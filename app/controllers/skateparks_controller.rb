@@ -30,6 +30,8 @@ class SkateparksController < ApplicationController
   end
 
   def destroy
+    Skatepark.find(params[:id]).destroy
+    redirect_to root_path
   end
 
   def index

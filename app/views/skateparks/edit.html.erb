@@ -1,16 +1,16 @@
 <h1>Skateparks#edit</h1>
   <%= form_for @skatepark, method: :patch do |f| %>
-      <%= f.text_field :name, value: @skatepark.name %>
-      <%= f.text_field :city, value: @skatepark.city %>
-      <%= f.text_field :state, value: @skatepark.state %>
-      <%= f.text_field :rating, value: @skatepark.rating %>
-      <%= f.text_field :designer, value: @skatepark.designer %>
-      <%= f.text_field :builder, value: @skatepark.builder %>
-      <%= f.text_field :opened, value: @skatepark.opened %>
-      <%= f.text_field :address, value: @skatepark.address %>
-      <%= f.text_field :hours, value: @skatepark.hours %>
-      <%= f.text_field :size, value: @skatepark.size %>
-      <%= f.text_field :notes, value: @skatepark.notes %>
-      <%= f.text_field :helmet, value: @skatepark.helmet %>
-      <%= f.submit value: 'Create' %>
+      <%= f.text_field :name, placeholder: 'name' %>
+      <%= f.text_field :city, placeholder: 'city' %>
+      <%= f.text_field :state, placeholder: 'state' %>
+      <%= f.text_field :rating, placeholder: 'rating' %>
+      <%= f.text_field :designer, placeholder: 'designer' %>
+      <%= f.text_field :builder, placeholder: 'builder' %>
+      <%= f.text_field :opened, placeholder: 'opened' %>
+      <%= f.text_field :address, placeholder: 'address' %>
+      <%= f.text_field :hours, placeholder: 'hours' %>
+      <%= f.text_field :size, placeholder: 'size' %>
+      <%= f.text_field :notes, placeholder: 'notes' %>
+      <%= f.text_field :helmet, placeholder: 'helmet' %>
+      <%= f.submit value: 'Update' %>
   <% end %>
