@@ -3,17 +3,12 @@ module SessionConcern
   extend ActiveSupport::Concern
 
   included do
-    # helper_method :login
+    helper_method :current_user
+    helper_method :logged_in?
   end
 
   def login
     @user = User.where(username: params[:username]).first
-    p '*' * 100
-    p @user
-    p params[:password]
-    p @user.password_digest
-    p @user.authenticate(params[:password])
-    p '*' * 100
 
     if @user && @user.authenticate(params[:password])
       session[:id] = @user.id
@@ -21,6 +16,19 @@ module SessionConcern
     else
       redirect_to new_session_path
     end
+  end
+
+  def logout
+    session.clear
+  end
+
+  def current_user
+    return nil if session[:id].blank?
+    @current_user ||= User.find(session[:id])
+  end
+
+  def logged_in?
+    !!current_user
   end
 
 end
