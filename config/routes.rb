@@ -1,11 +1,24 @@
 Rails.application.routes.draw do
 
+  get 'skateparks/new'
+
+  get 'skateparks/edit'
+
+  get 'skateparks/show'
+
+  get 'skateparks/update'
+
+  get 'skateparks/destroy'
+
+  get 'skateparks/index'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
   resources :users, only: [:show, :new, :create]
   resources :sessions, only: [:new, :create, :destroy]
+  resources :skateparks
   root 'welcome#index'
 
   # Example of regular route:

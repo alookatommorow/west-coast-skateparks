@@ -11,10 +11,37 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150729174148) do
+ActiveRecord::Schema.define(version: 20150729190646) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "skateparks", force: true do |t|
+    t.string   "name"
+    t.string   "city"
+    t.string   "state"
+    t.string   "rating"
+    t.string   "designer"
+    t.string   "builder"
+    t.string   "opened"
+    t.string   "address"
+    t.string   "hours"
+    t.string   "size"
+    t.string   "notes"
+    t.string   "helmet"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "user_skateparks", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "skatepark_id"
+    t.string   "review"
+    t.boolean  "favorite",     default: false
+    t.boolean  "visited",      default: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "users", force: true do |t|
     t.string   "username"
