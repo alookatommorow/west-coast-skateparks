@@ -1,2 +1,18 @@
 <h1>Skateparks#show</h1>
-<p>Find me in app/views/skateparks/show.html.erb</p>
+
+
+<ul>
+<% @skatepark.attributes.each do |attribute,value| %>
+  <% exclude = ['created_at', 'updated_at', 'id'] %>
+
+  <% unless exclude.include?(attribute) %>
+    <% if attribute == 'size' && value%>
+      <li><%= attribute %>: <%= value %> sq ft</li>
+    <% elsif value%>
+      <li><%= attribute %>: <%= value %></li>
+    <% end %>
+  <% end %>
+<% end %>
+</ul>
+
+

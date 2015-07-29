@@ -1,17 +1,5 @@
 Rails.application.routes.draw do
 
-  get 'skateparks/new'
-
-  get 'skateparks/edit'
-
-  get 'skateparks/show'
-
-  get 'skateparks/update'
-
-  get 'skateparks/destroy'
-
-  get 'skateparks/index'
-
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
