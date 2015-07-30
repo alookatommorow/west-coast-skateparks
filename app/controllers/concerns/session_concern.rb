@@ -9,7 +9,6 @@ module SessionConcern
 
   def login
     @user = User.where(username: params[:username]).first
-    p
     if @user && @user.authenticate(params[:password])
       session[:id] = @user.id
       redirect_to @user

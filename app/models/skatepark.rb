@@ -1,7 +1,7 @@
 class Skatepark < ActiveRecord::Base
 
   # include Geokit::Geocoders
-
+  validates :city, :state, presence: true
   has_many :user_skateparks, dependent: :destroy
   has_many :users, through: :user_skateparks
 
