@@ -13,3 +13,119 @@
  *= require_tree .
  *= require_self
  */
+.debug {
+  border: 1px solid red;
+}
+
+.container {
+  margin: 20px auto;
+  width: 800px;
+  padding: 0px 20px 20px 20px;
+  border: 1px dotted black;
+}
+
+.container h1 {
+  font-size: 17pt;
+
+}
+
+nav li {
+  display: inline-block;
+  color: blue;
+  text-decoration: none;
+}
+
+
+
+nav li a:hover {
+  text-decoration: underline;
+}
+
+#top_bar {
+  height: 40px;
+  font-weight: bold;
+}
+
+#menu_bar {
+  text-align: center;
+}
+
+#top_bar li a {
+  height: 40px;
+  font-weight: bold;
+  display: inline-block;
+  color: blue;
+  text-decoration: none;
+  margin-left: 2em;
+}
+
+#sign_out {
+  margin-left: 80%;
+}
+
+
+#menu_bar li a {
+  height: 40px;
+  font-weight: bold;
+  display: inline-block;
+  color: blue;
+  margin-left: 6em;
+  margin-right: 6em;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+
+form label {
+  font-weight: bold;
+  margin-right: 20px;
+}
+
+input {
+  margin-bottom: 10px;
+}
+
+.errors {
+  color: red;
+}
+
+form.quirks {
+  display: inline-block;
+}
+
+.submit {
+  text-align: center;
+}
+
+.label {
+  font-weight: bold;
+  float: left;
+  text-align: right;
+  margin-right: 20px;
+  width: 200px;
+}
+
+#sign-out input {
+  border:none;
+  background:none;
+  font-weight: :bold;
+}
+
+.create-container{
+  display: none;
+}
+
+.edit-container {
+  display: none;
+}
+
+a {
+  cursor: pointer;
+}
+
+
+#map {margin-left: auto; margin-right: auto; }
+
