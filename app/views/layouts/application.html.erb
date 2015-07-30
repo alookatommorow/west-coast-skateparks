@@ -8,6 +8,35 @@
 </head>
 <body>
 
+  <nav id="top_bar">
+
+    <ul>
+      <li><%= link_to 'Home', root_path %></li>
+      <% if logged_in? %>
+        <li id="sign_out">
+          <%= link_to 'Sign Out', session_path(current_user), method: :delete %>
+        </li>
+      <% else %>
+        <li><%= link_to 'Sign In', new_session_path %></li>
+        <li><%= link_to 'Sign Up', new_user_path %></li>
+      <% end %>
+    </ul>
+  </nav>
+
+   <nav id="menu_bar">
+      <ul>
+        <li><a href="/blog">News</a></li>
+        <li><%= link_to 'Skateparks', skateparks_path %></li>
+        <% if logged_in? %>
+          <li><%= link_to 'My Profile', user_path(current_user) %></li>
+        <% end %>
+        <li><form action="/skateparks/search" method="get">
+        <input type="text" name="city" value ="" placeholder="Enter city..." required>
+        <input type="submit" value="Search">
+        </form></li>
+      </ul>
+    </nav>
+
 <%= yield %>
 
 </body>
