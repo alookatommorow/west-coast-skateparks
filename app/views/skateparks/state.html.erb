@@ -1,0 +1,9 @@
+<ul>
+  <% @skateparks.each do |park| %>
+    <%unless park.name.blank?%>
+      <li> <%= link_to "#{park.city}: #{park.name}", park%>  </li>
+    <% else %>
+      <li> <%= link_to park.city, park %>  </li>
+    <% end %>
+  <% end %>
+</ul>

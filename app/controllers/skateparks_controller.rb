@@ -35,6 +35,12 @@ class SkateparksController < ApplicationController
   end
 
   def index
+
+  end
+
+  def state
+    @skateparks = Skatepark.where(state: params[:state])
+
   end
 
   private

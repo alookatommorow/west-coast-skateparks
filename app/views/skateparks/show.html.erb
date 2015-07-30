@@ -7,9 +7,9 @@
 
   <% unless exclude.include?(attribute) %>
     <% if attribute == 'size' && !value.blank? %>
-      <li><%= attribute %>: <%= value %> sq ft</li>
+      <li><%= attribute.capitalize %>: <%= value %> sq ft</li>
     <% elsif !value.blank?%>
-      <li><%= attribute %>: <%= value %></li>
+      <li><%= attribute.capitalize %>: <%= value %></li>
     <% end %>
   <% end %>
 <% end %>
