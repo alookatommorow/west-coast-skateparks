@@ -11,6 +11,24 @@
 // about supported directives.
 //
 //= require jquery
-//= require jquery_ujs
-//= require turbolinks
 //= require_tree .
+
+$(document).ready(function() {
+
+  bindEvents();
+
+
+});
+
+function bindEvents() {
+  $(".park-state").on('click', function(event){
+    event.preventDefault();
+    var url = $(this).attr('href');
+    $.ajax({url: url, dataType: 'JSON'}).done(function(response) {
+      $(".parks-container").children().remove();
+      $(".parks-container").append(response)
+    })
+  });
+
+
+}

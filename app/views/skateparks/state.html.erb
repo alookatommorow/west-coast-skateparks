@@ -3,15 +3,22 @@
 
   </div>
   <div class="parks-container">
-    <ul>
+    <ul class="collection">
       <% @skateparks.each do |park| %>
         <%unless park.name.blank?%>
-          <li> <%= link_to "#{park.city}: #{park.name}", park%>  </li>
+          <li class="collection-item">
+            <%= link_to "#{park.city}: #{park.name}", park%>
+            <% if current_user && current_user.admin %>
+              <%= button_to 'Delete', skatepark_path(park), method: :delete %>
+            <% end %>
+          </li>
         <% else %>
-          <li> <%= link_to park.city, park %>  </li>
-        <% end %>
-        <% if current_user && current_user.admin %>
-          <%= button_to 'Delete', skatepark_path(park), method: :delete %>
+          <li class="collection-item">
+            <%= link_to park.city, park %>
+            <% if current_user && current_user.admin %>
+              <%= button_to 'Delete', skatepark_path(park), method: :delete %>
+            <% end %>
+           </li>
         <% end %>
       <% end %>
     </ul>

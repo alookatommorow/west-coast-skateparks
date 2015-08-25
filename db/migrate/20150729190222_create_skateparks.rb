@@ -1,4 +1,4 @@
-class CreateSkateparks < ActiveRecord::Migration
+  class CreateSkateparks < ActiveRecord::Migration
   def change
     create_table :skateparks do |t|
       t.string :name
