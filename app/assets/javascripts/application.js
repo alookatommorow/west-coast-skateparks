@@ -23,10 +23,14 @@ $(document).ready(function() {
 function bindEvents() {
   $(".park-state").on('click', function(event){
     event.preventDefault();
+    console.log("getting")
     var url = $(this).attr('href');
+    console.log(url)
+    $("#test").remove();
     $.ajax({url: url, dataType: 'JSON'}).done(function(response) {
+      console.log(response.partial)
       $(".parks-container").children().remove();
-      $(".parks-container").append(response)
+      $(".parks-container").append(response.partial)
     })
   });
 

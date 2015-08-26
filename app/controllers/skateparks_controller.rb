@@ -40,6 +40,9 @@ class SkateparksController < ApplicationController
 
   def state
     @skateparks = Skatepark.where(state: params[:state])
+    respond_to do |format|
+      format.json {render json: {partial: render_to_string('_state.html.erb', layout: false)} }
+    end
 
   end
 

@@ -2,22 +2,28 @@
   <h1>Skateparks#show</h1>
 
 
-  <ul>
+  <ul class="collection">
   <% @skatepark.attributes.each do |attribute,value| %>
     <% exclude = ['created_at', 'updated_at', 'id'] %>
 
     <% unless exclude.include?(attribute) %>
       <% if attribute == 'size' && !value.blank? %>
-        <li><%= attribute.capitalize %>: <%= value %> sq ft</li>
+        <li class="collection-item"><%= attribute.capitalize %>: <%= value %> sq ft</li>
       <% elsif !value.blank?%>
-        <li><%= attribute.capitalize %>: <%= value %></li>
+        <li class="collection-item"><%= attribute.capitalize %>: <%= value %></li>
       <% end %>
     <% end %>
   <% end %>
   </ul>
-
   <% if current_user && current_user.admin %>
     <%= button_to 'Update', edit_skatepark_path, method: :get%>
   <% end %>
 
+  <div id="map">
+    <h1>hello</h1>
+  </div>
+
+
+
 </div>
+
