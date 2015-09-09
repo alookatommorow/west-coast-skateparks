@@ -13,6 +13,7 @@
 //= require jquery
 //= require_tree .
 
+
 $(document).ready(function() {
 
   bindEvents();
@@ -20,7 +21,13 @@ $(document).ready(function() {
 
 });
 
+
+
 function bindEvents() {
+
+
+  /////////////////////// Show skateparks by state/////////////
+
   $(".park-state").on('click', function(event){
     event.preventDefault();
     console.log("getting")
@@ -34,5 +41,17 @@ function bindEvents() {
     })
   });
 
+  /////////////////////////Delete Skatepark///////////////////
+
+  $(".parks-container").on('click', ".park-delete", function(event) {
+    event.preventDefault();
+    var url = $(this).attr('ajax_path');
+    console.log("getting " + url)
+    $.ajax({url: url, type: 'delete', dataType: 'JSON'}).done(function(response) {
+      var park_id = "." + response.id;
+      console.log("park delted")
+      $(park_id).remove();
+    })
+  });
 
 }

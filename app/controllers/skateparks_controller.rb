@@ -30,8 +30,13 @@ class SkateparksController < ApplicationController
   end
 
   def destroy
-    Skatepark.find(params[:id]).destroy
-    redirect_to root_path
+    @skatepark = Skatepark.find(params[:id])
+    @skatepark.destroy
+    p '*' *100
+    respond_to do |format|
+      format.json {render json: @skatepark }
+    end
+    # redirect_to root_path
   end
 
   def index

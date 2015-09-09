@@ -14,9 +14,20 @@
  *= require_tree .
  *= require_self
  */
+
+
 .debug {
   border: 1px solid red;
 }
+
+.sign-out {
+  background-color: #1976d2;
+  border: none;
+}
+
+
+
+
 
 /*.container {
   margin: 20px auto;

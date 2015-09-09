@@ -1,15 +1,17 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>WestCoastSkateparks</title>
+  <title>West Coast Skateparks</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
+  <script src='https://api.tiles.mapbox.com/mapbox.js/v2.2.1/mapbox.js'></script>
+
 </head>
 <body>
 
   <nav >
-    <div class="nav-wrapper">
+    <div class="nav-wrapper blue darken-2">
       <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
       <ul id="nav-mobile" class="left hide-on-med-and-down">
         <li><%= link_to 'Home', root_path %></li>
@@ -24,7 +26,7 @@
       <ul id="nav-mobile" class="right hide-on-med-and-down">
         <% if logged_in? %>
           <li id="sign_out">
-            <%= link_to 'Sign Out', session_path(current_user), method: :delete %>
+            <%= button_to 'Sign Out', session_path(current_user), method: :delete, class: "sign-out" %>
           </li>
         <% else %>
           <li><%= link_to 'Sign In', new_session_path %></li>
