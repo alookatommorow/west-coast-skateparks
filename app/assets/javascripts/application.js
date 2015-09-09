@@ -54,4 +54,17 @@ function bindEvents() {
     })
   });
 
+  ////////////////////////Toggle Create Form///////////////////
+
+  $(".new-skatepark").on('click', function() {
+  console.log("clicked");
+  $(".create-container").slideToggle(900, function(){});
+  })
+
+
 }
+
+
+
+
+
