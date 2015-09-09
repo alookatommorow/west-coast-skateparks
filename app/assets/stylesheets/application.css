@@ -10,14 +10,26 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
+ //= require material_icons
  *= require_tree .
  *= require_self
  */
+
+
 .debug {
   border: 1px solid red;
 }
 
-.container {
+.sign-out {
+  background-color: #1976d2;
+  border: none;
+}
+
+
+
+
+
+/*.container {
   margin: 20px auto;
   width: 800px;
   padding: 0px 20px 20px 20px;
@@ -127,5 +139,5 @@ a {
 }
 
 
-#map {margin-left: auto; margin-right: auto; }
+#map {margin-left: auto; margin-right: auto; }*/
 

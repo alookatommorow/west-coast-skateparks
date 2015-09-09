@@ -30,8 +30,13 @@ class SkateparksController < ApplicationController
   end
 
   def destroy
-    Skatepark.find(params[:id]).destroy
-    redirect_to root_path
+    @skatepark = Skatepark.find(params[:id])
+    @skatepark.destroy
+    p '*' *100
+    respond_to do |format|
+      format.json {render json: @skatepark }
+    end
+    # redirect_to root_path
   end
 
   def index
@@ -40,6 +45,9 @@ class SkateparksController < ApplicationController
 
   def state
     @skateparks = Skatepark.where(state: params[:state])
+    respond_to do |format|
+      format.json {render json: {partial: render_to_string('_state.html.erb', layout: false)} }
+    end
 
   end
 

@@ -1,41 +1,41 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>WestCoastSkateparks</title>
+  <title>West Coast Skateparks</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
+  <script src='https://api.tiles.mapbox.com/mapbox.js/v2.2.1/mapbox.js'></script>
+
 </head>
 <body>
 
-  <nav id="top_bar">
+  <nav >
+    <div class="nav-wrapper blue darken-2">
+      <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+      <ul id="nav-mobile" class="left hide-on-med-and-down">
+        <li><%= link_to 'Home', root_path %></li>
 
-    <ul>
-      <li><%= link_to 'Home', root_path %></li>
-      <% if logged_in? %>
-        <li id="sign_out">
-          <%= link_to 'Sign Out', session_path(current_user), method: :delete %>
-        </li>
-      <% else %>
-        <li><%= link_to 'Sign In', new_session_path %></li>
-        <li><%= link_to 'Sign Up', new_user_path %></li>
-      <% end %>
-    </ul>
-  </nav>
-
-   <nav id="menu_bar">
-      <ul>
         <li><a href="/blog">News</a></li>
         <li><%= link_to 'Skateparks', skateparks_path %></li>
         <% if logged_in? %>
           <li><%= link_to 'My Profile', user_path(current_user) %></li>
         <% end %>
-        <li><form action="/skateparks/search" method="get">
-        <input type="text" name="city" value ="" placeholder="Enter city..." required>
-        <input type="submit" value="Search">
-        </form></li>
       </ul>
-    </nav>
+
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <% if logged_in? %>
+          <li id="sign_out">
+            <%= button_to 'Sign Out', session_path(current_user), method: :delete, class: "sign-out" %>
+          </li>
+        <% else %>
+          <li><%= link_to 'Sign In', new_session_path %></li>
+          <li><%= link_to 'Sign Up', new_user_path %></li>
+        <% end %>
+
+      </ul>
+    </div>
+  </nav>
 
 <%= yield %>
 
