@@ -31,12 +31,16 @@ class SkateparksController < ApplicationController
 
   def destroy
     @skatepark = Skatepark.find(params[:id])
-    @skatepark.destroy
-    p '*' *100
-    respond_to do |format|
-      format.json {render json: @skatepark }
+    if @skatepark.destroy
+      p '*' *100
+      redirect_to root_path
+    else
+      redirect_to @skatepark
     end
-    # redirect_to root_path
+    # respond_to do |format|
+    #   format.json {render json: @skatepark }
+    # end
+
   end
 
   def index
@@ -49,6 +53,12 @@ class SkateparksController < ApplicationController
       format.json {render json: {partial: render_to_string('_state.html.erb', layout: false)} }
     end
 
+  end
+
+  def add_favorite
+    p "**hello**"*100
+    favorite(params[:user_id], params[:id])
+    redirect_to root_path
   end
 
   private
