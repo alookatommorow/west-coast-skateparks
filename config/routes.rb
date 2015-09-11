@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   resources :users, only: [:show, :new, :create]
   resources :sessions, only: [:new, :create, :destroy]
   resources :skateparks
-  get '/states/:state/skateparks', to: 'skateparks#state'
+  get '/states/:state/skateparks', to: 'skateparks#state', as: 'state'
   put '/users/:user_id/skateparks/:id/add_favorite', to: 'skateparks#add_favorite', as: 'add_favorite'
   put '/users/:user_id/skateparks/:id/remove_favorite', to: 'skateparks#remove_favorite', as: 'remove_favorite'
   root 'welcome#index'
