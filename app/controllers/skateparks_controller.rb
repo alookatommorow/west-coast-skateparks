@@ -31,16 +31,10 @@ class SkateparksController < ApplicationController
 
   def destroy
     @skatepark = Skatepark.find(params[:id])
-    if @skatepark.destroy
-      p '*' *100
-      redirect_to root_path
-    else
-      redirect_to @skatepark
+    @skatepark.destroy
+    respond_to do |format|
+      format.js
     end
-    # respond_to do |format|
-    #   format.json {render json: @skatepark }
-    # end
-
   end
 
   def index
@@ -58,8 +52,6 @@ class SkateparksController < ApplicationController
   def add_favorite
     favorite(params[:user_id], params[:id])
     respond_to do |format|
-      p "*"*100
-
       format.js
     end
 
@@ -68,8 +60,6 @@ class SkateparksController < ApplicationController
   def remove_favorite
     favorite(params[:user_id], params[:id])
     respond_to do |format|
-      p "*"*100
-
       format.js
     end
   end
