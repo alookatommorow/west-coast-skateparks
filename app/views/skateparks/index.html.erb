@@ -1,4 +1,24 @@
 <div class="container">
+  <% if current_user && current_user.admin %>
+    <p class="btn-floating btn-large waves-effect waves-light red new-skatepark">New</p>
+    <div class="create-container">
+      <%= form_for :skatepark do |f| %>
+          <%= f.text_field :name, placeholder: 'name' %>
+          <%= f.text_field :city, placeholder: 'city' %>
+          <%= f.text_field :state, placeholder: 'state' %>
+          <%= f.text_field :rating, placeholder: 'rating' %>
+          <%= f.text_field :designer, placeholder: 'designer' %>
+          <%= f.text_field :builder, placeholder: 'builder' %>
+          <%= f.text_field :opened, placeholder: 'opened' %>
+          <%= f.text_field :address, placeholder: 'address' %>
+          <%= f.text_field :hours, placeholder: 'hours' %>
+          <%= f.text_field :size, placeholder: 'size' %>
+          <%= f.text_field :notes, placeholder: 'notes' %>
+          <%= f.text_field :helmet, placeholder: 'helmet' %>
+          <%= f.submit value: 'Create' %>
+      <% end %>
+    </div>
+  <% end %>
   <h1 id="teste">Skateparks</h1>
   <a class="park-state waves-effect waves-light btn" href="/states/CA/skateparks">California</a>
   <a class="park-state waves-effect waves-light btn" href="/states/OR/skateparks">Oregon</a>

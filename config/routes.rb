@@ -1,13 +1,12 @@
 Rails.application.routes.draw do
 
-  # The priority is based upon order of creation: first created -> highest priority.
-  # See how all your routes lay out with "rake routes".
 
-  # You can have the root of your site routed with "root"
   resources :users, only: [:show, :new, :create]
   resources :sessions, only: [:new, :create, :destroy]
   resources :skateparks
   get '/states/:state/skateparks', to: 'skateparks#state'
+  put '/users/:user_id/skateparks/:id/add_favorite', to: 'skateparks#add_favorite', as: 'add_favorite'
+  put '/users/:user_id/skateparks/:id/remove_favorite', to: 'skateparks#remove_favorite', as: 'remove_favorite'
   root 'welcome#index'
 
   # Example of regular route:

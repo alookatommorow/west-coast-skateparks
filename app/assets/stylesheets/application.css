@@ -25,6 +25,14 @@
   border: none;
 }
 
+.create-container{
+  display: none;
+}
+
+/*.create-skatepark {
+  border: 2px solid #1976d2;
+}*/
+
 
 
 

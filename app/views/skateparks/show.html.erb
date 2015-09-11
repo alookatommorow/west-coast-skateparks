@@ -1,5 +1,5 @@
 <div class="container">
-  <h1>Skateparks#show</h1>
+  <h1><%= @skatepark.city %>, <%= @skatepark.state %></h1>
 
 
   <ul class="collection">
@@ -16,8 +16,35 @@
   <% end %>
   </ul>
   <% if current_user && current_user.admin %>
-    <%= button_to 'Update', edit_skatepark_path, method: :get%>
+    <%= button_to 'Update', edit_skatepark_path, method: :get %>
   <% end %>
+
+<!-- favorite button -->
+
+  <div id="fav-container">
+
+
+    <% if user_has_skatepark(current_user.id, @skatepark.id) %>
+        <% if user_has_skatepark(current_user.id, @skatepark.id).favorite == true %>
+
+          <%= button_to 'Remove Favorite', remove_favorite_path(current_user.id, @skatepark.id), method: :put, remote: true, class: 'remove-favorite-button' %>
+
+        <% else %>
+
+          <%= button_to 'Add Favorite', add_favorite_path(current_user.id, @skatepark.id), method: :put, remote: true, class: 'add-favorite-button' %>
+
+        <%end%>
+
+      <% else %>
+
+          <%= button_to 'Add Favorite', add_favorite_path(current_user.id, @skatepark.id), method: :put, remote: true, class: 'add-favorite-button' %>
+
+      <% end %>
+
+
+  </div>
+
+
 
   <div class="map-container">
       <div id='map'></div>
