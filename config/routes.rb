@@ -5,7 +5,8 @@ Rails.application.routes.draw do
   resources :sessions, only: [:new, :create, :destroy]
   resources :skateparks
   get '/states/:state/skateparks', to: 'skateparks#state'
-  put '/users/:user_id/skateparks/:id/favorite', to: 'skateparks#add_favorite', as: 'add_favorite'
+  put '/users/:user_id/skateparks/:id/add_favorite', to: 'skateparks#add_favorite', as: 'add_favorite'
+  put '/users/:user_id/skateparks/:id/remove_favorite', to: 'skateparks#remove_favorite', as: 'remove_favorite'
   root 'welcome#index'
 
   # Example of regular route:

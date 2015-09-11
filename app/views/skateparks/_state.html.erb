@@ -9,14 +9,14 @@
           <li id="#{park.id}" class="collection-item">
             <%= link_to "#{park.city}: #{park.name}", park%>
             <% if current_user && current_user.admin %>
-              <%= button_to 'Delete', skatepark_path(park), method: :delete, class: "park-delete waves-effect waves-teal btn-flat" %>
+              <%= button_to 'Delete', skatepark_path(park), method: :delete, data: {confirm: 'Are you sure?'}, class: "park-delete waves-effect waves-teal btn-flat" %>
             <% end %>
           </li>
         <% else %>
           <li id="#{park.id}" class="collection-item">
             <%= link_to park.city, park %>
             <% if current_user && current_user.admin %>
-              <%= button_to 'Delete', skatepark_path(park), method: :delete, class: "park-delete waves-effect waves-teal btn-flat" %>
+              <%= button_to 'Delete', skatepark_path(park), method: :delete, data: {confirm: 'Are you sure?'}, class: "park-delete waves-effect waves-teal btn-flat" %>
             <% end %>
            </li>
         <% end %>

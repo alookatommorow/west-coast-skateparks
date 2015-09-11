@@ -1,0 +1,12 @@
+var response = {
+  form_class: "remove-favorite", button_class: "remove-favorite-button", action: "/users/<%= current_user.id %>/skateparks/<%= params[:id] %>/remove_favorite", text: "Remove Favorite"
+};
+
+$('.add-favorite-button').attr({
+        value: response.text,
+        class: response.button_class
+      });
+
+$('#fav-container').children().first().attr({
+        action: response.action,
+      });

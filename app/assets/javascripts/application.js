@@ -11,6 +11,7 @@
 // about supported directives.
 //
 //= require jquery
+//= require jquery_ujs
 //= require_tree .
 
 
@@ -44,6 +45,10 @@ function bindEvents() {
   console.log("clicked");
   $(".create-container").slideToggle(900, function(){});
   })
+
+
+
+
 
 
 }

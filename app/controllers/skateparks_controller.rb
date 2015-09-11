@@ -56,9 +56,22 @@ class SkateparksController < ApplicationController
   end
 
   def add_favorite
-    p "**hello**"*100
     favorite(params[:user_id], params[:id])
-    redirect_to root_path
+    respond_to do |format|
+      p "*"*100
+
+      format.js
+    end
+
+  end
+
+  def remove_favorite
+    favorite(params[:user_id], params[:id])
+    respond_to do |format|
+      p "*"*100
+
+      format.js
+    end
   end
 
   private
