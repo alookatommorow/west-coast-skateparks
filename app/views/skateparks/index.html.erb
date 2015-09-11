@@ -19,12 +19,10 @@
       <% end %>
     </div>
   <% end %>
-  <h1 id="teste">Skateparks</h1>
-  <a class="park-state waves-effect waves-light btn" href="/states/CA/skateparks">California</a>
-  <a class="park-state waves-effect waves-light btn" href="/states/OR/skateparks">Oregon</a>
-  <a class="park-state waves-effect waves-light btn" href="/states/WA/skateparks">Washington</a>
-
-
+  <h1>Choose a State</h1>
+  <%= link_to 'California', state_path("CA"), class: "park-state waves-effect waves-light btn", remote: true%>
+  <%= link_to 'Oregon', state_path("OR"), class: "park-state waves-effect waves-light btn", remote: true%>
+  <%= link_to 'Washington', state_path("WA"), class: "park-state waves-effect waves-light btn", remote: true%>
 
   <div class="parks-container">
 
