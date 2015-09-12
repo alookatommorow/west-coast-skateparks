@@ -1,0 +1,10 @@
+var response = {form_class: "add-visit", button_class: "add-visit-button", action: "/users/<%= current_user.id %>/skateparks/<%= params[:id] %>/add_visit", text: "Been Here"}
+
+$('.remove-visit-button').attr({
+        value: response.text,
+        class: response.button_class
+      });
+
+$('.visit-container').children().first().attr({
+        action: response.action,
+      });

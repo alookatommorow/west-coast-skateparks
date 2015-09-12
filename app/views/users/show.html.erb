@@ -2,11 +2,22 @@
   <h1><%= @user.username %>'s page</h1>
   <h2>Favorites<h2>
     <ul>
-      <% @myfavorites.each do |fav|%>
-        <%if fav.name%>
-          <li><%= link_to fav.city + ": " + fav.name, skatepark_path(fav) %></li>
+      <% @myfavorites.each do |park|%>
+        <%if park.name%>
+          <li><%= link_to park.city + ": " + park.name + " (" + park.state + ")", skatepark_path(park) %></li>
         <% else %>
-          <li><%= link_to fav.city, skatepark_path(fav) %></li>
+          <li><%= link_to park.city + " (" + park.state + ")", skatepark_path(park) %></li>
+        <% end %>
+      <% end %>
+    </ul>
+
+    <h2>My Parks<h2>
+    <ul>
+      <% @myvisited.each do |park|%>
+        <%if park.name%>
+          <li><%= link_to park.city + ": " + park.name + "(" + park.state + ")", skatepark_path(park) %></li>
+        <% else %>
+          <li><%= link_to park.city + " (" + park.state + ")", skatepark_path(park) %></li>
         <% end %>
       <% end %>
     </ul>

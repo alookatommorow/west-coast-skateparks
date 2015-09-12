@@ -21,7 +21,7 @@
 
 <!-- favorite button -->
 
-  <div id="fav-container">
+  <div class="fav-container">
 
 
     <% if user_has_skatepark(current_user.id, @skatepark.id) %>
@@ -43,6 +43,32 @@
 
 
   </div>
+
+<!-- visit button -->
+
+  <div class="visit-container">
+
+
+    <% if user_has_skatepark(current_user.id, @skatepark.id) %>
+        <% if user_has_skatepark(current_user.id, @skatepark.id).visited == true %>
+
+          <%= button_to 'Never Been Here', remove_visit_path(current_user.id, @skatepark.id), method: :put, remote: true, class: 'remove-visit-button' %>
+
+        <% else %>
+
+          <%= button_to 'Been Here', add_visit_path(current_user.id, @skatepark.id), method: :put, remote: true, class: 'add-visit-button' %>
+
+        <%end%>
+
+      <% else %>
+
+          <%= button_to 'Been Here', add_visit_path(current_user.id, @skatepark.id), method: :put, remote: true, class: 'add-visit-button' %>
+
+      <% end %>
+
+
+  </div>
+
 
 
 
