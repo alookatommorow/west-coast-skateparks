@@ -47,6 +47,15 @@ function bindEvents() {
   })
 
 
+  ////////////////////////Toggle Rate Form///////////////////
+
+  $(".rate-button-container").on('click', function(event) {
+  console.log("clicked");
+  event.preventDefault();
+  $(".rate-container").slideToggle(900, function(){});
+  })
+
+
 
 
 

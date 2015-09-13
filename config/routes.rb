@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   put '/users/:user_id/skateparks/:id/remove_favorite', to: 'skateparks#remove_favorite', as: 'remove_favorite'
   put '/users/:user_id/skateparks/:id/add_visit', to: 'skateparks#add_visit', as: 'add_visit'
   put '/users/:user_id/skateparks/:id/remove_visit', to: 'skateparks#remove_visit', as: 'remove_visit'
+  put '/users/:user_id/skateparks/:id/rate', to: 'skateparks#rate', as: 'rate'
   root 'welcome#index'
 
   # Example of regular route:

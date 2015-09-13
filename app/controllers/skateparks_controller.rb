@@ -6,10 +6,14 @@ class SkateparksController < ApplicationController
   def create
     @skatepark = Skatepark.new(skatepark_params)
     if @skatepark.save
-      redirect_to @skatepark
+      respond_to do |format|
+        format.js
+      end
     else
       render 'new'
     end
+
+
   end
 
   def edit
@@ -18,6 +22,7 @@ class SkateparksController < ApplicationController
 
   def show
     @skatepark = Skatepark.find(params[:id])
+    @user_skatepark = user_has_skatepark(current_user.id, @skatepark.id)
   end
 
   def update
@@ -71,6 +76,13 @@ class SkateparksController < ApplicationController
 
   def remove_visit
     visit(params[:user_id], params[:id])
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def rate
+    rate_skatepark(params[:user_id], params[:id], params[:user_skatepark][:rating])
     respond_to do |format|
       format.js
     end

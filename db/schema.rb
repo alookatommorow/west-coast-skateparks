@@ -36,6 +36,7 @@ ActiveRecord::Schema.define(version: 20150729190646) do
   create_table "user_skateparks", force: true do |t|
     t.integer  "user_id"
     t.integer  "skatepark_id"
+    t.integer  "rating"
     t.string   "review"
     t.boolean  "favorite",     default: false
     t.boolean  "visited",      default: false

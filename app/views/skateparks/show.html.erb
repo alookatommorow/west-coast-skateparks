@@ -54,6 +54,7 @@
 
           <%= button_to 'Never Been Here', remove_visit_path(current_user.id, @skatepark.id), method: :put, remote: true, class: 'remove-visit-button' %>
 
+
         <% else %>
 
           <%= button_to 'Been Here', add_visit_path(current_user.id, @skatepark.id), method: :put, remote: true, class: 'add-visit-button' %>
@@ -65,6 +66,30 @@
           <%= button_to 'Been Here', add_visit_path(current_user.id, @skatepark.id), method: :put, remote: true, class: 'add-visit-button' %>
 
       <% end %>
+
+
+  </div>
+
+
+    <% if user_has_skatepark(current_user.id, @skatepark.id) %>
+      <% if user_has_skatepark(current_user.id, @skatepark.id).visited == true %>
+
+        <div class="rate-button-container">
+          <%= button_to 'Rate Skatepark'%>
+        </div>
+
+        <div class="rate-container">
+          <%= form_for @user_skatepark, url: rate_path(current_user.id, @skatepark.id), method: :put, remote: true do |f| %>
+            <%= f.text_field :rating, placeholder: 'write review here' %>
+
+            <%= f.submit value: 'Rate' %>
+          <% end %>
+        </div>
+
+
+
+      <% end %>
+    <% end %>
 
 
   </div>

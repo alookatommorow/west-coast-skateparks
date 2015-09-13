@@ -25,7 +25,11 @@
   border: none;
 }
 
-.create-container{
+.create-container {
+  display: none;
+}
+
+.rate-container {
   display: none;
 }
 
