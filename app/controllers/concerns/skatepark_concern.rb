@@ -42,4 +42,10 @@ module SkateparkConcern
     end
   end
 
+  def rate_skatepark(user_id, skatepark_id, rating)
+    user_has_skatepark = user_has_skatepark(user_id, skatepark_id)
+    user_has_skatepark.rating = rating
+    user_has_skatepark.save
+  end
+
 end

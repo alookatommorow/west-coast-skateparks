@@ -3,6 +3,7 @@ class CreateUserSkateparks < ActiveRecord::Migration
     create_table :user_skateparks do |t|
       t.integer :user_id
       t.integer :skatepark_id
+      t.integer :rating
       t.string :review
       t.boolean :favorite, default: false
       t.boolean :visited, default: false
