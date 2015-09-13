@@ -16,7 +16,7 @@
  */
 
 
-.debug {
+* {
   border: 1px solid red;
 }
 
@@ -30,6 +30,10 @@
 }
 
 .rate-container {
+  display: none;
+}
+
+.review-container {
   display: none;
 }
 

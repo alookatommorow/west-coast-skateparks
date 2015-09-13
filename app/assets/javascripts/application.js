@@ -42,17 +42,22 @@ function bindEvents() {
   ////////////////////////Toggle Create Form///////////////////
 
   $(".new-skatepark").on('click', function() {
-  console.log("clicked");
   $(".create-container").slideToggle(900, function(){});
   })
 
 
   ////////////////////////Toggle Rate Form///////////////////
 
-  $(".rate-button-container").on('click', function(event) {
-  console.log("clicked");
+  $(".rate-button").on('click', function(event) {
   event.preventDefault();
-  $(".rate-container").slideToggle(900, function(){});
+  $(".rate-container").slideToggle(500, function(){});
+  })
+
+  ////////////////////////Toggle Rate Form///////////////////
+
+  $(".review-button").on('click', function(event) {
+  event.preventDefault();
+  $(".review-container").slideToggle(500, function(){});
   })
 
 
