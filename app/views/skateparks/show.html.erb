@@ -15,6 +15,15 @@
     <% end %>
   <% end %>
   </ul>
+  <p>Reviews</p>
+  <ul class="collection" >
+    <% @all_user_skateparks.each do |user_park| %>
+      <li class="collection-item"><%= user_park.review %></li>
+    <% end %>
+
+  </ul>
+
+
   <% if current_user && current_user.admin %>
     <%= button_to 'Update', edit_skatepark_path, method: :get %>
   <% end %>
@@ -70,23 +79,36 @@
 
   </div>
 
+<!-- rate button -->
 
     <% if user_has_skatepark(current_user.id, @skatepark.id) %>
       <% if user_has_skatepark(current_user.id, @skatepark.id).visited == true %>
 
-        <div class="rate-button-container">
-          <%= button_to 'Rate Skatepark'%>
-        </div>
+        <%= button_to 'Rate Skatepark', rate_path(current_user.id, @skatepark.id), class: 'rate-button'%>
 
         <div class="rate-container">
           <%= form_for @user_skatepark, url: rate_path(current_user.id, @skatepark.id), method: :put, remote: true do |f| %>
-            <%= f.text_field :rating, placeholder: 'write review here' %>
-
+            <%= f.text_field :rating, placeholder: 'enter rating' %>
             <%= f.submit value: 'Rate' %>
           <% end %>
         </div>
 
+      <% end %>
+    <% end %>
 
+<!-- review button -->
+
+    <% if user_has_skatepark(current_user.id, @skatepark.id) %>
+      <% if user_has_skatepark(current_user.id, @skatepark.id).visited == true %>
+
+        <%= button_to 'Review Skatepark', review_path(current_user.id, @skatepark.id), class: "review-button" %>
+
+        <div class="review-container">
+          <%= form_for @user_skatepark, url: review_path(current_user.id, @skatepark.id), method: :put, remote: true do |f| %>
+            <%= f.text_field :review, placeholder: 'write review here' %>
+            <%= f.submit value: 'Review' %>
+          <% end %>
+        </div>
 
       <% end %>
     <% end %>

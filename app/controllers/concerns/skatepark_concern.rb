@@ -48,4 +48,12 @@ module SkateparkConcern
     user_has_skatepark.save
   end
 
+  def review_skatepark(user_id, skatepark_id, review)
+    user_has_skatepark = user_has_skatepark(user_id, skatepark_id)
+    user_has_skatepark.review = review
+    user_has_skatepark.save
+  end
+
+
+
 end
