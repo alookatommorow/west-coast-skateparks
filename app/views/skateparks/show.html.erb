@@ -23,6 +23,8 @@
 
   </ul>
 
+  <p>User Rating: <%= @user_rating %></p>
+
 
   <% if current_user && current_user.admin %>
     <%= button_to 'Update', edit_skatepark_path, method: :get %>
@@ -87,7 +89,7 @@
         <%= button_to 'Rate Skatepark', rate_path(current_user.id, @skatepark.id), class: 'rate-button'%>
 
         <div class="rate-container">
-          <%= form_for @user_skatepark, url: rate_path(current_user.id, @skatepark.id), method: :put, remote: true do |f| %>
+          <%= form_for @user_skatepark, url: rate_path(current_user.id, @skatepark.id), method: :put do |f| %>
             <%= f.text_field :rating, placeholder: 'enter rating' %>
             <%= f.submit value: 'Rate' %>
           <% end %>
@@ -104,7 +106,7 @@
         <%= button_to 'Review Skatepark', review_path(current_user.id, @skatepark.id), class: "review-button" %>
 
         <div class="review-container">
-          <%= form_for @user_skatepark, url: review_path(current_user.id, @skatepark.id), method: :put, remote: true do |f| %>
+          <%= form_for @user_skatepark, url: review_path(current_user.id, @skatepark.id), method: :put do |f| %>
             <%= f.text_field :review, placeholder: 'write review here' %>
             <%= f.submit value: 'Review' %>
           <% end %>
@@ -119,13 +121,38 @@
 
 
 
-  <div class="map-container">
-      <div id='map'></div>
-  </div>
+  <!-- Map -->
+
+    <div id='map-container'>
+      <div id='map'>
+
+      </div>
+    </div>
+
 
 
 
 
 </div>
+<script>
+
+  L.mapbox.accessToken = 'pk.eyJ1IjoiYWxvb2thdG9tbW9yb3ciLCJhIjoiNGM4ODhkZjUwMGM1ZDE4M2VjNzQ4MmQ4ODcxMjk5ZjMifQ.XVvFc8kl-0z4NAblE-mNqw';
+  var map = L.mapbox.map('map', 'mapbox.streets').setView(<%= @skatepark.get_lat_long %>, 10);
+  L.mapbox.featureLayer({
+    type: 'Feature',
+    geometry: {
+        type: 'Point',
+        coordinates: <%= @skatepark.get_lat_long.reverse %>
+    },
+    properties: {
+        'marker-size': 'large',
+        'marker-color': '#BE9A6B',
+        'marker-symbol': 'star-stroked'
+    }
+}).addTo(map);
+
+</script>
+
+
 
 

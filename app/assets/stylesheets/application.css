@@ -16,7 +16,7 @@
  */
 
 
-* {
+.debug {
   border: 1px solid red;
 }
 
@@ -37,6 +37,23 @@
   display: none;
 }
 
+.hidden {
+  display: none;
+}
+
+.map-container {
+  position: relative;
+  float: right;
+}
+
+
+#map {
+  height: 400px;
+  width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+
+}
 /*.create-skatepark {
   border: 2px solid #1976d2;
 }*/
