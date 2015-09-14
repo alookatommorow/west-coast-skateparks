@@ -23,6 +23,7 @@ class SkateparksController < ApplicationController
     @skatepark = Skatepark.find(params[:id])
     @user_skatepark = user_has_skatepark(current_user.id, @skatepark.id)
     @all_user_skateparks = UserSkatepark.where(skatepark_id: params[:id])
+    @user_rating = user_rating(params[:id])
   end
 
   def update
@@ -82,17 +83,15 @@ class SkateparksController < ApplicationController
   end
 
   def rate
+    @skatepark = Skatepark.find(params[:id])
     rate_skatepark(params[:user_id], params[:id], params[:user_skatepark][:rating])
-    respond_to do |format|
-      format.js
-    end
+    redirect_to @skatepark
   end
 
   def review
+    @skatepark = Skatepark.find(params[:id])
     review_skatepark(params[:user_id], params[:id], params[:user_skatepark][:review])
-    respond_to do |format|
-      format.js
-    end
+    redirect_to @skatepark
   end
 
   private

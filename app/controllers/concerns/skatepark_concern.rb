@@ -7,6 +7,7 @@ module SkateparkConcern
     helper_method :new_user_skatepark
     helper_method :favorite
     helper_method :visit
+    helper_method :get_lat_long
   end
 
   def user_has_skatepark(user_id, skatepark_id)
@@ -52,6 +53,27 @@ module SkateparkConcern
     user_has_skatepark = user_has_skatepark(user_id, skatepark_id)
     user_has_skatepark.review = review
     user_has_skatepark.save
+  end
+
+  def user_rating(skatepark_id)
+    ratings = 0
+    all_user_skateparks = UserSkatepark.where(skatepark_id: skatepark_id)
+    all_user_skateparks.each do |user_park|
+      unless user_park.rating.blank?
+        ratings += user_park.rating
+      end
+    end
+    unless ratings == 0
+      return ratings/all_user_skateparks.count
+    end
+  end
+
+  def get_lat_long
+    lat_long = []
+    coords = MultiGeocoder.geocode(self.address)
+    lat_long.push(coords.lat)
+    lat_long.push(coords.lng)
+    lat_long
   end
 
 

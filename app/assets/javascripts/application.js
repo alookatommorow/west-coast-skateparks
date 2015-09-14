@@ -53,12 +53,16 @@ function bindEvents() {
   $(".rate-container").slideToggle(500, function(){});
   })
 
-  ////////////////////////Toggle Rate Form///////////////////
+  ////////////////////////Toggle Review Form///////////////////
 
   $(".review-button").on('click', function(event) {
   event.preventDefault();
   $(".review-container").slideToggle(500, function(){});
   })
+
+  ////////////// map ////////////////////
+
+
 
 
 
