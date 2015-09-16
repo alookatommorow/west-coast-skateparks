@@ -8,9 +8,9 @@
 
     <% unless exclude.include?(attribute) %>
       <% if attribute == 'size' && !value.blank? %>
-        <li class="collection-item"><%= attribute.capitalize %>: <%= value %> sq ft</li>
+        <li class="collection-item"><%= attribute.capitalize %>: <%= value.capitalize %> sq ft</li>
       <% elsif !value.blank?%>
-        <li class="collection-item"><%= attribute.capitalize %>: <%= value %></li>
+        <li class="collection-item"><%= attribute.capitalize %>: <%= value.capitalize %></li>
       <% end %>
     <% end %>
   <% end %>
@@ -127,6 +127,7 @@
       <div id='map'>
 
       </div>
+
     </div>
 
 
@@ -134,25 +135,31 @@
 
 
 </div>
+
+
+
+
+
 <script>
 
-  L.mapbox.accessToken = 'pk.eyJ1IjoiYWxvb2thdG9tbW9yb3ciLCJhIjoiNGM4ODhkZjUwMGM1ZDE4M2VjNzQ4MmQ4ODcxMjk5ZjMifQ.XVvFc8kl-0z4NAblE-mNqw';
-  var map = L.mapbox.map('map', 'mapbox.streets').setView(<%= @skatepark.get_lat_long %>, 10);
-  L.mapbox.featureLayer({
-    type: 'Feature',
-    geometry: {
-        type: 'Point',
-        coordinates: <%= @skatepark.get_lat_long.reverse %>
-    },
-    properties: {
-        'marker-size': 'large',
-        'marker-color': '#BE9A6B',
-        'marker-symbol': 'star-stroked'
-    }
-}).addTo(map);
+function initMap() {
+  var myLatLng = {lat: <%= @skatepark.get_lat_long[0] %>, lng: <%= @skatepark.get_lat_long[1] %>};
 
-</script>
+  var map = new google.maps.Map(document.getElementById('map'), {
+    zoom: 9,
+    center: myLatLng
+  });
 
+  var marker = new google.maps.Marker({
+    position: myLatLng,
+    map: map,
+    title: 'Hello World!'
+  });
+}
+
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBnnixBSeEhMj8WuUtSLhiyesRyP0TjF9g&callback=initMap"
+        async defer></script>
 
 
 

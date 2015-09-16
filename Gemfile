@@ -29,6 +29,8 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'geokit'
 gem 'material_icons'
 gem 'therubyracer'
+gem 'underscore-rails'
+gem 'gmaps4rails'
 # Use unicorn as the app server
 # gem 'unicorn'
 
