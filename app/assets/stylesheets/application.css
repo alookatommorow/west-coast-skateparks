@@ -29,11 +29,11 @@
   display: none;
 }
 
-.rate-container {
+.rate-form-container {
   display: none;
 }
 
-.review-container {
+.review-form-container {
   display: none;
 }
 
@@ -53,9 +53,8 @@
   margin-left: auto;
   margin-right: auto;
 }
-/*.create-skatepark {
-  border: 2px solid #1976d2;
-}*/
+
+
 
 
 

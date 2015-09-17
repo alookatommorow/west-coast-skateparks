@@ -9,6 +9,10 @@ $('.visit-container').children().first().attr({
         action: response.action,
       });
 
+$('.first-rate-button').remove();
+
+$('.rate-container').prepend("<button class='first-rate-button'>Rate</button>");
+
 
 $('.review-button').removeClass('hidden');
 $('.rate-button').removeClass('hidden');

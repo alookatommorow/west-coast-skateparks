@@ -3,18 +3,19 @@
 
 
   <ul class="collection">
-  <% @skatepark.attributes.each do |attribute,value| %>
-    <% exclude = ['created_at', 'updated_at', 'id'] %>
-
-    <% unless exclude.include?(attribute) %>
-      <% if attribute == 'size' && !value.blank? %>
-        <li class="collection-item"><%= attribute.capitalize %>: <%= value %> sq ft</li>
-      <% elsif !value.blank?%>
-        <li class="collection-item"><%= attribute.capitalize %>: <%= value %></li>
+    <% @skatepark.attributes.each do |attribute,value| %>
+      <% exclude = ['created_at', 'updated_at', 'id'] %>
+      <% unless exclude.include?(attribute) %>
+        <% if attribute == 'size' && !value.blank? %>
+          <li class="collection-item"><%= attribute.capitalize %>: <%= value.capitalize %> sq ft</li>
+        <% elsif !value.blank?%>
+          <li class="collection-item"><%= attribute.capitalize %>: <%= value.titleize %></li>
+        <% end %>
       <% end %>
+
     <% end %>
-  <% end %>
   </ul>
+
   <p>Reviews</p>
   <ul class="collection" >
     <% @all_user_skateparks.each do |user_park| %>
@@ -83,29 +84,33 @@
 
 <!-- rate button -->
 
+  <div class="rate-container">
+  </div>
     <% if user_has_skatepark(current_user.id, @skatepark.id) %>
       <% if user_has_skatepark(current_user.id, @skatepark.id).visited == true %>
 
         <%= button_to 'Rate Skatepark', rate_path(current_user.id, @skatepark.id), class: 'rate-button'%>
 
-        <div class="rate-container">
+
+
+      <% end %>
+    <% end %>
+    <div class="rate-form-container">
           <%= form_for @user_skatepark, url: rate_path(current_user.id, @skatepark.id), method: :put do |f| %>
             <%= f.text_field :rating, placeholder: 'enter rating' %>
             <%= f.submit value: 'Rate' %>
           <% end %>
         </div>
 
-      <% end %>
-    <% end %>
 
 <!-- review button -->
-
+  <div class="review-container">
     <% if user_has_skatepark(current_user.id, @skatepark.id) %>
       <% if user_has_skatepark(current_user.id, @skatepark.id).visited == true %>
 
         <%= button_to 'Review Skatepark', review_path(current_user.id, @skatepark.id), class: "review-button" %>
 
-        <div class="review-container">
+        <div class="review-form-container">
           <%= form_for @user_skatepark, url: review_path(current_user.id, @skatepark.id), method: :put do |f| %>
             <%= f.text_field :review, placeholder: 'write review here' %>
             <%= f.submit value: 'Review' %>
@@ -127,6 +132,13 @@
       <div id='map'>
 
       </div>
+      <form action="http://maps.google.com/maps" method="get" target="_blank">
+         <label for="saddr">Enter your location</label>
+         <input type="text" name="saddr" />
+         <input type="hidden" name="daddr" value="<%= @skatepark.address %>" />
+         <input type="submit" value="Get directions" />
+      </form>
+
     </div>
 
 
@@ -134,25 +146,31 @@
 
 
 </div>
+
+
+
+
+
 <script>
 
-  L.mapbox.accessToken = 'pk.eyJ1IjoiYWxvb2thdG9tbW9yb3ciLCJhIjoiNGM4ODhkZjUwMGM1ZDE4M2VjNzQ4MmQ4ODcxMjk5ZjMifQ.XVvFc8kl-0z4NAblE-mNqw';
-  var map = L.mapbox.map('map', 'mapbox.streets').setView(<%= @skatepark.get_lat_long %>, 10);
-  L.mapbox.featureLayer({
-    type: 'Feature',
-    geometry: {
-        type: 'Point',
-        coordinates: <%= @skatepark.get_lat_long.reverse %>
-    },
-    properties: {
-        'marker-size': 'large',
-        'marker-color': '#BE9A6B',
-        'marker-symbol': 'star-stroked'
-    }
-}).addTo(map);
+function initMap() {
+  var myLatLng = {lat: <%= @skatepark.get_lat_long[0] %>, lng: <%= @skatepark.get_lat_long[1] %>};
 
-</script>
+  var map = new google.maps.Map(document.getElementById('map'), {
+    zoom: 9,
+    center: myLatLng
+  });
 
+  var marker = new google.maps.Marker({
+    position: myLatLng,
+    map: map,
+    title: '<%= @skatepark.name.titleize %>'
+  });
+}
+
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBnnixBSeEhMj8WuUtSLhiyesRyP0TjF9g&callback=initMap"
+        async defer></script>
 
 
 

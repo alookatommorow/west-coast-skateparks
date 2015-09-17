@@ -12,6 +12,8 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require underscore
+//= require gmaps/google
 //= require_tree .
 
 
@@ -46,18 +48,22 @@ function bindEvents() {
   })
 
 
+  $(".rate-container").on('click', '.first-rate-button', function() {
+    $(".rate-form-container").slideToggle(500, function(){});
+  });
+
   ////////////////////////Toggle Rate Form///////////////////
 
   $(".rate-button").on('click', function(event) {
   event.preventDefault();
-  $(".rate-container").slideToggle(500, function(){});
+  $(".rate-form-container").slideToggle(500, function(){});
   })
 
   ////////////////////////Toggle Review Form///////////////////
 
   $(".review-button").on('click', function(event) {
   event.preventDefault();
-  $(".review-container").slideToggle(500, function(){});
+  $(".review-form-container").slideToggle(500, function(){});
   })
 
   ////////////// map ////////////////////
