@@ -19,8 +19,6 @@
       <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
       <ul id="nav-mobile" class="left hide-on-med-and-down">
         <li><%= link_to 'Home', root_path %></li>
-
-        <li><a href="/blog">News</a></li>
         <li><%= link_to 'Skateparks', skateparks_path %></li>
         <% if logged_in? %>
           <li><%= link_to 'My Profile', user_path(current_user) %></li>

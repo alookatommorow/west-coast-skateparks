@@ -52,21 +52,33 @@ function bindEvents() {
     $(".rate-form-container").slideToggle(500, function(){});
   });
 
+
+  /////////////////////// Toggle Initial Rate Form /////////
+  $(".initial-rate-button").on('click', function(event) {
+  event.preventDefault();
+    $(".initial-rate-form-container").slideToggle(500, function(){});
+  })
+
   ////////////////////////Toggle Rate Form///////////////////
 
-  $(".rate-button").on('click', function(event) {
+  $(".rate-container").on('click', '.rate-button', function() {
+    $(".rate-form-container").slideToggle(500, function(){});
+  })
+
+   /////////////////////// Toggle Initial Review Form /////////
+  $(".initial-review-button").on('click', function(event) {
   event.preventDefault();
-  $(".rate-form-container").slideToggle(500, function(){});
+    $(".initial-review-form-container").slideToggle(500, function(){});
   })
 
   ////////////////////////Toggle Review Form///////////////////
 
-  $(".review-button").on('click', function(event) {
-  event.preventDefault();
-  $(".review-form-container").slideToggle(500, function(){});
+  $(".review-container").on('click', '.review-button', function() {
+    console.log("garbage pale")
+    $(".review-form-container").slideToggle(500, function(){});
   })
 
-  ////////////// map ////////////////////
+
 
 
 

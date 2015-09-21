@@ -26,7 +26,6 @@
 
   <p>User Rating: <%= @user_rating %></p>
 
-
   <% if current_user && current_user.admin %>
     <%= button_to 'Update', edit_skatepark_path, method: :get %>
   <% end %>
@@ -82,43 +81,51 @@
 
   </div>
 
-<!-- rate button -->
-
-  <div class="rate-container">
-  </div>
+<!-- rate containers -->
     <% if user_has_skatepark(current_user.id, @skatepark.id) %>
       <% if user_has_skatepark(current_user.id, @skatepark.id).visited == true %>
+        <div class="initial-rate-container">
 
-        <%= button_to 'Rate Skatepark', rate_path(current_user.id, @skatepark.id), class: 'rate-button'%>
+          <%= button_to 'Rate Skatepark', rate_path(current_user.id, @skatepark.id), class: 'initial-rate-button'%>
 
+          <div class="initial-rate-form-container hidden">
+            <%= form_for @user_skatepark, url: rate_path(current_user.id, @skatepark.id), method: :put do |f| %>
+              <%= f.text_field :rating, placeholder: 'enter rating' %>
+              <%= f.submit value: 'Rate' %>
+            <% end %>
+          </div>
 
-
-      <% end %>
-    <% end %>
-    <div class="rate-form-container">
-          <%= form_for @user_skatepark, url: rate_path(current_user.id, @skatepark.id), method: :put do |f| %>
-            <%= f.text_field :rating, placeholder: 'enter rating' %>
-            <%= f.submit value: 'Rate' %>
-          <% end %>
-        </div>
-
-
-<!-- review button -->
-  <div class="review-container">
-    <% if user_has_skatepark(current_user.id, @skatepark.id) %>
-      <% if user_has_skatepark(current_user.id, @skatepark.id).visited == true %>
-
-        <%= button_to 'Review Skatepark', review_path(current_user.id, @skatepark.id), class: "review-button" %>
-
-        <div class="review-form-container">
-          <%= form_for @user_skatepark, url: review_path(current_user.id, @skatepark.id), method: :put do |f| %>
-            <%= f.text_field :review, placeholder: 'write review here' %>
-            <%= f.submit value: 'Review' %>
-          <% end %>
         </div>
 
       <% end %>
     <% end %>
+
+    <div class="rate-container"></div>
+    <div class="rate-form-container hidden"></div>
+
+
+<!-- review containers -->
+    <% if user_has_skatepark(current_user.id, @skatepark.id) %>
+      <% if user_has_skatepark(current_user.id, @skatepark.id).visited == true %>
+        <div class='initial-review-container'>
+          <%= button_to 'Review Skatepark', review_path(current_user.id, @skatepark.id), class: "initial-review-button" %>
+
+          <div class="initial-review-form-container hidden">
+
+
+            <%= form_for @user_skatepark, url: review_path(current_user.id, @skatepark.id), method: :put do |f| %>
+              <%= f.text_field :review, placeholder: 'write review here' %>
+              <%= f.submit value: 'Review' %>
+            <% end %>
+
+          </div>
+        </div>
+
+      <% end %>
+    <% end %>
+
+    <div class="review-container"></div>
+    <div class="review-form-container hidden"></div>
 
 
   </div>
@@ -153,6 +160,8 @@
 
 <script>
 
+
+
 function initMap() {
   var myLatLng = {lat: <%= @skatepark.get_lat_long[0] %>, lng: <%= @skatepark.get_lat_long[1] %>};
 
@@ -164,8 +173,9 @@ function initMap() {
   var marker = new google.maps.Marker({
     position: myLatLng,
     map: map,
-    title: '<%= @skatepark.name.titleize %>'
+    title: '<%= @skatepark.city.titleize %>, <%= @skatepark.state.capitalize %>'
   });
+
 }
 
     </script>

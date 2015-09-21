@@ -19,10 +19,12 @@
       <% end %>
     </div>
   <% end %>
-  <h1>Choose a State</h1>
-  <%= link_to 'California', state_path("california"), class: "park-state waves-effect waves-light btn", remote: true%>
-  <%= link_to 'Oregon', state_path("oregon"), class: "park-state waves-effect waves-light btn", remote: true%>
-  <%= link_to 'Washington', state_path("washington"), class: "park-state waves-effect waves-light btn", remote: true%>
+  <div class="center-text">
+    <h4>Select a State</h4>
+    <%= link_to 'California', state_path("california"), class: "park-state waves-effect waves-light btn", remote: true%>
+    <%= link_to 'Oregon', state_path("oregon"), class: "park-state waves-effect waves-light btn", remote: true%>
+    <%= link_to 'Washington', state_path("washington"), class: "park-state waves-effect waves-light btn", remote: true%>
+  </div>
 
   <div class="parks-container">
 
