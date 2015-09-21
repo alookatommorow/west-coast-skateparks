@@ -25,15 +25,12 @@
   border: none;
 }
 
+.center-text {
+  text-align: center;
+}
+
+/*need to create atomic class for these*/
 .create-container {
-  display: none;
-}
-
-.rate-form-container {
-  display: none;
-}
-
-.review-form-container {
   display: none;
 }
 
@@ -43,7 +40,6 @@
 
 .map-container {
   position: relative;
-  float: right;
 }
 
 

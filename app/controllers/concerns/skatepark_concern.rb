@@ -11,7 +11,7 @@ module SkateparkConcern
   end
 
   def user_has_skatepark(user_id, skatepark_id)
-    @user_has_skatepark = UserSkatepark.where(user_id: user_id).where(skatepark_id: skatepark_id).last
+    UserSkatepark.where(user_id: user_id).where(skatepark_id: skatepark_id).last
   end
 
   def new_user_skatepark(user_id, skatepark_id)
@@ -27,6 +27,16 @@ module SkateparkConcern
       new_user_skatepark = new_user_skatepark(user_id, skatepark_id)
       new_user_skatepark.favorite = true
       new_user_skatepark.save
+    end
+  end
+
+  def user_has_favorite(user_id, skatepark_id)
+    if user_has_skatepark(user_id, skatepark_id)
+      if user_has_skatepark(user_id, skatepark_id).favorite == true
+        return true
+      end
+    else
+      return false
     end
   end
 

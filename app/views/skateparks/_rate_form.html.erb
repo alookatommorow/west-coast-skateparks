@@ -1,0 +1,4 @@
+<%= form_for @user_skatepark, url: rate_path(current_user.id, params[:id]), method: :put do |f| %>
+  <%= f.text_field :rating, placeholder: 'enter rating' %>
+  <%= f.submit value: 'Rate' %>
+<% end %>
