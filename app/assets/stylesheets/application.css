@@ -10,7 +10,8 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
- //= require material_icons
+
+ *= require semantic_ui/semantic_ui
  *= require_tree .
  *= require_self
  */
@@ -20,10 +21,10 @@
   border: 1px solid red;
 }
 
-.sign-out {
+/*.sign-out {
   background-color: #1976d2;
   border: none;
-}
+}*/
 
 .center-text {
   text-align: center;
@@ -56,14 +57,14 @@
 
 
 
-/*.container {
-  margin: 20px auto;
+.container {
+  margin: 10% auto;
   width: 800px;
   padding: 0px 20px 20px 20px;
   border: 1px dotted black;
 }
 
-.container h1 {
+/*.container h1 {
   font-size: 17pt;
 
 }
@@ -166,5 +167,6 @@ a {
 }
 
 
-#map {margin-left: auto; margin-right: auto; }*/
+#map {margin-left: auto; margin-right: auto; }
 
+*/

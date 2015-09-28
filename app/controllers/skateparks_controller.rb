@@ -21,12 +21,11 @@ class SkateparksController < ApplicationController
 
   def show
     @skatepark = Skatepark.find(params[:id])
-    @user_skatepark = user_has_skatepark(current_user.id, @skatepark.id)
+    if logged_in?
+      @user_skatepark = user_has_skatepark(current_user.id, params[:id])
+    end
     @all_user_skateparks = UserSkatepark.where(skatepark_id: params[:id])
     @user_rating = user_rating(params[:id])
-    p '*' *100
-    p user_has_favorite(current_user.id, params[:id])
-    p '*' *100
   end
 
   def update

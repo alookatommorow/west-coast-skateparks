@@ -15,24 +15,23 @@
 <body>
 
   <nav >
-    <div class="nav-wrapper blue darken-2">
-      <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
-      <ul id="nav-mobile" class="left hide-on-med-and-down">
-        <li><%= link_to 'Home', root_path %></li>
-        <li><%= link_to 'Skateparks', skateparks_path %></li>
+    <div class='ui menu'>
+      <ul>
+        <li class='item'><%= link_to 'Home', root_path, class: "ui primary button" %></li>
+        <li class='item'><%= link_to 'Skateparks', skateparks_path %></li>
         <% if logged_in? %>
-          <li><%= link_to 'My Profile', user_path(current_user) %></li>
+          <li class='item'><%= link_to 'My Profile', user_path(current_user) %></li>
         <% end %>
       </ul>
 
-      <ul id="nav-mobile" class="right hide-on-med-and-down">
+      <ul>
         <% if logged_in? %>
-          <li id="sign_out">
+          <li class='item'>
             <%= button_to 'Sign Out', session_path(current_user), method: :delete, class: "sign-out" %>
           </li>
         <% else %>
-          <li><%= link_to 'Sign In', new_session_path %></li>
-          <li><%= link_to 'Sign Up', new_user_path %></li>
+          <li class='item'><%= link_to 'Sign In', new_session_path %></li>
+          <li class='item'><%= link_to 'Sign Up', new_user_path %></li>
         <% end %>
 
       </ul>
