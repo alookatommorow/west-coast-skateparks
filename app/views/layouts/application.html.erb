@@ -14,29 +14,24 @@
 </head>
 <body>
 
-  <nav >
-    <div class='ui menu'>
-      <ul>
-        <li class='item'><%= link_to 'Home', root_path, class: "ui primary button" %></li>
-        <li class='item'><%= link_to 'Skateparks', skateparks_path %></li>
-        <% if logged_in? %>
-          <li class='item'><%= link_to 'My Profile', user_path(current_user) %></li>
-        <% end %>
-      </ul>
 
-      <ul>
-        <% if logged_in? %>
-          <li class='item'>
-            <%= button_to 'Sign Out', session_path(current_user), method: :delete, class: "sign-out" %>
-          </li>
-        <% else %>
-          <li class='item'><%= link_to 'Sign In', new_session_path %></li>
-          <li class='item'><%= link_to 'Sign Up', new_user_path %></li>
-        <% end %>
 
-      </ul>
-    </div>
-  </nav>
+      <div class='ui four item menu'>
+          <%= link_to 'Home', root_path, class: 'item' %>
+          <%= link_to 'Skateparks', skateparks_path, class: 'item' %>
+          <% if logged_in? %>
+            <%= link_to 'My Profile', user_path(current_user), class: 'item' %>
+            <%= link_to 'Sign Out', session_path(current_user), method: :delete, class: 'item' %>
+          <% else %>
+            <%= link_to 'Sign In', new_session_path, class: 'item' %>
+            <%= link_to 'Sign Up', new_user_path, class: 'item' %>
+          <% end %>
+      </div>
+
+
+
+
+
 
 <%= yield %>
 
