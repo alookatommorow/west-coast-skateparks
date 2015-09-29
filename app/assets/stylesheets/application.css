@@ -15,7 +15,9 @@
  *= require_tree .
  *= require_self
  */
-
+* {
+        font-family: 'Helvetica', sans-serif !important;
+    }
 
 .debug {
   border: 1px solid red;

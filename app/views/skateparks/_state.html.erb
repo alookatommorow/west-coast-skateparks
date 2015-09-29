@@ -14,7 +14,7 @@
       <% end %>
 
       <% if current_user && current_user.admin %>
-        <%= button_to 'Delete', skatepark_path(park), method: :delete, data: {confirm: 'Are you sure?'}, remote: true, class: 'park-delete ui button mini' %>
+        <%= button_to 'Delete', skatepark_path(park), method: :delete, data: {confirm: 'Are you sure?'}, remote: true, class: "#{park.id} ui button mini" %>
       <% end %>
 
     <% end %>
