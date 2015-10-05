@@ -1,4 +1,13 @@
 class SkateparksController < ApplicationController
+
+  def search
+    if params[:search]
+      p "wrong************"*100
+      @skateparks = Skatepark.where(city: params[:search].downcase)
+    end
+
+  end
+
   def new
     @skatepark = Skatepark.new
   end
@@ -15,12 +24,15 @@ class SkateparksController < ApplicationController
 
   end
 
+
   def edit
     @skatepark = Skatepark.find(params[:id])
   end
 
+
   def show
     @skatepark = Skatepark.find(params[:id])
+    has_review?(params[:id])
     if logged_in?
       @user_skatepark = user_has_skatepark(current_user.id, params[:id])
     end
@@ -53,6 +65,8 @@ class SkateparksController < ApplicationController
     end
 
   end
+
+
 
   def add_favorite
     favorite(params[:user_id], params[:id])

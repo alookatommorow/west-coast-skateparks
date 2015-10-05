@@ -16,12 +16,15 @@
     <% end %>
   </ul>
 
-  <p>Reviews</p>
-  <ul class="collection" >
-    <% @all_user_skateparks.each do |user_park| %>
-      <li class="collection-item"><%= user_park.review %></li>
-    <% end %>
-  </ul>
+  <% unless has_review?(@skatepark.id) == 0 %>
+    <p>Reviews</p>
+    <ul class="collection" >
+      <% @all_user_skateparks.each do |user_park| %>
+        <li class="collection-item"><%= user_park.review %></li>
+      <% end %>
+    </ul>
+  <% end %>
+
 
   <p>User Rating: <%= @user_rating %></p>
 

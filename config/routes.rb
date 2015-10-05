@@ -1,10 +1,11 @@
 Rails.application.routes.draw do
 
-
+  get '/skateparks/search', to: 'skateparks#search', as: 'search'
   resources :users, only: [:show, :new, :create]
   resources :sessions, only: [:new, :create, :destroy]
   resources :skateparks
   get '/states/:state/skateparks', to: 'skateparks#state', as: 'state'
+
   put '/users/:user_id/skateparks/:id/add_favorite', to: 'skateparks#add_favorite', as: 'add_favorite'
   put '/users/:user_id/skateparks/:id/remove_favorite', to: 'skateparks#remove_favorite', as: 'remove_favorite'
   put '/users/:user_id/skateparks/:id/add_visit', to: 'skateparks#add_visit', as: 'add_visit'
