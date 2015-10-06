@@ -19,7 +19,7 @@
   font-family: 'Helvetica', sans-serif;
 }
 
-* {
+.debug {
   border: 1px solid red;
 }
 

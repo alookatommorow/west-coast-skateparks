@@ -35,6 +35,7 @@ function bindEvents() {
   $(".park-state").on('click', function(event){
     event.preventDefault();
     var url = $(this).attr('href');
+    $(this).addClass('active').siblings().removeClass('active');
     $.ajax({url: url, dataType: 'JSON'}).done(function(response) {
       $(".parks-container").children().remove();
       $(".parks-container").append(response.partial)
