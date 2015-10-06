@@ -1,6 +1,7 @@
-<div class="container">
+<div class="ui grid">
+<div class="fifteen wide column page-container">
   <% if current_user && current_user.admin %>
-    <p class="btn-floating btn-large waves-effect waves-light red new-skatepark">New</p>
+    <p class="ui button new-skatepark">New</p>
     <div class="create-container">
       <%= form_for :skatepark, remote: true do |f| %>
           <%= f.text_field :name, placeholder: 'name' %>
@@ -19,15 +20,16 @@
       <% end %>
     </div>
   <% end %>
-  <div class="center-text">
-    <h4>Select a State</h4>
-    <%= link_to 'California', state_path("california"), class: "park-state waves-effect waves-light btn", remote: true%>
-    <%= link_to 'Oregon', state_path("oregon"), class: "park-state waves-effect waves-light btn", remote: true%>
-    <%= link_to 'Washington', state_path("washington"), class: "park-state waves-effect waves-light btn", remote: true%>
+  <div class="center-text top-gap"><h1>Select a State</h1></div>
+  <div class='ui three item inverted menu'>
+
+    <%= link_to 'California', state_path("california"), class: "park-state item", remote: true%>
+    <%= link_to 'Oregon', state_path("oregon"), class: "park-state item", remote: true%>
+    <%= link_to 'Washington', state_path("washington"), class: "park-state ui item", remote: true%>
   </div>
 
-  <div class="parks-container">
+  <div class="parks-container"></div>
 
-
-  </div>
 </div>
+</div>
+

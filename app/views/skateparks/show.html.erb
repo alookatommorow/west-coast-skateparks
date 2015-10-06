@@ -1,157 +1,162 @@
-<div class="container">
-  <h1><%= @skatepark.city %>, <%= @skatepark.state %></h1>
-
-
-  <ul class="collection">
-    <% @skatepark.attributes.each do |attribute,value| %>
-      <% exclude = ['created_at', 'updated_at', 'id'] %>
-      <% unless exclude.include?(attribute) %>
-        <% if attribute == 'size' && !value.blank? %>
-          <li class="collection-item"><%= attribute.capitalize %>: <%= value.capitalize %> sq ft</li>
-        <% elsif !value.blank?%>
-          <li class="collection-item"><%= attribute.capitalize %>: <%= value.titleize %></li>
-        <% end %>
-      <% end %>
-
-    <% end %>
-  </ul>
-
-  <p>Reviews</p>
-  <ul class="collection" >
-    <% @all_user_skateparks.each do |user_park| %>
-      <li class="collection-item"><%= user_park.review %></li>
-    <% end %>
-
-  </ul>
-
-  <p>User Rating: <%= @user_rating %></p>
-
-  <% if current_user && current_user.admin %>
-    <%= button_to 'Update', edit_skatepark_path, method: :get %>
+<div class='center-text top-gap'>
+  <% unless @skatepark.name.blank?%>
+    <h1><%= @skatepark.name.titleize %></h1>
   <% end %>
+  <h2><%= @skatepark.city.titleize %>, <%= @skatepark.state.capitalize %></h2>
+</div>
+<div class="ui grid">
+  <div class="fifteen wide column page-container">
 
-<!-- favorite button -->
 
-  <div class="fav-container">
+    <div class="ui relaxed divided list">
+      <% @skatepark.attributes.each do |attribute,value| %>
 
-
-    <% if user_has_skatepark(current_user.id, @skatepark.id) %>
-        <% if user_has_skatepark(current_user.id, @skatepark.id).favorite == true %>
-
-          <%= button_to 'Remove Favorite', remove_favorite_path(current_user.id, @skatepark.id), method: :put, remote: true, class: 'remove-favorite-button' %>
-
-        <% else %>
-
-          <%= button_to 'Add Favorite', add_favorite_path(current_user.id, @skatepark.id), method: :put, remote: true, class: 'add-favorite-button' %>
-
-        <%end%>
-
-      <% else %>
-
-          <%= button_to 'Add Favorite', add_favorite_path(current_user.id, @skatepark.id), method: :put, remote: true, class: 'add-favorite-button' %>
+        <% exclude = ['state', 'city', 'name', 'created_at', 'updated_at', 'id'] %>
+        <% unless exclude.include?(attribute) %>
+          <% if attribute == 'size' && !value.blank? %>
+            <div class="item"><%= attribute.capitalize %>: <%= value.capitalize %> sq ft</div>
+          <% elsif !value.blank?%>
+            <div class="item"><%= attribute.capitalize %>: <%= value.titleize %></div>
+          <% end %>
+        <% end %>
 
       <% end %>
+    </div>
 
-
-  </div>
-
-<!-- visit button -->
-
-  <div class="visit-container">
-
-
-    <% if user_has_skatepark(current_user.id, @skatepark.id) %>
-        <% if user_has_skatepark(current_user.id, @skatepark.id).visited == true %>
-
-          <%= button_to 'Never Been Here', remove_visit_path(current_user.id, @skatepark.id), method: :put, remote: true, class: 'remove-visit-button' %>
-
-
-        <% else %>
-
-          <%= button_to 'Been Here', add_visit_path(current_user.id, @skatepark.id), method: :put, remote: true, class: 'add-visit-button' %>
-
-        <%end%>
-
-      <% else %>
-
-          <%= button_to 'Been Here', add_visit_path(current_user.id, @skatepark.id), method: :put, remote: true, class: 'add-visit-button' %>
-
-      <% end %>
-
-
-  </div>
-
-<!-- rate containers -->
-    <% if user_has_skatepark(current_user.id, @skatepark.id) %>
-      <% if user_has_skatepark(current_user.id, @skatepark.id).visited == true %>
-        <div class="initial-rate-container">
-
-          <%= button_to 'Rate Skatepark', rate_path(current_user.id, @skatepark.id), class: 'initial-rate-button'%>
-
-          <div class="initial-rate-form-container hidden">
-            <%= form_for @user_skatepark, url: rate_path(current_user.id, @skatepark.id), method: :put do |f| %>
-              <%= f.text_field :rating, placeholder: 'enter rating' %>
-              <%= f.submit value: 'Rate' %>
-            <% end %>
-          </div>
-
-        </div>
-
-      <% end %>
-    <% end %>
-
-    <div class="rate-container"></div>
-    <div class="rate-form-container hidden"></div>
-
-
-<!-- review containers -->
-    <% if user_has_skatepark(current_user.id, @skatepark.id) %>
-      <% if user_has_skatepark(current_user.id, @skatepark.id).visited == true %>
-        <div class='initial-review-container'>
-          <%= button_to 'Review Skatepark', review_path(current_user.id, @skatepark.id), class: "initial-review-button" %>
-
-          <div class="initial-review-form-container hidden">
-
-
-            <%= form_for @user_skatepark, url: review_path(current_user.id, @skatepark.id), method: :put do |f| %>
-              <%= f.text_field :review, placeholder: 'write review here' %>
-              <%= f.submit value: 'Review' %>
-            <% end %>
-
-          </div>
-        </div>
-
-      <% end %>
-    <% end %>
-
-    <div class="review-container"></div>
-    <div class="review-form-container hidden"></div>
-
-
-  </div>
-
-
-
-
-  <!-- Map -->
-
-    <div id='map-container'>
-      <div id='map'>
-
+    <% unless has_review?(@skatepark.id) == 0 %>
+      <p>Reviews</p>
+      <div class="ui relaxed divided list">
+        <% @all_user_skateparks.each do |user_park| %>
+          <div class="item"><%= user_park.review %></div>
+        <% end %>
       </div>
-      <form action="http://maps.google.com/maps" method="get" target="_blank">
-         <label for="saddr">Enter your location</label>
-         <input type="text" name="saddr" />
-         <input type="hidden" name="daddr" value="<%= @skatepark.address %>" />
-         <input type="submit" value="Get directions" />
-      </form>
+    <% end %>
+
+
+    <p>User Rating: <%= @user_rating %></p>
+
+    <% if current_user && current_user.admin %>
+      <%= button_to 'Update', edit_skatepark_path, method: :get, class: 'ui primary button' %>
+    <% end %>
+
+    <% if logged_in? %>
+
+  <!-- favorite button -->
+
+    <div class="fav-container">
+
+
+      <% if user_has_skatepark(current_user.id, @skatepark.id) %>
+          <% if user_has_skatepark(current_user.id, @skatepark.id).favorite == true %>
+
+            <%= button_to 'Remove Favorite', remove_favorite_path(current_user.id, @skatepark.id), method: :put, remote: true, class: 'remove-favorite-button' %>
+
+          <% else %>
+
+            <%= button_to 'Add Favorite', add_favorite_path(current_user.id, @skatepark.id), method: :put, remote: true, class: 'add-favorite-button' %>
+
+          <%end%>
+
+        <% else %>
+
+            <%= button_to 'Add Favorite', add_favorite_path(current_user.id, @skatepark.id), method: :put, remote: true, class: 'add-favorite-button' %>
+
+        <% end %>
+
 
     </div>
 
+  <!-- visit button -->
+
+    <div class="visit-container">
+
+      <% if user_has_skatepark(current_user.id, @skatepark.id) %>
+          <% if user_has_skatepark(current_user.id, @skatepark.id).visited == true %>
+            <%= button_to 'Never Been Here', remove_visit_path(current_user.id, @skatepark.id), method: :put, remote: true, class: 'remove-visit-button' %>
+          <% else %>
+            <%= button_to 'Been Here', add_visit_path(current_user.id, @skatepark.id), method: :put, remote: true, class: 'add-visit-button' %>
+          <%end%>
+
+        <% else %>
+            <%= button_to 'Been Here', add_visit_path(current_user.id, @skatepark.id), method: :put, remote: true, class: 'add-visit-button' %>
+        <% end %>
+
+    </div>
+
+  <!-- rate containers -->
+      <% if user_has_skatepark(current_user.id, @skatepark.id) %>
+        <% if user_has_skatepark(current_user.id, @skatepark.id).visited == true %>
+          <div class="initial-rate-container">
+
+            <%= button_to 'Rate Skatepark', rate_path(current_user.id, @skatepark.id), class: 'initial-rate-button'%>
+
+            <div class="initial-rate-form-container hidden">
+              <%= form_for @user_skatepark, url: rate_path(current_user.id, @skatepark.id), method: :put do |f| %>
+                <%= f.text_field :rating, placeholder: 'enter rating' %>
+                <%= f.submit value: 'Rate' %>
+              <% end %>
+            </div>
+
+          </div>
+
+        <% end %>
+      <% end %>
+
+      <div class="rate-container"></div>
+      <div class="rate-form-container hidden"></div>
+
+
+  <!-- review containers -->
+      <% if user_has_skatepark(current_user.id, @skatepark.id) %>
+        <% if user_has_skatepark(current_user.id, @skatepark.id).visited == true %>
+          <div class='initial-review-container'>
+            <%= button_to 'Review Skatepark', review_path(current_user.id, @skatepark.id), class: "initial-review-button" %>
+
+            <div class="initial-review-form-container hidden">
+
+              <%= form_for @user_skatepark, url: review_path(current_user.id, @skatepark.id), method: :put do |f| %>
+                <%= f.text_field :review, placeholder: 'write review here' %>
+                <%= f.submit value: 'Review' %>
+              <% end %>
+
+            </div>
+          </div>
+
+        <% end %>
+      <% end %>
+
+      <div class="review-container"></div>
+      <div class="review-form-container hidden"></div>
+
+      <% end %>
+
+
+      <% unless @skatepark.address.blank? %>
+        <div id='map-container'>
+            <div id='map'></div>
+        </div>
+
+        <div class='center-text top-gap'>
+          <form action="http://maps.google.com/maps" method="get" target="_blank">
+               <label for="saddr">Enter your location</label>
+               <input type="text" name="saddr" />
+               <input type="hidden" name="daddr" value="<%= @skatepark.address %>" />
+               <input type="submit" value="Get directions" />
+            </form>
+        </div>
+      <% end %>
+
+
+
+    <!-- Map -->
 
 
 
 
+
+
+
+  </div>
 </div>
 
 

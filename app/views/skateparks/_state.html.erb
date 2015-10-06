@@ -1,28 +1,25 @@
-<div class="container">
-  <div class="create-container">
+<div class="create-container"></div>
+<div class="parks-container">
+  <div class="ui middle aligned selection list">
+    <% @skateparks.each do |park| %>
 
-  </div>
-  <div class="parks-container">
-    <ul class="collection">
-      <% @skateparks.each do |park| %>
-        <%unless park.name.blank?%>
-          <li class="<%= park.id %> collection-item">
-            <%= link_to "#{park.city}: #{park.name}", park%>
-            <% if current_user && current_user.admin %>
-              <%= button_to 'Delete', skatepark_path(park), method: :delete, data: {confirm: 'Are you sure?'}, remote: true, class: "park-delete waves-effect waves-teal btn-flat" %>
-            <% end %>
-          </li>
-        <% else %>
-          <li class="<%= park.id %> collection-item">
-            <%= link_to park.city, park %>
-            <% if current_user && current_user.admin %>
-              <%= button_to 'Delete', skatepark_path(park), method: :delete, data: {confirm: 'Are you sure?'}, remote: true, class: "park-delete waves-effect waves-teal btn-flat" %>
-            <% end %>
-           </li>
-        <% end %>
+      <%unless park.name.blank?%>
+        <div class="<%= park.id %> item">
+          <%= link_to "#{park.city.titleize}:  #{park.name.titleize}", park%>
+        </div>
+      <% else %>
+        <div class='<%= park.id %> item'>
+          <%= link_to park.city.titleize, park %>
+         </div>
       <% end %>
-    </ul>
 
+      <% if current_user && current_user.admin %>
+        <%= button_to 'Delete', skatepark_path(park), method: :delete, data: {confirm: 'Are you sure?'}, remote: true, class: "#{park.id} ui button mini" %>
+      <% end %>
+
+    <% end %>
   </div>
 
 </div>
+
+

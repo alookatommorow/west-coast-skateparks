@@ -10,38 +10,34 @@
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 
-
 </head>
 <body>
-
-  <nav >
-    <div class="nav-wrapper blue darken-2">
-      <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
-      <ul id="nav-mobile" class="left hide-on-med-and-down">
-        <li><%= link_to 'Home', root_path %></li>
-        <li><%= link_to 'Skateparks', skateparks_path %></li>
+  <div class='title-container'>
+    <div class="nav-container">
+      <div class='ui four item inverted menu'>
+        <%= link_to 'Home', root_path, class: 'item' %>
+        <%= link_to 'Skateparks', skateparks_path, class: 'item' %>
         <% if logged_in? %>
-          <li><%= link_to 'My Profile', user_path(current_user) %></li>
-        <% end %>
-      </ul>
-
-      <ul id="nav-mobile" class="right hide-on-med-and-down">
-        <% if logged_in? %>
-          <li id="sign_out">
-            <%= button_to 'Sign Out', session_path(current_user), method: :delete, class: "sign-out" %>
-          </li>
+          <%= link_to 'My Profile', user_path(current_user), class: 'item' %>
+          <%= link_to 'Sign Out', session_path(current_user), method: :delete, class: 'item' %>
         <% else %>
-          <li><%= link_to 'Sign In', new_session_path %></li>
-          <li><%= link_to 'Sign Up', new_user_path %></li>
+          <%= link_to 'Sign In', new_session_path, class: 'item' %>
+          <%= link_to 'Sign Up', new_user_path, class: 'item' %>
         <% end %>
-
-      </ul>
+      </div>
+      <div class='top-gap search-container'>
+        <%= form_tag(search_path, method: :get) do%>
+          <%= text_field_tag :search  %>
+          <%= submit_tag "Search", :name => nil %>
+        <% end %>
+      </div>
     </div>
-  </nav>
 
-<%= yield %>
+    <p class="four wide column title-words">West Coast Skateparks</p>
 
+  </div>
 
+  <%= yield %>
 
 </body>
 </html>

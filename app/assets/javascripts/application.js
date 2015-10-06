@@ -14,6 +14,7 @@
 //= require jquery_ujs
 //= require underscore
 //= require gmaps/google
+//= require semantic_ui/semantic_ui
 //= require_tree .
 
 
@@ -34,11 +35,23 @@ function bindEvents() {
   $(".park-state").on('click', function(event){
     event.preventDefault();
     var url = $(this).attr('href');
+    $(this).addClass('active').siblings().removeClass('active');
     $.ajax({url: url, dataType: 'JSON'}).done(function(response) {
       $(".parks-container").children().remove();
       $(".parks-container").append(response.partial)
     })
   });
+
+
+  /////////Select Skatepark From List//////
+$(".parks-container").on('click', '.item',function(){
+  console.log("clicked");
+  window.location = $(this).find("a").attr("href");
+  return false;
+
+  });
+
+
 
 
   ////////////////////////Toggle Create Form///////////////////
