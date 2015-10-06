@@ -32,7 +32,6 @@ class SkateparksController < ApplicationController
 
   def show
     @skatepark = Skatepark.find(params[:id])
-    has_review?(params[:id])
     if logged_in?
       @user_skatepark = user_has_skatepark(current_user.id, params[:id])
     end

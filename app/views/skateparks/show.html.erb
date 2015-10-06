@@ -2,27 +2,28 @@
   <h1><%= @skatepark.city.titleize %>, <%= @skatepark.state.capitalize %></h1>
 
 
-  <ul class="collection">
+  <div class="ui relaxed divided list">
     <% @skatepark.attributes.each do |attribute,value| %>
+
       <% exclude = ['created_at', 'updated_at', 'id'] %>
       <% unless exclude.include?(attribute) %>
         <% if attribute == 'size' && !value.blank? %>
-          <li class="collection-item"><%= attribute.capitalize %>: <%= value.capitalize %> sq ft</li>
+          <div class="item"><%= attribute.capitalize %>: <%= value.capitalize %> sq ft</div>
         <% elsif !value.blank?%>
-          <li class="collection-item"><%= attribute.capitalize %>: <%= value.titleize %></li>
+          <div class="item"><%= attribute.capitalize %>: <%= value.titleize %></div>
         <% end %>
       <% end %>
 
     <% end %>
-  </ul>
+  </div>
 
   <% unless has_review?(@skatepark.id) == 0 %>
     <p>Reviews</p>
-    <ul class="collection" >
+    <div class="ui relaxed divided list">
       <% @all_user_skateparks.each do |user_park| %>
-        <li class="collection-item"><%= user_park.review %></li>
+        <div class="item"><%= user_park.review %></div>
       <% end %>
-    </ul>
+    </div>
   <% end %>
 
 

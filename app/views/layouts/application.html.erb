@@ -16,27 +16,33 @@
 
 
 
-      <div class='ui four item menu'>
-          <%= link_to 'Home', root_path, class: 'item' %>
-          <%= link_to 'Skateparks', skateparks_path, class: 'item' %>
-          <% if logged_in? %>
-            <%= link_to 'My Profile', user_path(current_user), class: 'item' %>
-            <%= link_to 'Sign Out', session_path(current_user), method: :delete, class: 'item' %>
-          <% else %>
-            <%= link_to 'Sign In', new_session_path, class: 'item' %>
-            <%= link_to 'Sign Up', new_user_path, class: 'item' %>
-          <% end %>
+
+
+      <div class='title-container'>
+
+        <div class="nav-container">
+          <div class='ui four item inverted menu'>
+            <%= link_to 'Home', root_path, class: 'item' %>
+            <%= link_to 'Skateparks', skateparks_path, class: 'item' %>
+            <% if logged_in? %>
+              <%= link_to 'My Profile', user_path(current_user), class: 'item' %>
+              <%= link_to 'Sign Out', session_path(current_user), method: :delete, class: 'item' %>
+            <% else %>
+              <%= link_to 'Sign In', new_session_path, class: 'item' %>
+              <%= link_to 'Sign Up', new_user_path, class: 'item' %>
+            <% end %>
+          </div>
+        </div>
+        <%= form_tag(search_path, method: :get) do%>
+          <%= text_field_tag :search  %>
+          <%= submit_tag "Search", :name => nil %>
+        <% end %>
+        <p class="four wide column title-words">West Coast Skateparks</p>
+
+
       </div>
-      <!-- <div class="ui action input">
-        <input type="text" placeholder="Search...">
-        <button class="ui icon button">
-          <i class="search icon"></i>
-        </button>
-      </div> -->
-      <%= form_tag(search_path, method: :get) do%>
-        <%= text_field_tag :search  %>
-        <%= submit_tag "Search", :name => nil %>
-      <% end %>
+
+
 
 
 

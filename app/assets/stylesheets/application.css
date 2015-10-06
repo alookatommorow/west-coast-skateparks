@@ -16,7 +16,7 @@
  *= require_self
  */
 * {
-        font-family: 'Helvetica', sans-serif !important;
+        font-family: 'Helvetica', sans-serif;
     }
 
 .debug {
@@ -27,6 +27,45 @@
   background-color: #1976d2;
   border: none;
 }*/
+
+.title-container {
+  position: relative;
+  background-image: url("https://gonesk8ing.files.wordpress.com/2013/09/1388.jpg" );
+  height: 50%;
+  background-repeat: no-repeat;
+  background-size: 100% auto;
+  background-position: 0 -100px;
+
+}
+/*.title-photo {
+
+  position: absolute;
+  width: 100%;
+  top: -150px;
+  z-index: -1;
+
+}*/
+
+.nav-container {
+  position: absolute;
+  top: 5%;
+  left: 5%;
+  width: 90%;
+}
+
+.title-words {
+  position: absolute;
+  bottom: 5%;
+  right: 5%;
+  font-size: 4em;
+  font-weight: bold;
+  color: red;
+
+}
+
+
+
+
 
 .center-text {
   text-align: center;
