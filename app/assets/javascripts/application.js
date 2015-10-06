@@ -43,6 +43,17 @@ function bindEvents() {
   });
 
 
+  /////////Select Skatepark From List//////
+$(".parks-container").on('click', '.item',function(){
+  console.log("clicked");
+  window.location = $(this).find("a").attr("href");
+  return false;
+
+  });
+
+
+
+
   ////////////////////////Toggle Create Form///////////////////
 
   $(".new-skatepark").on('click', function() {
