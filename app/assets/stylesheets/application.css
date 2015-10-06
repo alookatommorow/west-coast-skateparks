@@ -26,10 +26,15 @@
 .title-container {
   position: relative;
   background-image: url("https://gonesk8ing.files.wordpress.com/2013/09/1388.jpg" );
-  height: 50%;
+  height: 40%;
   background-repeat: no-repeat;
   background-size: 100% auto;
-  background-position: 0 -100px;
+  background-position: 0 -120px;
+
+}
+
+body {
+  background-color: #CCCCCC;
 
 }
 /*.title-photo {
@@ -74,6 +79,16 @@
   margin-top: 1%;
 }
 
+.parks-container {
+  background-color: #E6E6E6;
+}
+
+a {
+  color: black;
+
+}
+
+
 /*need to create atomic class for these*/
 .create-container {
   display: none;
@@ -97,7 +112,7 @@
 }
 
 .page-container {
-  margin: 2% auto;
+  margin: 2% 10%;
 }
 
 .container {
