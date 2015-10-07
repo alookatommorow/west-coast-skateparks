@@ -1,11 +1,12 @@
 <div class='center-text top-gap'>
+  <h1><%= @skatepark.city.titleize %>, <%= @skatepark.state.capitalize %></h1>
   <% unless @skatepark.name.blank?%>
-    <h1><%= @skatepark.name.titleize %></h1>
+    <h2><%= @skatepark.name.titleize %></h2>
   <% end %>
-  <h2><%= @skatepark.city.titleize %>, <%= @skatepark.state.capitalize %></h2>
+
 </div>
 <div class="ui grid">
-  <div class="fifteen wide column page-container">
+  <div class="sixteen wide column page-container">
 
 
     <div class="ui relaxed divided list">

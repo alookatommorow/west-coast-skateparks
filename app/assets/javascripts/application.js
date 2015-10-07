@@ -44,14 +44,17 @@ function bindEvents() {
 
 
   /////////Select Skatepark From List//////
-$(".parks-container").on('click', '.item',function(){
-  console.log("clicked");
+$(".parks-container").on('click', '.item', function(){
   window.location = $(this).find("a").attr("href");
   return false;
-
   });
 
+///////////Select Skatepark From Profile Page////////
 
+$(".profile-container").on('click', '.item', function(){
+  window.location = $(this).find("a").attr("href");
+  return false;
+  });
 
 
   ////////////////////////Toggle Create Form///////////////////

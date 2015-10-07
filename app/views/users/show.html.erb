@@ -1,26 +1,48 @@
-<div class="ui grid">
-<div class="fifteen wide column page-container">
-  <h1><%= @user.username %>'s page</h1>
-  <h2>Favorites<h2>
-    <ul>
-      <% @myfavorites.each do |park|%>
-        <%if park.name%>
-          <li><%= link_to park.city + ": " + park.name + " (" + park.state + ")", skatepark_path(park) %></li>
-        <% else %>
-          <li><%= link_to park.city + " (" + park.state + ")", skatepark_path(park) %></li>
-        <% end %>
-      <% end %>
-    </ul>
-
-    <h2>My Parks<h2>
-    <ul>
-      <% @myvisited.each do |park|%>
-        <%if park.name%>
-          <li><%= link_to park.city + ": " + park.name + "(" + park.state + ")", skatepark_path(park) %></li>
-        <% else %>
-          <li><%= link_to park.city + " (" + park.state + ")", skatepark_path(park) %></li>
-        <% end %>
-      <% end %>
-    </ul>
+<div class='center-text top-gap'>
+  <h1><%= @user.username.titleize %>'s Page</h1>
 </div>
+<div class="ui grid">
+  <div class="sixteen wide column page-container">
+
+    <div class="profile-container">
+      <div class="ui grid">
+        <div class="sixteen column row">
+          <div class="left floated column"><h2 class="red">Favorites<h2></div>
+          <div class="right floated column right-align"><h2 class="red"><%= @myfavorites.length %><h2></div>
+        </div>
+      </div>
+
+      <div class="ui divider"></div>
+      <div class="ui middle aligned selection list">
+
+        <% @myfavorites.each do |park|%>
+          <%if park.name%>
+            <div class='item'><%= link_to park.city.titleize + ": " + park.name.titleize + ", " + park.state.capitalize.capitalize, skatepark_path(park) %></div>
+          <% else %>
+            <div class='item'><%= link_to park.city.titleize + ", " + park.state.capitalize, skatepark_path(park) %></div>
+          <% end %>
+        <% end %>
+
+      </div>
+
+      <div class="ui grid">
+        <div class="eight column row">
+          <div class="left floated column"><h2 class="red">My Parks<h2></div>
+          <div class="right floated column right-align"><h2 class="red"><%= @myvisited.length %><h2></div>
+        </div>
+      </div>
+
+      <div class="ui divider"></div>
+        <div class="ui middle aligned selection list">
+          <% @myvisited.each do |park|%>
+            <%if park.name%>
+              <div class='item'><%= link_to park.city.titleize  + ", " + park.state.capitalize + ": " + park.name.titleize , skatepark_path(park) %></div>
+            <% else %>
+              <div class='item'><%= link_to park.city.titleize + ", " + park.state.capitalize, skatepark_path(park) %></div>
+            <% end %>
+          <% end %>
+
+        </div>
+      </div>
+  </div>
 </div>
