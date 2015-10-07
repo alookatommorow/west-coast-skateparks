@@ -19,15 +19,17 @@
   font-family: 'Helvetica', sans-serif;
 }
 
-html,body,blockquote,code,h1,h2,h3,h4,h5,h6,p,pre{margin:0;padding:0}
+html,body,blockquote,code,h1,h2,h3,h4,h5,h6,p,pre{margin:0;padding:0;}
 
-body {
+body, .gray-background {
   background-color: #CCCCCC;
 }
 
-.debug  {
+* {
   border: 1px solid red;
 }
+
+/*-----------Layout----------*/
 
 .title-container {
   position: relative;
@@ -35,7 +37,7 @@ body {
   height: 40%;
   background-repeat: no-repeat;
   background-size: 100% auto;
-  background-position: 0 -120px;
+  background-position: 0 -180px;
 
 }
 
@@ -59,6 +61,23 @@ body {
    margin-left: 80%;
 }
 
+.page-container {
+  margin: 2% 10%;
+  background-color: #E6E6E6;
+}
+
+.parks-container, .profile-container  {
+  background-color: #E6E6E6;
+  height: 50em;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+
+
+
+/*---------Atomic-----------*/
+
 .center-text {
   text-align: center;
 }
@@ -67,24 +86,59 @@ body {
   margin-top: 1%;
 }
 
-.parks-container {
-  background-color: #E6E6E6;
-}
-
-a {
-  color: black;
-
-}
-
-/*need to create atomic class for these*/
-.create-container {
-  display: none;
-  margin-top: 10px;
+.red {
+  color: red;
 }
 
 .hidden {
   display: none;
 }
+
+.right-align {
+  text-align: right;
+}
+
+.inline-block {
+  display: inline-block;
+}
+
+.float-right {
+  float: right;
+}
+
+.reduced-margin {
+  margin: 0px;
+}
+
+
+/*-------Index Page----------*/
+
+
+
+.parks-container a {
+  color: black;
+  font-size: 1.5em;
+
+}
+
+
+.create-container {
+  display: none;
+  margin-top: 10px;
+}
+
+/*-------Profile Page----------*/
+
+
+.profile-container a {
+  color: black;
+  font-size: 1.5em;
+  padding: 0 0 0 0;
+}
+
+/*--------Show Page-------*/
+
+
 
 .map-container {
   position: relative;
@@ -97,16 +151,6 @@ a {
   margin-right: auto;
 }
 
-.page-container {
-  margin: 2% 10%;
-  background-color: #E6E6E6;
-}
 
-.container {
-  margin: 10% auto;
-  width: 800px;
-  padding: 0px 20px 20px 20px;
-  border: 1px dotted black;
-}
 
 
