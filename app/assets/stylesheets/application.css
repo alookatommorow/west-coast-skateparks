@@ -25,7 +25,7 @@ body {
   background-color: #CCCCCC;
 }
 
-.debug  {
+.debug {
   border: 1px solid red;
 }
 
@@ -37,7 +37,7 @@ body {
   height: 40%;
   background-repeat: no-repeat;
   background-size: 100% auto;
-  background-position: 0 -120px;
+  background-position: 0 -180px;
 
 }
 
@@ -66,6 +66,12 @@ body {
   background-color: #E6E6E6;
 }
 
+.parks-container, .profile-container  {
+  background-color: #E6E6E6;
+  height: 50em;
+  overflow: auto;
+}
+
 
 
 
@@ -91,17 +97,23 @@ body {
   text-align: right;
 }
 
+.inline-block {
+  display: inline-block;
+}
+
+.float-right {
+  float: right;
+}
+
 
 /*-------Index Page----------*/
 
-.parks-container  {
-  background-color: #E6E6E6;
-  height: 50em;
-}
+
 
 .parks-container a {
   color: black;
   font-size: 1.5em;
+
 }
 
 
@@ -112,14 +124,11 @@ body {
 
 /*-------Profile Page----------*/
 
-.profile-container {
-  background-color: #E6E6E6;
-  height: 50em;
-}
 
 .profile-container a {
   color: black;
   font-size: 1.5em;
+  padding: 0 0 0 0;
 }
 
 /*--------Show Page-------*/

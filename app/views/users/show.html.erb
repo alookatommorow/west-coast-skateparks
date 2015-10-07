@@ -5,13 +5,8 @@
   <div class="sixteen wide column page-container">
 
     <div class="profile-container">
-      <div class="ui grid">
-        <div class="sixteen column row">
-          <div class="left floated column"><h2 class="red">Favorites<h2></div>
-          <div class="right floated column right-align"><h2 class="red"><%= @myfavorites.length %><h2></div>
-        </div>
-      </div>
-
+      <div class='inline-block'><h2 class="red">Favorites<h2></div>
+      <div class='inline-block float-right'><h2 class="red"><%= @myfavorites.length %><h2></div>
       <div class="ui divider"></div>
       <div class="ui middle aligned selection list">
 
@@ -24,14 +19,8 @@
         <% end %>
 
       </div>
-
-      <div class="ui grid">
-        <div class="eight column row">
-          <div class="left floated column"><h2 class="red">My Parks<h2></div>
-          <div class="right floated column right-align"><h2 class="red"><%= @myvisited.length %><h2></div>
-        </div>
-      </div>
-
+      <div class='inline-block'><h2 class="red">My Parks<h2></div>
+      <div class='inline-block float-right'><h2 class="red"><%= @myvisited.length %><h2></div>
       <div class="ui divider"></div>
         <div class="ui middle aligned selection list">
           <% @myvisited.each do |park|%>

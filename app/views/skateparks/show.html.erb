@@ -3,15 +3,13 @@
   <% unless @skatepark.name.blank?%>
     <h2><%= @skatepark.name.titleize %></h2>
   <% end %>
-
 </div>
+
 <div class="ui grid">
   <div class="sixteen wide column page-container">
 
-
     <div class="ui relaxed divided list">
       <% @skatepark.attributes.each do |attribute,value| %>
-
         <% exclude = ['state', 'city', 'name', 'created_at', 'updated_at', 'id'] %>
         <% unless exclude.include?(attribute) %>
           <% if attribute == 'size' && !value.blank? %>
@@ -20,7 +18,6 @@
             <div class="item"><%= attribute.capitalize %>: <%= value.titleize %></div>
           <% end %>
         <% end %>
-
       <% end %>
     </div>
 
