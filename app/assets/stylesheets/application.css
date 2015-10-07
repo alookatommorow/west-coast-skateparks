@@ -21,11 +21,11 @@
 
 html,body,blockquote,code,h1,h2,h3,h4,h5,h6,p,pre{margin:0;padding:0;}
 
-body {
+body, .gray-background {
   background-color: #CCCCCC;
 }
 
-.debug {
+* {
   border: 1px solid red;
 }
 
@@ -69,7 +69,8 @@ body {
 .parks-container, .profile-container  {
   background-color: #E6E6E6;
   height: 50em;
-  overflow: auto;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 
@@ -103,6 +104,10 @@ body {
 
 .float-right {
   float: right;
+}
+
+.reduced-margin {
+  margin: 0px;
 }
 
 
