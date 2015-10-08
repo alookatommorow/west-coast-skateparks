@@ -17,4 +17,4 @@
 .DS_Store
 
 /db/skateparks2.csv
-
+# had to remove database for heroku
