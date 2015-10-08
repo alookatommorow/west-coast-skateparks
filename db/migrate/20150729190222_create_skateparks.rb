@@ -9,9 +9,9 @@
       t.string :builder
       t.string :opened
       t.string :address
-      t.string :hours
+      t.text :hours
       t.string :size
-      t.string :notes
+      t.text :notes
       t.string :helmet
 
       t.timestamps
