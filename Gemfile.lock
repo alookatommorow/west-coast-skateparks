@@ -72,6 +72,7 @@ GEM
     minitest (5.7.0)
     multi_json (1.11.2)
     pg (0.18.2)
+    puma (2.14.0)
     rack (1.5.5)
     rack-test (0.6.3)
       rack (>= 1.0)
@@ -146,6 +147,7 @@ DEPENDENCIES
   less-rails-semantic_ui (~> 2.0.7.0)
   material_icons
   pg
+  puma
   rails (= 4.1.6)
   rails_12factor
   sass-rails (~> 4.0.3)
