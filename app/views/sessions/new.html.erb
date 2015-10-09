@@ -1,12 +1,26 @@
-<div class="container">
-  <h1>Login</h1>
-  <%= form_tag '/sessions' do %>
-    <%= label_tag :username %>
-    <%= text_field_tag :username %>
-    <br>
-    <%= label_tag :password %>
-    <%= password_field_tag :password %>
-    <br>
-    <%= submit_tag 'Login' %>
-  <% end %>
+<div class='center-text'>
+  <h1>Sign In</h1>
+</div>
+<div class="ui grid">
+  <div class="sixteen wide column page-container">
+
+    <div class="ui one column stackable center aligned page grid">
+      <div class="column twelve wide">
+
+        <%= form_tag '/sessions', class: 'ui form top-gap' do %>
+          <div class="field">
+          <%= label_tag :username %>
+          <%= text_field_tag :username %>
+          </div>
+          <div class="field">
+          <%= label_tag :password %>
+          <%= password_field_tag :password %>
+          <div>
+          <br>
+          <%= submit_tag 'Submit', class: 'ui red button' %>
+        <% end %>
+
+      </div>
+    </div>
+  </div>
 </div>
