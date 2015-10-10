@@ -66,6 +66,8 @@ body, .gray-background {
   background-color: #E6E6E6;
 }
 
+
+
 .parks-container, .profile-container  {
   background-color: #E6E6E6;
   height: 50em;
@@ -118,7 +120,6 @@ body, .gray-background {
 
 .parks-container a {
   color: black;
-  font-size: 1.5em;
 
 }
 
@@ -133,9 +134,14 @@ body, .gray-background {
 
 .profile-container a {
   color: black;
-  font-size: 1.5em;
-  padding: 0 0 0 0;
 }
+
+/*--------Search Page-------*/
+
+.search-container a {
+  color: black;
+}
+
 
 /*--------Show Page-------*/
 

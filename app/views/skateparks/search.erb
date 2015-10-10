@@ -1,5 +1,6 @@
-<div class="container">
-  <div class="ui relaxed divided list">
+<div class="ui grid">
+  <div class="sixteen wide column page-container">
+  <div class="ui relaxed divided selection list search-container">
     <% @skateparks.each do |park| %>
       <%unless park.name.blank?%>
         <div class="item">
@@ -11,5 +12,6 @@
         </div>
       <% end %>
     <% end %>
+  </div>
   </div>
 </div>
