@@ -3,7 +3,6 @@ class SkateparksController < ApplicationController
   def search
     # take this out into self.search method for Skatepark?
     if params[:search]
-      # formatted_query = params[:search].downcase
       @skateparks = Skatepark.where("name LIKE ? OR city LIKE ? OR state LIKE ?", params[:search].downcase, params[:search].downcase, params[:search].downcase).order("state ASC").order("city ASC").order("name ASC")
     end
 
@@ -40,6 +39,8 @@ class SkateparksController < ApplicationController
     @user_rating = user_rating(params[:id])
   end
 
+# needs to be changed to AJAX
+
   def update
     @skatepark = Skatepark.find(params[:id])
     if @skatepark.update(skatepark_params)
@@ -49,6 +50,7 @@ class SkateparksController < ApplicationController
     end
   end
 
+# admin delete skatepark via AJAX
   def destroy
     @skatepark = Skatepark.find(params[:id])
     @skatepark.destroy
@@ -57,7 +59,7 @@ class SkateparksController < ApplicationController
     end
   end
 
-
+  # skateparks by state via AJAX
   def state
     @skateparks = Skatepark.where(state: params[:state])
     respond_to do |format|

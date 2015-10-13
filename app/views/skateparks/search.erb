@@ -1,9 +1,8 @@
 <div class="ui grid">
-  <div class="sixteen wide column page-container">
+  <div class="sixteen wide column">
   <div class="ui relaxed divided selection list search-container">
-    <img src="http://s3.amazonaws.com/west-coast-skateparks/skateparks/IMG_4007.JPG" alt="">
     <% @skateparks.each do |park| %>
-      <%unless park.name.blank?%>
+      <%if !park.name.blank?%>
         <div class="item">
           <%= link_to "#{park.city.titleize}:  #{park.name.titleize}", park%>
         </div>
