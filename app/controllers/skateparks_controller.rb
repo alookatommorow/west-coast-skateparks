@@ -2,9 +2,17 @@ class SkateparksController < ApplicationController
 
   def search
     # take this out into self.search method for Skatepark?
+    p params
+    p "*"* 100
     if params[:search]
       @skateparks = Skatepark.where("name LIKE ? OR city LIKE ? OR state LIKE ?", params[:search].downcase, params[:search].downcase, params[:search].downcase).order("state ASC").order("city ASC").order("name ASC")
+      p "*"* 100
+
+      respond_to do |format|
+        format.json {render json: {partial: render_to_string('_search.html.erb', layout: false)} }
+      end
     end
+
 
   end
 
