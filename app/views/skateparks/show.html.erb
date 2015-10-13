@@ -8,7 +8,7 @@
     </div>
     <div class="ui relaxed divided list">
       <% @skatepark.attributes.each do |attribute,value| %>
-        <% exclude = ['state', 'city', 'name', 'created_at', 'updated_at', 'id'] %>
+        <% exclude = ['state', 'city', 'name', 'notes', 'created_at', 'updated_at', 'id'] %>
         <% unless exclude.include?(attribute) %>
           <% if attribute == 'size' && !value.blank? %>
             <div class="item"><%= attribute.capitalize %>: <%= value.capitalize %> sq ft</div>

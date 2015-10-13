@@ -92,10 +92,6 @@ body {
   margin-top: 1%;
 }
 
-.gray-background {
-  background-color: #CCCCCC;
-}
-
 .blue {
   color: #5CB8E6;
 }
@@ -153,7 +149,6 @@ body {
 
 
 /*--------Show Page-------*/
-
 
 
 .map-container {

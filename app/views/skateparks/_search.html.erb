@@ -2,7 +2,7 @@
   <div class="inline-block">
     <h1>Search Results</h1>
   </div>
-  <div class="close-search float-right inline-block">CLOSE
+  <div class="ui button close-search float-right inline-block">CLOSE
   </div>
   <div class="ui divided selection list">
 
@@ -10,11 +10,11 @@
       <% @skateparks.each do |park| %>
         <%if !park.name.blank?%>
           <div class="<%= park.id %> item">
-            <%= link_to "#{park.city.titleize}:  #{park.name.titleize}", park%>
+            <%= link_to "#{park.city.titleize}:  #{park.name.titleize} (#{park.state.capitalize})", park%>
           </div>
         <% else %>
           <div class="<%= park.id %> item">
-            <%= link_to park.city.titleize, park %>
+            <%= link_to "#{park.city.titleize} (#{park.state.capitalize})", park %>
           </div>
         <% end %>
       <% end %>
@@ -23,5 +23,6 @@
         <p>No results</p>
       <% end %>
   </div>
+  <div class='ui divider'></div>
 
 </div>
