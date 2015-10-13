@@ -1,13 +1,18 @@
 <div class="ui divided selection list">
-  <% @skateparks.each do |park| %>
-    <%if !park.name.blank?%>
-      <div class="item">
-        <%= link_to "#{park.city.titleize}:  #{park.name.titleize}", park%>
-      </div>
-    <% else %>
-      <div class="item">
-        <%= link_to park.city.titleize, park %>
-      </div>
+  <% if !@skateparks.blank? %>
+    <% @skateparks.each do |park| %>
+      <%if !park.name.blank?%>
+        <div class="item">
+          <%= link_to "#{park.city.titleize}:  #{park.name.titleize}", park%>
+        </div>
+      <% else %>
+        <div class="item">
+          <%= link_to park.city.titleize, park %>
+        </div>
+      <% end %>
     <% end %>
-  <% end %>
+
+    <% else %>
+      <p>No results</p>
+    <% end %>
 </div>

@@ -1,17 +1,17 @@
 <div class="ui grid">
   <div class="sixteen wide column">
-  <div class="ui relaxed divided selection list search-container">
-    <% @skateparks.each do |park| %>
-      <%if !park.name.blank?%>
-        <div class="item">
-          <%= link_to "#{park.city.titleize}:  #{park.name.titleize}", park%>
-        </div>
-      <% else %>
-        <div class="item">
-          <%= link_to park.city.titleize, park %>
-        </div>
+    <div class="ui relaxed divided selection list search-container">
+      <% @skateparks.each do |park| %>
+        <%if !park.name.blank?%>
+          <div class="item">
+            <%= link_to "#{park.city.titleize}:  #{park.name.titleize}", park%>
+          </div>
+        <% else %>
+          <div class="item">
+            <%= link_to park.city.titleize, park %>
+          </div>
+        <% end %>
       <% end %>
-    <% end %>
-  </div>
+    </div>
   </div>
 </div>

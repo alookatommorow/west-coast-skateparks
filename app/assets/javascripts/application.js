@@ -51,8 +51,8 @@ function bindEvents() {
     var url = $(this).attr('action');
     var data = {search: $(this).find("input[name='search']").val()}
     $.ajax({url: url, data: data, dataType: 'JSON'}).done(function(response) {
-      $(".search-results-container").children().remove();
-      $(".search-results-container").append(response.partial)
+      $(".search-results-container").empty();
+      $(".search-results-container").append(response.partial);
     })
 
   });
