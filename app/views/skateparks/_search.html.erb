@@ -1,0 +1,27 @@
+<div class='search-results-container'>
+  <div class="inline-block">
+    <h1>Search Results</h1>
+  </div>
+  <div class="close-search float-right inline-block">CLOSE
+  </div>
+  <div class="ui divided selection list">
+
+    <% if !@skateparks.blank? %>
+      <% @skateparks.each do |park| %>
+        <%if !park.name.blank?%>
+          <div class="<%= park.id %> item">
+            <%= link_to "#{park.city.titleize}:  #{park.name.titleize}", park%>
+          </div>
+        <% else %>
+          <div class="<%= park.id %> item">
+            <%= link_to park.city.titleize, park %>
+          </div>
+        <% end %>
+      <% end %>
+
+      <% else %>
+        <p>No results</p>
+      <% end %>
+  </div>
+
+</div>

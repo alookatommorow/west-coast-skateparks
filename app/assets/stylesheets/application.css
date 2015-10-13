@@ -21,12 +21,14 @@
 
 html,body,blockquote,code,h1,h2,h3,h4,h5,h6,p,pre{margin:0;padding:0;}
 
-body, .gray-background {
-  background-color: #CCCCCC;
-}
+
 
 .debug {
   border: 1px solid red;
+}
+
+body {
+  /*background-color: #FAFFFF;*/
 }
 
 /*-----------Layout----------*/
@@ -37,7 +39,8 @@ body, .gray-background {
   height: 30%;
   background-repeat: no-repeat;
   background-size: 100% auto;
-  background-position: 0 -200px;
+  background-position: 0 -150px;
+  margin: 2% 9%;
 
 }
 
@@ -54,20 +57,22 @@ body, .gray-background {
   right: 5%;
   font-size: 4em;
   font-weight: bold;
-  color: red;
+  color: #5CB8E6;
 }
 
 .search-container {
- margin-right: 9%;
+ margin-bottom: 2%;
 }
 
 .page-container {
   margin: 2% 10%;
-  background-color: #E6E6E6;
+  /*background-color: #E6E6E6;*/
 }
 
-.parks-container, .profile-container  {
-  background-color: #E6E6E6;
+
+
+.parks-container, .profile-container, .scroll-box {
+  /*background-color: #E6E6E6;*/
   height: 50em;
   overflow-y: auto;
   overflow-x: hidden;
@@ -87,8 +92,12 @@ body, .gray-background {
   margin-top: 1%;
 }
 
-.red {
-  color: red;
+.gray-background {
+  background-color: #CCCCCC;
+}
+
+.blue {
+  color: #5CB8E6;
 }
 
 .hidden {
@@ -118,8 +127,6 @@ body, .gray-background {
 
 .parks-container a {
   color: black;
-  font-size: 1.5em;
-
 }
 
 
@@ -130,12 +137,20 @@ body, .gray-background {
 
 /*-------Profile Page----------*/
 
-
 .profile-container a {
   color: black;
-  font-size: 1.5em;
-  padding: 0 0 0 0;
 }
+
+/*--------Search Page-------*/
+
+.search-results-container {
+  margin-top: 2%;
+}
+
+.search-results-container a {
+  color: black;
+}
+
 
 /*--------Show Page-------*/
 
