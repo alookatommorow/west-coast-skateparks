@@ -42,6 +42,7 @@ function bindEvents() {
     })
   });
 
+/////////////////////// Search /////////////
 
   $('.search-form').on('submit', function(event){
     event.preventDefault();
@@ -51,12 +52,28 @@ function bindEvents() {
     var url = $(this).attr('action');
     var data = {search: $(this).find("input[name='search']").val()}
     $.ajax({url: url, data: data, dataType: 'JSON'}).done(function(response) {
-      $(".search-results-container").empty();
-      $(".search-results-container").append(response.partial);
+      $(".search-results-container").remove();
+      $(".search-container").append(response.partial);
     })
 
   });
 
+
+/////////Close Search //////
+
+  $(".search-container").on('click', '.close-search', function(){
+
+    $(this).parent().slideToggle(400, function(){});
+
+  });
+
+
+/////////Select Skatepark From Search //////
+
+$(".search-container").on('click', '.item', function(){
+  window.location = $(this).find("a").attr("href");
+  return false;
+  });
 
   /////////Select Skatepark From List//////
 $(".parks-container").on('click', '.item', function(){

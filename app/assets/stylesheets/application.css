@@ -71,7 +71,7 @@ body {
 
 
 
-.parks-container, .profile-container  {
+.parks-container, .profile-container, .scroll-box {
   /*background-color: #E6E6E6;*/
   height: 50em;
   overflow-y: auto;
@@ -127,7 +127,6 @@ body {
 
 .parks-container a {
   color: black;
-
 }
 
 
@@ -138,14 +137,17 @@ body {
 
 /*-------Profile Page----------*/
 
-
 .profile-container a {
   color: black;
 }
 
 /*--------Search Page-------*/
 
-.search-container a {
+.search-results-container {
+  margin-top: 2%;
+}
+
+.search-results-container a {
   color: black;
 }
 
