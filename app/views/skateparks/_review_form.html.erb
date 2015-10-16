@@ -1,4 +1,4 @@
 <%= form_for @user_skatepark, url: review_path(current_user.id, params[:id]), method: :put do |f| %>
-  <%= f.text_area_field :review, placeholder: 'write review here' %>
+  <%= f.text_area :review, placeholder: 'write review here' %>
   <%= f.submit value: 'Review' %>
 <% end %>

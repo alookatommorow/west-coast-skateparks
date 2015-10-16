@@ -44,6 +44,18 @@ class SkateparksController < ApplicationController
     end
     @all_user_skateparks = UserSkatepark.where(skatepark_id: params[:id])
     @user_rating = user_rating(params[:id])
+    @state_skateparks = Skatepark.where(state: @skatepark.state)
+    p "*"*100
+    p @skatepark.get_lat_long[0] + 1
+    p "*"*100
+
+
+    # credentials = Aws::Credentials.new(ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY'])
+    # s3 = Aws::S3::Client.new(region: 'us-west-1', credentials: credentials)
+    # resp = s3.get_object(bucket:'west-coast-skateparks/skateparks', key:'IMG_4007.JPG')
+    # p "*"*100
+    # p resp.body
+    # p "*"*100
   end
 
 # needs to be changed to AJAX
