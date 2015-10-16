@@ -8,7 +8,7 @@
     </div>
     <div class="ui relaxed divided list">
       <% @skatepark.attributes.each do |attribute,value| %>
-        <% exclude = ['state', 'city', 'name', 'created_at', 'updated_at', 'id'] %>
+        <% exclude = ['state', 'city', 'name', 'notes', 'created_at', 'updated_at', 'id'] %>
         <% unless exclude.include?(attribute) %>
           <% if attribute == 'size' && !value.blank? %>
             <div class="item"><%= attribute.capitalize %>: <%= value.capitalize %> sq ft</div>
@@ -111,7 +111,7 @@
             <div class="initial-review-form-container hidden">
 
               <%= form_for @user_skatepark, url: review_path(current_user.id, @skatepark.id), method: :put do |f| %>
-                <%= f.text_field :review, placeholder: 'write review here' %>
+                <%= f.text_area :review, placeholder: 'write review here' %>
                 <%= f.submit value: 'Review' %>
               <% end %>
 
@@ -164,6 +164,7 @@
 
 
 function initMap() {
+
   var myLatLng = {lat: <%= @skatepark.get_lat_long[0] %>, lng: <%= @skatepark.get_lat_long[1] %>};
 
   var map = new google.maps.Map(document.getElementById('map'), {
@@ -176,6 +177,8 @@ function initMap() {
     map: map,
     title: '<%= @skatepark.city.titleize %>, <%= @skatepark.state.capitalize %>'
   });
+
+
 
 }
 
