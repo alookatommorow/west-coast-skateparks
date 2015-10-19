@@ -44,4 +44,15 @@ gem 'autoprefixer-rails', '~> 5.2.1.2'
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
+group :development, :test do
+  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
+  gem 'pry-rails'
+  gem 'pry-byebug'
+  gem 'rspec-rails'
+  gem 'capybara'
+  gem 'selenium-webdriver'
 
+
+  # Access an IRB console on exception pages or by using <%= console %> in views
+  gem 'web-console', '~> 2.0'
+end
