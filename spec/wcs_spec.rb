@@ -38,18 +38,30 @@ describe 'Search', type: :feature do
 
 end
 
-# describe "the signin process", type: :feature do
-#   before :each do
-#     User.make(username: 'fogus', email: 'user@example.com', password: 'password')
-#   end
+describe 'Show', type: :feature do
 
-#   it "signs me in" do
-#     visit '/sessions/new'
-#     within("#session") do
-#       fill_in 'Username', :with => 'fogus'
-#       fill_in 'Password', :with => 'password'
-#     end
-#     click_button 'Submit'
-#     expect(page).to have_content 'Page'
-#   end
-# end
+  it 'displays skatepark information' do
+    visit '/skateparks/267'
+    expect(page).to have_text('Ojai')
+    expect(page).to have_text('Designer: Site Design')
+  end
+
+
+end
+
+describe "the signup process", type: :feature do
+  # before :each do
+  #   User.make(username: 'fogus', email: 'user@example.com', password: 'password')
+  # end
+
+  it "signs up a new user and logs them in" do
+    visit '/users/new'
+    fill_in 'Username', with: 'fogus'
+    fill_in 'Email', with: 'fogus@gmail.com'
+    fill_in 'Password', with: 'password'
+    click_button 'Register'
+    expect(page).to have_content 'Page'
+  end
+
+
+end
