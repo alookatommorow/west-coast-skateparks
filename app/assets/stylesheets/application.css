@@ -88,7 +88,7 @@ body {
   text-align: center;
 }
 
-.top-gap {
+.one-margin {
   margin-top: 1%;
 }
 
@@ -165,6 +165,11 @@ body {
 .picture-modal img {
   display:block;
   margin:auto;
+
+}
+
+.ui img {
+  cursor: pointer;
 }
 
 

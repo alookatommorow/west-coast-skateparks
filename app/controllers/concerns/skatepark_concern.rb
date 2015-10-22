@@ -9,6 +9,7 @@ module SkateparkConcern
     helper_method :visit
     helper_method :get_lat_long
     helper_method :has_review?
+    helper_method :has_user_rating?
   end
 
   def user_has_skatepark(user_id, skatepark_id)
@@ -87,7 +88,27 @@ module SkateparkConcern
         num_reviews += 1
       end
     end
-    num_reviews
+    if num_reviews > 0
+      return true
+    else
+      return false
+    end
+  end
+
+  def has_user_rating?(skatepark_id)
+    all_user_skateparks = UserSkatepark.where(skatepark_id: skatepark_id)
+    num_ratings = 0
+    all_user_skateparks.each do |park|
+      if park.rating != nil
+        num_ratings += 1
+      end
+    end
+    if num_ratings > 0
+      return true
+    else
+      return false
+    end
+
   end
 
   def get_lat_long

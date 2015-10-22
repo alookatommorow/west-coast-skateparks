@@ -30,7 +30,7 @@ $(document).ready(function() {
 function bindEvents() {
 
   $('.ui.image').click(function(){
-    $('.modal-image').attr('src', $(this).attr('src'));
+    $('.modal-image').attr('src', this.src);
     $('.picture-modal').modal('show');
   });
 
