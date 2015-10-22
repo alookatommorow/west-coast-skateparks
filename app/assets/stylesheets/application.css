@@ -162,6 +162,12 @@ body {
   margin-right: auto;
 }
 
+.picture-modal img {
+  display:block;
+  margin:auto;
+}
+
+
 
 
 

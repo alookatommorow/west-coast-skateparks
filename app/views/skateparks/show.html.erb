@@ -127,7 +127,15 @@
       <% end %>
 
 
-      <% unless @skatepark.address.blank? %>
+
+      <div class="ui small images">
+        <img class="ui image" src="https://storage.googleapis.com/west-coast-skateparks/<%= @skatepark.id %>-01.jpg">
+        <img class="ui image" src="https://storage.googleapis.com/west-coast-skateparks/<%= @skatepark.id %>-02.jpg">
+        <img class="ui image" src="https://storage.googleapis.com/west-coast-skateparks/<%= @skatepark.id %>-03.jpg">
+        <img class="ui image" src="https://storage.googleapis.com/west-coast-skateparks/<%= @skatepark.id %>-04.jpg">
+      </div>
+
+
         <div id='map-container'>
             <div id='map'></div>
         </div>
@@ -140,7 +148,7 @@
                <input type="submit" value="Get directions" />
             </form>
         </div>
-      <% end %>
+
 
 
 
@@ -153,6 +161,13 @@
 
 
   </div>
+</div>
+
+<div class="ui modal picture-modal">
+  <div class="image content">
+    <div class="ui huge image">
+      <img class="modal-image" src="">
+    </div>
 </div>
 
 

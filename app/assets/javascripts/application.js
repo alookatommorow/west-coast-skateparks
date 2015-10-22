@@ -29,6 +29,11 @@ $(document).ready(function() {
 
 function bindEvents() {
 
+  $('.ui.image').click(function(){
+    $('.modal-image').attr('src', $(this).attr('src'));
+    $('.picture-modal').modal('show');
+  });
+
 
   /////////////////////// Show skateparks by state/////////////
 
