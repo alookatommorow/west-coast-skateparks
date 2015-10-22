@@ -1,4 +1,4 @@
-var response = {form_class: "add-visit", button_class: "add-visit-button", action: "/users/<%= current_user.id %>/skateparks/<%= params[:id] %>/add_visit", text: "Been Here"}
+var response = {form_class: "add-visit", button_class: "ui primary button add-visit-button", action: "/users/<%= current_user.id %>/skateparks/<%= params[:id] %>/add_visit", text: "Been Here"}
 
 $('.remove-visit-button').attr({
         value: response.text,
@@ -13,5 +13,5 @@ $('.initial-rate-container').remove();
 $('.initial-review-container').remove();
 $('.edit_user_skatepark').remove();
 
-$('.review-button').addClass('hidden');
-$('.rate-button').addClass('hidden');
+$('.ui.primary.button.review-button').remove();
+$('.ui.primary.button.rate-button').remove();

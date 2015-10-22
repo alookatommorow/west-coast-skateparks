@@ -1,6 +1,6 @@
 //info to switch button
 
-var response = {form_class: "remove-visit", button_class: "remove-visit-button", action: "/users/<%= current_user.id %>/skateparks/<%= params[:id] %>/remove_visit", text: "Never Been Here", rate_button: "<button class='rate-button'>Rate Skatepark</button>", rate_form: "<%= escape_javascript (render partial: 'rate_form.html.erb',layout: false )%>", review_button: "<button class='review-button'>Review Skatepark</button>", review_form: "<%= escape_javascript (render partial: 'review_form.html.erb',layout: false )%>",
+var response = {form_class: "remove-visit", button_class: "ui red button remove-visit-button", action: "/users/<%= current_user.id %>/skateparks/<%= params[:id] %>/remove_visit", text: "Never Been Here", rate_button: "<button class='ui primary button rate-button'>Rate Skatepark</button>", rate_form: "<%= escape_javascript (render partial: 'rate_form.html.erb',layout: false )%>", review_button: "<button class='ui primary button review-button'>Review Skatepark</button>", review_form: "<%= escape_javascript (render partial: 'review_form.html.erb',layout: false )%>",
 }
 
 //switch 'add visit' to 'remove visit'

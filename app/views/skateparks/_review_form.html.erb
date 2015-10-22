@@ -1,4 +1,6 @@
-<%= form_for @user_skatepark, url: review_path(current_user.id, params[:id]), method: :put do |f| %>
-  <%= f.text_area :review, placeholder: 'write review here' %>
-  <%= f.submit value: 'Review' %>
-<% end %>
+<div class="ui form">
+  <%= form_for @user_skatepark, url: review_path(current_user.id, params[:id]), method: :put do |f| %>
+    <%= f.text_area :review, placeholder: 'write review here' %>
+    <%= f.submit value: 'Review', class: "ui button" %>
+  <% end %>
+</div>

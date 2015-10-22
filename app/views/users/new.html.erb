@@ -5,33 +5,38 @@
   <div class="sixteen wide column">
     <div class="ui one column stackable center aligned page grid">
       <div class="column twelve wide">
+        <div class='ui form'>
+          <%= form_for :user, url: users_path do |f| %>
+            <% if @user.errors.any? %>
+              <h4><%= pluralize(@user.errors.count, "error") %> prohibited registration :</h4>
+              <ul>
+                <% @user.errors.full_messages.each do |msg| %>
+                  <li><%= msg %></li>
+                <% end %>
+              </ul>
+            <% end %>
 
-        <%= form_for :user, url: users_path, class: 'ui form' do |f| %>
-          <% if @user.errors.any? %>
-            <h4><%= pluralize(@user.errors.count, "error") %> prohibited registration :</h4>
-            <ul>
-              <% @user.errors.full_messages.each do |msg| %>
-                <li><%= msg %></li>
-              <% end %>
-            </ul>
+            <div class="field">
+              <%= f.label :username %>
+              <%= f.text_field :username %>
+            </div>
+            <div class="field">
+              <%= f.label :email %>
+              <%= f.text_field :email %>
+            </div>
+            <div class="field">
+              <%= f.label :password %>
+              <%= f.password_field :password %>
+            </div>
+            <%= f.submit 'Register', class: 'ui green button' %>
           <% end %>
 
-          <div class="field">
-            <%= f.label :username %>
-            <%= f.text_field :username %>
-          </div>
-          <div class="field">
-            <%= f.label :email %>
-            <%= f.text_field :email %>
-          </div>
-          <div class="field">
-            <%= f.label :password %>
-            <%= f.password_field :password %>
-          </div>
-          <%= f.submit 'Register', class: 'ui red button' %>
-        <% end %>
+        </div>
+
 
       </div>
     </div>
   </div>
 </div>
+
+
