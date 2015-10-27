@@ -19,13 +19,8 @@
 
 
 $(document).ready(function() {
-
   bindEvents();
-
-
 });
-
-
 
 function bindEvents() {
 
@@ -33,7 +28,6 @@ function bindEvents() {
     $('.modal-image').attr('src', this.src);
     $('.picture-modal').modal('show');
   });
-
 
   /////////////////////// Show skateparks by state/////////////
 
@@ -51,9 +45,6 @@ function bindEvents() {
 
   $('.search-form').on('submit', function(event){
     event.preventDefault();
-    console.log("hello");
-    console.log("hello");
-
     var url = $(this).attr('action');
     var data = {search: $(this).find("input[name='search']").val()}
     $.ajax({url: url, data: data, dataType: 'JSON'}).done(function(response) {
@@ -67,9 +58,8 @@ function bindEvents() {
 /////////Close Search //////
 
   $(".search-container").on('click', '.close-search', function(){
-
     $(this).parent().slideToggle(400, function(){});
-
+    $('.search-form').find("input[name='search']").val('')
   });
 
 

@@ -1,3 +1,4 @@
+<div class="page-container">
 <div class="ui grid reduced-margin">
   <div class="sixteen wide column">
     <div class='center-text'>
@@ -32,9 +33,6 @@
         <% end %>
       </div>
     <% end %>
-
-
-
 
     <% if current_user && current_user.admin %>
       <%= button_to 'Update', edit_skatepark_path, method: :get, class: 'ui primary button' %>
@@ -169,6 +167,7 @@
 
 
   </div>
+</div>
 </div>
 
 <div class="ui basic modal picture-modal">

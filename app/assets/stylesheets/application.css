@@ -42,7 +42,7 @@ body {
   padding-bottom: 1%;
   font-size: 4.2em;
   font-weight: bold;
-  color: black;
+  color: #FF7519;
 
 }
 
@@ -62,8 +62,6 @@ body {
 .page-container {
   margin: 2% 10%;
 }
-
-
 
 .parks-container, .profile-container, .scroll-box {
   height: 50em;
@@ -107,23 +105,22 @@ body {
   margin: 0px;
 }
 
-/*-------Index Page----------*/
+/*-------Welcome Page----------*/
 
 .landing-container {
   position: relative;
   background-image: url("https://storage.googleapis.com/west-coast-skateparks/newberg_cover.jpg" );
   background-repeat: no-repeat;
   background-size: 100% auto;
-  background-position: 0 -200px;
-  padding: 20% 7%;
+  background-position: 0 -220px;
+  padding: 12% 7%;
 }
 
 .landing-content {
   background-color: rgba(255, 255, 255, 0.5);
   color: black;
-  padding-top: 7%;
-  padding-bottom: 7%;
-
+  padding-top: 5%;
+  padding-bottom: 5%;
 }
 
 

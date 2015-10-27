@@ -28,7 +28,7 @@
         <p class="title-words">West Coast Skateparks</p>
       </div>
       <div class='search-form-container'>
-        <div class='search-form inline-block'>
+        <div class='search-field inline-block'>
           <%= form_tag(search_path, method: :get, class: 'search-form') do%>
             <%= text_field_tag :search  %>
             <%= submit_tag "Search", :name => nil %>
