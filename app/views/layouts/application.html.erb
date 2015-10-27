@@ -2,54 +2,45 @@
 <html>
   <head>
     <title>West Coast Skateparks</title>
-    <!-- <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' /> -->
-
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-
     <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
     <%= csrf_meta_tags %>
 
   </head>
   <body>
+    <div class="nav-container">
+      <div class='ui four item inverted menu'>
 
-    <div class='title-container'>
-      <div class="nav-container">
-        <div class='ui four item inverted menu'>
+        <%= link_to 'Home', root_path, class: 'item' %>
+        <%= link_to 'Skateparks', skateparks_path, class: 'item' %>
+        <% if logged_in? %>
+          <%= link_to 'My Profile', user_path(current_user), class: 'item' %>
+          <%= link_to 'Sign Out', session_path(current_user), method: :delete, class: 'item' %>
+        <% else %>
+          <%= link_to 'Sign In', new_session_path, class: 'item' %>
+          <%= link_to 'Sign Up', new_user_path, class: 'item' %>
+        <% end %>
 
-          <%= link_to 'Home', root_path, class: 'item' %>
-          <%= link_to 'Skateparks', skateparks_path, class: 'item' %>
-          <% if logged_in? %>
-            <%= link_to 'My Profile', user_path(current_user), class: 'item' %>
-            <%= link_to 'Sign Out', session_path(current_user), method: :delete, class: 'item' %>
-          <% else %>
-            <%= link_to 'Sign In', new_session_path, class: 'item' %>
-            <%= link_to 'Sign Up', new_user_path, class: 'item' %>
-          <% end %>
-
-        </div>
       </div>
-
-      <p class="four wide column title-words">West Coast Skateparks</p>
-
     </div>
-
-
-    <div class='page-container'>
-      <div class='search-container'>
-        <div class='right-align '>
-
+    <div class="heading-container center-text" >
+      <div class="inline-block" >
+        <p class="title-words">West Coast Skateparks</p>
+      </div>
+      <div class='search-form-container'>
+        <div class='search-field inline-block'>
           <%= form_tag(search_path, method: :get, class: 'search-form') do%>
             <%= text_field_tag :search  %>
             <%= submit_tag "Search", :name => nil %>
           <% end %>
-
         </div>
       </div>
-
-
-      <%= yield %>
-
     </div>
+    <div class="search-container" ></div>
+
+
+    <%= yield %>
+
 
   </body>
 </html>
