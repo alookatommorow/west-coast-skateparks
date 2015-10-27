@@ -23,17 +23,21 @@
 
       </div>
     </div>
-    <div class='search-container'>
-      <div class='search-field right-align' >
-        <%= form_tag(search_path, method: :get, class: 'search-form') do%>
-          <%= text_field_tag :search  %>
-          <%= submit_tag "Search", :name => nil %>
-        <% end %>
+    <div class="heading-container center-text" >
+      <div class="inline-block" >
+        <p class="title-words">West Coast Skateparks</p>
+      </div>
+      <div class='search-form-container'>
+        <div class='search-form inline-block'>
+          <%= form_tag(search_path, method: :get, class: 'search-form') do%>
+            <%= text_field_tag :search  %>
+            <%= submit_tag "Search", :name => nil %>
+          <% end %>
+        </div>
       </div>
     </div>
-    <div>
-      <p class="title-words center-text">West Coast Skateparks</p>
-    </div>
+    <div class="search-container" ></div>
+
 
     <%= yield %>
 

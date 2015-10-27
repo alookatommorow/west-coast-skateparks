@@ -38,40 +38,39 @@ body {
 }
 
 
-
-
-
 .title-words {
   padding-bottom: 1%;
   font-size: 4.2em;
   font-weight: bold;
   color: black;
-  /*color: #5CB8E6;*/
+
 }
 
-.search-container {
- padding-top: 1%;
- padding-right: 2%;
+.heading-container {
+  margin-left: 12%;
+  padding-top: 1%;
+  padding-bottom: 1%;
+}
+
+.search-form-container {
+ float: right;
+ margin-top: 2.5%;
+ margin-right: 2%;
  background-color: white;
- width: 100%;
 }
 
 .page-container {
   margin: 2% 10%;
-  /*background-color: #E6E6E6;*/
 }
 
 
 
 .parks-container, .profile-container, .scroll-box {
-  /*background-color: #E6E6E6;*/
   height: 50em;
   overflow-y: auto;
   overflow-x: hidden;
   padding-left: 0;
 }
-
-
 
 
 /*---------Atomic-----------*/
@@ -110,31 +109,9 @@ body {
 
 /*-------Index Page----------*/
 
-/*.landing-page {
-  position: relative;
-  background-image: url("https://storage.googleapis.com/west-coast-skateparks/newberg_cover.jpg");
-  height: 50%;
-  background-repeat: no-repeat;
-  background-size: 100% auto;
-  background-position: 0 -150px;
-}
-*/
-
-/*.landing-container {
-  position: relative;
-  background-image: url("https://storage.googleapis.com/west-coast-skateparks/newberg_cover.jpg");
-  height: 50%;
-  background-color: blue;
-  background-repeat: no-repeat;
-  background-size: 100% auto;
-  background-position: 0 -200px;
-  padding: 15% 7%;
-}
-*/
-
 .landing-container {
   position: relative;
-  background-image: url("https://gonesk8ing.files.wordpress.com/2013/09/1388.jpg" );
+  background-image: url("https://storage.googleapis.com/west-coast-skateparks/newberg_cover.jpg" );
   background-repeat: no-repeat;
   background-size: 100% auto;
   background-position: 0 -200px;
@@ -142,26 +119,19 @@ body {
 }
 
 .landing-content {
-
-  background-color: rgba(255, 255, 255, 0.2);
-
+  background-color: rgba(255, 255, 255, 0.5);
   color: black;
-
-}
-
-.landing-text {
+  padding-top: 7%;
+  padding-bottom: 7%;
 
 }
 
 
 /*-------Index Page----------*/
 
-
-
 .parks-container a {
   color: black;
 }
-
 
 .create-container {
   display: none;
