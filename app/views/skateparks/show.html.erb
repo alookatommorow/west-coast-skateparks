@@ -44,7 +44,7 @@
 
   <!-- favorite button -->
 
-    <div class="fav-container">
+    <div class="fav-container inline-block">
 
 
       <% if user_has_skatepark(current_user.id, @skatepark.id) %>
@@ -69,7 +69,7 @@
 
   <!-- visit button -->
 
-    <div class="visit-container">
+    <div class="visit-container inline-block">
 
       <% if user_has_skatepark(current_user.id, @skatepark.id) %>
           <% if user_has_skatepark(current_user.id, @skatepark.id).visited == true %>
@@ -87,7 +87,7 @@
   <!-- rate containers -->
       <% if user_has_skatepark(current_user.id, @skatepark.id) %>
         <% if user_has_skatepark(current_user.id, @skatepark.id).visited == true %>
-          <div class="initial-rate-container">
+          <div class="initial-rate-container inline-block">
 
             <%= button_to 'Rate Skatepark', rate_path(current_user.id, @skatepark.id), class: 'ui primary button initial-rate-button '%>
 
@@ -112,7 +112,7 @@
   <!-- review containers -->
       <% if user_has_skatepark(current_user.id, @skatepark.id) %>
         <% if user_has_skatepark(current_user.id, @skatepark.id).visited == true %>
-          <div class='initial-review-container'>
+          <div class='initial-review-container inline-block'>
             <%= button_to 'Review Skatepark', review_path(current_user.id, @skatepark.id), class: "ui primary button initial-review-button" %>
 
             <div class="initial-review-form-container hidden">

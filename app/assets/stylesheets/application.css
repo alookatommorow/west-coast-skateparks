@@ -33,35 +33,27 @@ body {
 
 /*-----------Layout----------*/
 
-.title-container {
-  position: relative;
-  background-image: url("https://gonesk8ing.files.wordpress.com/2013/09/1388.jpg" );
-  height: 30%;
-  background-repeat: no-repeat;
-  background-size: 100% auto;
-  background-position: 0 -150px;
-  margin: 2% 9%;
-
-}
-
 .nav-container {
-  position: absolute;
-  top: 5%;
-  left: 5%;
-  width: 90%;
+  width: 100%;
 }
+
+
+
+
 
 .title-words {
-  position: absolute;
-  bottom: 2%;
-  right: 5%;
-  font-size: 4em;
+  padding-bottom: 1%;
+  font-size: 4.2em;
   font-weight: bold;
-  color: #5CB8E6;
+  color: black;
+  /*color: #5CB8E6;*/
 }
 
 .search-container {
- margin-bottom: 2%;
+ padding-top: 1%;
+ padding-right: 2%;
+ background-color: white;
+ width: 100%;
 }
 
 .page-container {
@@ -114,6 +106,51 @@ body {
 
 .reduced-margin {
   margin: 0px;
+}
+
+/*-------Index Page----------*/
+
+/*.landing-page {
+  position: relative;
+  background-image: url("https://storage.googleapis.com/west-coast-skateparks/newberg_cover.jpg");
+  height: 50%;
+  background-repeat: no-repeat;
+  background-size: 100% auto;
+  background-position: 0 -150px;
+}
+*/
+
+/*.landing-container {
+  position: relative;
+  background-image: url("https://storage.googleapis.com/west-coast-skateparks/newberg_cover.jpg");
+  height: 50%;
+  background-color: blue;
+  background-repeat: no-repeat;
+  background-size: 100% auto;
+  background-position: 0 -200px;
+  padding: 15% 7%;
+}
+*/
+
+.landing-container {
+  position: relative;
+  background-image: url("https://gonesk8ing.files.wordpress.com/2013/09/1388.jpg" );
+  background-repeat: no-repeat;
+  background-size: 100% auto;
+  background-position: 0 -200px;
+  padding: 20% 7%;
+}
+
+.landing-content {
+
+  background-color: rgba(255, 255, 255, 0.2);
+
+  color: black;
+
+}
+
+.landing-text {
+
 }
 
 
