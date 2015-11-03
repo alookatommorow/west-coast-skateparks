@@ -29,13 +29,13 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
-gem 'aws-sdk', '~> 2'
 gem 'geokit'
 gem 'therubyracer'
 gem 'underscore-rails'
 gem 'gmaps4rails'
 gem 'less-rails-semantic_ui', '~> 2.0.7.0'
 gem 'autoprefixer-rails', '~> 5.2.1.2'
+gem 'google-api-client'
 # Use unicorn as the app server
 # gem 'unicorn'
 
