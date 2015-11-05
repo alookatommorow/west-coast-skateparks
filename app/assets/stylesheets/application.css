@@ -69,6 +69,14 @@ body {
   padding-left: 0;
 }
 
+.footer {
+  background-color: black;
+  color: white;
+ /* padding-top: 1%;
+  padding-bottom: 1%;*/
+
+}
+
 
 /*---------Atomic-----------*/
 
@@ -120,6 +128,18 @@ body {
   color: black;
   padding-top: 5%;
   padding-bottom: 5%;
+}
+
+.landing-information-container {
+  padding-top: 8%;
+  padding-left: 5%;
+  padding-right: 5%;
+  padding-bottom: 8%;
+}
+
+.icon-container {
+
+  padding-bottom: 10%;
 }
 
 
@@ -175,6 +195,9 @@ body {
   cursor: pointer;
 }
 
+.skatepark-title {
+  padding-bottom: 3%;
+}
 
 
 

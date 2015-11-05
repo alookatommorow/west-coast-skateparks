@@ -7,6 +7,6 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 require 'csv'
 
-CSV.foreach('db/skateparks3.csv', headers: true, header_converters: :symbol, ) do |row|
+CSV.foreach('db/skateparks4.csv', headers: true, header_converters: :symbol, ) do |row|
   Skatepark.create(Hash[row])
 end

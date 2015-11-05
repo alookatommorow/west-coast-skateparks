@@ -3,15 +3,12 @@ class SkateparksController < ApplicationController
   def search
     # take this out into self.search method for Skatepark
     if params[:search]
-
-
       @skateparks = Skatepark.where("name LIKE ? OR city LIKE ? OR state LIKE ?", "%" +params[:search].downcase + "%", "%" +params[:search].downcase + "%", "%" +params[:search].downcase + "%").order("state ASC").order("city ASC").order("name ASC")
 
       respond_to do |format|
         format.json {render json: {partial: render_to_string('_search.html.erb', layout: false)} }
       end
     end
-
 
   end
 
@@ -46,30 +43,11 @@ class SkateparksController < ApplicationController
     @user_rating = user_rating(params[:id])
     @state_skateparks = Skatepark.where(state: @skatepark.state)
 
-    # credentials = Aws::Credentials.new(access_key_id: ENV['AWS_ACCESS_KEY_ID'], secret_access_key: ENV['AWS_SECRET_ACCESS_KEY'] )
-    # s3 = Aws::S3.new(access_key_id: ENV['AWS_ACCESS_KEY_ID'], secret_access_key: ENV['AWS_SECRET_ACCESS_KEY'])
-
-    # s3 = Aws.config('put configs?')
-    # s3.new(blah)
-
-    # s3 = AWS.config(
-    #   :access_key_id => ENV['AWS_ACCESS_KEY_ID'],
-    #   :secret_access_key => ENV['AWS_SECRET_ACCESS_KEY'])
-    # # S3.new will now use the credentials specified in AWS.config
-
-    # # s3 = AWS::S3.new
-    # # s3 = Aws::S3::Client.new(region: 'us-west-1', credentials: credentials)
-    # p "*"*100
-    # p s3
-    # p "*"*100
-    # resp = s3.get_object(bucket:'west-coast-skateparks/skateparks', key:'IMG_4007.JPG')
-
-
   end
 
-# needs to be changed to AJAX
 
-  def update
+
+  def update # needs to be changed to AJAX
     @skatepark = Skatepark.find(params[:id])
     if @skatepark.update(skatepark_params)
       redirect_to @skatepark
@@ -89,13 +67,11 @@ class SkateparksController < ApplicationController
 
   # skateparks by state via AJAX
   def state
-    @skateparks = Skatepark.where(state: params[:state])
+    @skateparks = Skatepark.where(state: params[:state]).order("city ASC")
     respond_to do |format|
       format.json {render json: {partial: render_to_string('_state.html.erb', layout: false)} }
     end
-
   end
-
 
 
   def add_favorite
@@ -103,7 +79,6 @@ class SkateparksController < ApplicationController
     respond_to do |format|
       format.js
     end
-
   end
 
   def remove_favorite
@@ -119,7 +94,6 @@ class SkateparksController < ApplicationController
     respond_to do |format|
       format.js
     end
-
   end
 
   def remove_visit
@@ -145,4 +119,5 @@ class SkateparksController < ApplicationController
   def skatepark_params
     params.require(:skatepark).permit(:name, :city, :state, :rating, :designer, :builder, :opened, :address, :hours, :size, :notes, :helmet)
   end
+
 end

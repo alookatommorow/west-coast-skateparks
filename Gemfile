@@ -35,7 +35,7 @@ gem 'underscore-rails'
 gem 'gmaps4rails'
 gem 'less-rails-semantic_ui', '~> 2.0.7.0'
 gem 'autoprefixer-rails', '~> 5.2.1.2'
-gem 'google-api-client'
+gem 'google-api-client-rails'
 # Use unicorn as the app server
 # gem 'unicorn'
 
