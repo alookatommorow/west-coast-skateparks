@@ -17,7 +17,7 @@
     <div class="column">
       <div class="ui segments">
         <% @skatepark.attributes.each do |attribute,value| %>
-          <% exclude = ['state', 'city', 'name', 'notes', 'created_at', 'updated_at', 'id'] %>
+          <% exclude = ['id', 'identifier', 'state', 'city', 'name', 'notes', 'created_at', 'updated_at', 'id', 'identifier'] %>
           <% unless exclude.include?(attribute) %>
             <% if attribute == 'size' && !value.blank? %>
               <div class="ui segment">
@@ -26,6 +26,16 @@
               <div class="ui segments">
                 <div class="ui inverted segment">
                   <%= value.capitalize %> sq ft
+                </div>
+              </div>
+
+            <% elsif attribute == 'beta' && !value.blank? %>
+              <div class="ui segment">
+                <h4 class="ui header">Special Info</h4>
+              </div>
+              <div class="ui segments">
+                <div class="ui inverted segment">
+                  <%= value %>
                 </div>
               </div>
 
