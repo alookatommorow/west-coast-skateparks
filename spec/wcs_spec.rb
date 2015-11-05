@@ -43,7 +43,7 @@ describe 'Show', type: :feature do
   it 'displays skatepark information' do
     visit '/skateparks/267'
     expect(page).to have_text('Ojai')
-    expect(page).to have_text('Designer: Site Design')
+    expect(page).to have_text('Site Design')
   end
 
 

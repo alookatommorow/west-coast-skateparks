@@ -67,7 +67,7 @@ class SkateparksController < ApplicationController
 
   # skateparks by state via AJAX
   def state
-    @skateparks = Skatepark.where(state: params[:state])
+    @skateparks = Skatepark.where(state: params[:state]).order("city ASC")
     respond_to do |format|
       format.json {render json: {partial: render_to_string('_state.html.erb', layout: false)} }
     end

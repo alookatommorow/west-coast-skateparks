@@ -1,7 +1,6 @@
 <div class="page-container">
 
-
-   <!-- skatepark header -->
+  <!-- skatepark header -->
 
   <div class='center-text skatepark-title'>
     <h1><%= @skatepark.city.titleize %>, <%= @skatepark.state.capitalize %></h1>
@@ -15,63 +14,149 @@
   <div class="ui two column grid">
 
   <!-- skatepark info -->
-  <div class="column">
-  <div class="ui segments">
-    <% @skatepark.attributes.each do |attribute,value| %>
-      <% exclude = ['state', 'city', 'name', 'notes', 'created_at', 'updated_at', 'id'] %>
-      <% unless exclude.include?(attribute) %>
-        <% if attribute == 'size' && !value.blank? %>
-          <div class="ui segment">
-            <h4 class="ui header"><%= attribute.capitalize %></h4>
-          </div>
-          <div class="ui segments">
-            <div class="ui inverted segment">
-              <%= value.capitalize %> sq ft
-            </div>
-          </div>
+    <div class="column">
+      <div class="ui segments">
+        <% @skatepark.attributes.each do |attribute,value| %>
+          <% exclude = ['state', 'city', 'name', 'notes', 'created_at', 'updated_at', 'id'] %>
+          <% unless exclude.include?(attribute) %>
+            <% if attribute == 'size' && !value.blank? %>
+              <div class="ui segment">
+                <h4 class="ui header"><%= attribute.capitalize %></h4>
+              </div>
+              <div class="ui segments">
+                <div class="ui inverted segment">
+                  <%= value.capitalize %> sq ft
+                </div>
+              </div>
 
-        <% elsif !value.blank?%>
+            <% elsif !value.blank?%>
+              <div class="ui segment">
+                <h4 class="ui header"><%= attribute.capitalize %></h4>
+              </div>
+              <div class="ui segments">
+                <div class="ui inverted segment">
+                  <%= value.titleize %>
+                </div>
+              </div>
+            <% end %>
+
+          <% end %>
+        <% end %>
+
+        <% if has_user_rating?(@skatepark.id) %>
           <div class="ui segment">
-            <h4 class="ui header"><%= attribute.capitalize %></h4>
+            <h4 class="ui header">User Rating</h4>
           </div>
           <div class="ui segments">
             <div class="ui inverted segment">
-              <%= value.titleize %>
+              <%= @user_rating %>
             </div>
           </div>
         <% end %>
 
-      <% end %>
-    <% end %>
-
-    <% if has_user_rating?(@skatepark.id) %>
-      <div class="ui segment">
-        <h4 class="ui header">User Rating</h4>
       </div>
-      <div class="ui segments">
-        <div class="ui inverted segment">
-          <%= @user_rating %>
+    </div>
+
+
+    <div class="column">
+      <div class="ui small images center-text">
+          <img class="ui image" src="https://storage.googleapis.com/west-coast-skateparks/<%= @skatepark.id %>-01.jpg">
+          <img class="ui image" src="https://storage.googleapis.com/west-coast-skateparks/<%= @skatepark.id %>-02.jpg">
+      </div>
+      <div class="ui small images center-text">
+          <img class="ui image" src="https://storage.googleapis.com/west-coast-skateparks/<%= @skatepark.id %>-03.jpg">
+          <img class="ui image" src="https://storage.googleapis.com/west-coast-skateparks/<%= @skatepark.id %>-04.jpg">
+      </div>
+
+
+      <% if logged_in? %>
+      <div class="button-container center-text">
+      <!-- visit button -->
+
+        <div class="visit-container inline-block">
+          <% if user_has_skatepark(current_user.id, @skatepark.id) %>
+            <% if user_has_skatepark(current_user.id, @skatepark.id).visited == true %>
+              <%= button_to 'Never Been Here', remove_visit_path(current_user.id, @skatepark.id), method: :put, remote: true, class: 'ui red button remove-visit-button' %>
+            <% else %>
+              <%= button_to 'Been Here', add_visit_path(current_user.id, @skatepark.id), method: :put, remote: true, class: 'ui primary button add-visit-button' %>
+            <%end%>
+          <% else %>
+              <%= button_to 'Been Here', add_visit_path(current_user.id, @skatepark.id), method: :put, remote: true, class: 'ui primary button add-visit-button' %>
+          <% end %>
         </div>
-      </div>
-    <% end %>
 
-  </div>
-  </div>
+      <!-- favorite button -->
 
-  <div class="column">
-    <div class="ui small images center-text">
-        <img class="ui image" src="https://storage.googleapis.com/west-coast-skateparks/<%= @skatepark.id %>-01.jpg">
-        <img class="ui image" src="https://storage.googleapis.com/west-coast-skateparks/<%= @skatepark.id %>-02.jpg">
+        <div class="fav-container inline-block">
+          <% if user_has_skatepark(current_user.id, @skatepark.id) %>
+            <% if user_has_skatepark(current_user.id, @skatepark.id).favorite == true %>
+              <%= button_to 'Unfavorite', remove_favorite_path(current_user.id, @skatepark.id), method: :put, remote: true, class: 'ui red button remove-favorite-button' %>
+            <% else %>
+              <%= button_to 'Favorite', add_favorite_path(current_user.id, @skatepark.id), method: :put, remote: true, class: 'ui primary button add-favorite-button' %>
+            <%end%>
+          <% else %>
+            <%= button_to 'Favorite', add_favorite_path(current_user.id, @skatepark.id), method: :put, remote: true, class: 'ui primary button add-favorite-button' %>
+          <% end %>
+        </div>
+
+      <!-- rate containers -->
+      <% if user_has_skatepark(current_user.id, @skatepark.id) %>
+        <% if user_has_skatepark(current_user.id, @skatepark.id).visited == true %>
+          <div class="initial-rate-container">
+            <%= button_to 'Rate Skatepark', rate_path(current_user.id, @skatepark.id), class: 'ui primary button initial-rate-button '%>
+            <div class="initial-rate-form-container hidden">
+              <div class="ui form">
+                <%= form_for @user_skatepark, url: rate_path(current_user.id, @skatepark.id), method: :put do |f| %>
+                  <%= f.text_field :rating, placeholder: 'enter rating' %>
+                  <%= f.submit value: 'Rate', class: "ui button" %>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+
+      <div class="rate-container"></div>
+      <div class="rate-form-container hidden"></div>
+
+
+      <!-- review containers -->
+          <% if user_has_skatepark(current_user.id, @skatepark.id) %>
+            <% if user_has_skatepark(current_user.id, @skatepark.id).visited == true %>
+              <div class='initial-review-container inline-block'>
+                <%= button_to 'Review Skatepark', review_path(current_user.id, @skatepark.id), class: "ui primary button initial-review-button" %>
+
+                <div class="initial-review-form-container hidden">
+                  <div class="ui form">
+                    <%= form_for @user_skatepark, url: review_path(current_user.id, @skatepark.id), method: :put do |f| %>
+                      <%= f.text_area :review, placeholder: 'write review here' %>
+                      <%= f.submit value: 'Review', class: 'ui button' %>
+                    <% end %>
+                  </div>
+
+                </div>
+              </div>
+
+            <% end %>
+          <% end %>
+
+          <div class="review-container"></div>
+          <div class="review-form-container hidden"></div>
+
+      <!-- end if logged in? -->
+      <% end %>
+
+     </div>
+
+    <!-- end column -->
     </div>
-    <div class="ui small images center-text">
-        <img class="ui image" src="https://storage.googleapis.com/west-coast-skateparks/<%= @skatepark.id %>-03.jpg">
-        <img class="ui image" src="https://storage.googleapis.com/west-coast-skateparks/<%= @skatepark.id %>-04.jpg">
-    </div>
-  </div>
 
 
 
 
+
+
+    <!-- end two column grid -->
   </div>
 
   <!-- Reviews -->
@@ -91,86 +176,7 @@
     <%= button_to 'Update', edit_skatepark_path, method: :get, class: 'ui primary button' %>
   <% end %>
 
-  <% if logged_in? %>
 
-  <div class="center-text">
-
-  <!-- favorite button -->
-
-    <div class="fav-container inline-block">
-      <% if user_has_skatepark(current_user.id, @skatepark.id) %>
-        <% if user_has_skatepark(current_user.id, @skatepark.id).favorite == true %>
-          <%= button_to 'Unfavorite', remove_favorite_path(current_user.id, @skatepark.id), method: :put, remote: true, class: 'ui red button remove-favorite-button' %>
-        <% else %>
-          <%= button_to 'Favorite', add_favorite_path(current_user.id, @skatepark.id), method: :put, remote: true, class: 'ui primary button add-favorite-button' %>
-        <%end%>
-      <% else %>
-        <%= button_to 'Favorite', add_favorite_path(current_user.id, @skatepark.id), method: :put, remote: true, class: 'ui primary button add-favorite-button' %>
-      <% end %>
-    </div>
-
-    <!-- visit button -->
-
-    <div class="visit-container inline-block">
-      <% if user_has_skatepark(current_user.id, @skatepark.id) %>
-        <% if user_has_skatepark(current_user.id, @skatepark.id).visited == true %>
-          <%= button_to 'Never Been Here', remove_visit_path(current_user.id, @skatepark.id), method: :put, remote: true, class: 'ui red button remove-visit-button' %>
-        <% else %>
-          <%= button_to 'Been Here', add_visit_path(current_user.id, @skatepark.id), method: :put, remote: true, class: 'ui primary button add-visit-button' %>
-        <%end%>
-      <% else %>
-          <%= button_to 'Been Here', add_visit_path(current_user.id, @skatepark.id), method: :put, remote: true, class: 'ui primary button add-visit-button' %>
-      <% end %>
-    </div>
-  </div>
-
-
-
-  <!-- rate containers -->
-  <% if user_has_skatepark(current_user.id, @skatepark.id) %>
-    <% if user_has_skatepark(current_user.id, @skatepark.id).visited == true %>
-      <div class="initial-rate-container inline-block">
-        <%= button_to 'Rate Skatepark', rate_path(current_user.id, @skatepark.id), class: 'ui primary button initial-rate-button '%>
-        <div class="initial-rate-form-container hidden">
-          <div class="ui form">
-            <%= form_for @user_skatepark, url: rate_path(current_user.id, @skatepark.id), method: :put do |f| %>
-              <%= f.text_field :rating, placeholder: 'enter rating' %>
-              <%= f.submit value: 'Rate', class: "ui button" %>
-            <% end %>
-          </div>
-        </div>
-      </div>
-    <% end %>
-  <% end %>
-
-  <div class="rate-container"></div>
-  <div class="rate-form-container hidden"></div>
-
-
-  <!-- review containers -->
-      <% if user_has_skatepark(current_user.id, @skatepark.id) %>
-        <% if user_has_skatepark(current_user.id, @skatepark.id).visited == true %>
-          <div class='initial-review-container inline-block'>
-            <%= button_to 'Review Skatepark', review_path(current_user.id, @skatepark.id), class: "ui primary button initial-review-button" %>
-
-            <div class="initial-review-form-container hidden">
-              <div class="ui form">
-                <%= form_for @user_skatepark, url: review_path(current_user.id, @skatepark.id), method: :put do |f| %>
-                  <%= f.text_area :review, placeholder: 'write review here' %>
-                  <%= f.submit value: 'Review', class: 'ui button' %>
-                <% end %>
-              </div>
-
-            </div>
-          </div>
-
-        <% end %>
-      <% end %>
-
-      <div class="review-container"></div>
-      <div class="review-form-container hidden"></div>
-
-      <% end %>
 
 
 
