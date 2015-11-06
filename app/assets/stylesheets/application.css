@@ -33,6 +33,27 @@ body {
 
 /*-----------Layout----------*/
 
+
+html, body {
+  height: 100%;
+}
+.page-wrap {
+  min-height: 100%;
+  /* equal to footer height */
+  margin-bottom: 3%;
+}
+.page-wrap:after {
+  content: "";
+  display: block;
+}
+.site-footer, .page-wrap:after {
+  height: 3%;
+}
+.site-footer {
+  background: black;
+  color: white;
+}
+
 .nav-container {
   width: 100%;
 }

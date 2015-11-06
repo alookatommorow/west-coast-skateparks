@@ -8,6 +8,7 @@
 
   </head>
   <body>
+    <div class='page-wrapper'>
     <div class="nav-container">
       <div class='ui four item inverted menu'>
 
@@ -40,7 +41,11 @@
 
     <%= yield %>
 
-    <%= render "layouts/footer" %>
+    <footer class="site-footer center-text">
+      &copy John Hess 2015
+    </footer>
+
+    </div>
 
 
   </body>
