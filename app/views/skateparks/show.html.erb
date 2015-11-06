@@ -8,6 +8,13 @@
       <h2><%= @skatepark.name.titleize %></h2>
     <% end %>
   </div>
+  <div class="stars-container center-text">
+    <% if !@skatepark.rating.blank? %>
+      <% (@skatepark.rating.to_i).times do %>
+        <i class="large yellow star icon inline-block"></i>
+      <% end %>
+    <% end %>
+  </div>
 
 
 
@@ -17,7 +24,7 @@
     <div class="column">
       <div class="ui segments">
         <% @skatepark.attributes.each do |attribute,value| %>
-          <% exclude = ['id', 'identifier', 'state', 'city', 'name', 'notes', 'created_at', 'updated_at', 'id', 'identifier'] %>
+          <% exclude = ['id', 'identifier', 'state', 'city', 'name', 'rating', 'notes', 'created_at', 'updated_at', 'id', 'identifier'] %>
           <% unless exclude.include?(attribute) %>
             <% if attribute == 'size' && !value.blank? %>
               <div class="ui segment">
@@ -36,6 +43,16 @@
               <div class="ui segments">
                 <div class="ui inverted segment">
                   <%= value %>
+                </div>
+              </div>
+
+            <% elsif attribute == 'lights' && !value.blank? %>
+              <div class="ui segment">
+                <h4 class="ui header">Lights</h4>
+              </div>
+              <div class="ui segments">
+                <div class="ui inverted segment">
+                  Yes
                 </div>
               </div>
 

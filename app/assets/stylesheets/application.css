@@ -196,7 +196,11 @@ body {
 }
 
 .skatepark-title {
-  padding-bottom: 3%;
+  padding-bottom: 2%;
+}
+
+.stars-container {
+  padding-bottom: 2%;
 }
 
 
