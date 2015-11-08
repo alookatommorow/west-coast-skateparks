@@ -9,42 +9,47 @@
   </head>
   <body>
     <div class='page-wrapper'>
-    <div class="nav-container">
-      <div class='ui four item inverted menu'>
+      <div class="nav-container">
+        <div class='ui four item inverted menu'>
 
-        <%= link_to 'Home', root_path, class: 'item' %>
-        <%= link_to 'Skateparks', skateparks_path, class: 'item' %>
-        <% if logged_in? %>
-          <%= link_to 'My Profile', user_path(current_user), class: 'item' %>
-          <%= link_to 'Sign Out', session_path(current_user), method: :delete, class: 'item' %>
-        <% else %>
-          <%= link_to 'Sign In', new_session_path, class: 'item' %>
-          <%= link_to 'Sign Up', new_user_path, class: 'item' %>
-        <% end %>
-
-      </div>
-    </div>
-    <div class="heading-container center-text" >
-      <div class="inline-block" >
-        <p class="title-words">West Coast Skateparks</p>
-      </div>
-      <div class='search-form-container'>
-        <div class='search-field inline-block'>
-          <%= form_tag(search_path, method: :get, class: 'search-form') do%>
-            <%= text_field_tag :search  %>
-            <%= submit_tag "Search", :name => nil %>
+          <%= link_to 'Home', root_path, class: 'item' %>
+          <%= link_to 'Skateparks', skateparks_path, class: 'item' %>
+          <% if logged_in? %>
+            <%= link_to 'My Profile', user_path(current_user), class: 'item' %>
+            <%= link_to 'Sign Out', session_path(current_user), method: :delete, class: 'item' %>
+          <% else %>
+            <%= link_to 'Sign In', new_session_path, class: 'item' %>
+            <%= link_to 'Sign Up', new_user_path, class: 'item' %>
           <% end %>
+
         </div>
       </div>
+      <div class="heading-container center-text" >
+        <div class="inline-block" >
+          <p class="title-words">West Coast Skateparks</p>
+        </div>
+        <div class='search-form-container'>
+          <div class='search-field inline-block'>
+            <%= form_tag(search_path, method: :get, class: 'search-form') do%>
+              <%= text_field_tag :search  %>
+              <%= submit_tag "Search", :name => nil %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+
+      <div class="search-container" ></div>
+
+      <%= yield %>
+
+
+
     </div>
-    <div class="search-container" ></div>
 
-    <%= yield %>
-
-    <footer class="site-footer center-text">
-      &copy John Hess 2015
-    </footer>
-
+    <div class="ui inverted footer segment">
+        <div class="ui container">
+            &copy John Hess 2015
+        </div>
     </div>
 
 

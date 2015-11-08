@@ -37,22 +37,8 @@ body {
 html, body {
   height: 100%;
 }
-.page-wrap {
-  min-height: 100%;
-  /* equal to footer height */
-  margin-bottom: 3%;
-}
-.page-wrap:after {
-  content: "";
-  display: block;
-}
-.site-footer, .page-wrap:after {
-  height: 3%;
-}
-.site-footer {
-  background: black;
-  color: white;
-}
+
+
 
 .nav-container {
   width: 100%;
@@ -76,11 +62,13 @@ html, body {
 .search-form-container {
  float: right;
  margin-top: 2.5%;
+ margin-right: 2%;
  background-color: white;
 }
 
 .page-container {
   margin: 2% 10%;
+  min-height: 80%;
 }
 
 .parks-container, .profile-container, .scroll-box {
@@ -194,6 +182,10 @@ html, body {
 
 /*--------Show Page-------*/
 
+.skatepark-info-conatiner {
+  float: left;
+}
+
 
 .map-container {
   position: relative;
@@ -223,7 +215,10 @@ html, body {
 .stars-container {
   padding-bottom: 2%;
 }
-
+/*.sign-form {
+  padding-bottom: 45%;
+}
+*/
 
 
 
