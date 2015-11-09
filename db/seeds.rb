@@ -8,6 +8,6 @@
 #little change for heroku
 require 'csv'
 
-CSV.foreach('db/Skateparks4.csv', headers: true, header_converters: :symbol, ) do |row|
+CSV.foreach('db/Skateparks5.csv', headers: true, header_converters: :symbol, ) do |row|
   Skatepark.create(Hash[row])
 end
