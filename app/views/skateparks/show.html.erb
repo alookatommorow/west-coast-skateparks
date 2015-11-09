@@ -108,12 +108,18 @@
         <div class="visit-container inline-block">
           <% if user_has_skatepark(current_user.id, @skatepark.id) %>
             <% if user_has_skatepark(current_user.id, @skatepark.id).visited == true %>
-              <%= button_to 'Never Been Here', remove_visit_path(current_user.id, @skatepark.id), method: :put, remote: true, class: 'ui red button remove-visit-button' %>
+              <%= button_to remove_visit_path(current_user.id, @skatepark.id), method: :put, remote: true, class: 'ui button remove-visit-button' do %>
+                <i class="red remove icon inline-block"></i> <p class="inline-block">Never Been Here</p>
+              <% end %>
             <% else %>
-              <%= button_to 'Been Here', add_visit_path(current_user.id, @skatepark.id), method: :put, remote: true, class: 'ui primary button add-visit-button' %>
+              <%= button_to add_visit_path(current_user.id, @skatepark.id), method: :put, remote: true, class: 'ui button add-visit-button' do %>
+                <i class="green checkmark icon inline-block"></i> <p class="inline-block">Been Here</p>
+              <% end %>
             <%end%>
           <% else %>
-              <%= button_to 'Been Here', add_visit_path(current_user.id, @skatepark.id), method: :put, remote: true, class: 'ui primary button add-visit-button' %>
+              <%= button_to add_visit_path(current_user.id, @skatepark.id), method: :put, remote: true, class: 'ui button add-visit-button' do %>
+                <i class="green checkmark icon inline-block"></i> <p class="inline-block">Been Here</p>
+              <% end %>
           <% end %>
         </div>
 
@@ -154,7 +160,7 @@
         <% end %>
       <% end %>
 
-      <div class="rate-container"></div>
+      <div class="rate-button-container"></div>
       <div class="rate-form-container hidden"></div>
 
 
@@ -178,7 +184,7 @@
             <% end %>
           <% end %>
 
-          <div class="review-container"></div>
+          <div class="review-button-container"></div>
           <div class="review-form-container hidden"></div>
 
       <!-- end if logged in? -->

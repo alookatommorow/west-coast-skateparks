@@ -98,6 +98,8 @@ class SkateparksController < ApplicationController
   def add_visit
     visit(params[:user_id], params[:id])
     @user_skatepark = user_has_skatepark(current_user.id, params[:id])
+    @current_user_id = current_user.id
+    @skatepark = Skatepark.find(params[:id])
     respond_to do |format|
       format.js
     end
@@ -105,6 +107,8 @@ class SkateparksController < ApplicationController
 
   def remove_visit
     visit(params[:user_id], params[:id])
+    @current_user_id = current_user.id
+    @skatepark = Skatepark.find(params[:id])
     respond_to do |format|
       format.js
     end

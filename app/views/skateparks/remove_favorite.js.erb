@@ -1,5 +1,4 @@
 var response = {
   addFavoriteButton: "<%= escape_javascript (render partial: 'remove_favorite.html.erb',layout: false )%>"
 }
-$('.fav-container form').remove();
-$('.fav-container').append(response.addFavoriteButton);
+$('.fav-container form').replaceWith(response.addFavoriteButton);
