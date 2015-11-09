@@ -1,28 +1,26 @@
 <div class='center-text'>
   <h1>Sign In</h1>
 </div>
-<div class="ui grid">
-  <div class="sixteen wide column">
-    <div class="ui one column stackable center aligned page grid">
-      <div class="column twelve wide">
 
-        <%= form_tag '/sessions', class: 'ui form sign-in-form' do %>
-          <div class="field">
-          <%= label_tag :username %>
-          <%= text_field_tag :username %>
-          </div>
-          <div class="field">
-          <%= label_tag :password %>
-          <%= password_field_tag :password %>
-          <div>
-          <br>
-          <%= submit_tag 'Submit', class: 'ui green button' %>
-        <% end %>
+<div class="ui one column stackable center aligned page grid">
+  <div class="column twelve wide">
 
+    <%= form_tag '/sessions', class: 'ui form sign-form' do %>
+      <div class="field">
+      <%= label_tag :username %>
+      <%= text_field_tag :username %>
       </div>
-    </div>
+      <div class="field">
+      <%= label_tag :password %>
+      <%= password_field_tag :password %>
+      <div>
+      <br>
+      <%= submit_tag 'Submit', class: 'ui green button' %>
+    <% end %>
+
   </div>
 </div>
+
 
 
 

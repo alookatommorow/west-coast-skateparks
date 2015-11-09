@@ -24,10 +24,18 @@ $(document).ready(function() {
 
 function bindEvents() {
 
+  /////////////////////// Show modal on picture click /////////////
+
   $('.ui.image').click(function(){
     $('.modal-image').attr('src', this.src);
     $('.picture-modal').modal('show');
   });
+
+/////////////////////// Hide image if not there /////////////
+
+  $(".skatepark-image").error(function () {
+    $(this).hide();
+});
 
   /////////////////////// Show skateparks by state/////////////
 

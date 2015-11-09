@@ -1,6 +1,7 @@
 <div class="page-container">
 
   <!-- skatepark header -->
+  <div class='header-picture'></div>
 
   <div class='center-text skatepark-title'>
     <h1><%= @skatepark.city.titleize %>, <%= @skatepark.state.capitalize %></h1>
@@ -8,16 +9,23 @@
       <h2><%= @skatepark.name.titleize %></h2>
     <% end %>
   </div>
+  <div class="stars-container center-text">
+    <% if !@skatepark.rating.blank? %>
+      <% (@skatepark.rating.to_i).times do %>
+        <i class="large yellow star icon inline-block"></i>
+      <% end %>
+    <% end %>
+  </div>
 
 
 
-  <div class="ui two column grid">
+  <div class="ui grid">
 
   <!-- skatepark info -->
-    <div class="column">
+    <div class="six wide column skatepark-info-container">
       <div class="ui segments">
         <% @skatepark.attributes.each do |attribute,value| %>
-          <% exclude = ['id', 'identifier', 'state', 'city', 'name', 'notes', 'created_at', 'updated_at', 'id', 'identifier'] %>
+          <% exclude = ['id', 'identifier', 'state', 'city', 'name', 'rating', 'notes', 'created_at', 'updated_at', 'id', 'identifier'] %>
           <% unless exclude.include?(attribute) %>
             <% if attribute == 'size' && !value.blank? %>
               <div class="ui segment">
@@ -31,11 +39,21 @@
 
             <% elsif attribute == 'beta' && !value.blank? %>
               <div class="ui segment">
-                <h4 class="ui header">Special Info</h4>
+                <h4 class="ui header">Info</h4>
               </div>
               <div class="ui segments">
                 <div class="ui inverted segment">
                   <%= value %>
+                </div>
+              </div>
+
+            <% elsif attribute == 'lights' && !value.blank? %>
+              <div class="ui segment">
+                <h4 class="ui header">Lights</h4>
+              </div>
+              <div class="ui segments">
+                <div class="ui inverted segment">
+                  Yes
                 </div>
               </div>
 
@@ -68,14 +86,14 @@
     </div>
 
 
-    <div class="column">
-      <div class="ui small images center-text">
-          <img class="ui image" src="https://storage.googleapis.com/west-coast-skateparks/<%= @skatepark.id %>-01.jpg">
-          <img class="ui image" src="https://storage.googleapis.com/west-coast-skateparks/<%= @skatepark.id %>-02.jpg">
+    <div class="ten wide column">
+      <div class="ui medium images center-text">
+          <img class="ui image skatepark-image" src="https://storage.googleapis.com/west-coast-skateparks/<%= @skatepark.identifier %>-01.jpg">
+          <img class="ui image skatepark-image" src="https://storage.googleapis.com/west-coast-skateparks/<%= @skatepark.identifier %>-02.jpg">
       </div>
-      <div class="ui small images center-text">
-          <img class="ui image" src="https://storage.googleapis.com/west-coast-skateparks/<%= @skatepark.id %>-03.jpg">
-          <img class="ui image" src="https://storage.googleapis.com/west-coast-skateparks/<%= @skatepark.id %>-04.jpg">
+      <div class="ui medium images center-text">
+          <img class="ui image skatepark-image" src="https://storage.googleapis.com/west-coast-skateparks/<%= @skatepark.identifier %>-03.jpg">
+          <img class="ui image skatepark-image" src="https://storage.googleapis.com/west-coast-skateparks/<%= @skatepark.identifier %>-04.jpg">
       </div>
 
 
@@ -246,6 +264,17 @@ function initMap() {
     </script>
     <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_KEY'] %>&callback=initMap"
         async defer></script>
+
+<style>
+  .header-picture {
+  position: relative;
+  background-image: url("https://storage.googleapis.com/west-coast-skateparks/<%= @skatepark.identifier %>-header.jpg" );
+  background-repeat: no-repeat;
+  background-size: 100% auto;
+  background-position: 0 -25px;
+  padding: 8%;
+}
+</style>
 
 
 
