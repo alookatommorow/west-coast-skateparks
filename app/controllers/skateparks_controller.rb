@@ -42,6 +42,9 @@ class SkateparksController < ApplicationController
     @all_user_skateparks = UserSkatepark.where(skatepark_id: params[:id])
     @user_rating = user_rating(params[:id])
     @state_skateparks = Skatepark.where(state: @skatepark.state)
+    @current_user = current_user
+    p "*"*100
+    p current_user.id
 
   end
 
@@ -76,6 +79,8 @@ class SkateparksController < ApplicationController
 
   def add_favorite
     favorite(params[:user_id], params[:id])
+    @current_user_id = current_user.id
+    @skatepark = Skatepark.find(params[:id])
     respond_to do |format|
       format.js
     end
@@ -83,6 +88,8 @@ class SkateparksController < ApplicationController
 
   def remove_favorite
     favorite(params[:user_id], params[:id])
+    @current_user_id = current_user.id
+    @skatepark = Skatepark.find(params[:id])
     respond_to do |format|
       format.js
     end

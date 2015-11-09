@@ -49,6 +49,19 @@ function bindEvents() {
     })
   });
 
+    /////////////////////// Add Favorite /////////////
+
+  // $(".fav-container").on('click', '.add-favorite-button', function(event) {
+  //   event.preventDefault();
+  //   console.log('detection')
+  //   var url = $('.fav-container form').attr('action');
+  //   console.log(url)
+  //   $.ajax({url: url, dataType: 'JSON'}).done(function(response) {
+  //     $(".parks-container").children().remove();
+  //     $(".parks-container").append(response.partial)
+  //   })
+  // });
+
 /////////////////////// Search /////////////
 
   $('.search-form').on('submit', function(event){
