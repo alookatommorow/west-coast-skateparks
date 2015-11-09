@@ -33,6 +33,7 @@ ActiveRecord::Schema.define(version: 20150729190646) do
     t.text     "beta"
     t.string   "helmet"
     t.string   "lights"
+    t.string   "video_url"
     t.text     "obstacles"
     t.datetime "created_at"
     t.datetime "updated_at"
