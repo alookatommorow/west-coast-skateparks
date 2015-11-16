@@ -36,15 +36,14 @@ class SkateparksController < ApplicationController
 
   def show
     @skatepark = Skatepark.find(params[:id])
+    @num_pics = @skatepark.num_pics
     if logged_in?
       @user_skatepark = user_has_skatepark(current_user.id, params[:id])
     end
     @all_user_skateparks = UserSkatepark.where(skatepark_id: params[:id])
     @user_rating = user_rating(params[:id])
     @state_skateparks = Skatepark.where(state: @skatepark.state)
-    @current_user = current_user
-    p "*"*100
-    p current_user.id
+
 
   end
 

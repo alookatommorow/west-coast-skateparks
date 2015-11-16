@@ -31,11 +31,6 @@ function bindEvents() {
     $('.picture-modal').modal('show');
   });
 
-/////////////////////// Hide image if not there /////////////
-
-  $(".skatepark-image").error(function () {
-    $(this).hide();
-});
 
   /////////////////////// Show skateparks by state/////////////
 

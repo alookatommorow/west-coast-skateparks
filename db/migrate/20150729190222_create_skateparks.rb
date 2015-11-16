@@ -17,7 +17,9 @@
       t.text :beta
       t.string :helmet
       t.string :lights
+      t.string :photo_cred
       t.string :video_url
+      t.integer :num_pics
       t.text :obstacles
 
       t.timestamps

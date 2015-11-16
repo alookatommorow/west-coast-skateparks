@@ -16,8 +16,8 @@ $('.initial-review-container').remove();
 //if no rate-button, append rate-button
 
 if ($('button').hasClass('rate-button') === false) {
-  $('.rate-container').append(response.rate_button);
-  $('.review-container').append(response.review_button);
+  $('.rate-button-container').append(response.rate_button);
+  $('.review-button-container').append(response.review_button);
 } else {
   $('.rate-button').removeClass('hidden');
   $('.review-button').removeClass('hidden');
