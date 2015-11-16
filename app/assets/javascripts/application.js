@@ -31,11 +31,6 @@ function bindEvents() {
     $('.picture-modal').modal('show');
   });
 
-/////////////////////// Hide image if not there /////////////
-
-  $(".skatepark-image").error(function () {
-    $(this).hide();
-});
 
   /////////////////////// Show skateparks by state/////////////
 
@@ -48,6 +43,7 @@ function bindEvents() {
       $(".parks-container").append(response.partial)
     })
   });
+
 
 /////////////////////// Search /////////////
 
@@ -105,6 +101,7 @@ $(".profile-container").on('click', '.item', function(){
 
 
   /////////////////////// Toggle Initial Rate Form /////////
+
   $(".initial-rate-button").on('click', function(event) {
   event.preventDefault();
     $(".initial-rate-form-container").slideToggle(500, function(){});
@@ -112,7 +109,7 @@ $(".profile-container").on('click', '.item', function(){
 
   ////////////////////////Toggle Rate Form///////////////////
 
-  $(".rate-container").on('click', '.rate-button', function() {
+  $(".rate-button-container").on('click', '.rate-button', function() {
     $(".rate-form-container").slideToggle(500, function(){});
   })
 
@@ -124,7 +121,7 @@ $(".profile-container").on('click', '.item', function(){
 
   ////////////////////////Toggle Review Form///////////////////
 
-  $(".review-container").on('click', '.review-button', function() {
+  $(".review-button-container").on('click', '.review-button', function() {
     console.log("garbage pale")
     $(".review-form-container").slideToggle(500, function(){});
   })

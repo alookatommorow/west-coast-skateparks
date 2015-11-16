@@ -38,19 +38,15 @@ html, body {
   height: 100%;
 }
 
-
-
 .nav-container {
   width: 100%;
 }
-
 
 .title-words {
   padding-bottom: 1%;
   font-size: 4.2em;
   font-weight: bold;
   color: #FF7519;
-
 }
 
 .heading-container {
@@ -67,7 +63,7 @@ html, body {
 }
 
 .page-container {
-  margin: 2% 10%;
+  margin: 0% 5%;
   min-height: 80%;
 }
 
@@ -83,7 +79,6 @@ html, body {
   color: white;
  /* padding-top: 1%;
   padding-bottom: 1%;*/
-
 }
 
 
@@ -107,6 +102,10 @@ html, body {
 
 .right-align {
   text-align: right;
+}
+
+.inline {
+  display: inline;
 }
 
 .inline-block {
@@ -147,7 +146,6 @@ html, body {
 }
 
 .icon-container {
-
   padding-bottom: 10%;
 }
 
@@ -182,10 +180,9 @@ html, body {
 
 /*--------Show Page-------*/
 
-.skatepark-info-conatiner {
+.skatepark-info-container {
   float: left;
 }
-
 
 .map-container {
   position: relative;
@@ -201,7 +198,6 @@ html, body {
 .picture-modal img {
   display:block;
   margin:auto;
-
 }
 
 .ui img {
@@ -215,6 +211,12 @@ html, body {
 .stars-container {
   padding-bottom: 2%;
 }
+
+.fav-container, .visit-container {
+  padding-top: 1%;
+  padding-bottom: 2%;
+}
+
 /*.sign-form {
   padding-bottom: 45%;
 }

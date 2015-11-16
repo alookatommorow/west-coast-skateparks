@@ -1,13 +1,8 @@
-var response = {form_class: "add-visit", button_class: "ui primary button add-visit-button", action: "/users/<%= current_user.id %>/skateparks/<%= params[:id] %>/add_visit", text: "Been Here"}
+var response = {addVisitButton: "<%= escape_javascript (render partial: 'remove_visit.html.erb', layout: false )%>",
 
-$('.remove-visit-button').attr({
-        value: response.text,
-        class: response.button_class
-      });
+}
 
-$('.visit-container').children().first().attr({
-        action: response.action,
-      });
+$('.visit-container form').replaceWith(response.addVisitButton);
 
 $('.initial-rate-container').remove();
 $('.initial-review-container').remove();

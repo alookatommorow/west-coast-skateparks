@@ -1,18 +1,12 @@
 //info to switch button
 
-var response = {form_class: "remove-visit", button_class: "ui red button remove-visit-button", action: "/users/<%= current_user.id %>/skateparks/<%= params[:id] %>/remove_visit", text: "Never Been Here", rate_button: "<button class='ui primary button rate-button'>Rate Skatepark</button>", rate_form: "<%= escape_javascript (render partial: 'rate_form.html.erb',layout: false )%>", review_button: "<button class='ui primary button review-button'>Review Skatepark</button>", review_form: "<%= escape_javascript (render partial: 'review_form.html.erb',layout: false )%>",
+var response = {
+  removeVisitButton: "<%= escape_javascript (render partial: 'add_visit.html.erb', layout: false )%>",
+  form_class: "remove-visit", button_class: "ui red button remove-visit-button", action: "/users/<%= current_user.id %>/skateparks/<%= params[:id] %>/remove_visit", text: "Never Been Here", rate_button: "<button class='ui primary button rate-button'>Rate Skatepark</button>", rate_form: "<%= escape_javascript (render partial: 'rate_form.html.erb',layout: false )%>", review_button: "<button class='ui primary button review-button'>Review Skatepark</button>", review_form: "<%= escape_javascript (render partial: 'review_form.html.erb',layout: false )%>",
 }
 
 //switch 'add visit' to 'remove visit'
-
-$('.add-visit-button').attr({
-        value: response.text,
-        class: response.button_class
-      });
-
-$('.visit-container').children().first().attr({
-        action: response.action,
-      });
+$('.visit-container form').replaceWith(response.removeVisitButton);
 
 //remove initial rate containers
 
@@ -22,8 +16,8 @@ $('.initial-review-container').remove();
 //if no rate-button, append rate-button
 
 if ($('button').hasClass('rate-button') === false) {
-  $('.rate-container').append(response.rate_button);
-  $('.review-container').append(response.review_button);
+  $('.rate-button-container').append(response.rate_button);
+  $('.review-button-container').append(response.review_button);
 } else {
   $('.rate-button').removeClass('hidden');
   $('.review-button').removeClass('hidden');

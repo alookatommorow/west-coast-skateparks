@@ -1,7 +1,7 @@
 <div class="page-container">
 
   <!-- skatepark header -->
-  <div class='header-picture'></div>
+  <div class='header-image'></div>
 
   <div class='center-text skatepark-title'>
     <h1><%= @skatepark.city.titleize %>, <%= @skatepark.state.capitalize %></h1>
@@ -25,7 +25,7 @@
     <div class="six wide column skatepark-info-container">
       <div class="ui segments">
         <% @skatepark.attributes.each do |attribute,value| %>
-          <% exclude = ['id', 'identifier', 'state', 'city', 'name', 'rating', 'notes', 'created_at', 'updated_at', 'id', 'identifier'] %>
+          <% exclude = ['id', 'identifier', 'state', 'city', 'name', 'rating', 'notes', 'helmet' 'photo_cred' 'video_url', 'num_pics', 'created_at', 'updated_at',] %>
           <% unless exclude.include?(attribute) %>
             <% if attribute == 'size' && !value.blank? %>
               <div class="ui segment">
@@ -81,13 +81,24 @@
             </div>
           </div>
         <% end %>
-
+      <!-- end segments -->
       </div>
+      <!-- end skatepark-info column -->
     </div>
 
 
     <div class="ten wide column">
-      <div class="ui medium images center-text">
+      <% if (!@num_pics.blank?) && (@skatepark.num_pics > 0) %>
+        <div class="ui medium images center-text">
+          <% (1..@num_pics).each do |i| %>
+
+              <img class="ui image skatepark-image" src="https://storage.googleapis.com/west-coast-skateparks/<%= @skatepark.identifier %>-0<%= i.to_s %>.jpg">
+
+          <% end %>
+        </div>
+      <% end  %>
+
+      <!-- <div class="ui medium images center-text">
           <img class="ui image skatepark-image" src="https://storage.googleapis.com/west-coast-skateparks/<%= @skatepark.identifier %>-01.jpg">
           <img class="ui image skatepark-image" src="https://storage.googleapis.com/west-coast-skateparks/<%= @skatepark.identifier %>-02.jpg">
       </div>
@@ -95,6 +106,10 @@
           <img class="ui image skatepark-image" src="https://storage.googleapis.com/west-coast-skateparks/<%= @skatepark.identifier %>-03.jpg">
           <img class="ui image skatepark-image" src="https://storage.googleapis.com/west-coast-skateparks/<%= @skatepark.identifier %>-04.jpg">
       </div>
+       <div class="ui medium images center-text">
+          <img class="ui image skatepark-image" src="https://storage.googleapis.com/west-coast-skateparks/<%= @skatepark.identifier %>-05.jpg">
+          <img class="ui image skatepark-image" src="https://storage.googleapis.com/west-coast-skateparks/<%= @skatepark.identifier %>-06.jpg">
+      </div> -->
 
 
       <% if logged_in? %>
@@ -104,26 +119,38 @@
         <div class="visit-container inline-block">
           <% if user_has_skatepark(current_user.id, @skatepark.id) %>
             <% if user_has_skatepark(current_user.id, @skatepark.id).visited == true %>
-              <%= button_to 'Never Been Here', remove_visit_path(current_user.id, @skatepark.id), method: :put, remote: true, class: 'ui red button remove-visit-button' %>
+              <%= button_to remove_visit_path(current_user.id, @skatepark.id), method: :put, remote: true, class: 'ui button remove-visit-button' do %>
+                <i class="red remove icon inline-block"></i> <p class="inline-block">Never Been Here</p>
+              <% end %>
             <% else %>
-              <%= button_to 'Been Here', add_visit_path(current_user.id, @skatepark.id), method: :put, remote: true, class: 'ui primary button add-visit-button' %>
+              <%= button_to add_visit_path(current_user.id, @skatepark.id), method: :put, remote: true, class: 'ui button add-visit-button' do %>
+                <i class="green checkmark icon inline-block"></i> <p class="inline-block">Been Here</p>
+              <% end %>
             <%end%>
           <% else %>
-              <%= button_to 'Been Here', add_visit_path(current_user.id, @skatepark.id), method: :put, remote: true, class: 'ui primary button add-visit-button' %>
+              <%= button_to add_visit_path(current_user.id, @skatepark.id), method: :put, remote: true, class: 'ui button add-visit-button' do %>
+                <i class="green checkmark icon inline-block"></i> <p class="inline-block">Been Here</p>
+              <% end %>
           <% end %>
         </div>
 
-      <!-- favorite button -->
+        <!-- favorite button -->
 
         <div class="fav-container inline-block">
           <% if user_has_skatepark(current_user.id, @skatepark.id) %>
             <% if user_has_skatepark(current_user.id, @skatepark.id).favorite == true %>
-              <%= button_to 'Unfavorite', remove_favorite_path(current_user.id, @skatepark.id), method: :put, remote: true, class: 'ui red button remove-favorite-button' %>
+              <%= button_to remove_favorite_path(current_user.id, @skatepark.id), method: :put, remote: true, class: 'ui button remove-favorite-button' do %>
+                <i class="empty heart icon inline-block"></i> <p class="inline-block">Unfavorite</p>
+              <% end %>
             <% else %>
-              <%= button_to 'Favorite', add_favorite_path(current_user.id, @skatepark.id), method: :put, remote: true, class: 'ui primary button add-favorite-button' %>
+              <%= button_to add_favorite_path(current_user.id, @skatepark.id), method: :put, remote: true, class: 'ui button add-favorite-button' do %>
+                <i class="red heart icon inline-block"></i> <p class="inline-block">Favorite</p>
+              <% end %>
             <%end%>
           <% else %>
-            <%= button_to 'Favorite', add_favorite_path(current_user.id, @skatepark.id), method: :put, remote: true, class: 'ui primary button add-favorite-button' %>
+            <%= button_to add_favorite_path(current_user.id, @skatepark.id), method: :put, remote: true, class: 'ui button add-favorite-button' do %>
+                <i class="red heart icon inline-block"></i> <p class="inline-block">Favorite</p>
+            <% end %>
           <% end %>
         </div>
 
@@ -140,11 +167,12 @@
                 <% end %>
               </div>
             </div>
+
           </div>
         <% end %>
       <% end %>
 
-      <div class="rate-container"></div>
+      <div class="rate-button-container"></div>
       <div class="rate-form-container hidden"></div>
 
 
@@ -168,14 +196,13 @@
             <% end %>
           <% end %>
 
-          <div class="review-container"></div>
+          <div class="review-button-container"></div>
           <div class="review-form-container hidden"></div>
 
-      <!-- end if logged in? -->
-      <% end %>
-
-     </div>
-
+          <!-- end if logged in? -->
+        <% end %>
+        <!-- end button-container -->
+      </div>
     <!-- end column -->
     </div>
 
@@ -184,7 +211,7 @@
 
 
 
-    <!-- end two column grid -->
+    <!-- end ui grid -->
   </div>
 
   <!-- Reviews -->
@@ -204,25 +231,20 @@
     <%= button_to 'Update', edit_skatepark_path, method: :get, class: 'ui primary button' %>
   <% end %>
 
-
-
-
-
-
       <!-- Map -->
-        <div id='map-container'>
-            <div id='map'></div>
-        </div>
+  <div id='map-container'>
+      <div id='map'></div>
+  </div>
 
-        <div class='center-text one-margin'>
-          <form action="http://maps.google.com/maps" method="get" target="_blank">
-               <label for="saddr">Enter your location</label>
-               <input type="text" name="saddr" />
-               <input type="hidden" name="daddr" value="<%= @skatepark.address %>" />
-               <input type="submit" value="Get directions" />
-            </form>
-        </div>
-
+  <div class='center-text one-margin'>
+    <form action="http://maps.google.com/maps" method="get" target="_blank">
+         <label for="saddr">Enter your location</label>
+         <input type="text" name="saddr" />
+         <input type="hidden" name="daddr" value="<%= @skatepark.address %>" />
+         <input type="submit" value="Get directions" />
+      </form>
+  </div>
+    <!-- end page-container -->
 </div>
 
 <div class="ui basic modal picture-modal">
@@ -234,13 +256,7 @@
   </div>
 </div>
 
-
-
-
-
 <script>
-
-
 
 function initMap() {
 
@@ -257,16 +273,14 @@ function initMap() {
     title: '<%= @skatepark.city.titleize %>, <%= @skatepark.state.capitalize %>'
   });
 
-
-
 }
 
-    </script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_KEY'] %>&callback=initMap"
-        async defer></script>
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_KEY'] %>&callback=initMap"
+    async defer></script>
 
 <style>
-  .header-picture {
+  .header-image {
   position: relative;
   background-image: url("https://storage.googleapis.com/west-coast-skateparks/<%= @skatepark.identifier %>-header.jpg" );
   background-repeat: no-repeat;

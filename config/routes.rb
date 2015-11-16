@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+
+  get 'google',  to: 'welcome#google'
   get '/skateparks/search', to: 'skateparks#search', as: 'search'
   resources :users, only: [:show, :new, :create]
   resources :sessions, only: [:new, :create, :destroy]

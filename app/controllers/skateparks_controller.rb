@@ -36,12 +36,14 @@ class SkateparksController < ApplicationController
 
   def show
     @skatepark = Skatepark.find(params[:id])
+    @num_pics = @skatepark.num_pics
     if logged_in?
       @user_skatepark = user_has_skatepark(current_user.id, params[:id])
     end
     @all_user_skateparks = UserSkatepark.where(skatepark_id: params[:id])
     @user_rating = user_rating(params[:id])
     @state_skateparks = Skatepark.where(state: @skatepark.state)
+
 
   end
 
@@ -76,6 +78,8 @@ class SkateparksController < ApplicationController
 
   def add_favorite
     favorite(params[:user_id], params[:id])
+    @current_user_id = current_user.id
+    @skatepark = Skatepark.find(params[:id])
     respond_to do |format|
       format.js
     end
@@ -83,6 +87,8 @@ class SkateparksController < ApplicationController
 
   def remove_favorite
     favorite(params[:user_id], params[:id])
+    @current_user_id = current_user.id
+    @skatepark = Skatepark.find(params[:id])
     respond_to do |format|
       format.js
     end
@@ -91,6 +97,8 @@ class SkateparksController < ApplicationController
   def add_visit
     visit(params[:user_id], params[:id])
     @user_skatepark = user_has_skatepark(current_user.id, params[:id])
+    @current_user_id = current_user.id
+    @skatepark = Skatepark.find(params[:id])
     respond_to do |format|
       format.js
     end
@@ -98,6 +106,8 @@ class SkateparksController < ApplicationController
 
   def remove_visit
     visit(params[:user_id], params[:id])
+    @current_user_id = current_user.id
+    @skatepark = Skatepark.find(params[:id])
     respond_to do |format|
       format.js
     end
