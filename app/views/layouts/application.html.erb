@@ -10,9 +10,10 @@
   <body>
     <div class='page-wrapper'>
       <div class="nav-container">
-        <div class='ui four item inverted pointing menu'>
+        <div class='ui five item inverted pointing menu'>
 
           <%= link_to 'Home', root_path, class: 'item' %>
+          <%= link_to 'About', about_path, class: 'item' %>
           <%= link_to 'Skateparks', skateparks_path, class: 'item' %>
           <% if logged_in? %>
             <%= link_to 'My Profile', user_path(current_user), class: 'item' %>
