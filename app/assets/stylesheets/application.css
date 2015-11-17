@@ -96,6 +96,10 @@ html, body {
   padding-top: 1%;
 }
 
+.one-bottom {
+  padding-bottom: 1%;
+}
+
 .blue {
   color: #5CB8E6;
 }
