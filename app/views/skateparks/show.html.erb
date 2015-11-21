@@ -95,7 +95,7 @@
       <% if (!@num_pics.blank?) && (@skatepark.num_pics > 0) %>
         <div class="ui medium images center-text">
           <% (1..@num_pics).each do |i| %>
-              <img class="ui image skatepark-image" src="https://storage.googleapis.com/west-coast-skateparks/<%= @skatepark.identifier %>-0<%= i.to_s %>.jpg">
+              <img class="ui image skatepark-image" src="https://storage.googleapis.com/west-coast-skateparks/<%= @skatepark.state %>/<%= @skatepark.identifier %>-0<%= i.to_s %>.jpg">
           <% end %>
         </div>
       <% end  %>
@@ -270,7 +270,7 @@ function initMap() {
 <style>
   .header-image {
   position: relative;
-  background-image: url("https://storage.googleapis.com/west-coast-skateparks/<%= @skatepark.identifier %>-header.jpg" );
+  background-image: url("https://storage.googleapis.com/west-coast-skateparks/<%= @skatepark.state %>/<%= @skatepark.identifier %>-header.jpg" );
   background-repeat: no-repeat;
   background-size: 100% auto;
   background-position: 0 -25px;
