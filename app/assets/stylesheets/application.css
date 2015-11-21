@@ -92,6 +92,14 @@ html, body {
   margin-top: 1%;
 }
 
+.one-top {
+  padding-top: 1%;
+}
+
+.one-bottom {
+  padding-bottom: 1%;
+}
+
 .blue {
   color: #5CB8E6;
 }
@@ -161,6 +169,10 @@ html, body {
   margin-top: 10px;
 }
 
+/*-------About Page----------*/
+
+
+
 /*-------Profile Page----------*/
 
 .profile-container a {
@@ -205,7 +217,8 @@ html, body {
 }
 
 .skatepark-title {
-  padding-bottom: 2%;
+  padding-top: 1%;
+  padding-bottom: 1%;
 }
 
 .stars-container {
@@ -217,10 +230,10 @@ html, body {
   padding-bottom: 2%;
 }
 
-/*.sign-form {
+.sign-form {
   padding-bottom: 45%;
 }
-*/
+
 
 
 
