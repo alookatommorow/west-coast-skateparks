@@ -25,8 +25,19 @@
   <div class="ui grid">
 
   <!-- skatepark info -->
-    <div class="six wide column skatepark-info-container">
+    <div class="six wide left floated column">
       <div class="ui segments">
+        <% if has_user_rating?(@skatepark.id) %>
+          <div class="ui segment">
+            <h4 class="ui header">User Rating</h4>
+          </div>
+          <div class="ui segments">
+            <div class="ui inverted segment">
+              <%= @user_rating %>
+            </div>
+          </div>
+        <% end %>
+
         <% @skatepark.attributes.each do |attribute,value| %>
           <% exclude = ['id', 'identifier', 'state', 'city', 'name', 'rating', 'notes', 'helmet', 'photo_cred', 'video_url', 'num_pics', 'created_at', 'updated_at',] %>
           <% unless exclude.include?(attribute) %>
@@ -74,16 +85,7 @@
           <% end %>
         <% end %>
 
-        <% if has_user_rating?(@skatepark.id) %>
-          <div class="ui segment">
-            <h4 class="ui header">User Rating</h4>
-          </div>
-          <div class="ui segments">
-            <div class="ui inverted segment">
-              <%= @user_rating %>
-            </div>
-          </div>
-        <% end %>
+
       <!-- end segments -->
       </div>
       <!-- end skatepark-info column -->
@@ -191,6 +193,19 @@
         <% end %>
         <!-- end button-container -->
       </div>
+
+      <div id='map-container'>
+          <div id='map'></div>
+      </div>
+
+      <div class='center-text one-margin'>
+        <form action="http://maps.google.com/maps" method="get" target="_blank">
+             <label for="saddr">Enter your location</label>
+             <input type="text" name="saddr" />
+             <input type="hidden" name="daddr" value="<%= @skatepark.address %>" />
+             <input type="submit" value="Get directions" />
+          </form>
+      </div>
     <!-- end column -->
     </div>
 
@@ -220,18 +235,9 @@
   <% end %>
 
       <!-- Map -->
-  <div id='map-container'>
-      <div id='map'></div>
-  </div>
 
-  <div class='center-text one-margin'>
-    <form action="http://maps.google.com/maps" method="get" target="_blank">
-         <label for="saddr">Enter your location</label>
-         <input type="text" name="saddr" />
-         <input type="hidden" name="daddr" value="<%= @skatepark.address %>" />
-         <input type="submit" value="Get directions" />
-      </form>
-  </div>
+
+
     <!-- end page-container -->
 </div>
 
