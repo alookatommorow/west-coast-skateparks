@@ -100,6 +100,10 @@ html, body {
   padding-bottom: 1%;
 }
 
+.relative {
+  position: relative;
+}
+
 .blue {
   color: #5CB8E6;
 }
@@ -192,13 +196,6 @@ html, body {
 
 /*--------Show Page-------*/
 
-.skatepark-info-container {
-  float: left;
-}
-
-.map-container {
-  position: relative;
-}
 
 #map {
   height: 400px;
@@ -214,11 +211,6 @@ html, body {
 
 .ui img {
   cursor: pointer;
-}
-
-.skatepark-title {
-  padding-top: 1%;
-  padding-bottom: 1%;
 }
 
 .stars-container {
