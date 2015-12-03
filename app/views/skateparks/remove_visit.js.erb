@@ -1,12 +1,10 @@
 var response = {addVisitButton: "<%= escape_javascript (render partial: 'remove_visit.html.erb', layout: false )%>",
-
 }
 
 $('.visit-container form').replaceWith(response.addVisitButton);
 
-$('.initial-rate-container').remove();
-$('.initial-review-container').remove();
-$('.edit_user_skatepark').remove();
+if ($('div').hasClass('initial-rate-container')) {
+  $('.initial-rate-container, .initial-review-container').remove();
+}
 
-$('.ui.primary.button.review-button').remove();
-$('.ui.primary.button.rate-button').remove();
+$('.rate-button-container, .review-button-container').remove();

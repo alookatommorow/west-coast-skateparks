@@ -152,8 +152,10 @@
             <div class="initial-rate-form-container hidden one-top">
               <div class="ui form">
                 <%= form_for @user_skatepark, url: rate_path(current_user.id, @skatepark.id), method: :put do |f| %>
+                  <div class="field">
                   <%= f.text_field :rating, placeholder: 'enter rating' %>
-                  <%= f.submit value: 'Rate', class: "ui button one-top" %>
+                  </div>
+                  <%= f.submit value: 'Rate', class: "ui button" %>
                 <% end %>
               </div>
             </div>
@@ -162,20 +164,21 @@
         <% end %>
       <% end %>
 
-      <div class="rate-button-container"></div>
-      <div class="rate-form-container hidden"></div>
+
 
 
       <!-- review containers -->
           <% if user_has_skatepark(current_user.id, @skatepark.id) %>
             <% if user_has_skatepark(current_user.id, @skatepark.id).visited == true %>
-              <div class='initial-review-container inline-block'>
+              <div class='initial-review-container'>
                 <%= button_to 'Review Skatepark', review_path(current_user.id, @skatepark.id), class: "ui primary button initial-review-button" %>
 
                 <div class="initial-review-form-container hidden one-top">
                   <div class="ui form">
                     <%= form_for @user_skatepark, url: review_path(current_user.id, @skatepark.id), method: :put do |f| %>
+                      <div class="field">
                       <%= f.text_area :review, placeholder: 'write review here' %>
+                      </div>
                       <%= f.submit value: 'Review', class: 'ui button' %>
                     <% end %>
                   </div>
@@ -186,8 +189,7 @@
             <% end %>
           <% end %>
 
-          <div class="review-button-container"></div>
-          <div class="review-form-container hidden"></div>
+
 
           <!-- end if logged in? -->
         <% end %>
