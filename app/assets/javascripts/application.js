@@ -103,26 +103,27 @@ $(".profile-container").on('click', '.item', function(){
   /////////////////////// Toggle Initial Rate Form /////////
 
   $(".initial-rate-button").on('click', function(event) {
-  event.preventDefault();
+    event.preventDefault();
     $(".initial-rate-form-container").slideToggle(500, function(){});
   })
 
   ////////////////////////Toggle Rate Form///////////////////
 
-  $(".rate-button-container").on('click', '.rate-button', function() {
+  $(".button-container").on('click', '.rate-button', function(event) {
+    event.preventDefault();
     $(".rate-form-container").slideToggle(500, function(){});
   })
 
    /////////////////////// Toggle Initial Review Form /////////
   $(".initial-review-button").on('click', function(event) {
-  event.preventDefault();
+    event.preventDefault();
     $(".initial-review-form-container").slideToggle(500, function(){});
   })
 
   ////////////////////////Toggle Review Form///////////////////
 
-  $(".review-button-container").on('click', '.review-button', function() {
-    console.log("garbage pale")
+  $(".button-container").on('click', '.review-button', function(event) {
+    event.preventDefault();
     $(".review-form-container").slideToggle(500, function(){});
   })
 
