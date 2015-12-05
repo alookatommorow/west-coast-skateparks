@@ -128,6 +128,10 @@ html, body {
   float: right;
 }
 
+.float-left {
+  float: left;
+}
+
 .reduced-margin {
   margin: 0px;
 }
@@ -198,8 +202,8 @@ html, body {
 
 
 #map {
-  height: 400px;
-  width: 500px;
+  height: 300px;
+  width: 400px;
   margin-left: auto;
   margin-right: auto;
 }
