@@ -14,7 +14,7 @@
       t.text :hours
       t.string :size
       t.text :notes
-      t.text :beta
+      t.text :info
       t.string :helmet
       t.string :lights
       t.string :photo_cred
