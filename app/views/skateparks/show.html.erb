@@ -39,9 +39,20 @@
         <% end %>
 
         <% @skatepark.attributes.each do |attribute,value| %>
-          <% exclude = ['id', 'identifier', 'state', 'city', 'name', 'rating', 'notes', 'helmet', 'photo_cred', 'video_url', 'num_pics', 'created_at', 'updated_at',] %>
+          <% exclude = ['id', 'identifier', 'state', 'city', 'name', 'rating', 'notes', 'helmet', 'photo_cred', 'video_url', 'num_pics', 'created_at', 'updated_at',]
+          display=[ 'address', 'hours', 'beta'] %>
           <% unless exclude.include?(attribute) %>
-            <% if attribute == 'size' && !value.blank? %>
+            <% if display.include?(attribute) && !value.blank? %>
+              <div class="ui segment">
+                <h4 class="ui header"><%= attribute.capitalize %></h4>
+              </div>
+              <div class="ui segments">
+                <div class="ui inverted segment">
+                  <%= value %>
+                </div>
+              </div>
+
+            <% elsif attribute == 'size' && !value.blank? %>
               <div class="ui segment">
                 <h4 class="ui header"><%= attribute.capitalize %></h4>
               </div>
@@ -51,33 +62,13 @@
                 </div>
               </div>
 
-            <% elsif attribute == 'beta' && !value.blank? %>
-              <div class="ui segment">
-                <h4 class="ui header">Info</h4>
-              </div>
-              <div class="ui segments">
-                <div class="ui inverted segment">
-                  <%= value %>
-                </div>
-              </div>
-
-            <% elsif attribute == 'lights' && !value.blank? %>
-              <div class="ui segment">
-                <h4 class="ui header">Lights</h4>
-              </div>
-              <div class="ui segments">
-                <div class="ui inverted segment">
-                  Yes
-                </div>
-              </div>
-
             <% elsif !value.blank?%>
               <div class="ui segment">
                 <h4 class="ui header"><%= attribute.capitalize %></h4>
               </div>
               <div class="ui segments">
                 <div class="ui inverted segment">
-                  <%= value %>
+                  <%= value.titleize %>
                 </div>
               </div>
             <% end %>
@@ -113,7 +104,7 @@
       <% if (!@num_pics.blank?) && (@skatepark.num_pics > 0) %>
         <div class="ui medium images center-text">
           <% (1..@num_pics).each do |i| %>
-              <img class="ui image skatepark-image" src="https://storage.googleapis.com/west-coast-skateparks/<%= @skatepark.state.downcase %>/<%= @skatepark.identifier %>-0<%= i.to_s %>.jpg">
+              <img class="ui image skatepark-image" src="https://storage.googleapis.com/west-coast-skateparks/<%= @skatepark.state %>/<%= @skatepark.identifier %>-0<%= i.to_s %>.jpg">
           <% end %>
         </div>
       <% end  %>
@@ -190,7 +181,7 @@
                 <%= button_to 'Review Skatepark', review_path(current_user.id, @skatepark.id), class: "ui primary button initial-review-button" %>
 
                 <div class="initial-review-form-container hidden one-top">
-                  <div class="ui form">
+                  <div class="ui reply form">
                     <%= form_for @user_skatepark, url: review_path(current_user.id, @skatepark.id), method: :put do |f| %>
                       <div class="field">
                       <%= f.text_area :review, placeholder: 'write review here' %>
@@ -208,22 +199,36 @@
         <% end %>
         <!-- end button-container -->
       </div>
+
+      <!-- Reviews -->
+      <div class="written-review-container">
+        <% if has_review?(@skatepark.id) %>
+          <h4>Reviews</h4>
+          <div class="ui comments">
+            <% @all_user_skateparks.each do |user_park| %>
+            <div class="comment">
+              <div class="content">
+                <a class="author"><%= user_park.username %></a>
+                <div class="metadata">
+                  <div class="date">
+                    <%= user_park.review_date %>
+                  </div>
+                </div>
+                <div class="text">
+                  <%= user_park.review %>
+                </div>
+              </div>
+            </div>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
     <!-- end column -->
     </div>
     <!-- end ui grid -->
   </div>
 
-  <!-- Reviews -->
-  <div class="center-text written-review-container">
-    <% if has_review?(@skatepark.id) %>
-      <h4>Reviews</h4>
-      <div class="ui relaxed divided list">
-        <% @all_user_skateparks.each do |user_park| %>
-          <div class="item"><%= user_park.review %></div>
-        <% end %>
-      </div>
-    <% end %>
-  </div>
+
 
   <!-- Update button for admin -->
   <% if current_user && current_user.admin %>
@@ -268,7 +273,7 @@ function initMap() {
 <style>
   .header-image {
   position: relative;
-  background-image: url("https://storage.googleapis.com/west-coast-skateparks/<%= @skatepark.state.downcase %>/<%= @skatepark.identifier %>-header.jpg" );
+  background-image: url("https://storage.googleapis.com/west-coast-skateparks/<%= @skatepark.state %>/<%= @skatepark.identifier %>-header.jpg" );
   background-repeat: no-repeat;
   background-size: 100% auto;
   background-position: 0 -25px;

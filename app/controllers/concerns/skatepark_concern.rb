@@ -61,9 +61,11 @@ module SkateparkConcern
     user_has_skatepark.save
   end
 
-  def review_skatepark(user_id, skatepark_id, review)
+  def review_skatepark(user_id, skatepark_id, review, username)
     user_has_skatepark = user_has_skatepark(user_id, skatepark_id)
     user_has_skatepark.review = review
+    user_has_skatepark.username = username
+    user_has_skatepark.review_date = Time.now.strftime("%m/%d/%y")
     user_has_skatepark.save
   end
 

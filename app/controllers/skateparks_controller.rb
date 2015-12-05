@@ -3,7 +3,7 @@ class SkateparksController < ApplicationController
   def search
     # take this out into self.search method for Skatepark
     if params[:search]
-      @skateparks = Skatepark.where("name LIKE ? OR city LIKE ? OR state LIKE ?", "%" +params[:search].titleize + "%", "%" +params[:search].titleize + "%", "%" +params[:search].titleize + "%").order("state ASC").order("city ASC").order("name ASC")
+      @skateparks = Skatepark.where("name LIKE ? OR city LIKE ? OR state LIKE ?", "%" +params[:search].downcase + "%", "%" +params[:search].downcase + "%", "%" +params[:search].downcase + "%").order("state ASC").order("city ASC").order("name ASC")
 
       respond_to do |format|
         format.json {render json: {partial: render_to_string('_search.html.erb', layout: false)} }
@@ -121,7 +121,8 @@ class SkateparksController < ApplicationController
 
   def review
     @skatepark = Skatepark.find(params[:id])
-    review_skatepark(params[:user_id], params[:id], params[:user_skatepark][:review])
+    username = User.find(params[:user_id]).username
+    review_skatepark(params[:user_id], params[:id], params[:user_skatepark][:review], username)
     redirect_to @skatepark
   end
 

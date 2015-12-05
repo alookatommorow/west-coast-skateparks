@@ -30,7 +30,7 @@ ActiveRecord::Schema.define(version: 20150729190646) do
     t.text     "hours"
     t.string   "size"
     t.text     "notes"
-    t.text     "beta"
+    t.text     "info"
     t.string   "helmet"
     t.string   "lights"
     t.string   "photo_cred"
@@ -45,7 +45,9 @@ ActiveRecord::Schema.define(version: 20150729190646) do
     t.integer  "user_id"
     t.integer  "skatepark_id"
     t.integer  "rating"
+    t.string   "username"
     t.string   "review"
+    t.string   "review_date"
     t.boolean  "favorite",     default: false
     t.boolean  "visited",      default: false
     t.datetime "created_at"
