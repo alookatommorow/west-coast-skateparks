@@ -24,6 +24,7 @@ $(document).ready(function() {
 
 function bindEvents() {
 
+
   /////////////////////// Show modal on picture click /////////////
 
   $('.ui.image').click(function(){
@@ -45,7 +46,7 @@ function bindEvents() {
   });
 
 
-/////////////////////// Search /////////////
+/////////////////////// Search form submit/////////////
 
   $('.search-form').on('submit', function(event){
     event.preventDefault();
@@ -54,8 +55,19 @@ function bindEvents() {
     $.ajax({url: url, data: data, dataType: 'JSON'}).done(function(response) {
       $(".search-results-container").remove();
       $(".search-container").append(response.partial);
-    })
+    });
 
+  });
+
+  /////////////////////// Search icon click/////////////
+
+  $('.circular.search').on('click', function(event){
+    var url = $(this).closest('form').attr('action');
+    var data = {search: $(this).closest('form').find("input[name='search']").val()};
+    $.ajax({url: url, data: data, dataType: 'JSON'}).done(function(response) {
+      $(".search-results-container").remove();
+      $(".search-container").append(response.partial);
+    });
   });
 
 

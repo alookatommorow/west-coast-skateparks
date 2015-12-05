@@ -25,7 +25,7 @@
   <div class="ui grid">
 
   <!-- skatepark info -->
-    <div class="six wide left floated column">
+    <div class="six wide column">
       <div class="ui segments">
         <% if has_user_rating?(@skatepark.id) %>
           <div class="ui segment">
@@ -85,8 +85,23 @@
           <% end %>
         <% end %>
 
+      <!-- end info segments -->
+      </div>
 
-      <!-- end segments -->
+    <!-- Map -->
+      <div class="one-top">
+        <div id='map-container relative'>
+            <div id='map'></div>
+        </div>
+      </div>
+
+      <div class='center-text one-top'>
+        <form action="http://maps.google.com/maps" method="get" target="_blank">
+           <label for="saddr">Enter your location</label>
+           <input type="text" name="saddr" />
+           <input type="hidden" name="daddr" value="<%= @skatepark.address %>" />
+           <input type="submit" value="Get directions" />
+          </form>
       </div>
       <!-- end skatepark-info column -->
     </div>
@@ -188,9 +203,6 @@
 
             <% end %>
           <% end %>
-
-
-
           <!-- end if logged in? -->
         <% end %>
         <!-- end button-container -->
@@ -216,23 +228,6 @@
   <% if current_user && current_user.admin %>
     <%= button_to 'Update', edit_skatepark_path, method: :get, class: 'ui primary button' %>
   <% end %>
-
-      <!-- Map -->
-  <div class="one-top">
-    <div id='map-container relative'>
-        <div id='map'></div>
-    </div>
-  </div>
-
-  <div class='center-text one-top'>
-    <form action="http://maps.google.com/maps" method="get" target="_blank">
-       <label for="saddr">Enter your location</label>
-       <input type="text" name="saddr" />
-       <input type="hidden" name="daddr" value="<%= @skatepark.address %>" />
-       <input type="submit" value="Get directions" />
-      </form>
-  </div>
-
 
     <!-- end page-container -->
 </div>
