@@ -40,7 +40,7 @@
 
         <% @skatepark.attributes.each do |attribute,value| %>
           <% exclude = ['id', 'identifier', 'state', 'city', 'name', 'rating', 'notes', 'helmet', 'photo_cred', 'video_url', 'num_pics', 'created_at', 'updated_at',]
-          display=[ 'address', 'hours', 'beta'] %>
+          display=[ 'address', 'hours', 'info'] %>
           <% unless exclude.include?(attribute) %>
             <% if display.include?(attribute) && !value.blank? %>
               <div class="ui segment">
@@ -107,6 +107,11 @@
               <img class="ui image skatepark-image" src="https://storage.googleapis.com/west-coast-skateparks/<%= @skatepark.state %>/<%= @skatepark.identifier %>-0<%= i.to_s %>.jpg">
           <% end %>
         </div>
+        <% if (!@photo_cred.blank?) %>
+          <div class="center-text one-top">
+            <p>Photos courtesy of <%= @photo_cred %></p>
+          </div>
+        <% end %>
       <% end  %>
 
       <% if logged_in? %>

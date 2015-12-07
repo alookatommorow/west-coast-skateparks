@@ -37,6 +37,7 @@ class SkateparksController < ApplicationController
   def show
     @skatepark = Skatepark.find(params[:id])
     @num_pics = @skatepark.num_pics
+    @photo_cred = @skatepark.photo_cred
     if logged_in?
       @user_skatepark = user_has_skatepark(current_user.id, params[:id])
     end
