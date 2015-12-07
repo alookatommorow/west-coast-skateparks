@@ -75,7 +75,7 @@ function bindEvents() {
 
   $(".search-container").on('click', '.close-search', function(){
     $(this).parent().slideToggle(400, function(){});
-    $('.search-form').find("input[name='search']").val('')
+    $('.search-form').find("input[name='search']").val('');
   });
 
 

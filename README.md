@@ -2,6 +2,8 @@
 
 West Coast Skateparks is an informational directory of every skatepark in the western states of the United States (California, Oregon, and Washington).  Skatepark listings include an address and map for each skatepark along with other pertinent details such as hours, size, and date opened.  Users can track visits and favorites and leave ratings and reviews.  Pictures coming soon.
 
+![Screenshot](https://github.com/alookatommorow/west-coast-skateparks/blob/master/public/wcsp.jpg)
+
 ##Deployment
 
 West Coast Skateparks is deployed to Heroku. Visit the app [here](https://vast-island-2935.herokuapp.com/)
@@ -34,11 +36,52 @@ To review the skatepark click "Review Skatepark" and write a review in the dropd
 
 ##Technology
 
-West Coast Skateparks was created using [Ruby on Rails](rubyonrails.org).  Dynamic content is added using [Jquery](https://jquery.com/) and [AJAX](http://api.jquery.com/jquery.ajax/).
+West Coast Skateparks was created using [Ruby on Rails](rubyonrails.org).  The database is [PostgreSQL](http://www.postgresql.org/). Dynamic content is added using [Jquery](https://jquery.com/) and [AJAX](http://api.jquery.com/jquery.ajax/).
 
 West Coast Skateparks uses [Semantic UI](http://semantic-ui.com/) for front-end pleasantries.
 
 Maps are generated using the [Google Maps API](https://developers.google.com/maps/documentation/javascript/).
+
+##Code Sample
+
+###Search
+
+The search is triggered using JQuery and Ajax in application.js:
+
+```javascript
+$('.search-form').on('submit', function(event){
+  event.preventDefault();
+  var url = $(this).attr('action');
+  var data = {search: $(this).find("input[name='search']").val()}
+  $.ajax({url: url, data: data, dataType: 'JSON'}).done(function(response) {
+    $(".search-results-container").remove();
+    $(".search-container").append(response.partial);
+  });
+
+});
+```
+
+The search action in the skateparks controller takes the search query and checks skatepark names and locations for a match and sorts the results.  It sends back a partial in JSON format:
+
+```ruby
+def search
+  if params[:search]
+    @skateparks = Skatepark.where("name LIKE ? OR city LIKE ? OR state LIKE ?", "%" +params[:search].downcase + "%", "%" +params[:search].downcase + "%", "%" +params[:search].downcase + "%").order("state ASC").order("city ASC").order("name ASC")
+
+    respond_to do |format|
+      format.json {render json: {partial: render_to_string('_search.html.erb', layout: false)} }
+    end
+  end
+end
+```
+The above javaScript first removes any search results that may already be there, then appends the partial that was sent back as JSON from the controller.  The search results container is closed and the value of the search form is reset using JQuery:
+
+```javascript
+$(".search-container").on('click', '.close-search', function(){
+  $(this).parent().slideToggle(400, function(){});
+  $('.search-form').find("input[name='search']").val('');
+});
+```
 
 ##Contribute
 
