@@ -38,6 +38,7 @@ class SkateparksController < ApplicationController
     @skatepark = Skatepark.find(params[:id])
     @num_pics = @skatepark.num_pics
     @photo_cred = @skatepark.photo_cred
+    @photo_url = @skatepark.photo_url
     if logged_in?
       @user_skatepark = user_has_skatepark(current_user.id, params[:id])
     end

@@ -109,7 +109,7 @@
         </div>
         <% if (!@photo_cred.blank?) %>
           <div class="center-text one-top">
-            <p>Photos courtesy of <%= @photo_cred %></p>
+            <p>Photos courtesy of <a href="<%= @photo_url %>"><%= @photo_cred %></a> </p>
           </div>
         <% end %>
       <% end  %>
