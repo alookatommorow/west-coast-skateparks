@@ -15,7 +15,7 @@ describe 'Search', type: :feature do
 
   it 'should have a search form' do
     visit '/'
-    expect(find('.search-form')).to have_button('Search')
+    expect(find('.search-form')).to have_field('search')
   end
 
   it 'should search properly and generate links to skateparks' do
@@ -36,12 +36,22 @@ describe 'Search', type: :feature do
     expect(page).not_to have_text('Search Results')
   end
 
+  it 'is case insensitive' do
+    visit '/'
+    fill_in 'search', with:'OJAI'
+    find_field('search').native.send_keys(:return)
+    expect(page).to have_text('Ojai (California)')
+    fill_in 'search', with:'Ojai'
+    find_field('search').native.send_keys(:return)
+    expect(page).to have_text('Ojai (California)')
+  end
+
 end
 
 describe 'Show', type: :feature do
 
   it 'displays skatepark information' do
-    visit '/skateparks/267'
+    visit '/skateparks/269'
     expect(page).to have_text('Ojai')
     expect(page).to have_text('Site Design')
   end
