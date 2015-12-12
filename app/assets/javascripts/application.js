@@ -103,10 +103,8 @@ $(".profile-container").on('click', '.item', function(){
   ////////////////////////Toggle Create Form///////////////////
 
   $(".new-skatepark").on('click', function() {
-  $(".create-container").slideToggle(900, function(){});
+    $(".create-container").slideToggle(900, function(){});
   })
-
-
   $(".rate-container").on('click', '.first-rate-button', function() {
     $(".rate-form-container").slideToggle(500, function(){});
   });
@@ -117,27 +115,27 @@ $(".profile-container").on('click', '.item', function(){
   $(".initial-rate-button").on('click', function(event) {
     event.preventDefault();
     $(".initial-rate-form-container").slideToggle(500, function(){});
-  })
+  });
 
   ////////////////////////Toggle Rate Form///////////////////
 
   $(".button-container").on('click', '.rate-button', function(event) {
     event.preventDefault();
     $(".rate-form-container").slideToggle(500, function(){});
-  })
+  });
 
    /////////////////////// Toggle Initial Review Form /////////
   $(".initial-review-button").on('click', function(event) {
     event.preventDefault();
     $(".initial-review-form-container").slideToggle(500, function(){});
-  })
+  });
 
   ////////////////////////Toggle Review Form///////////////////
 
   $(".button-container").on('click', '.review-button', function(event) {
     event.preventDefault();
     $(".review-form-container").slideToggle(500, function(){});
-  })
+  });
 
 
 

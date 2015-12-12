@@ -39,6 +39,7 @@ class SkateparksController < ApplicationController
     @num_pics = @skatepark.num_pics
     @photo_cred = @skatepark.photo_cred
     @photo_url = @skatepark.photo_url
+    @last = Skatepark.last.id
     if logged_in?
       @user_skatepark = user_has_skatepark(current_user.id, params[:id])
     end

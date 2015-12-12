@@ -217,10 +217,6 @@ html, body {
   cursor: pointer;
 }
 
-.stars-container {
-  padding-bottom: 2%;
-}
-
 .fav-container, .visit-container {
   padding-top: 1%;
   padding-bottom: 2%;
@@ -232,6 +228,10 @@ html, body {
 
 .written-review-container {
   padding-top: 3%;
+}
+
+.next-button {
+  text-align: right;
 }
 
 

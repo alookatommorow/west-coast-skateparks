@@ -27,7 +27,7 @@ describe 'Search', type: :feature do
     expect(page).to have_text('Address')
   end
 
-  it 'can be closed search' do
+  it 'can be closed' do
     visit '/'
     fill_in 'search', with:'ojai'
     find_field('search').native.send_keys(:return)
