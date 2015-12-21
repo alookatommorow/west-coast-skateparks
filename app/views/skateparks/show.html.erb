@@ -274,21 +274,20 @@
 
 <script>
 
+
 function initMap() {
-
-  var myLatLng = {lat: <%= @skatepark.get_lat_long[0] %>, lng: <%= @skatepark.get_lat_long[1] %>};
-
+  console.log(<%= @lat_long[0] %>)
+  var myLatLng = {lat: <%= @lat_long[0] %>, lng: <%= @lat_long[1] %>}
+  // var myLatLng = {lat: <%= @lat_long[0] %>, lng: <%= @lat_long[1] %>};
   var map = new google.maps.Map(document.getElementById('map'), {
     zoom: 9,
     center: myLatLng
   });
-
   var marker = new google.maps.Marker({
     position: myLatLng,
     map: map,
     title: '<%= @skatepark.city.titleize %>, <%= @skatepark.state.capitalize %>'
   });
-
 }
 
 </script>

@@ -121,6 +121,10 @@ module SkateparkConcern
     lat_long
   end
 
+  def search
+
+  end
+
 
 
 
