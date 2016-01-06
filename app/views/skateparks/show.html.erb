@@ -1,28 +1,48 @@
 <div class="page-container">
 
   <!-- skatepark header -->
-  <div class='header-image'></div>
-
-  <div class='center-text one-top one-bottom'>
-    <h1><%= @skatepark.city.titleize %>, <%= @skatepark.state.capitalize %></h1>
-    <% unless @skatepark.name.blank?%>
-      <h2><%= @skatepark.name.titleize %></h2>
-    <% end %>
-  </div>
-  <!-- stars -->
-  <div class="stars-container center-text">
-    <% if !@skatepark.rating.blank? %>
-      <% (@skatepark.rating.to_i).times do %>
-        <i class="large yellow star icon inline-block"></i>
-      <% end %>
-      <% (5 - @skatepark.rating.to_i).times do %>
-        <i class="large yellow empty star icon inline-block"></i>
-      <% end %>
-    <% end %>
-  </div>
-
+  <!-- <div class='header-image'></div> -->
 
   <div class="ui grid">
+    <div class="sixteen wide column">
+      <div class='header-image'></div>
+    </div>
+
+<!-- title row -->
+
+    <div class="one wide column">
+      <% if @skatepark.id > 1 %>
+        <a href="/skateparks/<%= (@skatepark.id) - 1 %>">
+          <i class="big left arrow icon"></i>
+        </a>
+      <% end %>
+    </div>
+    <div class="fourteen wide column center-text">
+      <h1><%= @skatepark.city.titleize %>, <%= @skatepark.state.capitalize %></h1>
+      <% unless @skatepark.name.blank?%>
+        <h2><%= @skatepark.name.titleize %></h2>
+      <% end %>
+
+        <!-- stars -->
+      <div class="one-top one-bottom">
+        <% if !@skatepark.rating.blank? %>
+          <% (@skatepark.rating.to_i).times do %>
+            <i class="large yellow star icon inline-block"></i>
+          <% end %>
+          <% (5 - @skatepark.rating.to_i).times do %>
+            <i class="large yellow empty star icon inline-block"></i>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+    <div class="one wide column next-button">
+      <% if @skatepark.id < @last %>
+        <a href="/skateparks/<%= (@skatepark.id) + 1 %>">
+          <i class="big right arrow icon"></i>
+        </a>
+      <% end %>
+
+    </div>
 
   <!-- skatepark info -->
     <div class="six wide column">
@@ -38,8 +58,8 @@
           </div>
         <% end %>
 
-        <% @skatepark.attributes.each do |attribute,value| %>
-          <% exclude = ['id', 'identifier', 'state', 'city', 'name', 'rating', 'notes', 'helmet', 'photo_cred', 'video_url', 'num_pics', 'created_at', 'updated_at',]
+        <% @skatepark.attributes.each do |attribute, value| %>
+          <% exclude = ['id', 'identifier', 'state', 'city', 'name', 'latitude', 'longitude', 'rating', 'notes', 'helmet', 'photo_cred', 'photo_url', 'video_url', 'num_pics', 'created_at', 'updated_at',]
           display=[ 'address', 'hours', 'info'] %>
           <% unless exclude.include?(attribute) %>
             <% if display.include?(attribute) && !value.blank? %>
@@ -109,7 +129,7 @@
         </div>
         <% if (!@photo_cred.blank?) %>
           <div class="center-text one-top">
-            <p>Photos courtesy of <%= @photo_cred %></p>
+            <p>Photos courtesy of <a href="<%= @photo_url %>"><%= @photo_cred %></a> </p>
           </div>
         <% end %>
       <% end  %>
@@ -254,21 +274,20 @@
 
 <script>
 
+
 function initMap() {
-
-  var myLatLng = {lat: <%= @skatepark.get_lat_long[0] %>, lng: <%= @skatepark.get_lat_long[1] %>};
-
+  console.log(<%= @lat_long[0] %>)
+  var myLatLng = {lat: <%= @lat_long[0] %>, lng: <%= @lat_long[1] %>}
+  // var myLatLng = {lat: <%= @lat_long[0] %>, lng: <%= @lat_long[1] %>};
   var map = new google.maps.Map(document.getElementById('map'), {
     zoom: 9,
     center: myLatLng
   });
-
   var marker = new google.maps.Marker({
     position: myLatLng,
     map: map,
     title: '<%= @skatepark.city.titleize %>, <%= @skatepark.state.capitalize %>'
   });
-
 }
 
 </script>

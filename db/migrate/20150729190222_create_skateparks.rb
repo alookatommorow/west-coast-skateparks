@@ -7,6 +7,8 @@
       t.string :identifier
       t.string :rating
       t.string :address
+      t.float :latitude
+      t.float :longitude
       t.string :material
       t.string :designer
       t.string :builder

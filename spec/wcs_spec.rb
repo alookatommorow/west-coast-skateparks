@@ -11,43 +11,6 @@ describe 'Homepage', type: :feature do
 
 end
 
-describe 'Search', type: :feature do
-
-  it 'should have a search form' do
-    visit '/'
-    expect(find('.search-form')).to have_field('search')
-  end
-
-  it 'should search properly and generate links to skateparks' do
-    visit '/'
-    fill_in 'search', with:'ojai'
-    find_field('search').native.send_keys(:return)
-    expect(page).to have_text('Search Results')
-    all('.item').last.click
-    expect(page).to have_text('Address')
-  end
-
-  it 'can be closed search' do
-    visit '/'
-    fill_in 'search', with:'ojai'
-    find_field('search').native.send_keys(:return)
-    expect(page).to have_text('Search Results')
-    find('.close-search').click
-    expect(page).not_to have_text('Search Results')
-  end
-
-  it 'is case insensitive' do
-    visit '/'
-    fill_in 'search', with:'OJAI'
-    find_field('search').native.send_keys(:return)
-    expect(page).to have_text('Ojai (California)')
-    fill_in 'search', with:'Ojai'
-    find_field('search').native.send_keys(:return)
-    expect(page).to have_text('Ojai (California)')
-  end
-
-end
-
 describe 'Show', type: :feature do
 
   it 'displays skatepark information' do
