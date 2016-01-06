@@ -58,8 +58,8 @@
           </div>
         <% end %>
 
-        <% @skatepark.attributes.each do |attribute,value| %>
-          <% exclude = ['id', 'identifier', 'state', 'city', 'name', 'rating', 'notes', 'helmet', 'photo_cred', 'photo_url', 'video_url', 'num_pics', 'created_at', 'updated_at',]
+        <% @skatepark.attributes.each do |attribute, value| %>
+          <% exclude = ['id', 'identifier', 'state', 'city', 'name', 'latitude', 'longitude', 'rating', 'notes', 'helmet', 'photo_cred', 'photo_url', 'video_url', 'num_pics', 'created_at', 'updated_at',]
           display=[ 'address', 'hours', 'info'] %>
           <% unless exclude.include?(attribute) %>
             <% if display.include?(attribute) && !value.blank? %>

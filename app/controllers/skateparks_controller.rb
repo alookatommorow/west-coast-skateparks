@@ -47,8 +47,6 @@ class SkateparksController < ApplicationController
     @all_user_skateparks = UserSkatepark.where(skatepark_id: params[:id])
     @user_rating = user_rating(params[:id])
     @state_skateparks = Skatepark.where(state: @skatepark.state)
-
-
   end
 
 
