@@ -1,7 +1,6 @@
 class SkateparksController < ApplicationController
 
   def search
-    # take this out into self.search method for Skatepark
     if params[:search]
       @skateparks = Skatepark.search(params[:search].downcase)
 
