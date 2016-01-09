@@ -18,7 +18,7 @@ describe 'Show', type: :feature do
   it 'displays skatepark information' do
     visit '/skateparks/269'
     expect(page).to have_text('Oceanside')
-    expect(page).to have_text('John Landes Skatepark')
+    expect(page).to have_text('Martin Luther King Jr Skatepark')
   end
 end
 
