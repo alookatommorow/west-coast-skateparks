@@ -52,7 +52,6 @@ group :development, :test do
   gem 'pry-byebug'
   gem 'rspec-rails'
   gem 'capybara'
-  # gem 'selenium-webdriver'
   gem 'capybara-webkit'
 
 
