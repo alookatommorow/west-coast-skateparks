@@ -18,14 +18,16 @@ ENV['BUNDLE_GEMFILE'] = File.expand_path('../../Gemfile', __FILE__)
 require 'bundler/setup'
 Bundler.require
 require 'pry-byebug'
-
 require 'capybara/rspec'
+require 'capybara/webkit'
 
-Capybara.register_driver :selenium do |app|
-  Capybara::Selenium::Driver.new(app, :browser => :chrome)
+Capybara.javascript_driver = :webkit
+Capybara.default_driver = :rack_test
+Capybara.app_host = 'http://localhost:3000'
+Capybara::Webkit.configure do |config|
+  config.allow_unknown_urls
 end
 
-Capybara.default_driver = :selenium
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 RSpec.configure do |config|
