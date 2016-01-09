@@ -5,6 +5,13 @@ describe 'Homepage', type: :feature do
     visit '/'
     expect(page).to have_text('West Coast Skateparks')
   end
+
+  # moved this from search spec because it seems more relevant here
+  it 'should have working links' do
+    visit '/'
+    click_link('Skateparks')
+    expect(page).to have_text('California')
+  end
 end
 
 describe 'Show', type: :feature do
