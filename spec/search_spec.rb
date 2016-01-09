@@ -1,36 +1,32 @@
-describe 'Search', type: :feature do
-  before do
-    Capybara.app_host = 'http://localhost:3000'
-  end
+require 'rails_helper'
 
-  it 'should have working links' do
-    visit '/'
-    click_link('Skateparks')
-    expect(page).to have_text('California')
-  end
-
+describe 'Search', type: :feature, js: true do
+  # this test is already kind of covered by all the other tests in here
+  # should we take it out?
+=begin
   it 'should have a search form' do
     visit '/'
     expect(find('.search-form')).to have_field('search')
   end
+=end
 
   it 'should search properly and generate links to skateparks' do
     visit '/'
     fill_in 'search', with:'antioch'
-    find_field('search').native.send_keys(:return)
+    submit_search
+
     expect(page).to have_text('Search Results')
     find_link('Antioch (California)').click
-    # click_link('Antioch (California)')
-    # p page.current_path
     expect(page).to have_text("Antioch, California")
-
   end
 
   it 'can be closed' do
     visit '/'
     fill_in 'search', with:'ojai'
-    find_field('search').native.send_keys(:return)
+    submit_search
+
     expect(page).to have_text('Search Results')
+
     find('.close-search').click
     expect(page).not_to have_text('Search Results')
   end
@@ -38,11 +34,18 @@ describe 'Search', type: :feature do
   it 'is case insensitive' do
     visit '/'
     fill_in 'search', with:'OJAI'
-    find_field('search').native.send_keys(:return)
+    submit_search
+
     expect(page).to have_text('Ojai (California)')
+
     fill_in 'search', with:'Ojai'
-    find_field('search').native.send_keys(:return)
+    submit_search
     expect(page).to have_text('Ojai (California)')
   end
+end
 
+# Use this because capybara/webkit doesn't have send_keys method.
+  # find_field('search').native.send_keys(:return)
+def submit_search
+  find('.input .search').click
 end
