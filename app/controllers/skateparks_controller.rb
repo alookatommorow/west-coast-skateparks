@@ -82,7 +82,6 @@ class SkateparksController < ApplicationController
 
   def add_favorite
     favorite(params[:user_id], params[:id])
-    @current_user_id = current_user.id
     @skatepark = Skatepark.find(params[:id])
     respond_to do |format|
       format.js
@@ -91,7 +90,6 @@ class SkateparksController < ApplicationController
 
   def remove_favorite
     favorite(params[:user_id], params[:id])
-    @current_user_id = current_user.id
     @skatepark = Skatepark.find(params[:id])
     respond_to do |format|
       format.js
