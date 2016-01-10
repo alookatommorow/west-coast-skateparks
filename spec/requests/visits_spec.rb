@@ -8,7 +8,7 @@ describe 'post /visits' do
     post '/visits', user_id: user.id, skatepark_id: skatepark.id
 
     visit = UserSkatepark.where(
-      user_id: user.id, skatepark_id: skatepark.id)
+      user_id: user.id, skatepark_id: skatepark.id).first
 
     expect(visit.visited).to eq(true)
   end

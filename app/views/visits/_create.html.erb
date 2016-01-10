@@ -1,0 +1,3 @@
+<%= button_to remove_visit_path(current_user.id, @skatepark_id), method: :put, remote: true, class: 'ui button remove-visit-button' do %>
+  <i class="red remove icon inline-block"></i> <p class="inline-block">Never Been Here</p>
+<% end %>
