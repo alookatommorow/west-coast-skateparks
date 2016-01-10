@@ -18,14 +18,22 @@ ENV['BUNDLE_GEMFILE'] = File.expand_path('../../Gemfile', __FILE__)
 require 'bundler/setup'
 Bundler.require
 require 'pry-byebug'
-
 require 'capybara/rspec'
+require 'capybara/webkit'
 
-Capybara.register_driver :selenium do |app|
-  Capybara::Selenium::Driver.new(app, :browser => :chrome)
+# use `describe 'Feature', type: :feature, js: true` to use this driver
+Capybara.javascript_driver = :webkit
+
+# tests use regular (faster) driver if they don't require js
+Capybara.default_driver = :rack_test
+
+# runs a server so tests aren't dependent on development server being up
+Capybara.run_server = true
+Capybara.server_port = 8200
+Capybara::Webkit.configure do |config|
+  config.allow_unknown_urls
 end
 
-Capybara.default_driver = :selenium
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 RSpec.configure do |config|

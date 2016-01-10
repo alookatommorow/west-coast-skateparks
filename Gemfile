@@ -52,7 +52,7 @@ group :development, :test do
   gem 'pry-byebug'
   gem 'rspec-rails'
   gem 'capybara'
-  gem 'selenium-webdriver'
+  gem 'capybara-webkit'
 
 
   # Access an IRB console on exception pages or by using <%= console %> in views
