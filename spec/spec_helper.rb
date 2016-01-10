@@ -20,6 +20,7 @@ Bundler.require
 require 'pry-byebug'
 require 'capybara/rspec'
 require 'capybara/webkit'
+require 'database_cleaner'
 
 # use `describe 'Feature', type: :feature, js: true` to use this driver
 Capybara.javascript_driver = :webkit
