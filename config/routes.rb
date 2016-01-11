@@ -13,8 +13,6 @@ Rails.application.routes.draw do
 
   post '/visits', to: 'visits#create'
   put '/visits', to: 'visits#update'
-  # put '/users/:user_id/skateparks/:id/add_visit', to: 'skateparks#add_visit', as: 'add_visit'
-  # put '/users/:user_id/skateparks/:id/remove_visit', to: 'skateparks#remove_visit', as: 'remove_visit'
 
   put '/users/:user_id/skateparks/:id/rate', to: 'skateparks#rate', as: 'rate'
   put '/users/:user_id/skateparks/:id/review', to: 'skateparks#review', as: 'review'

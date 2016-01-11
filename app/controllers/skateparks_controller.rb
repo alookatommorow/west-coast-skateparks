@@ -96,39 +96,16 @@ class SkateparksController < ApplicationController
     end
   end
 
-=begin
-  def add_visit
-    visit(params[:user_id], params[:id])
-    @user_skatepark = user_has_skatepark(current_user.id, params[:id])
-    @skatepark = Skatepark.find(params[:id])
-    respond_to do |format|
-      format.js
-    end
-  end
-
-  def remove_visit
-    visit(params[:user_id], params[:id])
-    @skatepark = Skatepark.find(params[:id])
-    respond_to do |format|
-      format.js
-    end
-  end
-=end
-
   def rate
-    @skatepark = Skatepark.find(params[:id])
-    # user_skatepark = user_has_skatepark(
-      # params[:user_id], params[:id])
-    # rate_skatepark(params[:user_id], params[:id], user_skatepark.rating)
     rate_skatepark(params[:user_id], params[:id], params[:rating])
-    redirect_to @skatepark
+    redirect_to skatepark_path(params[:id])
   end
 
   def review
-    @skatepark = Skatepark.find(params[:id])
     username = User.find(params[:user_id]).username
+
     review_skatepark(params[:user_id], params[:id], params[:review], username)
-    redirect_to @skatepark
+    redirect_to skatepark_path(params[:id])
   end
 
   private
