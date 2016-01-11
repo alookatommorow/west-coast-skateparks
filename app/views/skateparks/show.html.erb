@@ -148,16 +148,19 @@
               <%= form_tag visits_path, remote: true do %>
                 <%= hidden_field_tag :user_id, current_user.id %>
                 <%= hidden_field_tag :skatepark_id, @skatepark.id %>
-                <%= submit_tag %>
+                <%= button_tag class: 'ui button add-visits-button' do %>
+                  <i class="green checkmark icon inline-block"></i> <p class="inline-block"> Been Here</p>
+                <% end %>
               <% end %>
             <%end%>
           <% else %>
             <%= form_tag visits_path, remote: true do %>
               <%= hidden_field_tag :user_id, current_user.id %>
               <%= hidden_field_tag :skatepark_id, @skatepark.id %>
-              <%= submit_tag %>
+              <%= button_tag class: 'ui button add-visits-button' do %>
+                <i class="green checkmark icon inline-block"></i> <p class="inline-block"> Been Here</p>
+              <% end %>
             <% end %>
-              <!-- , class: 'ui button add-visits-button' -->
           <% end %>
         </div>
 
