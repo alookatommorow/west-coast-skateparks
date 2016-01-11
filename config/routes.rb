@@ -14,8 +14,10 @@ Rails.application.routes.draw do
   post '/visits', to: 'visits#create'
   put '/visits', to: 'visits#update'
 
-  put '/users/:user_id/skateparks/:id/rate', to: 'skateparks#rate', as: 'rate'
-  put '/users/:user_id/skateparks/:id/review', to: 'skateparks#review', as: 'review'
+  put '/rate', to: 'opinions#rate'
+  put '/review', to: 'opinions#review'
+  # put '/users/:user_id/skateparks/:id/rate', to: 'skateparks#rate', as: 'rate'
+  # put '/users/:user_id/skateparks/:id/review', to: 'skateparks#review', as: 'review'
   root 'welcome#index'
 
   # Example of regular route:
