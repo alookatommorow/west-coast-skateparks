@@ -16,19 +16,24 @@ end
 
 describe 'Show', type: :feature do
   it 'displays skatepark information' do
-    visit '/skateparks/269'
-    expect(page).to have_text('Oceanside')
-    expect(page).to have_text('Martin Luther King Jr Skatepark')
+    skatepark = create(:skatepark)
+
+    visit "/skateparks/#{skatepark.id}"
+    expect(page).to have_text(skatepark.city)
+    expect(page).to have_text(skatepark.state)
   end
 end
 
 describe "the signup process", type: :feature do
   it "signs up a new user and logs them in" do
+    user = build(:user)
+
     visit '/users/new'
-    fill_in 'Username', with: 'fogus'
-    fill_in 'Email', with: 'fogus@gmail.com'
-    fill_in 'Password', with: 'password'
+    fill_in 'Username', with: user.username
+    fill_in 'Email', with: user.email
+    fill_in 'Password', with: user.password
     click_button 'Register'
+
     expect(page).to have_content 'Page'
   end
 end

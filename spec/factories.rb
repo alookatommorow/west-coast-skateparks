@@ -1,7 +1,8 @@
 FactoryGirl.define do
   factory :skatepark do
-    city 'Bangladesh'
+    city 'Hayward'
     state 'California'
+    address '520 E 3rd Ave, Hayward, CA'
   end
 
   factory :user do
