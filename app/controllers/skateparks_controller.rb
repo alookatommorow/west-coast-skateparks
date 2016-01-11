@@ -82,7 +82,6 @@ class SkateparksController < ApplicationController
 
   def add_favorite
     favorite(params[:user_id], params[:id])
-    @current_user_id = current_user.id
     @skatepark = Skatepark.find(params[:id])
     respond_to do |format|
       format.js
@@ -91,43 +90,10 @@ class SkateparksController < ApplicationController
 
   def remove_favorite
     favorite(params[:user_id], params[:id])
-    @current_user_id = current_user.id
     @skatepark = Skatepark.find(params[:id])
     respond_to do |format|
       format.js
     end
-  end
-
-  def add_visit
-    visit(params[:user_id], params[:id])
-    @user_skatepark = user_has_skatepark(current_user.id, params[:id])
-    @current_user_id = current_user.id
-    @skatepark = Skatepark.find(params[:id])
-    respond_to do |format|
-      format.js
-    end
-  end
-
-  def remove_visit
-    visit(params[:user_id], params[:id])
-    @current_user_id = current_user.id
-    @skatepark = Skatepark.find(params[:id])
-    respond_to do |format|
-      format.js
-    end
-  end
-
-  def rate
-    @skatepark = Skatepark.find(params[:id])
-    rate_skatepark(params[:user_id], params[:id], params[:user_skatepark][:rating])
-    redirect_to @skatepark
-  end
-
-  def review
-    @skatepark = Skatepark.find(params[:id])
-    username = User.find(params[:user_id]).username
-    review_skatepark(params[:user_id], params[:id], params[:user_skatepark][:review], username)
-    redirect_to @skatepark
   end
 
   private

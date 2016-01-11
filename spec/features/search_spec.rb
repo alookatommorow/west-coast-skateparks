@@ -1,15 +1,6 @@
 require 'rails_helper'
 
 describe 'Search', type: :feature, js: true do
-  # this test is already kind of covered by all the other tests in here
-  # should we take it out?
-=begin
-  it 'should have a search form' do
-    visit '/'
-    expect(find('.search-form')).to have_field('search')
-  end
-=end
-
   it 'should search properly and generate links to skateparks' do
     visit '/'
     fill_in 'search', with:'antioch'

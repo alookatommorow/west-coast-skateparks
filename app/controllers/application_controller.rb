@@ -4,5 +4,5 @@ class ApplicationController < ActionController::Base
   include SessionConcern
   include SkateparkConcern
   include Geokit::Geocoders
-  protect_from_forgery with: :exception
+  protect_from_forgery unless Rails.env.test?
 end
