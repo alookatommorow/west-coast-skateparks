@@ -2,7 +2,9 @@
   <%= button_tag 'Review Skatepark', class: "ui primary button review-button" %>
   <div class="review-form-container hidden one-top">
     <div class="ui form">
-      <%= form_tag review_path(current_user.id, @skatepark_id), method: :put do |f| %>
+      <%= form_tag review_path, method: :put do |f| %>
+        <%= hidden_field_tag :user_id, current_user.id %>
+        <%= hidden_field_tag :id, @skatepark_id %>
         <div class="field">
         <%= text_area_tag :review, nil, placeholder: 'Write review here...' %>
         </div>
