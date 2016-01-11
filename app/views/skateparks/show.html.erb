@@ -192,10 +192,12 @@
       <% if user_has_skatepark(current_user.id, @skatepark.id) %>
         <% if user_has_skatepark(current_user.id, @skatepark.id).visited == true %>
           <div class="initial-rate-container one-bottom">
-            <%= button_to 'Rate Skatepark', rate_path(current_user.id, @skatepark.id), class: 'ui primary button initial-rate-button'%>
+            <%= button_tag 'Rate Skatepark', class: 'ui primary button initial-rate-button'%>
             <div class="initial-rate-form-container hidden one-top">
               <div class="ui form">
-                <%= form_tag rate_path(current_user.id, @skatepark.id), method: :put do |f| %>
+                <%= form_tag rate_path, method: :put do %>
+                  <%= hidden_field_tag :user_id, current_user.id %>
+                  <%= hidden_field_tag :id, @skatepark.id %>
                   <div class="field">
                     <%= text_field_tag :rating, nil, placeholder: 'enter rating' %>
                   </div>

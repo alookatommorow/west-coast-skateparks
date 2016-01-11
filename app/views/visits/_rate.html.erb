@@ -2,7 +2,9 @@
   <%= button_tag 'Rate Skatepark', class: 'ui primary button rate-button'%>
   <div class="rate-form-container hidden one-top">
     <div class="ui form">
-      <%= form_tag rate_path(current_user.id, @skatepark_id), method: :put do |f| %>
+      <%= form_tag rate_path, method: :put do %>
+        <%= hidden_field_tag :user_id, current_user.id %>
+        <%= hidden_field_tag :id, @skatepark_id %>
         <div class="field">
           <%= text_field_tag :rating, nil, placeholder: 'enter rating' %>
         </div>

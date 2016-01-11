@@ -45,6 +45,9 @@ gem 'autoprefixer-rails', '~> 5.2.1.2'
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
+group :development do
+  gem 'better_errors'
+end
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
