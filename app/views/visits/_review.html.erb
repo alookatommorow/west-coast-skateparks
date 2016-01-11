@@ -1,12 +1,12 @@
 <div class="review-button-container">
-  <%= button_to 'Review Skatepark', review_path(current_user.id, @skatepark_id), class: "ui primary button review-button" %>
+  <%= button_tag 'Review Skatepark', class: "ui primary button review-button" %>
   <div class="review-form-container hidden one-top">
     <div class="ui form">
-      <%= form_for review_path(current_user.id, @skatepark_id), method: :put do |f| %>
+      <%= form_tag review_path(current_user.id, @skatepark_id), method: :put do |f| %>
         <div class="field">
-        <%= text_area_tag :review, placeholder: 'Write review here...' %>
+        <%= text_area_tag :review, nil, placeholder: 'Write review here...' %>
         </div>
-        <%= submit_tag value: 'Review', class: "ui button" %>
+        <%= submit_tag 'Review', class: "ui button" %>
       <% end %>
     </div>
   </div>

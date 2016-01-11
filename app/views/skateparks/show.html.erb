@@ -141,14 +141,18 @@
         <div class="visit-container inline-block">
           <% if user_has_skatepark(current_user.id, @skatepark.id) %>
             <% if user_has_skatepark(current_user.id, @skatepark.id).visited == true %>
-              <%= button_to remove_visit_path(current_user.id, @skatepark.id), method: :put, remote: true, class: 'ui button remove-visit-button' do %>
-                <i class="red remove icon inline-block"></i> <p class="inline-block">Never Been Here</p>
+              <%= form_tag visits_path, method: :put, remote: true do %>
+                <%= hidden_field_tag :user_id, current_user.id %>
+                <%= hidden_field_tag :skatepark_id, @skatepark.id %>
+                <%= button_tag class: 'ui button' do %>
+                  <i class="red remove icon inline-block"></i> <p class="inline-block">Never Been Here</p>
+                <% end %>
               <% end %>
             <% else %>
               <%= form_tag visits_path, remote: true do %>
                 <%= hidden_field_tag :user_id, current_user.id %>
                 <%= hidden_field_tag :skatepark_id, @skatepark.id %>
-                <%= button_tag class: 'ui button add-visits-button' do %>
+                <%= button_tag class: 'ui button' do %>
                   <i class="green checkmark icon inline-block"></i> <p class="inline-block"> Been Here</p>
                 <% end %>
               <% end %>
@@ -157,7 +161,7 @@
             <%= form_tag visits_path, remote: true do %>
               <%= hidden_field_tag :user_id, current_user.id %>
               <%= hidden_field_tag :skatepark_id, @skatepark.id %>
-              <%= button_tag class: 'ui button add-visits-button' do %>
+              <%= button_tag class: 'ui button' do %>
                 <i class="green checkmark icon inline-block"></i> <p class="inline-block"> Been Here</p>
               <% end %>
             <% end %>
@@ -191,11 +195,11 @@
             <%= button_to 'Rate Skatepark', rate_path(current_user.id, @skatepark.id), class: 'ui primary button initial-rate-button'%>
             <div class="initial-rate-form-container hidden one-top">
               <div class="ui form">
-                <%= form_for @user_skatepark, url: rate_path(current_user.id, @skatepark.id), method: :put do |f| %>
+                <%= form_tag rate_path(current_user.id, @skatepark.id), method: :put do |f| %>
                   <div class="field">
-                  <%= f.text_field :rating, placeholder: 'enter rating' %>
+                    <%= text_field_tag :rating, nil, placeholder: 'enter rating' %>
                   </div>
-                  <%= f.submit value: 'Rate', class: "ui button" %>
+                  <%= submit_tag 'Rate', class: 'ui button' %>
                 <% end %>
               </div>
             </div>
@@ -211,15 +215,15 @@
           <% if user_has_skatepark(current_user.id, @skatepark.id) %>
             <% if user_has_skatepark(current_user.id, @skatepark.id).visited == true %>
               <div class='initial-review-container'>
-                <%= button_to 'Review Skatepark', review_path(current_user.id, @skatepark.id), class: "ui primary button initial-review-button" %>
+                <%= button_tag 'Review Skatepark', class: "ui primary button initial-review-button" %>
 
                 <div class="initial-review-form-container hidden one-top">
                   <div class="ui reply form">
-                    <%= form_for @user_skatepark, url: review_path(current_user.id, @skatepark.id), method: :put do |f| %>
+                    <%= form_tag review_path(current_user.id, @skatepark.id), method: :put do |f| %>
                       <div class="field">
-                      <%= f.text_area :review, placeholder: 'write review here' %>
+                        <%= text_area_tag :review, nil, placeholder: 'Write review here...' %>
                       </div>
-                      <%= f.submit value: 'Review', class: 'ui button' %>
+                      <%= submit_tag 'Review', class: "ui button" %>
                     <% end %>
                   </div>
 

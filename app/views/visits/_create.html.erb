@@ -1,3 +1,7 @@
-<%= button_to remove_visit_path(current_user.id, @skatepark_id), method: :put, remote: true, class: 'ui button remove-visit-button' do %>
-  <i class="red remove icon inline-block"></i> <p class="inline-block">Never Been Here</p>
+<%= form_tag visits_path, method: :put, remote: true do %>
+  <%= hidden_field_tag :user_id, current_user.id %>
+  <%= hidden_field_tag :skatepark_id, @skatepark_id %>
+  <%= button_tag class: 'ui button' do %>
+    <i class="red remove icon inline-block"></i> <p class="inline-block">Never Been Here</p>
+  <% end %>
 <% end %>
