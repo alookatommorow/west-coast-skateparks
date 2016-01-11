@@ -38,6 +38,22 @@ end
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 RSpec.configure do |config|
+  # need to reset the database to a clean state before running the whole test
+  config.before(:suite) do
+    DatabaseCleaner.clean_with(:truncation)
+  end
+
+  # set the default strategy to transactions since we want to run standard
+  # tests as fast as possible
+  config.before(:each) do
+    DatabaseCleaner.strategy = :transaction
+  end
+
+  # When we use the javascript-enabled driver (some Capybara feature tests),
+  # we'll want to use the truncation strategy.
+  config.before(:each, js: true) do
+    DatabaseCleaner.strategy = :truncation
+  end
   # rspec-expectations config goes here. You can use an alternate
   # assertion/expectation library such as wrong or the stdlib/minitest
   # assertions if you prefer.
