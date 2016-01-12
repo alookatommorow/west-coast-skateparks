@@ -109,22 +109,7 @@
       <!-- rate containers -->
       <% if @user_skatepark %>
         <% if @user_skatepark.visited %>
-          <div class="initial-rate-container one-bottom">
-            <%= button_tag 'Rate Skatepark', class: 'ui primary button initial-rate-button'%>
-            <div class="initial-rate-form-container hidden one-top">
-              <div class="ui form">
-                <%= form_tag rate_path, method: :put do %>
-                  <%= hidden_field_tag :user_id, current_user.id %>
-                  <%= hidden_field_tag :id, @skatepark.id %>
-                  <div class="field">
-                    <%= text_field_tag :rating, nil, placeholder: 'enter rating' %>
-                  </div>
-                  <%= submit_tag 'Rate', class: 'ui button' %>
-                <% end %>
-              </div>
-            </div>
-
-          </div>
+          <%= render partial: "rate", locals: {skatepark: @skatepark} %>
         <% end %>
       <% end %>
 
@@ -134,26 +119,10 @@
       <!-- review containers -->
           <% if @user_skatepark %>
             <% if @user_skatepark.visited %>
-              <div class='initial-review-container'>
-                <%= button_tag 'Review Skatepark', class: "ui primary button initial-review-button" %>
-
-                <div class="initial-review-form-container hidden one-top">
-                  <div class="ui reply form">
-                    <%= form_tag review_path, method: :put do |f| %>
-                      <%= hidden_field_tag :user_id, current_user.id %>
-                      <%= hidden_field_tag :id, @skatepark.id %>
-                      <div class="field">
-                        <%= text_area_tag :review, nil, placeholder: 'Write review here...' %>
-                      </div>
-                      <%= submit_tag 'Review', class: "ui button" %>
-                    <% end %>
-                  </div>
-
-                </div>
-              </div>
-
+              <%= render partial: "review", locals: {skatepark: @skatepark} %>
             <% end %>
           <% end %>
+
           <!-- end if logged in? -->
         <% end %>
         <!-- end button-container -->

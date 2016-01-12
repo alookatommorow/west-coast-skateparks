@@ -1,0 +1,15 @@
+<div class="initial-rate-container one-bottom">
+  <%= button_tag 'Rate Skatepark', class: 'ui primary button initial-rate-button'%>
+  <div class="initial-rate-form-container hidden one-top">
+    <div class="ui form">
+      <%= form_tag rate_path, method: :put do %>
+        <%= hidden_field_tag :user_id, current_user.id %>
+        <%= hidden_field_tag :id, skatepark.id %>
+        <div class="field">
+          <%= text_field_tag :rating, nil, placeholder: 'enter rating' %>
+        </div>
+        <%= submit_tag 'Rate', class: 'ui button' %>
+      <% end %>
+    </div>
+  </div>
+</div>
