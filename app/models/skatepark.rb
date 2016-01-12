@@ -16,6 +16,17 @@ class Skatepark < ActiveRecord::Base
     ).order('state ASC').order('city ASC').order('name ASC')
   end
 
+  def pictures
+    if !self.num_pics.blank? && self.num_pics > 0
+      (1..self.num_pics).map do |i|
+        "https://storage.googleapis.com/west-coast-skateparks/"\
+        "#{self.state}/#{self.identifier}-0#{i.to_s}.jpg"
+      end
+    else
+      []
+    end
+  end
+
   def get_lat_long
     lat_long = []
     coords = MultiGeocoder.geocode(self.address)

@@ -121,18 +121,12 @@
 
     <div class="ten wide column">
       <!-- pictures -->
-      <% if (!@num_pics.blank?) && (@skatepark.num_pics > 0) %>
-        <div class="ui medium images center-text">
-          <% (1..@num_pics).each do |i| %>
-              <img class="ui image skatepark-image" src="https://storage.googleapis.com/west-coast-skateparks/<%= @skatepark.state %>/<%= @skatepark.identifier %>-0<%= i.to_s %>.jpg">
-          <% end %>
-        </div>
-        <% if (!@photo_cred.blank?) %>
-          <div class="center-text one-top">
-            <p>Photos courtesy of <a href="<%= @photo_url %>"><%= @photo_cred %></a> </p>
-          </div>
+
+      <div class="ui medium images center-text">
+        <% @skatepark.pictures.each do |url| %>
+          <img class="ui image skatepark-image" src="<%= url %>" />
         <% end %>
-      <% end  %>
+      </div>
 
       <% if logged_in? %>
       <div class="button-container center-text">
