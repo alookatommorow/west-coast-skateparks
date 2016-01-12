@@ -79,15 +79,6 @@ class SkateparksController < ApplicationController
     end
   end
 
-
-  def add_favorite
-    favorite(params[:user_id], params[:id])
-    @skatepark = Skatepark.find(params[:id])
-    respond_to do |format|
-      format.js
-    end
-  end
-
   def remove_favorite
     favorite(params[:user_id], params[:id])
     @skatepark = Skatepark.find(params[:id])

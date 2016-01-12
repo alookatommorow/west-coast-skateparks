@@ -2,14 +2,12 @@ require 'rails_helper'
 
 #add helper method for signing in
 
-describe 'user adds a favorite', type: :feature, js: true do
+describe 'user adds a favorite' do
   it 'creates a UserSkatepark and sets favorite = true' do
     user = create(:user)
     skatepark = create(:skatepark)
     post '/favorites', user_id: user.id, skatepark_id: skatepark.id
-    # user_skatepark = create(:user_skatepark)
-    p user
-    # p user_skatepark
+
     # UserSkatepark.where(user_id: user.id, skatepark_id: skatepark.id).first
   end
 
