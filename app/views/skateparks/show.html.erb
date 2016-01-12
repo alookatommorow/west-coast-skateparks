@@ -127,6 +127,11 @@
           <img class="ui image skatepark-image" src="<%= url %>" />
         <% end %>
       </div>
+      <div class="center-text one-top">
+        <% if @skatepark.photo_cred %>
+          <p>Photos courtesy of <a href="<%= @skatepark.photo_url %>"><%= @skatepark.photo_cred %></a> </p>
+        <% end %>
+      </div>
 
       <% if logged_in? %>
       <div class="button-container center-text">
