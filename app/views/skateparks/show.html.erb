@@ -4,49 +4,16 @@
   <!-- <div class='header-image'></div> -->
 
   <div class="ui grid">
-    <div class="sixteen wide column">
-      <div class='header-image'></div>
-    </div>
 
-<!-- title row -->
+    <!-- header -->
+    <%= render partial: 'header', locals: { skatepark: @skatepark, last: @last } %>
 
-    <div class="one wide column">
-      <% if @skatepark.id > 1 %>
-        <a href="/skateparks/<%= (@skatepark.id) - 1 %>">
-          <i class="big left arrow icon"></i>
-        </a>
-      <% end %>
-    </div>
-    <div class="fourteen wide column center-text">
-      <h1><%= @skatepark.city.titleize %>, <%= @skatepark.state.capitalize %></h1>
-      <% unless @skatepark.name.blank?%>
-        <h2><%= @skatepark.name.titleize %></h2>
-      <% end %>
 
-        <!-- stars -->
-      <div class="one-top one-bottom">
-        <% if !@skatepark.rating.blank? %>
-          <% (@skatepark.rating.to_i).times do %>
-            <i class="large yellow star icon inline-block"></i>
-          <% end %>
-          <% (5 - @skatepark.rating.to_i).times do %>
-            <i class="large yellow empty star icon inline-block"></i>
-          <% end %>
-        <% end %>
-      </div>
-    </div>
-    <div class="one wide column next-button">
-      <% if @skatepark.id < @last %>
-        <a href="/skateparks/<%= (@skatepark.id) + 1 %>">
-          <i class="big right arrow icon"></i>
-        </a>
-      <% end %>
-
-    </div>
-
-  <!-- skatepark info -->
     <div class="six wide column">
+
+      <!-- skatepark info -->
       <div class="ui segments">
+        <!-- figure out new way to do this -->
         <% if has_user_rating?(@skatepark.id) %>
           <div class="ui segment">
             <h4 class="ui header">User Rating</h4>
@@ -58,46 +25,21 @@
           </div>
         <% end %>
 
-        <% @skatepark.attributes.each do |attribute, value| %>
-          <% exclude = ['id', 'identifier', 'state', 'city', 'name', 'latitude', 'longitude', 'rating', 'notes', 'helmet', 'photo_cred', 'photo_url', 'video_url', 'num_pics', 'created_at', 'updated_at',]
-          display=[ 'address', 'hours', 'info'] %>
-          <% unless exclude.include?(attribute) %>
-            <% if display.include?(attribute) && !value.blank? %>
-              <div class="ui segment">
-                <h4 class="ui header"><%= attribute.capitalize %></h4>
+        <% @skatepark.visibile_attributes.each do |attribute, value| %>
+          <% if value %>
+            <div class="ui segment">
+              <h4 class="ui header"><%= attribute %></h4>
+            </div>
+            <div class="ui segments">
+              <div class="ui inverted segment">
+                <%= value %>
               </div>
-              <div class="ui segments">
-                <div class="ui inverted segment">
-                  <%= value %>
-                </div>
-              </div>
-
-            <% elsif attribute == 'size' && !value.blank? %>
-              <div class="ui segment">
-                <h4 class="ui header"><%= attribute.capitalize %></h4>
-              </div>
-              <div class="ui segments">
-                <div class="ui inverted segment">
-                  <%= number_with_delimiter(value, :delimiter => ',') %> sq ft
-                </div>
-              </div>
-
-            <% elsif !value.blank?%>
-              <div class="ui segment">
-                <h4 class="ui header"><%= attribute.capitalize %></h4>
-              </div>
-              <div class="ui segments">
-                <div class="ui inverted segment">
-                  <%= value.titleize %>
-                </div>
-              </div>
-            <% end %>
-
+            </div>
           <% end %>
         <% end %>
-
-      <!-- end info segments -->
       </div>
+
+
 
     <!-- Map -->
       <div class="one-top">
@@ -121,18 +63,17 @@
 
     <div class="ten wide column">
       <!-- pictures -->
-      <% if (!@num_pics.blank?) && (@skatepark.num_pics > 0) %>
-        <div class="ui medium images center-text">
-          <% (1..@num_pics).each do |i| %>
-              <img class="ui image skatepark-image" src="https://storage.googleapis.com/west-coast-skateparks/<%= @skatepark.state %>/<%= @skatepark.identifier %>-0<%= i.to_s %>.jpg">
-          <% end %>
-        </div>
-        <% if (!@photo_cred.blank?) %>
-          <div class="center-text one-top">
-            <p>Photos courtesy of <a href="<%= @photo_url %>"><%= @photo_cred %></a> </p>
-          </div>
+
+      <div class="ui medium images center-text">
+        <% @skatepark.pictures.each do |url| %>
+          <img class="ui image skatepark-image" src="<%= url %>" />
         <% end %>
-      <% end  %>
+      </div>
+      <div class="center-text one-top">
+        <% if @skatepark.photo_cred %>
+          <p>Photos courtesy of <a href="<%= @skatepark.photo_url %>"><%= @skatepark.photo_cred %></a> </p>
+        <% end %>
+      </div>
 
       <% if logged_in? %>
       <div class="button-container center-text">
