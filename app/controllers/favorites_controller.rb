@@ -7,4 +7,12 @@ class FavoritesController < ApplicationController
     end
   end
 
+  def update
+    favorite(params[:user_id], params[:skatepark_id])
+    @skatepark = Skatepark.find(params[:skatepark_id])
+    respond_to do |format|
+      format.js
+    end
+  end
+
 end

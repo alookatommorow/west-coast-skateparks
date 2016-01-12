@@ -79,14 +79,6 @@ class SkateparksController < ApplicationController
     end
   end
 
-  def remove_favorite
-    favorite(params[:user_id], params[:id])
-    @skatepark = Skatepark.find(params[:id])
-    respond_to do |format|
-      format.js
-    end
-  end
-
   private
   def skatepark_params
     params.require(:skatepark).permit(:name, :city, :state, :rating, :designer, :builder, :opened, :address, :hours, :size, :notes, :helmet)
