@@ -13,13 +13,13 @@
 </div>
 <div class="fourteen wide column center-text">
   <h1><%= skatepark.city.titleize %>, <%= skatepark.state.capitalize %></h1>
-  <% unless skatepark.name.blank?%>
+  <% if skatepark.name %>
     <h2><%= skatepark.name.titleize %></h2>
   <% end %>
 
   <!-- stars -->
   <div class="one-top one-bottom">
-    <% if !skatepark.rating.blank? %>
+    <% if skatepark.rating %>
       <% (skatepark.rating.to_i).times do %>
         <i class="large yellow star icon inline-block"></i>
       <% end %>
