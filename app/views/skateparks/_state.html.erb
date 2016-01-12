@@ -1,7 +1,7 @@
 <div class="ui divided selection list">
   <% @skateparks.each do |park| %>
 
-    <%unless park.name.blank?%>
+    <%if park.name%>
       <div class="<%= park.id %> item">
         <%= link_to "#{park.city.titleize}:  #{park.name.titleize}", park%>
       </div>
