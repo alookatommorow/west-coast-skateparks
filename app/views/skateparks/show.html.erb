@@ -8,9 +8,12 @@
     <!-- header -->
     <%= render partial: 'header', locals: { skatepark: @skatepark, last: @last } %>
 
-    <!-- skatepark info -->
+
     <div class="six wide column">
+
+      <!-- skatepark info -->
       <div class="ui segments">
+        <!-- figure out new way to do this -->
         <% if has_user_rating?(@skatepark.id) %>
           <div class="ui segment">
             <h4 class="ui header">User Rating</h4>
@@ -22,46 +25,21 @@
           </div>
         <% end %>
 
-        <% @skatepark.attributes.each do |attribute, value| %>
-          <% exclude = ['id', 'identifier', 'state', 'city', 'name', 'latitude', 'longitude', 'rating', 'notes', 'helmet', 'photo_cred', 'photo_url', 'video_url', 'num_pics', 'created_at', 'updated_at',]
-          display=[ 'address', 'hours', 'info'] %>
-          <% unless exclude.include?(attribute) %>
-            <% if display.include?(attribute) && !value.blank? %>
-              <div class="ui segment">
-                <h4 class="ui header"><%= attribute.capitalize %></h4>
+        <% @skatepark.visibile_attributes.each do |attribute, value| %>
+          <% if value %>
+            <div class="ui segment">
+              <h4 class="ui header"><%= attribute %></h4>
+            </div>
+            <div class="ui segments">
+              <div class="ui inverted segment">
+                <%= value %>
               </div>
-              <div class="ui segments">
-                <div class="ui inverted segment">
-                  <%= value %>
-                </div>
-              </div>
-
-            <% elsif attribute == 'size' && !value.blank? %>
-              <div class="ui segment">
-                <h4 class="ui header"><%= attribute.capitalize %></h4>
-              </div>
-              <div class="ui segments">
-                <div class="ui inverted segment">
-                  <%= number_with_delimiter(value, :delimiter => ',') %> sq ft
-                </div>
-              </div>
-
-            <% elsif !value.blank?%>
-              <div class="ui segment">
-                <h4 class="ui header"><%= attribute.capitalize %></h4>
-              </div>
-              <div class="ui segments">
-                <div class="ui inverted segment">
-                  <%= value.titleize %>
-                </div>
-              </div>
-            <% end %>
-
+            </div>
           <% end %>
         <% end %>
-
-      <!-- end info segments -->
       </div>
+
+
 
     <!-- Map -->
       <div class="one-top">

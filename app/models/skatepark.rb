@@ -1,5 +1,5 @@
 class Skatepark < ActiveRecord::Base
-
+  include ActionView::Helpers::NumberHelper
   include Geokit::Geocoders
 
   validates :city, :state, presence: true
@@ -25,6 +25,23 @@ class Skatepark < ActiveRecord::Base
     else
       []
     end
+  end
+
+  def visibile_attributes
+    untouched = { 'Address' => self.address, 'Info' => self.info, 'Hours' => self.hours }
+    titleized = {
+      'Material' => self.material, 'Designer' => self.designer,
+      'Builder' => self.builder, 'Opened' => self.opened,
+      'Size' => delimit_number,
+      'Lights' => self.lights, 'Obstacles' => self.obstacles
+    }
+    titleized.each {|k, v| titleized[k] = v.titleize if v }
+    untouched.merge(titleized)
+  end
+
+  # remove this method once data is properly structured
+  def delimit_number
+    "#{number_with_delimiter(self.size, delimiter: ',')} sq ft" if self.size
   end
 
   def get_lat_long
