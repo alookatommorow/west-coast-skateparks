@@ -83,12 +83,12 @@
         <div class="visit-container inline-block">
           <% if @user_skatepark %>
             <% if @user_skatepark.visited %>
-              <%= render partial: "add_favorite_button", locals: {skatepark: @skatepark} %>
+              <%= render partial: "remove_visit_button", locals: {skatepark: @skatepark} %>
             <% else %>
-              <%= render partial: "remove_favorite_button", locals: {skatepark: @skatepark} %>
+              <%= render partial: "add_visit_button", locals: {skatepark: @skatepark} %>
             <%end%>
           <% else %>
-            <%= render partial: "remove_favorite_button", locals: {skatepark: @skatepark} %>
+            <%= render partial: "add_visit_button", locals: {skatepark: @skatepark} %>
           <% end %>
         </div>
 
