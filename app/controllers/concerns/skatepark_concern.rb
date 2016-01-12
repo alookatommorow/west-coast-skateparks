@@ -69,20 +69,7 @@ module SkateparkConcern
     user_has_skatepark.save
   end
 
-  def has_review?(skatepark_id)
-    all_user_skateparks = UserSkatepark.where(skatepark_id: skatepark_id)
-    num_reviews = 0
-    all_user_skateparks.each do |park|
-      if park.review != nil
-        num_reviews += 1
-      end
-    end
-    if num_reviews > 0
-      return true
-    else
-      return false
-    end
-  end
+
 
   def has_user_rating?(skatepark_id)
     all_user_skateparks = UserSkatepark.where(skatepark_id: skatepark_id)

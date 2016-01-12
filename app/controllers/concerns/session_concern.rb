@@ -22,8 +22,7 @@ module SessionConcern
   end
 
   def current_user
-    return nil if session[:id].blank?
-    @current_user ||= User.find(session[:id])
+    @current_user ||= User.where(id: session[:id]).first
   end
 
   def logged_in?

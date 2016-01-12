@@ -20,7 +20,7 @@
       <div class="ui middle aligned selection list">
 
         <% @myfavorites.each do |park|%>
-          <%if !park.name.blank?%>
+          <%if park.name%>
             <div class='item'><%= link_to park.city.titleize + ": " + park.name.titleize + ", " + park.state.capitalize.capitalize, skatepark_path(park) %></div>
           <% else %>
             <div class='item'><%= link_to park.city.titleize + ", " + park.state.capitalize, skatepark_path(park) %></div>
@@ -47,7 +47,7 @@
       <div class="ui middle aligned selection list">
 
         <% @myvisited.each do |park|%>
-          <%if !park.name.blank?%>
+          <%if park.name%>
             <div class='item'><%= link_to park.city.titleize  + ", " + park.state.capitalize + ": " + park.name.titleize , skatepark_path(park) %></div>
           <% else %>
             <div class='item'><%= link_to park.city.titleize + ", " + park.state.capitalize, skatepark_path(park) %></div>

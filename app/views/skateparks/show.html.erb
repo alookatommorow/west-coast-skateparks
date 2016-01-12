@@ -77,90 +77,39 @@
 
       <% if logged_in? %>
       <div class="button-container center-text">
+
       <!-- visit button -->
 
         <div class="visit-container inline-block">
-          <% if user_has_skatepark(current_user.id, @skatepark.id) %>
-            <% if user_has_skatepark(current_user.id, @skatepark.id).visited == true %>
-              <%= form_tag visits_path, method: :put, remote: true do %>
-                <%= hidden_field_tag :user_id, current_user.id %>
-                <%= hidden_field_tag :skatepark_id, @skatepark.id %>
-                <%= button_tag class: 'ui button' do %>
-                  <i class="red remove icon inline-block"></i> <p class="inline-block">Never Been Here</p>
-                <% end %>
-              <% end %>
+          <% if @user_skatepark %>
+            <% if @user_skatepark.visited %>
+              <%= render partial: "remove_visit_button", locals: {skatepark: @skatepark} %>
             <% else %>
-              <%= form_tag visits_path, remote: true do %>
-                <%= hidden_field_tag :user_id, current_user.id %>
-                <%= hidden_field_tag :skatepark_id, @skatepark.id %>
-                <%= button_tag class: 'ui button' do %>
-                  <i class="green checkmark icon inline-block"></i> <p class="inline-block"> Been Here</p>
-                <% end %>
-              <% end %>
+              <%= render partial: "add_visit_button", locals: {skatepark: @skatepark} %>
             <%end%>
           <% else %>
-            <%= form_tag visits_path, remote: true do %>
-              <%= hidden_field_tag :user_id, current_user.id %>
-              <%= hidden_field_tag :skatepark_id, @skatepark.id %>
-              <%= button_tag class: 'ui button' do %>
-                <i class="green checkmark icon inline-block"></i> <p class="inline-block"> Been Here</p>
-              <% end %>
-            <% end %>
+            <%= render partial: "add_visit_button", locals: {skatepark: @skatepark} %>
           <% end %>
         </div>
 
         <!-- favorite button -->
 
         <div class="fav-container inline-block one-top">
-          <% if user_has_skatepark(current_user.id, @skatepark.id) %>
-            <% if user_has_skatepark(current_user.id, @skatepark.id).favorite == true %>
-              <%= form_tag favorites_path, method: :put, remote: true do %>
-                <%= hidden_field_tag :user_id, current_user.id %>
-                <%= hidden_field_tag :skatepark_id, @skatepark.id %>
-                <%= button_tag class: 'ui button' do %>
-                  <i class="empty heart icon inline-block"></i> <p class="inline-block">Unfavorite</p>
-                <% end %>
-              <% end %>
-
+          <% if @user_skatepark %>
+            <% if @user_skatepark.favorite %>
+              <%= render partial: "remove_favorite_button", locals: {skatepark: @skatepark} %>
             <% else %>
-              <%= form_tag favorites_path, remote: true do %>
-                <%= hidden_field_tag :user_id, current_user.id %>
-                <%= hidden_field_tag :skatepark_id, @skatepark.id %>
-                <%= button_tag class: 'ui button' do %>
-                  <i class="red heart icon inline-block"></i> <p class="inline-block">Favorite</p>
-                <% end %>
-              <% end %>
+              <%= render partial: "add_favorite_button", locals: {skatepark: @skatepark} %>
             <%end%>
           <% else %>
-            <%= form_tag favorites_path, remote: true do %>
-              <%= hidden_field_tag :user_id, current_user.id %>
-              <%= hidden_field_tag :skatepark_id, @skatepark.id %>
-              <%= button_tag class: 'ui button' do %>
-                <i class="red heart icon inline-block"></i> <p class="inline-block">Favorite</p>
-              <% end %>
-            <% end %>
+            <%= render partial: "add_favorite_button", locals: {skatepark: @skatepark} %>
           <% end %>
         </div>
 
       <!-- rate containers -->
-      <% if user_has_skatepark(current_user.id, @skatepark.id) %>
-        <% if user_has_skatepark(current_user.id, @skatepark.id).visited == true %>
-          <div class="initial-rate-container one-bottom">
-            <%= button_tag 'Rate Skatepark', class: 'ui primary button initial-rate-button'%>
-            <div class="initial-rate-form-container hidden one-top">
-              <div class="ui form">
-                <%= form_tag rate_path, method: :put do %>
-                  <%= hidden_field_tag :user_id, current_user.id %>
-                  <%= hidden_field_tag :id, @skatepark.id %>
-                  <div class="field">
-                    <%= text_field_tag :rating, nil, placeholder: 'enter rating' %>
-                  </div>
-                  <%= submit_tag 'Rate', class: 'ui button' %>
-                <% end %>
-              </div>
-            </div>
-
-          </div>
+      <% if @user_skatepark %>
+        <% if @user_skatepark.visited %>
+          <%= render partial: "rate", locals: {skatepark: @skatepark} %>
         <% end %>
       <% end %>
 
@@ -168,28 +117,12 @@
 
 
       <!-- review containers -->
-          <% if user_has_skatepark(current_user.id, @skatepark.id) %>
-            <% if user_has_skatepark(current_user.id, @skatepark.id).visited == true %>
-              <div class='initial-review-container'>
-                <%= button_tag 'Review Skatepark', class: "ui primary button initial-review-button" %>
-
-                <div class="initial-review-form-container hidden one-top">
-                  <div class="ui reply form">
-                    <%= form_tag review_path, method: :put do |f| %>
-                      <%= hidden_field_tag :user_id, current_user.id %>
-                      <%= hidden_field_tag :id, @skatepark.id %>
-                      <div class="field">
-                        <%= text_area_tag :review, nil, placeholder: 'Write review here...' %>
-                      </div>
-                      <%= submit_tag 'Review', class: "ui button" %>
-                    <% end %>
-                  </div>
-
-                </div>
-              </div>
-
+          <% if @user_skatepark %>
+            <% if @user_skatepark.visited %>
+              <%= render partial: "review", locals: {skatepark: @skatepark} %>
             <% end %>
           <% end %>
+
           <!-- end if logged in? -->
         <% end %>
         <!-- end button-container -->
@@ -197,7 +130,7 @@
 
       <!-- Reviews -->
       <div class="written-review-container">
-        <% if has_review?(@skatepark.id) %>
+        <% if @has_review %>
           <h4>Reviews</h4>
           <div class="ui comments">
             <% @all_user_skateparks.each do |user_park| %>

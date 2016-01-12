@@ -42,6 +42,7 @@ class SkateparksController < ApplicationController
     end
     @all_user_skateparks = UserSkatepark.where(skatepark_id: params[:id])
     @user_rating = UserSkatepark.user_rating(params[:id])
+    @has_review = UserSkatepark.has_review?(params[:id])
     @state_skateparks = Skatepark.where(state: @skatepark.state)
   end
 
