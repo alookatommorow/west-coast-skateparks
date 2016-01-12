@@ -197,7 +197,7 @@
 
       <!-- Reviews -->
       <div class="written-review-container">
-        <% if has_review?(@skatepark.id) %>
+        <% if @has_review %>
           <h4>Reviews</h4>
           <div class="ui comments">
             <% @all_user_skateparks.each do |user_park| %>

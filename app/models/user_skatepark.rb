@@ -5,7 +5,7 @@ class UserSkatepark < ActiveRecord::Base
 
   # Dont allow 0 values
   def self.user_rating(skatepark_id)
-    all_user_skateparks = self.where(skatepark_id: skatepark_id)
+    all_user_skateparks = where(skatepark_id: skatepark_id)
     count = all_user_skateparks.count
     ratings = 0
 
@@ -14,5 +14,14 @@ class UserSkatepark < ActiveRecord::Base
     end
 
     return ratings/count if count > 0
+  end
+
+  def self.has_review?(skatepark_id)
+    all_user_skateparks = where(skatepark_id: skatepark_id)
+    num_reviews = 0
+    all_user_skateparks.each do |park|
+      num_reviews += 1 if park.review
+    end
+    num_reviews > 0
   end
 end
