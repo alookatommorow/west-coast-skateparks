@@ -14,6 +14,8 @@ Rails.application.routes.draw do
   post '/visits', to: 'visits#create'
   put '/visits', to: 'visits#update'
 
+  post '/favorites', to: 'favorites#create'
+
   put '/rate', to: 'opinions#rate'
   put '/review', to: 'opinions#review'
 
