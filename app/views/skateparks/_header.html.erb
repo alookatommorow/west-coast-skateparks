@@ -1,0 +1,39 @@
+<div class="sixteen wide column">
+  <div class='header-image'></div>
+</div>
+
+<!-- title row -->
+
+<div class="one wide column">
+  <% if skatepark.id > 1 %>
+    <a href="/skateparks/<%= (skatepark.id) - 1 %>">
+      <i class="big left arrow icon"></i>
+    </a>
+  <% end %>
+</div>
+<div class="fourteen wide column center-text">
+  <h1><%= skatepark.city.titleize %>, <%= skatepark.state.capitalize %></h1>
+  <% unless skatepark.name.blank?%>
+    <h2><%= skatepark.name.titleize %></h2>
+  <% end %>
+
+  <!-- stars -->
+  <div class="one-top one-bottom">
+    <% if !skatepark.rating.blank? %>
+      <% (skatepark.rating.to_i).times do %>
+        <i class="large yellow star icon inline-block"></i>
+      <% end %>
+      <% (5 - skatepark.rating.to_i).times do %>
+        <i class="large yellow empty star icon inline-block"></i>
+      <% end %>
+    <% end %>
+  </div>
+</div>
+<div class="one wide column next-button">
+  <% if skatepark.id < last %>
+    <a href="/skateparks/<%= (skatepark.id) + 1 %>">
+      <i class="big right arrow icon"></i>
+    </a>
+  <% end %>
+
+</div>
