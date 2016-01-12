@@ -80,8 +80,8 @@
       <!-- visit button -->
 
         <div class="visit-container inline-block">
-          <% if user_has_skatepark(current_user.id, @skatepark.id) %>
-            <% if user_has_skatepark(current_user.id, @skatepark.id).visited == true %>
+          <% if @user_skatepark %>
+            <% if @user_skatepark.visited %>
               <%= form_tag visits_path, method: :put, remote: true do %>
                 <%= hidden_field_tag :user_id, current_user.id %>
                 <%= hidden_field_tag :skatepark_id, @skatepark.id %>
@@ -112,8 +112,8 @@
         <!-- favorite button -->
 
         <div class="fav-container inline-block one-top">
-          <% if user_has_skatepark(current_user.id, @skatepark.id) %>
-            <% if user_has_skatepark(current_user.id, @skatepark.id).favorite == true %>
+          <% if @user_skatepark %>
+            <% if @user_skatepark.favorite %>
               <%= form_tag favorites_path, method: :put, remote: true do %>
                 <%= hidden_field_tag :user_id, current_user.id %>
                 <%= hidden_field_tag :skatepark_id, @skatepark.id %>
@@ -143,8 +143,8 @@
         </div>
 
       <!-- rate containers -->
-      <% if user_has_skatepark(current_user.id, @skatepark.id) %>
-        <% if user_has_skatepark(current_user.id, @skatepark.id).visited == true %>
+      <% if @user_skatepark %>
+        <% if @user_skatepark.visited %>
           <div class="initial-rate-container one-bottom">
             <%= button_tag 'Rate Skatepark', class: 'ui primary button initial-rate-button'%>
             <div class="initial-rate-form-container hidden one-top">
@@ -168,8 +168,8 @@
 
 
       <!-- review containers -->
-          <% if user_has_skatepark(current_user.id, @skatepark.id) %>
-            <% if user_has_skatepark(current_user.id, @skatepark.id).visited == true %>
+          <% if @user_skatepark %>
+            <% if @user_skatepark.visited %>
               <div class='initial-review-container'>
                 <%= button_tag 'Review Skatepark', class: "ui primary button initial-review-button" %>
 
