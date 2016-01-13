@@ -138,6 +138,9 @@ $(".profile-container").on('click', '.item', function(){
   });
 
 
+  $('.ui.dropdown').dropdown();
+
+
 
 
 
