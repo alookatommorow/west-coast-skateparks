@@ -14,13 +14,13 @@
       <!-- skatepark info -->
       <div class="ui segments">
         <!-- figure out new way to do this -->
-        <% if has_user_rating?(@skatepark.id) %>
+        <% if @skatepark.has_ratings? %>
           <div class="ui segment">
             <h4 class="ui header">User Rating</h4>
           </div>
           <div class="ui segments">
             <div class="ui inverted segment">
-              <%= @user_rating %>
+              <%= @skatepark.average_rating %>
             </div>
           </div>
         <% end %>
@@ -76,70 +76,60 @@
       </div>
 
       <% if logged_in? %>
-      <div class="button-container center-text">
-
-      <!-- visit button -->
-
-        <div class="visit-container inline-block">
-          <% if @user_skatepark %>
-            <% if @user_skatepark.visited %>
-              <%= render partial: "remove_visit_button", locals: {skatepark: @skatepark} %>
-            <% else %>
-              <%= render partial: "add_visit_button", locals: {skatepark: @skatepark} %>
-            <%end%>
+        <div class="button-container center-text">
+          <% if @skatepark.already_visited_by?(current_user) %>
+            <% visited = true %>
+            <% visibility = "" %>
           <% else %>
-            <%= render partial: "add_visit_button", locals: {skatepark: @skatepark} %>
-          <% end %>
-        </div>
-
-        <!-- favorite button -->
-
-        <div class="fav-container inline-block one-top">
-          <% unless @skatepark.already_favorited_by?(current_user) %>
-            <%= render partial: "add_favorite_button", locals: {skatepark: @skatepark} %>
-          <% else %>
-            <%= render partial: "remove_favorite_button", locals: {skatepark: @skatepark} %>
+            <% visited = false %>
+            <% visibility = "hidden" %>
           <%end%>
-        </div>
 
-      <!-- rate containers -->
-      <% if @user_skatepark %>
-        <% if @user_skatepark.visited %>
-          <%= render partial: "rate", locals: {skatepark: @skatepark} %>
-        <% end %>
+          <!-- visit button -->
+
+          <div class="visit-container inline-block">
+            <%= render partial: "add_visit_button", locals: {visited: visited, skatepark: @skatepark} %>
+            <%= render partial: "remove_visit_button", locals: {visited: visited, skatepark: @skatepark} %>
+          </div>
+
+          <!-- favorite button -->
+          <div class="fav-container inline-block one-top">
+            <% if @skatepark.already_favorited_by?(current_user) %>
+              <%= render partial: "remove_favorite_button", locals: {skatepark: @skatepark} %>
+            <% else %>
+              <%= render partial: "add_favorite_button", locals: {skatepark: @skatepark} %>
+            <%end%>
+          </div>
+
+          <div class="opinions-container <%= visibility %>">
+            <!-- rate containers -->
+            <%= render partial: "rate", locals: {skatepark: @skatepark} %>
+            <!-- review containers -->
+            <%= render partial: "review", locals: {skatepark: @skatepark} %>
+          </div>
+
+        <!-- end button-container -->
+        </div>
+      <!-- end if logged in? -->
       <% end %>
 
 
-
-
-      <!-- review containers -->
-          <% if @user_skatepark %>
-            <% if @user_skatepark.visited %>
-              <%= render partial: "review", locals: {skatepark: @skatepark} %>
-            <% end %>
-          <% end %>
-
-          <!-- end if logged in? -->
-        <% end %>
-        <!-- end button-container -->
-      </div>
-
       <!-- Reviews -->
       <div class="written-review-container">
-        <% if @has_review %>
+        <% if @skatepark.has_reviews? %>
           <h4>Reviews</h4>
           <div class="ui comments">
-            <% @all_user_skateparks.each do |user_park| %>
+            <% @skatepark.reviews.each do |review| %>
             <div class="comment">
               <div class="content">
-                <a class="author"><%= user_park.username %></a>
+                <a class="author"><%= review.user.username %></a>
                 <div class="metadata">
                   <div class="date">
-                    <%= user_park.review_date %>
+                    <%= review.created_at.strftime("%m/%d/%y") %>
                   </div>
                 </div>
                 <div class="text">
-                  <%= user_park.review %>
+                  <%= review.review %>
                 </div>
               </div>
             </div>
@@ -175,9 +165,8 @@
 
 
 function initMap() {
-  console.log(<%= @lat_long[0] %>)
-  var myLatLng = {lat: <%= @lat_long[0] %>, lng: <%= @lat_long[1] %>}
-  // var myLatLng = {lat: <%= @lat_long[0] %>, lng: <%= @lat_long[1] %>};
+  var latLong = <%= @skatepark.lat_long %>
+  var myLatLng = {lat: latLong[0], lng: latLong[1]}
   var map = new google.maps.Map(document.getElementById('map'), {
     zoom: 9,
     center: myLatLng

@@ -36,13 +36,6 @@ class SkateparksController < ApplicationController
   def show
     @skatepark = Skatepark.find(params[:id])
     @last = Skatepark.last.id
-    @lat_long = @skatepark.get_lat_long # this guy is gonna die
-    if logged_in?
-      @user_skatepark = user_has_skatepark(current_user.id, params[:id])
-    end
-    @all_user_skateparks = UserSkatepark.where(skatepark_id: params[:id])
-    @user_rating = UserSkatepark.user_rating(params[:id])
-    @has_review = UserSkatepark.has_review?(params[:id])
     @state_skateparks = Skatepark.where(state: @skatepark.state)
   end
 
@@ -70,7 +63,7 @@ class SkateparksController < ApplicationController
   def state
     @skateparks = Skatepark.where(state: params[:state]).order("city ASC")
     @skatepark = Skatepark.find(100)
-    @lat_long = @skatepark.get_lat_long
+    @lat_long = @skatepark.lat_long
     @testers = [[33.707255, -117.800631], [34.10446, -117.934803], [33.071545, -116.59284]]
     respond_to do |format|
       format.json {render json: {partial: render_to_string('_state.html.erb', layout: false)} }
@@ -81,5 +74,6 @@ class SkateparksController < ApplicationController
   def skatepark_params
     params.require(:skatepark).permit(:name, :city, :state, :rating, :designer, :builder, :opened, :address, :hours, :size, :notes, :helmet)
   end
+
 
 end

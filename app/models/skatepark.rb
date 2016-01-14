@@ -4,8 +4,18 @@ class Skatepark < ActiveRecord::Base
 
   validates :city, :state, presence: true
   validates :identifier, uniqueness: true
+
   has_many :favorites, dependent: :destroy
   has_many :users_who_faved, through: :favorites, source: :user
+
+  has_many :visits, dependent: :destroy
+  has_many :users_who_visited, through: :visits, source: :user
+
+  has_many :ratings, dependent: :destroy
+  has_many :users_who_rated, through: :ratings, source: :user
+
+  has_many :reviews, dependent: :destroy
+  has_many :users_who_reviewed, through: :reviews, source: :user
 
   def self.search(target)
     where(
@@ -32,6 +42,22 @@ class Skatepark < ActiveRecord::Base
     self.users_who_faved.include?(user)
   end
 
+  def already_visited_by?(user)
+    self.users_who_visited.include?(user)
+  end
+
+  def has_ratings?
+    ratings.length > 0
+  end
+
+  def has_reviews?
+    reviews.length > 0
+  end
+
+  def average_rating
+    ratings.map(&:rating).reduce(:+)/ratings.length
+  end
+
   def visibile_attributes
     untouched = { 'Address' => self.address, 'Info' => self.info, 'Hours' => self.hours }
     titleized = {
@@ -44,7 +70,7 @@ class Skatepark < ActiveRecord::Base
     untouched.merge(titleized)
   end
 
-  def get_lat_long
+  def lat_long
     lat_long = []
     coords = MultiGeocoder.geocode(self.address)
     lat_long.push(coords.lat)
