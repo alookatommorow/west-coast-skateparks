@@ -5,4 +5,6 @@ class User < ActiveRecord::Base
   validates_format_of :email, with: /.+@.+\..{2,}/
   has_many :user_skateparks
   has_many :skateparks, through: :user_skateparks
+  has_many :favorites
+  has_many :favorite_parks, through: :favorites, source: :skatepark
 end
