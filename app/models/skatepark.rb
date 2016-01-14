@@ -4,10 +4,18 @@ class Skatepark < ActiveRecord::Base
 
   validates :city, :state, presence: true
   validates :identifier, uniqueness: true
+
   has_many :favorites, dependent: :destroy
   has_many :users_who_faved, through: :favorites, source: :user
+
   has_many :visits, dependent: :destroy
   has_many :users_who_visited, through: :visits, source: :user
+
+  has_many :ratings
+  has_many :users_who_rated, through: :ratings, source: :user
+
+  has_many :reviews
+  has_many :users_who_reviewed, through: :reviews, source: :user
 
   def self.search(target)
     where(
