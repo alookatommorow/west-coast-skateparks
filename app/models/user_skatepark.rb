@@ -1,7 +1,7 @@
 class UserSkatepark < ActiveRecord::Base
   # Remember to create a migration!
-  # belongs_to :user
-  # belongs_to :skatepark
+  belongs_to :user
+  belongs_to :skatepark
 
   # Dont allow 0 values
   def self.user_rating(skatepark_id)
