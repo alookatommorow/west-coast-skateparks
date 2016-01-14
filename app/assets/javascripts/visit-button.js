@@ -6,7 +6,9 @@ $(document).ready(function() {
     var data = $(this).serialize();
     $.ajax({ url: url, data: data, method: 'post' })
     .done(function(response){
-      console.log("bitch");
+      $('.remove-visit-button').removeClass('hidden');
+      $('.add-visit-button').addClass('hidden');
+      $('.opinions-container').removeClass('hidden');
     })
     .fail(function(response){
       console.log(response);
