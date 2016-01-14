@@ -6,5 +6,7 @@ class CreateFavorites < ActiveRecord::Migration
 
       t.timestamps null: false
     end
+
+    add_index :favorites, [:user_id, :skatepark_id], unique: true
   end
 end

@@ -24,6 +24,7 @@ ActiveRecord::Schema.define(version: 20160114011745) do
   end
 
   add_index "favorites", ["skatepark_id"], name: "index_favorites_on_skatepark_id", using: :btree
+  add_index "favorites", ["user_id", "skatepark_id"], name: "index_favorites_on_user_id_and_skatepark_id", unique: true, using: :btree
   add_index "favorites", ["user_id"], name: "index_favorites_on_user_id", using: :btree
 
   create_table "skateparks", force: true do |t|

@@ -4,10 +4,9 @@ class Skatepark < ActiveRecord::Base
 
   validates :city, :state, presence: true
   validates :identifier, uniqueness: true
-  # has_many :user_skateparks, dependent: :destroy
-  # has_many :users, through: :user_skateparks
   has_many :favorites, dependent: :destroy
-  has_many :favorite_parks, through: :favorites
+  has_many :users_who_faved, through: :favorites
+  validates_associated :favorites
 
   def self.search(target)
     where(
