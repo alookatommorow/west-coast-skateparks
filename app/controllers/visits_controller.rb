@@ -7,7 +7,7 @@ class VisitsController < ApplicationController
     @skatepark_id = params[:skatepark_id]
 
     # this renders /_create.html.erb
-    respond_to { |format| format.js }
+    # respond_to { |format| format.js }
   end
 
   def update

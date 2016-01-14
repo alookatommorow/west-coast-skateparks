@@ -76,49 +76,46 @@
       </div>
 
       <% if logged_in? %>
-      <div class="button-container center-text">
+        <div class="button-container center-text">
 
-      <!-- visit button -->
+          <!-- visit button -->
 
-        <div class="visit-container inline-block">
+          <div class="visit-container inline-block">
+            <% if @skatepark.already_visited_by?(current_user) %>
+              <% visited = true %>
+            <% else %>
+              <% visited = false %>
+            <%end%>
+            <%= render partial: "add_visit_button", locals: {visited: visited, skatepark: @skatepark} %>
+            <%= render partial: "remove_visit_button", locals: {visited: visited, skatepark: @skatepark} %>
+          </div>
+
+          <!-- favorite button -->
+          <div class="fav-container inline-block one-top">
+            <% unless @skatepark.already_favorited_by?(current_user) %>
+              <%= render partial: "add_favorite_button", locals: {skatepark: @skatepark} %>
+            <% else %>
+              <%= render partial: "remove_favorite_button", locals: {skatepark: @skatepark} %>
+            <%end%>
+          </div>
+
+          <% visibility = "" %>
           <% unless @skatepark.already_visited_by?(current_user) %>
-            <%= render partial: "add_visit_button", locals: {skatepark: @skatepark} %>
-          <% else %>
-            <%= render partial: "remove_visit_button", locals: {skatepark: @skatepark} %>
-          <%end%>
-        </div>
-
-        <!-- favorite button -->
-
-        <div class="fav-container inline-block one-top">
-          <% unless @skatepark.already_favorited_by?(current_user) %>
-            <%= render partial: "add_favorite_button", locals: {skatepark: @skatepark} %>
-          <% else %>
-            <%= render partial: "remove_favorite_button", locals: {skatepark: @skatepark} %>
-          <%end%>
-        </div>
-
-      <!-- rate containers -->
-      <% if @user_skatepark %>
-        <% if @user_skatepark.visited %>
-          <%= render partial: "rate", locals: {skatepark: @skatepark} %>
-        <% end %>
-      <% end %>
-
-
-
-
-      <!-- review containers -->
-          <% if @user_skatepark %>
-            <% if @user_skatepark.visited %>
-              <%= render partial: "review", locals: {skatepark: @skatepark} %>
-            <% end %>
+            <% visibility = "hidden" %>
           <% end %>
 
-          <!-- end if logged in? -->
-        <% end %>
+          <div class="<%= visibility %>">
+            <!-- rate containers -->
+            <%= render partial: "rate", locals: {skatepark: @skatepark} %>
+            <!-- review containers -->
+            <%= render partial: "review", locals: {skatepark: @skatepark} %>
+          </div>
+
         <!-- end button-container -->
-      </div>
+        </div>
+      <!-- end if logged in? -->
+      <% end %>
+
 
       <!-- Reviews -->
       <div class="written-review-container">
