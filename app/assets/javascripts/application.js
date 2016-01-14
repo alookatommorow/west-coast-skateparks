@@ -181,8 +181,8 @@ $(".profile-container").on('click', '.item', function(){
       },
     });
 
-  ///// sign-in form validation //////
-  $('.sign-in-form').form({
+  ///// sign-up form validation //////
+  $('.sign-up-form').form({
     fields: {
       username: {
         identifier  : 'username',
