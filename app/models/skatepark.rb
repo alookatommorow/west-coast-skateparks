@@ -11,10 +11,10 @@ class Skatepark < ActiveRecord::Base
   has_many :visits, dependent: :destroy
   has_many :users_who_visited, through: :visits, source: :user
 
-  has_many :ratings
+  has_many :ratings, dependent: :destroy
   has_many :users_who_rated, through: :ratings, source: :user
 
-  has_many :reviews
+  has_many :reviews, dependent: :destroy
   has_many :users_who_reviewed, through: :reviews, source: :user
 
   def self.search(target)
