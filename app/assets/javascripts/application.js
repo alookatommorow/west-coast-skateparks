@@ -157,6 +157,31 @@ $(".profile-container").on('click', '.item', function(){
     });
 
 
+  ///// sign-in form validation //////
+  $('.sign-in-form').form({
+      fields: {
+        username: {
+          identifier  : 'username',
+          rules: [
+            {
+              type   : 'empty',
+              prompt : 'Please enter a value'
+            }
+          ]
+        },
+        password: {
+          identifier  : 'password',
+          rules: [
+            {
+              type   : 'empty',
+              prompt : 'Please enter a value'
+            }
+          ]
+        },
+      },
+    });
+
+
 
 
 

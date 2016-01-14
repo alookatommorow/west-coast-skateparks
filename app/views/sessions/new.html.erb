@@ -4,7 +4,7 @@
 
 <div class="ui one column stackable center aligned page grid">
   <div class="column twelve wide">
-    <div>
+
     <%= form_tag '/sessions', class: 'ui form sign-in-form' do %>
       <div class="field">
       <%= label_tag :username %>
@@ -16,6 +16,7 @@
       <div>
       <br>
       <%= submit_tag 'Submit', class: 'ui green button' %>
+      <div class="ui error message"></div>
     <% end %>
 
   </div>
