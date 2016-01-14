@@ -3,8 +3,8 @@ class User < ActiveRecord::Base
   validates :username, :password, :email, presence: true
   validates :username, :email, uniqueness: true
   validates_format_of :email, with: /.+@.+\..{2,}/
-  # has_many :user_skateparks
-  # has_many :skateparks, through: :user_skateparks
+  has_many :user_skateparks
+  has_many :skateparks, through: :user_skateparks
   has_many :favorites
   has_many :favorite_parks, through: :favorites, source: :skatepark
 end
