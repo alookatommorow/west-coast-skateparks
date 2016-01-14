@@ -7,4 +7,6 @@ class User < ActiveRecord::Base
   has_many :skateparks, through: :user_skateparks
   has_many :favorites
   has_many :favorite_parks, through: :favorites, source: :skatepark
+  has_many :visits
+  has_many :visited_parks, through: :visits, source: :skatepark
 end
