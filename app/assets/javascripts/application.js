@@ -26,15 +26,12 @@ function bindEvents() {
 
 
   /////////////////////// Show modal on picture click /////////////
-
   $('.ui.image').click(function(){
     $('.modal-image').attr('src', this.src);
     $('.picture-modal').modal('show');
   });
 
-
   /////////////////////// Show skateparks by state/////////////
-
   $(".park-state").on('click', function(event){
     event.preventDefault();
     var url = $(this).attr('href');
@@ -45,9 +42,7 @@ function bindEvents() {
     })
   });
 
-
-/////////////////////// Search form submit/////////////
-
+  /////////////////////// Search form submit/////////////
   $('.search-form').on('submit', function(event){
     event.preventDefault();
     var url = $(this).attr('action');
@@ -56,11 +51,9 @@ function bindEvents() {
       $(".search-results-container").remove();
       $(".search-container").append(response.partial);
     });
-
   });
 
   /////////////////////// Search icon click/////////////
-
   $('.circular.search').on('click', function(event){
     var url = $(this).closest('form').attr('action');
     var data = {search: $(this).closest('form').find("input[name='search']").val()};
@@ -70,154 +63,49 @@ function bindEvents() {
     });
   });
 
-
-/////////Close Search //////
-
+  /////////Close Search //////
   $(".search-container").on('click', '.close-search', function(){
     $(this).parent().slideToggle(400, function(){});
     $('.search-form').find("input[name='search']").val('');
   });
 
-
-/////////Select Skatepark From Search //////
-
-$(".search-container").on('click', '.item', function(){
-  window.location = $(this).find("a").attr("href");
-  return false;
+  /////////Select Skatepark From Search //////
+  $(".search-container").on('click', '.item', function(){
+    window.location = $(this).find("a").attr("href");
+    return false;
   });
 
   /////////Select Skatepark From List//////
-$(".parks-container").on('click', '.item', function(){
-  window.location = $(this).find("a").attr("href");
-  return false;
+  $(".parks-container").on('click', '.item', function(){
+    window.location = $(this).find("a").attr("href");
+    return false;
   });
 
-///////////Select Skatepark From Profile Page////////
-
-$(".profile-container").on('click', '.item', function(){
-  window.location = $(this).find("a").attr("href");
-  return false;
+  ///////////Select Skatepark From Profile Page////////
+  $(".profile-container").on('click', '.item', function(){
+    window.location = $(this).find("a").attr("href");
+    return false;
   });
-
 
   ////////////////////////Toggle Create Form///////////////////
-
   $(".new-skatepark").on('click', function() {
     $(".create-container").slideToggle(900, function(){});
-  })
-  $(".rate-container").on('click', '.first-rate-button', function() {
-    $(".rate-form-container").slideToggle(500, function(){});
   });
 
-
-  /////////////////////// Toggle Initial Rate Form /////////
-
-  $(".initial-rate-button").on('click', function(event) {
-    event.preventDefault();
-    $(".initial-rate-form-container").slideToggle(500, function(){});
-  });
-
-  ////////////////////////Toggle Rate Form///////////////////
-
-  $(".button-container").on('click', '.rate-button', function(event) {
+  /////////////////////// Toggle Rate Form /////////
+  $(".rate-button").on('click', function(event) {
     event.preventDefault();
     $(".rate-form-container").slideToggle(500, function(){});
   });
 
-   /////////////////////// Toggle Initial Review Form /////////
-  $(".initial-review-button").on('click', function(event) {
-    event.preventDefault();
-    $(".initial-review-form-container").slideToggle(500, function(){});
-  });
-
-  ////////////////////////Toggle Review Form///////////////////
-
-  $(".button-container").on('click', '.review-button', function(event) {
+  /////////////////////// Toggle Review Form /////////
+  $(".review-button").on('click', function(event) {
     event.preventDefault();
     $(".review-form-container").slideToggle(500, function(){});
   });
 
   //////// activate dropdown on rate form ////////
   $('.ui.dropdown').dropdown();
-
-
-  ///// review form validation //////
-  $('.review-form').form({
-      fields: {
-        review: {
-          identifier  : 'review',
-          rules: [
-            {
-              type   : 'empty',
-              prompt : 'Please enter a review'
-            }
-          ]
-        },
-      },
-    });
-
-
-  ///// sign-in form validation //////
-  $('.sign-in-form').form({
-      fields: {
-        username: {
-          identifier  : 'username',
-          rules: [
-            {
-              type   : 'empty',
-              prompt : 'Please enter a value'
-            }
-          ]
-        },
-        password: {
-          identifier  : 'password',
-          rules: [
-            {
-              type   : 'minLength[6]',
-              prompt : 'Password must be at least 6 characters'
-            }
-          ]
-        },
-      },
-    });
-
-  ///// sign-up form validation //////
-  $('.sign-up-form').form({
-    fields: {
-      username: {
-        identifier  : 'username',
-        rules: [
-          {
-            type   : 'empty',
-            prompt : 'Please enter a value'
-          }
-        ]
-      },
-      email: {
-        identifier  : 'email',
-        rules: [
-          {
-            type   : 'email',
-            prompt : 'Please enter a valid email'
-          }
-        ]
-      },
-      password: {
-        identifier  : 'password',
-        rules: [
-          {
-            type   : 'minLength[6]',
-            prompt : 'Password must be at least 6 characters'
-          }
-        ]
-      },
-    },
-  });
-
-
-
-
-
 
 
 
