@@ -1,6 +1,9 @@
 class FavoritesController < ApplicationController
   def create
-    favorite(params[:user_id], params[:skatepark_id])
+    Favorite.create(
+      user_id: params[:user_id],
+      skatepark_id: params[:skatepark_id])
+
     @skatepark = Skatepark.find(params[:skatepark_id])
     respond_to do |format|
       format.js
@@ -8,11 +11,14 @@ class FavoritesController < ApplicationController
   end
 
   def update
-    favorite(params[:user_id], params[:skatepark_id])
+    favorite = Favorite.where(
+      user_id: params[:user_id],
+      skatepark_id: params[:skatepark_id]).first
+    Favorite.destroy(favorite.id) if favorite
+
     @skatepark = Skatepark.find(params[:skatepark_id])
     respond_to do |format|
       format.js
     end
   end
-
 end

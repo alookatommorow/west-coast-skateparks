@@ -7,10 +7,11 @@ describe 'post /favorites (add favorite)' do
 
     post '/favorites', user_id: user.id, skatepark_id: skatepark.id
 
-    user_skatepark = UserSkatepark.where(
-      user_id: user.id, skatepark_id: skatepark.id).first
+    favorite = Favorite.where(
+      user_id: user.id,
+      skatepark_id: skatepark.id).first
 
-    expect(user_skatepark.favorite).to eq(true)
+    expect(favorite).to be_truthy
   end
 end
 
@@ -18,14 +19,14 @@ end
     it 'sets UserSkatepark visit = false' do
       user = create(:user)
       skatepark = create(:skatepark)
-      UserSkatepark.create(
-        user_id: user.id, skatepark_id: skatepark.id, favorite: true)
+      Favorite.create(
+        user_id: user.id, skatepark_id: skatepark.id)
 
       put '/favorites', user_id: user.id, skatepark_id: skatepark.id
 
-      user_skatepark = UserSkatepark.where(
+      favorite = Favorite.where(
         user_id: user.id, skatepark_id: skatepark.id).first
 
-      expect(user_skatepark.visited).to eq(false)
+      expect(favorite).to be_falsey
     end
   end
