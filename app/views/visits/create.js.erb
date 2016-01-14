@@ -16,6 +16,21 @@ if (!($('div').hasClass('rate-button-container'))) {
 
 $('.ui.dropdown').dropdown();
 
+/// review form validation
+  $('.review-form').form({
+      fields: {
+        review: {
+          identifier  : 'review',
+          rules: [
+            {
+              type   : 'empty',
+              prompt : 'Please enter a value'
+            }
+          ]
+        },
+      },
+    });
+
 
 
 

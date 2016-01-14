@@ -4,34 +4,22 @@
 
 <div class="ui one column stackable center aligned page grid">
   <div class="column twelve wide">
-    <div class="ui form sign-form">
-      <%= form_for :user, url: users_path do |f| %>
-        <% if @user.errors.any? %>
-          <h4><%= pluralize(@user.errors.count, "error") %> prohibited registration :</h4>
-          <ul>
-            <% @user.errors.full_messages.each do |msg| %>
-              <li><%= msg %></li>
-            <% end %>
-          </ul>
-        <% end %>
-
-        <div class="field">
-          <%= f.label :username %>
-          <%= f.text_field :username %>
-        </div>
-        <div class="field">
-          <%= f.label :email %>
-          <%= f.text_field :email %>
-        </div>
-        <div class="field">
-          <%= f.label :password %>
-          <%= f.password_field :password %>
-        </div>
-        <%= f.submit 'Register', class: 'ui green button' %>
-      <% end %>
-
-    </div>
-
+    <%= form_tag "/users", class: "ui form sign-up-form" do %>
+      <div class="field">
+        <%= label_tag :username %>
+        <%= text_field_tag :username %>
+      </div>
+      <div class="field">
+        <%= label_tag :email %>
+        <%= text_field_tag :email %>
+      </div>
+      <div class="field">
+        <%= label_tag :password %>
+        <%= password_field_tag :password %>
+      </div>
+      <%= submit_tag 'Register', class: 'ui green button' %>
+      <div class="ui error message"></div>
+    <% end %>
   </div>
 </div>
 
