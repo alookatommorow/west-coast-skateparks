@@ -1,31 +1,31 @@
 require 'rails_helper'
 
 describe 'post /visits' do
-  it 'creates a UserSkatepark and sets visit = true' do
+  it 'creates a Visit' do
     user = create(:user)
     skatepark = create(:skatepark)
 
     post '/visits', user_id: user.id, skatepark_id: skatepark.id
 
-    visit = UserSkatepark.where(
+    visit = Visit.where(
       user_id: user.id, skatepark_id: skatepark.id).first
 
-    expect(visit.visited).to eq(true)
+    expect(visit).to be_truthy
   end
 end
 
 describe 'put /visits' do
-  it 'sets UserSkatepark visit = false' do
+  it 'destroys a Visit' do
     user = create(:user)
     skatepark = create(:skatepark)
-    UserSkatepark.create(
-      user_id: user.id, skatepark_id: skatepark.id, visited: true)
+    Visit.create(
+      user_id: user.id, skatepark_id: skatepark.id)
 
     put '/visits', user_id: user.id, skatepark_id: skatepark.id
 
-    visit = UserSkatepark.where(
+    visit = Visit.where(
       user_id: user.id, skatepark_id: skatepark.id).first
 
-    expect(visit.visited).to eq(false)
+    expect(visit).to be_falsey
   end
 end

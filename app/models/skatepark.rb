@@ -46,6 +46,18 @@ class Skatepark < ActiveRecord::Base
     self.users_who_visited.include?(user)
   end
 
+  def has_ratings?
+    ratings.length > 0
+  end
+
+  def has_reviews?
+    reviews.length > 0
+  end
+
+  def average_rating
+    ratings.map(&:rating).reduce(:+)/ratings.length
+  end
+
   def visibile_attributes
     untouched = { 'Address' => self.address, 'Info' => self.info, 'Hours' => self.hours }
     titleized = {

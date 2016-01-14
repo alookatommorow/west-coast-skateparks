@@ -79,19 +79,6 @@ ActiveRecord::Schema.define(version: 20160114055317) do
     t.datetime "updated_at"
   end
 
-  create_table "user_skateparks", force: true do |t|
-    t.integer  "user_id"
-    t.integer  "skatepark_id"
-    t.integer  "rating"
-    t.string   "username"
-    t.string   "review"
-    t.string   "review_date"
-    t.boolean  "favorite",     default: false
-    t.boolean  "visited",      default: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "users", force: true do |t|
     t.string   "username"
     t.string   "email"
