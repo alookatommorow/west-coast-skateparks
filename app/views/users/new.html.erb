@@ -4,26 +4,22 @@
 
 <div class="ui one column stackable center aligned page grid">
   <div class="column twelve wide">
-
-      <%= form_tag "/users", class: "ui form sign-up-form" do %>
-        <div class="field">
-          <%= label_tag :username %>
-          <%= text_field_tag :username %>
-        </div>
-        <div class="field">
-          <%= label_tag :email %>
-          <%= text_field_tag :email %>
-        </div>
-        <div class="field">
-          <%= label_tag :password %>
-          <%= password_field_tag :password %>
-        </div>
-        <%= submit_tag 'Register', class: 'ui green button' %>
-
-      <% end %>
-
-    </div>
-
+    <%= form_tag "/users", class: "ui form sign-up-form" do %>
+      <div class="field">
+        <%= label_tag :username %>
+        <%= text_field_tag :username %>
+      </div>
+      <div class="field">
+        <%= label_tag :email %>
+        <%= text_field_tag :email %>
+      </div>
+      <div class="field">
+        <%= label_tag :password %>
+        <%= password_field_tag :password %>
+      </div>
+      <%= submit_tag 'Register', class: 'ui green button' %>
+      <div class="ui error message"></div>
+    <% end %>
   </div>
 </div>
 

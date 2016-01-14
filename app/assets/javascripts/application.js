@@ -149,7 +149,7 @@ $(".profile-container").on('click', '.item', function(){
           rules: [
             {
               type   : 'empty',
-              prompt : 'Please enter a value'
+              prompt : 'Please enter a review'
             }
           ]
         },
@@ -173,8 +173,8 @@ $(".profile-container").on('click', '.item', function(){
           identifier  : 'password',
           rules: [
             {
-              type   : 'empty',
-              prompt : 'Please enter a value'
+              type   : 'minLength[6]',
+              prompt : 'Password must be at least 6 characters'
             }
           ]
         },
@@ -190,6 +190,24 @@ $(".profile-container").on('click', '.item', function(){
           {
             type   : 'empty',
             prompt : 'Please enter a value'
+          }
+        ]
+      },
+      email: {
+        identifier  : 'email',
+        rules: [
+          {
+            type   : 'email',
+            prompt : 'Please enter a valid email'
+          }
+        ]
+      },
+      password: {
+        identifier  : 'password',
+        rules: [
+          {
+            type   : 'minLength[6]',
+            prompt : 'Password must be at least 6 characters'
           }
         ]
       },
