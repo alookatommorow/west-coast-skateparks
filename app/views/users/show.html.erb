@@ -13,13 +13,13 @@
         <h2 class="blue">Favorites<h2>
       </div>
       <div class='inline-block one-margin float-right'>
-        <h2 class="blue"><%= @myfavorites.length %><h2>
+        <h2 class="blue"><%= @user.favorite_parks.length %><h2>
       </div>
       <div class="ui divider">
       </div>
       <div class="ui middle aligned selection list">
 
-        <% @myfavorites.each do |park|%>
+        <% @user.favorite_parks.each do |park|%>
           <%if park.name%>
             <div class='item'><%= link_to park.city.titleize + ": " + park.name.titleize + ", " + park.state.capitalize.capitalize, skatepark_path(park) %></div>
           <% else %>

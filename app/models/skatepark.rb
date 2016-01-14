@@ -5,8 +5,7 @@ class Skatepark < ActiveRecord::Base
   validates :city, :state, presence: true
   validates :identifier, uniqueness: true
   has_many :favorites, dependent: :destroy
-  has_many :users_who_faved, through: :favorites
-  validates_associated :favorites
+  has_many :users_who_faved, through: :favorites, source: :user
 
   def self.search(target)
     where(
@@ -27,6 +26,10 @@ class Skatepark < ActiveRecord::Base
     else
       []
     end
+  end
+
+  def already_favorited_by?(user)
+    self.users_who_faved.include?(user)
   end
 
   def visibile_attributes

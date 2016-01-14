@@ -20,29 +20,6 @@ module SkateparkConcern
     @new_user_skatepark = UserSkatepark.create(user_id: user_id, skatepark_id: skatepark_id)
   end
 
-  def favorite(user_id, skatepark_id)
-    if user_has_skatepark(user_id, skatepark_id)
-      found_skatepark = user_has_skatepark(user_id, skatepark_id)
-      found_skatepark.favorite = !found_skatepark.favorite
-      found_skatepark.save
-    else
-      new_user_skatepark = new_user_skatepark(user_id, skatepark_id)
-      new_user_skatepark.favorite = true
-      new_user_skatepark.save
-    end
-  end
-
-  def user_has_favorite(user_id, skatepark_id)
-    if user_has_skatepark(user_id, skatepark_id)
-      if user_has_skatepark(user_id, skatepark_id).favorite == true
-        return true
-      end
-    else
-      return false
-    end
-  end
-
-
   def visit(user_id, skatepark_id)
     if user_has_skatepark(user_id, skatepark_id)
       found_skatepark = user_has_skatepark(user_id, skatepark_id)
