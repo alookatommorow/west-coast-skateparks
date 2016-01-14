@@ -6,6 +6,8 @@ class Skatepark < ActiveRecord::Base
   validates :identifier, uniqueness: true
   has_many :favorites, dependent: :destroy
   has_many :users_who_faved, through: :favorites, source: :user
+  has_many :visits, dependent: :destroy
+  has_many :users_who_visited, through: :visits, source: :user
 
   def self.search(target)
     where(
@@ -30,6 +32,10 @@ class Skatepark < ActiveRecord::Base
 
   def already_favorited_by?(user)
     self.users_who_faved.include?(user)
+  end
+
+  def already_visited_by?(user)
+    self.users_who_visited.include?(user)
   end
 
   def visibile_attributes

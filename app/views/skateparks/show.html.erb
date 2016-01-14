@@ -81,15 +81,11 @@
       <!-- visit button -->
 
         <div class="visit-container inline-block">
-          <% if @user_skatepark %>
-            <% if @user_skatepark.visited %>
-              <%= render partial: "remove_visit_button", locals: {skatepark: @skatepark} %>
-            <% else %>
-              <%= render partial: "add_visit_button", locals: {skatepark: @skatepark} %>
-            <%end%>
-          <% else %>
+          <% unless @skatepark.already_visited_by?(current_user) %>
             <%= render partial: "add_visit_button", locals: {skatepark: @skatepark} %>
-          <% end %>
+          <% else %>
+            <%= render partial: "remove_visit_button", locals: {skatepark: @skatepark} %>
+          <%end%>
         </div>
 
         <!-- favorite button -->

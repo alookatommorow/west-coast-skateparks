@@ -39,14 +39,14 @@
         <h2 class="blue">My Parks<h2>
       </div>
       <div class='inline-block float-right'>
-        <h2 class="blue"><%= @myvisited.length %>
+        <h2 class="blue"><%= @user.visited_parks.length %>
           <h2>
       </div>
       <div class="ui divider">
       </div>
       <div class="ui middle aligned selection list">
 
-        <% @myvisited.each do |park|%>
+        <% @user.visited_parks.each do |park|%>
           <%if park.name%>
             <div class='item'><%= link_to park.city.titleize  + ", " + park.state.capitalize + ": " + park.name.titleize , skatepark_path(park) %></div>
           <% else %>

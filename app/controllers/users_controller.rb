@@ -15,10 +15,6 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @myvisited = []
-    UserSkatepark.where(user_id: params[:id]).where(visited: true).each do |item|
-      @myvisited << Skatepark.find(item.skatepark_id)
-    end
   end
 
   private

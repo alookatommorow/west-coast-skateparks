@@ -1,6 +1,8 @@
 class VisitsController < ApplicationController
   def create
-    visit(params[:user_id], params[:skatepark_id])
+    Visit.create(
+      user_id: params[:user_id],
+      skatepark_id: params[:skatepark_id])
     user_has_skatepark(current_user.id, params[:skatepark_id])
     @skatepark_id = params[:skatepark_id]
 
@@ -9,7 +11,10 @@ class VisitsController < ApplicationController
   end
 
   def update
-    visit(params[:user_id], params[:skatepark_id])
+    visit = Visit.where(
+      user_id: params[:user_id],
+      skatepark_id: params[:skatepark_id]).first
+    Visit.destroy(visit.id) if visit
     @skatepark = Skatepark.find(params[:skatepark_id])
 
     respond_to { |format| format.js }
