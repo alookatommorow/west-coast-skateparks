@@ -77,32 +77,29 @@
 
       <% if logged_in? %>
         <div class="button-container center-text">
+          <% if @skatepark.already_visited_by?(current_user) %>
+            <% visited = true %>
+            <% visibility = "" %>
+          <% else %>
+            <% visited = false %>
+            <% visibility = "hidden" %>
+          <%end%>
 
           <!-- visit button -->
 
           <div class="visit-container inline-block">
-            <% if @skatepark.already_visited_by?(current_user) %>
-              <% visited = true %>
-            <% else %>
-              <% visited = false %>
-            <%end%>
             <%= render partial: "add_visit_button", locals: {visited: visited, skatepark: @skatepark} %>
             <%= render partial: "remove_visit_button", locals: {visited: visited, skatepark: @skatepark} %>
           </div>
 
           <!-- favorite button -->
           <div class="fav-container inline-block one-top">
-            <% unless @skatepark.already_favorited_by?(current_user) %>
-              <%= render partial: "add_favorite_button", locals: {skatepark: @skatepark} %>
-            <% else %>
+            <% if @skatepark.already_favorited_by?(current_user) %>
               <%= render partial: "remove_favorite_button", locals: {skatepark: @skatepark} %>
+            <% else %>
+              <%= render partial: "add_favorite_button", locals: {skatepark: @skatepark} %>
             <%end%>
           </div>
-
-          <% visibility = "" %>
-          <% unless @skatepark.already_visited_by?(current_user) %>
-            <% visibility = "hidden" %>
-          <% end %>
 
           <div class="opinions-container <%= visibility %>">
             <!-- rate containers -->
@@ -168,9 +165,8 @@
 
 
 function initMap() {
-  var latLong = <%= @lat_long %>
+  var latLong = <%= @skatepark.lat_long %>
   var myLatLng = {lat: latLong[0], lng: latLong[1]}
-  // var myLatLng = {lat: <%= @lat_long[0] %>, lng: <%= @lat_long[1] %>};
   var map = new google.maps.Map(document.getElementById('map'), {
     zoom: 9,
     center: myLatLng

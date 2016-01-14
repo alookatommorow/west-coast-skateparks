@@ -70,7 +70,7 @@ class Skatepark < ActiveRecord::Base
     untouched.merge(titleized)
   end
 
-  def get_lat_long
+  def lat_long
     lat_long = []
     coords = MultiGeocoder.geocode(self.address)
     lat_long.push(coords.lat)

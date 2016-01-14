@@ -36,7 +36,6 @@ class SkateparksController < ApplicationController
   def show
     @skatepark = Skatepark.find(params[:id])
     @last = Skatepark.last.id
-    @lat_long = @skatepark.get_lat_long # this guy is gonna die
     @state_skateparks = Skatepark.where(state: @skatepark.state)
   end
 
@@ -64,7 +63,7 @@ class SkateparksController < ApplicationController
   def state
     @skateparks = Skatepark.where(state: params[:state]).order("city ASC")
     @skatepark = Skatepark.find(100)
-    @lat_long = @skatepark.get_lat_long
+    @lat_long = @skatepark.lat_long
     @testers = [[33.707255, -117.800631], [34.10446, -117.934803], [33.071545, -116.59284]]
     respond_to do |format|
       format.json {render json: {partial: render_to_string('_state.html.erb', layout: false)} }
