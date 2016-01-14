@@ -137,9 +137,24 @@ $(".profile-container").on('click', '.item', function(){
     $(".review-form-container").slideToggle(500, function(){});
   });
 
-
+  //////// activate dropdown on rate form ////////
   $('.ui.dropdown').dropdown();
 
+
+  ///// review form validation //////
+  $('.review-form').form({
+      fields: {
+        review: {
+          identifier  : 'review',
+          rules: [
+            {
+              type   : 'empty',
+              prompt : 'Please enter a value'
+            }
+          ]
+        },
+      },
+    });
 
 
 

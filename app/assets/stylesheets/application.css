@@ -221,7 +221,7 @@ html, body {
   padding-bottom: 2%;
 }
 
-.sign-form {
+.sign-up-form, .sign-in-form {
   padding-bottom: 45%;
 }
 
@@ -240,6 +240,7 @@ html, body {
   margin-left: auto;
   margin-right: auto;
 }
+
 
 
 
