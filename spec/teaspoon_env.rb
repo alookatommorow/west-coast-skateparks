@@ -35,7 +35,9 @@ Teaspoon.configure do |config|
     #
     # Versions: 1.10.0, 1.17.1, 1.18.2, 1.19.0, 2.0.1, 2.1.0, 2.2.4, 2.2.5, 2.3.3
     suite.use_framework :mocha, "2.3.3"
-    suite.javascripts += ["support/expect", "support/chai"]
+
+    # Is this a better way to require assets than the spec_helper??
+    # suite.javascripts += ["support/expect", "support/chai", "support/sinon", "support/chai-jquery" ]
 
     # Specify a file matcher as a regular expression and all matching files will be loaded when the suite is run. These
     # files need to be within an asset path. You can add asset paths using the `config.asset_paths`.

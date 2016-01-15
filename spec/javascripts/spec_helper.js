@@ -1,10 +1,10 @@
 // Teaspoon includes some support files, but you can use anything from your own support path too.
-// require support/expect
-// require support/sinon
-// require support/chai
-// require support/chai-jq-0.0.7
+//= require magic_lamp
+//= require support/expect
+//= require support/sinon
+//= require support/chai
+//= require support/chai-jq-0.0.7
 // require support/your-support-file
-window.expect = chai.expect;
 //
 // PhantomJS (Teaspoons default driver) doesn't have support for Function.prototype.bind, which has caused confusion.
 // Use this polyfill to avoid the confusion.
@@ -36,6 +36,6 @@ window.expect = chai.expect;
 // If you're using Chai, you'll probably want to initialize your preferred assertion style. You can read more about Chai
 // at: http://chaijs.com/guide/styles
 //
-// window.assert = chai.assert;
-// window.expect = chai.expect;
+window.assert = chai.assert;
+window.expect = chai.expect;
 // window.should = chai.should();

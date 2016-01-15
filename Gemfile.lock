@@ -32,10 +32,6 @@ GEM
       execjs
       json
     bcrypt (3.1.10)
-    better_errors (2.1.1)
-      coderay (>= 1.0.0)
-      erubis (>= 2.6.6)
-      rack (>= 0.9.0)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
     builder (3.2.2)
@@ -89,6 +85,10 @@ GEM
     less-rails-semantic_ui (2.0.7.0)
       less-rails (>= 2.6.0, <= 2.7.0)
     libv8 (3.16.14.11)
+    magic_lamp (1.7.0)
+      method_source
+      rails (>= 4.0.0)
+      rake
     mail (2.6.3)
       mime-types (>= 1.16, < 3)
     method_source (0.8.2)
@@ -193,16 +193,15 @@ PLATFORMS
 DEPENDENCIES
   autoprefixer-rails (~> 5.2.1.2)
   bcrypt (~> 3.1.7)
-  better_errors
   capybara
   capybara-webkit
-  coffee-rails (~> 4.0.0)
   database_cleaner
   factory_girl_rails
   geokit
   gmaps4rails
   jquery-rails
   less-rails-semantic_ui (~> 2.0.7.0)
+  magic_lamp
   pg
   pry-byebug
   pry-rails
@@ -210,7 +209,7 @@ DEPENDENCIES
   rails (= 4.1.6)
   rails_12factor
   rspec-rails
-  teaspoon
+  sprockets-rails
   teaspoon-mocha
   therubyracer
   turbolinks

@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  #for JS tests
+  mount MagicLamp::Genie, at: "/magic_lamp" if defined?(MagicLamp)
 
   get 'about',  to: 'welcome#about', as: 'about'
   get '/skateparks/search', to: 'skateparks#search', as: 'search'
@@ -21,6 +23,8 @@ Rails.application.routes.draw do
   put '/review', to: 'opinions#review'
 
   root 'welcome#index'
+
+
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
