@@ -11,6 +11,8 @@ gem 'uglifier', '>= 1.3.0'
 gem 'jquery-rails'
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
+
+gem 'sprockets-rails'
 gem 'puma'
 gem 'turbolinks'
 gem 'geokit'
@@ -20,11 +22,12 @@ gem 'gmaps4rails'
 gem 'less-rails-semantic_ui', '~> 2.0.7.0'
 gem 'autoprefixer-rails', '~> 5.2.1.2'
 
+
 gem 'rails_12factor', group: :production
 
-group :development do
-  gem 'better_errors'
-end
+# group :development do
+  # gem 'better_errors'
+# end
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -34,6 +37,8 @@ group :development, :test do
   gem 'capybara'
   gem 'capybara-webkit'
   gem 'factory_girl_rails'
+  gem 'teaspoon-mocha'
+  gem 'magic_lamp'
 
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console', '~> 2.0'
@@ -45,10 +50,13 @@ end
 
 #bullshit gems - delete at some point!
 
-# Use SCSS for stylesheets
-# gem 'sass-rails', '~> 4.0.3'
+
 # Use CoffeeScript for .js.coffee assets and views
 # gem 'coffee-rails', '~> 4.0.0'
+
+# Use SCSS for stylesheets
+# gem 'sass-rails', '~> 4.0.3'
+
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer',  platforms: :ruby
 
