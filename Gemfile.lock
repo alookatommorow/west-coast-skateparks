@@ -161,6 +161,10 @@ GEM
       actionpack (>= 3.0)
       activesupport (>= 3.0)
       sprockets (>= 2.8, < 4.0)
+    teaspoon (1.1.2)
+      railties (>= 3.2.5, < 5)
+    teaspoon-mocha (2.3.3)
+      teaspoon (>= 1.0.0)
     therubyracer (0.12.2)
       libv8 (~> 3.16.14.0)
       ref
@@ -192,6 +196,7 @@ DEPENDENCIES
   better_errors
   capybara
   capybara-webkit
+  coffee-rails (~> 4.0.0)
   database_cleaner
   factory_girl_rails
   geokit
@@ -205,6 +210,8 @@ DEPENDENCIES
   rails (= 4.1.6)
   rails_12factor
   rspec-rails
+  teaspoon
+  teaspoon-mocha
   therubyracer
   turbolinks
   uglifier (>= 1.3.0)

@@ -1,3 +1,4 @@
+
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
@@ -35,3 +36,10 @@ Rails.application.configure do
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
 end
+
+Rails.application.config.assets.precompile += [
+  "teaspoon.css",
+  "teaspoon-mocha.js",
+  "mocha/1.17.1.js"
+]
+
