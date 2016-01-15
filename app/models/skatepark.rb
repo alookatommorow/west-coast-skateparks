@@ -39,11 +39,11 @@ class Skatepark < ActiveRecord::Base
   end
 
   def already_favorited_by?(user)
-    self.users_who_faved.include?(user)
+    users_who_faved.include?(user)
   end
 
   def already_visited_by?(user)
-    self.users_who_visited.include?(user)
+    users_who_visited.include?(user)
   end
 
   def has_ratings?
