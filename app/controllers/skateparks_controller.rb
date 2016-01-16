@@ -2,7 +2,7 @@ class SkateparksController < ApplicationController
 
   def search
     if params[:search]
-      @skateparks = Skatepark.search(params[:search].downcase)
+      skateparks = Skatepark.search(params[:search].downcase)
 
       respond_to do |format|
         format.json {render json: {partial: render_to_string('_search.html.erb', layout: false)} }
@@ -61,13 +61,17 @@ class SkateparksController < ApplicationController
 
   # skateparks by state via AJAX
   def state
-    @skateparks = Skatepark.where(state: params[:state]).order("city ASC")
-    @skatepark = Skatepark.find(100)
-    @lat_long = @skatepark.lat_long
-    @testers = [[33.707255, -117.800631], [34.10446, -117.934803], [33.071545, -116.59284]]
-    respond_to do |format|
-      format.json {render json: {partial: render_to_string('_state.html.erb', layout: false)} }
-    end
+    skateparks = Skatepark.where(state: params[:state]).order("city ASC")
+    p "*"*100
+    p params
+    p "*"*100
+    # @skatepark = Skatepark.find(100)
+    # @lat_long = @skatepark.lat_long
+    # @testers = [[33.707255, -117.800631], [34.10446, -117.934803], [33.071545, -116.59284]]
+    render partial: 'state', locals: {skateparks: skateparks}
+    # respond_to do |format|
+      # format.json {render json: {partial: render_to_string('_state.html.erb', layout: false)} }
+    # end
   end
 
   private

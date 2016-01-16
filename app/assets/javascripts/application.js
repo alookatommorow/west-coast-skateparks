@@ -36,9 +36,13 @@ function bindEvents() {
     event.preventDefault();
     var url = $(this).attr('href');
     $(this).addClass('active').siblings().removeClass('active');
-    $.ajax({url: url, dataType: 'JSON'}).done(function(response) {
+    $.ajax({url: url})
+    .done(function(response) {
       $(".parks-container").children().remove();
-      $(".parks-container").append(response.partial)
+      $(".parks-container").append(response)
+    })
+    .fail(function(response){
+      console.error(response)
     })
   });
 
