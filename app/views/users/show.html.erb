@@ -98,6 +98,16 @@
           title: '<%= skatepark.city.titleize %>, <%= skatepark.state.capitalize %> (visited)'
         });
       <% end %>
+      <% favs_and_visits[:both].each do |skatepark| %>
+        var parkLatLng = <%= skatepark.lat_long %>
+        var markerPosition = {lat: parkLatLng[0], lng: parkLatLng[1]}
+
+        var marker = new google.maps.Marker({
+          position: markerPosition,
+          map: map,
+          title: '<%= skatepark.city.titleize %>, <%= skatepark.state.capitalize %> (favorited & visited)'
+        });
+      <% end %>
     }
   </script>
   <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_KEY'] %>&callback=initMap"
