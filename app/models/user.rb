@@ -17,6 +17,11 @@ class User < ActiveRecord::Base
   has_many :reviewed_parks, through: :reviews, source: :skatepark
 
   def favorites_and_visits
-    { favorite_parks: favorite_parks, visited_parks: visited_parks }
+    dups = favorite_parks & visited_parks
+    {
+      favorite_parks: favorite_parks - dups,
+      visited_parks: visited_parks - dups,
+      both: dups
+    }
   end
 end

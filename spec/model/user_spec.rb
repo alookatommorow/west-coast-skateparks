@@ -21,12 +21,35 @@ RSpec.describe User, type: :model do
     it 'returns a hash of all favorited and visited parks' do
       user = create(:user)
       skatepark = create(:skatepark)
-      user.favorite_parks << skatepark
-      user.visited_parks << skatepark
+      other = create(:skatepark, :other)
+
+      create(:favorite, user_id: user.id, skatepark_id: skatepark.id)
+      create(:visit, user_id: user.id, skatepark_id: other.id)
 
       favorites_and_visits = {
         favorite_parks: user.favorite_parks,
-        visited_parks: user.visited_parks
+        visited_parks: user.visited_parks,
+        both: []
+      }
+
+      expect(user.favorites_and_visits).to eq(favorites_and_visits)
+    end
+
+    it 'returns parks as favorited and visited if they are both' do
+      user = create(:user)
+      skatepark = create(:skatepark)
+      favorited_park = create(:skatepark, :other)
+      visited_park = create(:skatepark, identifier: 'SUP')
+
+      create(:favorite, user_id: user.id, skatepark_id: skatepark.id)
+      create(:favorite, user_id: user.id, skatepark_id: favorited_park.id)
+      create(:visit, user_id: user.id, skatepark_id: skatepark.id)
+      create(:visit, user_id: user.id, skatepark_id: visited_park.id)
+
+      favorites_and_visits = {
+        favorite_parks: [favorited_park],
+        visited_parks: [visited_park],
+        both: [skatepark]
       }
 
       expect(user.favorites_and_visits).to eq(favorites_and_visits)
