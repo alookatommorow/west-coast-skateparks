@@ -76,14 +76,25 @@
         zoom: 6,
         center: mapCenter
       });
-      <% @user.favorite_parks.each do |skatepark| %>
+      <% favs_and_visits = @user.favorites_and_visits %>
+      <% favs_and_visits[:favorite_parks].each do |skatepark| %>
         var parkLatLng = <%= skatepark.lat_long %>
         var markerPosition = {lat: parkLatLng[0], lng: parkLatLng[1]}
 
         var marker = new google.maps.Marker({
           position: markerPosition,
           map: map,
-          title: '<%= skatepark.city.titleize %>, <%= skatepark.state.capitalize %>'
+          title: '<%= skatepark.city.titleize %>, <%= skatepark.state.capitalize %> (favorite)'
+        });
+      <% end %>
+      <% favs_and_visits[:visited_parks].each do |skatepark| %>
+        var parkLatLng = <%= skatepark.lat_long %>
+        var markerPosition = {lat: parkLatLng[0], lng: parkLatLng[1]}
+
+        var marker = new google.maps.Marker({
+          position: markerPosition,
+          map: map,
+          title: '<%= skatepark.city.titleize %>, <%= skatepark.state.capitalize %> (visited)'
         });
       <% end %>
     }
