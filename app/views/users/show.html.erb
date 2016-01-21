@@ -70,8 +70,9 @@
 
   <script>
     function initMap() {
-      var latLong = <%= @user.favorite_parks.first.lat_long %>
-      var mapCenter = {lat: latLong[0], lng: latLong[1]}
+      var parkCoords = <%= @user.first_map_marker %>
+
+      var mapCenter = {lat: parkCoords[0], lng: parkCoords[1]}
       var map = new google.maps.Map(document.getElementById('user-map'), {
         zoom: 6,
         center: mapCenter

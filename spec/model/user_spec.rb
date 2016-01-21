@@ -1,6 +1,25 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
+  context '#first_map_marker' do
+    it 'returns lat long of first favorited or visited skatepark' do
+      user = create(:user)
+      skatepark = create(:skatepark)
+      other = create(:skatepark, :other)
+
+      create(:visit, user_id: user.id, skatepark_id: skatepark.id)
+      create(:favorite, user_id: user.id, skatepark_id: other.id)
+
+      expect(user.first_map_marker).to eq(other.lat_long)
+    end
+
+    it 'returns SF EPICENTER if no park is found' do
+      user = create(:user)
+
+      expect(user.first_map_marker).to eq([37.7833, -122.4167])
+    end
+  end
+
   context '#favorite_parks' do
     it "returns user's favorited parks" do
       user = create(:user)
