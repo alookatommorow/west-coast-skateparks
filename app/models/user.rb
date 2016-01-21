@@ -15,4 +15,8 @@ class User < ActiveRecord::Base
 
   has_many :reviews
   has_many :reviewed_parks, through: :reviews, source: :skatepark
+
+  def favorites_and_visits
+    { favorite_parks: favorite_parks, visited_parks: visited_parks }
+  end
 end

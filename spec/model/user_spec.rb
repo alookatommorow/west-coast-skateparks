@@ -16,4 +16,20 @@ RSpec.describe User, type: :model do
       expect(fav_park.address).to eq(skatepark.address)
     end
   end
+
+  context '#favorites_and_visits' do
+    it 'returns a hash of all favorited and visited parks' do
+      user = create(:user)
+      skatepark = create(:skatepark)
+      user.favorite_parks << skatepark
+      user.visited_parks << skatepark
+
+      favorites_and_visits = {
+        favorite_parks: user.favorite_parks,
+        visited_parks: user.visited_parks
+      }
+
+      expect(user.favorites_and_visits).to eq(favorites_and_visits)
+    end
+  end
 end

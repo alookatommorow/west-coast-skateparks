@@ -11,6 +11,7 @@ FactoryGirl.define do
     username 'swaggy'
     password 'swag'
     email 'swag@swag.swag'
+    favorite_parks []
+    visited_parks []
   end
-
 end
