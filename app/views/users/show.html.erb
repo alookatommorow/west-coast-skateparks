@@ -1,65 +1,96 @@
 <div class="page-container" >
-<div class='center-text'>
-  <h1><%= @user.username.titleize %>'s Page</h1>
-</div>
+  <div class='center-text'>
+    <h1><%= @user.username.titleize %>'s Page</h1>
+  </div>
 
-<div class="profile-container">
+  <div class="profile-container">
 
 
     <!-- Favorites display -->
-  <div class="ui grid">
-    <div class="seven wide column">
-      <div class='inline-block one-margin'>
-        <h2 class="blue">Favorites<h2>
-      </div>
-      <div class='inline-block one-margin float-right'>
-        <h2 class="blue"><%= @user.favorite_parks.length %><h2>
-      </div>
-      <div class="ui divider">
-      </div>
-      <div class="ui middle aligned selection list">
+    <div class="ui grid">
+      <div class="seven wide column">
+        <div class='inline-block one-margin'>
+          <h2 class="blue">Favorites<h2>
+        </div>
+        <div class='inline-block one-margin float-right'>
+          <h2 class="blue"><%= @user.favorite_parks.length %><h2>
+        </div>
+        <div class="ui divider">
+        </div>
+        <div class="ui middle aligned selection list">
 
-        <% @user.favorite_parks.each do |park|%>
-          <%if park.name%>
-            <div class='item'><%= link_to park.city.titleize + ": " + park.name.titleize + ", " + park.state.capitalize.capitalize, skatepark_path(park) %></div>
-          <% else %>
-            <div class='item'><%= link_to park.city.titleize + ", " + park.state.capitalize, skatepark_path(park) %></div>
+          <% @user.favorite_parks.each do |park|%>
+            <%if park.name%>
+              <div class='item'><%= link_to park.city.titleize + ": " + park.name.titleize + ", " + park.state.capitalize.capitalize, skatepark_path(park) %></div>
+            <% else %>
+              <div class='item'><%= link_to park.city.titleize + ", " + park.state.capitalize, skatepark_path(park) %></div>
+            <% end %>
           <% end %>
-        <% end %>
 
+        </div>
+      </div>
+
+      <!-- MAP LOGIC -->
+      <div class="seven wide column">
+        <div id='user-map-container relative'>
+          <div id="user-map"></div>
+        </div>
       </div>
     </div>
-  </div>
 
-  <!-- Visited display -->
+    <!-- Visited display -->
 
-  <div class="ui grid">
-    <div class="seven wide column">
-      <div class='inline-block'>
-        <h2 class="blue">My Parks<h2>
-      </div>
-      <div class='inline-block float-right'>
-        <h2 class="blue"><%= @user.visited_parks.length %>
+    <div class="ui grid">
+
+      <div class="seven wide column">
+        <div class='inline-block'>
+          <h2 class="blue">My Parks<h2>
+        </div>
+        <div class='inline-block float-right'>
+          <h2 class="blue"><%= @user.visited_parks.length %>
           <h2>
-      </div>
-      <div class="ui divider">
-      </div>
-      <div class="ui middle aligned selection list">
-
-        <% @user.visited_parks.each do |park|%>
-          <%if park.name%>
-            <div class='item'><%= link_to park.city.titleize  + ", " + park.state.capitalize + ": " + park.name.titleize , skatepark_path(park) %></div>
-          <% else %>
-            <div class='item'><%= link_to park.city.titleize + ", " + park.state.capitalize, skatepark_path(park) %></div>
+        </div>
+        <div class="ui divider">
+        </div>
+        <div class="ui middle aligned selection list">
+          <% @user.visited_parks.each do |park|%>
+            <%if park.name%>
+              <div class='item'><%= link_to park.city.titleize  + ", " + park.state.capitalize + ": " + park.name.titleize , skatepark_path(park) %></div>
+            <% else %>
+              <div class='item'><%= link_to park.city.titleize + ", " + park.state.capitalize, skatepark_path(park) %></div>
+            <% end %>
           <% end %>
-        <% end %>
-
+        </div>
       </div>
 
     </div>
   </div>
 
-</div>
+
+
+  <script>
+    function initMap() {
+      var latLong = <%= @user.favorite_parks.first.lat_long %>
+      var mapCenter = {lat: latLong[0], lng: latLong[1]}
+      var map = new google.maps.Map(document.getElementById('user-map'), {
+        zoom: 6,
+        center: mapCenter
+      });
+      <% @user.favorite_parks.each do |skatepark| %>
+        var parkLatLng = <%= skatepark.lat_long %>
+        var markerPosition = {lat: parkLatLng[0], lng: parkLatLng[1]}
+
+        var marker = new google.maps.Marker({
+          position: markerPosition,
+          map: map,
+          title: '<%= skatepark.city.titleize %>, <%= skatepark.state.capitalize %>'
+        });
+      <% end %>
+    }
+  </script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_KEY'] %>&callback=initMap"
+          async defer></script>
+
 </div>
 
 
