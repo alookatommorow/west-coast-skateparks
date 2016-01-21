@@ -6,8 +6,7 @@ RSpec.describe User, type: :model do
       user = create(:user)
       skatepark = create(:skatepark)
 
-      Favorite.create(
-        user_id: user.id, skatepark_id: skatepark.id)
+      create(:favorite, user_id: user.id, skatepark_id: skatepark.id)
 
       fav_park = user.favorite_parks.first
       expect(fav_park.id).to eq(skatepark.id)
