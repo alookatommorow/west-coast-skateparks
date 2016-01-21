@@ -2,13 +2,9 @@ class SkateparksController < ApplicationController
 
   def search
     if params[:search]
-      @skateparks = Skatepark.search(params[:search].downcase)
-
-      respond_to do |format|
-        format.json {render json: {partial: render_to_string('_search.html.erb', layout: false)} }
-      end
+      skateparks = Skatepark.search(params[:search].downcase)
+      render partial: 'search', locals: {skateparks: skateparks}
     end
-
   end
 
   def new
@@ -24,14 +20,11 @@ class SkateparksController < ApplicationController
     else
       render 'new'
     end
-
   end
-
 
   def edit
     @skatepark = Skatepark.find(params[:id])
   end
-
 
   def show
     @skatepark = Skatepark.find(params[:id])
@@ -39,9 +32,8 @@ class SkateparksController < ApplicationController
     @state_skateparks = Skatepark.where(state: @skatepark.state)
   end
 
-
-
-  def update # needs to be changed to AJAX
+  # needs to be changed to AJAX
+  def update
     @skatepark = Skatepark.find(params[:id])
     if @skatepark.update(skatepark_params)
       redirect_to @skatepark
@@ -50,7 +42,7 @@ class SkateparksController < ApplicationController
     end
   end
 
-# admin delete skatepark via AJAX
+  # admin delete skatepark via AJAX
   def destroy
     @skatepark = Skatepark.find(params[:id])
     @skatepark.destroy
@@ -61,13 +53,8 @@ class SkateparksController < ApplicationController
 
   # skateparks by state via AJAX
   def state
-    @skateparks = Skatepark.where(state: params[:state]).order("city ASC")
-    @skatepark = Skatepark.find(100)
-    @lat_long = @skatepark.lat_long
-    @testers = [[33.707255, -117.800631], [34.10446, -117.934803], [33.071545, -116.59284]]
-    respond_to do |format|
-      format.json {render json: {partial: render_to_string('_state.html.erb', layout: false)} }
-    end
+    skateparks = Skatepark.where(state: params[:state]).order("city ASC")
+    render partial: 'state', locals: {skateparks: skateparks}
   end
 
   private
