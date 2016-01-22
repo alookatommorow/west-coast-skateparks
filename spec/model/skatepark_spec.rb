@@ -1,6 +1,32 @@
 require 'rails_helper'
 
 RSpec.describe Skatepark, type: :model do
+  context '#nearby_parks' do
+    it 'returns an array of nearby skateparks' do
+      skatepark = create(:skatepark, latitude: 35.0021, longitude: -113.0051)
+      skatepark2 = create(:skatepark, identifier: 'turdmonger', latitude: 35.7045, longitude: -113.0380)
+      skatepark3 = create(:skatepark, identifier: 'buttgoblin', latitude: 36.8021, longitude: -113.0051)
+
+      expect(skatepark.nearby_parks).to include(skatepark2)
+      expect(skatepark.nearby_parks).to_not include(skatepark3)
+
+    end
+
+  end
+
+  context '#has_coordinates?' do
+    it 'returns true if the skatepark has latitude and longitude' do
+      skatepark = create(:skatepark)
+      expect(skatepark.has_coordinates?).to eq(true)
+    end
+
+    it 'returns false if the skatepark does not have latitude or longitude' do
+      skatepark = create(:skatepark, latitude: nil)
+      expect(skatepark.has_coordinates?).to eq(false)
+    end
+
+  end
+
   context '#already_favorited_by?' do
     it 'returns true if skatepark has been favorited by user' do
       user = create(:user)
