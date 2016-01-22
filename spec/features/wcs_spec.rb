@@ -34,6 +34,6 @@ describe "the signup process", type: :feature do
     fill_in 'Password', with: user.password
     click_button 'Register'
 
-    expect(page).to have_content 'Page'
+    expect(page).to have_content user.username.capitalize
   end
 end

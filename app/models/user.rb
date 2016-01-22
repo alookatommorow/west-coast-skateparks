@@ -15,4 +15,25 @@ class User < ActiveRecord::Base
 
   has_many :reviews
   has_many :reviewed_parks, through: :reviews, source: :skatepark
+
+  def first_map_marker
+    return favorite_parks.first.lat_long if favorite_parks.first
+    return visited_parks.first.lat_long if visited_parks.first
+
+    [37.7833, -122.4167] # SF BRO!!!!
+  end
+
+  def favorites_and_visits
+    {
+      favorite_parks: favorite_parks - dups,
+      visited_parks: visited_parks - dups,
+      both: dups
+    }
+  end
+
+  private
+
+    def dups
+      @dups ||= favorite_parks & visited_parks
+    end
 end
