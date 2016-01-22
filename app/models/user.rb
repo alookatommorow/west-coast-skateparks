@@ -24,11 +24,16 @@ class User < ActiveRecord::Base
   end
 
   def favorites_and_visits
-    dups = favorite_parks & visited_parks
     {
       favorite_parks: favorite_parks - dups,
       visited_parks: visited_parks - dups,
       both: dups
     }
   end
+
+  private
+
+    def dups
+      @dups ||= favorite_parks & visited_parks
+    end
 end
