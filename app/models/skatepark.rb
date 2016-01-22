@@ -78,9 +78,27 @@ class Skatepark < ActiveRecord::Base
     lat_long
   end
 
+  def has_coordinates?
+    latitude && longitude
+  end
+
+  def is_nearby?(skatepark)
+    return if skatepark.id == id
+    return unless skatepark.has_coordinates?
+    (latitude > skatepark.latitude - 1.0 && latitude < skatepark.latitude + 1.0) &&
+      (longitude > skatepark.longitude - 1.0 && longitude < skatepark.longitude + 1.0)
+  end
+
+  def nearby_parks
+    return unless has_coordinates?
+    Skatepark.all.select { |park| is_nearby?(park) }
+  end
+
   private
     # remove this method once data is properly structured
     def delimit_size
       "#{number_with_delimiter(size, delimiter: ',')} sq ft" if size
     end
+
+
 end

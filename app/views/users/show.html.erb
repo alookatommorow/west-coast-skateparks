@@ -85,6 +85,7 @@
         var marker = new google.maps.Marker({
           position: markerPosition,
           map: map,
+          icon: 'https://maps.google.com/mapfiles/ms/icons/purple-dot.png',
           title: '<%= skatepark.city.titleize %>, <%= skatepark.state.capitalize %> (favorite)'
         });
       <% end %>
@@ -95,6 +96,7 @@
         var marker = new google.maps.Marker({
           position: markerPosition,
           map: map,
+          icon: 'https://maps.google.com/mapfiles/ms/icons/yellow-dot.png',
           title: '<%= skatepark.city.titleize %>, <%= skatepark.state.capitalize %> (visited)'
         });
       <% end %>
@@ -104,6 +106,7 @@
 
         var marker = new google.maps.Marker({
           position: markerPosition,
+          icon: 'https://maps.google.com/mapfiles/ms/icons/blue-dot.png',
           map: map,
           title: '<%= skatepark.city.titleize %>, <%= skatepark.state.capitalize %> (favorited & visited)'
         });

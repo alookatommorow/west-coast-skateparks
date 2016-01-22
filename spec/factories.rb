@@ -6,6 +6,8 @@ FactoryGirl.define do
     state 'California'
     address '520 E 3rd Ave, Hayward, CA'
     identifier 'swag'
+    latitude 53.0456
+    longitude -113.6547
 
     trait :other do
       city 'SW4GL4ND'
