@@ -170,6 +170,7 @@ function addNearbyParkMarkers(map) {
     var marker = new google.maps.Marker({
       position: position,
       map: map,
+      icon: "https://maps.google.com/mapfiles/ms/icons/green-dot.png",
       title: '<%= park.city.titleize %>, <%= park.state.capitalize %> (nearby)'
     });
   <% end %>
