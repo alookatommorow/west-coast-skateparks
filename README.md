@@ -6,7 +6,7 @@ West Coast Skateparks is an informational directory of every skatepark in the we
 
 ##Deployment
 
-West Coast Skateparks is deployed to Heroku. Visit the app [here](https://vast-island-2935.herokuapp.com/)
+West Coast Skateparks is deployed to Heroku. Visit the app [here](https://west-coast-skateparks.herokuapp.com/)
 
 ##Instructions for Use
 
@@ -46,34 +46,48 @@ Maps are generated using the [Google Maps API](https://developers.google.com/map
 
 ###Search
 
-The search is triggered using JQuery and Ajax in application.js:
+The search is triggered using JQuery and Ajax in search.js:
 
 ```javascript
 $('.search-form').on('submit', function(event){
-  event.preventDefault();
-  var url = $(this).attr('action');
-  var data = {search: $(this).find("input[name='search']").val()}
-  $.ajax({url: url, data: data, dataType: 'JSON'}).done(function(response) {
-    $(".search-results-container").remove();
-    $(".search-container").append(response.partial);
+    event.preventDefault();
+    var url = $(this).attr('action');
+    var data = $(this).serialize();
+    $.ajax({url: url, data: data})
+    .done(function(response) {
+      $(".search-results-container").remove();
+      $(".search-container").append(response);
+    })
+    .fail(function(response){
+      console.error(response);
+    })
   });
-
-});
 ```
 
-The search action in the skateparks controller takes the search query and checks skatepark names and locations for a match and sorts the results.  It sends back a partial in JSON format:
+The `skateparks#search` action in the controller calls the `skatepark#search` method, which takes the search query and checks skatepark names and locations for a match and sorts the results.  It sends back a partial in JSON format:
 
 ```ruby
 def search
   if params[:search]
-    @skateparks = Skatepark.where("name LIKE ? OR city LIKE ? OR state LIKE ?", "%" +params[:search].downcase + "%", "%" +params[:search].downcase + "%", "%" +params[:search].downcase + "%").order("state ASC").order("city ASC").order("name ASC")
-
-    respond_to do |format|
-      format.json {render json: {partial: render_to_string('_search.html.erb', layout: false)} }
-    end
+    skateparks = Skatepark.search(params[:search].downcase)
+    render partial: 'search', locals: {skateparks: skateparks}
   end
 end
 ```
+
+`Skatepark#search` method:
+
+```ruby
+def self.search(target)
+    where(
+      'name LIKE ? OR city LIKE ? OR state LIKE ?',
+      '%' + target + '%',
+      '%' + target + '%',
+      '%' + target + '%'
+    ).order('state ASC').order('city ASC').order('name ASC')
+  end
+```
+
 The above javaScript first removes any search results that may already be there, then appends the partial that was sent back as JSON from the controller.  The search results container is closed and the value of the search form is reset using JQuery:
 
 ```javascript
