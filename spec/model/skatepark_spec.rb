@@ -17,12 +17,12 @@ RSpec.describe Skatepark, type: :model do
   context '#has_coordinates?' do
     it 'returns true if the skatepark has latitude and longitude' do
       skatepark = create(:skatepark)
-      expect(skatepark.has_coordinates?).to eq(true)
+      expect(skatepark.has_coordinates?).to be_truthy
     end
 
     it 'returns false if the skatepark does not have latitude or longitude' do
       skatepark = create(:skatepark, latitude: nil)
-      expect(skatepark.has_coordinates?).to eq(false)
+      expect(skatepark.has_coordinates?).to be_falsey
     end
 
   end

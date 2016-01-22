@@ -27,11 +27,11 @@ describe 'Search', type: :feature, js: true do
     fill_in 'search', with:'OJAI'
     submit_search
 
-    expect(page).to have_text('Ojai (California)')
+    expect(page).to have_text('Ojai Skatepark (California)')
 
     fill_in 'search', with:'Ojai'
     submit_search
-    expect(page).to have_text('Ojai (California)')
+    expect(page).to have_text('Ojai Skatepark (California)')
   end
 end
 
