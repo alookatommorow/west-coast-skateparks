@@ -1,24 +1,19 @@
 class FavoritesController < ApplicationController
   def create
-    Favorite.create(
-      user_id: params[:user_id],
-      skatepark_id: params[:skatepark_id])
-
-    @skatepark = Skatepark.find(params[:skatepark_id])
-    respond_to do |format|
-      format.js
-    end
+    Favorite.create(favorite_params)
+    render nothing: true
   end
 
   def update
-    favorite = Favorite.where(
-      user_id: params[:user_id],
-      skatepark_id: params[:skatepark_id]).first
+    favorite = Favorite.find_by(favorite_params)
     Favorite.destroy(favorite.id) if favorite
-
-    @skatepark = Skatepark.find(params[:skatepark_id])
-    respond_to do |format|
-      format.js
-    end
+    render nothing: true
   end
+
+  private
+
+    def favorite_params
+      { user_id: params[:user_id],
+        skatepark_id: params[:skatepark_id] }
+    end
 end
