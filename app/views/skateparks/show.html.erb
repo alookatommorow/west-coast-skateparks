@@ -95,10 +95,12 @@
           <!-- favorite button -->
           <div class="fav-container inline-block one-top">
             <% if @skatepark.already_favorited_by?(current_user) %>
-              <%= render partial: "remove_favorite_button", locals: {skatepark: @skatepark} %>
+              <% favorited = true %>
             <% else %>
-              <%= render partial: "add_favorite_button", locals: {skatepark: @skatepark} %>
+              <% favorited = false %>
             <%end%>
+              <%= render partial: "remove_favorite_button", locals: {favorited: favorited, skatepark: @skatepark} %>
+              <%= render partial: "add_favorite_button", locals: {favorited: favorited, skatepark: @skatepark} %>
           </div>
 
           <div class="opinions-container <%= visibility %>">
