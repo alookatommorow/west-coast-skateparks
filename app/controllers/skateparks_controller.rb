@@ -28,7 +28,6 @@ class SkateparksController < ApplicationController
 
   def show
     @last = Skatepark.last.id
-    @state_skateparks = Skatepark.where(state: @skatepark.state)
   end
 
   # needs to be changed to AJAX
