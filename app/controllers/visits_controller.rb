@@ -14,6 +14,6 @@ class VisitsController < ApplicationController
 
     def visit_params
       { user_id: params[:user_id],
-      skatepark_id: params[:skatepark_id] }
+        skatepark_id: params[:skatepark_id] }
     end
 end
