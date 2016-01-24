@@ -1,4 +1,5 @@
 class SkateparksController < ApplicationController
+  before_action :set_skatepark, only: [:edit, :show, :update, :destroy]
 
   def search
     if params[:search]
@@ -23,18 +24,15 @@ class SkateparksController < ApplicationController
   end
 
   def edit
-    @skatepark = Skatepark.find(params[:id])
   end
 
   def show
-    @skatepark = Skatepark.find(params[:id])
     @last = Skatepark.last.id
     @state_skateparks = Skatepark.where(state: @skatepark.state)
   end
 
   # needs to be changed to AJAX
   def update
-    @skatepark = Skatepark.find(params[:id])
     if @skatepark.update(skatepark_params)
       redirect_to @skatepark
     else
@@ -44,7 +42,6 @@ class SkateparksController < ApplicationController
 
   # admin delete skatepark via AJAX
   def destroy
-    @skatepark = Skatepark.find(params[:id])
     @skatepark.destroy
     respond_to do |format|
       format.js
@@ -58,6 +55,11 @@ class SkateparksController < ApplicationController
   end
 
   private
+
+  def set_skatepark
+    @skatepark = Skatepark.find(params[:id])
+  end
+
   def skatepark_params
     params.require(:skatepark).permit(:name, :city, :state, :rating, :designer, :builder, :opened, :address, :hours, :size, :notes, :helmet)
   end
