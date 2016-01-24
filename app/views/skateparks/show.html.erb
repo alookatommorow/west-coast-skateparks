@@ -77,13 +77,8 @@
 
       <% if logged_in? %>
         <div class="button-container center-text">
-          <% if @skatepark.already_visited_by?(current_user) %>
-            <% visited = true %>
-            <% visibility = "" %>
-          <% else %>
-            <% visited = false %>
-            <% visibility = "hidden" %>
-          <%end%>
+          <% visited = @skatepark.already_visited_by?(current_user) %>
+          <% visibility = visited ? "" : "hidden" %>
 
           <!-- visit button -->
 
@@ -94,13 +89,9 @@
 
           <!-- favorite button -->
           <div class="fav-container inline-block one-top">
-            <% if @skatepark.already_favorited_by?(current_user) %>
-              <% favorited = true %>
-            <% else %>
-              <% favorited = false %>
-            <%end%>
-              <%= render partial: "remove_favorite_button", locals: {favorited: favorited, skatepark: @skatepark} %>
-              <%= render partial: "add_favorite_button", locals: {favorited: favorited, skatepark: @skatepark} %>
+            <% favorited = @skatepark.already_favorited_by?(current_user) %>
+            <%= render partial: "remove_favorite_button", locals: {favorited: favorited, skatepark: @skatepark} %>
+            <%= render partial: "add_favorite_button", locals: {favorited: favorited, skatepark: @skatepark} %>
           </div>
 
           <div class="opinions-container <%= visibility %>">
