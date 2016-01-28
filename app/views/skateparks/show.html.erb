@@ -157,15 +157,16 @@
 <script>
 
 function addNearbyParkMarkers(map) {
-
-  <% @skatepark.nearby_parks.each do |park| %>
-    var position = {lat: <%= park.latitude %>, lng: <%= park.longitude %>}
-    var marker = new google.maps.Marker({
-      position: position,
-      map: map,
-      icon: "https://maps.google.com/mapfiles/ms/icons/green-dot.png",
-      title: '<%= park.city.titleize %>, <%= park.state.capitalize %> (nearby)'
-    });
+  <% if @skatepark.nearby_parks %>
+    <% @skatepark.nearby_parks.each do |park| %>
+      var position = {lat: <%= park.latitude %>, lng: <%= park.longitude %>}
+      var marker = new google.maps.Marker({
+        position: position,
+        map: map,
+        icon: "https://maps.google.com/mapfiles/ms/icons/green-dot.png",
+        title: '<%= park.city.titleize %>, <%= park.state.capitalize %> (nearby)'
+      });
+    <% end %>
   <% end %>
 }
 
@@ -183,7 +184,9 @@ function initMap() {
     title: '<%= @skatepark.city.titleize %>, <%= @skatepark.state.capitalize %>'
   });
 
-  addNearbyParkMarkers(map);
+
+    addNearbyParkMarkers(map);
+
 
 }
 
