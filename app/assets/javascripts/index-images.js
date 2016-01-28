@@ -1,5 +1,5 @@
 function cycleImages(){
-    var $active = $('.active');
+    var $active = $('.image-rotator .active');
     var $next = ($active.next().length > 0) ? $active.next() : $('.image-rotator img:first');
     $active.fadeOut(1500,function(){
       $active.removeClass('active');
