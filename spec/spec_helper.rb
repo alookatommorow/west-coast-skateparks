@@ -28,9 +28,6 @@ Capybara.javascript_driver = :webkit
 # tests use regular (faster) driver if they don't require js
 Capybara.default_driver = :rack_test
 
-# runs a server so tests aren't dependent on development server being up
-Capybara.run_server = true
-Capybara.server_port = 8200
 Capybara::Webkit.configure do |config|
   config.allow_unknown_urls
 end
