@@ -77,7 +77,7 @@
 
     function initMap() {
 
-      var parkCoords = <%= @user.first_map_marker %>
+      var parkCoords = <%= @user.first_marker_coordinates %>
       var mapCenter = {lat: parkCoords[0], lng: parkCoords[1]}
       var map = new google.maps.Map(document.getElementById('user-map'), {
         zoom: 6,
