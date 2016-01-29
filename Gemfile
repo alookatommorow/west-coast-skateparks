@@ -30,11 +30,16 @@ gem 'rails_12factor', group: :production
   # gem 'better_errors'
 # end
 
+group :assets do
+  gem 'coffee-rails'
+end
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'pry-rails'
   gem 'pry-byebug'
   gem 'rspec-rails'
+  gem 'bundler-audit', require: false
   gem 'capybara'
   gem 'capybara-webkit'
   gem 'factory_girl_rails'
