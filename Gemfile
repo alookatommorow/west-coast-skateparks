@@ -30,6 +30,10 @@ gem 'rails_12factor', group: :production
   # gem 'better_errors'
 # end
 
+group :assets do
+  gem 'coffee-rails'
+end
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'pry-rails'
@@ -47,6 +51,10 @@ end
 
 group :test do
   gem 'database_cleaner'
+end
+
+group :development, :production do
+  gem 'forgery', '0.6.0'
 end
 
 #bullshit gems - delete at some point!

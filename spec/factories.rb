@@ -18,18 +18,18 @@ FactoryGirl.define do
   end
 
   factory :user do
-    username 'swaggy'
+    sequence(:username) { |n| "swaggy#{n}" }
+    sequence(:email) { |n| "swag#{n}@swag.swag" }
     password 'swag'
-    email 'swag@swag.swag'
   end
 
   factory :favorite do
-    user_id 1
-    skatepark_id 1
+    user_id 420
+    skatepark_id 420
   end
 
   factory :visit do
-    user_id 1
-    skatepark_id 1
+    user_id 420
+    skatepark_id 420
   end
 end
