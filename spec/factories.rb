@@ -8,12 +8,14 @@ FactoryGirl.define do
     identifier 'swag'
     latitude 53.0456
     longitude -113.6547
+    num_pics 3
 
     trait :other do
       city 'SW4GL4ND'
       state 'California'
       address '26251 Hesperian Blvd, Hayward, CA'
       identifier 'SWAGNIFICENT'
+      num_pics 0
     end
   end
 

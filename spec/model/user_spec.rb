@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  context '#first_map_marker' do
+  context '#first_marker_coordinates' do
     it 'returns lat long of first favorited or visited skatepark' do
       user = create(:user)
       skatepark = create(:skatepark)
@@ -10,13 +10,13 @@ RSpec.describe User, type: :model do
       create(:visit, user_id: user.id, skatepark_id: skatepark.id)
       create(:favorite, user_id: user.id, skatepark_id: other.id)
 
-      expect(user.first_map_marker).to eq(other.lat_long)
+      expect(user.first_marker_coordinates).to eq([other.latitude, other.longitude])
     end
 
     it 'returns SF EPICENTER if no park is found' do
       user = create(:user)
 
-      expect(user.first_map_marker).to eq([37.7833, -122.4167])
+      expect(user.first_marker_coordinates).to eq([37.7833, -122.4167])
     end
   end
 

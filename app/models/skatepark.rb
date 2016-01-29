@@ -17,6 +17,21 @@ class Skatepark < ActiveRecord::Base
   has_many :reviews, dependent: :destroy
   has_many :users_who_reviewed, through: :reviews, source: :user
 
+  def map_format
+    attributes.merge({
+      pictures: pictures,
+      nearbyParks: nearby_parks.map(&:map_format_nearby),
+      firstPicture: first_picture
+    }).to_json
+  end
+
+  def map_format_nearby
+    attributes.merge({
+      pictures: pictures,
+      firstPicture: first_picture
+    }).to_json
+  end
+
   def self.search(target)
     where(
       'name LIKE ? OR city LIKE ? OR state LIKE ?',
@@ -36,6 +51,10 @@ class Skatepark < ActiveRecord::Base
     else
       []
     end
+  end
+
+  def first_picture
+    pictures.first ? pictures.first : "https://storage.googleapis.com/west-coast-skateparks/logo-small.png"
   end
 
   def already_favorited_by?(user)
@@ -68,14 +87,6 @@ class Skatepark < ActiveRecord::Base
     }
     titleized.each {|k, v| titleized[k] = v.titleize if v }
     untouched.merge(titleized)
-  end
-
-  def lat_long
-    lat_long = []
-    coords = MultiGeocoder.geocode(self.address)
-    lat_long.push(coords.lat)
-    lat_long.push(coords.lng)
-    lat_long
   end
 
   def has_coordinates?

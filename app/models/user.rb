@@ -16,9 +16,11 @@ class User < ActiveRecord::Base
   has_many :reviews
   has_many :reviewed_parks, through: :reviews, source: :skatepark
 
-  def first_map_marker
-    return favorite_parks.first.lat_long if favorite_parks.first
-    return visited_parks.first.lat_long if visited_parks.first
+  def first_marker_coordinates
+    favorite = favorite_parks.first
+    return [favorite.latitude, favorite.longitude] if favorite
+    visit = visited_parks.first
+    return [visit.latitude, visit.longitude] if visit
 
     [37.7833, -122.4167] # SF BRO!!!!
   end
