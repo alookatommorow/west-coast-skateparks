@@ -38,6 +38,10 @@ class Skatepark < ActiveRecord::Base
     end
   end
 
+  def first_picture
+    pictures.first ? pictures.first : "https://storage.googleapis.com/west-coast-skateparks/logo-small.png"
+  end
+
   def already_favorited_by?(user)
     users_who_faved.include?(user)
   end

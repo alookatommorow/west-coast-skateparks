@@ -1,6 +1,37 @@
 require 'rails_helper'
 
 RSpec.describe Skatepark, type: :model do
+  context '#pictures' do
+    it 'returns an array with the correct photo urls' do
+      skatepark = create(:skatepark)
+      expect(skatepark.pictures).to eq(
+        [
+          generate_image_url(skatepark, 1),
+          generate_image_url(skatepark, 2),
+          generate_image_url(skatepark, 3),
+        ]
+      )
+
+    end
+
+    it 'returns an empty array if no pics' do
+      skatepark = create(:skatepark, :other)
+      expect(skatepark.pictures).to eq([])
+    end
+  end
+
+  context '#first_picture' do
+    it 'should return the url of the first picture' do
+      skatepark = create(:skatepark)
+      expect(skatepark.first_picture).to eq(generate_image_url(skatepark, 1))
+    end
+
+    it 'should return the wcs logo if no image' do
+      skatepark = create(:skatepark, :other)
+      expect(skatepark.first_picture).to eq("https://storage.googleapis.com/west-coast-skateparks/logo-small.png")
+    end
+  end
+
   context '#nearby_parks' do
     it 'returns an array of nearby skateparks' do
       skatepark = create(:skatepark, latitude: 35.0021, longitude: -113.0051)
@@ -102,4 +133,8 @@ RSpec.describe Skatepark, type: :model do
       expect(skatepark.average_rating).to eq(3)
     end
   end
+end
+
+def generate_image_url(skatepark, pic_num)
+  "https://storage.googleapis.com/west-coast-skateparks/#{skatepark.state}/#{skatepark.identifier}-0#{pic_num}.jpg"
 end

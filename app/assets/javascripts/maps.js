@@ -14,7 +14,9 @@ function addInfoWindow(map, skatepark, marker, allMarkers){
 }
 
 function generateContentString(skatepark) {
-  return "<div id='content'>"+skatepark.city+"</div>";
+  return "<div id='content'><div class='left'><img style='height:50px' src='https://storage.googleapis.com/west-coast-skateparks/"+skatepark.state+"/"+skatepark.identifier+"-01.jpg' ></div>"+skatepark.city+"</div>";
+
+  // "https://storage.googleapis.com/west-coast-skateparks/#{state}/#{identifier}-01.jpg"
 }
 
 function addNearbyParkMarkers(map, skatepark, nearbyParks) {
