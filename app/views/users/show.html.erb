@@ -87,15 +87,15 @@
       <% favs_and_visits = @user.favorites_and_visits %>
 
       <% favs_and_visits[:favorite_parks].each do |skatepark| %>
-        createMarker(map, <%= skatepark.to_json.html_safe %>, 'favorite');
+        createMarker(map, <%= skatepark.map_format_nearby.html_safe %>, 'favorite');
       <% end %>
 
       <% favs_and_visits[:visited_parks].each do |skatepark| %>
-        createMarker(map, <%= skatepark.to_json.html_safe %>, 'visited');
+        createMarker(map, <%= skatepark.map_format_nearby.html_safe %>, 'visited');
       <% end %>
 
       <% favs_and_visits[:both].each do |skatepark| %>
-        createMarker(map, <%= skatepark.to_json.html_safe %>, 'both');
+        createMarker(map, <%= skatepark.map_format_nearby.html_safe %>, 'both');
       <% end %>
 
       types.forEach(function (type) {

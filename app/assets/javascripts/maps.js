@@ -63,12 +63,10 @@ var toggleable = {favorite: [], visited: [], both: []};
 var allParks = []
 
 
-
 function createMarker(map, park, type) {
   var markerPosition = {lat: park.latitude, lng: park.longitude};
-  contentString = "<div id='content'>"+park.city+"</div>";
   var infowindow = new google.maps.InfoWindow({
-    content: contentString
+    content: generateContentString(park)
   });
 
   var marker = new google.maps.Marker({
