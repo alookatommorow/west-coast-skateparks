@@ -39,7 +39,6 @@ group :development, :test do
   gem 'pry-rails'
   gem 'pry-byebug'
   gem 'rspec-rails'
-  gem 'bundler-audit', require: false
   gem 'capybara'
   gem 'capybara-webkit'
   gem 'factory_girl_rails'
@@ -52,6 +51,10 @@ end
 
 group :test do
   gem 'database_cleaner'
+end
+
+group :development, :production do
+  gem 'forgery', '0.6.0'
 end
 
 #bullshit gems - delete at some point!
