@@ -158,67 +158,31 @@
 </div>
 
 <script>
+  function initMap() {
+    var skatepark = <%= @skatepark.to_json.html_safe %>
+    var nearbyParks = <%= @skatepark.nearby_parks.to_json.html_safe %>
 
-function addNearbyParkMarkers(map) {
-  <% if @skatepark.nearby_parks %>
-    var nearbyMarkers = [];
-    <% @skatepark.nearby_parks.each do |park| %>
-      var position = {lat: <%= park.latitude %>, lng: <%= park.longitude %>}
-      var marker = new google.maps.Marker({
-        position: position,
-        map: map,
-        icon: "https://maps.google.com/mapfiles/ms/icons/green-dot.png",
-        title: '<%= park.city.titleize %>, <%= park.state.capitalize %> (nearby)'
-      });
-
-      nearbyMarkers.push(marker);
-    <% end %>
-
-    $('#toggle-markers').on('click', function (event) {
-      var $button = $(event.target);
-      if ($button.text() === 'Hide Nearby Parks') {
-        $button.text('Show Nearby Parks');
-        toggleMarkerVisibility(nearbyMarkers, false);
-      } else {
-        $button.text('Hide Nearby Parks');
-        toggleMarkerVisibility(nearbyMarkers, true);
-      }
+    var myLatLng = {lat: skatepark.latitude, lng: skatepark.longitude}
+    var map = new google.maps.Map(document.getElementById('map'), {
+      zoom: 9,
+      center: myLatLng
+    });
+    var marker = new google.maps.Marker({
+      position: myLatLng,
+      map: map,
+      title: skatepark.city+', '+skatepark.state
     });
 
-  <% end %>
-}
+    addNearbyParkMarkers(map, skatepark, nearbyParks);
 
-function toggleMarkerVisibility(markers, visibility) {
-  markers.forEach(function (marker) {
-    marker.setVisible(visibility);
-  });
-}
-
-function initMap() {
-
-  var latLong = <%= @skatepark.lat_long %>
-  var myLatLng = {lat: latLong[0], lng: latLong[1]}
-  var map = new google.maps.Map(document.getElementById('map'), {
-    zoom: 9,
-    center: myLatLng
-  });
-  var marker = new google.maps.Marker({
-    position: myLatLng,
-    map: map,
-    title: '<%= @skatepark.city.titleize %>, <%= @skatepark.state.capitalize %>'
-  });
-
-
-  addNearbyParkMarkers(map);
-
-
-}
-
-
+  }
 
 </script>
+
+
 <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_KEY'] %>&callback=initMap"
-    async defer></script>
+    async defer>
+</script>
 
 <style>
   .header-image {
