@@ -1,8 +1,8 @@
 //skatepark#show
 function addInfoWindow(map, skatepark, marker, allMarkers){
-  contentString = "<div id='content'>"+skatepark.city+"</div>"
+  // contentString = skatepark.generate_info_window;
   var infowindow = new google.maps.InfoWindow({
-    content: contentString
+    content: generateContentString(skatepark)
   });
   marker['infowindow'] = infowindow;
   marker.addListener('click', function() {
@@ -11,6 +11,10 @@ function addInfoWindow(map, skatepark, marker, allMarkers){
     });
     infowindow.open(map, marker);
   });
+}
+
+function generateContentString(skatepark) {
+  return "<div id='content'>"+skatepark.city+"</div>";
 }
 
 function addNearbyParkMarkers(map, skatepark, nearbyParks) {
