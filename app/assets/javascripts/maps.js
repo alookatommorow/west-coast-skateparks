@@ -1,4 +1,17 @@
 //skatepark#show
+function addInfoWindow(map, skatepark, marker, allMarkers){
+  contentString = "<div id='content'>"+skatepark.city+"</div>"
+  var infowindow = new google.maps.InfoWindow({
+    content: contentString
+  });
+  marker['infowindow'] = infowindow;
+  marker.addListener('click', function() {
+    allMarkers.forEach(function(marker){
+      marker.infowindow.close();
+    });
+    infowindow.open(map, marker);
+  });
+}
 
 function addNearbyParkMarkers(map, skatepark, nearbyParks) {
   if (nearbyParks.length > 0) {
@@ -11,6 +24,7 @@ function addNearbyParkMarkers(map, skatepark, nearbyParks) {
         icon: "https://maps.google.com/mapfiles/ms/icons/green-dot.png",
         title: park.city+', '+park.state + ' (nearby)'
       });
+      addInfoWindow(map, park, marker, nearbyMarkers);
       nearbyMarkers.push(marker);
     });
   }
