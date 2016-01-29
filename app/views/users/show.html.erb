@@ -32,6 +32,11 @@
 
       <!-- MAP LOGIC -->
       <div class="seven wide column">
+        <div class="center-text">
+          <button id="toggle-favorite" class="ui button">Hide Favorites</button>
+          <button id="toggle-visited" class="ui button">Hide Visited</button>
+          <button id="toggle-both" class="ui button">Hide Thrashed</button>
+        </div>
         <div id='user-map-container relative'>
           <div id="user-map"></div>
         </div>
@@ -69,47 +74,72 @@
 
 
   <script>
+    var types = ['favorite', 'visited', 'both'];
+    var legend = {favorite: 'purple-dot', visited: 'yellow-dot', both: 'blue-dot'}
+    var toggleable = {};
+
+    types.forEach(function (type) {
+      toggleable[type] = [];
+      addMarkerToggleListener(type);
+    });
+
+    function createMarker(map, park, type) {
+      var markerPosition = {lat: park.latitude, lng: park.longitude}
+
+      var marker = new google.maps.Marker({
+        position: markerPosition,
+        map: map,
+        icon: 'https://maps.google.com/mapfiles/ms/icons/' + legend[type] + '.png',
+        title: park.city + ', ' + park.state + ' (' + type + ')'
+      });
+
+      toggleable[type].push(marker);
+    }
+
+    function addMarkerToggleListener(type) {
+      $('#toggle-' + type).on('click', function (event) {
+        var $button = $(event.target);
+        var action = $button.text().split(' ')
+
+        if (action[0] === 'Hide') {
+          action[0] = 'Show'
+          $button.text(action.join(' '));
+          toggleMarkerVisibility(toggleable[type], false);
+        } else {
+          action[0] = 'Hide'
+          $button.text(action.join(' '));
+          toggleMarkerVisibility(toggleable[type], true);
+        }
+      });
+    }
+
+    function toggleMarkerVisibility(markers, visibility) {
+      markers.forEach(function (marker) {
+        marker.setVisible(visibility);
+      });
+    }
+
+
     function initMap() {
       var parkCoords = <%= @user.first_map_marker %>
-
       var mapCenter = {lat: parkCoords[0], lng: parkCoords[1]}
       var map = new google.maps.Map(document.getElementById('user-map'), {
         zoom: 6,
         center: mapCenter
       });
+
       <% favs_and_visits = @user.favorites_and_visits %>
+
       <% favs_and_visits[:favorite_parks].each do |skatepark| %>
-        var parkLatLng = <%= skatepark.lat_long %>
-        var markerPosition = {lat: parkLatLng[0], lng: parkLatLng[1]}
-
-        var marker = new google.maps.Marker({
-          position: markerPosition,
-          map: map,
-          icon: 'https://maps.google.com/mapfiles/ms/icons/purple-dot.png',
-          title: '<%= skatepark.city.titleize %>, <%= skatepark.state.capitalize %> (favorite)'
-        });
+        createMarker(map, <%= skatepark.to_json.html_safe %>, 'favorite');
       <% end %>
+
       <% favs_and_visits[:visited_parks].each do |skatepark| %>
-        var parkLatLng = <%= skatepark.lat_long %>
-        var markerPosition = {lat: parkLatLng[0], lng: parkLatLng[1]}
-
-        var marker = new google.maps.Marker({
-          position: markerPosition,
-          map: map,
-          icon: 'https://maps.google.com/mapfiles/ms/icons/yellow-dot.png',
-          title: '<%= skatepark.city.titleize %>, <%= skatepark.state.capitalize %> (visited)'
-        });
+        createMarker(map, <%= skatepark.to_json.html_safe %>, 'visited');
       <% end %>
-      <% favs_and_visits[:both].each do |skatepark| %>
-        var parkLatLng = <%= skatepark.lat_long %>
-        var markerPosition = {lat: parkLatLng[0], lng: parkLatLng[1]}
 
-        var marker = new google.maps.Marker({
-          position: markerPosition,
-          icon: 'https://maps.google.com/mapfiles/ms/icons/blue-dot.png',
-          map: map,
-          title: '<%= skatepark.city.titleize %>, <%= skatepark.state.capitalize %> (favorited & visited)'
-        });
+      <% favs_and_visits[:both].each do |skatepark| %>
+        createMarker(map, <%= skatepark.to_json.html_safe %>, 'both');
       <% end %>
     }
   </script>

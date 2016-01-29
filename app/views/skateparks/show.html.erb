@@ -42,6 +42,9 @@
 
 
     <!-- Map -->
+      <div class="center-text">
+        <button id="toggle-markers" class="ui button">Hide Nearby Parks</button>
+      </div>
       <div class="one-top">
         <div id='map-container relative'>
             <div id='map'></div>
@@ -158,6 +161,7 @@
 
 function addNearbyParkMarkers(map) {
   <% if @skatepark.nearby_parks %>
+    var nearbyMarkers = [];
     <% @skatepark.nearby_parks.each do |park| %>
       var position = {lat: <%= park.latitude %>, lng: <%= park.longitude %>}
       var marker = new google.maps.Marker({
@@ -166,8 +170,28 @@ function addNearbyParkMarkers(map) {
         icon: "https://maps.google.com/mapfiles/ms/icons/green-dot.png",
         title: '<%= park.city.titleize %>, <%= park.state.capitalize %> (nearby)'
       });
+
+      nearbyMarkers.push(marker);
     <% end %>
+
+    $('#toggle-markers').on('click', function (event) {
+      var $button = $(event.target);
+      if ($button.text() === 'Hide Nearby Parks') {
+        $button.text('Show Nearby Parks');
+        toggleMarkerVisibility(nearbyMarkers, false);
+      } else {
+        $button.text('Hide Nearby Parks');
+        toggleMarkerVisibility(nearbyMarkers, true);
+      }
+    });
+
   <% end %>
+}
+
+function toggleMarkerVisibility(markers, visibility) {
+  markers.forEach(function (marker) {
+    marker.setVisible(visibility);
+  });
 }
 
 function initMap() {
@@ -185,7 +209,7 @@ function initMap() {
   });
 
 
-    addNearbyParkMarkers(map);
+  addNearbyParkMarkers(map);
 
 
 }
