@@ -13,8 +13,8 @@ RSpec.describe Skatepark, type: :model do
           generate_image_url(skatepark, 3),
         ]
       )
-      expect(map_format['nearby_parks'][0]).to eq(nearby_skatepark.map_format_nearby)
-      expect(map_format['first_picture']).to eq(generate_image_url(skatepark, 1))
+      expect(map_format['nearbyParks'][0]).to eq(nearby_skatepark.map_format_nearby)
+      expect(map_format['firstPicture']).to eq(generate_image_url(skatepark, 1))
     end
   end
 

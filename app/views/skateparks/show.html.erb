@@ -159,10 +159,7 @@
 
 <script>
   function initMap() {
-    var skatepark = <%= @skatepark.to_json.html_safe %>
-    var nearbyParks = <%= @skatepark.nearby_parks.to_json.html_safe %>
-    var infowindowPic = "<%= @skatepark.first_picture %>"
-
+    var skatepark = <%= @skatepark.map_format.html_safe %>
     var myLatLng = {lat: skatepark.latitude, lng: skatepark.longitude}
 
     var map = new google.maps.Map(document.getElementById('map'), {
@@ -176,15 +173,14 @@
       title: skatepark.city+', '+skatepark.state
     });
 
-    contentString = "<div id='content'>"+skatepark.city+"</div>"
     var infowindow = new google.maps.InfoWindow({
-      content: contentString
+      content: generateContentString(skatepark)
     });
     marker.addListener('click', function() {
       infowindow.open(map, marker);
     });
 
-    addNearbyParkMarkers(map, skatepark, nearbyParks, infowindowPic);
+    addNearbyParkMarkers(map, skatepark);
 
   }
 
