@@ -21,7 +21,8 @@ gem 'underscore-rails'
 gem 'gmaps4rails'
 gem 'less-rails-semantic_ui', '~> 2.0.7.0'
 gem 'autoprefixer-rails', '~> 5.2.1.2'
-
+# Use SCSS for stylesheets
+gem 'sass-rails', '~> 4.0.3'
 
 gem 'rails_12factor', group: :production
 
@@ -54,8 +55,7 @@ end
 # Use CoffeeScript for .js.coffee assets and views
 # gem 'coffee-rails', '~> 4.0.0'
 
-# Use SCSS for stylesheets
-# gem 'sass-rails', '~> 4.0.3'
+
 
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer',  platforms: :ruby
