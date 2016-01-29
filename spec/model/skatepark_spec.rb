@@ -1,6 +1,23 @@
 require 'rails_helper'
 
 RSpec.describe Skatepark, type: :model do
+  context '#map_format' do
+    it 'returns object with properties with values returned from model methods' do
+      skatepark = create(:skatepark)
+      nearby_skatepark = create(:skatepark, identifier: "alternate")
+      map_format = JSON.parse(skatepark.map_format)
+      expect(map_format['pictures']).to eq(
+        [
+          generate_image_url(skatepark, 1),
+          generate_image_url(skatepark, 2),
+          generate_image_url(skatepark, 3),
+        ]
+      )
+      expect(map_format['nearby_parks'][0]).to eq(nearby_skatepark.map_format_nearby)
+      expect(map_format['first_picture']).to eq(generate_image_url(skatepark, 1))
+    end
+  end
+
   context '#pictures' do
     it 'returns an array with the correct photo urls' do
       skatepark = create(:skatepark)

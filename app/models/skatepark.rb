@@ -17,6 +17,21 @@ class Skatepark < ActiveRecord::Base
   has_many :reviews, dependent: :destroy
   has_many :users_who_reviewed, through: :reviews, source: :user
 
+  def map_format
+    p attributes.merge({
+      pictures: pictures,
+      nearby_parks: nearby_parks.map(&:map_format_nearby),
+      first_picture: first_picture
+    }).to_json
+  end
+
+  def map_format_nearby
+    attributes.merge({
+      pictures: pictures,
+      first_picture: first_picture
+    }).to_json
+  end
+
   def self.search(target)
     where(
       'name LIKE ? OR city LIKE ? OR state LIKE ?',

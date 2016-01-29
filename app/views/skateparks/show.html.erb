@@ -161,6 +161,7 @@
   function initMap() {
     var skatepark = <%= @skatepark.to_json.html_safe %>
     var nearbyParks = <%= @skatepark.nearby_parks.to_json.html_safe %>
+    var infowindowPic = "<%= @skatepark.first_picture %>"
 
     var myLatLng = {lat: skatepark.latitude, lng: skatepark.longitude}
 
@@ -183,7 +184,7 @@
       infowindow.open(map, marker);
     });
 
-    addNearbyParkMarkers(map, skatepark, nearbyParks);
+    addNearbyParkMarkers(map, skatepark, nearbyParks, infowindowPic);
 
   }
 

@@ -1,8 +1,8 @@
 //skatepark#show
-function addInfoWindow(map, skatepark, marker, allMarkers){
+function addInfoWindow(map, skatepark, marker, allMarkers, infowindowPic){
   // contentString = skatepark.generate_info_window;
   var infowindow = new google.maps.InfoWindow({
-    content: generateContentString(skatepark)
+    content: generateContentString(skatepark, infowindowPic)
   });
   marker['infowindow'] = infowindow;
   marker.addListener('click', function() {
@@ -13,13 +13,13 @@ function addInfoWindow(map, skatepark, marker, allMarkers){
   });
 }
 
-function generateContentString(skatepark) {
-  return "<div id='content'><div class='left'><img style='height:50px' src='https://storage.googleapis.com/west-coast-skateparks/"+skatepark.state+"/"+skatepark.identifier+"-01.jpg' ></div>"+skatepark.city+"</div>";
+function generateContentString(skatepark, infowindowPic) {
+  return "<div id='content'><div class='left'><img style='height:50px' src='"+infowindowPic+ "' ></div>"+skatepark.city+"</div>";
 
   // "https://storage.googleapis.com/west-coast-skateparks/#{state}/#{identifier}-01.jpg"
 }
 
-function addNearbyParkMarkers(map, skatepark, nearbyParks) {
+function addNearbyParkMarkers(map, skatepark, nearbyParks, infowindowPic) {
   if (nearbyParks.length > 0) {
     var nearbyMarkers = [];
     nearbyParks.forEach(function(park){
@@ -30,7 +30,7 @@ function addNearbyParkMarkers(map, skatepark, nearbyParks) {
         icon: "https://maps.google.com/mapfiles/ms/icons/green-dot.png",
         title: park.city+', '+park.state + ' (nearby)'
       });
-      addInfoWindow(map, park, marker, nearbyMarkers);
+      addInfoWindow(map, park, marker, nearbyMarkers, infowindowPic);
       nearbyMarkers.push(marker);
     });
   }
