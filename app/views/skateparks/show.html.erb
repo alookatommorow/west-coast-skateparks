@@ -167,20 +167,11 @@
       center: myLatLng
     });
 
-    var marker = new google.maps.Marker({
-      position: myLatLng,
-      map: map,
-      title: skatepark.city+', '+skatepark.state
-    });
+    var generator = new MarkerGenerator(map);
+    generator.generateMainMarker(skatepark);
+    generator.generateNearbyMarkers(skatepark);
 
-    var infowindow = new google.maps.InfoWindow({
-      content: generateContentString(skatepark)
-    });
-    marker.addListener('click', function() {
-      infowindow.open(map, marker);
-    });
-
-    addNearbyParkMarkers(map, skatepark);
+    // addNearbyParkMarkers(map, skatepark);
 
   }
 
