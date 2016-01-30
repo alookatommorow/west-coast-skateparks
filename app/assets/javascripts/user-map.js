@@ -112,7 +112,7 @@ function MarkerGenerator(map, skateparks) {
   }
 
   function generateContentString(skatepark) {
-    return "<div id='content'><div class='left'><img style='height:50px' src='"+skatepark.firstPicture+ "' ></div>"+skatepark.city+"</div>";
+    return "<div id='content'><div class='left'><img style='height:50px' src='"+skatepark.firstPicture+ "' ></div><strong><a href='/skateparks/"+skatepark.id+"'>"+skatepark.city+"</a></strong></div>";
   }
 
   function addInfoWindow(map, skatepark, marker, allMarkers){
