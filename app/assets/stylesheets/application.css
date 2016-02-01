@@ -99,6 +99,14 @@ html, body {
   padding-bottom: 1%;
 }
 
+.ten-left {
+  padding-left: 10%;
+}
+
+.ten-right {
+  padding-left: 10%;
+}
+
 .relative {
   position: relative;
 }
@@ -167,6 +175,10 @@ html, body {
 
 /*-------Index Page----------*/
 
+.grey {
+  background-color: #c3c3c3;
+}
+
 .parks-container a {
   color: black;
 }
@@ -176,6 +188,13 @@ html, body {
   margin-top: 10px;
 }
 
+.image-rotator {
+  background-image: url("https://storage.googleapis.com/west-coast-skateparks/headers/lance-mountain.jpg" );
+  background-size: 100% auto;
+  background-position: 0 -100px;
+  padding: 12% 7%;
+}
+/*
 .image-rotator {
   position: relative;
   height: 400px;
@@ -195,7 +214,7 @@ html, body {
   position: absolute;
   display: none;
   height: 100%;
-}
+}*/
 
 /*-------About Page----------*/
 
