@@ -1,0 +1,4 @@
+test:
+  adapter: postgresql
+  database: west-coast-skateparks_test
+  username: postgres
