@@ -3,10 +3,15 @@ $(document).ready(function(){
 
   //////// Show skateparks by state ////////
   $(".park-state").on('click', function(event){
+    var $stateButton = $(this);
     event.preventDefault();
+    if ($stateButton.hasClass('active')) {
+      $stateButton.removeClass('active');
+      return slideDownImages();
+    }
     slideUpImages();
-    var url = $(this).attr('href');
-    $(this).addClass('active').siblings().removeClass('active');
+    var url = $stateButton.attr('href');
+    $stateButton.addClass('active').siblings().removeClass('active');
     $.ajax({url: url})
     .done(function(response) {
       $(".parks-container").children().remove();
@@ -45,11 +50,15 @@ $(document).ready(function(){
 
   var rotationTimer = setInterval(cycleImages, 4000);
 
+  function slideUpImages(){
+    clearInterval(rotationTimer);
+    $('.image-rotator').slideUp('slow');
+  }
+
+  function slideDownImages() {
+    rotationTimer = setInterval(cycleImages, 4000);
+    $('.image-rotator').slideDown('slow');
+  }
 
 });
 
-function slideUpImages(){
-  $('.image-rotator').slideUp('slow', function(){
-    clearInterval(rotationTimer);
-  });
-}
