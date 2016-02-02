@@ -1,5 +1,6 @@
 require 'rails_helper'
 
+=begin
 describe 'Search', type: :feature, js: true do
   it 'should search properly and generate links to skateparks' do
     visit '/'
@@ -40,3 +41,4 @@ end
 def submit_search
   find('.input .search').click
 end
+=end

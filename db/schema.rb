@@ -16,7 +16,7 @@ ActiveRecord::Schema.define(version: 20160114055317) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "favorites", force: true do |t|
+  create_table "favorites", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "skatepark_id"
     t.datetime "created_at",   null: false
@@ -27,7 +27,7 @@ ActiveRecord::Schema.define(version: 20160114055317) do
   add_index "favorites", ["user_id", "skatepark_id"], name: "index_favorites_on_user_id_and_skatepark_id", unique: true, using: :btree
   add_index "favorites", ["user_id"], name: "index_favorites_on_user_id", using: :btree
 
-  create_table "ratings", force: true do |t|
+  create_table "ratings", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "skatepark_id"
     t.integer  "rating"
@@ -39,7 +39,7 @@ ActiveRecord::Schema.define(version: 20160114055317) do
   add_index "ratings", ["user_id", "skatepark_id"], name: "index_ratings_on_user_id_and_skatepark_id", unique: true, using: :btree
   add_index "ratings", ["user_id"], name: "index_ratings_on_user_id", using: :btree
 
-  create_table "reviews", force: true do |t|
+  create_table "reviews", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "skatepark_id"
     t.string   "review"
@@ -51,7 +51,7 @@ ActiveRecord::Schema.define(version: 20160114055317) do
   add_index "reviews", ["user_id", "skatepark_id"], name: "index_reviews_on_user_id_and_skatepark_id", unique: true, using: :btree
   add_index "reviews", ["user_id"], name: "index_reviews_on_user_id", using: :btree
 
-  create_table "skateparks", force: true do |t|
+  create_table "skateparks", force: :cascade do |t|
     t.string   "name"
     t.string   "city"
     t.string   "state"
@@ -79,7 +79,7 @@ ActiveRecord::Schema.define(version: 20160114055317) do
     t.datetime "updated_at"
   end
 
-  create_table "users", force: true do |t|
+  create_table "users", force: :cascade do |t|
     t.string   "username"
     t.string   "email"
     t.boolean  "admin",           default: false
@@ -88,7 +88,7 @@ ActiveRecord::Schema.define(version: 20160114055317) do
     t.datetime "updated_at"
   end
 
-  create_table "visits", force: true do |t|
+  create_table "visits", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "skatepark_id"
     t.datetime "created_at",   null: false
