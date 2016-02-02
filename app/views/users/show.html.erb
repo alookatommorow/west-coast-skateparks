@@ -81,26 +81,24 @@
       var mapCenter = {lat: parkCoords[0], lng: parkCoords[1]}
       var map = new google.maps.Map(document.getElementById('user-map'), {
         zoom: 6,
-        center: mapCenter
+        center: mapCenter,
       });
 
       <% favs_and_visits = @user.favorites_and_visits %>
-
-      <% favs_and_visits[:favorite_parks].each do |skatepark| %>
-        createMarker(map, <%= skatepark.map_format_nearby.html_safe %>, 'favorite');
+      <% favs_and_visits.each_value do |skateparks| %>
+        <% skateparks.map do |skatepark| %>
+          <% skatepark.map_format_nearby.html_safe %>
+        <% end %>
       <% end %>
 
-      <% favs_and_visits[:visited_parks].each do |skatepark| %>
-        createMarker(map, <%= skatepark.map_format_nearby.html_safe %>, 'visited');
-      <% end %>
+      var favorite = <%= favs_and_visits[:favorite_parks].map {|s| s.map_format_nearby.html_safe}.to_json.html_safe %>;
+      var visited = <%= favs_and_visits[:visited_parks].map {|s| s.map_format_nearby.html_safe}.to_json.html_safe %>;
+      var both = <%= favs_and_visits[:both].map {|s| s.map_format_nearby.html_safe}.to_json.html_safe %>;
+      var skateparks = { favorite: favorite, visited: visited, both: both }
 
-      <% favs_and_visits[:both].each do |skatepark| %>
-        createMarker(map, <%= skatepark.map_format_nearby.html_safe %>, 'both');
-      <% end %>
+      new MarkerGenerator(map, skateparks).generateMarkers();
 
-      types.forEach(function (type) {
-        addMarkerToggleListener(type);
-      });
+      // ADD THIS BACK IN
 
     }
   </script>
