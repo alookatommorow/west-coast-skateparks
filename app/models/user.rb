@@ -25,6 +25,14 @@ class User < ActiveRecord::Base
     [37.7833, -122.4167] # SF BRO!!!!
   end
 
+  def has_favorites?
+    favorites.any?
+  end
+
+  def has_visits?
+    visits.any?
+  end
+
   def favorites_and_visits
     {
       favorite_parks: favorite_parks - dups,
