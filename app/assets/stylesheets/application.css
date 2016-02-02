@@ -191,8 +191,8 @@ html, body {
 .image-rotator {
   background-image: url("https://storage.googleapis.com/west-coast-skateparks/headers/lance-mountain.jpg" );
   background-size: 100% auto;
-  background-position: 0 -100px;
-  padding: 12% 7%;
+  background-position: 0 -30px;
+  padding: 20% 7%;
 }
 /*
 .image-rotator {
