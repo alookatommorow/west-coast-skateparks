@@ -15,10 +15,10 @@ $(document).ready(function(){
     $.ajax({url: url})
     .done(function(response) {
       $(".parks-container").children().remove();
-      $(".parks-container").append(response)
+      $(".parks-container").append(response);
     })
     .fail(function(response){
-      console.error(response)
+      console.error(response);
     })
   });
 
@@ -57,7 +57,9 @@ $(document).ready(function(){
 
   function slideDownImages() {
     rotationTimer = setInterval(cycleImages, 4000);
-    $('.image-rotator').slideDown('slow');
+    $('.image-rotator').slideDown('slow', function(){
+      $('.parks-container').children().remove();
+    });
   }
 
 });
