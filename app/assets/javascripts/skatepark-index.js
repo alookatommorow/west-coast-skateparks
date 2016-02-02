@@ -52,7 +52,9 @@ $(document).ready(function(){
 
   function slideUpImages(){
     clearInterval(rotationTimer);
-    $('.image-rotator').slideUp('slow');
+    $('.image-rotator').stop().slideUp('slow', function(){
+      $(this).animate({opacity:'100'});
+    });
   }
 
   function slideDownImages() {
