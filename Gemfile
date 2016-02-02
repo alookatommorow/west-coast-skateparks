@@ -26,9 +26,9 @@ gem 'sass-rails', '~> 4.0.3'
 
 gem 'rails_12factor', group: :production
 
-# group :development do
-  # gem 'better_errors'
-# end
+group :development do
+  gem 'web-console', '~> 2.0'
+end
 
 group :assets do
   gem 'coffee-rails'
@@ -46,9 +46,6 @@ group :development, :test do
   gem 'magic_lamp'
   gem 'bundler-audit', require: false
   gem 'dotenv-rails'
-
-  # Access an IRB console on exception pages or by using <%= console %> in views
-  gem 'web-console', '~> 2.0'
 end
 
 group :test do
