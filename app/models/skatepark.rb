@@ -101,7 +101,7 @@ class Skatepark < ActiveRecord::Base
   end
 
   def nearby_parks
-    return unless has_coordinates?
+    return [] unless has_coordinates?
     Skatepark.all.select { |park| is_nearby?(park) }
   end
 
