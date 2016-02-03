@@ -10,7 +10,7 @@ module Admin
 
     def authenticate_admin
       unless admin_signed_in
-        flash[:notice] = "You need admin authentication to access that."
+        flash[:notice] = 'You need admin authentication to access that.'
         redirect_to new_session_path
       end
       # TODO Add authentication logic here.
