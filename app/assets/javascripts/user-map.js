@@ -32,6 +32,8 @@ function MarkerGenerator(map, skateparks) {
     });
     if (type === 'main') {
       marker.main = true;
+    } else if (type === 'nearby') {
+      marker.setVisible(false);
     }
     toggleable[type].push(marker);
     bindInfowindowListener(map, allMarkers, marker, infowindow);
