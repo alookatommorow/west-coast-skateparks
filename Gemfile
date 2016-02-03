@@ -12,6 +12,7 @@ gem 'jquery-rails'
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
 
+gem 'administrate', '~> 0.1.3'
 gem 'sprockets-rails'
 gem 'puma'
 gem 'turbolinks'
@@ -20,9 +21,9 @@ gem 'therubyracer'
 gem 'underscore-rails'
 gem 'gmaps4rails'
 gem 'less-rails-semantic_ui', '~> 2.0.7.0'
-gem 'autoprefixer-rails', '~> 5.2.1.2'
+gem 'autoprefixer-rails', '~> 6.0'
 # Use SCSS for stylesheets
-gem 'sass-rails', '~> 4.0.3'
+gem 'sass-rails', '~> 5.0'
 
 gem 'rails_12factor', group: :production
 

@@ -8,10 +8,9 @@ module SessionConcern
   end
 
   def login
-    @user = User.where(username: params[:username]).first
-    if @user && @user.authenticate(params[:password])
+    if user_authenticated?
       session[:id] = @user.id
-      redirect_to @user
+      redirect_to @user.is_admin? ? admin_root_path : @user
     else
       redirect_to new_session_path
     end
@@ -27,6 +26,11 @@ module SessionConcern
 
   def logged_in?
     !!current_user
+  end
+
+  def user_authenticated?
+    @user = User.where(username: params[:username]).first
+    @user && @user.authenticate(params[:password])
   end
 
 end

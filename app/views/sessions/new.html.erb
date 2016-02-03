@@ -6,6 +6,9 @@
   <div class="column twelve wide">
 
     <%= form_tag '/sessions', class: 'ui form sign-in-form' do %>
+      <% if flash[:notice] %>
+        <div class="notice"><%= flash[:notice] %></div>
+      <% end %>
       <div class="field">
         <%= label_tag :username %>
         <%= text_field_tag :username %>
