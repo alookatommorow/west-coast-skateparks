@@ -24,7 +24,6 @@ class RatingDashboard < Administrate::BaseDashboard
   COLLECTION_ATTRIBUTES = [
     :user,
     :skatepark,
-    :id,
     :rating,
   ]
 
