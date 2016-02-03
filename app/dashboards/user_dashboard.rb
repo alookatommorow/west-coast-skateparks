@@ -8,14 +8,10 @@ class UserDashboard < Administrate::BaseDashboard
   # which determines how the attribute is displayed
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
-    favorites: Field::HasMany,
     favorite_parks: Field::HasMany.with_options(class_name: "Skatepark"),
-    visits: Field::HasMany,
     visited_parks: Field::HasMany.with_options(class_name: "Skatepark"),
     ratings: Field::HasMany,
-    rated_parks: Field::HasMany.with_options(class_name: "Skatepark"),
     reviews: Field::HasMany,
-    reviewed_parks: Field::HasMany.with_options(class_name: "Skatepark"),
     id: Field::Number,
     username: Field::String,
     email: Field::String,
@@ -31,30 +27,23 @@ class UserDashboard < Administrate::BaseDashboard
   # By default, it's limited to four items to reduce clutter on index pages.
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = [
-    :favorites,
-    :favorite_parks,
-    :visits,
-    :visited_parks,
+    :id,
+    :username,
+    :email,
+    :admin,
   ]
 
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = [
-    :favorites,
-    :favorite_parks,
-    :visits,
-    :visited_parks,
-    :ratings,
-    :rated_parks,
-    :reviews,
-    :reviewed_parks,
     :id,
     :username,
     :email,
     :admin,
-    :password_digest,
-    :created_at,
-    :updated_at,
+    :ratings,
+    :reviews,
+    :favorite_parks,
+    :visited_parks,
   ]
 
   # FORM_ATTRIBUTES
