@@ -1,66 +1,46 @@
 function MarkerGenerator(map, skateparks) {
-  var types = ['favorite', 'visited', 'both'];
-  var legend = { favorite: 'purple-dot', visited: 'yellow-dot', both: 'blue-dot' };
-  var toggleable = { favorite: [], visited: [], both: [] };
+  var types = Object.keys(skateparks);
+  var legend = { favorite: 'purple-dot', visited: 'yellow-dot', both: 'blue-dot', nearby: 'green-dot', main: 'red-dot' };
+  var toggleable = { favorite: [], visited: [], both: [], nearby: [], main: [] };
   var allMarkers = [];
 
   this.generateMarkers = function () {
     types.forEach(function (type) {
       skateparks[type].forEach(function (skatepark) {
-        createMarker(map, skatepark, type);
+        if (type !== 'main') {
+          skatepark = JSON.parse(skatepark);
+        }
+        var marker = createMarker(skatepark, type)
+        var infowindow = marker['infowindow']
+        toggleable[type].push(marker);
       });
-
-      addMarkerToggleListener(type);
+      bindVisibilityListener(type);
     });
   }
 
-  this.generateMainMarker = function (skatepark) {
+  function createMarker(skatepark, type){
     var latLng = { lat: skatepark.latitude, lng: skatepark.longitude };
-    var marker = new google.maps.Marker({
-      position: latLng,
-      map: map,
-      title: skatepark.city+', '+skatepark.state
-    });
     var infowindow = new google.maps.InfoWindow({
       content: generateContentString(skatepark)
     });
-    marker.addListener('click', function() {
-      infowindow.open(map, marker);
+    var marker = new google.maps.Marker({
+      position: latLng,
+      infowindow: infowindow,
+      map: map,
+      icon: 'https://maps.google.com/mapfiles/ms/icons/' + legend[type] + '.png',
+      title: skatepark.city + ', ' + skatepark.state + ' (' + type + ')'
     });
-  }
-
-  this.generateNearbyMarkers = function (skatepark) {
-    if (skatepark.nearbyParks.length > 0) {
-      var nearbyMarkers = [];
-      skatepark.nearbyParks.forEach(function(park){
-        var park = JSON.parse(park);
-        var position = {lat: park.latitude, lng: park.longitude}
-        var marker = new google.maps.Marker({
-          position: position,
-          map: map,
-          icon: "https://maps.google.com/mapfiles/ms/icons/green-dot.png",
-          title: park.city+', '+park.state + ' (nearby)'
-        });
-
-        addInfoWindow(map, park, marker, nearbyMarkers);
-        nearbyMarkers.push(marker);
-      });
+    if (type === 'main') {
+      marker.main = true;
     }
-
-    $('#toggle-markers').on('click', function (event) {
-      var $button = $(event.target);
-      if ($button.text() === 'Hide Nearby Parks') {
-        $button.text('Show Nearby Parks');
-        toggleMarkerVisibility(nearbyMarkers, false);
-      } else {
-        $button.text('Hide Nearby Parks');
-        toggleMarkerVisibility(nearbyMarkers, true);
-      }
-    });
+    toggleable[type].push(marker);
+    bindInfowindowListener(map, allMarkers, marker, infowindow);
+    allMarkers.push(marker);
+    return marker;
   }
 
   // private methods
-  function addMarkerToggleListener(type) {
+  function bindVisibilityListener(type) {
     $('#toggle-' + type).on('click', function (event) {
       var $button = $(event.target);
       var action = $button.text().split(' ')
@@ -77,26 +57,7 @@ function MarkerGenerator(map, skateparks) {
     });
   }
 
-  function createMarker(map, park, type) {
-    park = JSON.parse(park);
-    var markerPosition = {lat: park.latitude, lng: park.longitude};
-    var infowindow = new google.maps.InfoWindow({
-      content: generateContentString(park)
-    });
-
-    var marker = new google.maps.Marker({
-      infowindow: infowindow,
-      position: markerPosition,
-      map: map,
-      icon: 'https://maps.google.com/mapfiles/ms/icons/' + legend[type] + '.png',
-      title: park.city + ', ' + park.state + ' (' + type + ')'
-    });
-    toggleable[type].push(marker);
-    bindListenersToUserMarkers(map, allMarkers, marker, infowindow);
-    allMarkers.push(marker);
-  }
-
-  function bindListenersToUserMarkers(map, allMarkers, marker, infowindow) {
+  function bindInfowindowListener(map, allMarkers, marker, infowindow) {
     marker.addListener('click', function() {
       allMarkers.forEach(function(marker){
         marker.infowindow.close();
@@ -107,6 +68,10 @@ function MarkerGenerator(map, skateparks) {
 
   function toggleMarkerVisibility(markers, visibility) {
     markers.forEach(function (marker) {
+      if (marker.main) {
+        return;
+      }
+      marker.infowindow.close();
       marker.setVisible(visibility);
     });
   }
@@ -115,16 +80,5 @@ function MarkerGenerator(map, skateparks) {
     return "<div id='content'><div class='left'><img style='height:50px' src='"+skatepark.firstPicture+ "' ></div><strong><a href='/skateparks/"+skatepark.id+"'>"+skatepark.city+"</a></strong></div>";
   }
 
-  function addInfoWindow(map, skatepark, marker, allMarkers){
-    var infowindow = new google.maps.InfoWindow({
-      content: generateContentString(skatepark)
-    });
-    marker['infowindow'] = infowindow;
-    marker.addListener('click', function() {
-      allMarkers.forEach(function(marker){
-        marker.infowindow.close();
-      });
-      infowindow.open(map, marker);
-    });
-  }
+
 };
