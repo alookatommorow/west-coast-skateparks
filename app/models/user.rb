@@ -16,6 +16,10 @@ class User < ActiveRecord::Base
   has_many :reviews
   has_many :reviewed_parks, through: :reviews, source: :skatepark
 
+  def is_admin?
+    admin
+  end
+
   def first_marker_coordinates
     favorite = favorite_parks.first
     return [favorite.latitude, favorite.longitude] if favorite

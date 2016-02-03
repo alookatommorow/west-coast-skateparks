@@ -1,6 +1,20 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
+  context '#is_admin?' do
+    it 'returns true if user is an admin' do
+      user = create(:user, admin: true)
+
+      expect(user.is_admin?).to eq(true)
+    end
+
+    it 'returns false if user is not an admin' do
+      user = create(:user)
+
+      expect(user.is_admin?).to eq(false)
+    end
+  end
+
   context '#has_favorites?' do
     it 'returns true if user has favorites' do
       user = create(:user)
