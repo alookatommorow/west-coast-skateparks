@@ -96,8 +96,8 @@ class Skatepark < ActiveRecord::Base
   def is_nearby?(skatepark)
     return if skatepark.id == id
     return unless skatepark.has_coordinates?
-    (latitude > skatepark.latitude - 1.0 && latitude < skatepark.latitude + 1.0) &&
-      (longitude > skatepark.longitude - 1.0 && longitude < skatepark.longitude + 1.0)
+    (latitude > skatepark.latitude - 0.4 && latitude < skatepark.latitude + 0.4) &&
+      (longitude > skatepark.longitude - 0.4 && longitude < skatepark.longitude + 0.4)
   end
 
   def nearby_parks

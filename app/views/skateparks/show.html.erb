@@ -42,32 +42,37 @@
 
 
     <!-- Map -->
-      <% if @skatepark.nearby_parks.any? %>
-        <div class="center-text">
-          <button id="toggle-nearby" class="ui button">Hide Nearby Parks</button>
-        </div>
-      <% end %>
+
 
       <% if @skatepark.has_coordinates? %>
-      <div class="one-top">
-        <div id='map-container relative'>
-            <div id='map'></div>
+        <div class='center-text two-top'>
+          <form action="https://maps.google.com/maps" method="get" target="_blank">
+            <div class="ui action input one-top">
+              <input type="text" name="saddr" placeholder="Enter your location...">
+              <button class="ui button">Get Directions</button>
+            </div>
+            <input type="hidden" name="daddr" value="<%= @skatepark.address %>" />
+          </form>
         </div>
-      </div>
 
-      <div class='center-text one-top'>
-        <form action="https://maps.google.com/maps" method="get" target="_blank">
-          <div class="ui action input one-top">
-            <input type="text" name="saddr" placeholder="Enter your location...">
-            <button class="ui button">Get Directions</button>
+        <div class="one-top">
+          <div id='map-container relative'>
+              <div id='map'></div>
           </div>
-          <input type="hidden" name="daddr" value="<%= @skatepark.address %>" />
-        </form>
-      </div>
+        </div>
+
       <% else @skatepark.has_coordinates? %>
+
         <div class="map-missing">
           <img src="" >
             <h3>Map coming soon!!</h3>
+        </div>
+
+      <% end %>
+
+      <% if @skatepark.nearby_parks.any? %>
+        <div class="center-text one-top">
+          <button id="toggle-nearby" class="ui button primary">Show Nearby Parks</button>
         </div>
       <% end %>
       <!-- end skatepark-info column -->

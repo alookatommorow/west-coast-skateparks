@@ -90,19 +90,27 @@ input:-webkit-autofill {
 }
 
 .one-top {
-  padding-top: 1%;
+  margin-top: 1%;
 }
 
 .one-bottom {
-  padding-bottom: 1%;
+  margin-bottom: 1%;
+}
+
+.two-top {
+  margin-top: 2%;
+}
+
+.two-bottom {
+  margin-bottom: 2%;
 }
 
 .ten-left {
-  padding-left: 10%;
+  margin-left: 10%;
 }
 
 .ten-right {
-  padding-left: 10%;
+  margin-left: 10%;
 }
 
 .relative {
