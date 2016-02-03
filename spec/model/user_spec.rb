@@ -1,6 +1,40 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
+  context '#has_favorites?' do
+    it 'returns true if user has favorites' do
+      user = create(:user)
+      skatepark = create(:skatepark)
+      create(:favorite, user_id: user.id, skatepark_id: skatepark.id)
+
+      expect(user.has_favorites?).to eq(true)
+    end
+
+    it 'returns false if user does not have favorites' do
+      user = create(:user)
+
+      expect(user.has_favorites?).to eq(false)
+    end
+
+  end
+
+  context '#has_visits?' do
+    it 'returns true if user has visits' do
+      user = create(:user)
+      skatepark = create(:skatepark)
+      create(:visit, user_id: user.id, skatepark_id: skatepark.id)
+
+      expect(user.has_visits?).to eq(true)
+    end
+
+    it 'returns false if user does not have visits' do
+      user = create(:user)
+
+      expect(user.has_visits?).to eq(false)
+    end
+
+  end
+
   context '#first_marker_coordinates' do
     it 'returns lat long of first favorited or visited skatepark' do
       user = create(:user)

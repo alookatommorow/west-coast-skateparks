@@ -33,9 +33,15 @@
       <!-- MAP LOGIC -->
       <div class="seven wide column">
         <div class="center-text">
-          <button id="toggle-favorite" class="ui button">Hide Favorites</button>
-          <button id="toggle-visited" class="ui button">Hide Visited</button>
-          <button id="toggle-both" class="ui button">Hide Thrashed</button>
+          <% if @user.has_favorites? %>
+            <button id="toggle-favorite" class="ui button">Hide Favorites</button>
+          <% end %>
+          <% if @user.has_visits? %>
+            <button id="toggle-visited" class="ui button">Hide Visited</button>
+          <% end %>
+          <% if @user.has_favorites? && @user.has_visits? %>
+            <button id="toggle-both" class="ui button">Hide Thrashed</button>
+          <% end %>
         </div>
         <div id='user-map-container relative'>
           <div id="user-map"></div>

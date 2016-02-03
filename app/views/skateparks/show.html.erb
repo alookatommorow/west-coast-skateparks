@@ -42,9 +42,13 @@
 
 
     <!-- Map -->
-      <div class="center-text">
-        <button id="toggle-markers" class="ui button">Hide Nearby Parks</button>
-      </div>
+      <% if @skatepark.nearby_parks.any? %>
+        <div class="center-text">
+          <button id="toggle-markers" class="ui button">Hide Nearby Parks</button>
+        </div>
+      <% end %>
+
+      <% if @skatepark.has_coordinates? %>
       <div class="one-top">
         <div id='map-container relative'>
             <div id='map'></div>
@@ -60,6 +64,12 @@
           <input type="hidden" name="daddr" value="<%= @skatepark.address %>" />
         </form>
       </div>
+      <% else @skatepark.has_coordinates? %>
+        <div class="map-missing">
+          <img src="" >
+            <h3>Map coming soon!!</h3>
+        </div>
+      <% end %>
       <!-- end skatepark-info column -->
     </div>
 
@@ -157,30 +167,32 @@
   </div>
 </div>
 
-<script>
-  function initMap() {
-    var skatepark = <%= @skatepark.map_format.html_safe %>
-    var myLatLng = {lat: skatepark.latitude, lng: skatepark.longitude}
+<% if @skatepark.has_coordinates? %>
+  <script>
+    function initMap() {
+      var skatepark = <%= @skatepark.map_format.html_safe %>
+      var myLatLng = {lat: skatepark.latitude, lng: skatepark.longitude}
 
-    var map = new google.maps.Map(document.getElementById('map'), {
-      zoom: 9,
-      center: myLatLng
-    });
+      var map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 9,
+        center: myLatLng
+      });
 
-    var generator = new MarkerGenerator(map);
-    generator.generateMainMarker(skatepark);
-    generator.generateNearbyMarkers(skatepark);
+      var generator = new MarkerGenerator(map);
+      generator.generateMainMarker(skatepark);
+      <% if @skatepark.nearby_parks.any? %>
+        generator.generateNearbyMarkers(skatepark);
+      <% end %>
 
-    // addNearbyParkMarkers(map, skatepark);
+    }
 
-  }
-
-</script>
+  </script>
 
 
-<script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_KEY'] %>&callback=initMap"
-    async defer>
-</script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_KEY'] %>&callback=initMap"
+      async defer>
+  </script>
+<% end %>
 
 <style>
   .header-image {
