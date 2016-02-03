@@ -7,11 +7,12 @@ function MarkerGenerator(map, skateparks) {
   var nearbyMarkers = [];
 
   this.generateMainMarker = function (skatepark) {
-    var title = skatepark.city+', '+skatepark.state
+    var title = skatepark.city+', '+skatepark.state;
     var marker = manifestMarker(skatepark, title);
     var infowindow = marker['infowindow'];
-    bindListenerToMarker(map, nearbyMarkers, marker, infowindow);
-    nearbyMarkers.push(marker);
+    marker.main = true;
+    bindListenerToMarker(map, allMarkers, marker, infowindow);
+    allMarkers.push(marker);
   }
 
   this.generateNearbyMarkers = function (skatepark) {
@@ -21,8 +22,8 @@ function MarkerGenerator(map, skateparks) {
       var icon = "https://maps.google.com/mapfiles/ms/icons/green-dot.png";
       var marker = manifestMarker(park, title, icon);
       var infowindow = marker['infowindow'];
-      bindListenerToMarker(map, nearbyMarkers, marker, infowindow);
-      nearbyMarkers.push(marker);
+      bindListenerToMarker(map, allMarkers, marker, infowindow);
+      allMarkers.push(marker);
     });
   }
 
@@ -100,6 +101,9 @@ function MarkerGenerator(map, skateparks) {
 
   function toggleMarkerVisibility(markers, visibility) {
     markers.forEach(function (marker) {
+      if (marker.main) {
+        return;
+      }
       marker.infowindow.close();
       marker.setVisible(visibility);
     });
@@ -114,10 +118,10 @@ function MarkerGenerator(map, skateparks) {
     var $button = $(event.target);
     if ($button.text() === 'Hide Nearby Parks') {
       $button.text('Show Nearby Parks');
-      toggleMarkerVisibility(nearbyMarkers, false);
+      toggleMarkerVisibility(allMarkers, false);
     } else {
       $button.text('Hide Nearby Parks');
-      toggleMarkerVisibility(nearbyMarkers, true);
+      toggleMarkerVisibility(allMarkers, true);
     }
   });
 
