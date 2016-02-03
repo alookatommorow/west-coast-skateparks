@@ -175,11 +175,7 @@
 
       var skateparks = { nearby: skatepark.nearbyParks, main: [skatepark] }
 
-      new MarkerGenerator(map, skateparks, ['nearby', 'main']).generateMarkers();
-      // generator.generateMainMarker(skatepark);
-      // <% if @skatepark.nearby_parks.any? %>
-        // generator.generateMarkers();
-      // <% end %>
+      new MarkerGenerator(map, skateparks).generateMarkers();
 
     }
 

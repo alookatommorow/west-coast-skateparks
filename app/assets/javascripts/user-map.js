@@ -1,10 +1,9 @@
-function MarkerGenerator(map, skateparks, types) {
-  // var types = ['favorite', 'visited', 'both', 'nearby', 'main'];
+function MarkerGenerator(map, skateparks) {
+  var types = Object.keys(skateparks);
   var legend = { favorite: 'purple-dot', visited: 'yellow-dot', both: 'blue-dot', nearby: 'green-dot', main: 'red-dot' };
   var toggleable = { favorite: [], visited: [], both: [], nearby: [], main: [] };
   var allMarkers = [];
 
-  // for user#show
   this.generateMarkers = function () {
     types.forEach(function (type) {
       skateparks[type].forEach(function (skatepark) {
@@ -15,11 +14,10 @@ function MarkerGenerator(map, skateparks, types) {
         var infowindow = marker['infowindow']
         toggleable[type].push(marker);
       });
-      addMarkerToggleListener(type);
+      bindVisibilityListener(type);
     });
   }
 
-  // for skatepark #show
   function createMarker(skatepark, type){
     var latLng = { lat: skatepark.latitude, lng: skatepark.longitude };
     var infowindow = new google.maps.InfoWindow({
@@ -36,13 +34,13 @@ function MarkerGenerator(map, skateparks, types) {
       marker.main = true;
     }
     toggleable[type].push(marker);
-    bindListenerToMarker(map, allMarkers, marker, infowindow);
+    bindInfowindowListener(map, allMarkers, marker, infowindow);
     allMarkers.push(marker);
     return marker;
   }
 
   // private methods
-  function addMarkerToggleListener(type) {
+  function bindVisibilityListener(type) {
     $('#toggle-' + type).on('click', function (event) {
       var $button = $(event.target);
       var action = $button.text().split(' ')
@@ -59,7 +57,7 @@ function MarkerGenerator(map, skateparks, types) {
     });
   }
 
-  function bindListenerToMarker(map, allMarkers, marker, infowindow) {
+  function bindInfowindowListener(map, allMarkers, marker, infowindow) {
     marker.addListener('click', function() {
       allMarkers.forEach(function(marker){
         marker.infowindow.close();
@@ -82,16 +80,5 @@ function MarkerGenerator(map, skateparks, types) {
     return "<div id='content'><div class='left'><img style='height:50px' src='"+skatepark.firstPicture+ "' ></div><strong><a href='/skateparks/"+skatepark.id+"'>"+skatepark.city+"</a></strong></div>";
   }
 
-  ////// hide/show nearby parks
-  $('#toggle-markers').on('click', function (event) {
-    var $button = $(event.target);
-    if ($button.text() === 'Hide Nearby Parks') {
-      $button.text('Show Nearby Parks');
-      toggleMarkerVisibility(allMarkers, false);
-    } else {
-      $button.text('Hide Nearby Parks');
-      toggleMarkerVisibility(allMarkers, true);
-    }
-  });
 
 };
