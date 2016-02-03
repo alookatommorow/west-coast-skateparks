@@ -1,40 +1,44 @@
-function MarkerGenerator(map, skateparks) {
-  var types = ['favorite', 'visited', 'both'];
-  var legend = { favorite: 'purple-dot', visited: 'yellow-dot', both: 'blue-dot' };
-  var toggleable = { favorite: [], visited: [], both: [] };
+function MarkerGenerator(map, skateparks, types) {
+  // var types = ['favorite', 'visited', 'both', 'nearby', 'main'];
+  var legend = { favorite: 'purple-dot', visited: 'yellow-dot', both: 'blue-dot', nearby: 'green-dot', main: 'red-dot' };
+  var toggleable = { favorite: [], visited: [], both: [], nearby: [], main: [] };
   var allMarkers = [];
-
-  var nearbyMarkers = [];
-
-  this.generateMainMarker = function (skatepark) {
-    var title = skatepark.city+', '+skatepark.state;
-    var marker = manifestMarker(skatepark, title);
-    var infowindow = marker['infowindow'];
-    marker.main = true;
-    bindListenerToMarker(map, allMarkers, marker, infowindow);
-    allMarkers.push(marker);
-  }
-
-  this.generateNearbyMarkers = function (skatepark) {
-    skatepark.nearbyParks.forEach(function(park){
-      var park = JSON.parse(park);
-      var title = park.city+', '+park.state + ' (nearby)';
-      var icon = "https://maps.google.com/mapfiles/ms/icons/green-dot.png";
-      var marker = manifestMarker(park, title, icon);
-      var infowindow = marker['infowindow'];
-      bindListenerToMarker(map, allMarkers, marker, infowindow);
-      allMarkers.push(marker);
-    });
-  }
 
   // for user#show
   this.generateMarkers = function () {
     types.forEach(function (type) {
       skateparks[type].forEach(function (skatepark) {
-        createMarker(map, skatepark, type);
+        if (type !== 'main') {
+          skatepark = JSON.parse(skatepark);
+        }
+        var marker = createMarker(skatepark, type)
+        var infowindow = marker['infowindow']
+        toggleable[type].push(marker);
       });
       addMarkerToggleListener(type);
     });
+  }
+
+  // for skatepark #show
+  function createMarker(skatepark, type){
+    var latLng = { lat: skatepark.latitude, lng: skatepark.longitude };
+    var infowindow = new google.maps.InfoWindow({
+      content: generateContentString(skatepark)
+    });
+    var marker = new google.maps.Marker({
+      position: latLng,
+      infowindow: infowindow,
+      map: map,
+      icon: 'https://maps.google.com/mapfiles/ms/icons/' + legend[type] + '.png',
+      title: skatepark.city + ', ' + skatepark.state + ' (' + type + ')'
+    });
+    if (type === 'main') {
+      marker.main = true;
+    }
+    toggleable[type].push(marker);
+    bindListenerToMarker(map, allMarkers, marker, infowindow);
+    allMarkers.push(marker);
+    return marker;
   }
 
   // private methods
@@ -55,25 +59,6 @@ function MarkerGenerator(map, skateparks) {
     });
   }
 
-  //for user#show
-  function createMarker(map, park, type) {
-    park = JSON.parse(park);
-    var markerPosition = {lat: park.latitude, lng: park.longitude};
-    var infowindow = new google.maps.InfoWindow({
-      content: generateContentString(park)
-    });
-    var marker = new google.maps.Marker({
-      infowindow: infowindow,
-      position: markerPosition,
-      map: map,
-      icon: 'https://maps.google.com/mapfiles/ms/icons/' + legend[type] + '.png',
-      title: park.city + ', ' + park.state + ' (' + type + ')'
-    });
-    toggleable[type].push(marker);
-    bindListenerToMarker(map, allMarkers, marker, infowindow);
-    allMarkers.push(marker);
-  }
-
   function bindListenerToMarker(map, allMarkers, marker, infowindow) {
     marker.addListener('click', function() {
       allMarkers.forEach(function(marker){
@@ -81,22 +66,6 @@ function MarkerGenerator(map, skateparks) {
       });
       infowindow.open(map, marker);
     });
-  }
-
-  // for skatepark #show
-  function manifestMarker(skatepark, title, icon){
-    var latLng = { lat: skatepark.latitude, lng: skatepark.longitude };
-    var infowindow = new google.maps.InfoWindow({
-      content: generateContentString(skatepark)
-    });
-    var marker = new google.maps.Marker({
-      position: latLng,
-      infowindow: infowindow,
-      icon: icon,
-      map: map,
-      title: title
-    });
-    return marker;
   }
 
   function toggleMarkerVisibility(markers, visibility) {
