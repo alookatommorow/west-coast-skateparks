@@ -8,43 +8,8 @@ class SkateparksController < ApplicationController
     end
   end
 
-  def new
-    @skatepark = Skatepark.new
-  end
-
-  def create
-    @skatepark = Skatepark.new(skatepark_params)
-    if @skatepark.save
-      respond_to do |format|
-        format.js
-      end
-    else
-      render 'new'
-    end
-  end
-
-  def edit
-  end
-
   def show
     @last = Skatepark.last.id
-  end
-
-  # needs to be changed to AJAX
-  def update
-    if @skatepark.update(skatepark_params)
-      redirect_to @skatepark
-    else
-      render 'edit'
-    end
-  end
-
-  # admin delete skatepark via AJAX
-  def destroy
-    @skatepark.destroy
-    respond_to do |format|
-      format.js
-    end
   end
 
   # skateparks by state via AJAX
