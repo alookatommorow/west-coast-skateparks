@@ -3,8 +3,30 @@ function MarkerGenerator(map, skateparks) {
   var legend = { favorite: 'purple-dot', visited: 'yellow-dot', both: 'blue-dot' };
   var toggleable = { favorite: [], visited: [], both: [] };
   var allMarkers = [];
+
   var nearbyMarkers = [];
 
+  this.generateMainMarker = function (skatepark) {
+    var title = skatepark.city+', '+skatepark.state
+    var marker = manifestMarker(skatepark, title);
+    var infowindow = marker['infowindow'];
+    bindListenerToMarker(map, nearbyMarkers, marker, infowindow);
+    nearbyMarkers.push(marker);
+  }
+
+  this.generateNearbyMarkers = function (skatepark) {
+    skatepark.nearbyParks.forEach(function(park){
+      var park = JSON.parse(park);
+      var title = park.city+', '+park.state + ' (nearby)';
+      var icon = "https://maps.google.com/mapfiles/ms/icons/green-dot.png";
+      var marker = manifestMarker(park, title, icon);
+      var infowindow = marker['infowindow'];
+      bindListenerToMarker(map, nearbyMarkers, marker, infowindow);
+      nearbyMarkers.push(marker);
+    });
+  }
+
+  // for user#show
   this.generateMarkers = function () {
     types.forEach(function (type) {
       skateparks[type].forEach(function (skatepark) {
@@ -13,54 +35,6 @@ function MarkerGenerator(map, skateparks) {
       addMarkerToggleListener(type);
     });
   }
-
-  this.generateMainMarker = function (skatepark) {
-    var latLng = { lat: skatepark.latitude, lng: skatepark.longitude };
-    var infowindow = new google.maps.InfoWindow({
-      content: generateContentString(skatepark)
-    });
-    var marker = new google.maps.Marker({
-      position: latLng,
-      infowindow: infowindow,
-      map: map,
-      title: skatepark.city+', '+skatepark.state
-    });
-    marker.addListener('click', function() {
-      infowindow.open(map, marker);
-    });
-    nearbyMarkers.push(marker);
-  }
-
-  this.generateNearbyMarkers = function (skatepark) {
-    skatepark.nearbyParks.forEach(function(park){
-      var park = JSON.parse(park);
-      var position = {lat: park.latitude, lng: park.longitude};
-      var infowindow = new google.maps.InfoWindow({
-        content: generateContentString(park)
-      });
-      var marker = new google.maps.Marker({
-        position: position,
-        infowindow: infowindow,
-        map: map,
-        icon: "https://maps.google.com/mapfiles/ms/icons/green-dot.png",
-        title: park.city+', '+park.state + ' (nearby)'
-      });
-      bindListenersToMarkers(map, nearbyMarkers, marker, infowindow);
-      nearbyMarkers.push(marker);
-    });
-  }
-
-  ////// hide/show nearby parks
-  $('#toggle-markers').on('click', function (event) {
-    var $button = $(event.target);
-    if ($button.text() === 'Hide Nearby Parks') {
-      $button.text('Show Nearby Parks');
-      toggleMarkerVisibility(nearbyMarkers, false);
-    } else {
-      $button.text('Hide Nearby Parks');
-      toggleMarkerVisibility(nearbyMarkers, true);
-    }
-  });
 
   // private methods
   function addMarkerToggleListener(type) {
@@ -80,6 +54,7 @@ function MarkerGenerator(map, skateparks) {
     });
   }
 
+  //for user#show
   function createMarker(map, park, type) {
     park = JSON.parse(park);
     var markerPosition = {lat: park.latitude, lng: park.longitude};
@@ -94,17 +69,33 @@ function MarkerGenerator(map, skateparks) {
       title: park.city + ', ' + park.state + ' (' + type + ')'
     });
     toggleable[type].push(marker);
-    bindListenersToMarkers(map, allMarkers, marker, infowindow);
+    bindListenerToMarker(map, allMarkers, marker, infowindow);
     allMarkers.push(marker);
   }
 
-  function bindListenersToMarkers(map, allMarkers, marker, infowindow) {
+  function bindListenerToMarker(map, allMarkers, marker, infowindow) {
     marker.addListener('click', function() {
       allMarkers.forEach(function(marker){
         marker.infowindow.close();
       });
       infowindow.open(map, marker);
     });
+  }
+
+  // for skatepark #show
+  function manifestMarker(skatepark, title, icon){
+    var latLng = { lat: skatepark.latitude, lng: skatepark.longitude };
+    var infowindow = new google.maps.InfoWindow({
+      content: generateContentString(skatepark)
+    });
+    var marker = new google.maps.Marker({
+      position: latLng,
+      infowindow: infowindow,
+      icon: icon,
+      map: map,
+      title: title
+    });
+    return marker;
   }
 
   function toggleMarkerVisibility(markers, visibility) {
@@ -117,5 +108,17 @@ function MarkerGenerator(map, skateparks) {
   function generateContentString(skatepark) {
     return "<div id='content'><div class='left'><img style='height:50px' src='"+skatepark.firstPicture+ "' ></div><strong><a href='/skateparks/"+skatepark.id+"'>"+skatepark.city+"</a></strong></div>";
   }
+
+  ////// hide/show nearby parks
+  $('#toggle-markers').on('click', function (event) {
+    var $button = $(event.target);
+    if ($button.text() === 'Hide Nearby Parks') {
+      $button.text('Show Nearby Parks');
+      toggleMarkerVisibility(nearbyMarkers, false);
+    } else {
+      $button.text('Hide Nearby Parks');
+      toggleMarkerVisibility(nearbyMarkers, true);
+    }
+  });
 
 };
