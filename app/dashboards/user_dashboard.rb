@@ -16,7 +16,6 @@ class UserDashboard < Administrate::BaseDashboard
     username: Field::String,
     email: Field::String,
     admin: Field::Boolean,
-    password_digest: Field::String,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
   }
@@ -50,18 +49,11 @@ class UserDashboard < Administrate::BaseDashboard
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = [
-    :favorites,
-    :favorite_parks,
-    :visits,
-    :visited_parks,
-    :ratings,
-    :rated_parks,
-    :reviews,
-    :reviewed_parks,
     :username,
     :email,
     :admin,
-    :password_digest,
+    :ratings,
+    :reviews,
   ]
 
   # Overwrite this method to customize how users are displayed
