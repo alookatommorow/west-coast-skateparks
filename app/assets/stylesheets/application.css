@@ -50,15 +50,15 @@ html, body {
   padding-bottom: 1%;
 }
 
-/*.search-container {
-  padding-top: 15%;
-}*/
-
 .search-form-container {
  float: right;
  margin-top: 2.5%;
  margin-right: 2%;
  background-color: white;
+}
+
+input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0px 1000px white inset !important;
 }
 
 .page-container {
@@ -76,8 +76,6 @@ html, body {
 .footer {
   background-color: black;
   color: white;
- /* padding-top: 1%;
-  padding-bottom: 1%;*/
 }
 
 
@@ -194,31 +192,6 @@ html, body {
   background-position: 0 -30px;
   padding: 20% 7%;
 }
-/*
-.image-rotator {
-  position: relative;
-  height: 400px;
-}
-
-.image-rotator img.active {
-  position: absolute;
-  display: block;
-  left: 0;
-  right: 0;
-  margin: 0 auto;
-  height: 100%;
-  cursor: default;
-}
-
-.image-rotator img {
-  position: absolute;
-  display: none;
-  height: 100%;
-}*/
-
-/*-------About Page----------*/
-
-
 
 /*-------Profile Page----------*/
 
@@ -243,9 +216,7 @@ html, body {
   color: black;
 }
 
-
 /*--------Show Page-------*/
-
 
 #map {
   height: 300px;
@@ -280,7 +251,6 @@ html, body {
   text-align: right;
 }
 
-
 #state-map {
   height: 300px;
   width: 400px;
@@ -290,13 +260,13 @@ html, body {
 
 .map-missing {
   background-image: url("https://storage.googleapis.com/west-coast-skateparks/Monkey-business.jpg");
-  /*background-size: 100% auto;*/
   background-repeat: no-repeat;
   height: 300px;
-  /*padding: 15% 50%;*/
   text-align: center;
   color: red;
 }
+
+
 
 
 
