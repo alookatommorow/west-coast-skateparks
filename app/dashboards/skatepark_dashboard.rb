@@ -8,13 +8,6 @@ class SkateparkDashboard < Administrate::BaseDashboard
   # which determines how the attribute is displayed
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
-    favorites: Field::HasMany,
-    users_who_faved: Field::HasMany.with_options(class_name: "User"),
-    visits: Field::HasMany,
-    users_who_visited: Field::HasMany.with_options(class_name: "User"),
-    ratings: Field::HasMany,
-    users_who_rated: Field::HasMany.with_options(class_name: "User"),
-    reviews: Field::HasMany,
     users_who_reviewed: Field::HasMany.with_options(class_name: "User"),
     id: Field::Number,
     name: Field::String,
@@ -42,6 +35,11 @@ class SkateparkDashboard < Administrate::BaseDashboard
     obstacles: Field::Text,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
+    ratings: Field::HasMany,
+    reviews: Field::HasMany,
+    users_who_faved: Field::HasMany.with_options(class_name: "User"),
+    users_who_visited: Field::HasMany.with_options(class_name: "User"),
+    users_who_rated: Field::HasMany.with_options(class_name: "User"),
   }
 
   # COLLECTION_ATTRIBUTES
@@ -50,23 +48,14 @@ class SkateparkDashboard < Administrate::BaseDashboard
   # By default, it's limited to four items to reduce clutter on index pages.
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = [
-    :favorites,
-    :users_who_faved,
-    :visits,
-    :users_who_visited,
+    :city,
+    :state,
+    :address,
   ]
 
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = [
-    :favorites,
-    :users_who_faved,
-    :visits,
-    :users_who_visited,
-    :ratings,
-    :users_who_rated,
-    :reviews,
-    :users_who_reviewed,
     :id,
     :name,
     :city,
@@ -91,22 +80,16 @@ class SkateparkDashboard < Administrate::BaseDashboard
     :video_url,
     :num_pics,
     :obstacles,
-    :created_at,
-    :updated_at,
+    :ratings,
+    :reviews,
+    :users_who_faved,
+    :users_who_visited,
   ]
 
   # FORM_ATTRIBUTES
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = [
-    :favorites,
-    :users_who_faved,
-    :visits,
-    :users_who_visited,
-    :ratings,
-    :users_who_rated,
-    :reviews,
-    :users_who_reviewed,
     :name,
     :city,
     :state,
