@@ -49,14 +49,6 @@ class User < ActiveRecord::Base
     dups.map(&:map_json)
   end
 
-  def favorites_and_visits
-    {
-      favorite_parks: favorite_parks - dups,
-      visited_parks: visited_parks - dups,
-      both: dups
-    }
-  end
-
   private
 
     def dups
