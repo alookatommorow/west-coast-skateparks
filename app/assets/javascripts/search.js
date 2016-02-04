@@ -19,6 +19,9 @@ $(document).ready(function(){
   $('.circular.search').on('click', function(event){
     var url = $(this).closest('form').attr('action');
     var data = $(this).closest('form').serialize();
+    if ($('#search').val() === '') {
+      return
+    }
     $.ajax({url: url, data: data})
     .done(function(response) {
       $(".search-results-container").remove();
