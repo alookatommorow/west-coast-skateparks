@@ -38,7 +38,15 @@ class User < ActiveRecord::Base
   end
 
   def favorite_parks_json
-    favorite_parks.map(&:map_json)
+    (favorite_parks - dups).map(&:map_json)
+  end
+
+  def visited_parks_json
+    (visited_parks - dups).map(&:map_json)
+  end
+
+  def both_json
+    dups.map(&:map_json)
   end
 
   def favorites_and_visits
