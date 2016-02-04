@@ -92,10 +92,11 @@
         center: mapCenter,
       });
 
-      var favorite = <%= @user.favorite_parks_json.to_json.html_safe %>
-      var visited = <%= @user.visited_parks_json.to_json.html_safe %>
-      var both = <%= @user.both_json.to_json.html_safe %>
-      var skateparks = { favorite: favorite, visited: visited, both: both }
+      var skateparks = {
+        favorite: <%= @user.favorite_parks_json %>,
+        visited: <%= @user.visited_parks_json %>,
+        both: <%= @user.both_json %>
+      }
 
       new MarkerGenerator(map, skateparks).generateMarkers();
     }
