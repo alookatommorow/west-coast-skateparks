@@ -5,7 +5,7 @@ FactoryGirl.define do
     city 'Hayward'
     state 'California'
     address '520 E 3rd Ave, Hayward, CA'
-    identifier 'swag'
+    sequence(:identifier) { |i| "swag#{i}" }
     latitude 53.0456
     longitude -113.6547
     num_pics 3
