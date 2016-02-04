@@ -1,6 +1,81 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
+  context '#favorite_parks_json' do
+    it 'returns favorite parks converted to json' do
+      user = create(:user)
+      skatepark = create(:skatepark)
+      create(:favorite, user_id: user.id, skatepark_id: skatepark.id)
+
+      expect(user.favorite_parks_json).to eq(safe_json([skatepark.map_json]))
+    end
+
+    it 'does not return favorites that have also been visited' do
+      user = create(:user)
+      skatepark = create(:skatepark)
+      other_park = create(:skatepark, identifier: 'genius')
+      create(:favorite, user_id: user.id, skatepark_id: skatepark.id)
+      create(:favorite, user_id: user.id, skatepark_id: other_park.id)
+      create(:visit, user_id: user.id, skatepark_id: skatepark.id)
+
+      expect(user.favorite_parks_json).to eq(safe_json([other_park.map_json]))
+    end
+
+    it 'returns an empty array if no favorites' do
+      user = create(:user)
+
+      expect(user.favorite_parks_json).to eq(safe_json([]))
+    end
+  end
+
+  context '#visited_parks_json' do
+    it 'returns visited parks converted to json' do
+      user = create(:user)
+      skatepark = create(:skatepark)
+      create(:visit, user_id: user.id, skatepark_id: skatepark.id)
+
+      expect(user.visited_parks_json).to eq(safe_json([skatepark.map_json]))
+    end
+
+    it 'does not return visits that have also been favorited' do
+      user = create(:user)
+      skatepark = create(:skatepark)
+      other_park = create(:skatepark, identifier: 'genius')
+      create(:visit, user_id: user.id, skatepark_id: skatepark.id)
+      create(:visit, user_id: user.id, skatepark_id: other_park.id)
+      create(:favorite, user_id: user.id, skatepark_id: skatepark.id)
+
+      expect(user.visited_parks_json).to eq(safe_json([other_park.map_json]))
+    end
+
+    it 'returns an empty array if no visits' do
+      user = create(:user)
+
+      expect(user.visited_parks_json).to eq(safe_json([]))
+    end
+  end
+
+  context '#both_json' do
+    it 'returns json array of parks that have been favorited and visited' do
+      user = create(:user)
+      skatepark = create(:skatepark)
+      create(:favorite, user_id: user.id, skatepark_id: skatepark.id)
+      create(:visit, user_id: user.id, skatepark_id: skatepark.id)
+
+      expect(user.both_json).to eq(safe_json([skatepark.map_json]))
+    end
+
+    it 'returns an empty array if no fav-visits' do
+      user = create(:user)
+      skatepark = create(:skatepark)
+      other_park = create(:skatepark, identifier: 'swagdaddy')
+      create(:favorite, user_id: user.id, skatepark_id: skatepark.id)
+      create(:visit, user_id: user.id, skatepark_id: other_park.id)
+
+      expect(user.both_json).to eq(safe_json([]))
+    end
+  end
+
   context '#is_admin?' do
     it 'returns true if user is an admin' do
       user = create(:user, admin: true)
@@ -29,7 +104,6 @@ RSpec.describe User, type: :model do
 
       expect(user.has_favorites?).to eq(false)
     end
-
   end
 
   context '#has_visits?' do
@@ -46,7 +120,6 @@ RSpec.describe User, type: :model do
 
       expect(user.has_visits?).to eq(false)
     end
-
   end
 
   context '#first_marker_coordinates' do
@@ -82,43 +155,8 @@ RSpec.describe User, type: :model do
       expect(fav_park.address).to eq(skatepark.address)
     end
   end
+end
 
-  context '#favorites_and_visits' do
-    it 'returns a hash of all favorited and visited parks' do
-      user = create(:user)
-      skatepark = create(:skatepark)
-      other = create(:skatepark, :other)
-
-      create(:favorite, user_id: user.id, skatepark_id: skatepark.id)
-      create(:visit, user_id: user.id, skatepark_id: other.id)
-
-      favorites_and_visits = {
-        favorite_parks: user.favorite_parks,
-        visited_parks: user.visited_parks,
-        both: []
-      }
-
-      expect(user.favorites_and_visits).to eq(favorites_and_visits)
-    end
-
-    it 'returns parks as favorited and visited if they are both' do
-      user = create(:user)
-      skatepark = create(:skatepark)
-      favorited_park = create(:skatepark, :other)
-      visited_park = create(:skatepark, identifier: 'SUP')
-
-      create(:favorite, user_id: user.id, skatepark_id: skatepark.id)
-      create(:favorite, user_id: user.id, skatepark_id: favorited_park.id)
-      create(:visit, user_id: user.id, skatepark_id: skatepark.id)
-      create(:visit, user_id: user.id, skatepark_id: visited_park.id)
-
-      favorites_and_visits = {
-        favorite_parks: [favorited_park],
-        visited_parks: [visited_park],
-        both: [skatepark]
-      }
-
-      expect(user.favorites_and_visits).to eq(favorites_and_visits)
-    end
-  end
+def safe_json(object)
+  object.to_json.html_safe
 end
