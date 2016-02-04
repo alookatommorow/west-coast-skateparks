@@ -41,6 +41,10 @@ class Skatepark < ActiveRecord::Base
     ).order('state ASC').order('city ASC').order('name ASC')
   end
 
+  def self.in_state(state)
+    where(state: state).order("city ASC")
+  end
+
   def pictures
     # should default num_pics to 0
     if num_pics && num_pics > 0

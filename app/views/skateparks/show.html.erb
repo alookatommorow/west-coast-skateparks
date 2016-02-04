@@ -6,7 +6,7 @@
   <div class="ui grid">
 
     <!-- header -->
-    <%= render partial: 'header', locals: { skatepark: @skatepark, last: @last } %>
+    <%= render partial: 'header', locals: { skatepark: @skatepark, last: Skatepark.last.id } %>
 
 
     <div class="six wide column">
