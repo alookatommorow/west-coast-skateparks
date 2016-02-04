@@ -79,7 +79,13 @@ function MarkerGenerator(map, skateparks) {
   }
 
   function generateContentString(skatepark) {
-    return "<div id='content'><div class='left'><img style='height:50px' src='"+skatepark.firstPicture+ "' ></div><strong><a href='/skateparks/"+skatepark.id+"'>"+skatepark.city+"</a></strong></div>";
+    return "<div id='content'><div class='left'><img style='height:50px' src='"+skatepark.firstPicture+ "' ></div><strong><a href='/skateparks/"+skatepark.id+"'>"+titleize(skatepark.city)+"</a></strong></div>";
+  }
+
+  function titleize(string) {
+    return string.split(' ').map(function(word){
+      return word.charAt(0).toUpperCase() + word.slice(1)
+    }).join(' ');
   }
 
 

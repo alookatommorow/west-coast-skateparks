@@ -170,7 +170,7 @@
 <% if @skatepark.has_coordinates? %>
   <script>
     function initMap() {
-      var skatepark = <%= @skatepark.map_format.html_safe %>
+      var skatepark = <%= @skatepark.map_json_with_nearby.html_safe %>
       var myLatLng = {lat: skatepark.latitude, lng: skatepark.longitude}
 
       var map = new google.maps.Map(document.getElementById('map'), {

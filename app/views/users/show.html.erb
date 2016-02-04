@@ -95,13 +95,13 @@
       <% favs_and_visits = @user.favorites_and_visits %>
       <% favs_and_visits.each_value do |skateparks| %>
         <% skateparks.map do |skatepark| %>
-          <% skatepark.map_format_nearby.html_safe %>
+          <% skatepark.map_json.html_safe %>
         <% end %>
       <% end %>
 
-      var favorite = <%= favs_and_visits[:favorite_parks].map {|s| s.map_format_nearby.html_safe}.to_json.html_safe %>;
-      var visited = <%= favs_and_visits[:visited_parks].map {|s| s.map_format_nearby.html_safe}.to_json.html_safe %>;
-      var both = <%= favs_and_visits[:both].map {|s| s.map_format_nearby.html_safe}.to_json.html_safe %>;
+      var favorite = <%= favs_and_visits[:favorite_parks].map {|s| s.map_json.html_safe}.to_json.html_safe %>;
+      var visited = <%= favs_and_visits[:visited_parks].map {|s| s.map_json.html_safe}.to_json.html_safe %>;
+      var both = <%= favs_and_visits[:both].map {|s| s.map_json.html_safe}.to_json.html_safe %>;
       var skateparks = { favorite: favorite, visited: visited, both: both }
 
       new MarkerGenerator(map, skateparks).generateMarkers();
