@@ -17,15 +17,15 @@ class Skatepark < ActiveRecord::Base
   has_many :reviews, dependent: :destroy
   has_many :users_who_reviewed, through: :reviews, source: :user
 
-  def map_format
+  def map_json_with_nearby
     attributes.merge({
       pictures: pictures,
-      nearbyParks: nearby_parks.map(&:map_format_nearby),
+      nearbyParks: nearby_parks.map(&:map_json),
       firstPicture: first_picture
     }).to_json
   end
 
-  def map_format_nearby
+  def map_json
     attributes.merge({
       pictures: pictures,
       firstPicture: first_picture
