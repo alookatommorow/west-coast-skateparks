@@ -1,6 +1,22 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
+  context '#favorite_parks_json' do
+    it 'returns favorite parks converted to json' do
+      user = create(:user, admin: true)
+      skatepark = create(:skatepark)
+      create(:favorite, user_id: user.id, skatepark_id: skatepark.id)
+
+      expect(user.favorite_parks_json).to eq([skatepark.map_json])
+    end
+  end
+
+  context '#visited_parks_json' do
+  end
+
+  context '#both_json' do
+  end
+
   context '#is_admin?' do
     it 'returns true if user is an admin' do
       user = create(:user, admin: true)

@@ -37,6 +37,10 @@ class User < ActiveRecord::Base
     visits.any?
   end
 
+  def favorite_parks_json
+    favorite_parks.map(&:map_json)
+  end
+
   def favorites_and_visits
     {
       favorite_parks: favorite_parks - dups,

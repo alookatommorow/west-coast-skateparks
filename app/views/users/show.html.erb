@@ -99,7 +99,7 @@
         <% end %>
       <% end %>
 
-      var favorite = <%= favs_and_visits[:favorite_parks].map {|s| s.map_json.html_safe}.to_json.html_safe %>;
+      var favorite = <%= @user.favorite_parks_json.map {|s| s.html_safe}.to_json.html_safe %>
       var visited = <%= favs_and_visits[:visited_parks].map {|s| s.map_json.html_safe}.to_json.html_safe %>;
       var both = <%= favs_and_visits[:both].map {|s| s.map_json.html_safe}.to_json.html_safe %>;
       var skateparks = { favorite: favorite, visited: visited, both: both }
