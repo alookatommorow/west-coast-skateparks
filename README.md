@@ -14,28 +14,6 @@ West Coast Skateparks is deployed to Heroku. Visit the app [here](https://west-c
 
 To view the skatepark directory, click "Skateparks" on the navigation bar then select a state.  You may also search for a skatepark by city name using the search bar.
 
-###Directions
-
-To get directions to a skatepark, enter your address in the field below the map and click "Get Directions."  You will be taken to Google Maps.
-
-###Create an Account
-
-For added features, create an account using the "Sign Up" button on the nav bar.  You will need to enter a username, e-mail, and password.
-
-Once you create an account you can sign in and sign out using the nav bar.  As a registered user you will have a profile page that enables you to track which skateparks you have visited and which are your favorite.
-
-###Log a Visit, Favorite
-
-On the display page for a given skatepark, click the "Been Here" button to add that skatepark to the list of skateparks you have visited. Click "Never Been Here" to remove that skatepark from the list of skateparks you have visited.
-
-On the display page for a given skatepark, click the "Add Favorite" button to add that skatepark to the list of your favorite skateparks. Click "Remove Favorite" to remove it.
-
-###Ratings and Reviews
-
-Once you have visited a skatepark, you are given the option of giving it a rating or writing a review.  Your rating will be aggregated with other user ratings to give an average user ratings.  To rate the skatepark click "Rate Skatepark" and use the dropdown form to give a rating.
-
-To review the skatepark click "Review Skatepark" and write a review in the dropdown form.  Your review will be shown on that skatepark's page.
-
 ##Technology
 
 West Coast Skateparks was created using [Ruby on Rails](rubyonrails.org).  The database is [PostgreSQL](http://www.postgresql.org/). Dynamic content is added using [Jquery](https://jquery.com/) and [AJAX](http://api.jquery.com/jquery.ajax/).
