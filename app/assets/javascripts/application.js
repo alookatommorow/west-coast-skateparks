@@ -19,27 +19,15 @@
 
 
 $(document).ready(function() {
-  bindEvents();
-});
-
-function bindEvents() {
-
   //////// Show modal on picture click ////////
   $('.ui.image').click(function(){
     $('.modal-image').attr('src', this.src);
     $('.picture-modal').modal('show');
   });
 
-
-
   //////// Select Skatepark From Profile Page ////////
   $(".profile-container").on('click', '.item', function(){
     makeItemClickable(this);
-  });
-
-  //////// Toggle Create Form ////////
-  $(".new-skatepark").on('click', function() {
-    $(".create-container").slideToggle(900, function(){});
   });
 
   //////// Toggle Rate Form ////////
@@ -57,8 +45,7 @@ function bindEvents() {
   //////// activate dropdown on rate form ////////
   $('.ui.dropdown').dropdown();
 
-
-}
+});
 
 
 

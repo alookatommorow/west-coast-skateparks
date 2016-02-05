@@ -2,7 +2,7 @@ class User < ActiveRecord::Base
   has_secure_password
   validates :username, :password, :email, presence: true
   validates :username, :email, uniqueness: true
-  validates_format_of :email, with: /.+@.+\..{2,}/
+  validates_format_of :email, with: /\A.+@.+\..{2,}\z/
 
   has_many :favorites
   has_many :favorite_parks, through: :favorites, source: :skatepark

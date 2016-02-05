@@ -41,7 +41,7 @@ $(document).ready(function(){
 
   function cycleImages() {
     currentUrl++;
-    if (currentUrl == imageUrls.length - 1) {
+    if (currentUrl === imageUrls.length - 1) {
       currentUrl = 0;
     }
     animate(imageUrls[currentUrl]);

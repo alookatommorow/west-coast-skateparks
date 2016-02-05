@@ -50,7 +50,7 @@ class Skatepark < ActiveRecord::Base
     if num_pics && num_pics > 0
       (1..num_pics).map do |i|
         "https://storage.googleapis.com/west-coast-skateparks/"\
-        "#{state}/#{identifier}-0#{i.to_s}.jpg"
+        "#{state}/#{identifier}-0#{i}.jpg"
       end
     else
       []

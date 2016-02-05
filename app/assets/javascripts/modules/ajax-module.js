@@ -1,4 +1,4 @@
- var AJAX = (function(){
+var AJAX = (function(){
   var callbacks = {
     visit: {
       post: function() {
@@ -10,7 +10,7 @@
         $('.remove-visit-button').addClass('hidden');
         $('.add-visit-button').removeClass('hidden');
         $('.opinions-container').addClass('hidden');
-      },
+      }
     },
     favorite: {
       post: function() {
@@ -20,7 +20,7 @@
       put: function() {
         $('.remove-favorite-button').addClass('hidden');
         $('.add-favorite-button').removeClass('hidden');
-      },
+      }
     },
     search: function(response) {
       $(".search-results-container").remove();
@@ -33,7 +33,7 @@
     $.ajax({
       url: $(event.target).attr('action'),
       data: $(event.target).serialize(),
-      method: method,
+      method: method
     })
     .done(function(response) {
       callback(response);
@@ -67,7 +67,7 @@
 
   return exports;
 
-})();
+}());
 
 
 
