@@ -1,31 +1,15 @@
 $(document).ready(function() {
 
   $('.add-favorite-button').on('submit', function(event){
-    event.preventDefault();
-    var url = $(this).attr('action');
-    var data = $(this).serialize();
-    $.ajax({ url: url, data: data, method: 'post' })
-    .done(function(response){
-      $('.remove-favorite-button').removeClass('hidden');
-      $('.add-favorite-button').addClass('hidden');
-    })
-    .fail(function(response){
-      console.log(response);
-    });
+    // AJAX.favoriteVisit('post', 'favorite', event);
+    AJAX['favorite']['post'](event);
+
   });
 
   $('.remove-favorite-button').on('submit', function(event){
-    event.preventDefault();
-    var url = $(this).attr('action');
-    var data = $(this).serialize();
-    $.ajax({ url: url, data: data, method: 'put' })
-    .done(function(response){
-      $('.remove-favorite-button').addClass('hidden');
-      $('.add-favorite-button').removeClass('hidden');
-    })
-    .fail(function(response){
-      console.log(response);
-    });
+    // AJAX.favoriteVisit('put', 'favorite', event);
+    AJAX['favorite']['put'](event);
+
   });
 
 });
