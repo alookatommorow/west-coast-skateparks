@@ -30,8 +30,7 @@ $(document).ready(function(){
 
   //////// Select Skatepark From Search ////////
   $(".search-container").on('click', '.item', function(){
-    window.location = $(this).find("a").attr("href");
-    return false;
+    makeItemClickable(this);
   });
 
 });
