@@ -22,6 +22,10 @@
         $('.add-favorite-button').removeClass('hidden');
       },
     },
+    search: function(response) {
+      $(".search-results-container").remove();
+      $(".search-container").append(response);
+    }
   }
 
   function ajaxRequest(event, method, callback) {
@@ -32,7 +36,7 @@
       method: method,
     })
     .done(function(response) {
-      callback();
+      callback(response);
     })
     .fail(function(response){
       console.log(response);
@@ -55,6 +59,9 @@
       put: function(event) {
         ajaxRequest(event, 'put', callbacks['favorite']['put']);
       }
+    },
+    search: function(event) {
+      ajaxRequest(event, 'get', callbacks['search'])
     }
   }
 
