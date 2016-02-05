@@ -11,10 +11,6 @@ West Coast Skateparks is an informational directory of every skatepark in the we
 
 West Coast Skateparks is deployed to Heroku. Visit the app [here](https://west-coast-skateparks.herokuapp.com/)
 
-##Instructions for Use
-
-To view the skatepark directory, click "Skateparks" on the navigation bar then select a state.  You may also search for a skatepark by city name using the search bar.
-
 ##Technology
 
 West Coast Skateparks was created using [Ruby on Rails](rubyonrails.org).  The database is [PostgreSQL](http://www.postgresql.org/). Dynamic content is added using [Jquery](https://jquery.com/) and [AJAX](http://api.jquery.com/jquery.ajax/).
