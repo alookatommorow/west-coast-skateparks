@@ -24,8 +24,7 @@ $(document).ready(function(){
 
   //////// Select Skatepark From State List ////////
   $(".parks-container").on('click', '.item', function(){
-    window.location = $(this).find("a").attr("href");
-    return false;
+    makeItemClickable(this);
   });
 
   //// image rotation ////
@@ -42,7 +41,7 @@ $(document).ready(function(){
 
   function cycleImages() {
     currentUrl++;
-    if (currentUrl == imageUrls.length - 1) {
+    if (currentUrl === imageUrls.length - 1) {
       currentUrl = 0;
     }
     animate(imageUrls[currentUrl]);

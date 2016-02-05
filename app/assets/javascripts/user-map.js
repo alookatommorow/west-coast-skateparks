@@ -89,4 +89,4 @@ function MarkerGenerator(map, skateparks) {
   }
 
 
-};
+}

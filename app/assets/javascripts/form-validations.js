@@ -11,8 +11,8 @@ $(document).ready(function() {
               prompt : 'Please enter a review'
             }
           ]
-        },
-      },
+        }
+      }
     });
 
   ///// rate form validation //////
@@ -26,8 +26,8 @@ $(document).ready(function() {
               prompt : 'Please select a rating'
             }
           ]
-        },
-      },
+        }
+      }
     });
 
 
@@ -51,8 +51,8 @@ $(document).ready(function() {
               prompt : 'Password must be at least 6 characters'
             }
           ]
-        },
-      },
+        }
+      }
     });
 
   ///// sign-up form validation //////
@@ -84,8 +84,8 @@ $(document).ready(function() {
             prompt : 'Password must be at least 6 characters'
           }
         ]
-      },
-    },
+      }
+    }
   });
 
 
