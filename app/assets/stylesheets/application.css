@@ -15,9 +15,6 @@
  *= require_tree .
  *= require_self
  */
-* {
-  font-family: 'Helvetica', sans-serif;
-}
 
 html,body,blockquote,code,h1,h2,h3,h4,h5,h6,p,pre{margin:0;padding:0;}
 
@@ -25,9 +22,7 @@ html,body,blockquote,code,h1,h2,h3,h4,h5,h6,p,pre{margin:0;padding:0;}
   border: 1px solid red;
 }
 
-
 /*-----------Layout----------*/
-
 
 html, body {
   height: 100%;
@@ -79,146 +74,7 @@ input:-webkit-autofill {
 }
 
 
-/*---------Atomic-----------*/
-
-.red {
-  color: red;
-}
-
-.center-text {
-  text-align: center;
-}
-
-.one-margin {
-  margin-top: 1%;
-}
-
-.one-top {
-  margin-top: 1%;
-}
-
-.one-bottom {
-  margin-bottom: 1%;
-}
-
-.two-top {
-  margin-top: 2%;
-}
-
-.two-bottom {
-  margin-bottom: 2%;
-}
-
-.ten-left {
-  margin-left: 10%;
-}
-
-.ten-right {
-  margin-left: 10%;
-}
-
-.relative {
-  position: relative;
-}
-
-.blue {
-  color: #5CB8E6;
-}
-
-.hidden {
-  display: none;
-}
-
-.right-align {
-  text-align: right;
-}
-
-.inline {
-  display: inline;
-}
-
-.inline-block {
-  display: inline-block;
-}
-
-.float-right {
-  float: right;
-}
-
-.float-left {
-  float: left;
-}
-
-.reduced-margin {
-  margin: 0px;
-}
-
-/*-------Welcome Page----------*/
-
-.landing-container {
-  position: relative;
-  background-image: url("https://storage.googleapis.com/west-coast-skateparks/newberg_cover.jpg" );
-  background-repeat: no-repeat;
-  background-size: 100% auto;
-  background-position: 0 -220px;
-  padding: 12% 7%;
-}
-
-.landing-content {
-  background-color: rgba(255, 255, 255, 0.5);
-  color: black;
-  padding-top: 5%;
-  padding-bottom: 5%;
-}
-
-.landing-information-container {
-  padding-top: 8%;
-  padding-left: 5%;
-  padding-right: 5%;
-  padding-bottom: 8%;
-}
-
-.icon-container {
-  padding-bottom: 10%;
-}
-
-
-/*-------Index Page----------*/
-
-.grey {
-  background-color: #c3c3c3;
-}
-
-.parks-container a {
-  color: black;
-}
-
-.create-container {
-  display: none;
-  margin-top: 10px;
-}
-
-.image-rotator {
-  background-image: url("https://storage.googleapis.com/west-coast-skateparks/headers/lance-mountain.jpg" );
-  background-size: 100% auto;
-  background-position: 0 -30px;
-  padding: 20% 7%;
-}
-
-/*-------Profile Page----------*/
-
-#user-map {
-  height: 300px;
-  width: 400px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.profile-container a {
-  color: black;
-}
-
-/*--------Search Page-------*/
+/*--------Search -------*/
 
 .search-results-container {
   margin-top: 2%;
@@ -228,55 +84,7 @@ input:-webkit-autofill {
   color: black;
 }
 
-/*--------Show Page-------*/
 
-#map {
-  height: 300px;
-  width: 400px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.picture-modal img {
-  display:block;
-  margin:auto;
-}
-
-.ui img {
-  cursor: pointer;
-}
-
-.fav-container, .visit-container {
-  padding-top: 1%;
-  padding-bottom: 2%;
-}
-
-.sign-up-form, .sign-in-form {
-  padding-bottom: 45%;
-}
-
-.written-review-container {
-  padding-top: 3%;
-}
-
-.next-button {
-  text-align: right;
-}
-
-#state-map {
-  height: 300px;
-  width: 400px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.map-missing {
-  background-image: url("https://storage.googleapis.com/west-coast-skateparks/Monkey-business.jpg");
-  background-repeat: no-repeat;
-  height: 300px;
-  text-align: center;
-  color: red;
-}
 
 
 

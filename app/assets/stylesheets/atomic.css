@@ -1,0 +1,73 @@
+/*---------Atomic-----------*/
+
+.red {
+  color: red;
+}
+
+.center-text {
+  text-align: center;
+}
+
+.one-margin {
+  margin-top: 1%;
+}
+
+.one-top {
+  margin-top: 1%;
+}
+
+.one-bottom {
+  margin-bottom: 1%;
+}
+
+.two-top {
+  margin-top: 2%;
+}
+
+.two-bottom {
+  margin-bottom: 2%;
+}
+
+.ten-left {
+  margin-left: 10%;
+}
+
+.ten-right {
+  margin-left: 10%;
+}
+
+.relative {
+  position: relative;
+}
+
+.blue {
+  color: #5CB8E6;
+}
+
+.hidden {
+  display: none;
+}
+
+.right-align {
+  text-align: right;
+}
+
+.inline {
+  display: inline;
+}
+
+.inline-block {
+  display: inline-block;
+}
+
+.float-right {
+  float: right;
+}
+
+.float-left {
+  float: left;
+}
+
+.reduced-margin {
+  margin: 0px;
+}
