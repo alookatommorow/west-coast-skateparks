@@ -3,23 +3,14 @@ $(document).ready(function(){
 
   //////// Show skateparks by state ////////
   $(".park-state").on('click', function(event){
-    var $stateButton = $(this);
-    event.preventDefault();
+    var $stateButton = $(event.target);
     if ($stateButton.hasClass('active')) {
+      event.preventDefault();
       $stateButton.removeClass('active');
-      return slideDownImages();
+      slideDownImages();
+    } else {
+      AJAX.state(event);
     }
-    slideUpImages();
-    var url = $stateButton.attr('href');
-    $stateButton.addClass('active').siblings().removeClass('active');
-    $.ajax({url: url})
-    .done(function(response) {
-      $(".parks-container").children().remove();
-      $(".parks-container").append(response);
-    })
-    .fail(function(response){
-      console.error(response);
-    })
   });
 
   //////// Select Skatepark From State List ////////

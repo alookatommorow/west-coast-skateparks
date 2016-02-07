@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   resources :sessions, only: [:new, :create, :destroy]
   resources :skateparks
 
+  get '/state', to: 'skateparks#state', as: 'state'
   get '/search', to: 'skateparks#search', as: 'search'
 
   post '/visits', to: 'visits#create'

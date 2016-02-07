@@ -25,8 +25,14 @@ var AJAX = (function(){
     search: function(response) {
       $(".search-results-container").remove();
       $(".search-container").append(response);
+    },
+    state: function(response, event) {
+      slideUpImages();
+      $(event.target).addClass('active').siblings().removeClass('active');
+      $(".parks-container").children().remove();
+      $(".parks-container").append(response);
     }
-  }
+  };
 
   function ajaxRequest(event, method, callback) {
     event.preventDefault();
@@ -36,7 +42,7 @@ var AJAX = (function(){
       method: method
     })
     .done(function(response) {
-      callback(response);
+      callback(response, event);
     })
     .fail(function(response){
       console.log(response);
@@ -61,9 +67,12 @@ var AJAX = (function(){
       }
     },
     search: function(event) {
-      ajaxRequest(event, 'get', callbacks['search'])
+      ajaxRequest(event, 'get', callbacks['search']);
+    },
+    state: function(event) {
+      ajaxRequest(event, 'get', callbacks['state']);
     }
-  }
+  };
 
   return exports;
 
