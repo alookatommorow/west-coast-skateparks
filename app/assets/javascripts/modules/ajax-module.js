@@ -1,4 +1,20 @@
 var AJAX = (function(){
+  var requests = {
+    form: function(event, method) {
+      return $.ajax({
+        url: $(event.target).attr('action'),
+        data: $(event.target).serialize(),
+        method: method
+      });
+    },
+
+    link: function(event) {
+      return $.ajax({
+        url: $(event.target).attr('href')
+      });
+    }
+  };
+
   var callbacks = {
     visit: {
       post: function() {
@@ -27,27 +43,11 @@ var AJAX = (function(){
       $(".search-container").append(response);
     },
     state: function(response, event) {
-      slideUpImages();
       $(event.target).addClass('active').siblings().removeClass('active');
       $(".parks-container").children().remove();
       $(".parks-container").append(response);
     }
   };
-
-  function ajaxRequest(event, method, callback) {
-    event.preventDefault();
-    $.ajax({
-      url: $(event.target).attr('action'),
-      data: $(event.target).serialize(),
-      method: method
-    })
-    .done(function(response) {
-      callback(response, event);
-    })
-    .fail(function(response){
-      console.log(response);
-    });
-  }
 
   var exports = {
     visit: {
@@ -73,6 +73,25 @@ var AJAX = (function(){
       ajaxRequest(event, 'get', callbacks['state']);
     }
   };
+
+  function ajaxRequest(event, method, callback) {
+    event.preventDefault();
+    var request;
+    var comingFromAform = $(event.target).attr('action');
+
+    if (comingFromAform) {
+      request = requests.form(event, method);
+    } else {
+      request = requests.link(event);
+    }
+
+    request.done(function(response) {
+      callback(response, event);
+    });
+    request.fail(function(response){
+      console.log(response, event);
+    });
+  }
 
   return exports;
 
