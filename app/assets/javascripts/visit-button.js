@@ -1,22 +1,32 @@
 $(document).ready(function() {
-  var showRemoveVisitBtnShowOpinionsContainer = function () {
-    $('.remove-visit-button').removeClass('hidden');
-    $('.add-visit-button').addClass('hidden');
-    $('.opinions-container').removeClass('hidden');
-  };
-  var showAddVisitBtnHideOpinionsContainer = function () {
-    $('.remove-visit-button').addClass('hidden');
-    $('.add-visit-button').removeClass('hidden');
-    $('.opinions-container').addClass('hidden');
-  };
-
-
   $('.add-visit-button').on('submit', function(event){
-    AJAX(event, 'post', showRemoveVisitBtnShowOpinionsContainer);
+    AJAX(event, 'post', function () {
+      toggleVisibility({
+        show: $('.remove-visit-button'),
+        hide: $('.add-visit-button')
+      });
+      toggleOpinionsDisplay();
+    });
   });
 
   $('.remove-visit-button').on('submit', function(event){
-    AJAX(event, 'put', showAddVisitBtnHideOpinionsContainer);
+    AJAX(event, 'put', function () {
+      toggleVisibility({
+        hide: $('.remove-visit-button'),
+        show: $('.add-visit-button')
+      });
+      toggleOpinionsDisplay();
+    });
   });
+
+  function toggleOpinionsDisplay() {
+    var $opinions = $('.opinions-container');
+
+    if ($opinions.hasClass('hidden')) {
+      $opinions.addClass('hidden');
+    } else {
+      $opinions.removeClass('hidden');
+    }
+  }
 });
 

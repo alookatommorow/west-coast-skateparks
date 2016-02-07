@@ -1,20 +1,20 @@
 $(document).ready(function() {
-  var showRemoveFavoriteBtn = function () {
-    $('.remove-favorite-button').removeClass('hidden');
-    $('.add-favorite-button').addClass('hidden');
-  };
-  var showAddFavoriteBtn = function () {
-    $('.add-favorite-button').removeClass('hidden');
-    $('.remove-favorite-button').addClass('hidden');
-  };
-
-
   $('.add-favorite-button').on('submit', function(event){
-    AJAX(event, 'post', showRemoveFavoriteBtn);
+    AJAX(event, 'post', function () {
+      toggleVisibility({
+        show: $('.remove-favorite-button'),
+        hide: $('.add-favorite-button')
+      });
+    });
   });
 
   $('.remove-favorite-button').on('submit', function(event){
-    AJAX(event, 'put', showAddFavoriteBtn);
+    AJAX(event, 'put', function () {
+      toggleVisibility({
+        show: $('.add-favorite-button'),
+        hide: $('.remove-favorite-button')
+      });
+    });
   });
 });
 
