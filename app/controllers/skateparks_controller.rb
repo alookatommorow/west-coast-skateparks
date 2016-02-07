@@ -19,6 +19,4 @@ class SkateparksController < ApplicationController
   def skatepark_params
     params.require(:skatepark).permit(:name, :city, :state, :rating, :designer, :builder, :opened, :address, :hours, :size, :notes, :helmet)
   end
-
-
 end

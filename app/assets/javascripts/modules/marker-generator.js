@@ -10,13 +10,13 @@ function MarkerGenerator(map, skateparks) {
         if (type !== 'main') {
           skatepark = JSON.parse(skatepark);
         }
-        var marker = createMarker(skatepark, type)
-        var infowindow = marker['infowindow']
+        var marker = createMarker(skatepark, type);
+        var infowindow = marker.infowindow;
         toggleable[type].push(marker);
       });
       bindVisibilityListener(type);
     });
-  }
+  };
 
   function createMarker(skatepark, type){
     var latLng = { lat: skatepark.latitude, lng: skatepark.longitude };
@@ -45,18 +45,16 @@ function MarkerGenerator(map, skateparks) {
   function bindVisibilityListener(type) {
     $('#toggle-' + type).on('click', function (event) {
       var $button = $(event.target);
-      var action = $button.text().split(' ')
+      var action = $button.text().split(' ');
 
-      if (action[0] === 'Hide') {
-        action[0] = 'Show'
-        $button.text(action.join(' '));
-        toggleMarkerVisibility(toggleable[type], false);
-      } else {
-        action[0] = 'Hide'
-        $button.text(action.join(' '));
-        toggleMarkerVisibility(toggleable[type], true);
-      }
+      toggleMarkerVisibility(toggleable[type], action[0]);
+      toggleButtonText($button, action);
     });
+  }
+
+  function toggleButtonText(button, action) {
+    action[0] = (action[0] === 'Hide') ? 'Show' : 'Hide';
+    button.text(action.join(' '));
   }
 
   function bindInfowindowListener(map, allMarkers, marker, infowindow) {
@@ -69,6 +67,7 @@ function MarkerGenerator(map, skateparks) {
   }
 
   function toggleMarkerVisibility(markers, visibility) {
+    visibility = (visibility === 'Hide') ? false : true;
     markers.forEach(function (marker) {
       if (marker.main) {
         return;
@@ -84,9 +83,7 @@ function MarkerGenerator(map, skateparks) {
 
   function titleize(string) {
     return string.split(' ').map(function(word){
-      return word.charAt(0).toUpperCase() + word.slice(1)
+      return word.charAt(0).toUpperCase() + word.slice(1);
     }).join(' ');
   }
-
-
 }
