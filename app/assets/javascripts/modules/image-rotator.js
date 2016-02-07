@@ -1,9 +1,6 @@
-//$(document).ready(function () {
-  //// image rotation ////
 function ImageRotator() {
   var $container = $('.image-rotator');
   var currentUrl = 0;
-  //var rotationTimer = setInterval(cycleImages, 4000);
   var imageUrls = shuffle([
     'lance-mountain',
     'hewitt',
@@ -57,4 +54,3 @@ function ImageRotator() {
     return array;
   }
 }
-//});

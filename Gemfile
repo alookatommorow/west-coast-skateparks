@@ -26,6 +26,7 @@ group :assets do
 end
 
 group :development do
+  gem 'quiet_assets'
   gem 'web-console', '~> 3.1.1'
 end
 
