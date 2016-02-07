@@ -1,22 +1,24 @@
 $(document).ready(function(){
+  var appendSearchResultsToContainer = function (response) {
+    $(".search-results-container").remove();
+    $(".search-container").append(response);
+  };
 
   //////// Search form submit via enter key ////////
   $('.search-form').on('submit', function(event) {
-    AJAX['search'](event);
+    AJAX(event, 'get', appendSearchResultsToContainer);
   });
 
   //////// Search form submit via icon click ////////
   $('.circular.search').on('click', function(event) {
+    event.preventDefault();
     var url = $(this).closest('form').attr('action');
     var data = $(this).closest('form').serialize();
     if ($('#search').val() === '') {
       return
     }
     $.ajax({url: url, data: data})
-    .done(function(response) {
-      $(".search-results-container").remove();
-      $(".search-container").append(response);
-    })
+    .done(appendSearchResultsToContainer)
     .fail(function(response){
       console.error(response);
     })

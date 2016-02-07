@@ -1,6 +1,11 @@
 $(document).ready(function(){
   var rotator = new ImageRotator();
   var rotationTimer = setInterval(rotator.cycleImages, 4000);
+  var appendSkateparksToState = function (response, event) {
+    $(event.target).addClass('active').siblings().removeClass('active');
+    $(".parks-container").children().remove();
+    $(".parks-container").append(response);
+  };
 
   //////// Show skateparks by state ////////
   $(".park-state").on('click', function(event){
@@ -11,7 +16,7 @@ $(document).ready(function(){
       $stateButton.removeClass('active');
       slideDownImages();
     } else {
-      AJAX.state(event);
+      AJAX(event, 'get', appendSkateparksToState);
       slideUpImages();
     }
   });
