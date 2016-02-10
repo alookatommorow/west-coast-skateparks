@@ -7,9 +7,6 @@ function MarkerGenerator(map, skateparks) {
   this.generateMarkers = function () {
     types.forEach(function (type) {
       skateparks[type].forEach(function (skatepark) {
-        if (type !== 'main') {
-          skatepark = JSON.parse(skatepark);
-        }
         var marker = createMarker(skatepark, type);
         var infowindow = marker.infowindow;
         toggleable[type].push(marker);

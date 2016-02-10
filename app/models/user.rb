@@ -37,21 +37,21 @@ class User < ActiveRecord::Base
     visits.any?
   end
 
-  def favorite_parks_json
-    (favorite_parks - dups).map(&:map_json).to_json.html_safe
+  #add spec for this
+  def map_data
+    {
+      skateparks: {
+        favorite: (favorite_parks - dups).map(&:hashify_with_pictures),
+        visited: (visited_parks - dups).map(&:hashify_with_pictures),
+        both: dups.map(&:hashify_with_pictures)
+      },
+      mapCenter: first_marker_coordinates,
+      zoom: 6
+    }
   end
 
-  def visited_parks_json
-    (visited_parks - dups).map(&:map_json).to_json.html_safe
+  def dups
+    @dups ||= favorite_parks & visited_parks
   end
 
-  def both_json
-    dups.map(&:map_json).to_json.html_safe
-  end
-
-  private
-
-    def dups
-      @dups ||= favorite_parks & visited_parks
-    end
 end

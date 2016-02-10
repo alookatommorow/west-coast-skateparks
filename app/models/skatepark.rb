@@ -17,19 +17,22 @@ class Skatepark < ActiveRecord::Base
   has_many :reviews, dependent: :destroy
   has_many :users_who_reviewed, through: :reviews, source: :user
 
-  def map_json_with_nearby
+  def hashify_with_pictures
     attributes.merge({
       pictures: pictures,
-      nearbyParks: nearby_parks.map(&:map_json),
       firstPicture: first_picture
-    }).to_json
+    })
   end
 
-  def map_json
-    attributes.merge({
-      pictures: pictures,
-      firstPicture: first_picture
-    }).to_json
+  def map_data
+    {
+      skateparks: {
+        nearby: nearby_parks.map(&:hashify_with_pictures),
+        main: [hashify_with_pictures],
+      },
+      mapCenter: [latitude, longitude],
+      zoom: 9
+    }
   end
 
   def self.search(target)

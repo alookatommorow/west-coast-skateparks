@@ -1,6 +1,41 @@
 require 'rails_helper'
 
 RSpec.describe Skatepark, type: :model do
+  context '#map_data' do
+    it 'returns a hash with data needed for map generation' do
+      skatepark = create(:skatepark)
+      create(:skatepark, identifier: "areolaland")
+
+      expected = {
+        skateparks: {
+          nearby: skatepark.nearby_parks.map(&:hashify_with_pictures),
+          main: [skatepark.hashify_with_pictures],
+        },
+        mapCenter: [skatepark.latitude, skatepark.longitude],
+        zoom: 9
+      }
+
+      expect(skatepark.map_data).to eq(expected)
+    end
+
+    it 'assigns empty array as value of nearby key' do
+      skatepark = create(:skatepark)
+
+      expected = {
+        skateparks: {
+          nearby: [],
+          main: [skatepark.hashify_with_pictures],
+        },
+        mapCenter: [skatepark.latitude, skatepark.longitude],
+        zoom: 9
+      }
+
+      expect(skatepark.map_data).to eq(expected)
+    end
+
+
+  end
+
   context '.in_state' do
     it 'returns a collection of all parks in that state in ascending order by city name' do
       skateparks = [create(:skatepark, name: 'ZAMN'), create(:skatepark)]
@@ -12,22 +47,7 @@ RSpec.describe Skatepark, type: :model do
     end
   end
 
-  context '#map_json_with_nearby' do
-    it 'returns object with properties with values returned from model methods' do
-      skatepark = create(:skatepark)
-      nearby_skatepark = create(:skatepark, identifier: "alternate")
-      map_format = JSON.parse(skatepark.map_json_with_nearby)
-      expect(map_format['pictures']).to eq(
-        [
-          generate_image_url(skatepark, 1),
-          generate_image_url(skatepark, 2),
-          generate_image_url(skatepark, 3),
-        ]
-      )
-      expect(map_format['nearbyParks'][0]).to eq(nearby_skatepark.map_json)
-      expect(map_format['firstPicture']).to eq(generate_image_url(skatepark, 1))
-    end
-  end
+  #### ADD test for hashify_with_pictures and rename to hashify w/ pics (or something)
 
   context '#pictures' do
     it 'returns an array with the correct photo urls' do
