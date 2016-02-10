@@ -17,6 +17,11 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 
+  def map_data
+    user = User.find(params[:id])
+    render json: user.map_data
+  end
+
   private
 
     def user_params

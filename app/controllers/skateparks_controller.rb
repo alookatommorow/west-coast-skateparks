@@ -16,10 +16,7 @@ class SkateparksController < ApplicationController
 
   def map_data
     skatepark = Skatepark.find(params[:id])
-    render json: {
-      nearby: skatepark.nearby_parks.map(&:map_json),
-      main: [skatepark.map_json],
-    }
+    render json: skatepark.map_data
   end
 
   private

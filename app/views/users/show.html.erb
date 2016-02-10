@@ -33,7 +33,7 @@
       <div class="seven wide column">
 
         <div id='relative'>
-          <div id="user-map"></div>
+          <div id="map" class="user-map"></div>
         </div>
         <div class="center-text two-top">
           <% if @user.has_favorites? %>
@@ -83,23 +83,7 @@
 
   <script>
 
-    function initMap() {
 
-      var parkCoords = <%= @user.first_marker_coordinates %>
-      var mapCenter = {lat: parkCoords[0], lng: parkCoords[1]}
-      var map = new google.maps.Map(document.getElementById('user-map'), {
-        zoom: 6,
-        center: mapCenter,
-      });
-
-      var skateparks = {
-        favorite: <%= @user.favorite_parks_json %>,
-        visited: <%= @user.visited_parks_json %>,
-        both: <%= @user.both_json %>
-      }
-
-      new MarkerGenerator(map, skateparks).generateMarkers();
-    }
 
   </script>
   <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV.fetch('GOOGLE_KEY') %>&callback=initMap"

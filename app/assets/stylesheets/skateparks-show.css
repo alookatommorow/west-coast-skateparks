@@ -1,6 +1,6 @@
 /*--------Show Page-------*/
 
-#map {
+.skatepark-map {
   height: 300px;
   width: 400px;
   margin-left: auto;
