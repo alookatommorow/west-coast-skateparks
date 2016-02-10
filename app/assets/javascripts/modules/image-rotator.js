@@ -6,6 +6,8 @@ function ImageRotator() {
     'hewitt',
     'willis',
     'beckett',
+    'foy',
+    'childress',
     'kowalski',
     'drehobl',
     'robbie',
