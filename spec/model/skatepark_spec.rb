@@ -12,22 +12,7 @@ RSpec.describe Skatepark, type: :model do
     end
   end
 
-  context '#map_json_with_nearby' do
-    it 'returns object with properties with values returned from model methods' do
-      skatepark = create(:skatepark)
-      nearby_skatepark = create(:skatepark, identifier: "alternate")
-      map_format = JSON.parse(skatepark.map_json_with_nearby)
-      expect(map_format['pictures']).to eq(
-        [
-          generate_image_url(skatepark, 1),
-          generate_image_url(skatepark, 2),
-          generate_image_url(skatepark, 3),
-        ]
-      )
-      expect(map_format['nearbyParks'][0]).to eq(nearby_skatepark.map_json)
-      expect(map_format['firstPicture']).to eq(generate_image_url(skatepark, 1))
-    end
-  end
+  #### ADD test for map_json and rename to hashify w/ pics (or something)
 
   context '#pictures' do
     it 'returns an array with the correct photo urls' do

@@ -168,28 +168,11 @@
 </div>
 
 <% if @skatepark.has_coordinates? %>
-  <script>
-    function initMap() {
-      var skatepark = <%= @skatepark.map_json_with_nearby.html_safe %>
-      var myLatLng = {lat: skatepark.latitude, lng: skatepark.longitude}
-
-      var map = new google.maps.Map(document.getElementById('map'), {
-        zoom: 9,
-        center: myLatLng
-      });
-
-      var skateparks = { nearby: skatepark.nearbyParks, main: [skatepark] }
-
-      new MarkerGenerator(map, skateparks).generateMarkers();
-
-    }
-
-  </script>
-
 
   <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_KEY'] %>&callback=initMap"
       async defer>
   </script>
+
 <% end %>
 
 <style>

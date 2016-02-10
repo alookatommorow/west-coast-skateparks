@@ -14,6 +14,14 @@ class SkateparksController < ApplicationController
       skateparks: Skatepark.in_state(params[:state]) }
   end
 
+  def map_data
+    skatepark = Skatepark.find(params[:id])
+    render json: {
+      nearby: skatepark.nearby_parks.map(&:map_json),
+      main: [skatepark.map_json],
+    }
+  end
+
   private
 
   def skatepark_params
