@@ -8,8 +8,8 @@ RSpec.describe Skatepark, type: :model do
 
       expected = {
         skateparks: {
-          nearby: skatepark.nearby_parks.map(&:map_json),
-          main: [skatepark.map_json],
+          nearby: skatepark.nearby_parks.map(&:hashify_with_pictures),
+          main: [skatepark.hashify_with_pictures],
         },
         mapCenter: [skatepark.latitude, skatepark.longitude],
         zoom: 9
@@ -24,7 +24,7 @@ RSpec.describe Skatepark, type: :model do
       expected = {
         skateparks: {
           nearby: [],
-          main: [skatepark.map_json],
+          main: [skatepark.hashify_with_pictures],
         },
         mapCenter: [skatepark.latitude, skatepark.longitude],
         zoom: 9
@@ -47,7 +47,7 @@ RSpec.describe Skatepark, type: :model do
     end
   end
 
-  #### ADD test for map_json and rename to hashify w/ pics (or something)
+  #### ADD test for hashify_with_pictures and rename to hashify w/ pics (or something)
 
   context '#pictures' do
     it 'returns an array with the correct photo urls' do

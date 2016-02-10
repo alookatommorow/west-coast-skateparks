@@ -15,9 +15,9 @@ RSpec.describe User, type: :model do
 
       expected = {
         skateparks: {
-          favorite: (user.favorite_parks - user.dups).map(&:map_json),
-          visited: (user.visited_parks - user.dups).map(&:map_json),
-          both: user.dups.map(&:map_json)
+          favorite: (user.favorite_parks - user.dups).map(&:hashify_with_pictures),
+          visited: (user.visited_parks - user.dups).map(&:hashify_with_pictures),
+          both: user.dups.map(&:hashify_with_pictures)
         },
         mapCenter: user.first_marker_coordinates,
         zoom: 6

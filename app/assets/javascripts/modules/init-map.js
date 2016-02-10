@@ -16,7 +16,7 @@ var generateMarkers = function(response) {
 
   var map = new google.maps.Map(document.getElementById('map'), {
     zoom: response.zoom,
-    center: mapCenter,
+    center: mapCenter
   });
 
   new MarkerGenerator(map, response.skateparks).generateMarkers();

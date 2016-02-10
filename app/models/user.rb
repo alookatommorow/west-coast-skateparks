@@ -41,9 +41,9 @@ class User < ActiveRecord::Base
   def map_data
     {
       skateparks: {
-        favorite: (favorite_parks - dups).map(&:map_json),
-        visited: (visited_parks - dups).map(&:map_json),
-        both: dups.map(&:map_json)
+        favorite: (favorite_parks - dups).map(&:hashify_with_pictures),
+        visited: (visited_parks - dups).map(&:hashify_with_pictures),
+        both: dups.map(&:hashify_with_pictures)
       },
       mapCenter: first_marker_coordinates,
       zoom: 6
