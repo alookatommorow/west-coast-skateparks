@@ -50,4 +50,5 @@ end
 group :test do
   gem 'database_cleaner'
   gem 'rake'
+  gem "codeclimate-test-reporter", require: nil
 end
