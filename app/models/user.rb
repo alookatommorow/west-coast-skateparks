@@ -37,7 +37,6 @@ class User < ActiveRecord::Base
     visits.any?
   end
 
-  #add spec for this
   def map_data
     {
       skateparks: {
