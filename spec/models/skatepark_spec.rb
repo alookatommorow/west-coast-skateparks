@@ -1,6 +1,41 @@
 require 'rails_helper'
 
 RSpec.describe Skatepark, type: :model do
+  context '#map_data' do
+    it 'returns a hash with data needed for map generation' do
+      skatepark = create(:skatepark)
+      create(:skatepark, identifier: "areolaland")
+
+      expected = {
+        skateparks: {
+          nearby: skatepark.nearby_parks.map(&:map_json),
+          main: [skatepark.map_json],
+        },
+        mapCenter: [skatepark.latitude, skatepark.longitude],
+        zoom: 9
+      }
+
+      expect(skatepark.map_data).to eq(expected)
+    end
+
+    it 'assigns empty array as value of nearby key' do
+      skatepark = create(:skatepark)
+
+      expected = {
+        skateparks: {
+          nearby: [],
+          main: [skatepark.map_json],
+        },
+        mapCenter: [skatepark.latitude, skatepark.longitude],
+        zoom: 9
+      }
+
+      expect(skatepark.map_data).to eq(expected)
+    end
+
+
+  end
+
   context '.in_state' do
     it 'returns a collection of all parks in that state in ascending order by city name' do
       skateparks = [create(:skatepark, name: 'ZAMN'), create(:skatepark)]

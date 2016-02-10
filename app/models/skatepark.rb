@@ -24,6 +24,17 @@ class Skatepark < ActiveRecord::Base
     })
   end
 
+  def map_data
+    {
+      skateparks: {
+        nearby: nearby_parks.map(&:map_json),
+        main: [map_json],
+      },
+      mapCenter: [latitude, longitude],
+      zoom: 9
+    }
+  end
+
   def self.search(target)
     where(
       'name LIKE ? OR city LIKE ? OR state LIKE ?',
