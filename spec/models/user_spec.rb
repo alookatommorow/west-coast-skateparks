@@ -5,16 +5,15 @@ RSpec.describe User, type: :model do
   context '#dups' do
     it 'returns an array of skateparks in common between favorite and visited' do
       user = create(:user)
-      favorite_park = create(:skatepark, identifier: "fantasyland")
-      visited_park = create(:skatepark, identifier: "veggieland")
-      both_park = create(:skatepark, identifier: "island")
-      create(:favorite, user_id: user.id, skatepark_id: favorite_park.id)
-      create(:visit, user_id: user.id, skatepark_id: visited_park.id)
-      create(:visit, user_id: user.id, skatepark_id: both_park.id)
-      create(:favorite, user_id: user.id, skatepark_id: both_park.id)
+      skateparks = create_list(:skatepark, 3)
 
-      expected = [both_park]
+      create(:favorite, user_id: user.id, skatepark_id: skateparks.first.id)
+      create(:visit, user_id: user.id, skatepark_id: skateparks.second.id)
 
+      create(:favorite, user_id: user.id, skatepark_id: skateparks.third.id)
+      create(:visit, user_id: user.id, skatepark_id: skateparks.third.id)
+
+      expected = [skateparks.third]
       expect(user.dups).to eq(expected)
     end
   end
@@ -22,13 +21,13 @@ RSpec.describe User, type: :model do
   context '#map_data' do
     it 'returns a hash with data needed for map generation' do
       user = create(:user)
-      favorite_park = create(:skatepark, identifier: "candyland")
-      visited_park = create(:skatepark, identifier: "shroomland")
-      both_park = create(:skatepark, identifier: "cherryland")
-      create(:favorite, user_id: user.id, skatepark_id: favorite_park.id)
-      create(:visit, user_id: user.id, skatepark_id: visited_park.id)
-      create(:visit, user_id: user.id, skatepark_id: both_park.id)
-      create(:favorite, user_id: user.id, skatepark_id: both_park.id)
+      skateparks = create_list(:skatepark, 3)
+
+      create(:favorite, user_id: user.id, skatepark_id: skateparks.first.id)
+      create(:visit, user_id: user.id, skatepark_id: skateparks.second.id)
+
+      create(:favorite, user_id: user.id, skatepark_id: skateparks.third.id)
+      create(:visit, user_id: user.id, skatepark_id: skateparks.third.id)
 
       expected = {
         skateparks: {
@@ -46,7 +45,7 @@ RSpec.describe User, type: :model do
 
   context '#is_admin?' do
     it 'returns true if user is an admin' do
-      user = create(:user, admin: true)
+      user = create(:user, :admin)
 
       expect(user.is_admin?).to eq(true)
     end
@@ -93,13 +92,13 @@ RSpec.describe User, type: :model do
   context '#first_marker_coordinates' do
     it 'returns lat long of first favorited or visited skatepark' do
       user = create(:user)
-      skatepark = create(:skatepark)
-      other = create(:skatepark, :other)
+      skateparks = create_list(:skatepark, 2)
 
-      create(:visit, user_id: user.id, skatepark_id: skatepark.id)
-      create(:favorite, user_id: user.id, skatepark_id: other.id)
+      create(:visit, user_id: user.id, skatepark_id: skateparks.first.id)
+      create(:favorite, user_id: user.id, skatepark_id: skateparks.second.id)
 
-      expect(user.first_marker_coordinates).to eq([other.latitude, other.longitude])
+      expect(user.first_marker_coordinates).to eq(
+        [skateparks.second.latitude, skateparks.second.longitude])
     end
 
     it 'returns SF EPICENTER if no park is found' do
