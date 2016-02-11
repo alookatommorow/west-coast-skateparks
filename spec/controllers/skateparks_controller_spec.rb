@@ -3,11 +3,10 @@ require 'rails_helper'
 RSpec.describe SkateparksController, type: :controller do
   describe 'GET skateparks/:id/map_data' do
     it 'serves JSON object with skatepark and nearby_parks' do
-      skatepark = create(:skatepark)
-      nearby_skatepark = create(:skatepark, identifier: "alternate")
-      expected = skatepark.map_data.to_json
+      skateparks = create_list(:skatepark, 2)
+      expected = skateparks.first.map_data.to_json
 
-      get :map_data, id: skatepark.id
+      get :map_data, id: skateparks.first.id
       expect(response.body).to eq(expected)
     end
   end
