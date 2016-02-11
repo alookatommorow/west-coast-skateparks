@@ -6,6 +6,7 @@ gem 'administrate', '~> 0.1.3'
 gem 'autoprefixer-rails', '~> 6.0'
 gem 'awesome_print'
 gem 'bcrypt', '~> 3.1.7'
+gem "codeclimate-test-reporter", group: :test, require: nil
 gem 'geokit'
 gem 'gmaps4rails'
 gem 'jquery-rails'
@@ -20,6 +21,7 @@ gem 'therubyracer'
 gem 'turbolinks'
 gem 'uglifier', '>= 1.3.0'
 gem 'underscore-rails'
+
 
 group :assets do
   gem 'coffee-rails'

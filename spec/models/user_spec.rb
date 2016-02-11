@@ -2,6 +2,23 @@ require 'rails_helper'
 
 RSpec.describe User, type: :model do
 
+  context '#dups' do
+    it 'returns an array of skateparks in common between favorite and visited' do
+      user = create(:user)
+      favorite_park = create(:skatepark, identifier: "fantasyland")
+      visited_park = create(:skatepark, identifier: "veggieland")
+      both_park = create(:skatepark, identifier: "island")
+      create(:favorite, user_id: user.id, skatepark_id: favorite_park.id)
+      create(:visit, user_id: user.id, skatepark_id: visited_park.id)
+      create(:visit, user_id: user.id, skatepark_id: both_park.id)
+      create(:favorite, user_id: user.id, skatepark_id: both_park.id)
+
+      expected = [both_park]
+
+      expect(user.dups).to eq(expected)
+    end
+  end
+
   context '#map_data' do
     it 'returns a hash with data needed for map generation' do
       user = create(:user)
