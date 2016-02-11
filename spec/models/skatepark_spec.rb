@@ -63,7 +63,7 @@ RSpec.describe Skatepark, type: :model do
     end
 
     it 'returns an empty array if no pics' do
-      skatepark = create(:skatepark, :other)
+      skatepark = create(:skatepark, num_pics: 0)
       expect(skatepark.pictures).to eq([])
     end
   end
@@ -75,20 +75,19 @@ RSpec.describe Skatepark, type: :model do
     end
 
     it 'should return the wcs logo if no image' do
-      skatepark = create(:skatepark, :other)
+      skatepark = create(:skatepark, num_pics: 0)
       expect(skatepark.first_picture).to eq("https://storage.googleapis.com/west-coast-skateparks/logo-small.png")
     end
   end
 
   context '#nearby_parks' do
     it 'returns an array of nearby skateparks' do
-      skatepark = create(:skatepark, latitude: 35.0021, longitude: -113.0051)
-      skatepark2 = create(:skatepark, identifier: 'turdmonger', latitude: 35.3045, longitude: -113.0380)
-      skatepark3 = create(:skatepark, identifier: 'buttgoblin', latitude: 36.8021, longitude: -113.0051)
+      skatepark = create(:skatepark)
+      nearby_park = create(:skatepark, :nearby)
+      far_far_away = create(:skatepark, :far)
 
-      expect(skatepark.nearby_parks).to include(skatepark2)
-      expect(skatepark.nearby_parks).to_not include(skatepark3)
-
+      expect(skatepark.nearby_parks).to include(nearby_park)
+      expect(skatepark.nearby_parks).to_not include(far_far_away)
     end
   end
 
@@ -108,7 +107,7 @@ RSpec.describe Skatepark, type: :model do
     it 'returns true if skatepark has been favorited by user' do
       user = create(:user)
       skatepark = create(:skatepark)
-      skatepark.users_who_faved << user
+      create(:favorite, user_id: user.id, skatepark_id: skatepark.id)
 
       expect(skatepark.already_favorited_by?(user)).to be true
     end
@@ -125,7 +124,7 @@ RSpec.describe Skatepark, type: :model do
     it 'returns true if skatepark has been visited by user' do
       user = create(:user)
       skatepark = create(:skatepark)
-      skatepark.users_who_visited << user
+      create(:visit, user_id: user.id, skatepark_id: skatepark.id)
 
       expect(skatepark.already_visited_by?(user)).to be true
     end
@@ -164,17 +163,13 @@ RSpec.describe Skatepark, type: :model do
 
   context '#average_rating' do
     it 'returns the average of all ratings for a skatepark' do
-      user = create(:user)
-      guy = create(:user, username: 'guy', email: 'guy@guy.guy')
-      girl = create(:user, username: 'girl', email: 'girl@girl.girl')
+      users = create_list(:user, 3)
       skatepark = create(:skatepark)
 
-      Rating.create(
-        user_id: user.id, skatepark_id: skatepark.id, rating: 5)
-      Rating.create(
-        user_id: guy.id, skatepark_id: skatepark.id, rating: 3)
-      Rating.create(
-        user_id: girl.id, skatepark_id: skatepark.id, rating: 1)
+      users.each_with_index do |user, rating|
+        Rating.create(
+          user_id: user.id, skatepark_id: skatepark.id, rating: rating + 2)
+      end
 
       expect(skatepark.average_rating).to eq(3)
     end

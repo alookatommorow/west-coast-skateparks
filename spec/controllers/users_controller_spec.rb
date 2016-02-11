@@ -4,13 +4,13 @@ RSpec.describe UsersController, type: :controller do
   describe 'GET users/:id/map_data' do
     it 'serves JSON object with favorites, visits, and both' do
       user = create(:user)
-      favorite_park = create(:skatepark, identifier: "candyland")
-      visited_park = create(:skatepark, identifier: "shroomland")
-      both_park = create(:skatepark, identifier: "cherryland")
-      create(:favorite, user_id: user.id, skatepark_id: favorite_park.id)
-      create(:visit, user_id: user.id, skatepark_id: visited_park.id)
-      create(:visit, user_id: user.id, skatepark_id: both_park.id)
-      create(:favorite, user_id: user.id, skatepark_id: both_park.id)
+      skateparks = create_list(:skatepark, 3)
+
+      create(:favorite, user_id: user.id, skatepark_id: skateparks.first.id)
+      create(:visit, user_id: user.id, skatepark_id: skateparks.second.id)
+
+      create(:favorite, user_id: user.id, skatepark_id: skateparks.third.id)
+      create(:visit, user_id: user.id, skatepark_id: skateparks.third.id)
 
       expected = user.map_data.to_json
 

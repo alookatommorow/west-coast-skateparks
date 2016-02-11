@@ -1,21 +1,21 @@
 FactoryGirl.define do
-  #these tests depend on geocoding
-  #also, figure out how to make factories for join tables
   factory :skatepark do
     city 'Hayward'
     state 'California'
     address '520 E 3rd Ave, Hayward, CA'
     sequence(:identifier) { |i| "swag#{i}" }
-    latitude 53.0456
-    longitude -113.6547
+    latitude 35.0021
+    longitude -113.0051
     num_pics 3
 
-    trait :other do
-      city 'SW4GL4ND'
-      state 'California'
-      address '26251 Hesperian Blvd, Hayward, CA'
-      identifier 'SWAGNIFICENT'
-      num_pics 0
+    trait :nearby do
+      latitude 35.3045
+      longitude -113.0380
+    end
+
+    trait :far do
+      latitude 36.8021
+      longitude -113.0051
     end
   end
 
@@ -23,8 +23,13 @@ FactoryGirl.define do
     sequence(:username) { |n| "swaggy#{n}" }
     sequence(:email) { |n| "swag#{n}@swag.swag" }
     password 'swag'
+
+    trait :admin do
+      admin true
+    end
   end
 
+  # look into build_stubbed
   factory :favorite do
     user_id 420
     skatepark_id 420
