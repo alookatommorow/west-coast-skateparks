@@ -48,6 +48,10 @@ group :development, :test do
   gem 'teaspoon-mocha'
 end
 
+group :production do
+  gem 'skylight'
+end
+
 group :test do
   gem 'codeclimate-test-reporter', require: nil
   gem 'database_cleaner'
