@@ -6,7 +6,6 @@ gem 'administrate', '~> 0.1.3'
 gem 'autoprefixer-rails', '~> 6.0'
 gem 'awesome_print'
 gem 'bcrypt', '~> 3.1.7'
-gem "codeclimate-test-reporter", group: :test, require: nil
 gem 'geokit'
 gem 'gmaps4rails'
 gem 'jquery-rails'
@@ -22,12 +21,12 @@ gem 'turbolinks'
 gem 'uglifier', '>= 1.3.0'
 gem 'underscore-rails'
 
-
 group :assets do
   gem 'coffee-rails'
 end
 
 group :development do
+  gem 'spring-commands-rspec'
   gem 'quiet_assets'
   gem 'web-console', '~> 3.1.1'
 end
@@ -50,6 +49,7 @@ group :development, :test do
 end
 
 group :test do
+  gem 'codeclimate-test-reporter', require: nil
   gem 'database_cleaner'
   gem 'rake'
 end
