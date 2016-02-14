@@ -73,11 +73,11 @@ class Skatepark < ActiveRecord::Base
   end
 
   def has_ratings?
-    ratings.length > 0
+    ratings.any?
   end
 
   def has_reviews?
-    reviews.length > 0
+    reviews.any?
   end
 
   def average_rating
@@ -100,16 +100,12 @@ class Skatepark < ActiveRecord::Base
     latitude && longitude
   end
 
-  def is_nearby?(skatepark)
-    return if skatepark.id == id
-    return unless skatepark.has_coordinates?
-    (latitude > skatepark.latitude - 0.4 && latitude < skatepark.latitude + 0.4) &&
-      (longitude > skatepark.longitude - 0.4 && longitude < skatepark.longitude + 0.4)
-  end
-
   def nearby_parks
     return [] unless has_coordinates?
-    Skatepark.all.select { |park| is_nearby?(park) }
+    Skatepark.where(
+      "latitude BETWEEN #{latitude - 0.4} AND #{latitude + 0.4} AND "\
+      "longitude BETWEEN #{longitude - 0.4} AND #{longitude + 0.4} AND "\
+      "id != #{id}")
   end
 
   private

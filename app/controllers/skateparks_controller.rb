@@ -5,7 +5,9 @@ class SkateparksController < ApplicationController
   end
 
   def show
-    @skatepark = Skatepark.find(params[:id])
+    @skatepark = Skatepark.includes(
+      :users_who_reviewed,
+      :users_who_rated).find(params[:id])
   end
 
   # skateparks by state via AJAX
