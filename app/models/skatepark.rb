@@ -103,9 +103,9 @@ class Skatepark < ActiveRecord::Base
   def nearby_parks
     return [] unless has_coordinates?
     Skatepark.where(
-      "latitude BETWEEN #{latitude - 0.4} AND #{latitude + 0.4} AND "\
-      "longitude BETWEEN #{longitude - 0.4} AND #{longitude + 0.4} AND "\
-      "id != #{id}")
+      'latitude BETWEEN ? AND ?', latitude - 0.4, latitude + 0.4).where(
+        'longitude BETWEEN ? AND ?', longitude - 0.4, longitude + 0.4).where(
+          'id != ?', id)
   end
 
   private
@@ -113,6 +113,4 @@ class Skatepark < ActiveRecord::Base
     def delimit_size
       "#{number_with_delimiter(size, delimiter: ',')} sq ft" if size
     end
-
-
 end
