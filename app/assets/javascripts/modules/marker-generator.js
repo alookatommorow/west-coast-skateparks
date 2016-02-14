@@ -1,18 +1,18 @@
 function MarkerGenerator(map, skateparks) {
+  var types = Object.keys(skateparks);
   var legend = { favorite: 'purple-dot', visited: 'yellow-dot', both: 'blue-dot', nearby: 'green-dot', main: 'red-dot' };
   var toggleable = { favorite: [], visited: [], both: [], nearby: [], main: [] };
   var allMarkers = [];
 
   this.generateMarkers = function () {
-    for (var type in skateparks) {
+    types.forEach(function(type) {
       skateparks[type].forEach(function (skatepark) {
-        console.log(skatepark);
         var marker = createMarker(skatepark, type);
         var infowindow = marker.infowindow;
         toggleable[type].push(marker);
       });
       bindVisibilityListener(type);
-    };
+    });
   }
 
   this.showButtons = function() {

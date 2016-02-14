@@ -16,7 +16,7 @@ end
 
 describe 'Show', type: :feature do
   it 'displays skatepark information' do
-    skatepark = create(:skatepark)
+    skatepark = create(:skatepark, name: 'hayward skatepark')
 
     visit "/skateparks/#{skatepark.id}"
     expect(page).to have_text(skatepark.city)
