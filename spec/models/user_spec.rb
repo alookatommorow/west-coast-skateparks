@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-
   context '#dups' do
     it 'returns an array of skateparks in common between favorite and visited' do
       user = create(:user)
@@ -43,49 +42,49 @@ RSpec.describe User, type: :model do
     end
   end
 
-  context '#is_admin?' do
+  context '#admin?' do
     it 'returns true if user is an admin' do
       user = create(:user, :admin)
 
-      expect(user.is_admin?).to eq(true)
+      expect(user.admin?).to eq(true)
     end
 
     it 'returns false if user is not an admin' do
       user = create(:user)
 
-      expect(user.is_admin?).to eq(false)
+      expect(user.admin?).to eq(false)
     end
   end
 
-  context '#has_favorites?' do
+  context '#favorites?' do
     it 'returns true if user has favorites' do
       user = create(:user)
       skatepark = create(:skatepark)
       create(:favorite, user_id: user.id, skatepark_id: skatepark.id)
 
-      expect(user.has_favorites?).to eq(true)
+      expect(user.favorites?).to eq(true)
     end
 
     it 'returns false if user does not have favorites' do
       user = create(:user)
 
-      expect(user.has_favorites?).to eq(false)
+      expect(user.favorites?).to eq(false)
     end
   end
 
-  context '#has_visits?' do
+  context '#visits?' do
     it 'returns true if user has visits' do
       user = create(:user)
       skatepark = create(:skatepark)
       create(:visit, user_id: user.id, skatepark_id: skatepark.id)
 
-      expect(user.has_visits?).to eq(true)
+      expect(user.visits?).to eq(true)
     end
 
     it 'returns false if user does not have visits' do
       user = create(:user)
 
-      expect(user.has_visits?).to eq(false)
+      expect(user.visits?).to eq(false)
     end
   end
 

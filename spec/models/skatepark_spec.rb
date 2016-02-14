@@ -4,12 +4,12 @@ RSpec.describe Skatepark, type: :model do
   context '#map_data' do
     it 'returns a hash with data needed for map generation' do
       skatepark = create(:skatepark)
-      create(:skatepark, identifier: "areolaland")
+      create(:skatepark, identifier: 'areolaland')
 
       expected = {
         skateparks: {
           nearby: skatepark.nearby_parks.map(&:hashify_with_pictures),
-          main: [skatepark.hashify_with_pictures],
+          main: [skatepark.hashify_with_pictures]
         },
         mapCenter: [skatepark.latitude, skatepark.longitude],
         zoom: 9
@@ -24,7 +24,7 @@ RSpec.describe Skatepark, type: :model do
       expected = {
         skateparks: {
           nearby: [],
-          main: [skatepark.hashify_with_pictures],
+          main: [skatepark.hashify_with_pictures]
         },
         mapCenter: [skatepark.latitude, skatepark.longitude],
         zoom: 9
@@ -32,8 +32,6 @@ RSpec.describe Skatepark, type: :model do
 
       expect(skatepark.map_data).to eq(expected)
     end
-
-
   end
 
   context '.in_state' do
@@ -52,14 +50,10 @@ RSpec.describe Skatepark, type: :model do
   context '#pictures' do
     it 'returns an array with the correct photo urls' do
       skatepark = create(:skatepark)
-      expect(skatepark.pictures).to eq(
-        [
-          generate_image_url(skatepark, 1),
-          generate_image_url(skatepark, 2),
-          generate_image_url(skatepark, 3),
-        ]
-      )
-
+      expect(skatepark.pictures).to eq([
+        generate_image_url(skatepark, 1),
+        generate_image_url(skatepark, 2),
+        generate_image_url(skatepark, 3)])
     end
 
     it 'returns an empty array if no pics' do
@@ -76,7 +70,7 @@ RSpec.describe Skatepark, type: :model do
 
     it 'should return the wcs logo if no image' do
       skatepark = create(:skatepark, num_pics: 0)
-      expect(skatepark.first_picture).to eq("https://storage.googleapis.com/west-coast-skateparks/logo-small.png")
+      expect(skatepark.first_picture).to eq('https://storage.googleapis.com/west-coast-skateparks/logo-small.png')
     end
   end
 
@@ -91,53 +85,53 @@ RSpec.describe Skatepark, type: :model do
     end
   end
 
-  context '#has_coordinates?' do
+  context '#coordinates?' do
     it 'returns true if the skatepark has latitude and longitude' do
       skatepark = create(:skatepark)
-      expect(skatepark.has_coordinates?).to be_truthy
+      expect(skatepark.coordinates?).to be_truthy
     end
 
     it 'returns false if the skatepark does not have latitude or longitude' do
       skatepark = create(:skatepark, latitude: nil)
-      expect(skatepark.has_coordinates?).to be_falsey
+      expect(skatepark.coordinates?).to be_falsey
     end
   end
 
-  context '#already_favorited_by?' do
+  context '#favorited_by?' do
     it 'returns true if skatepark has been favorited by user' do
       user = create(:user)
       skatepark = create(:skatepark)
       create(:favorite, user_id: user.id, skatepark_id: skatepark.id)
 
-      expect(skatepark.already_favorited_by?(user)).to be true
+      expect(skatepark.favorited_by?(user)).to be true
     end
 
     it 'returns false if skatepark has not been favorited by user' do
       user = create(:user)
       skatepark = create(:skatepark)
 
-      expect(skatepark.already_favorited_by?(user)).to be false
+      expect(skatepark.favorited_by?(user)).to be false
     end
   end
 
-  context '#already_visited_by?' do
+  context '#visited_by?' do
     it 'returns true if skatepark has been visited by user' do
       user = create(:user)
       skatepark = create(:skatepark)
       create(:visit, user_id: user.id, skatepark_id: skatepark.id)
 
-      expect(skatepark.already_visited_by?(user)).to be true
+      expect(skatepark.visited_by?(user)).to be true
     end
 
     it 'returns false if skatepark has not been visited by user' do
       user = create(:user)
       skatepark = create(:skatepark)
 
-      expect(skatepark.already_visited_by?(user)).to be false
+      expect(skatepark.visited_by?(user)).to be false
     end
   end
 
-  context '#has_ratings?' do
+  context '#ratings?' do
     it 'returns true when a skatepark has ratings' do
       user = create(:user)
       skatepark = create(:skatepark)
@@ -145,11 +139,11 @@ RSpec.describe Skatepark, type: :model do
       Rating.create(
         user_id: user.id, skatepark_id: skatepark.id, rating: 5)
 
-      expect(skatepark.has_ratings?).to be true
+      expect(skatepark.ratings?).to be true
     end
   end
 
-  context '#has_reviews?' do
+  context '#reviews?' do
     it 'returns true when a skatepark has reviews' do
       user = create(:user)
       skatepark = create(:skatepark)
@@ -157,7 +151,7 @@ RSpec.describe Skatepark, type: :model do
       Review.create(
         user_id: user.id, skatepark_id: skatepark.id, review: 'meh')
 
-      expect(skatepark.has_reviews?).to be true
+      expect(skatepark.reviews?).to be true
     end
   end
 

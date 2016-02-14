@@ -17,24 +17,6 @@ class Skatepark < ActiveRecord::Base
   has_many :reviews, dependent: :destroy
   has_many :users_who_reviewed, through: :reviews, source: :user
 
-  def hashify_with_pictures
-    attributes.merge({
-      pictures: pictures,
-      firstPicture: first_picture
-    })
-  end
-
-  def map_data
-    {
-      skateparks: {
-        nearby: nearby_parks.map(&:hashify_with_pictures),
-        main: [hashify_with_pictures],
-      },
-      mapCenter: [latitude, longitude],
-      zoom: 9
-    }
-  end
-
   def self.search(target)
     where(
       'name LIKE ? OR city LIKE ? OR state LIKE ?',
@@ -45,78 +27,86 @@ class Skatepark < ActiveRecord::Base
   end
 
   def self.in_state(state)
-    where(state: state).order("city ASC")
+    where(state: state).order('city ASC')
+  end
+
+  def nearby_parks
+    return [] unless coordinates?
+    Skatepark.where(
+      'latitude BETWEEN ? AND ?', latitude - 0.4, latitude + 0.4).where(
+        'longitude BETWEEN ? AND ?', longitude - 0.4, longitude + 0.4).where(
+          'id != ?', id)
+  end
+
+  def map_data
+    {
+      skateparks: {
+        main: [hashify_with_pictures],
+        nearby: nearby_parks.map(&:hashify_with_pictures)
+      },
+      mapCenter: [latitude, longitude],
+      zoom: 9
+    }
+  end
+
+  def hashify_with_pictures
+    attributes.merge(
+      pictures: pictures,
+      firstPicture: first_picture)
   end
 
   def pictures
-    # should default num_pics to 0
-    if num_pics && num_pics > 0
-      (1..num_pics).map do |i|
-        "https://storage.googleapis.com/west-coast-skateparks/"\
-        "#{state}/#{identifier}-0#{i}.jpg"
-      end
-    else
-      []
-    end
+    return [] unless num_pics && num_pics > 0
+    (1..num_pics).map { |i| "#{bucket_url}/#{state}/#{identifier}-0#{i}.jpg" }
   end
 
   def first_picture
-    pictures.first ? pictures.first : "https://storage.googleapis.com/west-coast-skateparks/logo-small.png"
+    pictures.first ? pictures.first : "#{bucket_url}/logo-small.png"
   end
 
-  def already_favorited_by?(user)
+  def favorited_by?(user)
     users_who_faved.include?(user)
   end
 
-  def already_visited_by?(user)
+  def visited_by?(user)
     users_who_visited.include?(user)
   end
 
-  def has_ratings?
-    ratings.length > 0
+  def ratings?
+    ratings.any?
   end
 
-  def has_reviews?
-    reviews.length > 0
+  def reviews?
+    reviews.any?
   end
 
   def average_rating
-    ratings.map(&:rating).reduce(:+)/ratings.length
+    ratings.map(&:rating).reduce(:+) / ratings.length
   end
 
-  def visibile_attributes
-    untouched = { 'Address' => self.address, 'Info' => self.info, 'Hours' => self.hours }
+  def coordinates?
+    latitude && longitude
+  end
+
+  def visibile_attributes # refactor
+    untouched = { 'Address' => address, 'Info' => info, 'Hours' => hours }
     titleized = {
       'Material' => material, 'Designer' => designer,
       'Builder' => builder, 'Opened' => opened,
       'Size' => delimit_size,
       'Lights' => lights, 'Obstacles' => obstacles
     }
-    titleized.each {|k, v| titleized[k] = v.titleize if v }
+    titleized.each { |k, v| titleized[k] = v.titleize if v }
     untouched.merge(titleized)
   end
 
-  def has_coordinates?
-    latitude && longitude
-  end
-
-  def is_nearby?(skatepark)
-    return if skatepark.id == id
-    return unless skatepark.has_coordinates?
-    (latitude > skatepark.latitude - 0.4 && latitude < skatepark.latitude + 0.4) &&
-      (longitude > skatepark.longitude - 0.4 && longitude < skatepark.longitude + 0.4)
-  end
-
-  def nearby_parks
-    return [] unless has_coordinates?
-    Skatepark.all.select { |park| is_nearby?(park) }
-  end
-
   private
-    # remove this method once data is properly structured
-    def delimit_size
+
+    def delimit_size # remove this method once data is properly structured
       "#{number_with_delimiter(size, delimiter: ',')} sq ft" if size
     end
 
-
+    def bucket_url
+      'https://storage.googleapis.com/west-coast-skateparks'
+    end
 end

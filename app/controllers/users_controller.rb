@@ -25,6 +25,8 @@ class UsersController < ApplicationController
   private
 
     def user_params
-      {username: params[:username], email: params[:email], password: params[:password] }
+      { username: params[:username],
+        email: params[:email],
+        password: params[:password] }
     end
 end
