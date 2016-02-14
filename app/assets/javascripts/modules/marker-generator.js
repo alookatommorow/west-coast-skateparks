@@ -83,7 +83,8 @@ function MarkerGenerator(map, skateparks) {
   }
 
   function generateContentString(skatepark) {
-    return "<div id='content'><div class='left'><img style='height:50px' src='"+skatepark.firstPicture+ "' ></div><strong><a href='/skateparks/"+skatepark.id+"'>"+titleize(skatepark.city)+"</a></strong></div>";
+    // id='content' is a Google Maps requirement
+    return "<div id='content'><div class='center-text'><img style='height:50px' src='"+skatepark.firstPicture+ "' ></div><strong><a href='/skateparks/"+skatepark.id+"'>"+titleize(skatepark.name)+"</a></strong></div>";
   }
 
   function titleize(string) {
