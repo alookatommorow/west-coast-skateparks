@@ -1,19 +1,27 @@
 function MarkerGenerator(map, skateparks) {
-  var types = Object.keys(skateparks);
   var legend = { favorite: 'purple-dot', visited: 'yellow-dot', both: 'blue-dot', nearby: 'green-dot', main: 'red-dot' };
   var toggleable = { favorite: [], visited: [], both: [], nearby: [], main: [] };
   var allMarkers = [];
 
   this.generateMarkers = function () {
-    types.forEach(function (type) {
+    for (var type in skateparks) {
       skateparks[type].forEach(function (skatepark) {
+        console.log(skatepark);
         var marker = createMarker(skatepark, type);
         var infowindow = marker.infowindow;
         toggleable[type].push(marker);
       });
       bindVisibilityListener(type);
-    });
-  };
+    };
+  }
+
+  this.showButtons = function() {
+    for (var type in toggleable) {
+      if (toggleable[type].length > 0) {
+        $('#toggle-'+type+'-container').removeClass('hidden').addClass('inline-block');
+      }
+    }
+  }
 
   function createMarker(skatepark, type){
     var latLng = { lat: skatepark.latitude, lng: skatepark.longitude };
@@ -83,4 +91,5 @@ function MarkerGenerator(map, skateparks) {
       return word.charAt(0).toUpperCase() + word.slice(1);
     }).join(' ');
   }
+
 }

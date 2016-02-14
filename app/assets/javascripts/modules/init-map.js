@@ -19,5 +19,7 @@ var generateMarkers = function(response) {
     center: mapCenter
   });
 
-  new MarkerGenerator(map, response.skateparks).generateMarkers();
+  markergenerator = new MarkerGenerator(map, response.skateparks);
+  markergenerator.generateMarkers();
+  markergenerator.showButtons();
 }
