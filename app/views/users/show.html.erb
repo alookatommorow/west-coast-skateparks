@@ -36,13 +36,13 @@
           <div id="map" class="user-map"></div>
         </div>
         <div class="center-text two-top">
-          <% if @user.has_favorites? %>
+          <% if @user.favorites? %>
             <button id="toggle-favorite" class="ui button primary">Hide Favorites</button>
           <% end %>
-          <% if @user.has_visits? %>
+          <% if @user.visits? %>
             <button id="toggle-visited" class="ui button primary">Hide Visited</button>
           <% end %>
-          <% if @user.has_favorites? && @user.has_visits? %>
+          <% if @user.favorites? && @user.visits? %>
             <button id="toggle-both" class="ui button primary">Hide Thrashed</button>
           <% end %>
         </div>

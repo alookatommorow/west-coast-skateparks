@@ -14,7 +14,7 @@
       <!-- skatepark info -->
       <div class="ui segments">
         <!-- figure out new way to do this -->
-        <% if @skatepark.has_ratings? %>
+        <% if @skatepark.ratings? %>
           <div class="ui segment">
             <h4 class="ui header">User Rating</h4>
           </div>
@@ -44,7 +44,7 @@
     <!-- Map -->
 
 
-      <% if @skatepark.has_coordinates? %>
+      <% if @skatepark.coordinates? %>
         <div class='center-text two-top'>
           <form action="https://maps.google.com/maps" method="get" target="_blank">
             <div class="ui action input one-top">
@@ -61,7 +61,7 @@
           </div>
         </div>
 
-      <% else @skatepark.has_coordinates? %>
+      <% else @skatepark.coordinates? %>
 
         <div class="map-missing">
           <img src="" >
@@ -93,7 +93,7 @@
 
       <% if logged_in? %>
         <div class="button-container center-text">
-          <% visited = @skatepark.already_visited_by?(current_user) %>
+          <% visited = @skatepark.visited_by?(current_user) %>
           <% visibility = visited ? "" : "hidden" %>
 
           <!-- visit button -->
@@ -105,7 +105,7 @@
 
           <!-- favorite button -->
           <div class="fav-container inline-block one-top">
-            <% favorited = @skatepark.already_favorited_by?(current_user) %>
+            <% favorited = @skatepark.favorited_by?(current_user) %>
             <%= render partial: "remove_favorite_button", locals: {favorited: favorited, skatepark: @skatepark} %>
             <%= render partial: "add_favorite_button", locals: {favorited: favorited, skatepark: @skatepark} %>
           </div>
@@ -125,7 +125,7 @@
 
       <!-- Reviews -->
       <div class="written-review-container">
-        <% if @skatepark.has_reviews? %>
+        <% if @skatepark.reviews? %>
           <h4>Reviews</h4>
           <div class="ui comments">
             <% @skatepark.reviews.each do |review| %>
@@ -165,7 +165,7 @@
   </div>
 </div>
 
-<% if @skatepark.has_coordinates? %>
+<% if @skatepark.coordinates? %>
 
   <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_KEY'] %>&callback=initMap"
       async defer>

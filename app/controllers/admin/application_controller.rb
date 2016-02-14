@@ -9,17 +9,15 @@ module Admin
     before_filter :authenticate_admin
 
     def authenticate_admin
-      unless admin_signed_in
-        flash[:notice] = 'You need admin authentication to access that.'
-        redirect_to new_session_path
-      end
-      # TODO Add authentication logic here.
+      return if admin_signed_in
+      flash[:notice] = 'You need admin authentication to access that.'
+      redirect_to new_session_path
     end
 
     private
 
       def admin_signed_in
-        current_user && current_user.is_admin?
+        current_user && current_user.admin?
       end
 
       def current_user

@@ -16,7 +16,7 @@ class User < ActiveRecord::Base
   has_many :reviews
   has_many :reviewed_parks, through: :reviews, source: :skatepark
 
-  def is_admin?
+  def admin?
     admin
   end
 
@@ -29,11 +29,11 @@ class User < ActiveRecord::Base
     [37.7833, -122.4167] # SF BRO!!!!
   end
 
-  def has_favorites?
+  def favorites?
     favorites.any?
   end
 
-  def has_visits?
+  def visits?
     visits.any?
   end
 
@@ -52,5 +52,4 @@ class User < ActiveRecord::Base
   def dups
     @dups ||= favorite_parks & visited_parks
   end
-
 end
