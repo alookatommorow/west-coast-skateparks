@@ -5,7 +5,7 @@ function MarkerGenerator(map, skateparks) {
   var allMarkers = [];
 
   this.generateMarkers = function () {
-    types.forEach(function (type) {
+    types.forEach(function(type) {
       skateparks[type].forEach(function (skatepark) {
         var marker = createMarker(skatepark, type);
         var infowindow = marker.infowindow;
@@ -13,7 +13,16 @@ function MarkerGenerator(map, skateparks) {
       });
       bindVisibilityListener(type);
     });
-  };
+    return this;
+  }
+
+  this.showButtons = function() {
+    for (var type in toggleable) {
+      if (toggleable[type].length > 0) {
+        $('#toggle-'+type+'-container').removeClass('hidden').addClass('inline-block');
+      }
+    }
+  }
 
   function createMarker(skatepark, type){
     var latLng = { lat: skatepark.latitude, lng: skatepark.longitude };
@@ -75,7 +84,8 @@ function MarkerGenerator(map, skateparks) {
   }
 
   function generateContentString(skatepark) {
-    return "<div id='content'><div class='left'><img style='height:50px' src='"+skatepark.firstPicture+ "' ></div><strong><a href='/skateparks/"+skatepark.id+"'>"+titleize(skatepark.city)+"</a></strong></div>";
+    // id='content' is a Google Maps requirement
+    return "<div id='content'><div class='center-text'><img style='height:50px' src='"+skatepark.firstPicture+ "' ></div><strong><a href='/skateparks/"+skatepark.id+"'>"+titleize(skatepark.name)+"</a></strong></div>";
   }
 
   function titleize(string) {
@@ -83,4 +93,5 @@ function MarkerGenerator(map, skateparks) {
       return word.charAt(0).toUpperCase() + word.slice(1);
     }).join(' ');
   }
+
 }

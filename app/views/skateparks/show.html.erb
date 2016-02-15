@@ -39,10 +39,7 @@
         <% end %>
       </div>
 
-
-
     <!-- Map -->
-
 
       <% if @skatepark.coordinates? %>
         <div class='center-text two-top'>
@@ -71,7 +68,9 @@
       <% end %>
 
       <div class="center-text one-top">
-        <button id="toggle-nearby" class="ui button primary">Show Nearby Parks</button>
+        <div id="toggle-nearby-container" class="hidden">
+          <button id="toggle-nearby" class="ui button primary">Show Nearby Parks</button>
+        </div>
       </div>
       <!-- end skatepark-info column -->
     </div>
