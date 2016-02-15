@@ -13,6 +13,7 @@ function MarkerGenerator(map, skateparks) {
       });
       bindVisibilityListener(type);
     });
+    return this;
   }
 
   this.showButtons = function() {
