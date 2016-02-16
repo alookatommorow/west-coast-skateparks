@@ -10,7 +10,7 @@ gem 'geokit'
 gem 'gmaps4rails'
 gem 'jquery-rails'
 gem 'less-rails', '~> 2.7.1'
-gem 'less-rails-semantic_ui', '~> 2.1.8.1'
+gem 'less-rails-semantic_ui', '~> 2.1.8.2'
 gem 'pg'
 gem 'puma'
 gem 'rails_12factor', group: :production
