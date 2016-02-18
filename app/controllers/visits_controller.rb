@@ -1,6 +1,6 @@
 class VisitsController < ApplicationController
   def create
-    Association.new(Visit, params)
+    Association.create(Visit, params)
     render nothing: true
   end
 
