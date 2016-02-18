@@ -2,6 +2,7 @@
 [![Build Status](https://travis-ci.org/alookatommorow/west-coast-skateparks.svg?branch=master)](https://travis-ci.org/alookatommorow/west-coast-skateparks)
 [![Dependency Status](https://gemnasium.com/alookatommorow/west-coast-skateparks.svg)](https://gemnasium.com/alookatommorow/west-coast-skateparks)
 [![Code Climate](https://codeclimate.com/repos/56b41010daaa6a005f0030b7/badges/5528826f0d955acc3b4b/gpa.svg)](https://codeclimate.com/repos/56b41010daaa6a005f0030b7/feed)
+[![Test Coverage](https://codeclimate.com/repos/56b41010daaa6a005f0030b7/badges/5528826f0d955acc3b4b/coverage.svg)](https://codeclimate.com/repos/56b41010daaa6a005f0030b7/coverage)
 
 West Coast Skateparks is an informational directory of every skatepark in the western states of the United States (California, Oregon, and Washington).  Skatepark listings include an address and map for each skatepark along with other pertinent details such as hours, size, and date opened.  Users can track visits and favorites and leave ratings and reviews.  Pictures coming soon.
 
