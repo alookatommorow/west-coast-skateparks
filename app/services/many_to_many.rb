@@ -8,6 +8,11 @@ class ManyToMany
     end
   end
 
+  def self.destroy(class_name, params)
+    initialize(class_name, params)
+    association.destroy if association
+  end
+
   class << self
     private
 
@@ -23,16 +28,16 @@ class ManyToMany
       end
 
       def association
-        class_name.find_by(id_params)
+        class_name.find_by(foreign_keys)
       end
 
       def params_for_type
-        id_params.tap do |this|
+        foreign_keys.tap do |this|
           this.merge(type => params[type]) if type
         end
       end
 
-      def id_params
+      def foreign_keys
         params.select { |k, _v| k.to_s.match(/_id\Z/) }.
           inject({}) { |h, (k, v)| h[k] = v.to_i; h }
       end

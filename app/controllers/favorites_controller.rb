@@ -4,16 +4,8 @@ class FavoritesController < ApplicationController
     render nothing: true
   end
 
-  def update # make this use associate
-    favorite = Favorite.find_by(favorite_params)
-    Favorite.destroy(favorite.id) if favorite
+  def update
+    ManyToMany.destroy(Favorite, params)
     render nothing: true
   end
-
-  private
-
-    def favorite_params
-      { user_id: params[:user_id],
-        skatepark_id: params[:skatepark_id] }
-    end
 end
