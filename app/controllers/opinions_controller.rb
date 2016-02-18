@@ -1,36 +1,40 @@
 class OpinionsController < ApplicationController
   def rate
-    rating = Rating.find_by(id_params)
-    if rating
-      rating.update(rating: params[:rating])
-    else
-      Rating.create(rating_params)
-    end
-    redirect_to skatepark_path(params[:id])
+    create_opinion(:rating)
   end
 
   def review
-    review = Review.find_by(id_params)
-    if review
-      review.update(review: params[:review])
-    else
-      Review.create(review_params)
-    end
-    redirect_to skatepark_path(params[:id])
+    create_opinion(:review)
   end
 
   private
 
-  def rating_params
-    id_params.merge(rating: params[:rating])
-  end
+    attr_reader :type
 
-  def review_params
-    id_params.merge(review: params[:review])
-  end
+    def create_opinion(type)
+      @type = type
+      if opinion
+        opinion.update(type => params[type])
+      else
+        opinion_class.create(params_for(type))
+      end
+      redirect_to skatepark_path(params[:id])
+    end
 
-  def id_params
-    { user_id: params[:user_id],
-      skatepark_id: params[:id] }
-  end
+    def opinion_class
+      type == :review ? Review : Rating
+    end
+
+    def opinion
+      opinion_class.find_by(id_params)
+    end
+
+    def params_for(type)
+      id_params.merge(type => params[type])
+    end
+
+    def id_params
+      { user_id: params[:user_id],
+        skatepark_id: params[:id] }
+    end
 end
