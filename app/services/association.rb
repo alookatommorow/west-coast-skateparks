@@ -31,8 +31,8 @@ class Association
       end
 
       def id_params
-        { user_id: @params[:user_id],
-          skatepark_id: @params[:skatepark_id] }
+        @params.select { |k, _v| k.to_s.match(/_id\Z/) }.
+          inject({}) { |h, (k, v)| h[k] = v.to_i; h }
       end
   end
 end
