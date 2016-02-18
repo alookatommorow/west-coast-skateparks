@@ -1,6 +1,6 @@
 class VisitsController < ApplicationController
   def create
-    Association.create(Visit, params)
+    ManyToMany.create(Visit, params)
     render nothing: true
   end
 

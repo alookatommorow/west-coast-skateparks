@@ -1,6 +1,6 @@
 class FavoritesController < ApplicationController
   def create
-    Association.create(Favorite, params)
+    ManyToMany.create(Favorite, params)
     render nothing: true
   end
 
