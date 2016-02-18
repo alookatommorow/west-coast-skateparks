@@ -130,7 +130,7 @@
             <% @skatepark.reviews.each do |review| %>
             <div class="comment">
               <div class="content">
-                <a class="author"><%= review.user.username %></a>
+                <a class="author"><%= review.user.display_name %></a>
                 <div class="metadata">
                   <div class="date">
                     <%= review.created_at.strftime("%m/%d/%y") %>

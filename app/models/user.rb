@@ -20,6 +20,10 @@ class User < ActiveRecord::Base
     admin
   end
 
+  def display_name
+    uid ? name : username
+  end
+
   def first_marker_coordinates
     favorite = favorite_parks.first
     return [favorite.latitude, favorite.longitude] if favorite
