@@ -1,34 +1,34 @@
 class ManyToMany
-  def self.create(class_name, params)
-    initialize(class_name, params)
+  def self.create(klass, params)
+    initialize(klass, params)
     if association
-      association.update(type => @params[type])
+      association.update(type => params[type])
     else
-      @class_name.create(params_for_type)
+      klass.create(params_for_type)
     end
   end
 
-  def self.destroy(class_name, params)
-    initialize(class_name, params)
+  def self.destroy(klass, params)
+    initialize(klass, params)
     association.destroy if association
   end
 
   class << self
     private
 
-      attr_reader :params, :class_name
+      attr_reader :klass, :params
 
-      def initialize(class_name, params)
+      def initialize(klass, params)
+        @klass = klass
         @params = params
-        @class_name = class_name
       end
 
       def type
-        class_name.name.underscore.to_sym
+        klass.name.underscore.to_sym
       end
 
       def association
-        class_name.find_by(foreign_keys)
+        klass.find_by(foreign_keys)
       end
 
       def params_for_type
