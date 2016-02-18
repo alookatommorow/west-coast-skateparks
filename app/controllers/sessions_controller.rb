@@ -30,8 +30,7 @@ class SessionsController < ApplicationController
     end
 
     def login
-      if user_authenticated? || @user.uid
-
+      if user_authenticated?
         session[:id] = @user.id
         path = @user.admin? ? admin_root_path : @user
         redirect_to path, flash: { notice: "Welcome, #{@user.display_name}" }
