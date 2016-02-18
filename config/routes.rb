@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   resources :users, only: [:show, :create]
   get '/users/:id/map_data', to: 'users#map_data', as: 'user_map_data'
   resources :sessions, only: [:create, :destroy]
+  post '/sessions/create_with_auth', to: 'sessions#create_with_auth'
   resources :skateparks
   get '/skateparks/:id/map_data', to: 'skateparks#map_data', as: 'skatepark_map_data'
 
