@@ -11,7 +11,7 @@ module Admin
     def authenticate_admin
       return if admin_signed_in
       flash[:notice] = 'You need admin authentication to access that.'
-      redirect_to new_session_path
+      redirect_to root_path
     end
 
     private
