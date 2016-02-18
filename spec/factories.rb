@@ -22,6 +22,8 @@ FactoryGirl.define do
   factory :user do
     sequence(:username) { |n| "swaggy#{n}" }
     sequence(:email) { |n| "swag#{n}@swag.swag" }
+    name nil
+    uid nil
     password 'swag'
 
     trait :admin do

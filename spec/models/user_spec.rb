@@ -1,6 +1,20 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
+  context '#display_name' do
+    it 'returns name if facebook user' do
+      user = create(:user, name: 'Turd Furgeson', uid: 'sdfkjhrt56sdjhg')
+
+      expect(user.display_name).to eq('Turd Furgeson')
+    end
+
+    it 'returns username if non-facebook user' do
+      user = create(:user)
+
+      expect(user.display_name).to eq(user.username)
+    end
+  end
+
   context '#dups' do
     it 'returns an array of skateparks in common between favorite and visited' do
       user = create(:user)

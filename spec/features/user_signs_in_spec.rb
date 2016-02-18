@@ -24,7 +24,7 @@ RSpec.feature 'User signs in' do
     click_button 'Submit'
 
     expect(current_path).to eq(user_path(user))
-    expect(page).to have_text("#{user.username.capitalize}'s Page")
+    expect(page).to have_text("#{user.display_name.titleize}'s Page")
 
     click_link 'Sign Out'
     expect(current_path).to eq(root_path)

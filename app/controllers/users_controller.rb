@@ -11,6 +11,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    flash.now[:notice] = "Welcome #{@user.display_name}" if params[:from_fb]
   end
 
   def map_data
