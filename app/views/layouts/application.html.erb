@@ -26,10 +26,10 @@
         </div>
       </div>
 
-      <% if flash[:notice].present? %>
-        <div id="flashes" class="ui negative message transition hidden">
-          <i class="close icon"></i>
-          <div class="header"><%= flash[:notice] %></div>
+
+      <% if flash.any? %>
+        <div id="flashes" class="ui <%= flash_class_name(flash.first.first) %> message transition hidden">
+          <div class="header"><%= flash.first.second %></div>
         </div>
       <% end %>
 
