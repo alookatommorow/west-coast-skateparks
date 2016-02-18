@@ -7,7 +7,7 @@ describe 'put /rate' do
     Rating.create(
       user_id: user.id, skatepark_id: skatepark.id)
 
-    put '/rate', user_id: user.id, id: skatepark.id, rating: 5
+    put '/rate', user_id: user.id, skatepark_id: skatepark.id, rating: 5
 
     rating = Rating.where(
       user_id: user.id, skatepark_id: skatepark.id).first.rating
@@ -23,7 +23,7 @@ describe 'put /review' do
     Review.create(
       user_id: user.id, skatepark_id: skatepark.id)
 
-    put '/review', user_id: user.id, id: skatepark.id, review: 'this park iz chill'
+    put '/review', user_id: user.id, skatepark_id: skatepark.id, review: 'this park iz chill'
 
     review = Review.where(
       user_id: user.id, skatepark_id: skatepark.id).first.review

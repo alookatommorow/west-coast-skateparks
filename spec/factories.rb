@@ -41,4 +41,10 @@ FactoryGirl.define do
     user_id 420
     skatepark_id 420
   end
+
+  factory :rating do
+    user_id 420
+    skatepark_id 420
+    rating 5
+  end
 end
