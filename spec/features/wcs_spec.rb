@@ -29,9 +29,9 @@ describe "the signup process", type: :feature do
     user = build(:user)
 
     visit '/users/new'
-    fill_in 'Username', with: user.username
-    fill_in 'Email', with: user.email
-    fill_in 'Password', with: user.password
+    find('#username').set(user.username)
+    find('#email').set(user.email)
+    find('#password').set(user.password)
     click_button 'Register'
 
     expect(page).to have_content user.username.capitalize

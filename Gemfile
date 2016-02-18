@@ -41,6 +41,7 @@ group :development, :test do
   gem 'capybara-webkit'
   gem 'dotenv-rails'
   gem 'factory_girl_rails'
+  gem 'launchy'
   gem 'magic_lamp'
   gem 'pry-rails'
   gem 'pry-byebug'

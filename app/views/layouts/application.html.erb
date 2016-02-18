@@ -62,11 +62,11 @@
           <% end %>
           <div class="field">
             <%= label_tag :username %>
-            <%= text_field_tag :username %>
+            <%= text_field_tag :username, nil, id: 'username-sign-in' %>
           </div>
           <div class="field">
             <%= label_tag :password %>
-            <%= password_field_tag :password %>
+            <%= password_field_tag :password, nil, id: 'password-sign-in' %>
           </div>
           <br>
           <%= submit_tag 'Submit', class: 'ui green button' %>

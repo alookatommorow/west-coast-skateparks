@@ -1,6 +1,4 @@
 class SessionsController < ApplicationController
-  def new
-  end
 
   def create
     login
@@ -17,7 +15,7 @@ class SessionsController < ApplicationController
         session[:id] = @user.id
         redirect_to @user.admin? ? admin_root_path : @user
       else
-        redirect_to new_session_path
+        redirect_to root_path
       end
     end
 
