@@ -24,7 +24,7 @@ class ManyToMany
       end
 
       def type
-        klass.name.underscore.to_sym
+        klass.name.underscore
       end
 
       def association
