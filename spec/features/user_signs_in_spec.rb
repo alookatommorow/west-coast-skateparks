@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.feature 'User signs in' do
+RSpec.feature 'User signs in', js: true do
   scenario 'tries to access admin dashboard and is redirected with error message' do
     user = create(:user)
 
@@ -18,7 +18,8 @@ RSpec.feature 'User signs in' do
   scenario 'is redirected to their homepage, and can sign out if they choose' do
     user = create(:user)
 
-    visit new_session_path
+    visit root_path
+    click_link 'Sign In'
     fill_in 'Username', with: user.username
     fill_in 'Password', with: user.password
     click_button 'Submit'

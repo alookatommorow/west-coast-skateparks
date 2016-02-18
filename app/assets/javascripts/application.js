@@ -19,6 +19,11 @@
 
 
 $(document).ready(function() {
+  //////// Show sign-in modal on picture click ////////
+  $('.sign-in-button').click(function(){
+    $('#sign-in-modal').modal('show');
+  });
+
   //////// Show modal on picture click ////////
   $('.ui.image').click(function(){
     $('.modal-image').attr('src', this.src);

@@ -19,7 +19,7 @@
             <%= link_to 'My Profile', user_path(current_user), class: 'item' %>
             <%= link_to 'Sign Out', session_path(current_user), method: :delete, class: 'item' %>
           <% else %>
-            <%= link_to 'Sign In', new_session_path, class: 'item' %>
+            <%= link_to 'Sign In', '#', class: 'item sign-in-button' %>
             <%= link_to 'Sign Up', new_user_path, class: 'item' %>
           <% end %>
 
@@ -50,6 +50,29 @@
         <div class="ui container">
             &copy West Coast Skateparks 2015
         </div>
+    </div>
+
+    <div id="sign-in-modal" class="ui modal">
+      <i class="close icon"></i>
+      <div class="header center-text"><span class='orange'>Sign In</span></div>
+      <div class="content center-text">
+        <%= form_tag '/sessions', class: 'ui form sign-in-form' do %>
+          <% if flash[:notice] %>
+            <div class="notice"><%= flash[:notice] %></div>
+          <% end %>
+          <div class="field">
+            <%= label_tag :username %>
+            <%= text_field_tag :username %>
+          </div>
+          <div class="field">
+            <%= label_tag :password %>
+            <%= password_field_tag :password %>
+          </div>
+          <br>
+          <%= submit_tag 'Submit', class: 'ui green button' %>
+          <div class="ui error message"></div>
+        <% end %>
+      </div>
     </div>
 
 
