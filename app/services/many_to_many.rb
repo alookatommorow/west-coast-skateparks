@@ -32,8 +32,10 @@ class ManyToMany
       end
 
       def params_for_type
-        foreign_keys.tap do |this|
-          this.merge(type => params[type]) if type
+        if params[type]
+          foreign_keys.merge(type => params[type])
+        else
+          foreign_keys
         end
       end
 
