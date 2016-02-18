@@ -25,6 +25,7 @@ FactoryGirl.define do
     name nil
     uid nil
     password 'swag'
+    admin false
 
     trait :admin do
       admin true

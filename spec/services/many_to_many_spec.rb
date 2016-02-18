@@ -50,9 +50,10 @@ RSpec.describe ManyToMany do
       user = create(:user)
       skatepark = create(:skatepark)
       visit = create(:visit, skatepark_id: skatepark.id, user_id: user.id)
+
       ManyToMany.destroy(Visit, skatepark_id: skatepark.id, user_id: user.id)
 
-      expect(Visit.last).to eq(nil)
+      expect(Visit.find_by(id: visit.id)).to eq(nil)
     end
   end
 end
