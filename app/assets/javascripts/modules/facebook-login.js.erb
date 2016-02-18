@@ -38,7 +38,7 @@
       method: 'post'
     })
     .done(function(response){
-      window.location = '/users/'+response;
+      window.location = '/users/'+response+'?from_fb=true';
     })
     .fail(function(response){
       console.log(response);
