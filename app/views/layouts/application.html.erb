@@ -20,11 +20,18 @@
             <%= link_to 'Sign Out', session_path(current_user), method: :delete, class: 'item' %>
           <% else %>
             <%= link_to 'Sign In', '#', class: 'item sign-in-button' %>
-            <%= link_to 'Sign Up', new_user_path, class: 'item' %>
+            <%= link_to 'Sign Up', '#', class: 'item sign-up-button' %>
           <% end %>
 
         </div>
       </div>
+
+      <% if flash[:notice].present? %>
+        <div class="notices center-text">
+          <h2><%= flash[:notice] %></h2>
+        </div>
+      <% end %>
+
       <div class="heading-container center-text" >
         <div class="inline-block" >
           <p class="title-words">West Coast Skateparks</p>
@@ -52,6 +59,8 @@
         </div>
     </div>
 
+
+    <!-- SIGN IN MODAL -->
     <div id="sign-in-modal" class="ui modal">
       <i class="close icon"></i>
       <div class="header center-text"><span class='orange'>Sign In</span></div>
@@ -70,6 +79,32 @@
           </div>
           <br>
           <%= submit_tag 'Submit', class: 'ui green button' %>
+          <div class="ui error message"></div>
+        <% end %>
+      </div>
+    </div>
+
+
+
+    <!-- SIGN UP MODAL -->
+    <div id="sign-up-modal" class="ui modal">
+      <i class="close icon"></i>
+      <div class="header center-text"><span class='orange'>Sign Up</span></div>
+      <div class="content center-text">
+        <%= form_tag "/users", class: "ui form sign-up-form" do %>
+          <div class="field">
+            <%= label_tag :username %>
+            <%= text_field_tag :username %>
+          </div>
+          <div class="field">
+            <%= label_tag :email %>
+            <%= text_field_tag :email %>
+          </div>
+          <div class="field">
+            <%= label_tag :password %>
+            <%= password_field_tag :password %>
+          </div>
+          <%= submit_tag 'Register', class: 'ui green button' %>
           <div class="ui error message"></div>
         <% end %>
       </div>
