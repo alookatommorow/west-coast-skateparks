@@ -24,11 +24,11 @@ describe 'Show', type: :feature do
   end
 end
 
-describe "the signup process", type: :feature do
-  it "signs up a new user and logs them in" do
+describe 'the signup process', type: :feature do
+  it 'signs up a new user and logs them in' do
     user = build(:user)
 
-    visit '/users/new'
+    visit root_path
     find('#username').set(user.username)
     find('#email').set(user.email)
     find('#password').set(user.password)

@@ -1,5 +1,4 @@
 class SessionsController < ApplicationController
-
   def create
     login
   end
@@ -15,7 +14,7 @@ class SessionsController < ApplicationController
         session[:id] = @user.id
         redirect_to @user.admin? ? admin_root_path : @user
       else
-        redirect_to root_path
+        redirect_to root_path, notice: 'Sign in failed'
       end
     end
 

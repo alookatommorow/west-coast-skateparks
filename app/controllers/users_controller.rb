@@ -5,12 +5,8 @@ class UsersController < ApplicationController
       session[:id] = @user.id
       redirect_to @user
     else
-      render 'new'
+      redirect_to root_path, notice: @user.errors.full_messages.first
     end
-  end
-
-  def new
-    @user = User.new
   end
 
   def show

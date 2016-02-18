@@ -9,7 +9,7 @@ Rails.application.routes.draw do
 
   mount MagicLamp::Genie, at: '/magic_lamp' if defined?(MagicLamp)
 
-  resources :users, only: [:show, :new, :create]
+  resources :users, only: [:show, :create]
   get '/users/:id/map_data', to: 'users#map_data', as: 'user_map_data'
   resources :sessions, only: [:create, :destroy]
   resources :skateparks

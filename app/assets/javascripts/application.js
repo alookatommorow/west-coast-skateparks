@@ -19,15 +19,9 @@
 
 
 $(document).ready(function() {
-  //////// Show sign-in modal on picture click ////////
+  //////// Show sign-in modal ////////
   $('.sign-in-button').click(function(){
     $('#sign-in-modal').modal('show');
-  });
-
-  //////// Show modal on picture click ////////
-  $('.ui.image').click(function(){
-    $('.modal-image').attr('src', this.src);
-    $('.picture-modal').modal('show');
   });
 
   //////// Select Skatepark From Profile Page ////////
