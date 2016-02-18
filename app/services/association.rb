@@ -26,11 +26,13 @@ class Association
     end
 
     def params_for_type
-      id_params.merge(type => params[type])
+      id_params.tap do |this|
+        this.merge(type => params[type]) if type
+      end
     end
 
     def id_params
       { user_id: params[:user_id],
-        skatepark_id: params[:id] }
+        skatepark_id: params[:skatepark_id] }
     end
 end

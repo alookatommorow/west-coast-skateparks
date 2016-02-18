@@ -3,7 +3,7 @@
   <div class="rate-form-container hidden one-top">
         <%= form_tag rate_path, method: :put, class: "ui form rate-form" do %>
           <%= hidden_field_tag :user_id, current_user.id %>
-          <%= hidden_field_tag :id, skatepark.id %>
+          <%= hidden_field_tag :skatepark_id, skatepark.id %>
           <div class="ui selection dropdown field">
             <%= hidden_field_tag :rating, nil %>
             <i class="dropdown icon"></i>

@@ -1,10 +1,10 @@
 class FavoritesController < ApplicationController
   def create
-    Favorite.create(favorite_params)
+    Association.new(Favorite, params)
     render nothing: true
   end
 
-  def update
+  def update # make this use associate
     favorite = Favorite.find_by(favorite_params)
     Favorite.destroy(favorite.id) if favorite
     render nothing: true
