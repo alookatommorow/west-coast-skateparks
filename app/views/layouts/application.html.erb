@@ -27,8 +27,9 @@
       </div>
 
       <% if flash[:notice].present? %>
-        <div class="notices center-text">
-          <h2><%= flash[:notice] %></h2>
+        <div id="flashes" class="ui negative message transition hidden">
+          <i class="close icon"></i>
+          <div class="header"><%= flash[:notice] %></div>
         </div>
       <% end %>
 
@@ -66,9 +67,6 @@
       <div class="header center-text"><span class='orange'>Sign In</span></div>
       <div class="content center-text">
         <%= form_tag '/sessions', class: 'ui form sign-in-form' do %>
-          <% if flash[:notice] %>
-            <div class="notice"><%= flash[:notice] %></div>
-          <% end %>
           <div class="field">
             <%= label_tag :username %>
             <%= text_field_tag :username, nil, id: 'username-sign-in' %>

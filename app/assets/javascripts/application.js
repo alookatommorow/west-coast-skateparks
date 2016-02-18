@@ -24,17 +24,6 @@ $(document).ready(function() {
     $('#sign-in-modal').modal('show');
   });
 
-  //////// Show sign-up modal ////////
-  $('.sign-up-button').click(function(){
-    $('#sign-up-modal').modal('show');
-  });
-
-  //////// Show modal on picture click ////////
-  $('.ui.image').click(function(){
-    $('.modal-image').attr('src', this.src);
-    $('.picture-modal').modal('show');
-  });
-
   //////// Select Skatepark From Profile Page ////////
   $(".profile-container").on('click', '.item', function(){
     makeItemClickable(this);
