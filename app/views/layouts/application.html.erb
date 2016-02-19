@@ -58,7 +58,7 @@
         <div class='ui search inline-block'>
           <%= form_tag(search_path, method: :get, class: 'search-form') do%>
             <div class="ui icon input">
-              <%= text_field_tag :search, nil, placeholder: 'Search skateparks', required: true  %>
+              <%= text_field_tag :search, nil, placeholder: 'Search skateparks', required: true, id: 'search-input'  %>
               <i class="circular search link icon search-button"></i>
             </div>
           <% end %>

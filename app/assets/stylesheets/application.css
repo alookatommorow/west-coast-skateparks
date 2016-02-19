@@ -52,7 +52,8 @@ html, body {
  background-color: white;
 }
 
-input:-webkit-autofill {
+/*chrome input auto select fix (input field turns yellow when you select a previous value)*/
+#search-input:-webkit-autofill {
   box-shadow: 0 0 0 1000px white inset;
 }
 
