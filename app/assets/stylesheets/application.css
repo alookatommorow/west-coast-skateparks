@@ -52,9 +52,8 @@ html, body {
  background-color: white;
 }
 
-input:-webkit-autofill {
-  -webkit-box-shadow: 0 0 0 1000px white inset !important;
-  box-shadow: 0 0 0 1000px white inset !important;
+#search-input:-webkit-autofill {
+  box-shadow: 0 0 0 1000px white inset;
 }
 
 .page-container {
@@ -73,11 +72,6 @@ input:-webkit-autofill {
   background-color: black;
   color: white;
 }
-
-
-
-
-
 
 /*--------Search -------*/
 
