@@ -9,25 +9,9 @@
 
   </head>
   <body>
-    <script>
-      window.fbAsyncInit = function() {
-        FB.init({
-          appId      : <%= ENV.fetch('FACEBOOK_KEY') %>,
-          xfbml      : true,
-          version    : 'v2.5'
-        });
-      };
 
-      (function(d, s, id){
-         var js, fjs = d.getElementsByTagName(s)[0];
-         if (d.getElementById(id)) {return;}
-         js = d.createElement(s); js.id = id;
-         js.src = "//connect.facebook.net/en_US/sdk.js";
-         fjs.parentNode.insertBefore(js, fjs);
-       }(document, 'script', 'facebook-jssdk'));
-    </script>
     <div class="nav-container">
-      <div class='ui five item inverted pointing menu'>
+      <div class='ui four item inverted pointing menu'>
 
         <%= link_to 'Home', root_path, class: 'item' %>
         <%= link_to 'About', about_path, class: 'item' %>
@@ -36,8 +20,7 @@
           <%= link_to 'My Profile', user_path(current_user), class: 'item' %>
           <%= link_to 'Sign Out', session_path(current_user), method: :delete, class: 'item' %>
         <% else %>
-          <%= link_to 'Sign In', '#', class: 'item sign-in-button' %>
-          <%= link_to 'Sign Up', '#', class: 'item sign-up-button' %>
+          <%= link_to 'Sign In', '#', class: 'item session-button' %>
         <% end %>
 
       </div>
@@ -78,20 +61,22 @@
 
 
     <!-- SIGN IN MODAL -->
-    <div id="sign-in-modal" class="ui modal">
+    <div id="session-modal" class="ui modal">
       <i class="close icon"></i>
       <div class="header center-text"><span class='orange'>Sign In</span></div>
       <div class="content center-text">
-        <fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
-        </fb:login-button>
+        <div id='fb-login' class='two-bottom'>
+          <button class="ui labeled icon primary button two-bottom">
+            <i class="facebook square icon"></i>
+            LOGIN WITH FACEBOOK
+          </button>
+        </div>
         <%= form_tag '/sessions', class: 'ui form sign-in-form' do %>
           <div class="field">
-            <%= label_tag :username %>
-            <%= text_field_tag :username, nil, id: 'username-sign-in' %>
+            <%= text_field_tag :username, nil, id: 'username-sign-in', placeholder: 'Username' %>
           </div>
           <div class="field">
-            <%= label_tag :password %>
-            <%= password_field_tag :password, nil, id: 'password-sign-in' %>
+            <%= password_field_tag :password, nil, id: 'password-sign-in', placeholder: 'Password'  %>
           </div>
           <br>
           <%= submit_tag 'Submit', class: 'ui green button' %>
@@ -101,32 +86,6 @@
     </div>
 
 
-
-    <!-- SIGN UP MODAL -->
-    <div id="sign-up-modal" class="ui modal">
-      <i class="close icon"></i>
-      <div class="header center-text"><span class='orange'>Sign Up</span></div>
-      <div class="content center-text">
-        <fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
-        </fb:login-button>
-        <%= form_tag "/users", class: "ui form sign-up-form" do %>
-          <div class="field">
-            <%= label_tag :username %>
-            <%= text_field_tag :username %>
-          </div>
-          <div class="field">
-            <%= label_tag :email %>
-            <%= text_field_tag :email %>
-          </div>
-          <div class="field">
-            <%= label_tag :password %>
-            <%= password_field_tag :password %>
-          </div>
-          <%= submit_tag 'Register', class: 'ui green button' %>
-          <div class="ui error message"></div>
-        <% end %>
-      </div>
-    </div>
 
 
   </body>

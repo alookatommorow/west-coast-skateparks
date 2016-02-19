@@ -1,12 +1,19 @@
-#sign-in-modal,
-#sign-up-modal {
+
+#session-modal {
   max-width: 50%;
   height: 200px;
-  margin-left: -25%;
+  margin-left: -20%;
   padding-bottom: 0;
   top: 270px;
 
   form {
     padding-bottom: 0;
+    margin: 0 7%;
   }
+
+  #hidden-fb-button {
+    display: none;
+  }
+
 }
+
