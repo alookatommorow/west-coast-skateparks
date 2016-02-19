@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :skatepark do
-    city 'hayward'
+    sequence(:city) { |i| "hayward#{i}" }
     state 'California'
     address '520 E 3rd Ave, Hayward, CA'
     sequence(:identifier) { |i| "swag#{i}" }
