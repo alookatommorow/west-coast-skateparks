@@ -9,7 +9,6 @@
 
   </head>
   <body>
-
     <div class="nav-container">
       <div class='ui four item inverted pointing menu'>
 
@@ -51,6 +50,8 @@
 
     <div class="search-container"></div>
 
+
+
     <%= yield %>
 
     <div class="ui inverted segment">
@@ -59,32 +60,8 @@
       </div>
     </div>
 
-
-    <!-- SIGN IN MODAL -->
-    <div id="session-modal" class="ui modal">
-      <i class="close icon"></i>
-      <div class="header center-text"><span class='orange'>Sign In</span></div>
-      <div class="content center-text">
-        <div id='fb-login' class='two-bottom'>
-          <button class="ui labeled icon primary button two-bottom">
-            <i class="facebook square icon"></i>
-            LOGIN WITH FACEBOOK
-          </button>
-        </div>
-        <%= form_tag '/sessions', class: 'ui form sign-in-form' do %>
-          <div class="field">
-            <%= text_field_tag :username, nil, id: 'username-sign-in', placeholder: 'Username' %>
-          </div>
-          <div class="field">
-            <%= password_field_tag :password, nil, id: 'password-sign-in', placeholder: 'Password'  %>
-          </div>
-          <br>
-          <%= submit_tag 'Submit', class: 'ui green button' %>
-          <div class="ui error message"></div>
-        <% end %>
-      </div>
-    </div>
-
+  <!-- SIGN IN MODAL -->
+  <%= render partial: 'shared/session_modal' %>
 
 
 
