@@ -2,26 +2,16 @@
   <i class="close icon"></i>
   <div class="ui two column grid">
     <div class="column center-text">
-      <span class="orange log-in-button pointer">Log In</span>
+      <span class="orange log-in-button pointer">LOG IN</span>
     </div>
-    <div class="ui vertical divider">
-      Or
-    </div>
+    <div class="ui vertical divider">Or</div>
     <div class="column center-text">
-      <span class="orange sign-up-button pointer">Sign Up</span>
+      <span class="orange sign-up-button pointer">SIGN UP</span>
     </div>
   </div>
   <!-- <div class="ui divider"></div> -->
   <div class="content center-text">
-    <div id='fb-login' class='two-bottom'>
-      <button class="ui labeled icon large primary button two-bottom">
-        <i class="facebook square icon"></i>
-        LOGIN WITH FACEBOOK
-      </button>
-    </div>
-    <!-- <div class="ui horizontal divider">
-      Or
-    </div> -->
+
     <%= form_tag '/sessions', class: 'ui form log-in-form' do %>
       <div class="field">
         <%= text_field_tag :username, nil, id: 'username-sign-in', placeholder: 'Username' %>
@@ -46,6 +36,15 @@
       <%= submit_tag 'Register', class: 'ui green button' %>
       <div class="ui error message"></div>
     <% end %>
+    <div class="ui horizontal divider">
+      Or
+    </div>
+    <div>
+      <button id='fb-login' class="ui labeled icon huge primary button one-top">
+        <i class="facebook square icon"></i>
+        LOGIN WITH FACEBOOK
+      </button>
+    </div>
     <!-- end content -->
   </div>
   <!-- end modal -->
