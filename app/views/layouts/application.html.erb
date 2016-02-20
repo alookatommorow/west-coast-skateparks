@@ -10,19 +10,11 @@
   </head>
   <body>
     <div class="nav-container">
-      <div class='ui four item inverted pointing menu'>
-
-        <%= link_to 'Home', root_path, class: 'item' %>
-        <%= link_to 'About', about_path, class: 'item' %>
-        <%= link_to 'Skateparks', skateparks_path, class: 'item' %>
-        <% if logged_in? %>
-          <%= link_to 'My Profile', user_path(current_user), class: 'item' %>
-          <%= link_to 'Sign Out', session_path(current_user), method: :delete, class: 'item' %>
-        <% else %>
-          <%= link_to 'Sign In', '#', class: 'item session-button' %>
-        <% end %>
-
-      </div>
+      <% if logged_in? %>
+        <%= render partial: 'shared/logged_in_nav' %>
+      <% else %>
+        <%= render partial: 'shared/logged_out_nav' %>
+      <% end %>
     </div>
 
     <% if flash.any? %>
