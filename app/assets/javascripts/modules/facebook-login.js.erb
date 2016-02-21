@@ -49,7 +49,7 @@ function checkLoginState() {
 
 function sendUserData(response) {
   $.ajax({
-    url: '/sessions/create_with_auth',
+    url: '/sessions/create_with_fb_auth',
     data: response,
     method: 'post'
   })

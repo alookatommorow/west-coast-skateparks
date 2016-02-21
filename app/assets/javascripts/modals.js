@@ -5,9 +5,13 @@ $(document).ready(function () {
   });
 
   //////// FB login ////////
-
   $('#fb-login').click(function(){
     FB.login(checkLoginState);
+  })
+
+  //////// Goog login ////////
+  $('.goog-signin2').click(function(){
+    initGoogleAuth();
   })
 
   $('.sign-up-button').click(function(){
