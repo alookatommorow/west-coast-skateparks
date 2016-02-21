@@ -10,7 +10,7 @@ $(document).ready(function () {
   })
 
   //////// Goog login ////////
-  $('.goog-signin2').click(function(){
+  $('#goog-login').click(function(){
     initGoogleAuth();
   })
 

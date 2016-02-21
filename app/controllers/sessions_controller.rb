@@ -38,9 +38,7 @@ class SessionsController < ApplicationController
     end
 
     def google_params
-      {
-        email: params[:email]
-      }
+      { email: params[:email] }
     end
 
     def fb_params
