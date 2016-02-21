@@ -1,0 +1,51 @@
+<div id="session-modal" class="ui modal">
+  <i class="close icon"></i>
+  <div class="ui two column grid">
+    <div class="column center-text">
+      <span class="orange log-in-button pointer">LOG IN</span>
+    </div>
+    <div class="ui vertical divider">Or</div>
+    <div class="column center-text">
+      <span class="orange sign-up-button pointer">SIGN UP</span>
+    </div>
+  </div>
+  <!-- <div class="ui divider"></div> -->
+  <div class="content center-text">
+
+    <%= form_tag '/sessions', class: 'ui form log-in-form' do %>
+      <div class="field">
+        <%= text_field_tag :username, nil, id: 'username-sign-in', placeholder: 'Username' %>
+      </div>
+      <div class="field">
+        <%= password_field_tag :password, nil, id: 'password-sign-in', placeholder: 'Password'  %>
+      </div>
+      <%= submit_tag 'Submit', class: 'ui green button' %>
+      <div class="ui error message"></div>
+    <% end %>
+
+    <%= form_tag "/users", class: "ui form sign-up-form hidden" do %>
+      <div class="field">
+        <%= text_field_tag :username, nil, placeholder: 'Username' %>
+      </div>
+      <div class="field">
+        <%= text_field_tag :email, nil, placeholder: 'Email' %>
+      </div>
+      <div class="field">
+        <%= password_field_tag :password, nil, placeholder: 'Password' %>
+      </div>
+      <%= submit_tag 'Register', class: 'ui green button' %>
+      <div class="ui error message"></div>
+    <% end %>
+    <div class="ui horizontal divider">
+      Or
+    </div>
+    <div>
+      <button id='fb-login' class="ui labeled icon huge primary button one-top">
+        <i class="facebook square icon"></i>
+        LOGIN WITH FACEBOOK
+      </button>
+    </div>
+    <!-- end content -->
+  </div>
+  <!-- end modal -->
+</div>

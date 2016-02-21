@@ -9,39 +9,11 @@
 
   </head>
   <body>
-    <script>
-      window.fbAsyncInit = function() {
-        FB.init({
-          appId      : <%= ENV.fetch('FACEBOOK_KEY') %>,
-          xfbml      : true,
-          version    : 'v2.5'
-        });
-      };
-
-      (function(d, s, id){
-         var js, fjs = d.getElementsByTagName(s)[0];
-         if (d.getElementById(id)) {return;}
-         js = d.createElement(s); js.id = id;
-         js.src = "//connect.facebook.net/en_US/sdk.js";
-         fjs.parentNode.insertBefore(js, fjs);
-       }(document, 'script', 'facebook-jssdk'));
-    </script>
-    <div class="nav-container">
-      <div class='ui five item inverted pointing menu'>
-
-        <%= link_to 'Home', root_path, class: 'item' %>
-        <%= link_to 'About', about_path, class: 'item' %>
-        <%= link_to 'Skateparks', skateparks_path, class: 'item' %>
-        <% if logged_in? %>
-          <%= link_to 'My Profile', user_path(current_user), class: 'item' %>
-          <%= link_to 'Sign Out', session_path(current_user), method: :delete, class: 'item' %>
-        <% else %>
-          <%= link_to 'Sign In', '#', class: 'item sign-in-button' %>
-          <%= link_to 'Sign Up', '#', class: 'item sign-up-button' %>
-        <% end %>
-
-      </div>
-    </div>
+    <% if logged_in? %>
+      <%= render partial: 'shared/logged_in_nav' %>
+    <% else %>
+      <%= render partial: 'shared/logged_out_nav' %>
+    <% end %>
 
     <% if flash.any? %>
       <div id="flashes" class="ui <%= flash_class_name(flash.first.first) %> message transition hidden">
@@ -54,7 +26,6 @@
         <p class="title-words">West Coast Skateparks</p>
       </div>
       <div class='search-form-container'>
-
         <div class='ui search inline-block'>
           <%= form_tag(search_path, method: :get, class: 'search-form') do%>
             <div class="ui icon input">
@@ -76,58 +47,7 @@
       </div>
     </div>
 
-
     <!-- SIGN IN MODAL -->
-    <div id="sign-in-modal" class="ui modal">
-      <i class="close icon"></i>
-      <div class="header center-text"><span class='orange'>Sign In</span></div>
-      <div class="content center-text">
-        <fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
-        </fb:login-button>
-        <%= form_tag '/sessions', class: 'ui form sign-in-form' do %>
-          <div class="field">
-            <%= label_tag :username %>
-            <%= text_field_tag :username, nil, id: 'username-sign-in' %>
-          </div>
-          <div class="field">
-            <%= label_tag :password %>
-            <%= password_field_tag :password, nil, id: 'password-sign-in' %>
-          </div>
-          <br>
-          <%= submit_tag 'Submit', class: 'ui green button' %>
-          <div class="ui error message"></div>
-        <% end %>
-      </div>
-    </div>
-
-
-
-    <!-- SIGN UP MODAL -->
-    <div id="sign-up-modal" class="ui modal">
-      <i class="close icon"></i>
-      <div class="header center-text"><span class='orange'>Sign Up</span></div>
-      <div class="content center-text">
-        <fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
-        </fb:login-button>
-        <%= form_tag "/users", class: "ui form sign-up-form" do %>
-          <div class="field">
-            <%= label_tag :username %>
-            <%= text_field_tag :username %>
-          </div>
-          <div class="field">
-            <%= label_tag :email %>
-            <%= text_field_tag :email %>
-          </div>
-          <div class="field">
-            <%= label_tag :password %>
-            <%= password_field_tag :password %>
-          </div>
-          <%= submit_tag 'Register', class: 'ui green button' %>
-          <div class="ui error message"></div>
-        <% end %>
-      </div>
-    </div>
-
-
+    <%= render partial: 'shared/session_modal' %>
   </body>
 </html>
