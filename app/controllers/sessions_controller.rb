@@ -5,10 +5,10 @@ class SessionsController < ApplicationController
 
   def create_with_auth
     if params[:auth] == "facebook"
-      @user = User.find_by_uid(params[:uid])
+      @user = User.find_by(uid: params[:uid])
       auth_user_params = fb_params.merge(auth_params)
     else
-      @user = User.find_by_email(params[:email])
+      @user = User.find_by(email: params[:email])
       auth_user_params = google_params.merge(auth_params)
     end
     unless @user

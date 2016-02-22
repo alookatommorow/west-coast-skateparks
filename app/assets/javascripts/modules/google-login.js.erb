@@ -21,22 +21,5 @@ function onSignIn(googleUser) {
     auth: "google"
   }
   sendUserData(data);
-  // $.ajax({
-  //   url: '/sessions/create_with_google_auth',
-  //   data: {name: profile.getName(), email: profile.getEmail()},
-  //   method: 'post'
-  // })
-  // .done(function(response){
-  //   console.log(response)
-  //   window.location = '/users/'+response+'?from_fb=true';
-  // })
-  // .fail(function(response){
-  //   console.log(response);
-  // });
-
-  // console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
-  // console.log('Name: ' + profile.getName());
-  // console.log('Image URL: ' + profile.getImageUrl());
-  // console.log('Email: ' + profile.getEmail());
 }
 

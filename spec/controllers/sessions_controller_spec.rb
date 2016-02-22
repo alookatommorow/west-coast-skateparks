@@ -13,10 +13,19 @@ RSpec.describe SessionsController, type: :controller do
   end
 
   describe '#create_with_auth' do
-    it 'finds a user by uid and signs them in' do
-      user = create(:user, uid: 'skiddlybeebop7534', name: 'Melvin Nipplebottom')
+    it 'finds a facebook user by uid and signs them in' do
+      user = create(:user, uid: 'skiddlybeebop7534', name: 'Melvin Nipplebottom', auth: 'facebook')
 
-      post :create_with_auth, name: user.name, id: user.uid
+      post :create_with_auth, name: user.name, uid: user.uid, auth: 'facebook'
+
+      expect(session[:id]).to eq(user.id)
+      expect(response.body).to eq(user.id.to_json)
+    end
+
+    it 'finds a google user by email and signs them in' do
+      user = create(:user, email: 'skiddly@beebop.com', name: 'Melvin Nipplebottom', auth: 'google')
+
+      post :create_with_auth, email: user.email, name: user.name, id: user.uid, auth: 'google'
 
       expect(session[:id]).to eq(user.id)
       expect(response.body).to eq(user.id.to_json)
@@ -25,7 +34,7 @@ RSpec.describe SessionsController, type: :controller do
     it 'creates a user if user cannot be found with uid' do
       user = build(:user, uid: 'scrimpleton6435wr', name: 'Raymond Shrimp Boy Chow')
 
-      post :create_with_auth, name: user.name, id: user.uid
+      post :create_with_auth, name: user.name, uid: user.uid, auth: 'facebook'
 
       expect(User.last.name).to eq(user.name)
       expect(User.last.uid).to eq(user.uid)

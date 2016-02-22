@@ -14,6 +14,8 @@ $(document).ready(function () {
     initGoogleAuth();
   })
 
+  //////// Toggle log-in/sign-up visibility ////////
+  //using this over two separate functions cuz of Code Climate
   $('.sign-up-button, .log-in-button').click(function(){
     var $hide, $show
     if ($(this).hasClass('sign-up-button')) {
@@ -25,14 +27,6 @@ $(document).ready(function () {
     }
     toggleVisibility({hide: $hide, show: $show});
   })
-
-  // $('.sign-up-button').click(function(){
-  //   toggleVisibility({hide: $('.log-in-form'), show: $('.sign-up-form')})
-  // })
-
-  // $('.log-in-button').click(function(){
-  //   toggleVisibility({hide: $('.sign-up-form'), show: $('.log-in-form')})
-  // })
 
   //////// Show modal on picture click ////////
   $('.ui.image').click(function(){
