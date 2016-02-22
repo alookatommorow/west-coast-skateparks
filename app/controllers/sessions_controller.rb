@@ -3,20 +3,16 @@ class SessionsController < ApplicationController
     login
   end
 
-  def create_with_fb_auth
-    ap params.merge(auth_params)
-    @user = User.find_by_uid(params[:id])
-    unless @user
-      @user = User.create(fb_params.merge(auth_params))
+  def create_with_auth
+    if params[:auth] == "facebook"
+      @user = User.find_by_uid(params[:uid])
+      auth_user_params = fb_params.merge(auth_params)
+    else
+      @user = User.find_by_email(params[:email])
+      auth_user_params = google_params.merge(auth_params)
     end
-    session[:id] = @user.id
-    render json: @user.id
-  end
-
-  def create_with_google_auth
-    @user = User.find_by_email(params[:email])
     unless @user
-      @user = User.create(google_params.merge(auth_params))
+      @user = User.create(auth_user_params)
     end
     session[:id] = @user.id
     render json: @user.id
@@ -31,6 +27,7 @@ class SessionsController < ApplicationController
 
     def auth_params
       {
+        auth: params[:auth],
         name: params[:name],
         username: "#{SecureRandom.hex(9)}#{params[:name].gsub(/\s/, '')}",
         password: SecureRandom.hex(20)
@@ -44,7 +41,7 @@ class SessionsController < ApplicationController
     def fb_params
       {
         email: "#{params[:name].gsub(/\s/, '')}#{SecureRandom.hex(9)}@shred.net",
-        uid: params[:id],
+        uid: params[:uid],
       }
     end
 
@@ -68,6 +65,6 @@ class SessionsController < ApplicationController
     end
 
     def bye_message
-      ['Shred on brashiki', 'LAYYYYTTTERRRRRR', 'Grip it and rip it', "Go terrorize some 'crete"].sample
+      ['Shred on brashiki', 'LAYYYYTTTERRRRRR', 'Grip it and rip it', "Go terrorize some 'crete!"].sample
     end
 end

@@ -23,7 +23,12 @@ function statusChangeCallback(response) {
   if (response.status === 'connected') {
     // Logged into your app and Facebook.
     FB.api('/me', function(response) {
-      sendUserData(response);
+      data = {
+        uid: response.uid,
+        name: response.name,
+        auth: "facebook"
+      }
+      sendUserData(data);
     });
 
   } else if (response.status === 'not_authorized') {
@@ -49,12 +54,12 @@ function checkLoginState() {
 
 function sendUserData(response) {
   $.ajax({
-    url: '/sessions/create_with_fb_auth',
+    url: '/sessions/create_with_auth',
     data: response,
     method: 'post'
   })
   .done(function(response){
-    window.location = '/users/'+response+'?from_fb=true';
+    window.location = '/users/'+response+'?from_auth=true';
   })
   .fail(function(response){
     console.log(response);
