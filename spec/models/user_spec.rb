@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe User, type: :model do
   context '#display_name' do
     it 'returns name if facebook user' do
-      user = create(:user, name: 'Turd Furgeson', uid: 'sdfkjhrt56sdjhg')
+      user = create(:user, name: 'Turd Furgeson', uid: 'sdfkjhrt56sdjhg', auth: 'facebook')
 
       expect(user.display_name).to eq('Turd Furgeson')
     end
