@@ -45,8 +45,14 @@
         <div class='center-text two-top'>
           <form action="https://maps.google.com/maps" method="get" target="_blank">
             <div class="ui action input one-top">
-              <input type="text" name="saddr" placeholder="Enter your location...">
+              <div>
+              <%= render partial: 'shared/address_autocomplete' %>
+              </div>
+
+              <!-- <input type="text" name="saddr" placeholder="Enter your location..."> -->
+              <div>
               <button class="ui button">Get Directions</button>
+              </div>
             </div>
             <input type="hidden" name="daddr" value="<%= @skatepark.address %>" />
           </form>
@@ -166,9 +172,7 @@
 
 <% if @skatepark.coordinates? %>
 
-  <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV.fetch('GOOGLE_KEY') %>&callback=initMap"
-      async defer>
-  </script>
+
 
 <% end %>
 
