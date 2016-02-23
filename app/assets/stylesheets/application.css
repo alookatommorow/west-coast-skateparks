@@ -66,9 +66,14 @@ html, body {
 
 #footer {
   margin: 0;
+  border-radius: 0;
 }
 
 .ui.menu {
+  border-radius: 0;
+}
+
+.ui.segments:not(.horizontal)>.segment:first-child {
   border-radius: 0;
 }
 
