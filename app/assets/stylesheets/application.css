@@ -64,9 +64,12 @@ html, body {
   padding-left: 0;
 }
 
-.footer {
-  background-color: black;
-  color: white;
+#footer {
+  margin: 0;
+}
+
+.ui.menu {
+  border-radius: 0;
 }
 
 /*--------Search -------*/
