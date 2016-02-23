@@ -22,8 +22,6 @@ function statusChangeCallback(response) {
   // for FB.getLoginStatus().
   if (response.status === 'connected') {
     // Logged into your app and Facebook.
-    console.log(response);
-    console.log(response.name)
     FB.api('/me', function(response) {
       data = {
         uid: response.id,

@@ -1,4 +1,5 @@
 $(document).ready(function () {
+  initGoogleAuth();
   //////// Show sign-up modal ////////
   $('.session-button').click(function(){
     $('#session-modal').modal('show');
@@ -11,7 +12,7 @@ $(document).ready(function () {
 
   //////// Goog login ////////
   $('#goog-login').click(function(){
-    initGoogleAuth();
+    googleSignIn();
   })
 
   //////// Toggle log-in/sign-up visibility ////////

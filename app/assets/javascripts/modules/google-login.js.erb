@@ -1,15 +1,17 @@
 function initGoogleAuth(){
-  console.log("initing")
   gapi.load('auth2', function(){
     // Retrieve the singleton for the GoogleAuth library and set up the client.
-    auth2 = gapi.auth2.init({
-      client_id: "<%= ENV.fetch('GOOGLE_CLIENT_ID') %>",
+    gapi.auth2.init({
+      client_id: "<%= ENV.fetch('GOOGLE_CLIENT_ID') %>"
     });
-    gapi.auth2.getAuthInstance().signIn().then(function(result){
-      onSignIn(result);
-    }, function(err) {
-      console.log(err);
-    });
+  });
+}
+
+function googleSignIn() {
+  gapi.auth2.getAuthInstance().signIn().then(function(result){
+    onSignIn(result);
+  }, function(err) {
+    console.log(err);
   });
 }
 
@@ -22,4 +24,5 @@ function onSignIn(googleUser) {
   }
   sendUserData(data);
 }
+
 

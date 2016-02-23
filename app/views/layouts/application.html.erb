@@ -3,9 +3,10 @@
   <head>
     <title>West Coast Skateparks</title>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
     <%= csrf_meta_tags %>
     <%= favicon_link_tag 'favicon.ico' %>
+    <script src="https://apis.google.com/js/api:client.js"></script>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
 
   </head>
   <body>
@@ -49,6 +50,7 @@
 
     <!-- SIGN IN MODAL -->
     <%= render partial: 'shared/session_modal' %>
-    <script src="https://apis.google.com/js/api:client.js"></script>
+
+
   </body>
 </html>
