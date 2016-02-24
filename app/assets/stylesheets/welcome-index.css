@@ -2,11 +2,11 @@
 
 .landing-container {
   position: relative;
-  background-image: url("https://storage.googleapis.com/west-coast-skateparks/newberg_cover_skinny.jpg" );
+  background-image: url("https://storage.googleapis.com/west-coast-skateparks/newberg_cover.jpg" );
   background-repeat: no-repeat;
   height: 80%;
   background-size: 100%;
-  background-position: 0 -740px;
+  background-position: 0 -220px;
   margin-top: 2%;
 }
 
@@ -20,9 +20,19 @@
   padding: 4% 0;
 }
 
-@media (min-width: 320px) and (max-width: 1000px) {
+@media (min-width: 850px) and (max-width: 1225px) {
   .landing-container {
     background-position: center;
   }
 }
+
+@media (min-width: 300px) and (max-width: 850px) {
+  .landing-container {
+    background-position: center;
+    background-image: url("https://storage.googleapis.com/west-coast-skateparks/newberg_cover_skinny.jpg" );
+    height: 92%;
+  }
+}
+
+
 
