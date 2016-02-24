@@ -2,11 +2,12 @@
 
 .landing-container {
   position: relative;
-  background-image: url("https://storage.googleapis.com/west-coast-skateparks/newberg_cover.jpg" );
+  background-image: url("https://storage.googleapis.com/west-coast-skateparks/newberg_cover_skinny.jpg" );
   background-repeat: no-repeat;
-  height: 82%;
+  height: 80%;
   background-size: 100%;
-  background-position: 0 -220px;
+  background-position: 0 -480px;
+  margin-top: 2%;
 }
 
 .landing-content {
@@ -19,10 +20,9 @@
   padding: 4% 0;
 }
 
-@media (min-width: 360px) and (max-width: 1200px) {
+@media (min-width: 320px) and (max-width: 1000px) {
   .landing-container {
     background-position: center;
-    background-size: con;
   }
 }
 
