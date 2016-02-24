@@ -10,6 +10,7 @@
 
   </head>
   <body>
+
     <% if logged_in? %>
       <%= render partial: 'shared/logged_in_nav' %>
     <% else %>
@@ -44,6 +45,8 @@
     <div class="search-container"></div>
 
     <%= yield %>
+
+    <div class="buffer"></div>
 
     <div id="footer" class="ui inverted segment">
       &copy West Coast Skateparks 2015
