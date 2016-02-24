@@ -39,9 +39,18 @@ html, body {
   color: #FF7519;
 }
 
-@media (min-width: 360px) and (max-width: 900px) {
+@media (min-width: 736px) and (max-width: 1025px) {
   .title-words {
-    font-size: 3em;
+    font-size: 2.5em;
+  }
+}
+
+@media (min-width: 300px) and (max-width: 735px) {
+  .title-words {
+    font-size: 1.6em;
+  }
+  .ui.search {
+    text-align: center;
   }
 }
 

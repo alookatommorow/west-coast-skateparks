@@ -1,5 +1,9 @@
 /*---------Atomic-----------*/
 
+.overflow-hidden {
+  overflow: hidden;
+}
+
 .red {
   color: red;
 }

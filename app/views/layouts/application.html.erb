@@ -7,6 +7,7 @@
     <%= favicon_link_tag 'favicon.ico' %>
     <script src="https://apis.google.com/js/api:client.js"></script>
     <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
   </head>
   <body>
@@ -25,11 +26,11 @@
 
     <div class="ui stackable grid">
       <div class="row landing-header-container">
-        <div class="twelve wide column">
+        <div class="eleven wide column">
          <div class="title-words">West Coast Skateparks</div>
         </div>
-        <div class="four wide column" >
-          <div class='ui search center-text'>
+        <div class="five wide column" >
+          <div class='ui search'>
             <%= form_tag(search_path, method: :get, class: 'search-form') do%>
               <div class="ui icon input">
                 <%= text_field_tag :search, nil, placeholder: 'Search skateparks', required: true, id: 'search-input'  %>

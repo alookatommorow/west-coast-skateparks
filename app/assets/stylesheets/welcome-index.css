@@ -10,6 +10,10 @@
   margin-top: 2%;
 }
 
+.landing-container img {
+  width: 100%;
+}
+
 .landing-content {
   background-color: rgb(255, 255, 255);
   background-color: rgba(255, 255, 255, 0.5);
@@ -18,19 +22,35 @@
   margin: 0 7%;
   color: black;
   padding: 4% 0;
+  font-size: 2.5em;
+  font-weight: bold;
+  line-height: 1;
 }
 
-@media (min-width: 850px) and (max-width: 1225px) {
+/* just so it looks cool when u squeeze the browser*/
+@media (min-width: 1025px) and (max-width: 1225px) {
   .landing-container {
     background-position: center;
   }
 }
 
-@media (min-width: 300px) and (max-width: 850px) {
-  .landing-container {
-    background-position: center;
-    background-image: url("https://storage.googleapis.com/west-coast-skateparks/newberg_cover_skinny.jpg" );
-    height: 92%;
+/* iPads */
+@media (min-width: 736px) and (max-width: 1025px) {
+  .landing-container img {
+    display: block;
+  }
+  .landing-content {
+    font-size: 1.8em;
+  }
+}
+
+/* iPhones */
+@media (min-width: 300px) and (max-width: 735px) {
+  .landing-container img {
+    display: block;
+  }
+  .landing-content {
+    font-size: 1em;
   }
 }
 
