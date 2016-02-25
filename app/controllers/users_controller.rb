@@ -11,7 +11,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    flash.now[:notice] = "Welcome, #{@user.display_name}"
+    flash.now[:notice] = "Welcome, #{@user.display_name}" if params[:from_auth]
   end
 
   def map_data

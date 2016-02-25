@@ -1,9 +1,9 @@
 <div class="page-container">
 
   <!-- skatepark header -->
-  <!-- <div class='header-image'></div> -->
 
   <div class="ui grid">
+
 
     <!-- header -->
     <%= render partial: 'header', locals: { skatepark: @skatepark, last: Skatepark.last.id } %>
@@ -145,14 +145,11 @@
           </div>
         <% end %>
       </div>
-    <!-- end column -->
+      <!-- end column -->
     </div>
     <!-- end ui grid -->
   </div>
-
-
-
-    <!-- end page-container -->
+  <!-- end page-container -->
 </div>
 
 <div class="ui basic modal picture-modal">

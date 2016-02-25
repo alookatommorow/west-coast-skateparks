@@ -1,9 +1,5 @@
 class WelcomeController < ApplicationController
   def index
-
-  end
-
-  def about
-
+    @no_footer = true
   end
 end
