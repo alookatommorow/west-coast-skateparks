@@ -28,8 +28,24 @@ html, body {
   height: 100%;
 }
 
+.page-wrap {
+  height: 100%;
+}
+
+#footer {
+  height: 5%;
+  text-align: center;
+  background-color: black;
+  color: white;
+  width: 100%;
+  border-radius: 0;
+  margin: 0;
+}
+
 .landing-header-container {
-  margin-top: 2%;
+  margin: 2% 0;
+  /*padding-bottom: 2%;*/
+  /*margin-bottom: 2%;*/
 }
 
 .title-words {
@@ -72,14 +88,6 @@ html, body {
   padding-left: 0;
 }
 
-#footer {
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  border-radius: 0;
-  margin: 0;
-}
-
 .ui.menu {
   border-radius: 0;
 }
@@ -97,6 +105,8 @@ html, body {
 .search-results-container a {
   color: black;
 }
+
+
 
 
 

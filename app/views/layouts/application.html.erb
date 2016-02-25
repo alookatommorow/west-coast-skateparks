@@ -11,6 +11,7 @@
 
   </head>
   <body>
+    <div class="page-wrap">
 
     <% if logged_in? %>
       <%= render partial: 'shared/logged_in_nav' %>
@@ -47,15 +48,10 @@
 
     <%= yield %>
 
-    <div class="buffer"></div>
-
-    <div id="footer" class="ui inverted segment">
-      &copy West Coast Skateparks 2015
-    </div>
-
+    <%= render partial: 'shared/footer' unless @no_footer %>
     <!-- SIGN IN MODAL -->
     <%= render partial: 'shared/session_modal' %>
 
-
+    </div>
   </body>
 </html>
