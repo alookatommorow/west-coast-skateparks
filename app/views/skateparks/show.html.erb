@@ -44,17 +44,22 @@
       <% if @skatepark.coordinates? %>
         <div class='center-text two-top'>
           <form action="https://maps.google.com/maps" method="get" target="_blank">
-            <div class="ui action input one-top">
-              <input type="text" name="saddr" placeholder="Enter your location...">
-              <button class="ui button">Get Directions</button>
+            <div class="ui action input one-top three-bottom">
+              <div id="locationField">
+                <input id="autocomplete" name="saddr" placeholder="Enter your address" onFocus="geolocate()" type="text"></input>
+              </div>
             </div>
-            <input type="hidden" name="daddr" value="<%= @skatepark.address %>" />
+            <div class="two-top">
+              <button class="ui button">Get Directions</button>
+              <input type="hidden" name="daddr" value="<%= @skatepark.address %>" />
+            </div>
           </form>
         </div>
 
         <div class="one-top">
           <div id='map-container relative'>
-              <div id='map' class='skatepark-map' ></div>
+
+            <div id='map' class='skatepark-map' ></div>
           </div>
         </div>
 
@@ -163,11 +168,12 @@
 
 <% if @skatepark.coordinates? %>
 
-  <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV.fetch('GOOGLE_KEY') %>&callback=initMap"
-      async defer>
-  </script>
+
 
 <% end %>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV.fetch('GOOGLE_KEY') %>&signed_in=true&libraries=places&callback=initAll"
+    async defer></script>
 
 <style>
   .header-image {

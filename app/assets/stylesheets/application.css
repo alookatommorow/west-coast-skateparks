@@ -75,9 +75,7 @@ html, body {
 }
 
 .page-container {
-  margin-right: 5%;
-  margin-left: 5%;
-  margin-bottom: 5%;
+  margin: 0 5% 1% 5%;
   min-height: 80%;
 }
 
