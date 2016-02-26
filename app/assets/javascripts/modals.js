@@ -1,21 +1,32 @@
 $(document).ready(function () {
+  initGoogleAuth();
   //////// Show sign-up modal ////////
   $('.session-button').click(function(){
     $('#session-modal').modal('show');
   });
 
   //////// FB login ////////
-
   $('#fb-login').click(function(){
     FB.login(checkLoginState);
   })
 
-  $('.sign-up-button').click(function(){
-    toggleVisibility({hide: $('.log-in-form'), show: $('.sign-up-form')})
+  //////// Goog login ////////
+  $('#goog-login').click(function(){
+    googleSignIn();
   })
 
-  $('.log-in-button').click(function(){
-    toggleVisibility({hide: $('.sign-up-form'), show: $('.log-in-form')})
+  //////// Toggle log-in/sign-up visibility ////////
+  //using this over two separate functions cuz of Code Climate
+  $('.sign-up-button, .log-in-button').click(function(){
+    var $hide, $show
+    if ($(this).hasClass('sign-up-button')) {
+      $hide = $('.log-in-form');
+      $show = $('.sign-up-form');
+    } else {
+      $hide = $('.sign-up-form');
+      $show = $('.log-in-form');
+    }
+    toggleVisibility({hide: $hide, show: $show});
   })
 
   //////// Show modal on picture click ////////

@@ -23,7 +23,12 @@ function statusChangeCallback(response) {
   if (response.status === 'connected') {
     // Logged into your app and Facebook.
     FB.api('/me', function(response) {
-      sendUserData(response);
+      data = {
+        uid: response.id,
+        name: response.name,
+        auth: "facebook"
+      }
+      sendUserData(data);
     });
 
   } else if (response.status === 'not_authorized') {
@@ -54,7 +59,7 @@ function sendUserData(response) {
     method: 'post'
   })
   .done(function(response){
-    window.location = '/users/'+response+'?from_fb=true';
+    window.location = '/users/'+response+'?from_auth=true';
   })
   .fail(function(response){
     console.log(response);

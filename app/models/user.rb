@@ -21,7 +21,7 @@ class User < ActiveRecord::Base
   end
 
   def display_name
-    uid ? name : username
+    auth ? name : username
   end
 
   def first_marker_coordinates
