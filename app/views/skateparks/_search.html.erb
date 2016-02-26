@@ -7,16 +7,31 @@
   <div class="ui divided selection list">
 
     <% if skateparks.any? %>
+
+        <div class="ui header search-header">
+          Skatepark
+        </div>
+        <div class="ui header search-header">
+          City
+        </div>
+        <div class="ui header search-header">
+          State
+        </div>
+
       <% skateparks.each do |park| %>
-        <%if park.name%>
-          <div class="<%= park.id %> item">
-            <%= link_to "#{park.city.titleize}:  #{park.name.titleize} (#{park.state.capitalize})", park%>
-          </div>
-        <% else %>
-          <div class="<%= park.id %> item">
-            <%= link_to "#{park.city.titleize} (#{park.state.capitalize})", park %>
-          </div>
-        <% end %>
+        <div class="item">
+          <a href="/skateparks/<%= park.id %>">
+            <div class="search-col-one">
+              <%= park.name.titleize %>
+            </div>
+            <div class="search-col-two">
+              <%= park.city.titleize %>
+            </div>
+            <div class="search-col-three">
+              <%= park.state.capitalize %>
+            </div>
+          </a>
+        </div>
       <% end %>
 
       <% else %>
