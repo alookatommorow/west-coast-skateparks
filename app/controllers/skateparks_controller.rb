@@ -1,7 +1,7 @@
 class SkateparksController < ApplicationController
   def search
     @skateparks = Skatepark.search(params[:search].downcase)
-    render partial: 'search_modal', locals: {
+    render partial: 'search_results', locals: {
       skateparks: Skatepark.search(params[:search].downcase) }
   end
 

@@ -1,3 +1,15 @@
+/*--------Search -------*/
+
+.search-results-container {
+  height: 25em;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.search-results-container a {
+  color: black;
+}
+
 .search-col-one, .search-col-two, .search-col-three, .ui.header.search-header {
   width: 25%;
   margin-left: 8%;
@@ -5,5 +17,20 @@
 }
 
 #search-modal {
-  width: 50%;
+  height: 70%;
+  padding-top: 2%;
+  border-radius: 0;
 }
+
+@media (min-width: 736px) and (max-width: 1025px) {
+  .search-results-container {
+    height: 40em;
+  }
+}
+
+@media (min-width: 300px) and (max-width: 735px) {
+  #search-modal {
+    height: 10em;
+  }
+}
+

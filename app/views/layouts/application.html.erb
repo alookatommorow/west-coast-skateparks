@@ -20,6 +20,8 @@
       <%= yield %>
 
       <%= render 'footer' unless current_page?(root_path) %>
+      <%= render 'session_modal' %>
+      <%= render 'search_modal' %>
       <%= render partial: "javascripts", locals: { skatepark: @skatepark, user: @user } %>
     </div>
   </body>
