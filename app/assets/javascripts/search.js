@@ -2,6 +2,7 @@ $(document).ready(function(){
   var appendSearchResultsToContainer = function (response) {
     $(".search-results-container").remove();
     $(".search-container").append(response);
+    $('#search-modal').modal('show');
   };
 
   //////// Search form submit via enter key ////////

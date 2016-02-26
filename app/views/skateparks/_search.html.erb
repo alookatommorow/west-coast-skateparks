@@ -7,17 +7,15 @@
   <div class="ui divided selection list">
 
     <% if skateparks.any? %>
-
-        <div class="ui header search-header">
-          Skatepark
-        </div>
-        <div class="ui header search-header">
-          City
-        </div>
-        <div class="ui header search-header">
-          State
-        </div>
-
+      <div class="ui header search-header">
+        Skatepark
+      </div>
+      <div class="ui header search-header">
+        City
+      </div>
+      <div class="ui header search-header">
+        State
+      </div>
       <% skateparks.each do |park| %>
         <div class="item">
           <a href="/skateparks/<%= park.id %>">
@@ -39,5 +37,4 @@
       <% end %>
   </div>
   <div class='ui divider'></div>
-
 </div>
