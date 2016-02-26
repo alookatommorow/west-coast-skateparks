@@ -1,5 +1,3 @@
-/*--------Show Page-------*/
-
 .skatepark-map {
   height: 300px;
   width: 400px;
@@ -46,4 +44,12 @@
   height: 300px;
   text-align: center;
   color: red;
+}
+
+.header-image {
+  position: relative;
+  background-repeat: no-repeat;
+  background-size: 100% auto;
+  background-position: 0 -25px;
+  padding: 8%;
 }

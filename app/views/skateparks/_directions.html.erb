@@ -1,0 +1,13 @@
+<div class='center-text two-top'>
+  <form action="https://maps.google.com/maps" method="get" target="_blank">
+    <div class="ui action input one-top three-bottom">
+      <div id="locationField">
+        <input id="autocomplete" name="saddr" placeholder="Enter your address" onFocus="geolocate()" type="text"></input>
+      </div>
+    </div>
+    <div class="two-top">
+      <button class="ui button">Get Directions</button>
+      <input type="hidden" name="daddr" value="<%= @skatepark.address %>" />
+    </div>
+  </form>
+</div>
