@@ -166,15 +166,6 @@
   </div>
 </div>
 
-<% if @skatepark.coordinates? %>
-
-
-
-<% end %>
-
-<script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV.fetch('GOOGLE_KEY') %>&signed_in=true&libraries=places&callback=initAll"
-    async defer></script>
-
 <style>
   .header-image {
   position: relative;

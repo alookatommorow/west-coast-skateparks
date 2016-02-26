@@ -5,53 +5,23 @@
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
     <%= csrf_meta_tags %>
     <%= favicon_link_tag 'favicon.ico' %>
-    <script src="https://apis.google.com/js/api:client.js"></script>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
   </head>
   <body>
     <div class="page-wrap">
+      <% if logged_in? %>
+        <%= render 'logged_in_nav' %>
+      <% else %>
+        <%= render 'logged_out_nav' %>
+      <% end %>
+      <%= render "flashes" %>
+      <%= render "hero" %>
 
-    <% if logged_in? %>
-      <%= render partial: 'shared/logged_in_nav' %>
-    <% else %>
-      <%= render partial: 'shared/logged_out_nav' %>
-    <% end %>
+      <%= yield %>
 
-    <% if flash.any? %>
-      <div id="flashes" class="ui <%= flash_class_name(flash.first.first) %> message transition hidden">
-        <div class="header"><%= flash.first.second %></div>
-      </div>
-    <% end %>
-
-    <div class="ui stackable grid">
-      <div class="row landing-header-container">
-        <div class="eleven wide column">
-         <div class="title-words">West Coast Skateparks</div>
-        </div>
-        <div class="five wide column" >
-          <div class='ui search'>
-            <%= form_tag(search_path, method: :get, class: 'search-form') do%>
-              <div class="ui icon input">
-                <%= text_field_tag :search, nil, placeholder: 'Search skateparks', required: true, id: 'search-input'  %>
-                <i class="circular search link icon search-button"></i>
-              </div>
-            <% end %>
-          </div>
-        </div>
-      </div>
-    </div>
-
-
-    <div class="search-container"></div>
-
-    <%= yield %>
-
-    <%= render partial: 'shared/footer' unless @no_footer %>
-    <!-- SIGN IN MODAL -->
-    <%= render partial: 'shared/session_modal' %>
-
+      <%= render 'footer' unless current_page?(root_path) %>
+      <%= render 'session_modal' %>
+      <%= render partial: "javascripts", locals: { skatepark: @skatepark, user: @user } %>
     </div>
   </body>
 </html>
