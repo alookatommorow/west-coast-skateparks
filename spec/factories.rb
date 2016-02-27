@@ -3,6 +3,7 @@ FactoryGirl.define do
     sequence(:city) { |i| "hayward#{i}" }
     state 'California'
     address '520 E 3rd Ave, Hayward, CA'
+    sequence(:name) {|i| "cribbage#{i}" }
     sequence(:identifier) { |i| "swag#{i}" }
     latitude 35.0021
     longitude -113.0051

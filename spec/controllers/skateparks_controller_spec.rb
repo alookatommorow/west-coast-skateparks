@@ -4,8 +4,8 @@ RSpec.describe SkateparksController, type: :controller do
   describe '#search' do
     render_views
 
-    it 'renders the _search partial' do
-      expect(get :search, search: 'sup').to render_template('_search')
+    it 'renders the _search_results partial' do
+      expect(get :search, search: 'sup').to render_template('_search_results')
     end
 
     it 'renders all the results matching the search param' do
@@ -14,7 +14,7 @@ RSpec.describe SkateparksController, type: :controller do
 
       skateparks.each do |sp|
         expect(response.body).to include(
-          "#{sp.city.titleize} (#{sp.state.titleize})")
+          "#{sp.city.titleize}", "#{sp.state.titleize}")
       end
     end
 
