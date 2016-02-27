@@ -1,9 +1,8 @@
 <div class="ui divided selection list">
   <% skateparks.each do |park| %>
-
     <%if park.name%>
-      <div class="<%= park.id %> item">
-        <%= link_to "#{park.city.titleize}:  #{park.name.titleize}", park%>
+      <div class="item">
+        <%= link_to "#{park.city.titleize}:  #{park.name.titleize}", park %>
       </div>
     <% else %>
       <div class='<%= park.id %> item'>

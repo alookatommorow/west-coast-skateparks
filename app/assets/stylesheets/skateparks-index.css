@@ -13,9 +13,25 @@
   margin-bottom: 2%;
 }
 
+.parks-container {
+  height: 39em;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.skateparks-index-container {
+  height: 87%;
+}
+
 @media (min-width: 736px) and (max-width: 1025px) {
   .image-rotator {
     background-position: center;
+  }
+  .parks-container {
+    height: 55em;
+  }
+  .skateparks-index-container {
+    height: 90%;
   }
 }
 
@@ -23,4 +39,12 @@
   .image-rotator {
     background-position: center;
   }
+  .parks-container {
+    height: 25em;
+  }
+  .skateparks-index-container {
+    height: 86%;
+  }
 }
+
+
