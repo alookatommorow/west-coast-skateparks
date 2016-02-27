@@ -7,8 +7,20 @@
 .image-rotator {
   background-image: url("https://storage.googleapis.com/west-coast-skateparks/headers/lance-mountain.jpg" );
   background-size: 100% auto;
-  background-position: 0 -30px;
+  background-position: 0 -60px;
   background-repeat: no-repeat;
-  /*padding: 20% 0;*/
   height: 60%;
+  margin-bottom: 2%;
+}
+
+@media (min-width: 736px) and (max-width: 1025px) {
+  .image-rotator {
+    background-position: center;
+  }
+}
+
+@media (min-width: 300px) and (max-width: 735px) {
+  .image-rotator {
+    background-position: center;
+  }
 }
