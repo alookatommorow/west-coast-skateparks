@@ -2,6 +2,9 @@ $(document).ready(function() {
   opinionValidation('rating');
   opinionValidation('review');
 
+  sessionValidation('log-in');
+  sessionValidation('sign-up');
+
   function opinionValidation(type) {
     var options = { fields: {} };
     options.fields[type] = {
@@ -16,8 +19,8 @@ $(document).ready(function() {
     $('.'+type+'-form').form(options);
   }
 
-  ///// sign-in form validation //////
-  $('.sign-in-form').form({
+  function sessionValidation(type) {
+    var options = {
       fields: {
         username: {
           identifier  : 'username',
@@ -38,21 +41,9 @@ $(document).ready(function() {
           ]
         }
       }
-    });
-
-  ///// sign-up form validation //////
-  $('.sign-up-form').form({
-    fields: {
-      username: {
-        identifier  : 'username',
-        rules: [
-          {
-            type   : 'empty',
-            prompt : 'Please enter a value'
-          }
-        ]
-      },
-      email: {
+    };
+    if (type === 'sign-up') {
+      options.fields.email = {
         identifier  : 'email',
         rules: [
           {
@@ -60,16 +51,8 @@ $(document).ready(function() {
             prompt : 'Please enter a valid email'
           }
         ]
-      },
-      password: {
-        identifier  : 'password',
-        rules: [
-          {
-            type   : 'minLength[6]',
-            prompt : 'Password must be at least 6 characters'
-          }
-        ]
-      }
+      };
     }
-  });
+    $('.'+type+'-form').form(options);
+  }
 });
