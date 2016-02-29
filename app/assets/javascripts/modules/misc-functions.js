@@ -3,7 +3,7 @@ function makeItemClickable(target) {
   return false;
 }
 
-function toggleVisibility(legend) {
-  legend.hide.addClass('hidden');
-  legend.show.removeClass('hidden');
+function hideMeShowOpposite(target) {
+  target.hide();
+  $(target.data('toggle')).show();
 }

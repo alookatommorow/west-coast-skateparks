@@ -1,10 +1,10 @@
 var AJAX = (function(){
   var requests = {
-    form: function(event, method) {
+    form: function(event) {
       return $.ajax({
         url: $(event.target).attr('action'),
         data: $(event.target).serialize(),
-        method: method
+        method: $(event.target).attr('method')
       });
     },
 
@@ -15,13 +15,12 @@ var AJAX = (function(){
     }
   };
 
-  var ajaxRequest = function (event, method, callback) {
-    event.preventDefault();
+  return function (event, callback) {
     var request;
     var comingFromAform = $(event.target).attr('action');
 
     if (comingFromAform) {
-      request = requests.form(event, method);
+      request = requests.form(event);
     } else {
       request = requests.link(event);
     }
@@ -32,10 +31,9 @@ var AJAX = (function(){
     request.fail(function(response){
       console.log(response, event);
     });
-  }
 
-  return ajaxRequest;
-
+    event.preventDefault();
+  };
 }());
 
 
