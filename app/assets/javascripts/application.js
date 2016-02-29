@@ -16,25 +16,3 @@
 //= require gmaps/google
 //= require semantic_ui/semantic_ui
 //= require_tree .
-
-
-$(document).ready(function() {
-  //////// Show sign-in modal ////////
-  $('.sign-in-button').click(function(){
-    $('#sign-in-modal').modal('show');
-  });
-
-  //////// Select Skatepark From Profile Page ////////
-  $(".profile-container").on('click', '.item', function(){
-    makeItemClickable(this);
-  });
-
-  //////// activate dropdown on rate form ////////
-  $('.ui.dropdown').dropdown();
-
-});
-
-
-
-
-

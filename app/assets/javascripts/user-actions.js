@@ -1,6 +1,8 @@
 $(document).ready(function() {
   $('form[data-ajax-toggle]').each(bindAjaxToggle);
   $('button[data-slide-toggle]').each(bindSlideToggle);
+  $('.ui.dropdown').dropdown(); // dropdown on rate form
+
 
   function bindAjaxToggle(_, domEl) {
     $(domEl).on('submit', function (event) {

@@ -11,7 +11,7 @@
       <% end %>
     <% end %>
 
-    <%= form_tag visits_path, method: :put, id: "remove-visit", class: "#{'hidden' unless visited}", data: { toggle: '#add-visit' } do %>
+    <%= form_tag visits_path, method: :put, id: "remove-visit", class: "#{'hidden' unless visited}", data: { ajax_toggle: '#add-visit' } do %>
       <%= hidden_field_tag :user_id, current_user.id %>
       <%= hidden_field_tag :skatepark_id, skatepark.id %>
       <%= button_tag class: 'ui button' do %>
@@ -32,7 +32,7 @@
       <% end %>
     <% end %>
 
-    <%= form_tag favorites_path, method: :put, id: "remove-fav", class: "#{'hidden' unless favorited}", data: { toggle: '#add-fav' } do %>
+    <%= form_tag favorites_path, method: :put, id: "remove-fav", class: "#{'hidden' unless favorited}", data: { ajax_toggle: '#add-fav' } do %>
       <%= hidden_field_tag :user_id, current_user.id %>
       <%= hidden_field_tag :skatepark_id, skatepark.id %>
       <%= button_tag class: 'ui button' do %>
