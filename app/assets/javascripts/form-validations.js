@@ -1,35 +1,20 @@
 $(document).ready(function() {
+  opinionValidation('rating');
+  opinionValidation('review');
 
-  ///// review form validation //////
-  $('.review-form').form({
-      fields: {
-        review: {
-          identifier  : 'review',
-          rules: [
-            {
-              type   : 'empty',
-              prompt : 'Please enter a review'
-            }
-          ]
+  function opinionValidation(type) {
+    var options = { fields: {} };
+    options.fields[type] = {
+      identifier: type,
+      rules: [
+        {
+          type: 'empty',
+          prompt: 'Please select a '+type
         }
-      }
-    });
-
-  ///// rate form validation //////
-  $('.rate-form').form({
-      fields: {
-        rating: {
-          identifier  : 'rating',
-          rules: [
-            {
-              type   : 'empty',
-              prompt : 'Please select a rating'
-            }
-          ]
-        }
-      }
-    });
-
+      ]
+    };
+    $('.'+type+'-form').form(options);
+  }
 
   ///// sign-in form validation //////
   $('.sign-in-form').form({
@@ -87,21 +72,4 @@ $(document).ready(function() {
       }
     }
   });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 });

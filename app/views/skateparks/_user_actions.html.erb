@@ -43,9 +43,9 @@
 
   <div class="opinions-container">
     <div class="rate-container one-bottom">
-      <%= button_tag 'Rate Skatepark', class: 'ui primary button', data: { slide_toggle: '.rate-form-container' }%>
-      <div class="rate-form-container hidden one-top">
-        <%= form_tag rate_path, method: :put, class: "ui form rate-form" do %>
+      <%= button_tag 'Rate Skatepark', class: 'ui primary button', data: { slide_toggle: '.rating-form-container' }%>
+      <div class="rating-form-container hidden one-top">
+        <%= form_tag rate_path, method: :put, class: "ui form rating-form" do %>
           <%= hidden_field_tag :user_id, current_user.id %>
           <%= hidden_field_tag :skatepark_id, skatepark.id %>
           <div class="ui selection dropdown field">
