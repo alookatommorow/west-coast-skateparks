@@ -3,5 +3,5 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   include SessionConcern
   include Geokit::Geocoders
-  protect_from_forgery unless Rails.env.test?
+  protect_from_forgery with: :exception
 end

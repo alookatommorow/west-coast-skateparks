@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe UsersController, type: :controller do
-  describe 'GET users/:id/map_data' do
+  describe '#map_data' do
     it 'serves JSON object with favorites, visits, and both' do
       user = create(:user)
       skateparks = create_list(:skatepark, 3)
