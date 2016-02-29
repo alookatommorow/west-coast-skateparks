@@ -1,7 +1,10 @@
-<div class='ui five item inverted pointing menu'>
+<div class='ui six item inverted menu'>
   <%= link_to 'Home', root_path, class: 'item' %>
   <%= link_to 'About', about_path, class: 'item' %>
   <%= link_to 'Skateparks', skateparks_path, class: 'item' %>
   <%= link_to 'My Profile', user_path(current_user), class: 'item' %>
   <%= link_to 'Sign Out', session_path(current_user), method: :delete, class: 'item sign-out-button' %>
+  <a class="item search-button">
+    <i class="search icon"></i>
+  </a>
 </div>

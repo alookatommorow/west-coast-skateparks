@@ -1,0 +1,49 @@
+/*-------Index Page----------*/
+$tablet: "(max-width: 1025px)";
+$mobile: "(max-width: 735px)";
+
+.image-rotator {
+  background-image: url("https://storage.googleapis.com/west-coast-skateparks/headers/lance-mountain.jpg" );
+  background-size: 100% auto;
+  background-position: 0 -60px;
+  background-repeat: no-repeat;
+  height: 60%;
+  margin-bottom: 2%;
+
+  @media #{$tablet} {
+    background-position: center;
+  }
+}
+
+.parks-container {
+  height: 39em;
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  a {
+    color: black;
+  }
+
+  @media #{$mobile} {
+    height: 25em;
+  }
+
+  @media #{$tablet} {
+    height: 55em;
+  }
+}
+
+.skateparks-index-container {
+  height: 87%;
+
+  @media #{$mobile} {
+    height: 86%;
+  }
+
+  @media #{$tablet} {
+    height: 90%;
+  }
+}
+
+
+

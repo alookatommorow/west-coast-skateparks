@@ -7,6 +7,13 @@
   margin-right: auto;
 }
 
+.profile-container {
+  height: 50em;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-left: 0;
+}
+
 .profile-container a {
   color: black;
 }

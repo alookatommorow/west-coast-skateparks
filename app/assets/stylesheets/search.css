@@ -1,0 +1,56 @@
+/*--------Search -------*/
+
+.search-results-container {
+  height: 25em;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.search-results-container a {
+  color: black;
+}
+
+.search-col-one, .search-col-two, .search-col-three {
+  width: 25%;
+  margin-left: 8%;
+  display: inline-block;
+}
+
+.ui.header.search-header {
+  display: inline-block;
+  width: 24.8%;
+  margin-left: 7.9%;
+}
+
+#search-results-skatepark-header {
+  margin-left: 8.5%;
+  width: 24.7%;
+}
+
+#search-modal {
+  height: 73%;
+  padding-top: 2%;
+  border-radius: 0;
+}
+
+@media (min-width: 736px) and (max-width: 1025px) {
+  .search-results-container {
+    height: 40em;
+  }
+}
+
+@media (min-width: 300px) and (max-width: 735px) {
+  .search-results-container {
+    height: 15em;
+  }
+  .search-col-two, .search-col-three, .ui.header.search-header {
+    width: 20%;
+    margin-left: 8%;
+    display: inline-block;
+  }
+  .search-col-one, #seach-results-skatepark-header {
+    width: 25%;
+  }
+}
+
+

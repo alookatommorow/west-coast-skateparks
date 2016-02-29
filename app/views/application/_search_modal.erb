@@ -1,0 +1,11 @@
+<div id="search-modal" class="ui fullscreen modal">
+  <i class="close icon"></i>
+  <div class='ui search center-text'>
+    <%= form_tag(search_path, method: :get, class: 'search-form') do%>
+      <div class="ui input">
+        <%= text_field_tag :search, nil, placeholder: 'Search skateparks', required: true, id: 'search-input'  %>
+      </div>
+    <% end %>
+  </div>
+  <div class="search-container"></div>
+</div>

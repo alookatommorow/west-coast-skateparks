@@ -16,17 +16,11 @@
  *= require_self
  */
 
-html,body,blockquote,code,h1,h2,h3,h4,h5,h6,p,pre{margin:0;padding:0;}
-
 .debug {
   border: 1px solid red;
 }
 
 /*-----------Layout----------*/
-
-html, body {
-  height: 100%;
-}
 
 .page-wrap {
   height: 100%;
@@ -42,13 +36,9 @@ html, body {
   margin: 0;
 }
 
-.landing-header-container {
-  margin: 2% 0;
-  /*padding-bottom: 2%;*/
-  /*margin-bottom: 2%;*/
-}
-
 .title-words {
+  margin-top: 2%;
+  margin-bottom: 2%;
   text-align: center;
   font-size: 4.2em;
   font-weight: bold;
@@ -58,15 +48,13 @@ html, body {
 @media (min-width: 736px) and (max-width: 1025px) {
   .title-words {
     font-size: 2.5em;
+    height: 2%;
   }
 }
 
 @media (min-width: 300px) and (max-width: 735px) {
   .title-words {
     font-size: 1.6em;
-  }
-  .ui.search {
-    text-align: center;
   }
 }
 
@@ -79,13 +67,6 @@ html, body {
   min-height: 80%;
 }
 
-.parks-container, .profile-container, .scroll-box {
-  height: 50em;
-  overflow-y: auto;
-  overflow-x: hidden;
-  padding-left: 0;
-}
-
 .ui.menu {
   border-radius: 0;
 }
@@ -94,15 +75,7 @@ html, body {
   border-radius: 0;
 }
 
-/*--------Search -------*/
 
-.search-results-container {
-  margin-top: 2%;
-}
-
-.search-results-container a {
-  color: black;
-}
 
 
 
