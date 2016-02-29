@@ -1,7 +1,9 @@
 $(document).ready(function() {
-  $('.add-favorite-button').on('submit', ajaxButtonToggle);
-  $('.remove-favorite-button').on('submit', ajaxButtonToggle);
+  $('form[data-toggle]').each(bindAjaxToggle);
 
-  $('.add-visit-button').on('submit', ajaxButtonToggle);
-  $('.remove-visit-button').on('submit', ajaxButtonToggle);
+  function bindAjaxToggle(_, domEl) {
+    $(domEl).on('submit', function (event) {
+      AJAX(event, function() { hideMeShowOpposite($(event.target)); });
+    });
+  }
 });

@@ -3,13 +3,7 @@ function makeItemClickable(target) {
   return false;
 }
 
-function hideThisShowOpposite(target) {
+function hideMeShowOpposite(target) {
   target.hide();
-  $(target.data('show')).show();
-}
-
-function ajaxButtonToggle(event) {
-  AJAX(event, function() {
-    hideThisShowOpposite($(event.target));
-  });
+  $(target.data('toggle')).show();
 }
