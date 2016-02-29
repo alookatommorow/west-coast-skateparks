@@ -1,14 +1,14 @@
 $(document).ready(function() {
   $('.add-visit-button').on('submit', function(event){
-    visitRequest('post', $(event.target), $('.remove-visit-button'));
+    visitRequest($(event.target), $('.remove-visit-button'));
   });
 
   $('.remove-visit-button').on('submit', function(event){
-    visitRequest('put', $(event.target), $('.add-visit-button'));
+    visitRequest($(event.target), $('.add-visit-button'));
   });
 
-  function visitRequest(method, hide, show) {
-    AJAX(event, method, function () {
+  function visitRequest(hide, show) {
+    AJAX(event, function () {
       toggleVisibility({ hide: hide, show: show });
       toggleOpinionsDisplay();
     });

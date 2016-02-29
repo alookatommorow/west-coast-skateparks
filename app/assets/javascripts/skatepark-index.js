@@ -16,7 +16,7 @@ $(document).ready(function(){
       $stateButton.removeClass('active');
       slideDownImages();
     } else {
-      AJAX(event, 'get', appendSkateparksToState);
+      AJAX(event, appendSkateparksToState);
       slideUpImages();
     }
   });

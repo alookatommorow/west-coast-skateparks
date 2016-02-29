@@ -11,7 +11,7 @@ $(document).ready(function(){
 
   //////// Search form submit via enter key ////////
   $('.search-form').on('submit', function(event) {
-    AJAX(event, 'get', appendSearchResultsToContainer);
+    AJAX(event, appendSearchResultsToContainer);
   });
 
   //////// Search form submit via icon click ////////
