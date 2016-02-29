@@ -1,10 +1,9 @@
 <div class="button-container center-text">
   <% visited = skatepark.visited_by?(current_user) %>
-  <% visibility = visited ? "" : "hidden" %>
 
   <!-- visit button -->
   <div class="visit-container inline-block">
-    <%= form_tag visits_path, class: "add-visit-button #{'hidden' if visited}" do %>
+    <%= form_tag visits_path, class: "add-visit-button #{'hidden' if visited}", data: { show: '.remove-visit-button' } do %>
       <%= hidden_field_tag :user_id, current_user.id %>
       <%= hidden_field_tag :skatepark_id, skatepark.id %>
       <%= button_tag class: 'ui button' do %>
@@ -12,7 +11,7 @@
       <% end %>
     <% end %>
 
-    <%= form_tag visits_path, method: :put, class: "remove-visit-button #{'hidden' unless visited}" do %>
+    <%= form_tag visits_path, method: :put, class: "remove-visit-button #{'hidden' unless visited}", data: { show: '.add-visit-button' } do %>
       <%= hidden_field_tag :user_id, current_user.id %>
       <%= hidden_field_tag :skatepark_id, skatepark.id %>
       <%= button_tag class: 'ui button' do %>
@@ -25,7 +24,7 @@
   <div class="fav-container inline-block one-top">
     <% favorited = skatepark.favorited_by?(current_user) %>
 
-    <%= form_tag favorites_path, class: "add-favorite-button #{'hidden' if favorited}" do %>
+    <%= form_tag favorites_path, class: "add-favorite-button #{'hidden' if favorited}", data: { show: '.remove-favorite-button' } do %>
       <%= hidden_field_tag :user_id, current_user.id %>
       <%= hidden_field_tag :skatepark_id, skatepark.id %>
       <%= button_tag class: 'ui button' do %>
@@ -33,7 +32,7 @@
       <% end %>
     <% end %>
 
-    <%= form_tag favorites_path, method: :put, class: "remove-favorite-button #{'hidden' unless favorited}" do %>
+    <%= form_tag favorites_path, method: :put, class: "remove-favorite-button #{'hidden' unless favorited}", data: { show: '.add-favorite-button' } do %>
       <%= hidden_field_tag :user_id, current_user.id %>
       <%= hidden_field_tag :skatepark_id, skatepark.id %>
       <%= button_tag class: 'ui button' do %>
@@ -42,7 +41,7 @@
     <% end %>
   </div>
 
-  <div class="opinions-container <%= visibility %>">
+  <div class="opinions-container">
     <div class="rate-container one-bottom">
       <%= button_tag 'Rate Skatepark', class: 'ui primary button rate-button'%>
       <div class="rate-form-container hidden one-top">
