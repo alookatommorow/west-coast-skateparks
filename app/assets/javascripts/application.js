@@ -16,37 +16,3 @@
 //= require gmaps/google
 //= require semantic_ui/semantic_ui
 //= require_tree .
-
-
-$(document).ready(function() {
-  //////// Show sign-in modal ////////
-  $('.sign-in-button').click(function(){
-    $('#sign-in-modal').modal('show');
-  });
-
-  //////// Select Skatepark From Profile Page ////////
-  $(".profile-container").on('click', '.item', function(){
-    makeItemClickable(this);
-  });
-
-  //////// Toggle Rate Form ////////
-  $(".rate-button").on('click', function(event) {
-    event.preventDefault();
-    $(".rate-form-container").slideToggle(500, function(){});
-  });
-
-  //////// Toggle Review Form ////////
-  $(".review-button").on('click', function(event) {
-    event.preventDefault();
-    $(".review-form-container").slideToggle(500, function(){});
-  });
-
-  //////// activate dropdown on rate form ////////
-  $('.ui.dropdown').dropdown();
-
-});
-
-
-
-
-

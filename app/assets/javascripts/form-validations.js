@@ -1,38 +1,26 @@
 $(document).ready(function() {
+  opinionValidation('rating');
+  opinionValidation('review');
 
-  ///// review form validation //////
-  $('.review-form').form({
-      fields: {
-        review: {
-          identifier  : 'review',
-          rules: [
-            {
-              type   : 'empty',
-              prompt : 'Please enter a review'
-            }
-          ]
+  sessionValidation('log-in');
+  sessionValidation('sign-up');
+
+  function opinionValidation(type) {
+    var options = { fields: {} };
+    options.fields[type] = {
+      identifier: type,
+      rules: [
+        {
+          type: 'empty',
+          prompt: 'Please select a '+type
         }
-      }
-    });
+      ]
+    };
+    $('.'+type+'-form').form(options);
+  }
 
-  ///// rate form validation //////
-  $('.rate-form').form({
-      fields: {
-        rating: {
-          identifier  : 'rating',
-          rules: [
-            {
-              type   : 'empty',
-              prompt : 'Please select a rating'
-            }
-          ]
-        }
-      }
-    });
-
-
-  ///// sign-in form validation //////
-  $('.sign-in-form').form({
+  function sessionValidation(type) {
+    var options = {
       fields: {
         username: {
           identifier  : 'username',
@@ -53,21 +41,9 @@ $(document).ready(function() {
           ]
         }
       }
-    });
-
-  ///// sign-up form validation //////
-  $('.sign-up-form').form({
-    fields: {
-      username: {
-        identifier  : 'username',
-        rules: [
-          {
-            type   : 'empty',
-            prompt : 'Please enter a value'
-          }
-        ]
-      },
-      email: {
+    };
+    if (type === 'sign-up') {
+      options.fields.email = {
         identifier  : 'email',
         rules: [
           {
@@ -75,33 +51,8 @@ $(document).ready(function() {
             prompt : 'Please enter a valid email'
           }
         ]
-      },
-      password: {
-        identifier  : 'password',
-        rules: [
-          {
-            type   : 'minLength[6]',
-            prompt : 'Password must be at least 6 characters'
-          }
-        ]
-      }
+      };
     }
-  });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    $('.'+type+'-form').form(options);
+  }
 });
