@@ -29,7 +29,7 @@
 }
 
 /* just so it looks cool when u squeeze the browser*/
-@media (min-width: 1025px) and (max-width: 1311px) {
+@media (min-width: 1025px) {
   .landing-container {
     background-position: center;
   }
