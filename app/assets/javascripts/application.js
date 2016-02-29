@@ -29,18 +29,6 @@ $(document).ready(function() {
     makeItemClickable(this);
   });
 
-  //////// Toggle Rate Form ////////
-  $(".rate-button").on('click', function(event) {
-    event.preventDefault();
-    $(".rate-form-container").slideToggle(500, function(){});
-  });
-
-  //////// Toggle Review Form ////////
-  $(".review-button").on('click', function(event) {
-    event.preventDefault();
-    $(".review-form-container").slideToggle(500, function(){});
-  });
-
   //////// activate dropdown on rate form ////////
   $('.ui.dropdown').dropdown();
 

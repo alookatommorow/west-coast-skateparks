@@ -3,7 +3,7 @@
 
   <!-- visit button -->
   <div class="visit-container inline-block">
-    <%= form_tag visits_path, id: "add-visit", class: "#{'hidden' if visited}", data: { toggle: '#remove-visit' } do %>
+    <%= form_tag visits_path, id: "add-visit", class: "#{'hidden' if visited}", data: { ajax_toggle: '#remove-visit' } do %>
       <%= hidden_field_tag :user_id, current_user.id %>
       <%= hidden_field_tag :skatepark_id, skatepark.id %>
       <%= button_tag class: 'ui button' do %>
@@ -24,7 +24,7 @@
   <div class="fav-container inline-block one-top">
     <% favorited = skatepark.favorited_by?(current_user) %>
 
-    <%= form_tag favorites_path, id: "add-fav", class: "#{'hidden' if favorited}", data: { toggle: '#remove-fav' } do %>
+    <%= form_tag favorites_path, id: "add-fav", class: "#{'hidden' if favorited}", data: { ajax_toggle: '#remove-fav' } do %>
       <%= hidden_field_tag :user_id, current_user.id %>
       <%= hidden_field_tag :skatepark_id, skatepark.id %>
       <%= button_tag class: 'ui button' do %>
@@ -43,7 +43,7 @@
 
   <div class="opinions-container">
     <div class="rate-container one-bottom">
-      <%= button_tag 'Rate Skatepark', class: 'ui primary button rate-button'%>
+      <%= button_tag 'Rate Skatepark', class: 'ui primary button', data: { slide_toggle: '.rate-form-container' }%>
       <div class="rate-form-container hidden one-top">
         <%= form_tag rate_path, method: :put, class: "ui form rate-form" do %>
           <%= hidden_field_tag :user_id, current_user.id %>
@@ -67,7 +67,7 @@
     </div>
 
     <div class='review-container'>
-      <%= button_tag 'Review Skatepark', class: "ui primary button review-button" %>
+      <%= button_tag 'Review Skatepark', class: "ui primary button", data: { slide_toggle: '.review-form-container' } %>
       <div class="review-form-container hidden one-top">
         <%= form_tag review_path, method: :put, class: "ui form review-form" do |f| %>
           <%= hidden_field_tag :user_id, current_user.id %>
