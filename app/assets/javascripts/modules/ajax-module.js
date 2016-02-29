@@ -4,7 +4,7 @@ var AJAX = (function(){
       return $.ajax({
         url: $(event.target).attr('action'),
         data: $(event.target).serialize(),
-        method: $(event.target).attr('method'),
+        method: $(event.target).attr('method')
       });
     },
 
