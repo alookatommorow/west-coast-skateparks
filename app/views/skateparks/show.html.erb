@@ -4,14 +4,7 @@
 
     <div class="six wide column">
       <%= render partial: 'info', locals: { skatepark: @skatepark } %>
-      <% if @skatepark.coordinates? %>
-        <%= render "directions" %>
-        <%= render "map" %>
-      <% else %>
-        <div class="map-missing">
-          <h3>Map coming soon!!</h3>
-        </div>
-      <% end %>
+      <%= render partial: "map", locals: { skatepark: @skatepark } %>
     </div>
 
     <div class="ten wide column">
@@ -19,14 +12,7 @@
       <% if logged_in? %>
         <%= render partial: 'user_actions', locals: { skatepark: @skatepark } %>
       <% end %>
-      <div class="written-review-container">
-        <% if @skatepark.reviews? %>
-          <h4>Reviews</h4>
-          <div class="ui comments">
-            <%= render partial: "review", collection: @skatepark.reviews %>
-          </div>
-        <% end %>
-      </div>
+      <%= render partial: 'reviews', locals: { skatepark: @skatepark } %>
     </div>
   </div>
 </div>

@@ -1,11 +1,9 @@
-/*---------Atomic-----------*/
+.debug {
+  border: 1px solid red;
+}
 
 .overflow-hidden {
   overflow: hidden;
-}
-
-.red {
-  color: red;
 }
 
 .center-text {
@@ -48,10 +46,6 @@
   position: relative;
 }
 
-.blue {
-  color: #5CB8E6;
-}
-
 .hidden {
   display: none;
 }
@@ -81,5 +75,5 @@
 }
 
 .orange {
-  color: #FF7519;
+  color: $orange;
 }

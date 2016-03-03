@@ -1,0 +1,28 @@
+.skatepark-map {
+  height: 300px;
+  width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#map-missing {
+  background-image: url("https://storage.googleapis.com/west-coast-skateparks/Monkey-business.jpg");
+  background-repeat: no-repeat;
+  height: 300px;
+  text-align: center;
+  color: red;
+}
+
+#locationField {
+  position: relative;
+  width: 480px;
+  height: 20px;
+  margin-bottom: 2px;
+}
+
+#autocomplete {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 99%;
+}
