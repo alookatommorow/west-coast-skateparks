@@ -22,34 +22,74 @@ Maps are generated using the [Google Maps API](https://developers.google.com/map
 
 ##Code Sample
 
-###Search
+### Ajax module
 
-The search is triggered using JQuery and Ajax in search.js:
+The Ajax module provides reusable functionality for making dynamic requests triggered by submission of a form or click of a link:
 
 ```javascript
-$('.search-form').on('submit', function(event){
+var AJAX = (function(){
+  var requests = {
+    form: function(event) {
+      return $.ajax({
+        url: $(event.target).attr('action'),
+        data: $(event.target).serialize(),
+        method: $(event.target).attr('method')
+      });
+    },
+
+    link: function(event) {
+      return $.ajax({
+        url: $(event.target).attr('href')
+      });
+    }
+  };
+
+  return function (event, callback) {
+    var request;
+    var comingFromAform = $(event.target).attr('action');
+
+    if (comingFromAform) {
+      request = requests.form(event);
+    } else {
+      request = requests.link(event);
+    }
+
+    request.done(function(response) {
+      callback(response, event);
+    });
+    request.fail(function(response){
+      console.log(response, event);
+    });
+
     event.preventDefault();
-    var url = $(this).attr('action');
-    var data = $(this).serialize();
-    $.ajax({url: url, data: data})
-    .done(function(response) {
-      $(".search-results-container").remove();
-      $(".search-container").append(response);
-    })
-    .fail(function(response){
-      console.error(response);
-    })
-  });
+  };
+}());
 ```
 
-The `skateparks#search` action in the controller calls the `skatepark#search` method, which takes the search query and checks skatepark names and locations for a match and sorts the results.  It sends back a partial in JSON format:
+###Search
+
+The search employs the Ajax module to execute the search: 
+
+```javascript
+$('.search-form').on('submit', function(event) {
+    AJAX(event, appendSearchResultsToContainer);
+});
+```
+callback:
+
+```javascript
+var appendSearchResultsToContainer = function (response) {
+    $(".search-container").empty().append(response);
+};
+```
+
+The `skateparks#search` action in the controller calls the `skatepark#search` method, which takes the search query and checks skatepark names and locations for a match and sorts the results.  It sends back a partial to be appended to the DOM:
 
 ```ruby
 def search
-  if params[:search]
-    skateparks = Skatepark.search(params[:search].downcase)
-    render partial: 'search', locals: {skateparks: skateparks}
-  end
+    @skateparks = Skatepark.search(params[:search].downcase)
+    render partial: 'search_results', locals: {
+      skateparks: @skateparks }
 end
 ```
 
@@ -64,15 +104,6 @@ def self.search(target)
       '%' + target + '%'
     ).order('state ASC').order('city ASC').order('name ASC')
   end
-```
-
-The above javaScript first removes any search results that may already be there, then appends the partial that was sent back as JSON from the controller.  The search results container is closed and the value of the search form is reset using JQuery:
-
-```javascript
-$(".search-container").on('click', '.close-search', function(){
-  $(this).parent().slideToggle(400, function(){});
-  $('.search-form').find("input[name='search']").val('');
-});
 ```
 
 ##Contribute
