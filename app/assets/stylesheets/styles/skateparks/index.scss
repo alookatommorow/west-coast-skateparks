@@ -11,6 +11,17 @@
   }
 }
 
+.skateparks-index-container {
+  height: 84%;
+
+  @media #{$tablet} {
+    height: 90%;
+  }
+
+  @media #{$mobile} {
+    height: 90%;
+  }
+
 .parks-container {
   height: 39em;
   overflow-y: auto;
@@ -20,25 +31,16 @@
     color: black;
   }
 
-  @media #{$mobile} {
-    height: 25em;
-  }
-
   @media #{$tablet} {
     height: 55em;
   }
-}
-
-.skateparks-index-container {
-  height: 87%;
 
   @media #{$mobile} {
-    height: 86%;
+    height: 30em;
   }
+}
 
-  @media #{$tablet} {
-    height: 90%;
-  }
+
 }
 
 
