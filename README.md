@@ -103,7 +103,7 @@ def self.search(target)
       '%' + target + '%',
       '%' + target + '%'
     ).order('state ASC').order('city ASC').order('name ASC')
-  end
+end
 ```
 
 ##Contribute
