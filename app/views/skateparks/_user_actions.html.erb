@@ -1,8 +1,8 @@
-<div class="button-container center-text">
+<div id="user-actions">
   <% visited = skatepark.visited_by?(current_user) %>
 
   <!-- visit button -->
-  <div class="visit-container inline-block">
+  <div class="inline-button">
     <%= form_tag visits_path, id: "add-visit", class: "#{'hidden' if visited}", data: { ajax_toggle: '#remove-visit' } do %>
       <%= hidden_field_tag :user_id, current_user.id %>
       <%= hidden_field_tag :skatepark_id, skatepark.id %>
@@ -21,7 +21,7 @@
   </div>
 
   <!-- favorite button -->
-  <div class="fav-container inline-block one-top">
+  <div class="inline-button">
     <% favorited = skatepark.favorited_by?(current_user) %>
 
     <%= form_tag favorites_path, id: "add-fav", class: "#{'hidden' if favorited}", data: { ajax_toggle: '#remove-fav' } do %>

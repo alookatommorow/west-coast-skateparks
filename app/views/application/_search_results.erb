@@ -17,13 +17,13 @@
         <% skateparks.each do |park| %>
           <div class="item">
             <a href="/skateparks/<%= park.id %>">
-              <div class="search-col-one">
+              <div class="search-col-one search-column">
                 <%= park.name.titleize %>
               </div>
-              <div class="search-col-two">
+              <div class="search-col-two search-column">
                 <%= park.city.titleize %>
               </div>
-              <div class="search-col-three">
+              <div class="search-col-three search-column">
                 <%= park.state.capitalize %>
               </div>
             </a>
