@@ -1,0 +1,21 @@
+.sixteen.wide.column
+  .header-image style="background-image: url('#{header_url(skatepark)}');"
+
+one.wide.column
+  - if skatepark.id > 1
+    a href="/skateparks/= skatepark.id - 1"
+      i class="huge left arrow icon"
+.fourteen.wide.column.center-text
+  h1 = skatepark.name.titleize
+  h2 #{skatepark.city.titleize}, #{skatepark.state.capitalize}
+  .one-top.one-bottom
+    - if skatepark.rating
+      - (skatepark.rating.to_i).times do
+        i class="large yellow star icon inline-block"
+      - (5-skatepark.rating.to_i).times do
+        i class="large yellow empty star icon inline-block"
+.one.wide.column.right-aign
+  - if skatepark.id < last
+    a href="/skateparks/= skatepark.id + 1"
+      i class="huge right arrow icon"
+
