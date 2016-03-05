@@ -36,7 +36,7 @@ $(document).ready(function(){
   function slideDownImages() {
     rotationTimer = setInterval(rotator.cycleImages, 4000);
     $('.image-rotator').slideDown('slow', function(){
-      $('.parks-container').children().remove();
+      $(".parks-container").children().remove();
     });
   }
 });
