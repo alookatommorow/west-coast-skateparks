@@ -36,7 +36,7 @@ RSpec.describe Skatepark, type: :model do
 
   context '.in_state' do
     it 'returns a collection of all parks in that state in ascending order by city name' do
-      skateparks = [create(:skatepark, name: 'ZAMN'), create(:skatepark)]
+      skateparks = create_list(:skatepark, 2, state: 'california')
       out_of_state = create(:skatepark, state: 'dummyland')
 
       california_parks = Skatepark.in_state(skateparks[0].state)
