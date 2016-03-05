@@ -8,21 +8,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
   </head>
   <body>
-    <div class="page-wrap">
-      <% if logged_in? %>
-        <%= render 'logged_in_nav' %>
-      <% else %>
-        <%= render 'logged_out_nav' %>
-      <% end %>
-      <%= render "flashes" %>
-      <%= render "hero" %>
+    <% if logged_in? %>
+      <%= render 'logged_in_nav' %>
+    <% else %>
+      <%= render 'logged_out_nav' %>
+    <% end %>
+    <%= render "flashes" %>
+    <%= render "hero" %>
 
-      <%= yield %>
+    <%= yield %>
 
-      <%= render 'footer' unless current_page?(root_path) %>
-      <%= render 'session_modal' %>
-      <%= render 'search_modal' %>
-      <%= render partial: "javascripts", locals: { skatepark: @skatepark, user: @user } %>
-    </div>
+    <%= render 'footer' unless current_page?(root_path) %>
+    <%= render 'session_modal' %>
+    <%= render 'search_modal' %>
+    <%= render partial: "javascripts", locals: { skatepark: @skatepark, user: @user } %>
   </body>
 </html>

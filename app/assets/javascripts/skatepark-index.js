@@ -3,8 +3,8 @@ $(document).ready(function(){
   var rotationTimer = setInterval(rotator.cycleImages, 4000);
   var appendSkateparksToState = function (response, event) {
     $(event.target).addClass('active').siblings().removeClass('active');
-    $(".parks-container").children().remove();
-    $(".parks-container").append(response);
+    $(".state-menu").next().remove();
+    $(".state-menu").after(response);
   };
 
   //////// Show skateparks by state ////////
@@ -36,7 +36,7 @@ $(document).ready(function(){
   function slideDownImages() {
     rotationTimer = setInterval(rotator.cycleImages, 4000);
     $('.image-rotator').slideDown('slow', function(){
-      $('.parks-container').children().remove();
+      $(".state-menu").next().remove();
     });
   }
 });
