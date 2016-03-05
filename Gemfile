@@ -15,6 +15,7 @@ gem 'pg'
 gem 'puma'
 gem 'rails_12factor', group: :production
 gem 'sass-rails', '~> 5.0'
+gem 'slim'
 gem 'sprockets-rails'
 gem 'therubyracer'
 gem 'turbolinks'
