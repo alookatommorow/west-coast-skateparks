@@ -4,7 +4,7 @@
     - skatepark.reviews.each do |review|
       .comment
         .conent
-          a.author= review.user.display_name
-          .metadata
-            .date= review.created_at.strftime("%m/%d/%y")
+          .author.inline-block= review.user.display_name
+          .metadata.inline-block
+            .date.inline-block= review.created_at.strftime("%m/%d/%y")
           .text= review.review
