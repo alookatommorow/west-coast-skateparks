@@ -88,23 +88,7 @@ class Skatepark < ActiveRecord::Base
     latitude && longitude
   end
 
-  def visibile_attributes # refactor
-    untouched = { 'Address' => address, 'Info' => info, 'Hours' => hours }
-    titleized = {
-      'Material' => material, 'Designer' => designer,
-      'Builder' => builder, 'Opened' => opened,
-      'Size' => delimit_size,
-      'Lights' => lights, 'Obstacles' => obstacles
-    }
-    titleized.each { |k, v| titleized[k] = v.titleize if v }
-    untouched.merge(titleized)
-  end
-
   private
-
-    def delimit_size # remove this method once data is properly structured
-      "#{number_with_delimiter(size, delimiter: ',')} sq ft" if size
-    end
 
     def bucket_url
       'https://storage.googleapis.com/west-coast-skateparks'

@@ -10,16 +10,14 @@
     </div>
   <% end %>
 
-  <% @skatepark.visibile_attributes.each do |attribute, value| %>
-    <% if value %>
-      <div class="ui segment">
-        <h4 class="ui header"><%= attribute %></h4>
+  <% @skatepark.attributes.each do |attribute, value| %>
+    <div class="ui segment">
+      <h4 class="ui header"><%= attribute.titleize %></h4>
+    </div>
+    <div class="ui segments">
+      <div class="ui inverted segment">
+        <%= value %>
       </div>
-      <div class="ui segments">
-        <div class="ui inverted segment">
-          <%= value %>
-        </div>
-      </div>
-    <% end %>
+    </div>
   <% end %>
 </div>
