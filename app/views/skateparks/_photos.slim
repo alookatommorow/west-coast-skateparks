@@ -1,0 +1,9 @@
+.ui.medium.images.center-text
+  - skatepark.pictures.each do |url|
+    img.ui.image.skatepark-image src="#{url}"
+.center-text.one-top
+  - if skatepark.photo_cred
+    p
+    ' Photos courtesy of
+    a href="#{skatepark.photo_url}"= skatepark.photo_cred
+    '

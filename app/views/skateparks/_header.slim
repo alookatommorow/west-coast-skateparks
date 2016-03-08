@@ -2,7 +2,7 @@
   .header-image style="background-image: url('#{header_url(skatepark)}');"
 one.wide.column
   - if skatepark.id > 1
-    a href="/skateparks/= skatepark.id - 1"
+    a href="/skateparks/#{skatepark.id - 1}"
       i.huge.left.arrow.icon
 .fourteen.wide.column.center-text
   h1= skatepark.name.titleize
@@ -15,6 +15,6 @@ one.wide.column
         i.large.yellow.empty.star.icon.inline-block
 .one.wide.column.right-aign
   - if skatepark.id < last
-    a href="/skateparks/= skatepark.id + 1"
+    a href="/skateparks/#{skatepark.id + 1}"
       i.huge.right.arrow.icon
 
