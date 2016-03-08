@@ -1,0 +1,40 @@
+.page-container
+  .center-text
+    h1= @user.display_name.titleize
+  .profile-container
+    .ui.grid
+      .seven.wide.column
+        .inline-block.one-margin
+          h2 Favorites
+        .inline-block.one-margin.float-right
+          h2= @user.favorite_parks.length
+        .ui.divider
+        .ui.middle.aligned.selection.list
+          - @user.favorite_parks.each do |park|
+            -if park.name
+              .item= link_to park.city.titleize + ": " + park.name.titleize + ", " + park.state.capitalize.capitalize, skatepark_path(park)
+            -else
+              .item= link_to park.city.titleize + ", " + park.state.capitalize, skatepark_path(park)
+      .seven.wide.column
+        #relative
+          #map.user-map
+        .center-text.two-top
+          #toggle-favorite-container.hidden
+            button#toggle-favorite.ui.button.primary Hide Favorites
+          #toggle-visited-container.hidden
+            button#toggle-visited.ui.button.primary Hide Visited
+          #toggle-both-container.hidden
+            button#toggle-both.ui.button.primary Hide THRASHED
+    .ui.grid
+      .seven.wide.column
+        .inline-block
+          h2 My Parks
+        .inline-block.float-right
+          h2= @user.visited_parks.length
+        .ui.divider
+        .ui.middle.aligned.selection.list
+          - @user.visited_parks.each do |park|
+            - if park.name
+              .item= link_to park.city.titleize  + ", " + park.state.capitalize + ": " + park.name.titleize , skatepark_path(park)
+            -else
+              .item= link_to park.city.titleize + ", " + park.state.capitalize, skatepark_path(park)
