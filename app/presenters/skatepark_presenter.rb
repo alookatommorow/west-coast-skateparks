@@ -3,6 +3,14 @@ class SkateparkPresenter < SimpleDelegator
     present_attributes.slice('address', 'info', 'hours').merge(titleized_attributes)
   end
 
+  def average_rating
+    if model.ratings.any?
+      model.ratings.map(&:rating).reduce(:+) / model.ratings.length
+    else
+      'Be the first to rate!'
+    end
+  end
+
   def model
     __getobj__
   end

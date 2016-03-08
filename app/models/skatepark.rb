@@ -80,10 +80,6 @@ class Skatepark < ActiveRecord::Base
     reviews.any?
   end
 
-  def average_rating
-    ratings.map(&:rating).reduce(:+) / ratings.length
-  end
-
   def coordinates?
     latitude && longitude
   end
