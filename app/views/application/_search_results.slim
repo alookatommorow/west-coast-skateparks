@@ -1,0 +1,20 @@
+.one-top.center-text
+  h1 Search Results
+.page-container.two-bottom
+  - if skateparks.any?
+    #search-results-skatepark-header.ui.header.search.header
+      div Skatepark
+    .ui.header.search-header
+      div City
+    .ui.header.search-header
+      div State
+    .search-results-container
+      .ui.divided.selection.list
+        -skateparks.each do |park|
+          .item
+            a href="/skateparks/#{park.id}"
+              .search-col-one.search-column= park.name.titleize
+              .search-col-two.search-column= park.city.titleize
+              .search-col-three.search-column= park.state.titleize
+  - else
+    h2 No Results
