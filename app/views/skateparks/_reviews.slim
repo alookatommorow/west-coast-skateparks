@@ -1,0 +1,10 @@
+- if skatepark.reviews?
+  h4 Reviews
+  .ui.comments
+    - skatepark.reviews.each do |review|
+      .comment
+        .conent
+          a.author= review.user.display_name
+          .metadata
+            .date= review.created_at.strftime("%m/%d/%y")
+          .text= review.review
