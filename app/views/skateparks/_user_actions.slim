@@ -1,0 +1,58 @@
+#user-actions
+  - visited = skatepark.visited_by?(current_user)
+  .inline-button
+    = form_tag visits_path, id: "add-visit", class: "#{'hidden' if visited}", data: { ajax_toggle: '#remove-visit' } do
+      = hidden_field_tag :user_id, current_user.id
+      = hidden_field_tag :skatepark_id, skatepark.id
+      = button_tag class: 'ui button' do
+        i.green.checkmark.icon.inline-block
+        p.inline-block Been here
+    = form_tag visits_path, method: :put, id: "remove-visit", class: "#{'hidden' unless visited}", data: { ajax_toggle: '#add-visit' } do
+      = hidden_field_tag :user_id, current_user.id
+      = hidden_field_tag :skatepark_id, skatepark.id
+      = button_tag class: 'ui button' do
+        i.red.remove.icon.inline-block
+        p.inline-block Never Been Here
+  - favorited = skatepark.favorited_by?(current_user)
+  .inline-button
+    = form_tag favorites_path, id: "add-fav", class: "#{'hidden' if favorited}", data: { ajax_toggle: '#remove-fav' } do
+      = hidden_field_tag :user_id, current_user.id
+      = hidden_field_tag :skatepark_id, skatepark.id
+      = button_tag class: 'ui button' do
+        i.red.heart.icon.inline-block
+        p.inline-block Favorite
+    = form_tag favorites_path, method: :put, id: "remove-fav", class: "#{'hidden' unless favorited}", data: { ajax_toggle: '#add-fav' } do
+      = hidden_field_tag :user_id, current_user.id
+      = hidden_field_tag :skatepark_id, skatepark.id
+      = button_tag class: 'ui button' do
+        i.empty.heart.icon.inline-block
+        p.inline-block Unfavorite
+  .opinions-container
+    .rate-container.one-bottom
+      = button_tag 'Rate Skatepark', class: 'ui primary button', data: { slide_toggle: '.rating-form-container' }
+      .rating-form-container.hidden.one-top
+        = form_tag rate_path, method: :put, class: "ui form rating-form" do
+          = hidden_field_tag :user_id, current_user.id
+          = hidden_field_tag :skatepark_id, skatepark.id
+          .ui.selection.dropdown.field
+            = hidden_field_tag :rating, nil
+            i.dropdown.icon
+            .default.text Select Rating...
+            .menu
+              .item data-value="1" 1
+              .item data-value="2" 2
+              .item data-value="3" 3
+              .item data-value="4" 4
+              .item data-value="5" 5
+          = submit_tag "Rate", class: 'ui button'
+          .ui.error.message
+    .review-container
+      = button_tag 'Review Skatepark', class: "ui primary button", data: { slide_toggle: '.review-form-container' }
+      .review-form-container.hidden.one-top
+        = form_tag review_path, method: :put, class: "ui form review-form" do
+          = hidden_field_tag :user_id, current_user.id
+          = hidden_field_tag :skatepark_id, skatepark.id
+          .field
+            = text_area_tag :review, nil, placeholder: 'Write review here...', class: ""
+          = submit_tag 'Review', class: "ui button"
+          .ui.error.message
