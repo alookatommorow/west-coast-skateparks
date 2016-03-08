@@ -1,25 +1,21 @@
 <div class="ui segments">
-  <% if @skatepark.ratings? %>
+  <div class="ui segment">
+    <h4 class="ui header">User Rating</h4>
+  </div>
+  <div class="ui segments">
+    <div class="ui inverted segment">
+      <%= @skatepark.average_rating %>
+    </div>
+  </div>
+
+  <% @skatepark.attributes.each do |attribute, value| %>
     <div class="ui segment">
-      <h4 class="ui header">User Rating</h4>
+      <h4 class="ui header"><%= attribute.titleize %></h4>
     </div>
     <div class="ui segments">
       <div class="ui inverted segment">
-        <%= @skatepark.average_rating %>
+        <%= value %>
       </div>
     </div>
-  <% end %>
-
-  <% @skatepark.visibile_attributes.each do |attribute, value| %>
-    <% if value %>
-      <div class="ui segment">
-        <h4 class="ui header"><%= attribute %></h4>
-      </div>
-      <div class="ui segments">
-        <div class="ui inverted segment">
-          <%= value %>
-        </div>
-      </div>
-    <% end %>
   <% end %>
 </div>
