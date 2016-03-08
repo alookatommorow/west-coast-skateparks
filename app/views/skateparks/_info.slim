@@ -1,0 +1,10 @@
+.ui.segments
+  - if skatepark.ratings?
+    .ui.segment
+      h4.ui.header User Rating
+      .ui.inverted.segment= skatepark.average_rating
+  - skatepark.visible_attributes.each do |attribute, value|
+    - if value
+      .ui.segment
+        h4.ui.header= attribute
+        .ui.inverted.segment= value
