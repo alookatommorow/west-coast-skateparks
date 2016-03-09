@@ -26,12 +26,10 @@ class SessionsController < ApplicationController
 
     def auth_params
       {
-        auth: params[:auth],
         name: params[:name],
         email: params[:email],
         username: params[:email],
         avatar: URI.parse(params[:avatar]),
-        uid: params[:uid], # we no longer need this
         password: SecureRandom.hex(20) # or this
       }
     end
