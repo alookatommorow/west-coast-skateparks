@@ -17,6 +17,9 @@ class Skatepark < ActiveRecord::Base
   has_many :reviews, dependent: :destroy
   has_many :users_who_reviewed, through: :reviews, source: :user
 
+  has_attached_file :hero, default_url: "https://storage.googleapis.com/west-coast-skateparks/default-header.jpg"
+  validates_attachment_content_type :hero, content_type: /\Aimage\/.*\Z/
+
   def self.search(target)
     where(
       'name LIKE ? OR city LIKE ? OR state LIKE ?',
