@@ -8,8 +8,7 @@ class UserDashboard < Administrate::BaseDashboard
   # which determines how the attribute is displayed
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
-    favorite_parks: Field::HasMany.with_options(class_name: "Skatepark"),
-    visited_parks: Field::HasMany.with_options(class_name: "Skatepark"),
+    avatar: PaperclipField,
     ratings: Field::HasMany,
     reviews: Field::HasMany,
     id: Field::Number,
@@ -18,6 +17,8 @@ class UserDashboard < Administrate::BaseDashboard
     admin: Field::Boolean,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
+    favorite_parks: Field::HasMany.with_options(class_name: "Skatepark"),
+    visited_parks: Field::HasMany.with_options(class_name: "Skatepark")
   }
 
   # COLLECTION_ATTRIBUTES
@@ -26,34 +27,26 @@ class UserDashboard < Administrate::BaseDashboard
   # By default, it's limited to four items to reduce clutter on index pages.
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = [
+    :avatar,
     :id,
     :username,
-    :email,
-    :admin,
+    :email
   ]
 
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
-  SHOW_PAGE_ATTRIBUTES = [
-    :id,
-    :username,
-    :email,
-    :admin,
-    :ratings,
-    :reviews,
-    :favorite_parks,
-    :visited_parks,
-  ]
+  SHOW_PAGE_ATTRIBUTES = ATTRIBUTE_TYPES.keys
 
   # FORM_ATTRIBUTES
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = [
+    :avatar,
     :username,
     :email,
     :admin,
     :ratings,
-    :reviews,
+    :reviews
   ]
 
   # Overwrite this method to customize how users are displayed

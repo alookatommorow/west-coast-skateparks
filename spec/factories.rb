@@ -23,8 +23,10 @@ FactoryGirl.define do
   factory :user do
     sequence(:username) { |n| "swaggy#{n}" }
     sequence(:email) { |n| "swag#{n}@swag.swag" }
+    # sequence(:name) { |n| "Swaggity#{n} Swag" }
     name nil
     uid nil
+    avatar nil
     password 'swag'
     admin false
 

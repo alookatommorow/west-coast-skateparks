@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe SessionsController, type: :controller do
   describe '#create' do
-    it  'signs a user in and redirects with flash message' do
+    it 'signs a user in and redirects with flash message' do
       user = create(:user)
 
       post :create, id: user.id, username: user.username, password: user.password
@@ -17,38 +17,37 @@ RSpec.describe SessionsController, type: :controller do
       post :create, id: user.id, username: user.username, password: user.password
 
       expect(session[:id]).to eq(user.id)
-      expect(flash[:error]).to eq("Sign in failed")
+      expect(flash[:error]).to eq('Sign in failed')
     end
   end
 
   describe '#create_with_auth' do
-    it 'finds a facebook user by uid and signs them in' do
-      user = create(:user, uid: 'skiddlybeebop7534', name: 'Melvin Nipplebottom', auth: 'facebook')
+    it 'creates a user if one cannot be found by email, and signs them in' do
+      allow(URI).to receive(:parse)
+      auth_params = {
+        name: 'DudeBroMan',
+        email: 'fuckbuttsdaily@swag.net',
+        username: 'fuckbuttsdaily@swag.net',
+        avatar: 'http://butt-plugs.gov/test_image.png'
+      }
 
-      post :create_with_auth, name: user.name, uid: user.uid, auth: 'facebook'
+      post :create_with_auth, auth_params
 
-      expect(session[:id]).to eq(user.id)
-      expect(response.body).to eq(user.id.to_json)
-    end
-
-    it 'finds a google user by email and signs them in' do
-      user = create(:user, email: 'skiddly@beebop.com', name: 'Melvin Nipplebottom', auth: 'google')
-
-      post :create_with_auth, email: user.email, name: user.name, id: user.uid, auth: 'google'
-
-      expect(session[:id]).to eq(user.id)
-      expect(response.body).to eq(user.id.to_json)
-    end
-
-    it 'creates a user if user cannot be found with uid' do
-      user = build(:user, uid: 'scrimpleton6435wr', name: 'Raymond Shrimp Boy Chow')
-
-      post :create_with_auth, name: user.name, uid: user.uid, auth: 'facebook'
-
-      expect(User.last.name).to eq(user.name)
-      expect(User.last.uid).to eq(user.uid)
+      expect(User.last.name).to eq('DudeBroMan')
+      expect(User.last.email).to eq('fuckbuttsdaily@swag.net')
+      expect(User.last.username).to eq(User.last.email)
+      expect(URI).to have_received(:parse).with('http://butt-plugs.gov/test_image.png')
       expect(session[:id]).to eq(User.last.id)
       expect(response.body).to eq(User.last.id.to_json)
+    end
+
+    it 'signs in a user if one can be found by email' do
+      user = create(:user)
+
+      post :create_with_auth, email: user.email
+
+      expect(session[:id]).to eq(user.id)
+      expect(response.body).to eq(user.id.to_json)
     end
   end
 end

@@ -60,4 +60,5 @@ group :test do
   gem 'codeclimate-test-reporter', require: nil
   gem 'database_cleaner'
   gem 'rake'
+  gem 'webmock'
 end
