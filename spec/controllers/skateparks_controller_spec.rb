@@ -21,7 +21,7 @@ RSpec.describe SkateparksController, type: :controller do
     it 'renders "No Results" if search does not yield anything' do
       get :search, search: 'ripmaster'
 
-      expect(response.body).to include('No results')
+      expect(response.body).to include('No Results')
     end
   end
 

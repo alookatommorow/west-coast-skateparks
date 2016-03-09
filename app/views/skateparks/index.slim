@@ -1,0 +1,9 @@
+.image-rotator
+.skateparks-index-container
+  .ui.centered.grid
+    .thirteen.wide.column
+      .ui.three.item.inverted.menu.state-menu
+        = link_to 'California', state_path(state: 'california'), class: 'park-state item'
+        = link_to 'Oregon', state_path(state: 'oregon'), class: 'park-state item'
+        = link_to 'Washington', state_path(state: 'washington'), class: 'park-state item'
+      .parks-container

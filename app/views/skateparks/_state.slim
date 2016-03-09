@@ -1,0 +1,6 @@
+.ui.divided.selection.list
+  - skateparks.each do |park|
+    - if park.name
+      .item= link_to "#{park.city.titleize}: #{park.name.titleize}", park
+    - else
+      div class="#{park.id} item"= link_to park.city.titleize, park
