@@ -12,7 +12,7 @@ class SessionsController < ApplicationController
 
   def create_with_auth
     if params[:email].blank?
-      flash.now[:error] = 'No email associated with this account'
+      flash.now[:error] = 'No email detected, please create an account or add email to your Facebook'
       render partial: 'flashes'
     else
       user = User.find_by_email(params[:email])
