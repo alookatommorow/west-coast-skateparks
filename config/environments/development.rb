@@ -1,14 +1,6 @@
 
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
-  config.paperclip_defaults = {
-    storage: :fog,
-    fog_credentials: {
-      google_storage_access_key_id: ENV.fetch('GOOGLE_STORAGE_ID'),
-      google_storage_secret_access_key: ENV.fetch('GOOGLE_STORAGE_SECRET'),
-      provider: 'Google' },
-    fog_directory: "west-coast-skateparks"}
-
   Paperclip.options[:command_path] = "/usr/local/bin/"
   # In the development environment your application's code is reloaded on
   # every request. This slows down response time but is perfect for development
