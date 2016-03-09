@@ -59,7 +59,7 @@ RSpec.describe SessionsController, type: :controller do
         }
 
         expect(post :create_with_auth, auth_params).to render_template('_flashes')
-        expect(flash[:error]).to eq('No email associated with this account')
+        expect(flash[:error]).to eq('No email detected, please create an account or add email to your Facebook')
       end
     end
   end
