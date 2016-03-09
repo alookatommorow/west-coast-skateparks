@@ -16,6 +16,12 @@ class User < ActiveRecord::Base
   has_many :reviews
   has_many :reviewed_parks, through: :reviews, source: :skatepark
 
+  has_attached_file(
+    :avatar,
+    styles: { thumb: '100x100>' },
+    default_url: 'https://33.media.tumblr.com/avatar_ee7f0ba1cb58_128.png')
+  validates_attachment_content_type :avatar, content_type: %r{\Aimage/.*\Z}
+
   def admin?
     admin
   end
