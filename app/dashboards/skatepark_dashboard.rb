@@ -8,7 +8,7 @@ class SkateparkDashboard < Administrate::BaseDashboard
   # which determines how the attribute is displayed
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
-    users_who_reviewed: Field::HasMany.with_options(class_name: "User"),
+    hero: PaperclipField,
     id: Field::Number,
     name: Field::String,
     city: Field::String,
@@ -40,6 +40,7 @@ class SkateparkDashboard < Administrate::BaseDashboard
     users_who_faved: Field::HasMany.with_options(class_name: "User"),
     users_who_visited: Field::HasMany.with_options(class_name: "User"),
     users_who_rated: Field::HasMany.with_options(class_name: "User"),
+    users_who_reviewed: Field::HasMany.with_options(class_name: "User"),
   }
 
   # COLLECTION_ATTRIBUTES
@@ -55,41 +56,13 @@ class SkateparkDashboard < Administrate::BaseDashboard
 
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
-  SHOW_PAGE_ATTRIBUTES = [
-    :id,
-    :name,
-    :city,
-    :state,
-    :identifier,
-    :rating,
-    :address,
-    :latitude,
-    :longitude,
-    :material,
-    :designer,
-    :builder,
-    :opened,
-    :hours,
-    :size,
-    :notes,
-    :info,
-    :helmet,
-    :lights,
-    :photo_cred,
-    :photo_url,
-    :video_url,
-    :num_pics,
-    :obstacles,
-    :ratings,
-    :reviews,
-    :users_who_faved,
-    :users_who_visited,
-  ]
+  SHOW_PAGE_ATTRIBUTES = ATTRIBUTE_TYPES.keys
 
   # FORM_ATTRIBUTES
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = [
+    :hero,
     :name,
     :city,
     :state,

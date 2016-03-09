@@ -1,6 +1,13 @@
 Rails.application.configure do
-  # Settings specified here will take precedence over those in config/application.rb.
+  config.paperclip_defaults = {
+    storage: :fog,
+    fog_credentials: {
+      google_storage_access_key_id: ENV.fetch('GOOGLE_STORAGE_ID'),
+      google_storage_secret_access_key: ENV.fetch('GOOGLE_STORAGE_SECRET'),
+      provider: 'Google' },
+    fog_directory: 'west-coast-skateparks' }
 
+  # Settings specified here will take precedence over those in config/application.rb.
   # Code is not reloaded between requests.
   config.cache_classes = true
 
@@ -18,7 +25,6 @@ Rails.application.configure do
   # Add `rack-cache` to your Gemfile before enabling this.
   # For large-scale production use, consider using a caching reverse proxy like nginx, varnish or squid.
   # config.action_dispatch.rack_cache = true
-
 
   # Disable Rails's static asset server (Apache or nginx will already do this).
   config.serve_static_files = true
