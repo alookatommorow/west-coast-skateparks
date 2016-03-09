@@ -11,10 +11,15 @@ class SessionsController < ApplicationController
   end
 
   def create_with_auth
-    user = User.find_by_email(params[:email])
-    user = User.create(auth_params) if user.nil?
-    session[:id] = user.id
-    render json: user.id
+    if params[:email].blank?
+      flash.now[:error] = 'No email associated with this account'
+      render partial: 'flashes'
+    else
+      user = User.find_by_email(params[:email])
+      user = User.create(auth_params) if user.nil?
+      session[:id] = user.id
+      render json: user.id
+    end
   end
 
   def destroy
@@ -29,9 +34,13 @@ class SessionsController < ApplicationController
         name: params[:name],
         email: params[:email],
         username: params[:email],
-        avatar: URI.parse(params[:avatar]),
+        avatar: avatar,
         password: SecureRandom.hex(20) # or this
       }
+    end
+
+    def avatar
+      URI.parse(params[:avatar]) if params[:avatar].present?
     end
 
     def login

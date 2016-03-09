@@ -49,5 +49,18 @@ RSpec.describe SessionsController, type: :controller do
       expect(session[:id]).to eq(user.id)
       expect(response.body).to eq(user.id.to_json)
     end
+
+    context 'when user does not have email associated with their account' do
+      it 'it cracks their bitch ass with a flash error' do
+        allow(URI).to receive(:parse)
+        auth_params = {
+          name: 'Irie Dingus',
+          email: nil
+        }
+
+        expect(post :create_with_auth, auth_params).to render_template('_flashes')
+        expect(flash[:error]).to eq('No email associated with this account')
+      end
+    end
   end
 end
