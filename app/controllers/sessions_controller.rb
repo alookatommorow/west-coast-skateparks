@@ -4,7 +4,7 @@ class SessionsController < ApplicationController
   end
 
   def create_with_auth
-    if params[:auth] == "facebook"
+    if params[:auth] == 'facebook'
       @user = User.find_by(uid: params[:uid])
       auth_user_params = fb_params.merge(auth_params)
     else
@@ -29,7 +29,7 @@ class SessionsController < ApplicationController
       {
         auth: params[:auth],
         name: params[:name],
-        username: "#{SecureRandom.hex(9)}#{params[:name].gsub(/\s/, '')}",
+        # username: "#{SecureRandom.hex(9)}#{params[:name].gsub(/\s/, '')}",
         password: SecureRandom.hex(20)
       }
     end
@@ -40,8 +40,11 @@ class SessionsController < ApplicationController
 
     def fb_params
       {
-        email: "#{params[:name].gsub(/\s/, '')}#{SecureRandom.hex(9)}@shred.net",
+        # email: "#{params[:name].gsub(/\s/, '')}#{SecureRandom.hex(9)}@shred.net",
+        username: params[:email],
+        email: params[:email],
         uid: params[:uid],
+        avatar: URI.parse(params[:avatar])
       }
     end
 
