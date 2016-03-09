@@ -26,7 +26,7 @@ require 'capybara/webkit'
 require 'database_cleaner'
 require 'webmock/rspec'
 
-WebMock.disable_net_connect!(allow_localhost: true)
+WebMock.disable_net_connect!(allow_localhost: true, allow: 'codeclimate.com')
 
 # use `describe 'Feature', type: :feature, js: true` to use this driver
 Capybara.javascript_driver = :webkit
