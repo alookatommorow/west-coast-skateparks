@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160309003222) do
+ActiveRecord::Schema.define(version: 20160309062112) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -86,17 +86,18 @@ ActiveRecord::Schema.define(version: 20160309003222) do
   create_table "users", force: :cascade do |t|
     t.string   "username"
     t.string   "email"
-    t.boolean  "admin",           default: false
+    t.boolean  "admin",               default: false
     t.string   "password_digest"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "uid"
     t.string   "name"
-    t.string   "auth"
+    t.string   "avatar_file_name"
+    t.string   "avatar_content_type"
+    t.integer  "avatar_file_size"
+    t.datetime "avatar_updated_at"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", using: :btree
-  add_index "users", ["uid"], name: "index_users_on_uid", using: :btree
 
   create_table "visits", force: :cascade do |t|
     t.integer  "user_id"

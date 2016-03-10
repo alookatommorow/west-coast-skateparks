@@ -20,7 +20,7 @@ function onSignIn(googleUser) {
   var data = {
     name: profile.getName(),
     email: profile.getEmail(),
-    auth: "google"
+    avatar: profile.getImageUrl()
   }
   sendUserData(data);
 }

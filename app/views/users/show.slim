@@ -1,6 +1,8 @@
 .page-container
   .center-text
-    h1= @user.display_name.titleize
+    h1
+      = @user.display_name.titleize
+      = image_tag @user.avatar.url(:thumb)
   .profile-container
     .ui.grid
       .seven.wide.column

@@ -3,7 +3,7 @@
   .ui.comments
     - skatepark.reviews.each do |review|
       .comment
-        .conent
+        .content
           .author.inline-block= review.user.display_name
           .metadata.inline-block
             .date.inline-block= review.created_at.strftime("%m/%d/%y")
