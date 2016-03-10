@@ -14,6 +14,7 @@ class DashboardManifest
     :skateparks,
     :ratings,
     :reviews,
+    :skatepark_images,
   ]
 
   # `ROOT_DASHBOARD`

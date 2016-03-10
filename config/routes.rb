@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   post '/sessions/create_with_auth', to: 'sessions#create_with_auth'
   resources :skateparks
   get '/skateparks/:id/map_data', to: 'skateparks#map_data', as: 'skatepark_map_data'
+  resources :skatepark_images, only: [:create, :destroy]
 
   get '/state', to: 'skateparks#state', as: 'state'
   get '/search', to: 'skateparks#search', as: 'search'
