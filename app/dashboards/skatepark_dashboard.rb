@@ -52,6 +52,7 @@ class SkateparkDashboard < Administrate::BaseDashboard
     :city,
     :state,
     :address,
+    :reviews,
   ]
 
   # SHOW_PAGE_ATTRIBUTES
