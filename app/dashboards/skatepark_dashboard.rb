@@ -37,6 +37,7 @@ class SkateparkDashboard < Administrate::BaseDashboard
     updated_at: Field::DateTime,
     ratings: Field::HasMany,
     reviews: Field::HasMany,
+    skatepark_images: Field::HasMany,
     users_who_faved: Field::HasMany.with_options(class_name: "User"),
     users_who_visited: Field::HasMany.with_options(class_name: "User"),
     users_who_rated: Field::HasMany.with_options(class_name: "User"),

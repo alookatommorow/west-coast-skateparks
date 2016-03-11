@@ -1,3 +1,0 @@
-class SkateparkImagesController < ApplicationController
-
-end

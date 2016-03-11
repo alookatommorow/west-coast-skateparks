@@ -20,7 +20,7 @@ class Skatepark < ActiveRecord::Base
   has_many :skatepark_images, :dependent => :destroy
 
   has_attached_file :hero, default_url: 'https://storage.googleapis.com/west-coast-skateparks/default-header.jpg'
-  validates_attachment_presence :hero
+  #validates_attachment_presence :hero
   validates_attachment_content_type :hero, content_type: /\Aimage/
 
   def self.search(target)
