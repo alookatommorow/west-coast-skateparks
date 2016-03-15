@@ -20,7 +20,7 @@ class User < ActiveRecord::Base
     :avatar,
     styles: { thumb: '100x100>' },
     default_url: 'https://33.media.tumblr.com/avatar_ee7f0ba1cb58_128.png')
-  validates_attachment_content_type :avatar, content_type: %r{\Aimage/.*\Z}
+  validates_attachment_content_type :avatar, content_type: /\Aimage/
 
   def admin?
     admin

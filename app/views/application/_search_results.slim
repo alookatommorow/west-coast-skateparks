@@ -2,19 +2,19 @@
   h1 Search Results
 .page-container.two-bottom
   - if skateparks.any?
-    #search-results-skatepark-header.ui.header.search.header
-      div Skatepark
-    .ui.header.search-header
-      div City
-    .ui.header.search-header
-      div State
-    .search-results-container
-      .ui.divided.selection.list
-        -skateparks.each do |park|
-          .item
-            a href="/skateparks/#{park.id}"
-              .search-col-one.search-column= park.name.titleize
-              .search-col-two.search-column= park.city.titleize
-              .search-col-three.search-column= park.state.titleize
+    .ui.twelve.wide.grid
+      .ui.three.column.grid
+        .row
+          .column.ui.header.center-text Skatepark
+          .column.ui.header.center-text City
+          .column.ui.header.center-text State
+        .search-results-container
+          .ui.divided.selection.list
+            -skateparks.each do |park|
+              .item
+                a href="/skateparks/#{park.id}"
+                  .search-column= park.name.titleize
+                  .search-column= park.city.titleize
+                  .search-column= park.state.titleize
   - else
     h2 No Results
