@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe RatingsController, type: :controller do
-
   describe '#create' do
     it 'creates a rating' do
       skatepark = create(:skatepark)

@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe FavoritesController, type: :controller do
-
   describe '#create' do
     it 'creates a favorite' do
       skatepark = create(:skatepark)
