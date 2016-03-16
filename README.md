@@ -4,7 +4,7 @@
 [![Code Climate](https://codeclimate.com/github/alookatommorow/west-coast-skateparks/badges/gpa.svg)](https://codeclimate.com/github/alookatommorow/west-coast-skateparks)
 [![Test Coverage](https://codeclimate.com/github/alookatommorow/west-coast-skateparks/badges/coverage.svg)](https://codeclimate.com/github/alookatommorow/west-coast-skateparks/coverage)
 
-West Coast Skateparks is an informational directory of every skatepark in the western states of the United States (California, Oregon, and Washington).  Skatepark listings include an address and map for each skatepark along with other pertinent details such as hours, size, and date opened.  Users can track visits and favorites and leave ratings and reviews.  Pictures coming soon.
+West Coast Skateparks (WCS) is an informational directory of every skatepark in the western states of the United States (California, Oregon, and Washington).  Skatepark listings include an address and map for each skatepark along with other pertinent details such as hours, size, and date opened.  Users can track visits and favorites and leave ratings and reviews.  Pictures coming soon.
 
 ![Screenshot](https://github.com/alookatommorow/west-coast-skateparks/blob/master/public/wcsp.jpg)
 
@@ -108,7 +108,7 @@ end
 
 ##Contribute
 
-West Coast Skateparks is a work in progress.  Pending the consolidation of more skatepark information and front-end improvements, pictures and embedded video will be added.  If you would like to clone the repo and make a contribution, please feel free!
+WCS is a work in progress.  Pending the final touches to the database and a UI/UX enhancement, the app will be officially launched, making it the premiere source for skatepark information in the western U.S.  If you would like to clone the repo and make a contribution, please feel free!
 
 Clone the repo from your command line
 
