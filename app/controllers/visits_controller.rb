@@ -4,7 +4,7 @@ class VisitsController < ApplicationController
     render nothing: true
   end
 
-  def update
+  def destroy
     ManyToMany.destroy(Visit, params)
     render nothing: true
   end

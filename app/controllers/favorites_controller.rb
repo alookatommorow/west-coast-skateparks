@@ -4,7 +4,7 @@ class FavoritesController < ApplicationController
     render nothing: true
   end
 
-  def update
+  def destroy
     ManyToMany.destroy(Favorite, params)
     render nothing: true
   end

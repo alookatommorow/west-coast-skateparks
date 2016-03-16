@@ -7,9 +7,7 @@
       = button_tag class: 'ui button' do
         i.green.checkmark.icon.inline-block
         p.inline-block Been here
-    = form_tag visits_path, method: :put, id: "remove-visit", class: "#{'hidden' unless visited}", data: { ajax_toggle: '#add-visit' } do
-      = hidden_field_tag :user_id, current_user.id
-      = hidden_field_tag :skatepark_id, skatepark.id
+    = form_tag "/visits/#{current_user.id}/#{skatepark.id}", method: :delete, id: "remove-visit", class: "#{'hidden' unless visited}", data: { ajax_toggle: '#add-visit' } do
       = button_tag class: 'ui button' do
         i.red.remove.icon.inline-block
         p.inline-block Never Been Here
@@ -21,9 +19,7 @@
       = button_tag class: 'ui button' do
         i.red.heart.icon.inline-block
         p.inline-block Favorite
-    = form_tag favorites_path, method: :put, id: "remove-fav", class: "#{'hidden' unless favorited}", data: { ajax_toggle: '#add-fav' } do
-      = hidden_field_tag :user_id, current_user.id
-      = hidden_field_tag :skatepark_id, skatepark.id
+    = form_tag "/favorites/#{current_user.id}/#{skatepark.id}", method: :delete, id: "remove-fav", class: "#{'hidden' unless favorited}", data: { ajax_toggle: '#add-fav' } do
       = button_tag class: 'ui button' do
         i.empty.heart.icon.inline-block
         p.inline-block Unfavorite

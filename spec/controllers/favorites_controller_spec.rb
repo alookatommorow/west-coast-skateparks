@@ -17,7 +17,7 @@ RSpec.describe FavoritesController, type: :controller do
     it 'destroys existing favorite' do
       favorite = create(:favorite)
 
-      put :update, skatepark_id: favorite.skatepark_id, user_id: favorite.user_id
+      delete :destroy, skatepark_id: favorite.skatepark_id, user_id: favorite.user_id
 
       expect(Favorite.last).to_not be(favorite)
     end
