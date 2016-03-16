@@ -31,7 +31,7 @@
     .rate-container.one-bottom
       = button_tag 'Rate Skatepark', class: 'ui primary button', data: { slide_toggle: '.rating-form-container' }
       .rating-form-container.hidden.one-top
-        = form_tag rate_path, method: :put, class: "ui form rating-form" do
+        = form_tag ratings_path, class: "ui form rating-form" do
           = hidden_field_tag :user_id, current_user.id
           = hidden_field_tag :skatepark_id, skatepark.id
           .ui.selection.dropdown.field
@@ -49,7 +49,7 @@
     .review-container
       = button_tag 'Review Skatepark', class: "ui primary button", data: { slide_toggle: '.review-form-container' }
       .review-form-container.hidden.one-top
-        = form_tag review_path, method: :put, class: "ui form review-form" do
+        = form_tag reviews_path, class: "ui form review-form" do
           = hidden_field_tag :user_id, current_user.id
           = hidden_field_tag :skatepark_id, skatepark.id
           .field
