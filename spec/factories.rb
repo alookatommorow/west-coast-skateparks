@@ -23,8 +23,7 @@ FactoryGirl.define do
   factory :user do
     sequence(:username) { |n| "swaggy#{n}" }
     sequence(:email) { |n| "swag#{n}@swag.swag" }
-    # sequence(:name) { |n| "Swaggity#{n} Swag" }
-    name nil
+    sequence(:name) { |n| "Swaggity#{n} Swag" }
     avatar nil
     password 'swag'
     admin false
@@ -34,20 +33,19 @@ FactoryGirl.define do
     end
   end
 
-  # look into build_stubbed
   factory :favorite do
-    user_id 420
-    skatepark_id 420
+    user
+    skatepark
   end
 
   factory :visit do
-    user_id 420
-    skatepark_id 420
+    user
+    skatepark
   end
 
   factory :rating do
-    user_id 420
-    skatepark_id 420
+    user
+    skatepark
     rating 5
   end
 end

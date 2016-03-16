@@ -9,7 +9,7 @@ RSpec.describe User, type: :model do
     end
 
     it 'returns username if user does not have a name' do
-      user = create(:user)
+      user = create(:user, name: nil)
 
       expect(user.display_name).to eq(user.username)
     end

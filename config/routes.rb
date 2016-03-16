@@ -16,6 +16,8 @@ Rails.application.routes.draw do
   resources :skateparks
   get '/skateparks/:id/map_data', to: 'skateparks#map_data', as: 'skatepark_map_data'
   resources :skatepark_images, only: [:create, :destroy]
+  resources :ratings, only: [:create]
+  resources :reviews, only: [:create]
 
   get '/state', to: 'skateparks#state', as: 'state'
   get '/search', to: 'skateparks#search', as: 'search'
@@ -25,9 +27,6 @@ Rails.application.routes.draw do
 
   post '/favorites', to: 'favorites#create'
   put '/favorites', to: 'favorites#update'
-
-  put '/rate', to: 'opinions#rate'
-  put '/review', to: 'opinions#review'
 
   get 'about', to: 'welcome#about', as: 'about'
   root 'welcome#index'

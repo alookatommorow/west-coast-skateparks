@@ -16,7 +16,7 @@ RSpec.describe SessionsController, type: :controller do
 
       post :create, id: user.id, username: user.username, password: user.password
 
-      expect(session[:id]).to eq(user.id)
+      expect(session[:id]).to be_nil
       expect(flash[:error]).to eq('Sign in failed')
     end
   end
