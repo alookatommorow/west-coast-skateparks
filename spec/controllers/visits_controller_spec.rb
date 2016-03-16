@@ -18,7 +18,7 @@ RSpec.describe VisitsController, type: :controller do
     it 'destroys existing visit' do
       visit = create(:visit)
 
-      put :update, skatepark_id: visit.skatepark_id, user_id: visit.user_id
+      delete :destroy, skatepark_id: visit.skatepark_id, user_id: visit.user_id
 
       expect(Visit.last).to_not be(visit)
     end

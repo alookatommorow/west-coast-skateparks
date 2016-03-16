@@ -19,14 +19,14 @@ Rails.application.routes.draw do
   resources :ratings, only: [:create]
   resources :reviews, only: [:create]
 
+  resources :favorites, only: [:create]
+  delete '/favorites/:user_id/:skatepark_id', to: 'favorites#destroy'
+
+  resources :visits, only: [:create]
+  delete '/visits/:user_id/:skatepark_id', to: 'visits#destroy'
+
   get '/state', to: 'skateparks#state', as: 'state'
   get '/search', to: 'skateparks#search', as: 'search'
-
-  post '/visits', to: 'visits#create'
-  put '/visits', to: 'visits#update'
-
-  post '/favorites', to: 'favorites#create'
-  put '/favorites', to: 'favorites#update'
 
   get 'about', to: 'welcome#about', as: 'about'
   root 'welcome#index'
