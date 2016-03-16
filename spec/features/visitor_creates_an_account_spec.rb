@@ -14,7 +14,6 @@ RSpec.feature 'Visitor creates an account' do
   end
 
   context 'with email already in use' do
-
     scenario 'they are bitch slapped by a flash error' do
       user = create(:user)
       invalid_user = build(:user,
@@ -27,8 +26,6 @@ RSpec.feature 'Visitor creates an account' do
       find('#email').set(user.email)
       find('#password').set(invalid_user.password)
       click_button 'Register'
-
-      user = User.last
 
       expect(current_path).to eq(root_path)
       expect(page).to have_text(invalid_user.errors.full_messages.first)
