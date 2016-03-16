@@ -36,8 +36,8 @@ FactoryGirl.define do
 
   # look into build_stubbed
   factory :favorite do
-    user_id 420
-    skatepark_id 420
+    user
+    skatepark
   end
 
   factory :visit do
