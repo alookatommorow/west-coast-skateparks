@@ -8,6 +8,7 @@ RSpec.describe FlashesHelper, type: :helper do
       flash.now[:notice] = 'swag'
       flash.now[:success] = 'swag'
       flash.now[:stuff] = 'HEY'
+
       expect(user_facing_flashes).to eq(
         'error' => 'swag',
         'alert' => 'swag',
