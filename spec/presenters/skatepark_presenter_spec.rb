@@ -3,8 +3,7 @@ require 'rails_helper'
 RSpec.describe SkateparkPresenter do
   describe '#attributes' do
     it 'returns formatted titleized skatepark attributes' do
-      original_skatepark = create(
-        :skatepark, material: 'bullshit garbage', opened: nil, builder: 'bob', obstacles: 'poo debris, debris')
+      original_skatepark = create(:skatepark, :presentable)
       skatepark = SkateparkPresenter.new(original_skatepark)
 
       show_attributes = original_skatepark.attributes.slice('address', 'info', 'hours')

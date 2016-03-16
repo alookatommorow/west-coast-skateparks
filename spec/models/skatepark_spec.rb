@@ -3,8 +3,7 @@ require 'rails_helper'
 RSpec.describe Skatepark, type: :model do
   context '#map_data' do
     it 'returns a hash with data needed for map generation' do
-      skatepark = create(:skatepark)
-      create(:skatepark, identifier: 'areolaland')
+      skatepark = create_list(:skatepark, 2).first
 
       expected = {
         skateparks: {
@@ -45,8 +44,6 @@ RSpec.describe Skatepark, type: :model do
     end
   end
 
-  #### ADD test for hashify_with_pictures and rename to hashify w/ pics (or something)
-
   context '#pictures' do
     it 'returns an array with the correct photo urls' do
       skatepark = create(:skatepark)
@@ -65,11 +62,13 @@ RSpec.describe Skatepark, type: :model do
   context '#first_picture' do
     it 'should return the url of the first picture' do
       skatepark = create(:skatepark)
+
       expect(skatepark.first_picture).to eq(generate_image_url(skatepark, 1))
     end
 
     it 'should return the wcs logo if no image' do
       skatepark = create(:skatepark, num_pics: 0)
+
       expect(skatepark.first_picture).to eq('https://storage.googleapis.com/west-coast-skateparks/logo-small.png')
     end
   end
