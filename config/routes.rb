@@ -18,11 +18,15 @@ Rails.application.routes.draw do
   resources :skatepark_images, only: [:create, :destroy]
   resources :ratings, only: [:create]
   resources :reviews, only: [:create]
-  resources :visits, only: [:create, :update]
-  resources :favorites, only: [:create, :update]
 
   get '/state', to: 'skateparks#state', as: 'state'
   get '/search', to: 'skateparks#search', as: 'search'
+
+  post '/visits', to: 'visits#create'
+  put '/visits', to: 'visits#update'
+
+  post '/favorites', to: 'favorites#create'
+  put '/favorites', to: 'favorites#update'
 
   get 'about', to: 'welcome#about', as: 'about'
   root 'welcome#index'

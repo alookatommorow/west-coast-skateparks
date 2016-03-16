@@ -14,18 +14,4 @@ RSpec.describe RatingsController, type: :controller do
       expect(Rating.last.rating).to eq(5)
     end
   end
-
-  # describe '#review' do
-  #   it 'creates a review' do
-  #     skatepark = create(:skatepark)
-  #     user = create(:user)
-  #     review = "This is really a fabulous scene. But it still sucks"
-
-  #     post :review, skatepark_id: skatepark.id, user_id: user.id, review: review
-
-  #     expect(Review.last.skatepark_id).to eq(skatepark.id)
-  #     expect(Review.last.user_id).to eq(user.id)
-  #     expect(Review.last.review).to eq(review)
-  #   end
-  # end
 end

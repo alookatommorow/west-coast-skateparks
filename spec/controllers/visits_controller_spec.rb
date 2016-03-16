@@ -9,18 +9,16 @@ RSpec.describe VisitsController, type: :controller do
 
       post :create, skatepark_id: skatepark.id, user_id: user.id
 
-      expect(Visit.last.skatepark_id).to eq(skatepark.id)
-      expect(Visit.last.user_id).to eq(user.id)
+      expect(Visit.last.skatepark).to eq(skatepark)
+      expect(Visit.last.user).to eq(user)
     end
   end
 
   describe '#update' do
     it 'destroys existing visit' do
-      skatepark = create(:skatepark)
-      user = create(:user)
-      visit = create(:visit, user_id: user.id, skatepark_id: skatepark.id)
+      visit = create(:visit)
 
-      put :update, skatepark_id: skatepark.id, user_id: user.id
+      put :update, skatepark_id: visit.skatepark_id, user_id: visit.user_id
 
       expect(Visit.last).to_not be(visit)
     end
