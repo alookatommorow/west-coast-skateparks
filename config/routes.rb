@@ -13,11 +13,12 @@ Rails.application.routes.draw do
   get '/users/:id/map_data', to: 'users#map_data', as: 'user_map_data'
   resources :sessions, only: [:create, :destroy]
   post '/sessions/create_with_auth', to: 'sessions#create_with_auth'
-  resources :skateparks
 
   namespace :skateparks do
     resources :searches, only: :create
+    resource :state, only: :show
   end
+  resources :skateparks
 
   get '/skateparks/:id/map_data', to: 'skateparks#map_data', as: 'skatepark_map_data'
   resources :skatepark_images, only: [:create, :destroy]
@@ -29,9 +30,6 @@ Rails.application.routes.draw do
 
   resources :visits, only: :create
   delete '/visits/:user_id/:skatepark_id', to: 'visits#destroy'
-
-  get '/state', to: 'skateparks#state', as: 'state'
-  get '/search', to: 'skateparks#search', as: 'search'
 
   get 'about', to: 'welcome#about', as: 'about'
   root 'welcome#index'
