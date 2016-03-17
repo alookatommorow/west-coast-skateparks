@@ -1,9 +1,4 @@
 class SkateparksController < ApplicationController
-  def search
-    render partial: 'search_results', locals: {
-      skateparks: Skatepark.search(params[:search].downcase) }
-  end
-
   def show
     @skatepark = SkateparkPresenter.new(
       Skatepark.includes(
