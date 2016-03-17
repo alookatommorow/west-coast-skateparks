@@ -14,8 +14,10 @@
 #
 # The `.rspec` file also contains a few flags that are not defaults but that
 # users commonly want.
-require "codeclimate-test-reporter"
+require 'codeclimate-test-reporter'
 CodeClimate::TestReporter.start
+
+ENV['RAILS_ENV'] ||= 'test'
 
 ENV['BUNDLE_GEMFILE'] = File.expand_path('../../Gemfile', __FILE__)
 require 'bundler/setup'
