@@ -1,6 +1,6 @@
 module Skateparks
   class SearchesController < ApplicationController
-    def create
+    def show
       render partial: 'search_results', locals: {
         skateparks: Skatepark.search(params[:search].downcase) }
     end

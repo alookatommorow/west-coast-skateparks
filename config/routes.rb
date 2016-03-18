@@ -17,7 +17,7 @@ Rails.application.routes.draw do
   post '/sessions/create_with_auth', to: 'sessions#create_with_auth'
 
   namespace :skateparks do
-    resources :searches, only: :create
+    resource :search, only: :show
     resource :state, only: :show
   end
 
