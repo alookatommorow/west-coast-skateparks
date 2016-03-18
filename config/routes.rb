@@ -18,10 +18,11 @@ Rails.application.routes.draw do
     resources :searches, only: :create
     resource :state, only: :show
   end
-  resources :skateparks
 
-  get '/skateparks/:id/map_data', to: 'skateparks#map_data', as: 'skatepark_map_data'
-  resources :skatepark_images, only: [:create, :destroy]
+  resources :skateparks do
+    resource :map, only: :show, controller: 'skateparks/maps'
+  end
+
   resources :ratings, only: :create
   resources :reviews, only: :create
 
