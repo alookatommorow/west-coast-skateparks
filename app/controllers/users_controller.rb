@@ -14,11 +14,6 @@ class UsersController < ApplicationController
     flash.now[:notice] = "Welcome, #{@user.display_name}" if params[:from_auth]
   end
 
-  def map_data
-    user = User.find(params[:id])
-    render json: user.map_data
-  end
-
   private
 
     def user_params

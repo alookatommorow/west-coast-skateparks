@@ -9,8 +9,10 @@ Rails.application.routes.draw do
 
   mount MagicLamp::Genie, at: '/magic_lamp' if defined?(MagicLamp)
 
-  resources :users, only: [:show, :create]
-  get '/users/:id/map_data', to: 'users#map_data', as: 'user_map_data'
+  resources :users, only: [:show, :create] do
+    resource :map, only: :show, controller: 'users/maps'
+  end
+
   resources :sessions, only: [:create, :destroy]
   post '/sessions/create_with_auth', to: 'sessions#create_with_auth'
 
