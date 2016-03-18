@@ -8,7 +8,7 @@ function initMap() {
   var id = location.pop().split("?")[0];
   var resourceName = location.pop();
   $.ajax({
-    url: '/'+resourceName+'/'+id+'/map_data'
+    url: '/'+resourceName+'/'+id+'/map'
   })
   .done(generateMarkers)
   .fail(function(response){
