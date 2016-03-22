@@ -7,8 +7,6 @@ Rails.application.routes.draw do
     root controller: DashboardManifest::ROOT_DASHBOARD, action: :index
   end
 
-  mount MagicLamp::Genie, at: '/magic_lamp' if defined?(MagicLamp)
-
   resources :users, only: [:show, :create] do
     resource :map, only: :show, controller: 'users/maps'
   end
