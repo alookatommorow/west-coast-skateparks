@@ -42,11 +42,9 @@ group :development, :test do
   gem 'bundler-audit', require: false
   gem 'dotenv-rails'
   gem 'launchy'
-  gem 'magic_lamp'
   gem 'pry-rails'
   gem 'pry-byebug'
   gem 'rspec-rails'
-  gem 'teaspoon-mocha'
 end
 
 group :production do

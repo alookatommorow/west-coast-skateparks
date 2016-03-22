@@ -36,22 +36,3 @@ Rails.application.configure do
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
 end
-
-Rails.application.config.assets.precompile += %w(
-  teaspoon.css
-  teaspoon-mocha.js
-  mocha/1.17.1.js
-  support/phantomjs-shims.self.js
-  jquery_ujs.self.js
-  jquery.self.js
-  bootstrap.min.self.js
-  application.self.js
-  spec_helper.self.js
-  test_spec.self.js
-  support/chai.self.js
-  magic_lamp/magic_lamp.self.js
-  magic_lamp/genie.self.js
-  magic_lamp/application.self.js
-  magic_lamp/boot.self.js
-  magic_lamp.self.js
-)
