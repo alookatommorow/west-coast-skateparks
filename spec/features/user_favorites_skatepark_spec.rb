@@ -8,6 +8,7 @@ RSpec.feature 'User favorites skatepark' do
     sign_in_user(user)
 
     visit skatepark_path(skatepark)
+    expect(page).not_to have_button('Unfavorite')
 
     click_button 'Favorite'
     expect(page).to have_button('Unfavorite')

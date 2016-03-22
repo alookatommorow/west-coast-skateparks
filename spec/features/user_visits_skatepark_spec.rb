@@ -8,6 +8,7 @@ RSpec.feature 'User visits skatepark' do
     sign_in_user(user)
 
     visit skatepark_path(skatepark)
+    expect(page).not_to have_button('Never Been Here')
 
     click_button 'Been Here'
     expect(page).to have_button('Never Been Here')
