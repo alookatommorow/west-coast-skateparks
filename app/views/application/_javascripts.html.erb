@@ -6,3 +6,10 @@
 <% elsif user %>
   <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV.fetch('GOOGLE_KEY') %>&callback=initMap" async defer></script>
 <% end %>
+
+<% if Rails.env.test? %>
+  <%= javascript_tag do %>
+    $.fx.off = true;
+    $.ajaxSetup({ async: false });
+  <% end %>
+<% end %>
