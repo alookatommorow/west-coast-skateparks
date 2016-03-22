@@ -4,13 +4,8 @@ before_script:
 - cp config/database.travis.yml config/database.yml
 - bundle exec rake db:create RAILS_ENV=test
 - bundle exec rake db:migrate RAILS_ENV=test
-- gem uninstall capybara-webkit
-- brew install qt5
-- brew linkapps qt5
-- brew link --force qt5
-- gem install capybara-webkit
 script:
-- RAILS_ENV=test bundle exec rake spec
+- RAILS_ENV=test xvfb-run -a bundle exec rake spec
 test:
   adapter: postgresql
   database: west-coast-skateparks_test
