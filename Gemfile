@@ -40,10 +40,7 @@ end
 
 group :development, :test do
   gem 'bundler-audit', require: false
-  gem 'capybara'
-  gem 'capybara-webkit'
   gem 'dotenv-rails'
-  gem 'factory_girl_rails'
   gem 'launchy'
   gem 'magic_lamp'
   gem 'pry-rails'
@@ -58,6 +55,9 @@ end
 
 group :test do
   gem 'codeclimate-test-reporter', require: nil
+  gem 'capybara'
+  gem 'capybara-webkit'
+  gem 'factory_girl_rails'
   gem 'database_cleaner'
   gem 'rake'
   gem 'webmock'

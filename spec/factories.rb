@@ -32,7 +32,7 @@ FactoryGirl.define do
     sequence(:email) { |n| "swag#{n}@swag.swag" }
     sequence(:name) { |n| "Swaggity#{n} Swag" }
     avatar nil
-    password 'swag'
+    password 'swagmethfout'
     admin false
 
     trait :admin do
