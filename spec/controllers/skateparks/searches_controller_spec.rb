@@ -8,7 +8,7 @@ RSpec.describe Skateparks::SearchesController, type: :controller do
       expect(get :show, search: 'ballsack').to render_template(partial: '_search_results')
     end
 
-    it 'returns a partial with results matchin search params' do
+    it 'returns a partial with results matching search params' do
       create_list(:skatepark, 2, state: 'washington')
       create(:skatepark, state: 'oregon')
 
