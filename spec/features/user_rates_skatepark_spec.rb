@@ -8,6 +8,7 @@ RSpec.feature 'User reviews skatepark' do
     sign_in_user(user)
 
     visit skatepark_path(skatepark)
+
     expect(page).to have_text('Be the first to rate!')
 
     click_on 'Rate Skatepark'

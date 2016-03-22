@@ -20,6 +20,7 @@ RSpec.feature 'User signs in' do
     expect(page).to have_text("#{user.display_name.titleize}")
 
     click_link 'Sign Out'
+
     expect(current_path).to eq(root_path)
   end
 end
