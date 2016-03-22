@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.feature 'User reviews skatepark' do
+RSpec.feature 'User rates skatepark' do
   scenario 'they see an updated user rating', js: true do
     user = create(:user)
     skatepark = create(:skatepark)
