@@ -4,7 +4,7 @@ $(document).ready(function(){
   };
 
   //// Open search modal ////
-  $('.search-button').click(function(event){
+  $('.search-nav').click(function(event){
     event.preventDefault();
     $('#search-modal').modal('show');
   });

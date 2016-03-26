@@ -4,10 +4,7 @@ RSpec.feature 'User signs in' do
   scenario 'tries to access admin dashboard and is redirected with error message' do
     user = create(:user)
 
-    visit root_path
-    find('#username-sign-in').set(user.username)
-    find('#password-sign-in').set(user.password)
-    click_button 'Submit'
+    sign_in_user(user)
 
     visit admin_root_path
 
@@ -17,16 +14,13 @@ RSpec.feature 'User signs in' do
 
   scenario 'is redirected to their homepage, and can sign out if they choose' do
     user = create(:user)
-
-    visit root_path
-    find('#username-sign-in').set(user.username)
-    find('#password-sign-in').set(user.password)
-    click_button 'Submit'
+    sign_in_user(user)
 
     expect(current_path).to eq(user_path(user))
     expect(page).to have_text("#{user.display_name.titleize}")
 
     click_link 'Sign Out'
+
     expect(current_path).to eq(root_path)
   end
 end
