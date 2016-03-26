@@ -15,6 +15,7 @@ gem 'less-rails-semantic_ui', '~> 2.1.8.2'
 gem 'paperclip', '~> 4.3'
 gem 'pg'
 gem 'puma'
+gem 'rack-ssl-enforcer'
 gem 'rails_12factor', group: :production
 gem 'sass-rails', '~> 5.0'
 gem 'slim'
