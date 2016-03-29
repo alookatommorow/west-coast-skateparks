@@ -25,6 +25,10 @@ FactoryGirl.define do
       builder 'bob'
       obstacles 'poo debris, debris'
     end
+
+    trait :map_photo do
+      map_photo File.new(Rails.root + 'public/test_image.png')
+    end
   end
 
   factory :user do
@@ -54,10 +58,5 @@ FactoryGirl.define do
     user
     skatepark
     rating 5
-  end
-
-  factory :skatepark_image do
-    skatepark
-    photo File.new(Rails.root + 'public/test_image.png')
   end
 end

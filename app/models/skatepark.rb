@@ -19,13 +19,13 @@ class Skatepark < ActiveRecord::Base
 
   has_many :skatepark_images, :dependent => :destroy
 
-  has_attached_file :hero, default_url: "#{bucket_url}/default-header.jpg"
+  has_attached_file :hero, default_url: "https://storage.googleapis.com/west-coast-skateparks/default-header.jpg"
   #validates_attachment_presence :hero
   validates_attachment_content_type :hero, content_type: /\Aimage/
 
-  has_attached_file :map_photo, styles: { thumb: '75x50>' }, default_url: "#{bucket_url}/logo-small.png"
+  has_attached_file :map_photo, styles: { thumb: '75x50>' }, default_url: "https://storage.googleapis.com/west-coast-skateparks/logo-small.png"
   #validates_attachment_presence :hero
-  validates_attachment_content_type :hero, content_type: /\Aimage/
+  validates_attachment_content_type :map_photo, content_type: /\Aimage/
 
   def self.search(target)
     where(
@@ -60,12 +60,13 @@ class Skatepark < ActiveRecord::Base
   end
 
   def hashify_with_picture
-    attributes.merge(
-      picture: map_picture)
-  end
-
-  def map_picture
-    pics? ? first_pic : "#{bucket_url}/logo-small.png"
+    {
+      id: id,
+      name: name,
+      latitude: latitude,
+      longitude: longitude,
+      picture: map_photo.url(:thumb)
+    }
   end
 
   def favorited_by?(user)
@@ -80,16 +81,12 @@ class Skatepark < ActiveRecord::Base
     ratings.any?
   end
 
-  def pics?
-    skatepark_images.any?
-  end
-
-  def first_pic
-    skatepark_images[0].photo.url
-  end
-
   def reviews?
     reviews.any?
+  end
+
+  def pictures?
+    skatepark_images.any?
   end
 
   def coordinates?
