@@ -33,11 +33,7 @@ RSpec.describe User, type: :model do
   context '#map_data' do
     it 'returns a hash with data needed for map generation' do
       user = create(:user)
-      skateparks = create_list(:skatepark, 3)
-
-      create(:skatepark_image, skatepark: skateparks.first)
-      create(:skatepark_image, skatepark: skateparks.second)
-      create(:skatepark_image, skatepark: skateparks.third)
+      skateparks = create_list(:skatepark, 3, :map_photo)
 
       create(:favorite, user: user, skatepark: skateparks.first)
       create(:visit, user: user, skatepark: skateparks.second)

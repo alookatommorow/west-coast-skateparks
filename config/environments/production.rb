@@ -6,7 +6,7 @@ Rails.application.configure do
       google_storage_secret_access_key: ENV.fetch('GOOGLE_STORAGE_SECRET'),
       provider: 'Google' },
     # staging use 'west-coast-skateparks-staging'
-    fog_directory: 'west-coast-skateparks-prod' }
+    fog_directory: 'west-coast-skateparks-staging' }
 
   # Settings specified here will take precedence over those in config/application.rb.
   # Code is not reloaded between requests.

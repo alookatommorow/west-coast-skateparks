@@ -3,27 +3,22 @@ require 'rails_helper'
 RSpec.describe Skatepark, type: :model do
   context '#map_data' do
     it 'returns a hash with data needed for map generation' do
-      skateparks = create_list(:skatepark, 2)
-      main_park = skateparks.first
-      nearby_park = skateparks.second
-      create(:skatepark_image, skatepark: main_park)
-      create(:skatepark_image, skatepark: nearby_park)
+      skatepark = create_list(:skatepark, 2, :map_photo).first
 
       expected = {
         skateparks: {
-          nearby: main_park.nearby_parks.map(&:hashify_with_picture),
-          main: [main_park.hashify_with_picture]
+          nearby: skatepark.nearby_parks.map(&:hashify_with_picture),
+          main: [skatepark.hashify_with_picture]
         },
-        mapCenter: [main_park.latitude, main_park.longitude],
+        mapCenter: [skatepark.latitude, skatepark.longitude],
         zoom: 9
       }
 
-      expect(main_park.map_data).to eq(expected)
+      expect(skatepark.map_data).to eq(expected)
     end
 
     it 'assigns empty array as value of nearby key' do
-      skatepark = create(:skatepark)
-      create(:skatepark_image, skatepark: skatepark)
+      skatepark = create(:skatepark, :map_photo)
 
       expected = {
         skateparks: {
@@ -51,10 +46,9 @@ RSpec.describe Skatepark, type: :model do
 
   context '#map_picture' do
     it 'should return the url of the first picture' do
-      skatepark = create(:skatepark)
-      image = create(:skatepark_image, skatepark: skatepark)
+      skatepark = create(:skatepark, :map_photo)
 
-      expect(skatepark.map_picture).to eq(image.photo.url)
+      expect(skatepark.map_picture).to eq(skatepark.map_photo.url)
     end
 
     it 'should return the wcs logo if no image' do
