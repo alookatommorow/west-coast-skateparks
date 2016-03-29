@@ -19,7 +19,11 @@ class Skatepark < ActiveRecord::Base
 
   has_many :skatepark_images, :dependent => :destroy
 
-  has_attached_file :hero, default_url: 'https://storage.googleapis.com/west-coast-skateparks/default-header.jpg'
+  has_attached_file :hero, default_url: "#{bucket_url}/default-header.jpg"
+  #validates_attachment_presence :hero
+  validates_attachment_content_type :hero, content_type: /\Aimage/
+
+  has_attached_file :map_photo, styles: { thumb: '75x50>' }, default_url: "#{bucket_url}/logo-small.png"
   #validates_attachment_presence :hero
   validates_attachment_content_type :hero, content_type: /\Aimage/
 
