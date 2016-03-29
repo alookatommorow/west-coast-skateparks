@@ -6,6 +6,10 @@ RSpec.describe Users::MapsController, type: :controller do
       user = create(:user)
       skateparks = create_list(:skatepark, 3)
 
+      create(:skatepark_image, skatepark: skateparks.first)
+      create(:skatepark_image, skatepark: skateparks.second)
+      create(:skatepark_image, skatepark: skateparks.third)
+
       create(:favorite, user: user, skatepark: skateparks.first)
       create(:visit, user: user, skatepark: skateparks.second)
 

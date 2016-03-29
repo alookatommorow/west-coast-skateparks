@@ -1,6 +1,6 @@
 .ui.medium.images.center-text
-  - skatepark.pictures.each do |url|
-    img.ui.image.skatepark-image src="#{url}"
+  - skatepark.skatepark_images.each do |image|
+    img.ui.image.skatepark-image src="#{image.photo.url}"
 .center-text.one-top
   - if !skatepark.photo_cred.blank?
     p

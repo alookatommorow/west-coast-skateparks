@@ -35,6 +35,10 @@ RSpec.describe User, type: :model do
       user = create(:user)
       skateparks = create_list(:skatepark, 3)
 
+      create(:skatepark_image, skatepark: skateparks.first)
+      create(:skatepark_image, skatepark: skateparks.second)
+      create(:skatepark_image, skatepark: skateparks.third)
+
       create(:favorite, user: user, skatepark: skateparks.first)
       create(:visit, user: user, skatepark: skateparks.second)
 
@@ -43,9 +47,9 @@ RSpec.describe User, type: :model do
 
       expect(user.map_data).to eq(
         skateparks: {
-          favorite: (user.favorite_parks - user.dups).map(&:hashify_with_pictures),
-          visited: (user.visited_parks - user.dups).map(&:hashify_with_pictures),
-          both: user.dups.map(&:hashify_with_pictures)
+          favorite: (user.favorite_parks - user.dups).map(&:hashify_with_picture),
+          visited: (user.visited_parks - user.dups).map(&:hashify_with_picture),
+          both: user.dups.map(&:hashify_with_picture)
         },
         mapCenter: user.first_marker_coordinates,
         zoom: 6

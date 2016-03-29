@@ -47,27 +47,21 @@ class Skatepark < ActiveRecord::Base
   def map_data
     {
       skateparks: {
-        main: [hashify_with_pictures],
-        nearby: nearby_parks.map(&:hashify_with_pictures)
+        main: [hashify_with_picture],
+        nearby: nearby_parks.map(&:hashify_with_picture)
       },
       mapCenter: [latitude, longitude],
       zoom: 9
     }
   end
 
-  def hashify_with_pictures
+  def hashify_with_picture
     attributes.merge(
-      pictures: pictures,
-      firstPicture: first_picture)
+      picture: map_picture)
   end
 
-  def pictures
-    return [] unless num_pics && num_pics > 0
-    (1..num_pics).map { |i| "#{bucket_url}/#{state}/#{identifier}-0#{i}.jpg" }
-  end
-
-  def first_picture
-    pictures.first ? pictures.first : "#{bucket_url}/logo-small.png"
+  def map_picture
+    pics? ? first_pic : "#{bucket_url}/logo-small.png"
   end
 
   def favorited_by?(user)
@@ -80,6 +74,14 @@ class Skatepark < ActiveRecord::Base
 
   def ratings?
     ratings.any?
+  end
+
+  def pics?
+    skatepark_images.any?
+  end
+
+  def first_pic
+    skatepark_images[0].photo.url
   end
 
   def reviews?
