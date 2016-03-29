@@ -3,12 +3,12 @@ require 'rails_helper'
 RSpec.describe Skatepark, type: :model do
   context '#map_data' do
     it 'returns a hash with data needed for map generation' do
-      skatepark = create_list(:skatepark, 2).first
+      skatepark = create_list(:skatepark, 2, :map_photo).first
 
       expected = {
         skateparks: {
-          nearby: skatepark.nearby_parks.map(&:hashify_with_pictures),
-          main: [skatepark.hashify_with_pictures]
+          nearby: skatepark.nearby_parks.map(&:hashify_with_picture),
+          main: [skatepark.hashify_with_picture]
         },
         mapCenter: [skatepark.latitude, skatepark.longitude],
         zoom: 9
@@ -18,12 +18,12 @@ RSpec.describe Skatepark, type: :model do
     end
 
     it 'assigns empty array as value of nearby key' do
-      skatepark = create(:skatepark)
+      skatepark = create(:skatepark, :map_photo)
 
       expected = {
         skateparks: {
           nearby: [],
-          main: [skatepark.hashify_with_pictures]
+          main: [skatepark.hashify_with_picture]
         },
         mapCenter: [skatepark.latitude, skatepark.longitude],
         zoom: 9
@@ -44,32 +44,17 @@ RSpec.describe Skatepark, type: :model do
     end
   end
 
-  context '#pictures' do
-    it 'returns an array with the correct photo urls' do
-      skatepark = create(:skatepark)
-      expect(skatepark.pictures).to eq([
-        generate_image_url(skatepark, 1),
-        generate_image_url(skatepark, 2),
-        generate_image_url(skatepark, 3)])
-    end
-
-    it 'returns an empty array if no pics' do
-      skatepark = create(:skatepark, num_pics: 0)
-      expect(skatepark.pictures).to eq([])
-    end
-  end
-
-  context '#first_picture' do
+  context '#map_picture' do
     it 'should return the url of the first picture' do
-      skatepark = create(:skatepark)
+      skatepark = create(:skatepark, :map_photo)
 
-      expect(skatepark.first_picture).to eq(generate_image_url(skatepark, 1))
+      expect(skatepark.map_picture).to eq(skatepark.map_photo.url)
     end
 
     it 'should return the wcs logo if no image' do
       skatepark = create(:skatepark, num_pics: 0)
 
-      expect(skatepark.first_picture).to eq('https://storage.googleapis.com/west-coast-skateparks/logo-small.png')
+      expect(skatepark.map_picture).to eq('https://storage.googleapis.com/west-coast-skateparks/logo-small.png')
     end
   end
 

@@ -19,9 +19,13 @@ class Skatepark < ActiveRecord::Base
 
   has_many :skatepark_images, :dependent => :destroy
 
-  has_attached_file :hero, default_url: 'https://storage.googleapis.com/west-coast-skateparks/default-header.jpg'
+  has_attached_file :hero, default_url: "https://storage.googleapis.com/west-coast-skateparks/default-header.jpg"
   #validates_attachment_presence :hero
   validates_attachment_content_type :hero, content_type: /\Aimage/
+
+  has_attached_file :map_photo, styles: { thumb: '75x50>' }, default_url: "https://storage.googleapis.com/west-coast-skateparks/logo-small.png"
+  #validates_attachment_presence :hero
+  validates_attachment_content_type :map_photo, content_type: /\Aimage/
 
   def self.search(target)
     where(
@@ -47,27 +51,21 @@ class Skatepark < ActiveRecord::Base
   def map_data
     {
       skateparks: {
-        main: [hashify_with_pictures],
-        nearby: nearby_parks.map(&:hashify_with_pictures)
+        main: [hashify_with_picture],
+        nearby: nearby_parks.map(&:hashify_with_picture)
       },
       mapCenter: [latitude, longitude],
       zoom: 9
     }
   end
 
-  def hashify_with_pictures
+  def hashify_with_picture
     attributes.merge(
-      pictures: pictures,
-      firstPicture: first_picture)
+      picture: map_picture)
   end
 
-  def pictures
-    return [] unless num_pics && num_pics > 0
-    (1..num_pics).map { |i| "#{bucket_url}/#{state}/#{identifier}-0#{i}.jpg" }
-  end
-
-  def first_picture
-    pictures.first ? pictures.first : "#{bucket_url}/logo-small.png"
+  def map_picture
+    map_photo.url
   end
 
   def favorited_by?(user)
@@ -84,6 +82,10 @@ class Skatepark < ActiveRecord::Base
 
   def reviews?
     reviews.any?
+  end
+
+  def pictures?
+    skatepark_images.any?
   end
 
   def coordinates?
