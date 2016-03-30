@@ -1,13 +1,4 @@
 Rails.application.configure do
-  config.paperclip_defaults = {
-    storage: :fog,
-    fog_credentials: {
-      google_storage_access_key_id: ENV.fetch('GOOGLE_STORAGE_ID'),
-      google_storage_secret_access_key: ENV.fetch('GOOGLE_STORAGE_SECRET'),
-      provider: 'Google' },
-    permissions: 'public-read',
-    # staging use 'west-coast-skateparks-staging'
-    fog_directory: 'west-coast-skateparks-staging' }
 
   # Settings specified here will take precedence over those in config/application.rb.
   # Code is not reloaded between requests.
