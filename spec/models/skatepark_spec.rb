@@ -125,7 +125,3 @@ RSpec.describe Skatepark, type: :model do
     end
   end
 end
-
-def generate_image_url(skatepark, pic_num)
-  "https://storage.googleapis.com/west-coast-skateparks/#{skatepark.state}/#{skatepark.identifier}-0#{pic_num}.jpg"
-end
