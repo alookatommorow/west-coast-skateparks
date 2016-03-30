@@ -27,6 +27,5 @@ module WestCoastSkateparks
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
     config.active_record.raise_in_transactional_callbacks = true
-    config.paperclip_defaults = { storage: :s3,  s3_credentials: {:bucket => "west-coast-skateparks", :access_key_id => ENV.fetch('AWS_ACCESS_KEY_ID'), :secret_access_key => ENV.fetch('AWS_SECRET_ACCESS_KEY')}, s3_host_name: 's3-us-west-1.amazonaws.com'}
   end
 end

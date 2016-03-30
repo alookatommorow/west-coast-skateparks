@@ -20,11 +20,11 @@ class Skatepark < ActiveRecord::Base
   has_many :skatepark_images, :dependent => :destroy
 
   has_attached_file :hero, default_url: "https://storage.googleapis.com/west-coast-skateparks/default-header.jpg"
-  #validates_attachment_presence :hero
+  # validates_attachment_presence :hero
   validates_attachment_content_type :hero, content_type: /\Aimage/
 
-  has_attached_file :map_photo, default_url: "https://storage.googleapis.com/west-coast-skateparks/logo-small.png"
-  #validates_attachment_presence :hero
+  has_attached_file :map_photo, default_url: "https://storage.googleapis.com/west-coast-skateparks/logo-small.png", styles: {thumb: "300x200>"}
+  # validates_attachment_presence :map_photo
   validates_attachment_content_type :map_photo, content_type: /\Aimage/
 
   def self.search(target)
@@ -65,7 +65,7 @@ class Skatepark < ActiveRecord::Base
       name: name,
       latitude: latitude,
       longitude: longitude,
-      picture: map_photo.url
+      picture: map_photo(:thumb)
     }
   end
 
