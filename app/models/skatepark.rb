@@ -23,7 +23,7 @@ class Skatepark < ActiveRecord::Base
   #validates_attachment_presence :hero
   validates_attachment_content_type :hero, content_type: /\Aimage/
 
-  has_attached_file :map_photo, styles: { thumb: '75x50>' }, default_url: "https://storage.googleapis.com/west-coast-skateparks/logo-small.png", storage: :s3, s3_credentials: {:bucket => "west-coast-skateparks-production", :access_key_id => ENV.fetch('AWS_ACCESS_KEY_ID'), :secret_access_key => ENV.fetch('AWS_SECRET_ACCESS_KEY')}
+  has_attached_file :map_photo, default_url: "https://storage.googleapis.com/west-coast-skateparks/logo-small.png"
   #validates_attachment_presence :hero
   validates_attachment_content_type :map_photo, content_type: /\Aimage/
 
@@ -65,7 +65,7 @@ class Skatepark < ActiveRecord::Base
       name: name,
       latitude: latitude,
       longitude: longitude,
-      picture: map_photo.url(:thumb)
+      picture: map_photo.url
     }
   end
 
