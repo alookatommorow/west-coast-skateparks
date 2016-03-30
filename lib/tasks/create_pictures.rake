@@ -2,11 +2,13 @@ namespace :images  do
   desc 'Feeds image urls to paperclip to create skatepark images'
   task :create => :environment do
     Skatepark.all.each do |skatepark|
-      skatepark.pictures.each do |url|
-        SkateparkImage.create(
-          skatepark_id: skatepark.id,
-          photo: URI.parse(URI.encode(url))
-          )
+      if skatepark.num_pics > 0
+        (1..skatepark.num_pics).each do |num|
+          SkateparkImage.create(
+            skatepark_id: skatepark.id,
+            photo: URI.parse(URI.encode("https://storage.googleapis.com/west-coast-skateparks/#{skatepark.state}/#{skatepark.identifier}-0#{num}.jpg"))
+            )
+        end
       end
     end
   end
