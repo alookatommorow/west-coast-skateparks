@@ -44,20 +44,6 @@ RSpec.describe Skatepark, type: :model do
     end
   end
 
-  context '#map_picture' do
-    it 'should return the url of the first picture' do
-      skatepark = create(:skatepark, :map_photo)
-
-      expect(skatepark.map_picture).to eq(skatepark.map_photo.url)
-    end
-
-    it 'should return the wcs logo if no image' do
-      skatepark = create(:skatepark, num_pics: 0)
-
-      expect(skatepark.map_picture).to eq('https://storage.googleapis.com/west-coast-skateparks/logo-small.png')
-    end
-  end
-
   context '#nearby_parks' do
     it 'returns an array of nearby skateparks' do
       skatepark = create(:skatepark)
