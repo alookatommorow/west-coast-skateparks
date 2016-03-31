@@ -98,8 +98,4 @@ class Skatepark < ActiveRecord::Base
     def bucket_url
       'https://storage.googleapis.com/west-coast-skateparks'
     end
-
-    def s3_credentials
-
-  end
 end
