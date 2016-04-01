@@ -33,7 +33,7 @@ RSpec.describe User, type: :model do
   context '#map_data' do
     it 'returns a hash with data needed for map generation' do
       user = create(:user)
-      skateparks = create_list(:skatepark, 3)
+      skateparks = create_list(:skatepark, 3, :map_photo)
 
       create(:favorite, user: user, skatepark: skateparks.first)
       create(:visit, user: user, skatepark: skateparks.second)
@@ -43,9 +43,9 @@ RSpec.describe User, type: :model do
 
       expect(user.map_data).to eq(
         skateparks: {
-          favorite: (user.favorite_parks - user.dups).map(&:hashify_with_pictures),
-          visited: (user.visited_parks - user.dups).map(&:hashify_with_pictures),
-          both: user.dups.map(&:hashify_with_pictures)
+          favorite: (user.favorite_parks - user.dups).map(&:hashify_with_picture),
+          visited: (user.visited_parks - user.dups).map(&:hashify_with_picture),
+          both: user.dups.map(&:hashify_with_picture)
         },
         mapCenter: user.first_marker_coordinates,
         zoom: 6

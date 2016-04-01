@@ -1,11 +1,13 @@
 Rails.application.configure do
   config.paperclip_defaults = {
-    storage: :fog,
-    fog_credentials: {
-      google_storage_access_key_id: ENV.fetch('GOOGLE_STORAGE_ID'),
-      google_storage_secret_access_key: ENV.fetch('GOOGLE_STORAGE_SECRET'),
-      provider: 'Google' },
-    fog_directory: 'west-coast-skateparks' }
+    storage: :s3,
+    s3_credentials: {
+      :bucket => ENV.fetch('S3_BUCKET'),
+      :access_key_id => ENV.fetch('AWS_ACCESS_KEY_ID'),
+      :secret_access_key => ENV.fetch('AWS_SECRET_ACCESS_KEY')
+      },
+    s3_host_name: 's3-us-west-1.amazonaws.com'
+  }
 
   # Settings specified here will take precedence over those in config/application.rb.
   # Code is not reloaded between requests.
