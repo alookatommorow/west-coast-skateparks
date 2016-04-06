@@ -25,10 +25,6 @@ FactoryGirl.define do
       builder 'bob'
       obstacles 'poo debris, debris'
     end
-
-    trait :map_photo do
-      map_photo File.new(Rails.root + 'public/test_image.png')
-    end
   end
 
   factory :user do

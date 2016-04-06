@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe Skatepark, type: :model do
   context '#map_data' do
     it 'returns a hash with data needed for map generation' do
-      skatepark = create_list(:skatepark, 2, :map_photo).first
+      skatepark = create_list(:skatepark, 2).first
 
       expected = {
         skateparks: {
@@ -18,7 +18,7 @@ RSpec.describe Skatepark, type: :model do
     end
 
     it 'assigns empty array as value of nearby key' do
-      skatepark = create(:skatepark, :map_photo)
+      skatepark = create(:skatepark)
 
       expected = {
         skateparks: {
