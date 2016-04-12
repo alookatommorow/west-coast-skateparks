@@ -39,7 +39,7 @@ function MarkerGenerator(map, skateparks) {
       marker.setVisible(false);
     }
     toggleable[type].push(marker);
-    bindInfowindowListener(map, allMarkers, marker, infowindow);
+    bindInfowindowListener(map, allMarkers, marker);
     allMarkers.push(marker);
     return marker;
   }
@@ -60,12 +60,12 @@ function MarkerGenerator(map, skateparks) {
     button.text(action.join(' '));
   }
 
-  function bindInfowindowListener(map, allMarkers, marker, infowindow) {
+  function bindInfowindowListener(map, allMarkers, marker) {
     marker.addListener('click', function() {
       allMarkers.forEach(function(marker){
         marker.infowindow.close();
       });
-      infowindow.open(map, marker);
+      marker.infowindow.open(map, marker);
     });
   }
 
