@@ -10,26 +10,13 @@ function initMap() {
   $.ajax({
     url: '/'+resourceName+'/'+id+'/map'
   })
-  .done(generateMarkers)
+  .done(generateMap)
   .fail(function(response){
     console.log("error", response);
   });
 }
 
-var generateMarkers = function(response) {
-  var mapCenter = {lat: response.mapCenter[0], lng: response.mapCenter[1]};
-
-  var map = new google.maps.Map(document.getElementById('map'), {
-    zoom: response.zoom,
-    center: mapCenter
-  });
-
-  new MarkerGenerator(map, response.skateparks).generateMarkers().showButtons();
-};
-
-
 //// Map Autocomplete ////
-
 var autocomplete;
 
 function initAutocomplete() {
