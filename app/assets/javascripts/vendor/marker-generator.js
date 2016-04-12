@@ -10,9 +10,9 @@ function MarkerGenerator(map, skateparks) {
         var marker = createMarker(skatepark, type);
         toggleable[type].push(marker);
         allMarkers.push(marker);
-        bindInfowindowListener(marker);
+        bindCloseInfowindowsListenerToMarker(marker);
       });
-      bindVisibilityListener(type);
+      bindVisibilityListenerToButton(type);
     });
     return this;
   }
@@ -44,7 +44,7 @@ function MarkerGenerator(map, skateparks) {
   }
 
   // private methods
-  function bindVisibilityListener(type) {
+  function bindVisibilityListenerToButton(type) {
     $('#toggle-' + type).on('click', function (event) {
       var $button = $(event.target);
       var action = $button.text().split(' ');
@@ -59,7 +59,7 @@ function MarkerGenerator(map, skateparks) {
     button.text(action.join(' '));
   }
 
-  function bindInfowindowListener(marker) {
+  function bindCloseInfowindowsListenerToMarker(marker) {
     marker.addListener('click', function() {
       allMarkers.forEach(function(marker){
         marker.infowindow.close();
