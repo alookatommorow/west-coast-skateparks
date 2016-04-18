@@ -11,6 +11,10 @@ Rails.application.routes.draw do
     resource :map, only: :show, controller: 'users/maps'
   end
 
+  namespace :api do
+    resources :skateparks, only: :index
+  end
+
   resources :sessions, only: [:create, :destroy, :new]
   post '/sessions/create_with_auth', to: 'sessions#create_with_auth'
 
