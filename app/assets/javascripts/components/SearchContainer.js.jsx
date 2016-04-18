@@ -13,9 +13,10 @@ var SearchContainer = React.createClass({
   },
 
   searchSkateparks: function(query) {
+    var regExp = new RegExp(query);
     return this.state.skateparks.filter(function(skatepark){
-      return skatepark.city.match(new RegExp(query)) ||
-        skatepark.name.match(new RegExp(query));
+      return skatepark.city.match(regExp) ||
+        skatepark.name.match(regExp);
     });
   },
 
@@ -26,9 +27,10 @@ var SearchContainer = React.createClass({
         results: [],
       });
     } else {
-      var results = this.searchSkateparks(event.target.value);
+      var results = this.searchSkateparks(query);
       this.setState({
-        results: results,
+        query: query,
+        results: results
       });
     }
   },
@@ -42,7 +44,7 @@ var SearchContainer = React.createClass({
   },
 
   storeAllSkateparks: function(response) {
-    this.setState({ skateparks: response});
+    this.setState({skateparks: response});
   },
 
   successFunction: function(response) {
@@ -58,7 +60,7 @@ var SearchContainer = React.createClass({
       <div>
         <div>Fuck ur bum</div>
         <SearchForm handleChange={this.handleChange} />
-        <SearchResults results={this.state.results} />
+        <SearchResults results={this.state.results} query={this.state.query} />
       </div>
     );
   }
