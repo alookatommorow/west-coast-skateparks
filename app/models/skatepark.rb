@@ -2,7 +2,7 @@ class Skatepark < ActiveRecord::Base
   include ActionView::Helpers::NumberHelper
   include Geokit::Geocoders
 
-  validates :city, :state, :name, presence: true
+  validates :name, presence: true
   validates :identifier, uniqueness: true
 
   has_many :favorites, dependent: :destroy

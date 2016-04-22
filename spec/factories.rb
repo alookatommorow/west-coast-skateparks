@@ -1,12 +1,7 @@
 FactoryGirl.define do
   factory :skatepark do
-    sequence(:city) { |i| "hayward#{i}" }
-    state 'California'
-    address '520 E 3rd Ave, Hayward, CA'
     sequence(:name) { |i| "cribbage#{i}" }
     sequence(:identifier) { |i| "swag#{i}" }
-    latitude 35.0021
-    longitude -113.0051
     num_pics 3
 
     trait :nearby do
@@ -25,6 +20,14 @@ FactoryGirl.define do
       builder 'bob'
       obstacles 'poo debris, debris'
     end
+  end
+
+  factory :location do
+    sequence(:city) { |i| "hayward#{i}" }
+    state 'California'
+    address '520 E 3rd Ave, Hayward, CA'
+    latitude 35.0021
+    longitude -113.0051
   end
 
   factory :user do
