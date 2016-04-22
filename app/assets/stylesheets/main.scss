@@ -1,3 +1,10 @@
 @import 'base/_variables';
 @import 'base/_atomic';
 @import 'styles/**/*';
+@import url(https://fonts.googleapis.com/css?family=Playfair+Display:400,900italic);
+@import url(https://fonts.googleapis.com/css?family=Ceviche+One);
+@import url(https://fonts.googleapis.com/css?family=Kanit:400,600italic);
+@font-face {
+    font-family: Outlander;
+    src: url("https://storage.googleapis.com/west-coast-skateparks/fonts/outlander.ttf");
+};
