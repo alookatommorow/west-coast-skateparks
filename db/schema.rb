@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160329163726) do
+ActiveRecord::Schema.define(version: 20160422201812) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,6 +26,18 @@ ActiveRecord::Schema.define(version: 20160329163726) do
   add_index "favorites", ["skatepark_id"], name: "index_favorites_on_skatepark_id", using: :btree
   add_index "favorites", ["user_id", "skatepark_id"], name: "index_favorites_on_user_id_and_skatepark_id", unique: true, using: :btree
   add_index "favorites", ["user_id"], name: "index_favorites_on_user_id", using: :btree
+
+  create_table "locations", force: :cascade do |t|
+    t.integer "skatepark_id"
+    t.string  "address"
+    t.string  "city"
+    t.string  "state"
+    t.string  "zip_code"
+    t.float   "latitude"
+    t.float   "longitude"
+  end
+
+  add_index "locations", ["skatepark_id"], name: "index_locations_on_skatepark_id", using: :btree
 
   create_table "ratings", force: :cascade do |t|
     t.integer  "user_id"
@@ -127,4 +139,5 @@ ActiveRecord::Schema.define(version: 20160329163726) do
   add_index "visits", ["user_id", "skatepark_id"], name: "index_visits_on_user_id_and_skatepark_id", unique: true, using: :btree
   add_index "visits", ["user_id"], name: "index_visits_on_user_id", using: :btree
 
+  add_foreign_key "locations", "skateparks"
 end
