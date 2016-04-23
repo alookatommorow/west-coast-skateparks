@@ -1,6 +1,5 @@
 class Skatepark < ActiveRecord::Base
-  include ActionView::Helpers::NumberHelper
-  include Geokit::Geocoders
+  LOCATION_ATTRIBUTES = %i(address city state zip_code latitude longitude)
 
   validates :name, presence: true
   validates :identifier, uniqueness: true
@@ -16,7 +15,7 @@ class Skatepark < ActiveRecord::Base
   has_many :skatepark_images, :dependent => :destroy
   has_one :location, :dependent => :destroy
 
-  delegate :latitude, :longitude, :city, :address, :state, :zip_code, :has_coordinates?, to: :location
+  delegate(*LOCATION_ATTRIBUTES, :has_coordinates?, to: :location)
 
   has_attached_file :hero, default_url: "https://storage.googleapis.com/west-coast-skateparks/default-header.jpg"
   # validates_attachment_presence :hero
@@ -26,20 +25,20 @@ class Skatepark < ActiveRecord::Base
   # validates_attachment_presence :map_photo
   validates_attachment_content_type :map_photo, content_type: /\Aimage/
 
-  scope :california, -> { joins(:location).where("locations.state" => "california") }
-  scope :washington, -> { joins(:location).where("locations.state" => "washington") }
-  scope :oregon, -> { joins(:location).where("locations.state" => "oregon") }
-  scope :search, -> (query) do
+  scope :search, -> (query) {
     joins(:location).
       where("name LIKE ? OR locations.city LIKE ?", "%#{query}%", "%#{query}%").
       order("locations.city", :name)
-  end
+  }
+
+  scope :nearby_to, -> (object) {
+    joins(:location).
+      where('locations.latitude BETWEEN ? AND ?', object.latitude - 0.4, object.latitude + 0.4).
+      where('locations.longitude BETWEEN ? AND ?', object.longitude - 0.4, object.longitude + 0.4)
+  }
 
   def nearby_parks
-    Skatepark.joins(:location).
-      where('locations.latitude BETWEEN ? AND ?', location.latitude - 0.4, location.latitude + 0.4).
-      where('locations.longitude BETWEEN ? AND ?', location.longitude - 0.4, location.longitude + 0.4).
-      where.not(id: id)
+    Skatepark.nearby_to(self).where.not(id: id)
   end
 
   def map_data
