@@ -26,25 +26,20 @@ class Skatepark < ActiveRecord::Base
   # validates_attachment_presence :map_photo
   validates_attachment_content_type :map_photo, content_type: /\Aimage/
 
-  def self.search(target)
-    where(
-      'name LIKE ? OR city LIKE ? OR state LIKE ?',
-      '%' + target + '%',
-      '%' + target + '%',
-      '%' + target + '%'
-    ).order('state ASC').order('city ASC').order('name ASC')
-  end
-
-  def self.in_state(state)
-    where(state: state).order('city ASC')
+  scope :california, -> { joins(:location).where("locations.state" => "california") }
+  scope :washington, -> { joins(:location).where("locations.state" => "washington") }
+  scope :oregon, -> { joins(:location).where("locations.state" => "oregon") }
+  scope :search, -> (query) do
+    joins(:location).
+      where("name LIKE ? OR locations.city LIKE ?", "%#{query}%", "%#{query}%").
+      order("locations.city", :name)
   end
 
   def nearby_parks
-    return [] unless coordinates?
-    Skatepark.where(
-      'latitude BETWEEN ? AND ?', latitude - 0.4, latitude + 0.4).where(
-        'longitude BETWEEN ? AND ?', longitude - 0.4, longitude + 0.4).where(
-          'id != ?', id)
+    Skatepark.joins(:location).
+      where('locations.latitude BETWEEN ? AND ?', location.latitude - 0.4, location.latitude + 0.4).
+      where('locations.longitude BETWEEN ? AND ?', location.longitude - 0.4, location.longitude + 0.4).
+      where.not(id: id)
   end
 
   def map_data
