@@ -7,19 +7,16 @@ class Skatepark < ActiveRecord::Base
 
   has_many :favorites, dependent: :destroy
   has_many :users_who_faved, through: :favorites, source: :user
-
   has_many :visits, dependent: :destroy
   has_many :users_who_visited, through: :visits, source: :user
-
   has_many :ratings, dependent: :destroy
   has_many :users_who_rated, through: :ratings, source: :user
-
   has_many :reviews, dependent: :destroy
   has_many :users_who_reviewed, through: :reviews, source: :user
-
   has_many :skatepark_images, :dependent => :destroy
-
   has_one :location, :dependent => :destroy
+
+  delegate :latitude, :longitude, :city, :address, :state, :zip_code, :has_coordinates?, to: :location
 
   has_attached_file :hero, default_url: "https://storage.googleapis.com/west-coast-skateparks/default-header.jpg"
   # validates_attachment_presence :hero
@@ -89,10 +86,6 @@ class Skatepark < ActiveRecord::Base
 
   def pictures?
     skatepark_images.any?
-  end
-
-  def coordinates?
-    latitude && longitude
   end
 
   private

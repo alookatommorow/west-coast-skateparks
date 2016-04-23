@@ -3,15 +3,30 @@ FactoryGirl.define do
     sequence(:name) { |i| "cribbage#{i}" }
     sequence(:identifier) { |i| "swag#{i}" }
     num_pics 3
+    location
 
     trait :nearby do
-      latitude 35.3045
-      longitude -113.0380
+      after(:build) do |skatepark|
+        skatepark.location = build(:location, :nearby)
+      end
     end
 
     trait :far do
-      latitude 36.8021
-      longitude -113.0051
+      after(:build) do |skatepark|
+        skatepark.location = build(:location, :far)
+      end
+    end
+
+    trait :washington do
+      after(:build) do |skatepark|
+        skatepark.location = build(:location, state: "washington")
+      end
+    end
+
+    trait :oregon do
+      after(:build) do |skatepark|
+        skatepark.location = build(:location, state: "oregon")
+      end
     end
 
     trait :presentable do
@@ -25,9 +40,19 @@ FactoryGirl.define do
   factory :location do
     sequence(:city) { |i| "hayward#{i}" }
     state 'California'
-    address '520 E 3rd Ave, Hayward, CA'
+    address '520 E 3rd Ave'
     latitude 35.0021
     longitude -113.0051
+
+    trait :nearby do
+      latitude 35.3045
+      longitude -113.0380
+    end
+
+    trait :far do
+      latitude 36.8021
+      longitude -113.0051
+    end
   end
 
   factory :user do

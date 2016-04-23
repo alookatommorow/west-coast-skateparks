@@ -120,10 +120,7 @@ RSpec.describe User, type: :model do
       skatepark = create(:favorite, user: user).skatepark
 
       fav_park = user.favorite_parks.first
-      expect(fav_park.id).to eq(skatepark.id)
-      expect(fav_park.city).to eq(skatepark.city)
-      expect(fav_park.state).to eq(skatepark.state)
-      expect(fav_park.address).to eq(skatepark.address)
+      expect(fav_park).to eq(skatepark)
     end
   end
 end

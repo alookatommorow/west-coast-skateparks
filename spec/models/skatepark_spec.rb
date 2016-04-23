@@ -55,18 +55,6 @@ RSpec.describe Skatepark, type: :model do
     end
   end
 
-  context '#coordinates?' do
-    it 'returns true if the skatepark has latitude and longitude' do
-      skatepark = create(:skatepark)
-      expect(skatepark.coordinates?).to be_truthy
-    end
-
-    it 'returns false if the skatepark does not have latitude or longitude' do
-      skatepark = create(:skatepark, latitude: nil)
-      expect(skatepark.coordinates?).to be_falsey
-    end
-  end
-
   context '#favorited_by?' do
     it 'returns true if skatepark has been favorited by user' do
       user = create(:user)
