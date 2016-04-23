@@ -1,6 +1,6 @@
 class SkateparkPresenter < SimpleDelegator
   def attributes
-    present_attributes.slice('address', 'info', 'hours').merge(titleized_attributes)
+    present_attributes.slice('info', 'hours').merge("address" => address).merge(titleized_attributes)
   end
 
   def average_rating

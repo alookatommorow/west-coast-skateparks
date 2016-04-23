@@ -9,13 +9,14 @@ RSpec.describe Skateparks::SearchesController, type: :controller do
     end
 
     it 'returns a partial with results matching search params' do
-      create_list(:skatepark, 2, state: 'washington')
-      create(:skatepark, state: 'oregon')
+      location = create(:location, city: "Hayward")
+      create_list(:skatepark, 2, location: location)
+      skatepark = create(:skatepark)
 
-      get :show, search: 'washington'
+      get :show, search: "hayward"
 
-      expect(response.body).to include('Washington')
-      expect(response.body).to_not include('Oregon')
+      expect(response.body).to include("Hayward")
+      expect(response.body).to_not include(skatepark.city)
     end
 
     it 'renders "No Results" if search does not yield anything' do

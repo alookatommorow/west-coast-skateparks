@@ -6,7 +6,7 @@ RSpec.describe SkateparkPresenter do
       original_skatepark = create(:skatepark, :presentable)
       skatepark = SkateparkPresenter.new(original_skatepark)
 
-      show_attributes = original_skatepark.attributes.slice('address', 'info', 'hours')
+      show_attributes = original_skatepark.attributes.slice('info', 'hours').merge("address" => original_skatepark.address)
       titleized_attributes = {
         'material' => 'Bullshit Garbage',
         'builder' => 'Bob',

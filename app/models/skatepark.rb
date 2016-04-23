@@ -1,23 +1,21 @@
 class Skatepark < ActiveRecord::Base
-  include ActionView::Helpers::NumberHelper
-  include Geokit::Geocoders
+  LOCATION_ATTRIBUTES = %i(address city state zip_code latitude longitude)
 
-  validates :city, :state, :name, presence: true
+  validates :name, presence: true
   validates :identifier, uniqueness: true
 
   has_many :favorites, dependent: :destroy
   has_many :users_who_faved, through: :favorites, source: :user
-
   has_many :visits, dependent: :destroy
   has_many :users_who_visited, through: :visits, source: :user
-
   has_many :ratings, dependent: :destroy
   has_many :users_who_rated, through: :ratings, source: :user
-
   has_many :reviews, dependent: :destroy
   has_many :users_who_reviewed, through: :reviews, source: :user
-
   has_many :skatepark_images, :dependent => :destroy
+  has_one :location, :dependent => :destroy
+
+  delegate(*LOCATION_ATTRIBUTES, :has_coordinates?, to: :location)
 
   has_attached_file :hero, default_url: "https://storage.googleapis.com/west-coast-skateparks/default-header.jpg"
   # validates_attachment_presence :hero
@@ -27,25 +25,20 @@ class Skatepark < ActiveRecord::Base
   # validates_attachment_presence :map_photo
   validates_attachment_content_type :map_photo, content_type: /\Aimage/
 
-  def self.search(target)
-    where(
-      'name LIKE ? OR city LIKE ? OR state LIKE ?',
-      '%' + target + '%',
-      '%' + target + '%',
-      '%' + target + '%'
-    ).order('state ASC').order('city ASC').order('name ASC')
-  end
+  scope :search, -> (query) {
+    joins(:location).
+      where("name LIKE ? OR locations.city LIKE ?", "%#{query}%", "%#{query}%").
+      order("locations.city", :name)
+  }
 
-  def self.in_state(state)
-    where(state: state).order('city ASC')
-  end
+  scope :nearby_to, -> (object) {
+    joins(:location).
+      where('locations.latitude BETWEEN ? AND ?', object.latitude - 0.4, object.latitude + 0.4).
+      where('locations.longitude BETWEEN ? AND ?', object.longitude - 0.4, object.longitude + 0.4)
+  }
 
   def nearby_parks
-    return [] unless coordinates?
-    Skatepark.where(
-      'latitude BETWEEN ? AND ?', latitude - 0.4, latitude + 0.4).where(
-        'longitude BETWEEN ? AND ?', longitude - 0.4, longitude + 0.4).where(
-          'id != ?', id)
+    Skatepark.nearby_to(self).where.not(id: id)
   end
 
   def map_data
@@ -87,10 +80,6 @@ class Skatepark < ActiveRecord::Base
 
   def pictures?
     skatepark_images.any?
-  end
-
-  def coordinates?
-    latitude && longitude
   end
 
   private
