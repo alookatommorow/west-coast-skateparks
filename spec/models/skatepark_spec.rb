@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Skatepark, type: :model do
-  context '#map_data' do
+  describe '#map_data' do
     it 'returns a hash with data needed for map generation' do
       skatepark = create_list(:skatepark, 2).first
 
@@ -30,17 +30,6 @@ RSpec.describe Skatepark, type: :model do
       }
 
       expect(skatepark.map_data).to eq(expected)
-    end
-  end
-
-  context '.in_state' do
-    it 'returns a collection of all parks in that state in ascending order by city name' do
-      skateparks = create_list(:skatepark, 2, state: 'california')
-      out_of_state = create(:skatepark, state: 'dummyland')
-
-      california_parks = Skatepark.in_state(skateparks[0].state)
-      expect(california_parks).to eq(skateparks)
-      expect(california_parks).to_not include(out_of_state)
     end
   end
 
