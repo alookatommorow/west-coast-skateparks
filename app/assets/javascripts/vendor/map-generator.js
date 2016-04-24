@@ -1,6 +1,6 @@
 function generateMap(response) {
   var map = new google.maps.Map(document.getElementById('map'), {
-    zoom: response.zoom,
+    zoom: response.zoom
   });
 
   new MapGenerator(map, response.skateparks).initializeMap();
