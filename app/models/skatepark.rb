@@ -12,8 +12,8 @@ class Skatepark < ActiveRecord::Base
   has_many :users_who_rated, through: :ratings, source: :user
   has_many :reviews, dependent: :destroy
   has_many :users_who_reviewed, through: :reviews, source: :user
-  has_many :skatepark_images, :dependent => :destroy
-  has_one :location, :dependent => :destroy
+  has_many :skatepark_images, dependent: :destroy
+  has_one :location, dependent: :destroy
 
   delegate(*LOCATION_ATTRIBUTES, :has_coordinates?, to: :location)
 
@@ -21,7 +21,7 @@ class Skatepark < ActiveRecord::Base
   # validates_attachment_presence :hero
   validates_attachment_content_type :hero, content_type: /\Aimage/
 
-  has_attached_file :map_photo, default_url: "https://storage.googleapis.com/west-coast-skateparks/logo-small.png", styles: {thumb: "300x200>"}
+  has_attached_file :map_photo, default_url: "https://storage.googleapis.com/west-coast-skateparks/logo-small.png", styles: { thumb: "300x200>" }
   # validates_attachment_presence :map_photo
   validates_attachment_content_type :map_photo, content_type: /\Aimage/
 
