@@ -11,20 +11,20 @@ class CreateLocations < ActiveRecord::Migration
     end
 
     Skatepark.all.each do |skatepark|
-      if skatepark.address
-        @address = skatepark.address.split(',').first
-        @zip_code = skatepark.address.split(' ').last
+      if skatepark[:address]
+        @address = skatepark[:address].split(',').first
+        @zip_code = skatepark[:address].split(' ').last
         @zip_code = @zip_code =~ /\d/ ? @zip_code : nil
       end
 
       Location.create(
         address: @address,
-        city: skatepark.city.titleize,
-        state: skatepark.state.capitalize,
+        city: skatepark[:city].titleize,
+        state: skatepark[:state].capitalize,
         skatepark_id: skatepark.id,
         zip_code: @zip_code,
-        latitude: skatepark.latitude,
-        longitude: skatepark.longitude,
+        latitude: skatepark[:latitude],
+        longitude: skatepark[:longitude],
       )
     end
   end

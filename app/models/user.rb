@@ -30,15 +30,6 @@ class User < ActiveRecord::Base
     name ? name : username
   end
 
-  def first_marker_coordinates
-    favorite = favorite_parks.first
-    return [favorite.latitude, favorite.longitude] if favorite
-    visit = visited_parks.first
-    return [visit.latitude, visit.longitude] if visit
-
-    [37.7833, -122.4167] # SF BRO!!!!
-  end
-
   def favorites?
     favorites.any?
   end
@@ -54,7 +45,6 @@ class User < ActiveRecord::Base
         visited: (visited_parks - dups).map(&:hashify_with_picture),
         both: dups.map(&:hashify_with_picture)
       },
-      mapCenter: first_marker_coordinates,
       zoom: 6
     }
   end

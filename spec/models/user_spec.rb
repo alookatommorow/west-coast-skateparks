@@ -47,7 +47,6 @@ RSpec.describe User, type: :model do
           visited: (user.visited_parks - user.dups).map(&:hashify_with_picture),
           both: user.dups.map(&:hashify_with_picture)
         },
-        mapCenter: user.first_marker_coordinates,
         zoom: 6
       )
     end
@@ -92,25 +91,6 @@ RSpec.describe User, type: :model do
       user = build(:user)
 
       expect(user.visits?).to eq(false)
-    end
-  end
-
-  context '#first_marker_coordinates' do
-    it 'returns lat long of first favorited or visited skatepark' do
-      user = create(:user)
-      skateparks = create_list(:skatepark, 2)
-
-      create(:visit, user: user, skatepark: skateparks.first)
-      create(:favorite, user: user, skatepark: skateparks.second)
-
-      expect(user.first_marker_coordinates).to eq(
-        [skateparks.second.latitude, skateparks.second.longitude])
-    end
-
-    it 'returns SF EPICENTER if no park is found' do
-      user = build(:user)
-
-      expect(user.first_marker_coordinates).to eq([37.7833, -122.4167])
     end
   end
 
