@@ -16,12 +16,12 @@
     color: $orange;
 
     @media #{$tablet} {
-      font-size: 4em;
+      font-size: 3em;
     }
 
     @media #{$mobile} {
       top: 20%;
-      font-size: 1.8em;
+      font-size: 1.5em;
     }
   }
 
@@ -31,7 +31,6 @@
     top: 55%;
     left: 5%;
     right: 5%;
-    font-family: 'Dirty-Bakers-Dozen', sans-serif;
     color: white;
     font-size: 2.5em;
     font-weight: bold;
@@ -52,14 +51,16 @@
     font-family: 'Dirty-Bakers-Dozen', sans-serif;
     font-size: 2em;
     color: $orange;
-    top: 65%;
+    top: 70%;
     left: 40%;
     right: 40%;
-    padding: 1% 0 1% 0;
+    padding: 1% 1%;
     text-align: center;
 
     @media #{$tablet} {
       font-size: 1.3em;
+      left: 35%;
+      right: 35%;
     }
 
     @media #{$mobile} {
