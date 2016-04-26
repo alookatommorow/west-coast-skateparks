@@ -10,6 +10,8 @@
   width: 100%;
   border-radius: 0;
   margin: 0;
+
+
 }
 
 .page-container {
@@ -20,6 +22,16 @@
 .ui.menu {
   border-radius: 0;
   margin: 0;
+  background-color: #285077;
+
+  a.item {
+    color: white;
+
+    &:hover {
+      color: $orange;
+      background-color: #19364D;
+    }
+  }
 }
 
 .ui.segment {

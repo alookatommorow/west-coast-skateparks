@@ -12,18 +12,16 @@
     left: 0;
     right: 0;
     font-size: 5em;
-    font-weight: bold;
-    font-family: 'Outlander', sans-serif;
-    font-style: normal;
-    color: #FF7216;
+    font-family: 'Dirty-Bakers-Dozen', sans-serif;
+    color: $orange;
 
-    // @media #{$tablet} {
-    //   font-size: 1.8em;
-    // }
+    @media #{$tablet} {
+      font-size: 4em;
+    }
 
     @media #{$mobile} {
-      top: 13%;
-      font-size: 4em;
+      top: 20%;
+      font-size: 1.8em;
     }
   }
 
@@ -31,9 +29,9 @@
     text-align: center;
     position: absolute;
     top: 45%;
-    left: 10%;
-    right: 10%;
-    // margin: 0 7%;
+    left: 5%;
+    right: 5%;
+    font-family: 'Dirty-Bakers-Dozen', sans-serif;
     color: white;
     font-size: 2.5em;
     font-weight: bold;
