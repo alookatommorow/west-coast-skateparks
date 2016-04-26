@@ -22,6 +22,19 @@
     height: 90%;
   }
 
+  .ui.menu {
+    background-color: #285077;
+
+    a.item {
+      color: white;
+
+      &:hover {
+        color: $orange;
+        background-color: #19364D;
+      }
+    }
+  }
+
   .parks-container {
     height: 39em;
     overflow-y: auto;
