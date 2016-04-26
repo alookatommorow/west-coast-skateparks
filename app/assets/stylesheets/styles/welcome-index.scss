@@ -1,5 +1,5 @@
 .landing-container {
-  background-image: linear-gradient( rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4) ), url("https://storage.googleapis.com/west-coast-skateparks/headers/hewitt-desktop.jpg" );
+  background-image: linear-gradient( rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6) ), url("https://storage.googleapis.com/west-coast-skateparks/headers/hewitt-desktop.jpg" );
   width: 100%;
   height: 95%;
   background-repeat: no-repeat;
@@ -69,13 +69,13 @@
   }
 
   @media #{$tablet} {
-    background-image: linear-gradient( rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4) ), url("https://storage.googleapis.com/west-coast-skateparks/headers/hewitt-ipad.jpg" );
+    background-image: linear-gradient( rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6) ), url("https://storage.googleapis.com/west-coast-skateparks/headers/hewitt-ipad.jpg" );
     background-position: center;
     height: 98%;
   }
 
   @media #{$mobile} {
-    background-image: linear-gradient( rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4) ), url("https://storage.googleapis.com/west-coast-skateparks/headers/hewitt-iphone.jpg" );
+    background-image: linear-gradient( rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6) ), url("https://storage.googleapis.com/west-coast-skateparks/headers/hewitt-iphone.jpg" );
     height: 96%;
   }
 }

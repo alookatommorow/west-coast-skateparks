@@ -1,6 +1,8 @@
 class SkateparkPresenter < SimpleDelegator
   def attributes
-    present_attributes.slice('info', 'hours').merge("address" => address).merge(titleized_attributes)
+    present_attributes.slice('info', 'hours')
+    .merge("address" => formatted_address)
+    .merge(titleized_attributes)
   end
 
   def average_rating
@@ -16,6 +18,21 @@ class SkateparkPresenter < SimpleDelegator
   end
 
   private
+    def formatted_address
+      if zip_code
+        address + ", " + city.titleize + ", " + states["#{state}"] + " " + zip_code
+      else
+        address
+      end
+    end
+
+    def states
+      {
+        'california' => 'CA',
+        'oregon' => 'OR',
+        'washington' => 'WA',
+      }
+    end
 
     def present_attributes
       model.attributes.select { |_k, v| v.present? }
