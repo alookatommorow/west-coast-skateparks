@@ -15,6 +15,7 @@ function MapGenerator(map, skateparks) {
   this.initializeMap = function() {
     generateMarkers();
     setMapCenter();
+    setStyles();
     showButtons();
   };
 
@@ -38,6 +39,10 @@ function MapGenerator(map, skateparks) {
     } else {
       map.setCenter(new google.maps.LatLng(37.7833, -122.4167));
     }
+  }
+
+  function setStyles() {
+    map.setOptions({styles: mapStyles});
   }
 
   function showButtons() {
