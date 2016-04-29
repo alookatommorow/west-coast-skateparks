@@ -1,11 +1,12 @@
 body {
   line-height: 1.2;
+  background-color: #EAEAEA;
 }
 
 #footer {
   height: 5%;
   text-align: center;
-  background-color: black;
+  background-color: $blue;
   color: white;
   width: 100%;
   border-radius: 0;
@@ -17,17 +18,56 @@ body {
   min-height: 80%;
 }
 
-.ui.menu {
+.ui.menu.nav-menu {
   border-radius: 0;
   margin: 0;
-  background-color: #285077;
+  background-color: $blue;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 9999999;
 
-  a.item {
+  a.item, #burger {
     color: white;
 
     &:hover {
       color: $orange;
-      background-color: #19364D;
+      background-color: $dark-blue;
+    }
+
+    > i.icon {
+      margin: 0;
+    }
+  }
+
+  #burger {
+    max-width: max-content;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  .item.mobile-nav-item {
+    display: none;
+  }
+
+  input[type=checkbox] {
+    display: none;
+
+    &:checked ~ .item.nav-item {
+      display: block;
+    }
+  }
+
+  @media #{$mobile} {
+    .item.nav-item {
+      display: none;
+    }
+
+    .item.mobile-nav-item {
+      display: block;
     }
   }
 }
