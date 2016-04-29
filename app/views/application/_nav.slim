@@ -1,6 +1,10 @@
 .ui.stackable.menu.nav-menu
-  label.item.show-menu for="show-menu" id="burger"
-    i.large.sidebar.icon
+  .menu
+    label.item.mobile-nav-item for="show-menu" id="burger"
+      i.large.sidebar.icon
+    .right.menu
+      a.item.mobile-nav-item.search-nav
+        i.large.search.icon
   input type="checkbox" id="show-menu" role="button"
   = link_to 'Home', root_path, class: 'item nav-item'
   = link_to 'About', about_path, class: 'item nav-item'

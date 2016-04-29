@@ -23,14 +23,14 @@
   }
 
   .ui.menu {
-    background-color: #285077;
+    background-color: $blue;
 
     a.item {
       color: white;
 
       &:hover {
         color: $orange;
-        background-color: #19364D;
+        background-color: $dark-blue;
       }
     }
   }
