@@ -17,7 +17,7 @@ body {
   min-height: 80%;
 }
 
-.ui.menu {
+.ui.menu.nav-menu {
   border-radius: 0;
   margin: 0;
   background-color: #285077;
@@ -27,14 +27,17 @@ body {
   width: 100%;
   z-index: 9999999;
 
-  .item.show-menu {
-    display: none;
+  a.item, #burger {
     color: white;
 
     &:hover {
       color: $orange;
       background-color: #19364D;
     }
+  }
+
+  .item.show-menu {
+    display: none;
   }
 
   input[type=checkbox] {
@@ -42,16 +45,6 @@ body {
 
     &:checked ~ .item.nav-item {
       display: block;
-    }
-  }
-
-  a.item {
-    color: white;
-    z-index: 9999999;
-
-    &:hover {
-      color: $orange;
-      background-color: #19364D;
     }
   }
 

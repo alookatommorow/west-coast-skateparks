@@ -1,9 +1,7 @@
 require 'rails_helper'
 
-RSpec.feature 'User selects skatepark from index' do
+RSpec.feature 'Visitor selects skatepark from index' do
   scenario 'Sees working links for skateparks from each state', js: true do
-    pending "Until we figure this bullshit out"
-
     or_skatepark = create(:skatepark, :oregon)
     wa_skatepark = create(:skatepark, :washington)
 
@@ -19,7 +17,6 @@ RSpec.feature 'User selects skatepark from index' do
     expect(page).to have_text(wa_skatepark.name.titleize)
     expect(page).not_to have_text(or_skatepark.name.titleize)
 
-    # find("a[href='#{skatepark_path(wa_skatepark)}']").click
     click_link wa_skatepark.name.titleize
 
     expect(page).to have_text(wa_skatepark.address)
