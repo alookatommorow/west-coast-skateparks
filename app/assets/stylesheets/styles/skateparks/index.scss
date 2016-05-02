@@ -1,29 +1,31 @@
-.ui.button.state-button {
-  background-color: $blue;
-  color: white;
-  max-width: 250px;
+.ui.three.item.menu.state-menu {
 
-  &:hover {
-    color: $orange;
-    background-color: $dark-blue;
-  }
+  .item.state-button {
+    background-color: $blue;
+    color: white;
 
-  .state-label {
-    font-size: 3em;
-    font-family: 'Dirty-Bakers-Dozen', sans-serif;
-    min-width: min-content;
-
-    @media #{$tablet} {
-      font-size: 1em;
+    &:hover {
+      color: $orange;
+      background-color: $dark-blue;
     }
-  }
 
-  .ui.centered.image {
-    margin-bottom: 10%;
+    .state-label {
+      font-size: 3em;
+      font-family: 'Dirty-Bakers-Dozen', sans-serif;
+      min-width: min-content;
+
+      @media #{$tablet} {
+        font-size: 1em;
+      }
+    }
+
+    .ui.centered.image {
+      margin-bottom: 5%;
+    }
   }
 }
 
-.ui.button.state-button.active {
+.state-button.active {
   color: $orange;
   background-color: $dark-blue;
 }
@@ -48,13 +50,6 @@
 
       .item-header {
         font-weight: bold;
-      }
-
-      &:hover {
-
-        a {
-          color: $orange;
-        }
       }
     }
 

@@ -1,23 +1,18 @@
-.ui.grid.container
-  .row
-    .ui.three.column.centered.grid
-      .center.aligned.column
-        = link_to skateparks_state_path(state: 'california'),
-          data: { state_link: true },
-          class: 'ui button state-button' do
-          p.state-label
-            | #{image_tag("https://storage.googleapis.com/west-coast-skateparks/states/ca-largeseal.png", class: "ui centered image")} CA
-      .center.aligned.column
-        = link_to skateparks_state_path(state: 'oregon'),
-          data: { state_link: true },
-          class: 'ui button state-button' do
-          p.state-label
-            | #{image_tag("https://storage.googleapis.com/west-coast-skateparks/states/or-largeseal.png", class: "ui centered image")} OR
-      .center.aligned.column
-        = link_to skateparks_state_path(state: 'washington'),
-          data: { state_link: true },
-          class: 'ui button state-button' do
-          p.state-label
-            | #{image_tag("https://storage.googleapis.com/west-coast-skateparks/states/wa-largeseal.png", class: "ui centered image")} WA
-  .row
-    .parks-container
+.ui.centered.grid.container
+  .ui.three.item.menu.state-menu
+    = link_to skateparks_state_path(state: 'california'),
+      data: { state_link: true },
+      class: 'item state-button' do
+      p.state-label
+        | #{image_tag("https://storage.googleapis.com/west-coast-skateparks/states/ca-largeseal.png", class: "ui centered small image")} CA
+    = link_to skateparks_state_path(state: 'oregon'),
+      data: { state_link: true },
+      class: 'item state-button' do
+      p.state-label
+        | #{image_tag("https://storage.googleapis.com/west-coast-skateparks/states/or-largeseal.png", class: "ui centered small image")} OR
+    = link_to skateparks_state_path(state: 'washington'),
+      data: { state_link: true },
+      class: 'item state-button' do
+      p.state-label
+        | #{image_tag("https://storage.googleapis.com/west-coast-skateparks/states/wa-largeseal.png", class: "ui centered small image")} WA
+  .parks-container
