@@ -1,19 +1,19 @@
 .ui.grid.container
   .row
-    .ui.equal.width.grid
-      .column
+    .ui.three.column.centered.grid
+      .center.aligned.column
         = link_to skateparks_state_path(state: 'california'),
           data: { state_link: true },
           class: 'ui button state-button' do
           p.state-label
             | #{image_tag("https://storage.googleapis.com/west-coast-skateparks/states/ca-largeseal.png", class: "ui centered image")} CA
-      .column
+      .center.aligned.column
         = link_to skateparks_state_path(state: 'oregon'),
           data: { state_link: true },
           class: 'ui button state-button' do
           p.state-label
             | #{image_tag("https://storage.googleapis.com/west-coast-skateparks/states/or-largeseal.png", class: "ui centered image")} OR
-      .column
+      .center.aligned.column
         = link_to skateparks_state_path(state: 'washington'),
           data: { state_link: true },
           class: 'ui button state-button' do

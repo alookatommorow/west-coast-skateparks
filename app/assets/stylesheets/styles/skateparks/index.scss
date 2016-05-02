@@ -1,6 +1,7 @@
 .ui.button.state-button {
   background-color: $blue;
   color: white;
+  max-width: 250px;
 
   &:hover {
     color: $orange;
@@ -30,12 +31,32 @@
 .parks-container {
   margin-bottom: 2%;
   width: 100%;
+  min-height: 30em;
 
   .ui.selection.list {
     position: relative;
     overflow-y: auto;
     overflow-x: hidden;
     height: 39em;
+
+    .item {
+      background: white;
+
+      p {
+        color: black;
+      }
+
+      .item-header {
+        font-weight: bold;
+      }
+
+      &:hover {
+
+        a {
+          color: $orange;
+        }
+      }
+    }
 
     @media #{$tablet} {
       height: 55em;
@@ -46,24 +67,9 @@
     }
   }
 
-  .ui.selection.list > .item {
-    background: white;
-
-    a {
-      color: black;
-    }
-
-    &:hover {
-
-      a {
-        color: $orange;
-      }
-    }
-  }
-
   .states-header {
     background-color: $orange;
-    color: $dark-blue;
+    color: $blue;
     text-align: center;
     font-family: 'Dirty-Bakers-Dozen', sans-serif;
     font-size: 2em;

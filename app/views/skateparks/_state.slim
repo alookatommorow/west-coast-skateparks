@@ -1,8 +1,12 @@
 .states-header
-  p =skateparks.first.state.capitalize
+  p= skateparks.first.state.capitalize
 .ui.divided.selection.list
   - skateparks.each do |park|
-    - if park.name
-      .item= link_to "#{park.city.titleize}: #{park.name.titleize}", park
-    - else
-      div class="#{park.id} item"= link_to park.city.titleize, park
+    = link_to park, class: "item" do
+      .ui.grid
+        .five.wide.column
+          p.item-header #{park.city.titleize}
+        .five.wide.column
+          p #{park.name.titleize}
+        .six.wide.column
+          = image_tag("#{park.hero}", class: "ui small image float-right")
