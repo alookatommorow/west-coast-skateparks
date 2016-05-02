@@ -7,12 +7,12 @@ RSpec.feature 'Visitor selects skatepark from index' do
 
     visit root_path
     click_link "Skateparks"
-    click_link "Oregon"
+    click_link "OR"
 
     expect(page).to have_text(or_skatepark.name.titleize)
     expect(page).not_to have_text(wa_skatepark.name.titleize)
 
-    click_link "Washington"
+    click_link "WA"
 
     expect(page).to have_text(wa_skatepark.name.titleize)
     expect(page).not_to have_text(or_skatepark.name.titleize)
