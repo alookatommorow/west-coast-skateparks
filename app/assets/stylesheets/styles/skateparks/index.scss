@@ -28,17 +28,29 @@
 }
 
 .parks-container {
-  height: 39em;
-  width: 100%;
-  overflow-y: auto;
-  overflow-x: hidden;
   margin-bottom: 2%;
+  width: 100%;
+
+  .ui.selection.list {
+    position: relative;
+    overflow-y: auto;
+    overflow-x: hidden;
+    height: 39em;
+
+    @media #{$tablet} {
+      height: 55em;
+    }
+
+    @media #{$mobile} {
+      height: 30em;
+    }
+  }
 
   .ui.selection.list > .item {
-    background: $blue;
+    background: white;
 
     a {
-      color: white;
+      color: black;
     }
 
     &:hover {
@@ -49,12 +61,12 @@
     }
   }
 
-  @media #{$tablet} {
-    height: 55em;
-  }
-
-  @media #{$mobile} {
-    height: 30em;
+  .states-header {
+    background-color: $orange;
+    color: $dark-blue;
+    text-align: center;
+    font-family: 'Dirty-Bakers-Dozen', sans-serif;
+    font-size: 2em;
   }
 }
 
