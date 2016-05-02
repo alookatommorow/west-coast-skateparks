@@ -5,7 +5,9 @@ RSpec.describe Skateparks::StatesController, type: :controller do
 
   describe '#show' do
     it 'renders the _state partial' do
-      expect(get :show, state: 'california').to render_template('_state')
+      skatepark = create(:skatepark, :oregon)
+
+      expect(get :show, state: 'oregon').to render_template('_state')
     end
 
     it 'renders all the skateparks in a state' do

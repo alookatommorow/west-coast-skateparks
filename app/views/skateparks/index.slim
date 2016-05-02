@@ -1,9 +1,18 @@
-.image-rotator
-.skateparks-index-container
-  .ui.centered.grid
-    .thirteen.wide.column
-      .ui.three.item.menu
-        = link_to 'California', skateparks_state_path(state: 'california'), class: 'park-state item'
-        = link_to 'Oregon', skateparks_state_path(state: 'oregon'), class: 'park-state item'
-        = link_to 'Washington', skateparks_state_path(state: 'washington'), class: 'park-state item'
-      .parks-container
+.ui.centered.grid.container
+  .ui.three.item.menu.state-menu
+    = link_to skateparks_state_path(state: 'california'),
+      data: { state_link: true },
+      class: 'item state-button' do
+      p.state-label
+        | #{image_tag("https://storage.googleapis.com/west-coast-skateparks/states/ca-largeseal.png", class: "ui centered small image")} CA
+    = link_to skateparks_state_path(state: 'oregon'),
+      data: { state_link: true },
+      class: 'item state-button' do
+      p.state-label
+        | #{image_tag("https://storage.googleapis.com/west-coast-skateparks/states/or-largeseal.png", class: "ui centered small image")} OR
+    = link_to skateparks_state_path(state: 'washington'),
+      data: { state_link: true },
+      class: 'item state-button' do
+      p.state-label
+        | #{image_tag("https://storage.googleapis.com/west-coast-skateparks/states/wa-largeseal.png", class: "ui centered small image")} WA
+  .parks-container
