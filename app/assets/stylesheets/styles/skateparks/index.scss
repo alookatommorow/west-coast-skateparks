@@ -1,58 +1,63 @@
-.image-rotator {
-  background-image: url("https://storage.googleapis.com/west-coast-skateparks/headers/lance-mountain.jpg" );
-  background-size: 100% auto;
-  background-position: 0 -60px;
-  background-repeat: no-repeat;
-  height: 60%;
-  margin-bottom: 2%;
+.ui.button.state-button {
+  background-color: $blue;
+  color: white;
 
-  @media #{$tablet} {
-    background-position: center;
+  &:hover {
+    color: $orange;
+    background-color: $dark-blue;
+  }
+
+  .state-label {
+    font-size: 3em;
+    font-family: 'Dirty-Bakers-Dozen', sans-serif;
+    min-width: min-content;
+
+    @media #{$tablet} {
+      font-size: 1em;
+    }
+  }
+
+  .ui.centered.image {
+    margin-bottom: 10%;
   }
 }
 
-.skateparks-index-container {
-  height: 83%;
+.ui.button.state-button.active {
+  color: $orange;
+  background-color: $dark-blue;
+}
 
-  @media #{$tablet} {
-    height: 90%;
-  }
+.parks-container {
+  height: 39em;
+  width: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  margin-bottom: 2%;
 
-  @media #{$mobile} {
-    height: 90%;
-  }
+  .ui.selection.list > .item {
+    background: $blue;
 
-  .ui.menu {
-    background-color: $blue;
-
-    a.item {
+    a {
       color: white;
+    }
 
-      &:hover {
+    &:hover {
+
+      a {
         color: $orange;
-        background-color: $dark-blue;
       }
     }
   }
 
-  .parks-container {
-    height: 39em;
-    overflow-y: auto;
-    overflow-x: hidden;
+  @media #{$tablet} {
+    height: 55em;
+  }
 
-    a {
-      color: black;
-    }
-
-    @media #{$tablet} {
-      height: 55em;
-    }
-
-    @media #{$mobile} {
-      height: 30em;
-    }
+  @media #{$mobile} {
+    height: 30em;
   }
 }
+
 
 
 

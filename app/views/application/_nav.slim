@@ -10,8 +10,8 @@
   = link_to 'About', about_path, class: 'item nav-item'
   = link_to 'Skateparks', skateparks_path, class: 'item nav-item'
   - if logged_in?
-    = link_to 'My Profile', user_path(current_user), class: 'item'
-    = link_to 'Sign Out', session_path(current_user), method: :delete, class: 'item sign-out-button'
+    = link_to 'My Profile', user_path(current_user), class: 'item nav-item'
+    = link_to 'Sign Out', session_path(current_user), method: :delete, class: 'item nav-item sign-out-button'
   - else
     = link_to 'Sign In', '#', class: 'item  nav-item session-button'
   .right.menu
