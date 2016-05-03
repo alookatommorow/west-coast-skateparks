@@ -34,6 +34,5 @@ Rails.application.routes.draw do
   resources :visits, only: :create
   delete '/visits/:user_id/:skatepark_id', to: 'visits#destroy'
 
-  get 'about', to: 'welcome#about', as: 'about'
-  root 'welcome#index'
+  get "/pages/home", to: redirect("/")
 end
