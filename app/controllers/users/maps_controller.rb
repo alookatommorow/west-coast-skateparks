@@ -1,7 +1,11 @@
 module Users
   class MapsController < ApplicationController
     def show
-      render json: User.find(params[:user_id]).map_data
+      render json: User.
+        includes(
+          favorite_parks: :location,
+          visited_parks: :location,
+        ).find(params[:user_id]).map_data
     end
   end
 end
