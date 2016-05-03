@@ -28,12 +28,73 @@
       margin-bottom: 5%;
     }
   }
+
+  @media #{$mobile} {
+    display: none;
+  }
 }
 
+
+.ui.centered.grid.container {
+
+  .sixteen.wide.column.mobile-menu {
+    background-color: $blue;
+    color: white;
+    font-size: 1.5em;
+    font-family: 'Dirty-Bakers-Dozen', sans-serif;
+    margin-bottom: 1%;
+    display: none;
+
+    &:hover {
+      color: $orange;
+      background-color: $dark-blue;
+    }
+
+    .state-text {
+      position: absolute;
+      top: 31%;
+    }
+
+    .state-image {
+      float: right;
+    }
+
+    @media #{$mobile} {
+      display: inline-block;
+    }
+  }
+}
+
+
 .parks-container {
-  margin-bottom: 2%;
+  margin-bottom: 3%;
   width: 100%;
-  min-height: 30em;
+  min-height: 39em;
+
+  .show-mobile-menu {
+    background-color: $blue;
+    color: $orange;
+    margin-bottom: 2%;
+    padding: 1% 0;
+    font-family: 'Dirty-Bakers-Dozen', sans-serif;
+    display: none;
+
+    div {
+      display: inline-block;
+    }
+
+    .arrow-icon {
+      float: right;
+    }
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    @media #{$mobile} {
+      display: block;
+    }
+  }
 
   .letter-links {
     background-color: white;
@@ -78,9 +139,11 @@
     }
 
     @media #{$mobile} {
-      height: 30em;
+      height: 37em;
     }
   }
+
+
 
   .states-header {
     background-color: $orange;

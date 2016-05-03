@@ -7,12 +7,15 @@ $(document).ready(function(){
   //////// Show skateparks by state ////////
   $("a[data-state-link]").on("click", function(event){
     event.preventDefault();
+    console.log(this)
     if ($(this).hasClass("active")) {
       return;
+    } else if ($(this).hasClass("mobile-menu")) {
+      $(".index-menu-container").slideUp();
     }
     $(".active").removeClass("active");
     $(this).addClass("active");
-    $.get($(this).attr("href"), appendSkateparksToState);
+    $.get(this.href, appendSkateparksToState);
   });
 
   //////// Select Skatepark From State List ////////
@@ -25,5 +28,10 @@ $(document).ready(function(){
     event.preventDefault();
     $.get(this.href, appendSkateparksToState);
   });
+
+  $(".parks-container").on("click", ".show-mobile-menu", function(){
+    $(".index-menu-container").slideDown();
+  });
+
 });
 
