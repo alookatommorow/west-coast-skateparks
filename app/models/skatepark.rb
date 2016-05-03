@@ -40,17 +40,17 @@ class Skatepark < ActiveRecord::Base
   }
 
   def nearby_parks
-    Skatepark.nearby_to(self).where.not(id: id)
+    Skatepark.includes(:location).nearby_to(self).where.not(id: id)
   end
 
   def map_data
     {
       skateparks: {
         main: [hashify_with_picture],
-        nearby: nearby_parks.map(&:hashify_with_picture)
+        nearby: nearby_parks.map(&:hashify_with_picture),
       },
       mapCenter: [latitude, longitude],
-      zoom: 9
+      zoom: 9,
     }
   end
 
@@ -60,7 +60,7 @@ class Skatepark < ActiveRecord::Base
       name: name,
       latitude: latitude,
       longitude: longitude,
-      picture: map_photo(:thumb)
+      picture: map_photo(:thumb),
     }
   end
 

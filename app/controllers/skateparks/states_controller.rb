@@ -3,6 +3,7 @@ module Skateparks
     def show
       render partial: 'skateparks/state', locals: {
         skateparks: Skatepark.
+          includes(:location).
           in_state(params[:state]).
           order("locations.city", :name),
         state: params[:state],

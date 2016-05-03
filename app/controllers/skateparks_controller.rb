@@ -1,8 +1,7 @@
 class SkateparksController < ApplicationController
   def show
     @skatepark = SkateparkPresenter.new(
-      Skatepark.includes(
-        :users_who_reviewed,
-        :users_who_rated).find(params[:id]))
+      Skatepark.includes({ reviews: :user }, :ratings).find(params[:id])
+    )
   end
 end
