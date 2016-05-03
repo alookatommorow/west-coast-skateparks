@@ -1,6 +1,11 @@
 .ui.three.item.menu.state-menu {
 
-  .item.state-button {
+  a.item.state-button.active {
+    color: $orange;
+    background-color: $dark-blue;
+  }
+
+  a.item.state-button {
     background-color: $blue;
     color: white;
 
@@ -25,15 +30,26 @@
   }
 }
 
-.state-button.active {
-  color: $orange;
-  background-color: $dark-blue;
-}
-
 .parks-container {
   margin-bottom: 2%;
   width: 100%;
   min-height: 30em;
+
+  .letter-links {
+    background-color: white;
+    padding: 0 3%;
+
+      .link {
+        color: $blue;
+        padding: 1% 1%;
+        display: inline-block;
+
+        &:hover {
+          cursor: pointer;
+          background-color: $gray
+        }
+      }
+  }
 
   .ui.selection.list {
     position: relative;
@@ -43,6 +59,10 @@
 
     .item {
       background: white;
+
+      &:hover {
+        background-color: $gray
+      }
 
       p {
         color: black;
@@ -68,6 +88,7 @@
     text-align: center;
     font-family: 'Dirty-Bakers-Dozen', sans-serif;
     font-size: 2em;
+    margin-bottom: 1%;
   }
 }
 
