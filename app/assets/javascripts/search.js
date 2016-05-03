@@ -7,7 +7,9 @@ $(document).ready(function(){
   //////// Search form submit via enter key ////////
   $('.search-form').on('submit', function(event) {
     $(".ui.dimmer").addClass("active");
-    AJAX(event, appendSearchResultsToContainer);
+    $.get(this.action, $(this).serialize(), appendSearchResultsToContainer);
+
+    event.preventDefault();
   });
 
   //////// Search form submit via icon click ////////
