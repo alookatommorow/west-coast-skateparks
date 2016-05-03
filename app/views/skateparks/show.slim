@@ -1,14 +1,21 @@
 .page-container
   .ui.grid
-    = render partial: 'header', locals: { skatepark: @skatepark, last: Skatepark.last.id }
+    = render 'header', skatepark: @skatepark, last: Skatepark.last.id
     .six.wide.column
-      = render partial: 'info', locals: { skatepark: @skatepark }
-      = render partial: 'map', locals: { skatepark: @skatepark }
+      = render 'info', skatepark: @skatepark
+      = render 'map', skatepark: @skatepark
     .ten.wide.column
-      = render partial: 'photos', locals: { skatepark: @skatepark }
+      = render 'photos', skatepark: @skatepark
       - if logged_in?
-        = render partial: 'user_actions', locals: { skatepark: @skatepark }
-      = render partial: 'reviews', locals: { skatepark: @skatepark }
+        #user-actions
+          span data-ajax-container=true
+            = render "visits/button",
+              visit: @visit, user: current_user, skatepark: @skatepark
+          span data-ajax-container=true
+            = render "favorites/button",
+              favorite: @favorite, user: current_user, skatepark: @skatepark
+          = render 'user_actions', skatepark: @skatepark
+      = render 'reviews', skatepark: @skatepark
 .ui.basic.modal.picture-modal
   i.close.icon
   .image.content

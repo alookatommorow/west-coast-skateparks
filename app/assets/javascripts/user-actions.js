@@ -1,13 +1,15 @@
 $(document).ready(function() {
-  $('form[data-ajax-toggle]').each(bindAjaxToggle);
   $('button[data-slide-toggle]').each(bindSlideToggle);
   $('.ui.dropdown').dropdown(); // dropdown on rate form
 
+  $("[data-ajax-container]").on("submit", "[data-ajax-form]", function (event) {
+    $.post(this.action, $(this).serialize())
+      .success(renderResponse.bind(this));
+    event.preventDefault();
+  });
 
-  function bindAjaxToggle(_, domEl) {
-    $(domEl).on('submit', function (event) {
-      AJAX(event, function() { hideMeShowOpposite($(event.target)); });
-    });
+  function renderResponse(response) {
+    $(this).closest("[data-ajax-container]").html(response);
   }
 
   function bindSlideToggle(_, domEl) {
@@ -15,10 +17,5 @@ $(document).ready(function() {
       event.preventDefault();
       $($(event.target).data('slide-toggle')).slideToggle(500);
     });
-  }
-
-  function hideMeShowOpposite(target) {
-    target.hide();
-    $(target.data('ajax-toggle')).show();
   }
 });

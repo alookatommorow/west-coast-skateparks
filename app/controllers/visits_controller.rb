@@ -1,11 +1,24 @@
 class VisitsController < ApplicationController
   def create
-    ManyToMany.create(Visit, params)
-    render nothing: true
+    @visit = Visit.create(
+      skatepark_id: params[:skatepark_id],
+      user_id: current_user.id,
+    )
+    render_visit_button
   end
 
   def destroy
-    ManyToMany.destroy(Visit, params)
-    render nothing: true
+    Visit.destroy(params[:id])
+    render_visit_button
   end
+
+  private
+
+    def render_visit_button
+      render partial: "button", locals: {
+        visit: @visit,
+        user: current_user.id,
+        skatepark: Skatepark.find(params[:skatepark_id]),
+      }
+    end
 end

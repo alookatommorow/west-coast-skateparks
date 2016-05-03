@@ -23,16 +23,12 @@ Rails.application.routes.draw do
 
   resources :skateparks do
     resource :map, only: :show, controller: 'skateparks/maps'
+    resources :favorites, only: %i(create destroy)
+    resources :visits, only: %i(create destroy)
   end
 
   resources :ratings, only: :create
   resources :reviews, only: :create
-
-  resources :favorites, only: :create
-  delete '/favorites/:user_id/:skatepark_id', to: 'favorites#destroy'
-
-  resources :visits, only: :create
-  delete '/visits/:user_id/:skatepark_id', to: 'visits#destroy'
 
   get "/pages/home", to: redirect("/")
 end
