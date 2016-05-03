@@ -25,6 +25,8 @@ class Skatepark < ActiveRecord::Base
   # validates_attachment_presence :map_photo
   validates_attachment_content_type :map_photo, content_type: /\Aimage/
 
+  scope :in_state, -> (state) { joins(:location).where("locations.state = ?", state) }
+
   scope :search, -> (query) {
     joins(:location).
       where("name LIKE ? OR locations.city LIKE ?", "%#{query}%", "%#{query}%").

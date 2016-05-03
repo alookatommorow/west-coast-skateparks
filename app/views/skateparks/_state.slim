@@ -1,5 +1,10 @@
 .states-header
-  p= skateparks.first.state.capitalize
+  p= state.titleize
+.letter-links
+  - ("A".."Z").each do |letter|
+    = link_to letter,
+      skateparks_state_letter_path(state_id: state, letter: letter),
+      data: { skatepark_letter_link: true }
 .ui.divided.selection.list
   - skateparks.each do |park|
     = link_to park, class: "item" do
@@ -10,3 +15,5 @@
           p #{park.name.titleize}
         .six.wide.column
           = image_tag("#{park.hero}", class: "ui small image float-right")
+  - if skateparks.empty?
+    h1 AINT NO PARKS BY THAT LETTER MY G

@@ -16,7 +16,9 @@ Rails.application.routes.draw do
 
   namespace :skateparks do
     resource :search, only: :show
-    resource :state, only: :show
+    resource :state, only: :show do
+      resource :letter, only: :show
+    end
   end
 
   resources :skateparks do
