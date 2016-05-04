@@ -1,4 +1,5 @@
 .ui.three.item.menu.state-menu {
+  margin-top: 1%;
 
   a.item.state-button.active {
     color: $orange;
@@ -83,8 +84,14 @@
       display: inline-block;
     }
 
-    .arrow-icon {
+    .arrow-icon-left {
+      float: left;
+      margin-left: 1%;
+    }
+
+    .arrow-icon-right {
       float: right;
+      margin-right: 1%;
     }
 
     &:hover {
@@ -100,16 +107,20 @@
     background-color: white;
     padding: 0 3%;
 
-      .link {
-        color: $blue;
-        padding: 1% 1%;
-        display: inline-block;
+    .link {
+      color: $blue;
+      padding: 1% 1%;
+      display: inline-block;
 
-        &:hover {
-          cursor: pointer;
-          background-color: $gray
-        }
+      &:hover {
+        cursor: pointer;
+        background-color: $gray
       }
+
+      @media #{$mobile} {
+        padding: 1% 2%;
+      }
+    }
   }
 
   .ui.selection.list {
