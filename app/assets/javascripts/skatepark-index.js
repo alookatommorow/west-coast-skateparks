@@ -10,6 +10,7 @@ $(document).ready(function(){
     if ($(this).hasClass("active")) {
       return;
     }
+
     $(".active").removeClass("active");
     $(this).addClass("active");
     $.get(this.href, appendSkateparksToState);
@@ -18,10 +19,9 @@ $(document).ready(function(){
   //////// Show skateparks by state mobile ////////
   $("a[data-mobile-state-link]").on("click", function(event){
     event.preventDefault();
-    if ($(this).hasClass("mobile-menu")) {
-      $(".index-menu-container").slideUp();
-    }
-    $.get(this.href, appendSkateparksToState);
+    $(".index-menu-container").slideUp(function(){
+      $.get(this.href, appendSkateparksToState);
+    }.bind(this));
   });
 
   /////// Show skatepark by Letter ////////
