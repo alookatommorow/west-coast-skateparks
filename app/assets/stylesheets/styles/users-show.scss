@@ -10,8 +10,8 @@
   overflow-y: auto;
   overflow-x: hidden;
   padding-left: 0;
-}
 
-.profile-container a {
-  color: black;
+  .selection.list > .item {
+    color: black;
+  }
 }

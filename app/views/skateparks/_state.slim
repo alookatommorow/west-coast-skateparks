@@ -1,19 +1,25 @@
+.sixteen.wide.column.show-mobile-menu
+  .arrow-icon-left
+    i.arrow.down.icon
+  .show-menu-text Show Menu
+  .arrow-icon-right
+    i.arrow.down.icon
 .states-header
   p= state.titleize
 .letter-links
   - ("A".."Z").each do |letter|
     = link_to letter,
       skateparks_state_letter_path(state_id: state, letter: letter),
-      data: { skatepark_letter_link: true }
+      data: { skatepark_letter_link: true }, class: "link"
 .ui.divided.selection.list
   - skateparks.each do |park|
     = link_to park, class: "item" do
       .ui.grid
-        .five.wide.column
+        .left.aligned.five.wide.column
           p.item-header #{park.city.titleize}
-        .five.wide.column
+        .left.aligned.five.wide.column
           p #{park.name.titleize}
-        .six.wide.column
+        .left.aligned.six.wide.column
           = image_tag("#{park.hero}", class: "ui small image float-right")
   - if skateparks.empty?
     h1 AINT NO PARKS BY THAT LETTER MY G

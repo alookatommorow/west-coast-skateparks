@@ -13,10 +13,7 @@
         .ui.divider
         .ui.middle.aligned.selection.list
           - @user.favorite_parks.each do |park|
-            -if park.name
-              .item= link_to park.city.titleize + ": " + park.name.titleize + ", " + park.state.capitalize.capitalize, skatepark_path(park)
-            -else
-              .item= link_to park.city.titleize + ", " + park.state.capitalize, skatepark_path(park)
+            = link_to park.city.titleize + ": " + park.name.titleize + ", " + park.state.capitalize.capitalize, skatepark_path(park), class: "item"
       .seven.wide.column
         #relative
           #map.user-map
@@ -36,7 +33,5 @@
         .ui.divider
         .ui.middle.aligned.selection.list
           - @user.visited_parks.each do |park|
-            - if park.name
-              .item= link_to park.city.titleize  + ", " + park.state.capitalize + ": " + park.name.titleize , skatepark_path(park)
-            -else
-              .item= link_to park.city.titleize + ", " + park.state.capitalize, skatepark_path(park)
+            = link_to park.city.titleize  + ", " + park.state.capitalize + ": " + park.name.titleize , skatepark_path(park), class: "item"
+

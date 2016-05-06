@@ -10,20 +10,29 @@ $(document).ready(function(){
     if ($(this).hasClass("active")) {
       return;
     }
+
     $(".active").removeClass("active");
     $(this).addClass("active");
-    $.get($(this).attr("href"), appendSkateparksToState);
+    $.get(this.href, appendSkateparksToState);
   });
 
-  //////// Select Skatepark From State List ////////
-  $(".parks-container").on("click", ".item", function(){
-    makeItemClickable(this);
+  //////// Show skateparks by state mobile ////////
+  $("a[data-mobile-state-link]").on("click", function(event){
+    event.preventDefault();
+    $(".index-menu-container").slideUp(function(){
+      $.get(this.href, appendSkateparksToState);
+    }.bind(this));
   });
 
   /////// Show skatepark by Letter ////////
   $(".parks-container").on("click", "a[data-skatepark-letter-link]", function(event) {
     event.preventDefault();
     $.get(this.href, appendSkateparksToState);
+  });
+
+  $(".parks-container").on("click", ".show-mobile-menu", function(){
+    $(".parks-container").children().remove();
+    $(".index-menu-container").slideDown();
   });
 });
 

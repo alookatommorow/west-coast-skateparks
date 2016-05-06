@@ -1,6 +1,12 @@
 .ui.three.item.menu.state-menu {
+  margin-top: 1%;
 
-  .item.state-button {
+  a.item.state-button.active {
+    color: $orange;
+    background-color: $dark-blue;
+  }
+
+  a.item.state-button {
     background-color: $blue;
     color: white;
 
@@ -23,17 +29,99 @@
       margin-bottom: 5%;
     }
   }
+
+  @media #{$mobile} {
+    display: none;
+  }
 }
 
-.state-button.active {
-  color: $orange;
-  background-color: $dark-blue;
+
+.ui.centered.grid.container {
+
+  .sixteen.wide.column.mobile-menu {
+    background-color: $blue;
+    color: white;
+    font-size: 1.5em;
+    font-family: 'Dirty-Bakers-Dozen', sans-serif;
+    margin-bottom: 1%;
+    display: none;
+
+    &:hover {
+      color: $orange;
+      background-color: $dark-blue;
+    }
+
+    .state-text {
+      position: absolute;
+      top: 31%;
+    }
+
+    .state-image {
+      float: right;
+    }
+
+    @media #{$mobile} {
+      display: inline-block;
+    }
+  }
 }
+
 
 .parks-container {
-  margin-bottom: 2%;
+  margin-bottom: 3%;
   width: 100%;
-  min-height: 30em;
+  min-height: 39em;
+
+  .show-mobile-menu {
+    background-color: $blue;
+    color: $orange;
+    margin-bottom: 2%;
+    padding: 1% 0;
+    font-family: 'Dirty-Bakers-Dozen', sans-serif;
+    display: none;
+
+    div {
+      display: inline-block;
+    }
+
+    .arrow-icon-left {
+      float: left;
+      margin-left: 1%;
+    }
+
+    .arrow-icon-right {
+      float: right;
+      margin-right: 1%;
+    }
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    @media #{$mobile} {
+      display: block;
+    }
+  }
+
+  .letter-links {
+    background-color: white;
+    padding: 0 3%;
+
+    .link {
+      color: $blue;
+      padding: 1% 1%;
+      display: inline-block;
+
+      &:hover {
+        cursor: pointer;
+        background-color: $gray
+      }
+
+      @media #{$mobile} {
+        padding: 1% 2%;
+      }
+    }
+  }
 
   .ui.selection.list {
     position: relative;
@@ -43,6 +131,10 @@
 
     .item {
       background: white;
+
+      &:hover {
+        background-color: $gray
+      }
 
       p {
         color: black;
@@ -58,9 +150,11 @@
     }
 
     @media #{$mobile} {
-      height: 30em;
+      height: 37em;
     }
   }
+
+
 
   .states-header {
     background-color: $orange;
@@ -68,6 +162,7 @@
     text-align: center;
     font-family: 'Dirty-Bakers-Dozen', sans-serif;
     font-size: 2em;
+    margin-bottom: 1%;
   }
 }
 
