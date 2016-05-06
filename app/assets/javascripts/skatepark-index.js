@@ -52,13 +52,18 @@ $(document).ready(function(){
     }
   });
 
+  function showBackToTopLink() {
+  }
+
   function renderSkateparks(response) {
     $(".parks-container").html(response);
+    $("#back-to-top").hide();
   }
 
   function appendSkateparks(response) {
     var $skateparks = $($(response)[$(response).length - 1]).children();
     $skateparks.hide().appendTo(".selection.list").fadeIn(400);
+    $("#back-to-top").show();
   }
 
   function updatePageNumber() {
