@@ -45,7 +45,7 @@ $(document).ready(function(){
 
   ////// infinity scroll //////
   $(window).scroll(function () {
-    var scrolledToBottom = $(document).height() - $(window).height() == $(window).scrollTop();
+    var scrolledToBottom = $(document).height() - $(window).height() === $(window).scrollTop();
     if (scrolledToBottom && currentStateLink && morePagesLeft()) {
       updatePageNumber();
       $.get(currentStateLink, appendSkateparks);
@@ -68,7 +68,7 @@ $(document).ready(function(){
 
   function updatePageNumber() {
     currentStateLink = currentStateLink.replace(/page=(\d+)/g, function(match, page) {
-      return "page=" + (parseInt(page) + 1);
+      return "page=" + (parseInt(page, 10) + 1);
     });
     pageCount++;
   }
