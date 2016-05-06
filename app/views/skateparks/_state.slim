@@ -9,7 +9,7 @@
 .letter-links
   - ("A".."Z").each do |letter|
     = link_to letter,
-      skateparks_state_letter_path(state_id: state, letter: letter),
+      skateparks_state_letter_path(state_id: state, letter: letter, page: 1),
       data: { skatepark_letter_link: true }, class: "link"
 .ui.divided.selection.list data-total-pages=skateparks.total_pages
   - skateparks.each do |park|

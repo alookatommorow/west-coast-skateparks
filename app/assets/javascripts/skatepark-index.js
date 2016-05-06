@@ -1,5 +1,3 @@
-// ADD INFINITY PAGINATION ON LETTERS
-
 $(document).ready(function(){
   var pageCount = 1;
   var currentStateLink;
@@ -33,6 +31,10 @@ $(document).ready(function(){
   /////// Show skatepark by Letter ////////
   $(".parks-container").on("click", "a[data-skatepark-letter-link]", function(event) {
     event.preventDefault();
+
+    pageCount = 1;
+    currentStateLink = this.href;
+
     $.get(this.href, renderSkateparks);
   });
 

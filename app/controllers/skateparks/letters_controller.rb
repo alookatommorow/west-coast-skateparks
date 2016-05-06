@@ -6,7 +6,8 @@ module Skateparks
           includes(:location).
           in_state(params[:state_id]).
           where("lower(locations.city) LIKE ?", "#{params[:letter].downcase}%").
-          order("locations.city", :name),
+          order("locations.city", :name).
+          page(params[:page]),
         state: params[:state_id],
       }
     end
