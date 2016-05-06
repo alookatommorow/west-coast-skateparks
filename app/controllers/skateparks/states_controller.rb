@@ -5,7 +5,8 @@ module Skateparks
         skateparks: Skatepark.
           includes(:location).
           in_state(params[:state]).
-          order("locations.city", :name),
+          order("locations.city", :name).
+          page(params[:page]),
         state: params[:state],
       }
     end
