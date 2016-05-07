@@ -60,9 +60,6 @@ $(document).ready(function(){
     }
   }
 
-  function showBackToTopLink() {
-  }
-
   function renderSkateparks(response) {
     $(".parks-container").html(response);
     $("#back-to-top").hide();
