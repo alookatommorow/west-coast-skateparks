@@ -318,6 +318,7 @@ DEPENDENCIES
   gmaps4rails
   high_voltage (~> 3.0.0)
   jquery-rails
+  kaminari
   launchy
   less-rails (~> 2.7.1)
   less-rails-semantic_ui (~> 2.1.8.2)

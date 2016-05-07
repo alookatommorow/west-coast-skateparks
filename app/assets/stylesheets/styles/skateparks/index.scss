@@ -125,9 +125,6 @@
 
   .ui.selection.list {
     position: relative;
-    overflow-y: auto;
-    overflow-x: hidden;
-    height: 39em;
 
     .item {
       background: white;
@@ -144,17 +141,7 @@
         font-weight: bold;
       }
     }
-
-    @media #{$tablet} {
-      height: 55em;
-    }
-
-    @media #{$mobile} {
-      height: 37em;
-    }
   }
-
-
 
   .states-header {
     background-color: $orange;
@@ -166,6 +153,18 @@
   }
 }
 
+a#back-to-top {
+  position: fixed;
+  right: 0;
+  padding-right: 10px;
+  bottom: 50px;
+  font-size: 3em;
+  background-color: $orange;
+  color: $blue;
+  border-radius: 10px 0 0 10px;
+  display: none;
 
-
-
+  &:hover {
+    padding-right: 25px;
+  }
+}
