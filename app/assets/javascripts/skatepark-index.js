@@ -44,13 +44,18 @@ $(document).ready(function(){
   });
 
   ////// infinity scroll //////
-  $(window).scroll(function () {
-    var scrolledToBottom = $(document).height() - $(window).height() === $(window).scrollTop();
+  $(window).scroll(infiniteScroll);
+
+  function infiniteScroll() {
+    var scrolledToBottom = ($(document).height() - $(window).height()) - 400 <= $(window).scrollTop();
     if (scrolledToBottom && currentStateLink && morePagesLeft()) {
       updatePageNumber();
-      $.get(currentStateLink, appendSkateparks);
+      $(window).off("scroll");
+      $.get(currentStateLink, appendSkateparks).then(function () {
+        $(window).scroll(infiniteScroll);
+      });
     }
-  });
+  }
 
   function showBackToTopLink() {
   }
