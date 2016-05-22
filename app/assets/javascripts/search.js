@@ -11,7 +11,7 @@ $(document).ready(function(){
   });
 
   //////// Search form submit via icon click ////////
-  $('.circular.search').on('click', function(event) {
+  $('#search-button').on('click', function(event) {
     $('.search-form').submit();
   });
 });
