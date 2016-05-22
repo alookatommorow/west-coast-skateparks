@@ -3,7 +3,7 @@
     label.item.mobile-nav-item for="show-menu" id="burger"
       i.large.sidebar.icon
     .right.menu
-      a.item.mobile-nav-item.search-nav
+      = link_to new_skateparks_search_path, class: "item search-nav" do
         i.large.search.icon
   input type="checkbox" id="show-menu" role="button"
   = link_to 'Home', page_path("home"), class: 'item nav-item'
@@ -13,7 +13,7 @@
     = link_to 'My Profile', user_path(current_user), class: 'item nav-item'
     = link_to 'Sign Out', session_path(current_user), method: :delete, class: 'item nav-item sign-out-button'
   - else
-    = link_to 'Sign In', '#', class: 'item  nav-item session-button'
+    = link_to 'Sign In', new_session_path, class: 'item  nav-item session-button'
   .right.menu
-    a.item.nav-item.search-nav
+    = link_to new_skateparks_search_path, class: "item nav-item search-nav" do
       i.large.search.icon

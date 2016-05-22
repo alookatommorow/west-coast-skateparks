@@ -3,6 +3,8 @@ require 'rails_helper'
 RSpec.feature 'Visitor creates an account' do
   scenario "they are redirected to 'my parks'" do
     visit root_path
+    click_link("Sign In")
+    click_link("Don't have a WCS")
     find('#username').set('buttclown95')
     find('#email').set('juggalo@icplovers.org')
     find('#password').set('thesmellofsack')
@@ -22,12 +24,14 @@ RSpec.feature 'Visitor creates an account' do
         password: 'suckmyjaggon')
 
       visit root_path
+      click_link("Sign In")
+      click_link("Don't have a WCS")
       find('#username').set(invalid_user.username)
       find('#email').set(user.email)
       find('#password').set(invalid_user.password)
       click_button 'Register'
 
-      expect(current_path).to eq(root_path)
+      expect(current_path).to eq(new_user_path)
       expect(page).to have_text(invalid_user.errors.full_messages.first)
     end
   end

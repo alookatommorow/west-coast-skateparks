@@ -1,8 +1,0 @@
-#search-modal.ui.fullscreen.modal
-  i.close.icon
-  .ui.search.center-text
-    = form_tag(skateparks_search_path, method: 'get', class: 'search-form') do
-      .ui.icon.input
-        = text_field_tag :search, nil, placeholder: 'Search skateparks', required: true, id: 'search-input'
-        i.circular.search.link.icon.search-button
-  .search-container

@@ -1,0 +1,14 @@
+- if skateparks.any?
+  p.search-header Search Results
+  .ui.divided.selection.list
+    - skateparks.each do |park|
+      = link_to park, class: "item" do
+        .ui.grid
+          .left.aligned.five.wide.column
+            p.item-header #{park.city.titleize}
+          .left.aligned.five.wide.column
+            p #{park.name.titleize}
+          .left.aligned.six.wide.column
+            = image_tag("#{park.hero}", class: "ui small image float-right")
+- else
+  p.search-header No Results

@@ -3,5 +3,5 @@ def sign_in_user(user)
   click_link 'Sign In'
   find('#username-sign-in').set(user.username)
   find('#password-sign-in').set(user.password)
-  click_button 'Submit'
+  click_button 'Sign In'
 end

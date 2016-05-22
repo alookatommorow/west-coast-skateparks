@@ -5,14 +5,14 @@ RSpec.feature 'Visitor searches skatepark' do
     skatepark = create(:skatepark)
 
     visit root_path
-    find('.search-nav').click
+    first('.search-nav').click
     fill_in 'search', with: 'ragamuffin skank'
     submit_search
 
     expect(page).to have_text('No Results')
 
     fill_in 'search', with: skatepark.name
-    find('.search-button').click
+    find('#search-button').click
 
     expect(page).to have_text(skatepark.name.titleize)
     expect(page).not_to have_text('No Results')
