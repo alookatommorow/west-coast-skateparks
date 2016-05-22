@@ -1,9 +1,5 @@
 $(document).ready(function () {
   initGoogleAuth();
-  //////// Show sign-up modal ////////
-  $('.session-button').click(function(){
-    $('#session-modal').modal('show');
-  });
 
   //////// FB login ////////
   $('#fb-login').click(function(){

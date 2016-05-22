@@ -3,11 +3,10 @@ class SessionsController < ApplicationController
     'Shred on brashiki',
     'LAYYYYTTTERRRRRR',
     'Grip it and rip it',
-    "Go terrorize some 'crete!"
+    "Go terrorize some 'crete!",
   ].freeze
 
   def new
-
   end
 
   def create
