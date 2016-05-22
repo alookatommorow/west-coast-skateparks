@@ -3,12 +3,6 @@ $(document).ready(function(){
     $(".search-container").empty().append(response);
   };
 
-  //// Open search modal ////
-  $('.search-nav').click(function(event){
-    event.preventDefault();
-    $('#search-modal').modal('show');
-  });
-
   //////// Search form submit via enter key ////////
   $('.search-form').on('submit', function(event) {
     AJAX(event, appendSearchResultsToContainer);

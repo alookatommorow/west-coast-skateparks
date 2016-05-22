@@ -15,5 +15,5 @@
   - else
     = link_to 'Sign In', new_session_path, class: 'item  nav-item session-button'
   .right.menu
-    a.item.nav-item.search-nav
+    = link_to new_skateparks_search_path, class: "item nav-item search-nav" do
       i.large.search.icon

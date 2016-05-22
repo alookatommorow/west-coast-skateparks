@@ -1,5 +1,8 @@
 module Skateparks
   class SearchesController < ApplicationController
+    def new
+    end
+
     def show
       render partial: 'search_results', locals: {
         skateparks: Skatepark.
