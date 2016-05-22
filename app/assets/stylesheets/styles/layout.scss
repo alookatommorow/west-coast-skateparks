@@ -49,6 +49,14 @@ body {
     }
   }
 
+  #mobile-search {
+    display: none;
+
+    @media #{$mobile} {
+      display: inline;
+    }
+  }
+
   .item.mobile-nav-item {
     display: none;
   }
