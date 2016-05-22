@@ -1,6 +1,6 @@
-.form-container
-  .log-in-form
-    = form_tag "/users", class: "ui form sign-up-form" do
+.form-container#sign-up-container
+  .sign-up-form
+    = form_tag "/users", class: "ui form" do
       .field
         = text_field_tag :username, nil, placeholder: 'Username'
       .field

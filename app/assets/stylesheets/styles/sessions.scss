@@ -1,10 +1,20 @@
 .form-container {
-  background: url("https://storage.googleapis.com/west-coast-skateparks/headers/burndog-bw.jpg") center center no-repeat;
   height: 100%;
-  background-attachment: fixed;
-  background-size: cover;
 
-  .log-in-form {
+  &#sign-in-container {
+    background: url("https://storage.googleapis.com/west-coast-skateparks/headers/burndog-bw.jpg") center center no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+  }
+
+  &#sign-up-container {
+    background: url("https://storage.googleapis.com/west-coast-skateparks/headers/marginal-bw.jpg") center center no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+  }
+
+  .sign-in-form,
+  .sign-up-form {
     padding: 30px;
     width: 500px;
     margin: 30px auto;

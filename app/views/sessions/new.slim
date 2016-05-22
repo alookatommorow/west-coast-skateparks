@@ -1,5 +1,5 @@
-.form-container
-  .log-in-form
+.form-container#sign-in-container
+  .sign-in-form
     = form_tag '/sessions', class: 'ui form' do
       .field
         = text_field_tag :username, nil, id: 'username-sign-in', placeholder: 'Username'
