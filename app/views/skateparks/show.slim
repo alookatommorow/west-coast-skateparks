@@ -5,14 +5,7 @@
   = render 'map', skatepark: @skatepark
   = render 'photos', skatepark: @skatepark
   - if logged_in?
-    #user-actions
-      span data-ajax-container=true
-        = render "visits/button",
-          visit: @visit, user: current_user, skatepark: @skatepark
-      span data-ajax-container=true
-        = render "favorites/button",
-          favorite: @favorite, user: current_user, skatepark: @skatepark
-      = render 'user_actions', skatepark: @skatepark
+    = render 'user_actions', skatepark: @skatepark
   = render 'reviews', skatepark: @skatepark
 
 .ui.basic.modal.picture-modal

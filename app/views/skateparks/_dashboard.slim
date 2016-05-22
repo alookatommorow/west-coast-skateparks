@@ -10,9 +10,17 @@
           | #{rating_phrase[skatepark.rating.to_i][0]}
           span  #{rating_phrase[skatepark.rating.to_i][1]}
     .content-right
-      p UR A BITCH
+      - if logged_in?
+        #user-actions
+          span data-ajax-container=true
+            = render "visits/button",
+              visit: @visit, user: current_user, skatepark: @skatepark
+          span data-ajax-container=true
+            = render "favorites/button",
+              favorite: @favorite, user: current_user, skatepark: @skatepark
   .ui.divider
   .address
     p
-      i.marker.icon
-      | #{skatepark.formatted_address}
+      a href="https://maps.google.com/maps?saddr='Current Location'&daddr=#{skatepark.formatted_address}" target="_blank"
+        i.marker.icon
+        | #{skatepark.formatted_address}
