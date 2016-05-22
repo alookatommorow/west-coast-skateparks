@@ -1,0 +1,18 @@
+.skatepark-show-dashboard
+  .stars
+    .content-left
+      - if skatepark.rating
+        - (skatepark.rating.to_i).times do
+          i.large.star.icon
+        - (5-skatepark.rating.to_i).times do
+          i.large.star.icon.shaded
+        p
+          | #{rating_phrase[skatepark.rating.to_i][0]}
+          span  #{rating_phrase[skatepark.rating.to_i][1]}
+    .content-right
+      p UR A BITCH
+  .ui.divider
+  .address
+    p
+      i.marker.icon
+      | #{skatepark.formatted_address}

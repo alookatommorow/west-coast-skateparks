@@ -1,0 +1,54 @@
+.skatepark-show-dashboard {
+  padding: 15px;
+
+  .content-left {
+    display: inline-block;
+  }
+
+  .content-right {
+    display: inline-block;
+    float: right;
+  }
+
+  .stars {
+    font-size: 20px;
+
+    i.star {
+      color: $orange;
+
+      &.shaded {
+        color: $dark-blue;
+      }
+    }
+
+    p {
+      font-size: 18px;
+      font-weight: bold;
+      color: $dark-blue;
+      margin-top: 5px;
+
+      span {
+        font-size: 16px;
+        font-weight: normal;
+        font-style: italic;
+        color: black;
+
+        &:before {
+          content: " - ";
+          margin: 0 2px;
+          color: $orange;
+        }
+      }
+    }
+  }
+
+  .address {
+    margin-top: 15px;
+    font-size: 16px;
+
+    i {
+      font-size: 25px;
+      color: $dark-blue;
+    }
+  }
+}

@@ -9,18 +9,3 @@ header.skatepark-show-header style="background-image: linear-gradient( rgba(0, 0
     - if skatepark.id < last
       = link_to skatepark_path(skatepark.id + 1) do
         i.angle.right.icon
-
-
-
-
-
-
-.one-top.one-bottom
-  - if skatepark.rating
-    - (skatepark.rating.to_i).times do
-      i.large.yellow.star.icon.inline-block
-    - (5-skatepark.rating.to_i).times do
-      i.large.yellow.empty.star.icon.inline-block
-
-one.wide.column
-
