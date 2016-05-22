@@ -8,7 +8,7 @@ class UsersController < ApplicationController
       session[:id] = @user.id
       redirect_to @user
     else
-      redirect_to root_path, notice: @user.errors.full_messages.first
+      redirect_to new_user_path, flash: { error: @user.errors.full_messages.first }
     end
   end
 

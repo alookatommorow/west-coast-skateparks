@@ -52,7 +52,7 @@ class SessionsController < ApplicationController
         path = @user.admin? ? admin_root_path : @user
         redirect_to path, flash: { notice: "Welcome, #{@user.display_name}" }
       else
-        redirect_to root_path, flash: { error: 'Sign in failed' }
+        redirect_to new_session_path, flash: { error: 'Sign in failed' }
       end
     end
 

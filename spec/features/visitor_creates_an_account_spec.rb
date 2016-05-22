@@ -31,7 +31,7 @@ RSpec.feature 'Visitor creates an account' do
       find('#password').set(invalid_user.password)
       click_button 'Register'
 
-      expect(current_path).to eq(root_path)
+      expect(current_path).to eq(new_user_path)
       expect(page).to have_text(invalid_user.errors.full_messages.first)
     end
   end
