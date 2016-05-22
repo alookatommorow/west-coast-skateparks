@@ -1,5 +1,5 @@
-p.search-header Search Results
 - if skateparks.any?
+  p.search-header Search Results
   .ui.divided.selection.list
     - skateparks.each do |park|
       = link_to park, class: "item" do

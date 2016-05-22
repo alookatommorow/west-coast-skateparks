@@ -1,29 +1,45 @@
 .search-page-container {
-  height: 100%;
-  background: url("https://storage.googleapis.com/west-coast-skateparks/headers/newberg-bw.jpg") center center no-repeat;
+  height: 200%;
+  background: url("https://storage.googleapis.com/west-coast-skateparks/headers/newberg-bw.jpg") center center repeat-y;
   background-attachment: fixed;
   background-size: cover;
 
   .search-form-container {
-    padding: 30px;
-    width: 95%;
+    width: 85%;
     margin: 30px auto;
     position: relative;
     top: 55px;
-    background-color: $gray;
-    border-radius: 5px;
+
+
+    .ui.icon.input {
+      width: 75%;
+      height: 50px;
+      font-size: 15px;
+
+      #search-button {
+        margin-top: 5px;
+        color: $blue;
+        opacity: 1;
+
+        &:hover {
+          color: $orange;
+          opacity: 1;
+        }
+      }
+    }
   }
 
   .search-header {
     text-align: center;
     margin: 2% 0;
     font-weight: bold;
-    color: $blue;
+    color: $orange;
     font-size: 30px;
   }
 
   .ui.selection.list {
     position: relative;
+    margin-bottom: 1%;
 
     .item {
       background: white;
