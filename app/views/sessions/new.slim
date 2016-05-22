@@ -1,0 +1,18 @@
+.form-container
+  .log-in-form
+    = form_tag '/sessions', class: 'ui form' do
+      .field
+        = text_field_tag :username, nil, id: 'username-sign-in', placeholder: 'Username'
+      .field
+        = password_field_tag :password, nil, id: 'password-sign-in', placeholder: 'Password'
+      = submit_tag 'Sign In', class: 'ui button sign-in-button'
+      .ui.error.message
+    .ui.horizontal.divider Or
+    button#fb-login.ui.labeled.icon.primary.button.social-login
+      '
+      i.facebook.square.icon
+      span.social-login Login with Facebook
+    button#goog-login.ui.red.labeled.icon.button.social-login
+      '
+      i.google.plus.square.icon
+      span Login with Google

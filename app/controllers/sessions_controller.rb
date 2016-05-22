@@ -6,6 +6,10 @@ class SessionsController < ApplicationController
     "Go terrorize some 'crete!"
   ].freeze
 
+  def new
+
+  end
+
   def create
     login
   end

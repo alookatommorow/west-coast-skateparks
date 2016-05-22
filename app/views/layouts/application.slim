@@ -9,11 +9,10 @@ html
   body
     = render 'nav'
     = render 'flashes'
-    = render 'hero' unless current_page?(root_path)
+    = render 'hero' unless current_page?(root_path) || current_page?(new_session_path)
 
     = yield
 
-    = render 'footer' unless current_page?(root_path)
     = render 'session_modal'
     = render 'search_modal'
     = render partial: 'javascripts', locals: { skatepark: @skatepark, user: @user }
