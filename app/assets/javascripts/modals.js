@@ -3,11 +3,13 @@ $(document).ready(function () {
 
   //////// FB login ////////
   $('#fb-login').click(function(){
+    hideSessionForm();
     FB.login(checkLoginState);
   });
 
   //////// Goog login ////////
   $('#goog-login').click(function(){
+    hideSessionForm();
     googleSignIn();
   });
 
@@ -21,5 +23,11 @@ $(document).ready(function () {
   function toggleVisibility(legend) {
     legend.hide.addClass('hidden');
     legend.show.removeClass('hidden');
+  }
+
+  function hideSessionForm() {
+    $(".ui.dimmer").addClass("active");
+    $(".sign-in-form").hide();
+    $(".sign-up-form").hide();
   }
 });
