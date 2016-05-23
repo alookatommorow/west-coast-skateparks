@@ -1,7 +1,3 @@
-function initAll() {
-  initMap();
-}
-
 function initMap() {
   var location = window.location.href.split('/');
   var id = location.pop().split("?")[0];

@@ -26,13 +26,13 @@
           i.marker.icon
           | #{skatepark.formatted_address}
     .content-right
-      .links data-dashboard-links=true
-        a#info-link.selected href="#"
+      .links
+        a#info-link.selected href="#" data-dashboard-link="#skatepark-info"
           i.info.circle.icon
           span Info
-        a#map-link href="#"
+        a#map-link href="#" data-dashboard-link="#skatepark-map"
           i.compass.icon
           span Map
-        a#reviews-link href="#"
+        a#reviews-link href="#" data-dashboard-link="#skatepark-reviews"
           i.write.square.icon
           span Rate

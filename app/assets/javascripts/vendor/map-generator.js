@@ -73,7 +73,8 @@ function MapGenerator(map, skateparks) {
 
   // private methods
   function bindVisibilityListenerToButton(type) {
-    $('#toggle-' + type).on('click', function (event) {
+    var buttonId = '#toggle-' + type;
+    $(document).on('click', buttonId, function (event) {
       var $button = $(event.target);
       var action = $button.text().split(' ');
 

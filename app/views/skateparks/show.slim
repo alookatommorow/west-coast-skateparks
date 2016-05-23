@@ -1,7 +1,7 @@
 .skatepark-show-container
   = render 'header', skatepark: @skatepark, last: Skatepark.last.id
   = render 'dashboard', skatepark: @skatepark
-  /= render 'info', skatepark: @skatepark
+  = render 'info', skatepark: @skatepark
   = render 'map', skatepark: @skatepark
   = render 'photos', skatepark: @skatepark
   - if logged_in?

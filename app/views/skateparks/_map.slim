@@ -1,10 +1,9 @@
-- if skatepark.has_coordinates?
-  .one-top
+#skatepark-map data-toggle-container=true
+  - if skatepark.has_coordinates?
     #map-container
-      #map.skatepark-map
-  .center-text.one-top
+      #map
     #toggle-nearby-container class="hidden"
-      button#toggle-nearby.ui.button.primary Show Nearby Parks
-- else
-  #map-missing
-    h3 Map coming soon!!
+      button#toggle-nearby.ui.button Show Nearby Parks
+  - else
+    #map-missing
+      h3 Map coming soon!!
