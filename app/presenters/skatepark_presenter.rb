@@ -1,7 +1,6 @@
 class SkateparkPresenter < SimpleDelegator
   def attributes
     present_attributes.slice('info', 'hours')
-    .merge("address" => formatted_address)
     .merge(titleized_attributes)
   end
 

@@ -1,5 +1,38 @@
 #skatepark-info {
+  padding: 0 30px;
 
+  .info-display {
+
+    .item.skatepark-info-attribute {
+      font-size: 14px;
+
+      .ui.grid {
+        margin: 0;
+
+        .four.wide {
+          font-weight: 600;
+        }
+
+        .twelve.wide {
+          color: gray;
+        }
+      }
+    }
+  }
+
+  .photo-display {
+    // display: inline-block;
+    // max-width: 55%;
+  }
+
+  .picture-modal img {
+    display:block;
+    margin:auto;
+  }
+
+  img {
+    cursor: pointer;
+  }
 }
 
 #skatepark-reviews {

@@ -12,8 +12,6 @@ $("[data-dashboard-link]").click(function (event) {
     alreadyInitializedMap = true;
     initMap();
   }
-
-  // event.preventDefault();
 });
 
 function resizeMap() {
