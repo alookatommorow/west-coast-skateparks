@@ -1,0 +1,101 @@
+.skatepark-show-dashboard {
+  padding: 15px;
+
+  .content-left {
+    display: inline-block;
+  }
+
+  .content-right {
+    display: inline-block;
+    float: right;
+
+    .button {
+      border-radius: 0;
+      background-color: $blue;
+
+      p {
+        color: white;
+        font-size: 15px;
+        font-weight: lighter;
+        letter-spacing: 2px;
+      }
+
+      i {
+        font-size: 18px;
+      }
+
+      &:last-child {
+        margin-left: 15px;
+      }
+    }
+
+    @media #{$mobile} {
+      width: 100%;
+      float: none;
+      margin-top: 15px;
+    }
+  }
+
+  .stars {
+    font-size: 20px;
+
+    i.star {
+      color: $orange;
+
+      &.shaded {
+        color: $dark-blue;
+      }
+    }
+
+    p {
+      font-size: 18px;
+      font-weight: bold;
+      color: $dark-blue;
+      margin-top: 5px;
+
+      span {
+        font-size: 16px;
+        font-weight: normal;
+        font-style: italic;
+        color: black;
+
+        &:before {
+          content: " - ";
+          margin: 0 2px;
+          color: $orange;
+        }
+      }
+    }
+
+    @media #{$mobile} {
+      text-align: center;
+    }
+  }
+
+  .address {
+    margin-top: 15px;
+    font-size: 16px;
+
+    a {
+      color: black;
+
+      i {
+        font-size: 25px;
+        color: $dark-blue;
+      }
+
+      &:hover {
+        color: $orange;
+        font-weight: bold;
+
+        i {
+          color: $orange;
+        }
+      }
+    }
+
+    @media #{$mobile} {
+      text-align: center;
+    }
+  }
+}

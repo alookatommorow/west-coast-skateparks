@@ -1,11 +1,13 @@
 .skatepark-show-container
-  = render partial: 'header', locals: { skatepark: @skatepark, last: Skatepark.last.id }
-  = render partial: 'info', locals: { skatepark: @skatepark }
-  = render partial: 'map', locals: { skatepark: @skatepark }
-  = render partial: 'photos', locals: { skatepark: @skatepark }
+  = render 'header', skatepark: @skatepark, last: Skatepark.last.id
+  = render 'dashboard', skatepark: @skatepark
+  = render 'info', skatepark: @skatepark
+  = render 'map', skatepark: @skatepark
+  = render 'photos', skatepark: @skatepark
   - if logged_in?
-    = render partial: 'user_actions', locals: { skatepark: @skatepark }
-  = render partial: 'reviews', locals: { skatepark: @skatepark }
+    = render 'user_actions', skatepark: @skatepark
+  = render 'reviews', skatepark: @skatepark
+
 .ui.basic.modal.picture-modal
   i.close.icon
   .image.content

@@ -17,14 +17,15 @@ class SkateparkPresenter < SimpleDelegator
     __getobj__
   end
 
-  private
-    def formatted_address
-      if zip_code
-        address + ", " + city.titleize + ", " + states["#{state}"] + " " + zip_code
-      else
-        address
-      end
+  def formatted_address
+    if zip_code
+      address + ", " + city.titleize + ", " + states["#{state}"] + " " + zip_code
+    else
+      address
     end
+  end
+
+  private
 
     def states
       {
