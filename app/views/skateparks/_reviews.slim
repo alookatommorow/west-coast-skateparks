@@ -1,10 +1,11 @@
 - if skatepark.reviews?
-  h4 Reviews
-  .ui.comments
-    - skatepark.reviews.each do |review|
-      .comment
-        .content
-          .author.inline-block= review.user.display_name
-          .metadata.inline-block
-            .date.inline-block= review.created_at.strftime("%m/%d/%y")
-          .text= review.review
+  #skatepark-reviews data-toggle-container=true
+    h4 Reviews
+    .ui.comments
+      - skatepark.reviews.each do |review|
+        .comment
+          .content
+            .author.inline-block= review.user.display_name
+            .metadata.inline-block
+              .date.inline-block= review.created_at.strftime("%m/%d/%y")
+            .text= review.review

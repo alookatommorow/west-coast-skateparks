@@ -1,11 +1,7 @@
 <script src="https://apis.google.com/js/api:client.js"></script>
 <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
 
-<% if skatepark && skatepark.has_coordinates? %>
-  <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV.fetch('GOOGLE_KEY') %>&signed_in=true&libraries=places&callback=initAll" async defer></script>
-<% elsif user %>
-  <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV.fetch('GOOGLE_KEY') %>" async defer></script>
-<% end %>
+<script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV.fetch('GOOGLE_KEY') %>" async defer></script>
 
 <% if Rails.env.test? %>
   <%= javascript_tag do %>

@@ -6,12 +6,14 @@ $("[data-dashboard-link]").click(function (event) {
   $("[data-toggle-container]").hide();
   $($(this).data("dashboard-link")).show();
 
+  event.preventDefault();
+
   if ($(this).data("dashboard-link") === "#skatepark-map" && !alreadyInitializedMap) {
     alreadyInitializedMap = true;
     initMap();
   }
 
-  event.preventDefault();
+  // event.preventDefault();
 });
 
 function resizeMap() {
