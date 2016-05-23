@@ -20,7 +20,19 @@
               favorite: @favorite, user: current_user, skatepark: @skatepark
   .ui.divider
   .address
-    p
-      a href="https://maps.google.com/maps?saddr='Current Location'&daddr=#{skatepark.formatted_address}" target="_blank"
-        i.marker.icon
-        | #{skatepark.formatted_address}
+    .content-left
+      p
+        a href="https://maps.google.com/maps?saddr='Current Location'&daddr=#{skatepark.formatted_address}" target="_blank"
+          i.marker.icon
+          | #{skatepark.formatted_address}
+    .content-right
+      .links data-dashboard-links=true
+        a#info-link.selected href="#"
+          i.info.circle.icon
+          span Info
+        a#map-link href="#"
+          i.compass.icon
+          span Map
+        a#reviews-link href="#"
+          i.write.square.icon
+          span Rate

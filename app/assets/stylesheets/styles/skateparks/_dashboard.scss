@@ -73,11 +73,14 @@
   }
 
   .address {
-    margin-top: 15px;
+    margin: 30px 0;
     font-size: 16px;
+    height: 25px;
+    line-height: 25px;
 
     a {
       color: black;
+      vertical-align: middle;
 
       i {
         font-size: 25px;
@@ -85,9 +88,14 @@
       }
 
       &:hover {
-        color: $orange;
         font-weight: bold;
 
+        i {
+          color: $orange;
+        }
+      }
+
+      &.selected {
         i {
           color: $orange;
         }
@@ -96,6 +104,40 @@
 
     @media #{$mobile} {
       text-align: center;
+      height: initial;
+      line-height: initial;
+    }
+  }
+
+  .links {
+    display: inline-flex;
+    justify-content: space-between;
+    width: 350px;
+
+    a {
+      display: inline-block;
+      text-align: center;
+      font-family: "Dirty-Bakers-Dozen", sans-serif;
+      color: $dark-blue;
+      font-size: 20px;
+      vertical-align: middle;
+      text-transform: uppercase;
+      width: 100px;
+
+      i {
+        font-size: 40px;
+        vertical-align: middle;
+      }
+
+      span {
+        display: block;
+      }
+    }
+
+    @media #{$mobile} {
+      margin: 20px 0;
+      width: 80%;
+      justify-content: space-around;
     }
   }
 }
