@@ -27,6 +27,12 @@
       &:last-child {
         margin-left: 15px;
       }
+
+      &:hover {
+        p {
+          color: $orange;
+        }
+      }
     }
 
     @media #{$mobile} {

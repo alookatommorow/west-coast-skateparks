@@ -17,7 +17,7 @@ $("[data-dashboard-link]").click(function (event) {
 $(document).ready(function() {
 
   var currentIndex = 0,
-      $photos = $('.photo-carousel div'),
+      $photos = $('.carousel-image-container div'),
       lastIndex = $photos.length - 1,
       $thumbs = $(".skatepark-show-thumbnail");
 
@@ -31,7 +31,7 @@ $(document).ready(function() {
 
   function showNext() {
     var $currentPhoto = $photos.eq(currentIndex);
-    var $nextThumb = $thumbs.eq(currentIndex + 1).children()
+    var $nextThumb = $thumbs.eq(currentIndex + 1).children();
     if (currentIndex === lastIndex) {
       $currentPhoto.hide();
       $photos.first().show();
@@ -47,7 +47,7 @@ $(document).ready(function() {
 
   function showPrev() {
     var $currentPhoto = $photos.eq(currentIndex),
-        $nextThumb = $thumbs.eq(currentIndex - 1).children()
+        $nextThumb = $thumbs.eq(currentIndex - 1).children();
     if (currentIndex === 0) {
       $currentPhoto.hide();
       $photos.last().show();

@@ -10,12 +10,13 @@
 
     -if skatepark.pictures?
     .photo-display
-      button.carousel-button data-carousel="prev" Prev
       .photo-carousel
-        - skatepark.skatepark_images.each do |image|
-          .skatepark-show-image
-            img src="#{image.photo.url}"
-      button.carousel-button data-carousel="next"  Next
+        button.prev.carousel-button data-carousel="prev" Prev
+        button.next.carousel-button data-carousel="next"  Next
+        .carousel-image-container
+          - skatepark.skatepark_images.each do |image|
+            .skatepark-show-image
+              img src="#{image.photo.url}"
       .photo-thumbnails
         - skatepark.skatepark_images.each do |image|
           .skatepark-show-thumbnail

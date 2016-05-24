@@ -24,31 +24,68 @@
     width: 75%;
 
     .photo-carousel {
+      height: 520px;
+      // width: 620px;
+      // margin: auto;
+      // width: 800px;
 
-      .skatepark-show-image {
-        width: 100%;
-        display: none;
-        text-align: center;
 
-        // &:first-child {
-        //   display: block;
-        // }
+      button {
+        position: relative;
+        top: 50%;
+        transform: translateY(-50%);
+        // vertical-align: middle;
+        // margin: auto 0;
+        // display: inline-block;
+
+        &.prev {
+          float: left;
+        }
+
+        &.next {
+          float: right;
+        }
+      }
+
+      .carousel-image-container {
+        margin: 0 auto;
+        height: 520px;
+        width: 620px;
+        display: flex;
+        justify-content: center;
+
+        .skatepark-show-image {
+          margin: auto 0;
+          display: none;
+
+          img {
+            max-height: 500px;
+            max-width: 600px;
+          }
+        }
       }
     }
 
     .photo-thumbnails {
       display: flex;
-      justify-content: space-around;
+      justify-content: center;
+      flex-wrap: wrap;
 
       .skatepark-show-thumbnail {
+        margin: auto 10px auto 0;
         display: inline-block;
 
         .selected {
-          border: 2px solid red;
+          border: 2px solid $orange;
         }
 
         img {
-          width: 150px;
+          max-width: 150px;
+          max-height: 150px;
+        }
+
+        &:last-child {
+          margin: auto 0;
         }
       }
     }
