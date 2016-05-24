@@ -15,41 +15,57 @@ $("[data-dashboard-link]").click(function (event) {
 });
 
 $(document).ready(function() {
+
   var currentIndex = 0,
-    item = $('.photo-carousel div').eq(currentIndex),
-    items = $('.photo-carousel div'),
-    itemAmt = items.length,
-    thumbs = $(".skatepark-show-thumbnail");
+      $photos = $('.photo-carousel div'),
+      lastIndex = $photos.length - 1,
+      $thumbs = $(".skatepark-show-thumbnail");
 
-  item.show();
-  thumbs.first().children().addClass("selected");
+  $photos.eq(currentIndex).show();
+  $thumbs.first().children().addClass("selected");
 
-  $(".prev").click(function(){
-    var item = $('.photo-carousel div').eq(currentIndex),
-        prevItem = $('.photo-carousel div').eq(currentIndex - 1)
-        prevThumb = $(".skatepark-show-thumbnail").eq(currentIndex-1).children()
-    if (currentIndex === 0) {
-      item.hide();
-      items.last().show();
-      currentIndex = itemAmt - 1;
-    } else {
-      item.hide();
-      item.prev().show();
-      currentIndex--;
-    }
-  });
+  function selectNextThumb(next) {
+    $(".selected").removeClass("selected");
+    next.addClass("selected")
+  }
 
-  $(".next").click(function(){
-    var item = $('.photo-carousel div').eq(currentIndex);
-    if (currentIndex === itemAmt - 1) {
-      item.hide();
-      items.first().show();
+  function showNext() {
+    var $currentPhoto = $photos.eq(currentIndex);
+    var $nextThumb = $thumbs.eq(currentIndex + 1).children()
+    if (currentIndex === lastIndex) {
+      $currentPhoto.hide();
+      $photos.first().show();
+      selectNextThumb($thumbs.first().children());
       currentIndex = 0;
     } else {
-      debugger
-      item.hide();
-      item.next().show();
+      $currentPhoto.hide();
+      $currentPhoto.next().show();
+      selectNextThumb($nextThumb);
       currentIndex++;
+    }
+  }
+
+  function showPrev() {
+    var $currentPhoto = $photos.eq(currentIndex),
+        $nextThumb = $thumbs.eq(currentIndex - 1).children()
+    if (currentIndex === 0) {
+      $currentPhoto.hide();
+      $photos.last().show();
+      selectNextThumb($nextThumb);
+      currentIndex = lastIndex;
+    } else {
+      $currentPhoto.hide();
+      $currentPhoto.prev().show();
+      selectNextThumb($nextThumb);
+      currentIndex--;
+    }
+  }
+
+  $(".carousel-button").click(function(){
+    if ($(this).data("carousel") === "prev") {
+      showPrev();
+    } else {
+      showNext();
     }
   });
 });
