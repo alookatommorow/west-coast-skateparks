@@ -1,22 +1,28 @@
 #skatepark-info data-toggle-container=true
-  .ui.grid
-    .left.aligned.six.wide.column.info-display
-      .ui.segment
-        .ui.list
-          - skatepark.attributes.each do |attribute, value|
-            .item.skatepark-info-attribute
-              .ui.grid
-                .left.aligned.four.wide.column= attribute.titleize
-                .left.aligned.twelve.wide.column= value
-    .left.aligned.ten.wide.column.photo-display
-      -if skatepark.pictures?
+  .info-display
+    .ui.segment
+      .ui.list
+        - skatepark.attributes.each do |attribute, value|
+          .item.skatepark-info-attribute
+            .ui.grid
+              .left.aligned.four.wide.column= attribute.titleize
+              .left.aligned.twelve.wide.column= value
+
+    -if skatepark.pictures?
+    .photo-display
+      button.prev Prev
       .photo-carousel
         - skatepark.skatepark_images.each do |image|
-          div
+          .skatepark-show-image
             img src="#{image.photo.url}"
-      .center-text.one-top
-        - if !skatepark.photo_cred.blank?
-          p
-          ' Photos courtesy of
-          a href="#{skatepark.photo_url}"= skatepark.photo_cred
+      button.next Next
+      .photo-thumbnails
+        - skatepark.skatepark_images.each do |image|
+          .skatepark-show-thumbnail
+            img src="#{image.photo.url(:thumb)}"
+
+    - if !skatepark.photo_cred.blank?
+      p
+      ' Photos courtesy of
+      a href="#{skatepark.photo_url}"= skatepark.photo_cred
 
