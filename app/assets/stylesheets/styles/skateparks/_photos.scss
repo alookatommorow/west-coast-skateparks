@@ -1,0 +1,84 @@
+#skatepark-photos {
+
+  .photo-display {
+    margin: 0 auto;
+    width: 85%;
+
+    .photo-carousel {
+      height: 720px;
+
+      i {
+        color: $blue;
+        position: relative;
+        top: 50%;
+        transform: translateY(-50%);
+        cursor: pointer;
+
+        &.prev {
+          float: left;
+          left: 30px;
+        }
+
+        &.next {
+          float: right;
+          right: 30px;
+        }
+
+        &:hover {
+          color: $orange;
+        }
+      }
+
+      .carousel-image-container {
+        margin: 0 auto;
+        height: 720px;
+        width: 820px;
+        display: flex;
+        justify-content: center;
+
+        .skatepark-show-image {
+          margin: auto 0;
+          display: none;
+
+          img {
+            max-height: 700px;
+            max-width: 800px;
+          }
+        }
+      }
+    }
+
+    .photo-thumbnails {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+
+      .skatepark-show-thumbnail {
+        margin: auto 10px auto 0;
+        display: inline-block;
+
+        .selected {
+          border: 2px solid $orange;
+        }
+
+        img {
+          max-width: 150px;
+          max-height: 150px;
+        }
+
+        &:last-child {
+          margin: auto 0;
+        }
+      }
+    }
+  }
+
+  // .picture-modal img {
+  //   display:block;
+  //   margin:auto;
+  // }
+
+  // .ui img {
+  //   cursor: pointer;
+  // }
+}

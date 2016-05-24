@@ -1,0 +1,19 @@
+#skatepark-photos data-toggle-container=true
+  -if skatepark.pictures?
+      .photo-display
+        .photo-carousel
+          i.huge.arrow.circle.left.icon.prev.carousel-button data-carousel="prev"
+          i.huge.arrow.circle.right.icon.next.carousel-button data-carousel="next"
+          .carousel-image-container
+            - skatepark.skatepark_images.each do |image|
+              .skatepark-show-image
+                img src="#{image.photo.url}"
+        .photo-thumbnails
+          - skatepark.skatepark_images.each do |image|
+            .skatepark-show-thumbnail
+              img src="#{image.photo.url(:thumb)}"
+
+      - if !skatepark.photo_cred.blank?
+        p
+        ' Photos courtesy of
+        a href="#{skatepark.photo_url}"= skatepark.photo_cred
