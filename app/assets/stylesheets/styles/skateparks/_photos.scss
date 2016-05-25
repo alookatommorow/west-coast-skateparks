@@ -2,113 +2,104 @@
 
   .photo-display {
     margin: 0 auto;
-    width: 95%;
+    width: 98%;
+    height: 720px;
+    position: relative;
 
-    .photo-carousel {
+    i.icon {
+      color: $blue;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      cursor: pointer;
+      font-size: 50px;
+      line-height: 50px;
+      margin: 0;
+
+      &.prev {
+        left: 30px;
+      }
+
+      &.next {
+        right: 30px;
+      }
+
+      &:hover {
+        color: $orange;
+      }
+    }
+
+    .carousel-image-container {
+      margin: 0 auto;
       height: 720px;
+      width: 80%;
+      display: flex;
+      justify-content: center;
+
+      .skatepark-show-image {
+        margin: auto 0;
+        display: none;
+        cursor: pointer;
+
+        img {
+          max-height: 700px;
+          max-width: 100%;
+        }
+      }
+    }
+
+
+    @media #{$tablet} {
+      height: 620px;
 
       i.icon {
-        color: $blue;
-        position: relative;
-        top: 50%;
-        transform: translateY(-50%);
-        cursor: pointer;
-        font-size: 50px;
-        line-height: 50px;
-        margin: 0;
+        font-size: 35px;
+        line-height: 35px;
 
         &.prev {
-          float: left;
-          left: 30px;
+          left: 0;
         }
 
         &.next {
-          float: right;
-          right: 30px;
-        }
-
-        &:hover {
-          color: $orange;
+          right: 0;
         }
       }
 
       .carousel-image-container {
-        margin: 0 auto;
-        height: 720px;
-        width: 80%;
-        display: flex;
-        justify-content: center;
-
-        .skatepark-show-image {
-          margin: auto 0;
-          display: none;
-
-          img {
-            max-height: 700px;
-            max-width: 100%;
-          }
-        }
-      }
-
-      @media #{$tablet} {
         height: 620px;
+        width: 90%;
 
-        i.icon {
-          font-size: 35px;
-          line-height: 35px;
-
-          &.prev {
-            left: 0;
-          }
-
-          &.next {
-            right: 0;
-          }
+        .skatepark-show-image img {
+          max-height: 600px;
         }
-
-        .carousel-image-container {
-          height: 620px;
-          width: 85%;
-
-          .skatepark-show-image {
-
-            img {
-              max-height: 600px;
-            }
-          }
-        }
-      }
-
-      @media #{$mobile} {
-        height: 340px;
-
-        i.icon {
-          font-size: 30px;
-          line-height: 30px;
-
-          &.prev {
-            left: 0;
-          }
-
-          &.next {
-            right: 0;
-          }
-        }
-
-        .carousel-image-container {
-          height: 340px;
-          width: 75%;
-
-          .skatepark-show-image {
-
-            img {
-              max-height: 325px;
-            }
-          }
-        }
-
       }
     }
+
+    @media #{$mobile} {
+      height: 340px;
+
+      i.icon {
+        font-size: 30px;
+        line-height: 30px;
+
+        &.prev {
+          left: 0;
+        }
+
+        &.next {
+          right: 0;
+        }
+      }
+
+      .carousel-image-container {
+        height: 340px;
+
+        .skatepark-show-image img {
+          max-height: 325px;
+        }
+      }
+    }
+
 
     .photo-thumbnails {
       display: flex;
@@ -118,6 +109,7 @@
       .skatepark-show-thumbnail {
         margin: auto 10px auto 0;
         display: inline-block;
+        cursor: pointer;
 
         .active-photo {
           border: 2px solid $orange;

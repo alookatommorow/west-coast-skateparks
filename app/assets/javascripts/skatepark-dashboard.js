@@ -68,4 +68,16 @@ $(document).ready(function() {
       showNext();
     }
   });
+
+  $('.skatepark-show-image').click(function() {
+    showNext();
+  });
+
+  $('.skatepark-show-thumbnail').click(function() {
+    nextIndex = $(this).index();
+    var $currentPhoto = $photos.eq(currentIndex);
+    $currentPhoto.hide();
+    $photos.eq(nextIndex).show();
+    currentIndex = nextIndex;
+  });
 });
