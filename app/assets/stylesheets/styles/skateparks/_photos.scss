@@ -2,17 +2,20 @@
 
   .photo-display {
     margin: 0 auto;
-    width: 85%;
+    width: 95%;
 
     .photo-carousel {
       height: 720px;
 
-      i {
+      i.icon {
         color: $blue;
         position: relative;
         top: 50%;
         transform: translateY(-50%);
         cursor: pointer;
+        font-size: 50px;
+        line-height: 50px;
+        margin: 0;
 
         &.prev {
           float: left;
@@ -32,7 +35,7 @@
       .carousel-image-container {
         margin: 0 auto;
         height: 720px;
-        width: 820px;
+        width: 80%;
         display: flex;
         justify-content: center;
 
@@ -42,9 +45,68 @@
 
           img {
             max-height: 700px;
-            max-width: 800px;
+            max-width: 100%;
           }
         }
+      }
+
+      @media #{$tablet} {
+        height: 620px;
+
+        i.icon {
+          font-size: 35px;
+          line-height: 35px;
+
+          &.prev {
+            left: 0;
+          }
+
+          &.next {
+            right: 0;
+          }
+        }
+
+        .carousel-image-container {
+          height: 620px;
+          width: 85%;
+
+          .skatepark-show-image {
+
+            img {
+              max-height: 600px;
+            }
+          }
+        }
+      }
+
+      @media #{$mobile} {
+        height: 340px;
+
+        i.icon {
+          font-size: 30px;
+          line-height: 30px;
+
+          &.prev {
+            left: 0;
+          }
+
+          &.next {
+            right: 0;
+          }
+        }
+
+        .carousel-image-container {
+          height: 340px;
+          width: 75%;
+
+          .skatepark-show-image {
+
+            img {
+              max-height: 325px;
+            }
+          }
+        }
+
       }
     }
 
@@ -57,19 +119,31 @@
         margin: auto 10px auto 0;
         display: inline-block;
 
-        .selected {
+        .active-photo {
           border: 2px solid $orange;
         }
 
         img {
           max-width: 150px;
           max-height: 150px;
+
+          @media #{$tablet} {
+            max-width: 100px;
+            max-height: 100px;
+          }
+
+          @media #{$mobile} {
+            max-width: 75px;
+            max-height: 75px;
+          }
         }
 
         &:last-child {
           margin: auto 0;
         }
       }
+
+
     }
   }
 

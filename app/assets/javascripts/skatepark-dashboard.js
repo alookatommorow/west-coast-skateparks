@@ -22,11 +22,11 @@ $(document).ready(function() {
       $thumbs = $(".skatepark-show-thumbnail");
 
   $photos.eq(currentIndex).show();
-  $thumbs.first().children().addClass("selected");
+  $thumbs.first().children().addClass("active-photo");
 
   function selectNextThumb(next) {
-    $(".selected").removeClass("selected");
-    next.addClass("selected")
+    $(".active-photo").removeClass("active-photo");
+    next.addClass("active-photo")
   }
 
   function showNext() {
