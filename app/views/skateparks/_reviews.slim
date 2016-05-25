@@ -1,11 +1,45 @@
-- if skatepark.reviews?
-  #skatepark-reviews data-toggle-container=true
-    h4 Reviews
-    .ui.comments
+#skatepark-reviews data-toggle-container=true
+  - if logged_in?
+    .opinions-container
+      .rate-container.one-bottom
+        = button_tag 'Rate Skatepark', class: 'ui button', data: { slide_toggle: '.rating-form-container' }
+        .rating-form-container.hidden.one-top
+          = form_tag ratings_path, class: "ui form rating-form" do
+            = hidden_field_tag :user_id, current_user.id
+            = hidden_field_tag :skatepark_id, skatepark.id
+            .ui.selection.dropdown.field
+              = hidden_field_tag :rating, nil
+              i.dropdown.icon
+              .default.text Select Rating...
+              .menu
+                .item data-value="1" 1
+                .item data-value="2" 2
+                .item data-value="3" 3
+                .item data-value="4" 4
+                .item data-value="5" 5
+            = submit_tag "Rate", class: 'ui button'
+            .ui.error.message
+      .review-container
+        = button_tag 'Review Skatepark', class: 'ui button', data: { slide_toggle: '.review-form-container' }
+        .review-form-container.hidden.one-top
+          = form_tag reviews_path, class: "ui form review-form" do
+            = hidden_field_tag :user_id, current_user.id
+            = hidden_field_tag :skatepark_id, skatepark.id
+            .field
+              = text_area_tag :review, nil, placeholder: 'Write review here...', class: ""
+            = submit_tag 'Review', class: "ui button"
+            .ui.error.message
+  - if skatepark.reviews?
+    .ui.comments.reviews
       - skatepark.reviews.each do |review|
         .comment
+          a.avatar
+            img src="#{review.user.avatar.url(:thumb)}"
           .content
             .author.inline-block= review.user.display_name
             .metadata.inline-block
               .date.inline-block= review.created_at.strftime("%m/%d/%y")
             .text= review.review
+  - else
+    h4 No reviews
+

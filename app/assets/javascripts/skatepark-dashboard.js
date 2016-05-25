@@ -26,7 +26,7 @@ $(document).ready(function() {
 
   function selectNextThumb(next) {
     $(".active-photo").removeClass("active-photo");
-    next.addClass("active-photo")
+    next.addClass("active-photo");
   }
 
   function showNext() {
@@ -78,6 +78,7 @@ $(document).ready(function() {
     var $currentPhoto = $photos.eq(currentIndex);
     $currentPhoto.hide();
     $photos.eq(nextIndex).show();
+    selectNextThumb($thumbs.eq(nextIndex).children());
     currentIndex = nextIndex;
   });
 });

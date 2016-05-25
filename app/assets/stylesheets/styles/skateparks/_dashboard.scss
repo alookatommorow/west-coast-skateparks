@@ -1,5 +1,5 @@
 .skatepark-show-dashboard {
-  padding: 15px;
+  padding: 25px;
 
   .content-left {
     display: inline-block;
@@ -78,77 +78,109 @@
     }
   }
 
-  .address {
-    margin: 30px 0 60px 0;
-    font-size: 16px;
-    height: 25px;
-    line-height: 25px;
+  .address-container {
+    text-align: center;
 
-    a {
-      color: black;
-      vertical-align: middle;
+    .address {
+      display: inline-block;
+      font-size: 18px;
 
-      i {
-        font-size: 25px;
-        color: $dark-blue;
-      }
+      a {
 
-      &:hover {
-        font-weight: bold;
+        div {
+          display: block;
+          color: black;
 
-        i {
-          color: $orange;
+          i {
+            font-size: 30px;
+            color: $dark-blue;
+          }
+        }
+
+        .get-directions {
+          padding-top: 4px;
+          font-size: 16px;
+          font-style: italic;
+          color: $dark-blue;
+          text-align: center;
+        }
+
+        &:hover {
+
+          div {
+            font-weight: bold;
+
+            i {
+              color: $orange;
+            }
+          }
+
+          .get-directions {
+            color: $orange;
+          }
         }
       }
 
-      &.selected {
-        i {
-          color: $orange;
-        }
+      @media #{$mobile} {
+        margin: 0;
+        text-align: center;
+        height: initial;
+        line-height: initial;
       }
-    }
-
-    @media #{$mobile} {
-      margin: 0;
-      text-align: center;
-      height: initial;
-      line-height: initial;
     }
   }
 
-  .links {
-    display: inline-flex;
-    justify-content: space-between;
-    width: 350px;
+  .links-container {
+    text-align: center;
+    margin-top: 30px;
 
-    a {
-      display: inline-block;
-      text-align: center;
-      font-family: "Dirty-Bakers-Dozen", sans-serif;
-      color: $dark-blue;
-      font-size: 20px;
-      vertical-align: middle;
-      text-transform: uppercase;
-      width: 100px;
+    .links {
+      display: inline-flex;
+      justify-content: space-between;
+      width: 50%;
 
-      i {
-        font-size: 40px;
-        vertical-align: middle;
+      a {
+        display: inline-block;
+        text-align: center;
+        font-family: "Dirty-Bakers-Dozen", sans-serif;
+        color: $dark-blue;
+        font-size: 30px;
+        text-transform: uppercase;
+
+        i {
+          line-height: 50px;
+          font-size: 50px;
+          margin: 0;
+        }
+
+        span {
+          display: block;
+        }
+
+        &:hover, &.selected {
+          i {
+            color: $orange;
+          }
+        }
       }
 
-      span {
-        display: block;
+      @media #{$tablet} {
+        margin-top: 10px;
+        width: 80%;
+        justify-content: space-around;
+      }
+
+      @media #{$mobile} {
+        margin-top: 0;
+
+        a span {
+          display: none;
+        }
       }
     }
+  }
 
-    @media #{$mobile} {
-      margin-top: 20px;
-      width: 95%;
-      justify-content: space-around;
-
-      a span {
-        display: none;
-      }
-    }
+  @media #{$mobile} {
+    padding: 15px;
   }
 }

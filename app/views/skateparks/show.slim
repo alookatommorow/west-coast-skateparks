@@ -4,8 +4,6 @@
   = render 'photos', skatepark: @skatepark
   = render 'info', skatepark: @skatepark
   = render 'map', skatepark: @skatepark
-  - if logged_in?
-    = render 'user_actions', skatepark: @skatepark
   = render 'reviews', skatepark: @skatepark
 
 .ui.basic.modal.picture-modal

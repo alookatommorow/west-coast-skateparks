@@ -1,5 +1,8 @@
 #skatepark-info {
   display: none;
+  width: 65%;
+  margin: 0 auto;
+  padding-bottom: 30px;
 
   .info-display {
 
@@ -9,20 +12,51 @@
       .ui.grid {
         margin: 0;
 
-        .four.wide {
-          font-weight: 600;
-        }
-
         .twelve.wide {
           color: gray;
         }
       }
     }
   }
+
+  @media #{$mobile} {
+    width: 85%;
+  }
 }
 
 #skatepark-reviews {
   display: none;
+  padding: 25px;
+
+  .opinions-container {
+    margin-right: 5%;
+    text-align: right;
+    width: 300px;
+    float: right;
+
+    .ui.button {
+      background-color: $blue;
+      border-radius: 0;
+      color: white;
+    }
+  }
+
+  .comments.reviews {
+    margin: 0 0 0 5%;
+    display: inline-block;
+    width: 500px;
+  }
+
+  h4 {
+    font-family: "Dirty-Bakers-Dozen", sans-serif;
+    color: $orange;
+    font-size: 30px;
+    text-transform: uppercase;
+  }
+
+  @media #{$mobile} {
+    padding: 15px;
+  }
 }
 
 

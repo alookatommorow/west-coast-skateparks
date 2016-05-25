@@ -19,23 +19,25 @@
             = render "favorites/button",
               favorite: @favorite, user: current_user, skatepark: @skatepark
   .ui.divider
-  .address
-    .content-left
-      p
-        a href="https://maps.google.com/maps?saddr='Current Location'&daddr=#{skatepark.formatted_address}" target="_blank"
+  .address-container
+    .address
+      a href="https://maps.google.com/maps?saddr='Current Location'&daddr=#{skatepark.formatted_address}" target="_blank"
+        div
           i.marker.icon
           | #{skatepark.formatted_address}
-    .content-right
-      .links
-        a#info-link.selected href="#" data-dashboard-link="#skatepark-photos"
-          i.photo.icon
-          span Photos
-        a#info-link href="#" data-dashboard-link="#skatepark-info"
-          i.info.circle.icon
-          span Info
-        a#map-link href="" data-dashboard-link="#skatepark-map"
-          i.compass.icon
-          span Map
-        a#reviews-link href="#" data-dashboard-link="#skatepark-reviews"
-          i.write.square.icon
-          span Rate
+        div.get-directions Get Directions
+  .ui.divider
+  .links-container
+    .links
+      a#info-link.selected href="#" data-dashboard-link="#skatepark-photos"
+        i.photo.icon
+        span Photos
+      a#info-link href="#" data-dashboard-link="#skatepark-info"
+        i.info.circle.icon
+        span Info
+      a#map-link href="" data-dashboard-link="#skatepark-map"
+        i.compass.icon
+        span Map
+      a#reviews-link href="#" data-dashboard-link="#skatepark-reviews"
+        i.write.square.icon
+        span Rate
