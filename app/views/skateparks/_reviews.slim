@@ -15,7 +15,7 @@
               .item data-value="3" 3
               .item data-value="4" 4
               .item data-value="5" 5
-          = submit_tag "Rate", class: 'ui button'
+          = submit_tag "Rate", class: 'ui button', id: "submit-rating"
           .ui.error.message
       .review-form-container
         = form_tag reviews_path, class: "ui form review-form", data: { ajax_form: true } do
@@ -25,17 +25,28 @@
             = text_area_tag :review, nil, placeholder: 'Write review here...', class: ""
           = submit_tag 'Review', class: "ui button"
           .ui.error.message
-  .ui.comments.reviews
-    - if skatepark.reviews?
-      - skatepark.reviews.each do |review|
-        .comment
-          a.avatar
-            img src="#{review.user.avatar.url(:thumb)}"
-          .content
-            .author.inline-block= review.user.display_name
-            .metadata.inline-block
-              .date.inline-block= review.created_at.strftime("%m/%d/%y")
-            .text= review.review
-    - else
-      h4 No reviews
+  .rating-reviews
+    .user-rating
+      -if skatepark.average_rating
+        h4 User Rating
+        - (skatepark.average_rating.to_i).times do
+          i.large.star.icon
+        - (5-skatepark.average_rating.to_i).times do
+          i.large.star.icon.shaded
+      - else
+        h4 Be the first to rate!
+    .ui.comments.reviews
+      - if skatepark.reviews?
+        h4 Reviews
+        - skatepark.reviews.each do |review|
+          .comment
+            a.avatar
+              img src="#{review.user.avatar.url(:thumb)}"
+            .content
+              .author.inline-block= review.user.display_name
+              .metadata.inline-block
+                .date.inline-block= review.created_at.strftime("%m/%d/%y")
+              .text= review.review
+      - else
+        h4 No reviews
 

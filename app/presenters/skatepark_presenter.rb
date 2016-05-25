@@ -7,8 +7,6 @@ class SkateparkPresenter < SimpleDelegator
   def average_rating
     if model.ratings.any?
       model.ratings.map(&:rating).reduce(:+) / model.ratings.length
-    else
-      'Be the first to rate!'
     end
   end
 
