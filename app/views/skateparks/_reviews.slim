@@ -1,8 +1,8 @@
-#skatepark-reviews data-toggle-container=true
+#skatepark-reviews data-ajax-container=true
   - if logged_in?
     .opinions-container
       .rating-form-container
-        = form_tag ratings_path, class: "ui form rating-form" do
+        = form_tag ratings_path, class: "ui form rating-form", data: { ajax_form: true } do
           = hidden_field_tag :user_id, current_user.id
           = hidden_field_tag :skatepark_id, skatepark.id
           .ui.selection.dropdown.field
@@ -18,15 +18,15 @@
           = submit_tag "Rate", class: 'ui button'
           .ui.error.message
       .review-form-container
-        = form_tag reviews_path, class: "ui form review-form" do
+        = form_tag reviews_path, class: "ui form review-form", data: { ajax_form: true } do
           = hidden_field_tag :user_id, current_user.id
           = hidden_field_tag :skatepark_id, skatepark.id
           .field
             = text_area_tag :review, nil, placeholder: 'Write review here...', class: ""
           = submit_tag 'Review', class: "ui button"
           .ui.error.message
-  - if skatepark.reviews?
-    .ui.comments.reviews
+  .ui.comments.reviews
+    - if skatepark.reviews?
       - skatepark.reviews.each do |review|
         .comment
           a.avatar
@@ -36,6 +36,6 @@
             .metadata.inline-block
               .date.inline-block= review.created_at.strftime("%m/%d/%y")
             .text= review.review
-  - else
-    h4 No reviews
+    - else
+      h4 No reviews
 
