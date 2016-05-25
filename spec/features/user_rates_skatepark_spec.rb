@@ -9,13 +9,15 @@ RSpec.feature 'User rates skatepark' do
 
     visit skatepark_path(skatepark)
 
-    expect(page).to have_text('Be the first to rate!')
-
-    click_on 'Rate Skatepark'
-    find('#rating', visible: false).set '1'
     click_on 'Rate'
 
-    expect(page).not_to have_text('Be the first to rate!')
+    expect(page).to have_text('Be the first to rate!')
+
+    find('#rating', visible: false).set '1'
+
+    find('.rating-form-container').click_on 'Rate'
+
+    expect(page).to have_text('User Rating')
   end
 end
 

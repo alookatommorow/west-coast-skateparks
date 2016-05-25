@@ -31,10 +31,10 @@ RSpec.describe SkateparkPresenter do
       expect(skatepark.average_rating).to eq(3)
     end
 
-    it 'returns a prompt for users if skatepark has not been rated' do
+    it 'returns a nil if skatepark has not been rated' do
       skatepark = SkateparkPresenter.new(create(:skatepark))
 
-      expect(skatepark.average_rating).to eq('Be the first to rate!')
+      expect(skatepark.average_rating).to eq(nil)
     end
   end
 end

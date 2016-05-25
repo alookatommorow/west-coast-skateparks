@@ -37,5 +37,9 @@
         color: $orange;
       }
     }
+
+    @media #{$mobile} {
+      right: 20px;
+    }
   }
 }
