@@ -8,7 +8,8 @@ $(document).ready(function() {
   });
 
   function renderResponse(response) {
-    $(this).closest("[data-ajax-container]").html(response);
+    $container = $(this).data("ajax-form")
+    $($container).html(response);
     $('.ui.dropdown').dropdown();
   }
 });
