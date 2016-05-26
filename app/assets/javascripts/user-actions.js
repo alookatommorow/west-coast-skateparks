@@ -5,11 +5,22 @@ $(document).ready(function() {
     $.post(this.action, $(this).serialize())
       .success(renderResponse.bind(this));
     event.preventDefault();
+    if ($(this).is("form")) {
+      console.log("check works");
+      resetForm(this);
+    }
   });
 
   function renderResponse(response) {
     $container = $(this).data("ajax-form")
     $($container).html(response);
-    $('.ui.dropdown').dropdown();
+  }
+
+  function resetForm(form) {
+    if ($(form).children(".dropdown").length > 0) {
+      $(form).children(".dropdown").dropdown("restore defaults");
+    } else {
+      form.reset();
+    }
   }
 });
