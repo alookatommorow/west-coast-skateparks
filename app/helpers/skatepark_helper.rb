@@ -8,4 +8,12 @@ module SkateparkHelper
       5 => ["Holy Grail", "A crown jewel holding a life's worth of skating"],
     }
   end
+
+  def state_abbrev
+    {
+      "california" => "CA",
+      "oregon" => "OR",
+      "washington" => "WA",
+    }
+  end
 end
