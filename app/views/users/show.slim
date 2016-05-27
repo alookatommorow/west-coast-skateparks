@@ -17,6 +17,8 @@
         .user-stat
           i.write.icon
           p.inline-block= @user.reviews.count
+      .edit-button
+        = link_to "Edit Info", edit_user_path(@user), class: "ui button"
   .user-map-container
     #map.user-map
     .user-map-buttons

@@ -21,9 +21,12 @@
     .ui.form
       = simple_form_for @user do |f|
         .field
+          .label Username
           = f.input_field :username
         .field
+          .label Name
           = f.input_field :name
         .field
+          .label Picture
           = f.input_field :avatar
         = f.submit 'Update', class: "ui button"
