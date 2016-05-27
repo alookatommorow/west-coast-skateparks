@@ -19,6 +19,7 @@ gem "paperclip", "~> 4.3"
 gem "pg"
 gem "puma"
 gem "sass-rails", "~> 5.0"
+gem 'simple_form'
 gem "slim"
 gem "sprockets-rails"
 gem "therubyracer"
