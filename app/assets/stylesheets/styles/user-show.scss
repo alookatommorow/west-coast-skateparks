@@ -1,3 +1,19 @@
+.user-show-container {
+  padding: 0 30px;
+
+  .user-dashboard .ui.card {
+    border-radius: 0;
+
+    img {
+      border-radius: 0;
+    }
+  }
+
+  .user-stat p.inline-block {
+    margin-left: 10px;
+  }
+}
+
 #relative {
   position: relative;
 }
