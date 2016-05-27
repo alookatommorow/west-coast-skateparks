@@ -1,0 +1,33 @@
+.user-edit-container {
+  padding: 0 30px 30px 30px;
+
+  .user-dashboard {
+    float: left;
+    width: 20%;
+
+    .ui.card, .ui.card img {
+      border-radius: 0;
+    }
+
+    .user-stat p.inline-block {
+      margin-left: 10px;
+    }
+  }
+
+  .edit-form-container {
+    width: 80%;
+    float: right;
+
+    .ui.form {
+      width: 80%;
+      margin: 0 auto;
+
+      .button {
+        background-color: $blue;
+        color: white;
+        border-radius: 0;
+        width: 100%;
+      }
+    }
+  }
+}

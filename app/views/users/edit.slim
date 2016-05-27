@@ -1,0 +1,29 @@
+.user-edit-container
+  .user-dashboard
+    .ui.card
+      .image
+        = image_tag @user.avatar.url(:thumb)
+      .content
+        .header= @user.display_name
+        .meta
+          span.date Joined #{@user.created_at.strftime("%Y")}
+      .extra.content
+        .user-stat
+          i.heart.icon
+          p.inline-block= @user.favorites.count
+        .user-stat
+          i.checkmark.icon
+          p.inline-block= @user.visits.count
+        .user-stat
+          i.write.icon
+          p.inline-block= @user.reviews.count
+  .edit-form-container
+    .ui.form
+      = simple_form_for @user do |f|
+        .field
+          = f.input_field :username
+        .field
+          = f.input_field :name
+        .field
+          = f.input_field :avatar
+        = f.submit 'Update', class: "ui button"

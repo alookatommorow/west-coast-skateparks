@@ -12,6 +12,21 @@
     .user-stat p.inline-block {
       margin-left: 10px;
     }
+
+    .edit-button {
+      margin: 10px auto;
+
+      .button {
+        background-color: $blue;
+        color: white;
+        margin: 0 auto;
+        border-radius: 0;
+
+        &:hover {
+          color: $orange;
+        }
+      }
+    }
   }
 
   .user-map-container {
