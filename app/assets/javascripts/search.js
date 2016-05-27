@@ -1,4 +1,7 @@
 $(document).ready(function(){
+
+  $('#search-input').focus(); //put cursor in input on page load
+
   var appendSearchResultsToContainer = function (response) {
     $(".ui.dimmer").removeClass("active");
     $(".search-container").empty().append(response);

@@ -11,7 +11,6 @@
     position: relative;
     top: 55px;
 
-
     .ui.icon.input {
       width: 75%;
       height: 50px;
@@ -39,22 +38,42 @@
   }
 
   .ui.selection.list {
-    position: relative;
     margin-bottom: 1%;
 
     .item {
+      padding-left: 20px;
+      border-radius: 0;
+      display: flex;
       background: white;
+      color: black;
 
       &:hover {
         background-color: $gray
       }
 
-      p {
-        color: black;
+      .link-section {
+        text-align: left;
+        flex: 1;
+        position: relative;
+
+        .item-header {
+          font-weight: bold;
+        }
+
+        .name, .item-header {
+          position: absolute;
+          top: 50%;
+          transform: translateY(-50%)
+        }
+
+        img {
+          margin: auto 0;
+          width: 100%;
+        }
       }
 
-      .item-header {
-        font-weight: bold;
+      @media #{$mobile} {
+        padding-left: 15px;
       }
     }
   }
