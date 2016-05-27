@@ -1,6 +1,10 @@
 class RatingsController < ApplicationController
   def create
     ManyToMany.create(Rating, params)
-    redirect_to skatepark_path(params[:skatepark_id])
+    render partial: 'ajax-partials/rating', locals: {
+      skatepark: SkateparkPresenter.new(
+        Skatepark.includes(:ratings).find(params[:skatepark_id])
+      )
+    }
   end
 end

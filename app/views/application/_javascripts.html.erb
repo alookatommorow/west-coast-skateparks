@@ -2,7 +2,7 @@
 <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
 
 <% if skatepark && skatepark.has_coordinates? %>
-  <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV.fetch('GOOGLE_KEY') %>&signed_in=true&libraries=places&callback=initAll" async defer></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV.fetch('GOOGLE_KEY') %>" async defer></script>
 <% elsif user %>
   <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV.fetch('GOOGLE_KEY') %>&callback=initMap" async defer></script>
 <% end %>

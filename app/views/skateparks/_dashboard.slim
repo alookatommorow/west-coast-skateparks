@@ -1,0 +1,43 @@
+.skatepark-show-dashboard
+  .stars
+    .content-left
+      - if skatepark.rating
+        - (skatepark.rating.to_i).times do
+          i.large.star.icon
+        - (5-skatepark.rating.to_i).times do
+          i.large.star.icon.shaded
+        p
+          | #{rating_phrase[skatepark.rating.to_i][0]}
+          span  #{rating_phrase[skatepark.rating.to_i][1]}
+    .content-right
+      - if logged_in?
+        #user-actions data-ajax-container=true
+          span data-visit-button=true
+            = render "visits/button",
+              visit: @visit, user: current_user, skatepark: @skatepark
+          span data-favorite-button=true
+            = render "favorites/button",
+              favorite: @favorite, user: current_user, skatepark: @skatepark
+  .ui.divider
+  .address-container
+    .address
+      a href="https://maps.google.com/maps?saddr='Current Location'&daddr=#{skatepark.formatted_address}" target="_blank"
+        div
+          i.marker.icon
+          | #{skatepark.formatted_address}
+        div.get-directions Get Directions
+  .ui.divider
+  .links-container
+    .links
+      a#info-link.selected href="#" data-dashboard-link="#skatepark-photos"
+        i.photo.icon
+        span Photos
+      a#info-link href="#" data-dashboard-link="#skatepark-info"
+        i.info.circle.icon
+        span Info
+      a#map-link href="" data-dashboard-link="#skatepark-map"
+        i.compass.icon
+        span Map
+      a#reviews-link href="#" data-dashboard-link="#skatepark-reviews"
+        i.write.square.icon
+        span Rate

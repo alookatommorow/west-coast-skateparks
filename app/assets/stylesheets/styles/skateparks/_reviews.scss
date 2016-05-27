@@ -1,0 +1,72 @@
+#skatepark-reviews {
+  display: none;
+  padding: 25px;
+
+  .opinions-container {
+    text-align: right;
+    width: 500px;
+    float: right;
+
+    .ui.button {
+      background-color: $blue;
+      border-radius: 0;
+      color: white;
+    }
+
+    .rating-form-container .button {
+      margin-left: 20px;
+    }
+  }
+
+  .rating-reviews {
+
+    .user-rating {
+      font-size: 20px;
+
+      i.star {
+        color: $orange;
+
+        &.shaded {
+          color: $dark-blue;
+        }
+      }
+    }
+
+    .reviews {
+      width: 800px;
+      font-size: 16px;
+    }
+
+    h4 {
+      color: $dark-blue;
+      font-size: 20px;
+    }
+  }
+
+  @media #{$tablet} {
+
+    .opinions-container {
+      width: 300px;
+    }
+
+    .reviews {
+      width: 300px;
+      font-size: 16px;
+    }
+  }
+
+  @media #{$mobile} {
+    padding: 15px;
+
+    .opinions-container {
+      margin: 0 auto;
+      width: 300px;
+      float: none;
+      text-align: center;
+    }
+
+    .rating-reviews {
+      margin-top: 10px;
+    }
+  }
+}

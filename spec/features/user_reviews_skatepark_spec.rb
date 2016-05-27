@@ -9,7 +9,7 @@ RSpec.feature 'User reviews skatepark' do
 
     visit skatepark_path(skatepark)
 
-    click_on 'Review Skatepark'
+    click_on 'Rate'
     fill_in 'Write review here...', with: 'This park IZ PRETTY CHILL -eatmyshortz'
     click_on 'Review'
 

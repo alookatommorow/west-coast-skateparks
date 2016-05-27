@@ -1,21 +1,26 @@
 $(document).ready(function() {
-  $('button[data-slide-toggle]').each(bindSlideToggle);
   $('.ui.dropdown').dropdown(); // dropdown on rate form
 
   $("[data-ajax-container]").on("submit", "[data-ajax-form]", function (event) {
     $.post(this.action, $(this).serialize())
       .success(renderResponse.bind(this));
     event.preventDefault();
+    if ($(this).is("form")) {
+      console.log("check works");
+      resetForm(this);
+    }
   });
 
   function renderResponse(response) {
-    $(this).closest("[data-ajax-container]").html(response);
+    $container = $(this).data("ajax-form")
+    $($container).html(response);
   }
 
-  function bindSlideToggle(_, domEl) {
-    $(domEl).on('click', function (event) {
-      event.preventDefault();
-      $($(event.target).data('slide-toggle')).slideToggle(500);
-    });
+  function resetForm(form) {
+    if ($(form).children(".dropdown").length > 0) {
+      $(form).children(".dropdown").dropdown("restore defaults");
+    } else {
+      form.reset();
+    }
   }
 });

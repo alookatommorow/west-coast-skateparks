@@ -1,8 +1,12 @@
-.ui.segments
-  .ui.segment
-    h4.ui.header User Rating
-    .ui.inverted.segment= skatepark.average_rating
-  - skatepark.attributes.each do |attribute, value|
+#skatepark-info data-toggle-container=true
+  .info-display
     .ui.segment
-      h4.ui.header= attribute.titleize
-      .ui.inverted.segment= value
+      .ui.list
+        - skatepark.attributes.each do |attribute, value|
+          .item.skatepark-info-attribute
+            .ui.grid
+              .left.aligned.four.wide.column= attribute.titleize
+              .left.aligned.twelve.wide.column= value
+
+
+

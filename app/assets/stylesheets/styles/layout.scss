@@ -14,15 +14,14 @@ body {
 }
 
 .page-container {
-  margin: 0 5% 1% 5%;
-  min-height: 80%;
+  margin-top: 49px;
 }
 
 .ui.menu.nav-menu {
   border-radius: 0;
   margin: 0;
   background-color: $blue;
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
@@ -46,6 +45,14 @@ body {
 
     &:hover {
       cursor: pointer;
+    }
+  }
+
+  #mobile-search {
+    display: none;
+
+    @media #{$mobile} {
+      display: inline;
     }
   }
 

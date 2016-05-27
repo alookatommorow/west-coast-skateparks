@@ -1,10 +1,52 @@
-- if skatepark.reviews?
-  h4 Reviews
-  .ui.comments
-    - skatepark.reviews.each do |review|
-      .comment
-        .content
-          .author.inline-block= review.user.display_name
-          .metadata.inline-block
-            .date.inline-block= review.created_at.strftime("%m/%d/%y")
-          .text= review.review
+#skatepark-reviews data-ajax-container=true
+  - if logged_in?
+    .opinions-container
+      .rating-form-container
+        = form_tag ratings_path, class: "ui form rating-form", data: { ajax_form: "[data-rating-display]" } do
+          = hidden_field_tag :user_id, current_user.id
+          = hidden_field_tag :skatepark_id, skatepark.id
+          .ui.selection.dropdown.field
+            = hidden_field_tag :rating, nil
+            i.dropdown.icon
+            .default.text Select Rating...
+            .menu
+              .item data-value="1" 1
+              .item data-value="2" 2
+              .item data-value="3" 3
+              .item data-value="4" 4
+              .item data-value="5" 5
+          = submit_tag "Rate", class: 'ui button'
+          .ui.error.message
+      .review-form-container
+        = form_tag reviews_path, class: "ui form review-form", data: { ajax_form: "[data-reviews-display]" } do
+          = hidden_field_tag :user_id, current_user.id
+          = hidden_field_tag :skatepark_id, skatepark.id
+          .field
+            = text_area_tag :review, nil, placeholder: 'Write review here...', class: ""
+          = submit_tag 'Review', class: "ui button"
+          .ui.error.message
+  .rating-reviews
+    .user-rating data-rating-display=true
+      -if skatepark.average_rating
+        h4 User Rating
+        - (skatepark.average_rating.to_i).times do
+          i.large.star.icon
+        - (5-skatepark.average_rating.to_i).times do
+          i.large.star.icon.shaded
+      - else
+        h4 Be the first to rate!
+    .ui.comments.reviews data-reviews-display=true
+      - if skatepark.reviews?
+        h4 Reviews
+        - skatepark.reviews.each do |review|
+          .comment
+            a.avatar
+              img src="#{review.user.avatar.url(:thumb)}"
+            .content
+              .author.inline-block= review.user.display_name
+              .metadata.inline-block
+                .date.inline-block= review.created_at.strftime("%m/%d/%y")
+              .text= review.review
+      - else
+        h4 Be the first to review!
+

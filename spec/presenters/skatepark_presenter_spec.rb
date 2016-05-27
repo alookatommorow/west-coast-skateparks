@@ -6,7 +6,7 @@ RSpec.describe SkateparkPresenter do
       original_skatepark = create(:skatepark, :presentable)
       skatepark = SkateparkPresenter.new(original_skatepark)
 
-      show_attributes = original_skatepark.attributes.slice('info', 'hours').merge("address" => original_skatepark.address)
+      show_attributes = original_skatepark.attributes.slice('info', 'hours')
       titleized_attributes = {
         'material' => 'Bullshit Garbage',
         'builder' => 'Bob',
@@ -31,10 +31,10 @@ RSpec.describe SkateparkPresenter do
       expect(skatepark.average_rating).to eq(3)
     end
 
-    it 'returns a prompt for users if skatepark has not been rated' do
+    it 'returns a nil if skatepark has not been rated' do
       skatepark = SkateparkPresenter.new(create(:skatepark))
 
-      expect(skatepark.average_rating).to eq('Be the first to rate!')
+      expect(skatepark.average_rating).to eq(nil)
     end
   end
 end

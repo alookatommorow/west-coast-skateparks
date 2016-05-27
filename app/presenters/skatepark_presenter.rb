@@ -1,15 +1,12 @@
 class SkateparkPresenter < SimpleDelegator
   def attributes
     present_attributes.slice('info', 'hours')
-    .merge("address" => formatted_address)
     .merge(titleized_attributes)
   end
 
   def average_rating
     if model.ratings.any?
       model.ratings.map(&:rating).reduce(:+) / model.ratings.length
-    else
-      'Be the first to rate!'
     end
   end
 
@@ -17,14 +14,15 @@ class SkateparkPresenter < SimpleDelegator
     __getobj__
   end
 
-  private
-    def formatted_address
-      if zip_code
-        address + ", " + city.titleize + ", " + states["#{state}"] + " " + zip_code
-      else
-        address
-      end
+  def formatted_address
+    if zip_code
+      address + ", " + city.titleize + ", " + states["#{state}"] + " " + zip_code
+    else
+      address
     end
+  end
+
+  private
 
     def states
       {

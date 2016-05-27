@@ -1,10 +1,18 @@
-.ui.medium.images.center-text
+#skatepark-photos data-toggle-container=true
   -if skatepark.pictures?
-    - skatepark.skatepark_images.each do |image|
-      img.ui.image.skatepark-image src="#{image.photo.url}"
-.center-text.one-top
-  - if !skatepark.photo_cred.blank?
-    p
-    ' Photos courtesy of
-    a href="#{skatepark.photo_url}"= skatepark.photo_cred
-    '
+    .photo-display
+      i.arrow.circle.left.icon.prev.carousel-button data-carousel="prev"
+      i.arrow.circle.right.icon.next.carousel-button data-carousel="next"
+      .carousel-image-container
+        - skatepark.skatepark_images.each do |image|
+          .skatepark-show-image
+            img src="#{image.photo.url}"
+      .photo-thumbnails
+        - skatepark.skatepark_images.each do |image|
+          .skatepark-show-thumbnail
+            img src="#{image.photo.url(:thumb)}"
+      - if !skatepark.photo_cred.blank?
+        .photo-cred
+          ' Photos courtesy of
+          a href="#{skatepark.photo_url}"= skatepark.photo_cred
+

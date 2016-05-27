@@ -1,18 +1,9 @@
-- if skatepark.has_coordinates?
-  .center-text.two-top
-    form action="https://maps.google.com/maps" method="get" target="_blank"
-      .ui.action.input.one-top.three-bottom
-        #locationField
-          input#autocomplete name="saddr" placeholder="Enter your address" onFocus="geolocate()" type="text"
-      .two-top
-        button.ui.button Get Directions
-        input type="hidden" name="daddr" value="#{skatepark.address}"
-  .one-top
+#skatepark-map data-toggle-container=true
+  - if skatepark.has_coordinates?
     #map-container
-      #map.skatepark-map
-  .center-text.one-top
+      #map
     #toggle-nearby-container class="hidden"
-      button#toggle-nearby.ui.button.primary Show Nearby Parks
-- else
-  #map-missing
-    h3 Map coming soon!!
+      button#toggle-nearby.ui.button Show Nearby Parks
+  - else
+    #map-missing
+      h3 Map coming soon!!
