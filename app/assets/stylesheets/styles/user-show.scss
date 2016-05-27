@@ -1,37 +1,134 @@
 .user-show-container {
-  padding: 0 30px;
+  padding: 0 30px 30px 30px;
 
-  .user-dashboard .ui.card {
-    border-radius: 0;
+  .user-dashboard {
+    float: left;
+    width: 20%;
 
-    img {
+    .ui.card, .ui.card img {
       border-radius: 0;
+    }
+
+    .user-stat p.inline-block {
+      margin-left: 10px;
     }
   }
 
-  .user-stat p.inline-block {
-    margin-left: 10px;
+  .user-map-container {
+    position: relative;
+    float: right;
+    width: 78%;
+    margin-bottom: 30px;
+
+    #map {
+      height: 500px;
+      width: 100%;
+    }
+
+    .user-map-buttons {
+      display: flex;
+      justify-content: space-around;
+      margin-top: 15px;
+
+      .ui.button {
+        border-radius: 0;
+        background-color: $blue;
+        color: white;
+
+        &:hover {
+          color: $orange;
+        }
+      }
+    }
   }
-}
 
-#relative {
-  position: relative;
-}
+  .favorites-visits {
+    clear: right;
+    display: flex;
+    justify-content: space-around;
 
-#map {
-  height: 300px;
-  width: 400px;
-  margin-left: auto;
-  margin-right: auto;
-}
+    h4 {
+      font-family: 'Dirty-Bakers-Dozen', sans-serif;
+      color: $blue;
+      font-size: 25px;
+      margin-bottom: 10px;
+    }
 
-.profile-container {
-  height: 50em;
-  overflow-y: auto;
-  overflow-x: hidden;
-  padding-left: 0;
+    .favorites, .visits {
+      text-align: center;
+      width: 48%;
+    }
 
-  .selection.list > .item {
-    color: black;
+    .ui.selection.list .item {
+      padding-left: 10px;
+      border-radius: 0;
+      display: flex;
+      background: white;
+      color: black;
+
+      &:hover {
+        background-color: $gray
+      }
+
+      .link-section {
+        text-align: left;
+        flex: 1;
+        position: relative;
+
+        .city {
+          font-weight: bold;
+        }
+
+        .name, .city {
+          position: absolute;
+          top: 50%;
+          transform: translateY(-50%)
+        }
+
+        img {
+          margin: auto 0;
+          width: 100%;
+        }
+      }
+    }
+
+    @media #{$tablet} {
+      display: block;
+
+      .favorites, .visits {
+        width: 100%;
+        margin: 0 auto;
+      }
+
+      .visits {
+        margin-top: 15px;
+      }
+    }
+  }
+
+
+
+  @media #{$mobile} {
+
+    .user-dashboard {
+      float: none;
+      margin: 0 auto;
+      width: 65%;
+
+      .ui.card {
+        border-radius: 0;
+        margin: 0 auto;
+      }
+    }
+
+    .user-map-container {
+      float: none;
+      width: 90%;
+      margin: 15px auto;
+
+      #map {
+        height: 400px;
+      }
+    }
   }
 }
