@@ -4,15 +4,16 @@ $(document).ready(function() {
   $("[data-ajax-container]").on("submit", "[data-ajax-form]", function (event) {
     $.post(this.action, $(this).serialize())
       .success(renderResponse.bind(this));
+
     event.preventDefault();
-    if ($(this).is("form")) {
-      console.log("check works");
+
+    if ($(this).data("reset-form")) {
       resetForm(this);
     }
   });
 
   function renderResponse(response) {
-    $container = $(this).data("ajax-form")
+    $container = $(this).data("ajax-form");
     $($container).html(response);
   }
 
