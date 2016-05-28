@@ -1,8 +1,8 @@
-#skatepark-reviews data-ajax-container=true
+#skatepark-reviews data-toggle-container=true
   - if logged_in?
-    .opinions-container
+    .opinions-container data-ajax-container=true
       .rating-form-container
-        = form_tag ratings_path, class: "ui form rating-form", data: { ajax_form: "[data-rating-display]" } do
+        = form_tag ratings_path, class: "ui form rating-form", data: { ajax_form: "[data-rating-display]", reset_form: true } do
           = hidden_field_tag :user_id, current_user.id
           = hidden_field_tag :skatepark_id, skatepark.id
           .ui.selection.dropdown.field
@@ -18,7 +18,7 @@
           = submit_tag "Rate", class: 'ui button'
           .ui.error.message
       .review-form-container
-        = form_tag reviews_path, class: "ui form review-form", data: { ajax_form: "[data-reviews-display]" } do
+        = form_tag reviews_path, class: "ui form review-form", data: { ajax_form: "[data-reviews-display]", reset_form: true } do
           = hidden_field_tag :user_id, current_user.id
           = hidden_field_tag :skatepark_id, skatepark.id
           .field

@@ -7,7 +7,7 @@ Rails.application.routes.draw do
     root controller: DashboardManifest::ROOT_DASHBOARD, action: :index
   end
 
-  resources :users, only: [:show, :create, :new] do
+  resources :users, only: [:show, :create, :new, :edit, :update] do
     resource :map, only: :show, controller: 'users/maps'
   end
 

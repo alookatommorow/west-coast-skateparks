@@ -1,37 +1,53 @@
-.page-container
-  .center-text
-    h1
-      = @user.display_name.titleize
-      = image_tag @user.avatar.url(:thumb)
-  .profile-container
-    .ui.grid
-      .seven.wide.column
-        .inline-block.one-margin
-          h2 Favorites
-        .inline-block.one-margin.float-right
-          h2= @user.favorite_parks.length
-        .ui.divider
-        .ui.middle.aligned.selection.list
-          - @user.favorite_parks.each do |park|
-            = link_to park.city.titleize + ": " + park.name.titleize + ", " + park.state.capitalize.capitalize, skatepark_path(park), class: "item"
-      .seven.wide.column
-        #relative
-          #map.user-map
-        .center-text.two-top
-          #toggle-favorite-container.hidden
-            button#toggle-favorite.ui.button.primary Hide Favorites
-          #toggle-visited-container.hidden
-            button#toggle-visited.ui.button.primary Hide Visited
-          #toggle-both-container.hidden
-            button#toggle-both.ui.button.primary Hide THRASHED
-    .ui.grid
-      .seven.wide.column
-        .inline-block
-          h2 My Parks
-        .inline-block.float-right
-          h2= @user.visited_parks.length
-        .ui.divider
-        .ui.middle.aligned.selection.list
-          - @user.visited_parks.each do |park|
-            = link_to park.city.titleize  + ", " + park.state.capitalize + ": " + park.name.titleize , skatepark_path(park), class: "item"
-
+.user-show-container
+  .user-dashboard
+    .ui.card
+      .image
+        = image_tag @user.avatar.url(:thumb)
+      .content
+        .header= @user.display_name
+        .meta
+          span.date Joined #{@user.created_at.strftime("%Y")}
+      .extra.content
+        .user-stat
+          i.heart.icon
+          p.inline-block= @user.favorites.count
+        .user-stat
+          i.checkmark.icon
+          p.inline-block= @user.visits.count
+        .user-stat
+          i.write.icon
+          p.inline-block= @user.reviews.count
+      .edit-button
+        = link_to "Edit Info", edit_user_path(@user), class: "ui button"
+  .user-map-container
+    #map.user-map
+    .user-map-buttons
+      #toggle-favorite-container.hidden
+        #toggle-favorite.ui.button Hide Favorites
+      #toggle-visited-container.hidden
+        #toggle-visited.ui.button Hide Visited
+      #toggle-both-container.hidden
+        #toggle-both.ui.button Hide THRASHED
+  .favorites-visits
+    .favorites
+      h4 Favorites
+      .ui.divided.selection.list
+        - @user.favorite_parks.each do |park|
+          = link_to park, class: "item" do
+            .link-section
+              .city= park.city.titleize + ", " + state_abbrev[park.state]
+            .link-section
+              .name= park.name.titleize
+            .link-section
+              = image_tag("#{park.hero}")
+    .visits
+      h4 Visits
+      .ui.divided.selection.list
+        - @user.visited_parks.each do |park|
+          = link_to park, class: "item" do
+            .link-section
+              .city= park.city.titleize + ", " + state_abbrev[park.state]
+            .link-section
+              .name= park.name.titleize
+            .link-section
+              = image_tag("#{park.hero}")
