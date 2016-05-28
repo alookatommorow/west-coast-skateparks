@@ -5,9 +5,9 @@ RSpec.feature 'Visitor creates an account' do
     visit root_path
     click_link("Sign In")
     click_link("Don't have a WCS")
-    find('#username').set('buttclown95')
-    find('#email').set('juggalo@icplovers.org')
-    find('#password').set('thesmellofsack')
+    fill_in 'user_username', with: 'buttclown95'
+    fill_in 'user_email', with: 'juggalo@icplovers.org'
+    fill_in 'user_password', with: 'thesmellofsack'
     click_button 'Register'
 
     user = User.last
@@ -26,9 +26,9 @@ RSpec.feature 'Visitor creates an account' do
       visit root_path
       click_link("Sign In")
       click_link("Don't have a WCS")
-      find('#username').set(invalid_user.username)
-      find('#email').set(user.email)
-      find('#password').set(invalid_user.password)
+      fill_in 'user_username', with: invalid_user.username
+      fill_in 'user_email', with: user.email
+      fill_in 'user_password', with: invalid_user.password
       click_button 'Register'
 
       expect(current_path).to eq(new_user_path)

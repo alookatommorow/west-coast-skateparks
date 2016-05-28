@@ -1,24 +1,6 @@
 .user-show-container
   .user-dashboard
-    .ui.card
-      .image
-        = image_tag @user.avatar.url(:thumb)
-      .content
-        .header= @user.display_name
-        .meta
-          span.date Joined #{@user.created_at.strftime("%Y")}
-      .extra.content
-        .user-stat
-          i.heart.icon
-          p.inline-block= @user.favorites.count
-        .user-stat
-          i.checkmark.icon
-          p.inline-block= @user.visits.count
-        .user-stat
-          i.write.icon
-          p.inline-block= @user.reviews.count
-      .edit-button
-        = link_to "Edit Info", edit_user_path(@user), class: "ui button"
+    = render "profile_card", user: @user
   .user-map-container
     #map.user-map
     .user-map-buttons

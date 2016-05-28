@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
   has_secure_password
-  validates :username, :password, :email, presence: true
+  validates :username, :email, presence: true
+  validates :password, presence: true, on: :create
   validates :username, :email, uniqueness: true
   validates_format_of :email, with: /\A.+@.+\..{2,}\z/
 
