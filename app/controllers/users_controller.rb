@@ -1,10 +1,16 @@
 class UsersController < ApplicationController
   def new
+    @user = User.new
   end
 
   def update
     @user = User.find(params[:id])
-    redirect_to @user
+    if @user.update(user_params)
+      redirect_to @user, notice: "Righteous."
+    else
+      flash.now[:error] = @user.errors.full_messages.join(", ")
+      render :edit
+    end
   end
 
   def edit
@@ -35,8 +41,6 @@ class UsersController < ApplicationController
   private
 
     def user_params
-      { username: params[:username],
-        email: params[:email],
-        password: params[:password] }
+      params.require(:user).permit(:username, :password, :name, :email, :avatar)
     end
 end

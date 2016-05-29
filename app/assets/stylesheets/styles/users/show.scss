@@ -1,34 +1,6 @@
 .user-show-container {
   padding: 0 30px 30px 30px;
 
-  .user-dashboard {
-    float: left;
-    width: 20%;
-
-    .ui.card, .ui.card img {
-      border-radius: 0;
-    }
-
-    .user-stat p.inline-block {
-      margin-left: 10px;
-    }
-
-    .edit-button {
-      margin: 10px auto;
-
-      .button {
-        background-color: $blue;
-        color: white;
-        margin: 0 auto;
-        border-radius: 0;
-
-        &:hover {
-          color: $orange;
-        }
-      }
-    }
-  }
-
   .user-map-container {
     position: relative;
     float: right;
@@ -143,6 +115,41 @@
 
       #map {
         height: 400px;
+      }
+    }
+  }
+}
+
+.user-dashboard {
+  float: left;
+  width: 20%;
+
+  .ui.card, .ui.card img {
+    border-radius: 0;
+  }
+  
+  .ui.card {
+    p.name,
+    p.date {
+      margin-bottom: 0;
+    }
+  }
+
+  .user-stat p.inline-block {
+    margin-left: 10px;
+  }
+
+  .edit-button {
+    margin: 10px auto;
+
+    .button {
+      background-color: $blue;
+      color: white;
+      margin: 0 auto;
+      border-radius: 0;
+
+      &:hover {
+        color: $orange;
       }
     }
   }

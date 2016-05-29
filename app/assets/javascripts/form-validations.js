@@ -3,7 +3,7 @@ $(document).ready(function() {
   opinionValidation('review');
 
   sessionValidation('log-in');
-  sessionValidation('sign-up');
+  sessionValidation('new_user');
 
   function opinionValidation(type) {
     var options = { fields: {} };
@@ -23,7 +23,7 @@ $(document).ready(function() {
     var options = {
       fields: {
         username: {
-          identifier  : 'username',
+          identifier  : 'user_username',
           rules: [
             {
               type   : 'empty',
@@ -32,7 +32,7 @@ $(document).ready(function() {
           ]
         },
         password: {
-          identifier  : 'password',
+          identifier  : 'user_password',
           rules: [
             {
               type   : 'minLength[6]',
@@ -42,9 +42,9 @@ $(document).ready(function() {
         }
       }
     };
-    if (type === 'sign-up') {
+    if (type === 'new_user') {
       options.fields.email = {
-        identifier  : 'email',
+        identifier  : 'user_email',
         rules: [
           {
             type   : 'email',
@@ -53,6 +53,6 @@ $(document).ready(function() {
         ]
       };
     }
-    $('.'+type+'-form').form(options);
+    $('.'+type).form(options);
   }
 });
