@@ -5,6 +5,10 @@ html
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true
     = csrf_meta_tags
     = favicon_link_tag 'favicon.ico'
+    - if content_for? :og_metadata
+      = yield :og_metadata
+    - else
+      = render "default_open_graph_metatags"
 
     meta name='viewport' content='width=device-width, initial-scale=1'
   body
