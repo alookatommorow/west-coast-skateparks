@@ -1,4 +1,7 @@
 class UsersController < ApplicationController
+
+  before_action :verify_user, except: [:new, :create]
+
   def new
     @user = User.new
   end
@@ -39,6 +42,14 @@ class UsersController < ApplicationController
   end
 
   private
+
+    def verify_user
+      if !logged_in?
+        redirect_to new_session_path, flash: { error: "Sign in to see your profile" }
+      elsif logged_in? && params[:id].to_i != current_user.id
+        redirect_to root_path, flash: { error: "That's not your profile" }
+      end
+    end
 
     def user_params
       params.require(:user).permit(:username, :password, :name, :email, :avatar)
