@@ -4,8 +4,8 @@ var SearchResults = React.createClass({
     var createBoldString = function(string) {}
     var matchInfo = [];
     var results = this.props.results.map(function(skatepark){
-      matchIndex = skatepark.city.match(query) ? skatepark.city.match(query).index : skatepark.name.match(query).index;
-      console.log(matchIndex);
+      // matchIndex = skatepark.city.match(query) ? skatepark.city.match(query).index : skatepark.name.match(query).index;
+      // console.log(matchIndex);
       return <div key={skatepark.id}>
               <div>{skatepark.name}, {skatepark.city}</div>
             </div>

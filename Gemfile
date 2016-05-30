@@ -18,7 +18,6 @@ gem "less-rails-semantic_ui", "~> 2.1.8.2"
 gem "paperclip", "~> 4.3"
 gem "pg"
 gem "puma"
-gem 'rails_12factor', group: :production
 gem 'react-rails', '~> 1.6.0'
 gem "sass-rails", "~> 5.0"
 gem 'simple_form'

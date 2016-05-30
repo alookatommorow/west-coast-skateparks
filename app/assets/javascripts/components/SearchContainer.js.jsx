@@ -14,14 +14,14 @@ var SearchContainer = React.createClass({
 
   searchSkateparks: function(query) {
     var regExp = new RegExp(query);
+    console.log(regExp);
     return this.state.skateparks.filter(function(skatepark){
-      return skatepark.city.match(regExp) ||
-        skatepark.name.match(regExp);
+      return skatepark.name.match("ten");
     });
   },
 
   handleChange: function(event) {
-    var query = event.target.value
+    var query = event.target.value;
     if (query === '') {
       this.setState({
         results: [],
@@ -44,6 +44,7 @@ var SearchContainer = React.createClass({
   },
 
   storeAllSkateparks: function(response) {
+    console.log(response);
     this.setState({skateparks: response});
   },
 
@@ -57,6 +58,7 @@ var SearchContainer = React.createClass({
 
   render: function() {
     return (
+
       <div>
         <div>Fuck ur bum</div>
         <SearchForm handleChange={this.handleChange} />
