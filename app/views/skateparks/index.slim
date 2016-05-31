@@ -40,3 +40,7 @@
 
 a#back-to-top href="#top"
   i#up-arrow.angle.double.up.icon
+
+= content_for :analytics_event
+  javascript:
+    analytics.page("Skateparks Index");
