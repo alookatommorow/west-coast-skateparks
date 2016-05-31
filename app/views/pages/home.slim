@@ -6,3 +6,7 @@
   .landing-button
     .call-to-action
       = link_to "Find a park", skateparks_path
+
+= content_for :analytics_event
+  javascript:
+    analytics.page("Home");

@@ -19,4 +19,12 @@ module AnalyticsHelper
       admin_rating: skatepark.rating,
     }.to_json
   end
+
+  def new_user_json(user)
+    {
+      username: user.username,
+      name: user.name,
+      email: user.email,
+    }.to_json
+  end
 end

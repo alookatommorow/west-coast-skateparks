@@ -33,3 +33,8 @@
               .name= park.name.titleize
             .link-section
               = image_tag("#{park.hero}")
+
+- if flash[:signed_up]
+  = content_for :analytics_event
+    javascript:
+      analytics.track("Signed Up", #{raw new_user_json(@user)});
