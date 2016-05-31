@@ -1,5 +1,5 @@
 #skatepark-reviews data-toggle-container=true
-  - if logged_in?
+  -if logged_in?
     .opinions-container data-ajax-container=true
       .rating-form-container
         = form_tag ratings_path, class: "ui form rating-form", data: { ajax_form: "[data-rating-display]", reset_form: true } do

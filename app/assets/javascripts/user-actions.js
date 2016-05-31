@@ -13,8 +13,20 @@ $(document).ready(function() {
   });
 
   function renderResponse(response) {
-    $container = $(this).data("ajax-form");
-    $($container).html(response);
+    if (response.length > 0) {
+      $container = $(this).data("ajax-form");
+      $($container).html(response);
+    } else {
+      swal({
+        title: "Hold Up!",
+        text: "You must be signed in to do that",
+        type: "warning",
+        confirmButtonText: "Sign Up",
+        showCancelButton: true
+      }, function(){
+        window.location.href = '/sessions/new.html';
+      });
+    }
   }
 
   function resetForm(form) {
