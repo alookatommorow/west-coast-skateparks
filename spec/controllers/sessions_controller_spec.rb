@@ -5,7 +5,10 @@ RSpec.describe SessionsController, type: :controller do
     it 'signs a user in and redirects with flash message' do
       user = create(:user)
 
-      post :create, id: user.id, username: user.username, password: user.password
+      post :create, session: {
+        username: user.username,
+        password: user.password
+      }
 
       expect(session[:id]).to eq(user.id)
       expect(flash[:notice]).to eq("Welcome, #{user.display_name}")
@@ -14,7 +17,10 @@ RSpec.describe SessionsController, type: :controller do
     it 'flashes like a bitch if it shits the bed' do
       user = build(:user)
 
-      post :create, id: user.id, username: user.username, password: user.password
+      post :create, session: {
+        username: user.username,
+        password: user.password
+      }
 
       expect(session[:id]).to be_nil
       expect(flash[:error]).to eq('Sign in failed')
