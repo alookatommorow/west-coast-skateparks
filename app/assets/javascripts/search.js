@@ -12,6 +12,7 @@ $(document).ready(function(){
     $(".ui.dimmer").addClass("active");
     $.get(this.action, $(this).serialize(), appendSearchResultsToContainer);
 
+    analytics.track("Searched for Skatepark", { query: $("#search-input").val() });
     event.preventDefault();
   });
 
