@@ -5,3 +5,16 @@
   = render 'info', skatepark: @skatepark
   = render 'map', skatepark: @skatepark
   = render 'reviews', skatepark: @skatepark
+
+= content_for :og_metadata
+  meta name="twitter:card" content="summary_large_image"
+  /meta name="twitter:site" content="@dont_have_one"
+  meta name="twitter:title" content=skatepark_meta_title
+  meta name="twitter:image" content=@skatepark.hero.url
+  meta name="twitter:description" content=@skatepark.formatted_address
+
+  meta property="og:title" content=skatepark_meta_title
+  meta property="og:url" content=request.original_url
+  meta property="og:image" content=@skatepark.hero.url
+  meta property="og:description" content=@skatepark.formatted_address
+  meta property="fb:app_id" content="1520128344956383"
