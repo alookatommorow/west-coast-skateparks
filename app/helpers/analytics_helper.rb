@@ -1,4 +1,8 @@
 module AnalyticsHelper
+  def analytics?
+    ENV["SEGMENT_WRITE_KEY"].present?
+  end
+
   def identify_hash(user = current_user)
     {
       created: user.created_at,
