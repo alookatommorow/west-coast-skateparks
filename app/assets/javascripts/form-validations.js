@@ -2,7 +2,7 @@ $(document).ready(function() {
   opinionValidation('rating');
   opinionValidation('review');
 
-  sessionValidation('log-in');
+  sessionValidation('new_session');
   sessionValidation('new_user');
 
   function opinionValidation(type) {
