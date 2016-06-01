@@ -1,6 +1,6 @@
 module AnalyticsHelper
   def analytics?
-    ENV["SEGMENT_WRITE_KEY"].present?
+    (!Rails.env.test?) && ENV["SEGMENT_WRITE_KEY"].present?
   end
 
   def identify_hash(user = current_user)

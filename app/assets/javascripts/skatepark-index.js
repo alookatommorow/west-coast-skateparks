@@ -81,10 +81,10 @@ $(document).ready(function(){
   }
 
   function trackStateLinkClick() {
-    <% unless Rails.env.test? %>
+    if (window.analytics) {
       var state = $(this).data("state-link") || $(this).data("mobile-state-link");
       analytics.track("Clicked State Link", { state: state });
-    <% end %>
+    }
   }
 });
 
