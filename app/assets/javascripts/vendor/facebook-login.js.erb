@@ -17,7 +17,7 @@ window.fbAsyncInit = function() {
 
 function statusChangeCallback(response) {
   if (response.status === 'connected') {
-    FB.api('/me', {fields: ['picture', 'name', 'email']}, function(response) {
+    FB.api('/me?fields=picture.type(large),name,email', function(response) {
       var avatar;
       if (!response.picture.data.is_silhouette) {
         avatar = response.picture.data.url
