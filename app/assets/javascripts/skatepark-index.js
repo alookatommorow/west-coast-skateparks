@@ -9,6 +9,7 @@ $(document).ready(function(){
       return;
     }
 
+    trackStateLinkClick(this); // .bind failed TravisCI
     pageCount = 1;
     currentStateLink = this.href;
 
@@ -24,6 +25,7 @@ $(document).ready(function(){
       $.get(this.href, renderSkateparks);
     }.bind(this));
 
+    trackStateLinkClick(this);
     pageCount = 1;
     currentStateLink = this.href;
   });
@@ -76,6 +78,13 @@ $(document).ready(function(){
       return "page=" + (parseInt(page, 10) + 1);
     });
     pageCount++;
+  }
+
+  function trackStateLinkClick(link) {
+    if (window.analytics) {
+      var state = $(link).data("state-link") || $(link).data("mobile-state-link");
+      analytics.track("Clicked State Link", { state: state });
+    }
   }
 });
 

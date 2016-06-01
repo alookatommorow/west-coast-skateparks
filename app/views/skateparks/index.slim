@@ -1,36 +1,36 @@
 #top.ui.centered.grid.container.index-menu-container
   .ui.three.item.menu.state-menu
     = link_to skateparks_state_path(state: 'california', page: 1),
-      data: { state_link: true },
+      data: { state_link: "california" },
       class: 'item state-button' do
       p.state-label
         | #{image_tag("https://storage.googleapis.com/west-coast-skateparks/states/ca-largeseal.png", class: "ui centered small image")} CA
     = link_to skateparks_state_path(state: 'oregon', page: 1),
-      data: { state_link: true },
+      data: { state_link: "oregon" },
       class: 'item state-button' do
       p.state-label
         | #{image_tag("https://storage.googleapis.com/west-coast-skateparks/states/or-largeseal.png", class: "ui centered small image")} OR
     = link_to skateparks_state_path(state: 'washington', page: 1),
-      data: { state_link: true },
+      data: { state_link: "washington" },
       class: 'item state-button' do
       p.state-label
         | #{image_tag("https://storage.googleapis.com/west-coast-skateparks/states/wa-largeseal.png", class: "ui centered small image")} WA
 
   / Mobile links
   = link_to skateparks_state_path(state: 'california', page: 1),
-    data: { mobile_state_link: true },
+    data: { mobile_state_link: "california" },
     class: "sixteen wide column mobile-menu" do
       div.state-text
         p California
       div.state-image= image_tag("https://storage.googleapis.com/west-coast-skateparks/states/ca-largeseal.png", class: "ui tiny image")
   = link_to skateparks_state_path(state: 'oregon', page: 1),
-    data: { mobile_state_link: true },
+    data: { mobile_state_link: "oregon" },
     class: "sixteen wide column mobile-menu" do
       div.state-text
         p Oregon
       div.state-image= image_tag("https://storage.googleapis.com/west-coast-skateparks/states/or-largeseal.png", class: "ui tiny image")
   = link_to skateparks_state_path(state: 'washington', page: 1),
-    data: { mobile_state_link: true },
+    data: { mobile_state_link: "washington" },
     class: "sixteen wide column mobile-menu" do
       div.state-text
         p Washington
@@ -40,3 +40,7 @@
 
 a#back-to-top href="#top"
   i#up-arrow.angle.double.up.icon
+
+= content_for :analytics_event
+  javascript:
+    analytics.page("Skateparks Index");

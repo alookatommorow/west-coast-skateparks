@@ -1,5 +1,4 @@
 class UsersController < ApplicationController
-
   before_action :verify_user, except: [:new, :create]
 
   def new
@@ -26,8 +25,9 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
+      flash[:signed_up] = true
       session[:id] = @user.id
-      redirect_to @user
+      redirect_to @user, notice: "Welcome, #{@user.username}"
     else
       redirect_to new_user_path, flash: { error: @user.errors.full_messages.first }
     end

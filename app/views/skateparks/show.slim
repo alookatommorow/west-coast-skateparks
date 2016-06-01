@@ -18,3 +18,7 @@
   meta property="og:image" content=@skatepark.hero.url
   meta property="og:description" content=@skatepark.formatted_address
   meta property="fb:app_id" content="1520128344956383"
+
+= content_for :analytics_event
+  javascript:
+    analytics.page("Skatepark", #{raw skatepark_json(@skatepark)});
