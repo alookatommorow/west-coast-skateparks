@@ -8,16 +8,20 @@ class SkateparkDashboard < Administrate::BaseDashboard
   # which determines how the attribute is displayed
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
-    hero: PaperclipField,
+    favorites: Field::HasMany,
+    users_who_faved: Field::HasMany.with_options(class_name: "User"),
+    visits: Field::HasMany,
+    users_who_visited: Field::HasMany.with_options(class_name: "User"),
+    ratings: Field::HasMany,
+    users_who_rated: Field::HasMany.with_options(class_name: "User"),
+    reviews: Field::HasMany,
+    users_who_reviewed: Field::HasMany.with_options(class_name: "User"),
+    skatepark_images: Field::HasMany,
+    location: Field::HasOne,
     id: Field::Number,
     name: Field::String,
-    city: Field::String,
-    state: Field::String,
     identifier: Field::String,
     rating: Field::String,
-    address: Field::String,
-    latitude: Field::Number.with_options(decimals: 2),
-    longitude: Field::Number.with_options(decimals: 2),
     material: Field::String,
     designer: Field::String,
     builder: Field::String,
@@ -35,15 +39,15 @@ class SkateparkDashboard < Administrate::BaseDashboard
     obstacles: Field::Text,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
-    ratings: Field::HasMany,
-    reviews: Field::HasMany,
-    map_photo: PaperclipField,
-    skatepark_images: Field::HasMany,
-    users_who_faved: Field::HasMany.with_options(class_name: "User"),
-    users_who_visited: Field::HasMany.with_options(class_name: "User"),
-    users_who_rated: Field::HasMany.with_options(class_name: "User"),
-    users_who_reviewed: Field::HasMany.with_options(class_name: "User"),
-  }
+    hero_file_name: Field::String,
+    hero_content_type: Field::String,
+    hero_file_size: Field::Number,
+    hero_updated_at: Field::DateTime,
+    map_photo_file_name: Field::String,
+    map_photo_content_type: Field::String,
+    map_photo_file_size: Field::Number,
+    map_photo_updated_at: Field::DateTime,
+  }.freeze
 
   # COLLECTION_ATTRIBUTES
   # an array of attributes that will be displayed on the model's index page.
@@ -51,29 +55,29 @@ class SkateparkDashboard < Administrate::BaseDashboard
   # By default, it's limited to four items to reduce clutter on index pages.
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = [
-    :city,
-    :state,
-    :address,
-    :reviews,
-  ]
+    :location,
+    :name,
+    :favorites,
+    :visits,
+  ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
-  SHOW_PAGE_ATTRIBUTES = ATTRIBUTE_TYPES.keys
-
-  # FORM_ATTRIBUTES
-  # an array of attributes that will be displayed
-  # on the model's form (`new` and `edit`) pages.
-  FORM_ATTRIBUTES = [
-    :hero,
+  SHOW_PAGE_ATTRIBUTES = [
+    :favorites,
+    :users_who_faved,
+    :visits,
+    :users_who_visited,
+    :ratings,
+    :users_who_rated,
+    :reviews,
+    :users_who_reviewed,
+    :skatepark_images,
+    :location,
+    :id,
     :name,
-    :city,
-    :state,
     :identifier,
     :rating,
-    :address,
-    :latitude,
-    :longitude,
     :material,
     :designer,
     :builder,
@@ -84,13 +88,64 @@ class SkateparkDashboard < Administrate::BaseDashboard
     :info,
     :helmet,
     :lights,
-    :map_photo,
     :photo_cred,
     :photo_url,
     :video_url,
     :num_pics,
     :obstacles,
-  ]
+    :created_at,
+    :updated_at,
+    :hero_file_name,
+    :hero_content_type,
+    :hero_file_size,
+    :hero_updated_at,
+    :map_photo_file_name,
+    :map_photo_content_type,
+    :map_photo_file_size,
+    :map_photo_updated_at,
+  ].freeze
+
+  # FORM_ATTRIBUTES
+  # an array of attributes that will be displayed
+  # on the model's form (`new` and `edit`) pages.
+  FORM_ATTRIBUTES = [
+    :favorites,
+    :users_who_faved,
+    :visits,
+    :users_who_visited,
+    :ratings,
+    :users_who_rated,
+    :reviews,
+    :users_who_reviewed,
+    :skatepark_images,
+    :location,
+    :name,
+    :identifier,
+    :rating,
+    :material,
+    :designer,
+    :builder,
+    :opened,
+    :hours,
+    :size,
+    :notes,
+    :info,
+    :helmet,
+    :lights,
+    :photo_cred,
+    :photo_url,
+    :video_url,
+    :num_pics,
+    :obstacles,
+    :hero_file_name,
+    :hero_content_type,
+    :hero_file_size,
+    :hero_updated_at,
+    :map_photo_file_name,
+    :map_photo_content_type,
+    :map_photo_file_size,
+    :map_photo_updated_at,
+  ].freeze
 
   # Overwrite this method to customize how skateparks are displayed
   # across all pages of the admin dashboard.
