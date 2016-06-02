@@ -10,11 +10,13 @@
           | #{rating_phrase[skatepark.rating.to_i][0]}
           span  #{rating_phrase[skatepark.rating.to_i][1]}
     .content-right
-      #user-actions data-ajax-container=true
-        span data-visit-button=true
+      #user-actions
+        - if logged_in?
+          div data-signed-in=true
+        span data-ajax-container=true
           = render "visits/button",
             visit: @visit, user: current_user, skatepark: @skatepark
-        span data-favorite-button=true
+        span data-ajax-container=true
           = render "favorites/button",
             favorite: @favorite, user: current_user, skatepark: @skatepark
   .ui.divider

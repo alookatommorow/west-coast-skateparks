@@ -23,7 +23,7 @@ $(document).ready(function() {
     var options = {
       fields: {
         username: {
-          identifier  : ''+type+'_username',
+          identifier  : type+'_username',
           rules: [
             {
               type   : 'empty',
@@ -32,7 +32,7 @@ $(document).ready(function() {
           ]
         },
         password: {
-          identifier  : ''+type+'_password',
+          identifier  : type+'_password',
           rules: [
             {
               type   : 'minLength[6]',

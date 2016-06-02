@@ -1,14 +1,10 @@
 class VisitsController < ApplicationController
   def create
-    if logged_in?
-      @visit = Visit.create(
-        skatepark_id: params[:skatepark_id],
-        user_id: current_user.id,
-      )
-      render_visit_button
-    else
-      render nothing: true
-    end
+    @visit = Visit.create(
+      skatepark_id: params[:skatepark_id],
+      user_id: current_user.id,
+    )
+    render_visit_button
   end
 
   def destroy

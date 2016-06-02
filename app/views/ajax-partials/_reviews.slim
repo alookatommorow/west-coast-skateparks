@@ -1,13 +1,11 @@
-- if skatepark.reviews?
-  h4 Reviews
-  - skatepark.reviews.each do |review|
-    .comment
-      a.avatar
-        img src="#{review.user.avatar.url(:thumb)}"
-      .content
-        .author.inline-block= review.user.display_name
-        .metadata.inline-block
-          .date.inline-block= review.created_at.strftime("%m/%d/%y")
-        .text= review.review
-- else
-  h4 Be the first to review!
+h4 Reviews
+- skatepark.reviews.each do |review|
+  .comment
+    a.avatar
+      img src="#{review.user.avatar.url(:thumb)}"
+    .content
+      .author.inline-block= review.user.display_name
+      .metadata.inline-block
+        .date.inline-block= review.created_at.strftime("%m/%d/%y")
+      .text= review.review
+

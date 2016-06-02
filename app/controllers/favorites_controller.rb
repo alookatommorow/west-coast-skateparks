@@ -1,14 +1,10 @@
 class FavoritesController < ApplicationController
   def create
-    if logged_in?
-      @favorite = Favorite.create(
-        skatepark_id: params[:skatepark_id],
-        user_id: current_user.id,
-      )
-      render_favorite_button
-    else
-      render nothing: true
-    end
+    @favorite = Favorite.create(
+      skatepark_id: params[:skatepark_id],
+      user_id: current_user.id,
+    )
+    render_favorite_button
   end
 
   def destroy

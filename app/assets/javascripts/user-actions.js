@@ -1,32 +1,45 @@
 $(document).ready(function() {
   $('.ui.dropdown').dropdown(); // dropdown on rate form
 
-  $("[data-ajax-container]").on("submit", "[data-ajax-form]", function (event) {
-    $.post(this.action, $(this).serialize())
-      .success(renderResponse.bind(this));
-
-    event.preventDefault();
-
-    if ($(this).data("reset-form")) {
-      resetForm(this);
+  $("[data-ajax-container]").on("submit", "[data-ajax-button]", function (event) {
+    if ($("[data-signed-in]").length > 0) {
+      ajaxPost(this, renderButtonResponse);
+    } else {
+      sweetAlert();
     }
+    event.preventDefault();
   });
 
-  function renderResponse(response) {
-    if (response.length > 0) {
-      $container = $(this).data("ajax-form");
-      $($container).html(response);
-    } else {
-      swal({
-        title: "Hold Up!",
-        text: "You must be signed in to do that",
-        type: "warning",
-        confirmButtonText: "Sign Up",
-        showCancelButton: true
-      }, function(){
-        window.location.href = '/sessions/new.html';
-      });
-    }
+  $("[data-ajax-container]").on("submit", "[data-ajax-form]", function (event) {
+    ajaxPost(this, renderFormResponse);
+    event.preventDefault();
+    resetForm(this);
+  });
+
+  function sweetAlert() {
+    return swal({
+      title: "Hold Up!",
+      text: "You must be signed in to do that",
+      type: "warning",
+      confirmButtonText: "Sign Up",
+      showCancelButton: true
+    }, function(){
+      window.location.href = '/sessions/new.html';
+    });
+  }
+
+  function renderFormResponse(response) {
+    $container = $(this).data("ajax-form");
+    $($container).html(response);
+  }
+
+  function renderButtonResponse(response) {
+    $(this).closest("[data-ajax-container]").html(response);
+  }
+
+  function ajaxPost(form, callback) {
+    $.post(form.action, $(form).serialize())
+      .success(callback.bind(form));
   }
 
   function resetForm(form) {

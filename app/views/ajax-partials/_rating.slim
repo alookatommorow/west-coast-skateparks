@@ -1,8 +1,5 @@
--if skatepark.average_rating
-  h4 User Rating
-  - (skatepark.average_rating.to_i).times do
-    i.large.star.icon
-  - (5-skatepark.average_rating.to_i).times do
-    i.large.star.icon.shaded
-- else
-  h4 Be the first to rate!
+h4 User Rating
+- (skatepark.average_rating.to_i).times do
+  i.large.star.icon
+- (5-skatepark.average_rating.to_i).times do
+  i.large.star.icon.shaded
