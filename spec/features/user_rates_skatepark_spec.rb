@@ -11,7 +11,7 @@ RSpec.feature 'User rates skatepark' do
 
     click_on 'Rate'
 
-    expect(page).to have_text('Be the first to rate!')
+    expect(page).to have_text('Sign in and be the first to rate!')
 
     find('#rating', visible: false).set '1'
 

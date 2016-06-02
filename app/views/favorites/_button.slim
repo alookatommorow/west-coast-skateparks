@@ -2,13 +2,13 @@
   - if favorite.present?
     = form_for [skatepark, favorite],
       method: :delete,
-      data: { ajax_form: "[data-favorite-button]" } do
+      data: { ajax_button: true } do
         button.ui.button
           i.empty.heart.icon.inline-block
           p.inline-block Unfavorite
   - else
     = form_for [skatepark, Favorite.new],
-      data: { ajax_form: "[data-favorite-button]" } do
+      data: { ajax_button: true } do
         button.ui.button
           i.red.heart.icon.inline-block
           p.inline-block Favorite

@@ -1,6 +1,8 @@
 .form-container#sign-up-container
+  .ui.dimmer
+    .ui.loader
   .sign-up-form.ui.form
-    = form_for @user, html: { class: "ui form new_user" } do |f|
+    = form_for @user, html: { class: "ui form user" } do |f|
       .field
         = f.text_field :username, placeholder: "Username"
       .field

@@ -2,7 +2,7 @@
   - if logged_in?
     .opinions-container data-ajax-container=true
       .rating-form-container
-        = form_tag ratings_path, class: "ui form rating-form", data: { ajax_form: "[data-rating-display]", reset_form: true } do
+        = form_tag ratings_path, class: "ui form rating-form", data: { ajax_form: "[data-rating-display]" } do
           = hidden_field_tag :user_id, current_user.id
           = hidden_field_tag :skatepark_id, skatepark.id
           .ui.selection.dropdown.field
@@ -18,7 +18,7 @@
           = submit_tag "Rate", class: 'ui button'
           .ui.error.message
       .review-form-container
-        = form_tag reviews_path, class: "ui form review-form", data: { ajax_form: "[data-reviews-display]", reset_form: true } do
+        = form_tag reviews_path, class: "ui form review-form", data: { ajax_form: "[data-reviews-display]" } do
           = hidden_field_tag :user_id, current_user.id
           = hidden_field_tag :skatepark_id, skatepark.id
           .field
@@ -27,14 +27,15 @@
           .ui.error.message
   .rating-reviews
     .user-rating data-rating-display=true
-      -if skatepark.average_rating
+      - if skatepark.average_rating
         h4 User Rating
         - (skatepark.average_rating.to_i).times do
           i.large.star.icon
         - (5-skatepark.average_rating.to_i).times do
           i.large.star.icon.shaded
       - else
-        h4 Be the first to rate!
+        = link_to new_session_path, class: "ui button" do
+          h4 Sign in and be the first to rate!
     .ui.comments.reviews data-reviews-display=true
       - if skatepark.reviews?
         h4 Reviews
@@ -48,5 +49,6 @@
                 .date.inline-block= review.created_at.strftime("%m/%d/%y")
               .text= review.review
       - else
-        h4 Be the first to review!
+        = link_to new_session_path, class: "ui button" do
+          h4 Sign in and be the first to review!
 

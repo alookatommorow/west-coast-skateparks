@@ -15,4 +15,5 @@
 //= require underscore
 //= require gmaps/google
 //= require semantic_ui/semantic_ui
+//= require_tree ../../../vendor/assets/javascripts/.
 //= require_tree .

@@ -37,9 +37,16 @@
       font-size: 16px;
     }
 
-    h4 {
-      color: $dark-blue;
+    .button {
+      border-radius: 0;
+      color: white;
+      background-color: $blue;
       font-size: 20px;
+
+      &:hover {
+        background-color: $dark-blue;
+        color: $orange;
+      }
     }
   }
 

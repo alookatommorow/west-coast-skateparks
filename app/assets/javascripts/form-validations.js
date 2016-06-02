@@ -2,8 +2,8 @@ $(document).ready(function() {
   opinionValidation('rating');
   opinionValidation('review');
 
-  sessionValidation('log-in');
-  sessionValidation('new_user');
+  sessionValidation('session');
+  sessionValidation('user');
 
   function opinionValidation(type) {
     var options = { fields: {} };
@@ -23,7 +23,7 @@ $(document).ready(function() {
     var options = {
       fields: {
         username: {
-          identifier  : 'user_username',
+          identifier  : type+'_username',
           rules: [
             {
               type   : 'empty',
@@ -32,7 +32,7 @@ $(document).ready(function() {
           ]
         },
         password: {
-          identifier  : 'user_password',
+          identifier  : type+'_password',
           rules: [
             {
               type   : 'minLength[6]',
@@ -42,7 +42,7 @@ $(document).ready(function() {
         }
       }
     };
-    if (type === 'new_user') {
+    if (type === 'user') {
       options.fields.email = {
         identifier  : 'user_email',
         rules: [
