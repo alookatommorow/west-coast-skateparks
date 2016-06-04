@@ -8,6 +8,8 @@ class SkateparkDashboard < Administrate::BaseDashboard
   # which determines how the attribute is displayed
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
+    hero: PaperclipField,
+    map_photo: PaperclipField,
     favorites: Field::HasMany,
     users_who_faved: Field::HasMany.with_options(class_name: "User"),
     visits: Field::HasMany,
@@ -39,14 +41,6 @@ class SkateparkDashboard < Administrate::BaseDashboard
     obstacles: Field::Text,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
-    hero_file_name: Field::String,
-    hero_content_type: Field::String,
-    hero_file_size: Field::Number,
-    hero_updated_at: Field::DateTime,
-    map_photo_file_name: Field::String,
-    map_photo_content_type: Field::String,
-    map_photo_file_size: Field::Number,
-    map_photo_updated_at: Field::DateTime,
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -95,28 +89,15 @@ class SkateparkDashboard < Administrate::BaseDashboard
     :obstacles,
     :created_at,
     :updated_at,
-    :hero_file_name,
-    :hero_content_type,
-    :hero_file_size,
-    :hero_updated_at,
-    :map_photo_file_name,
-    :map_photo_content_type,
-    :map_photo_file_size,
-    :map_photo_updated_at,
+
   ].freeze
 
   # FORM_ATTRIBUTES
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = [
-    :favorites,
-    :users_who_faved,
-    :visits,
-    :users_who_visited,
-    :ratings,
-    :users_who_rated,
-    :reviews,
-    :users_who_reviewed,
+    :hero,
+    :map_photo,
     :skatepark_images,
     :location,
     :name,
@@ -137,14 +118,6 @@ class SkateparkDashboard < Administrate::BaseDashboard
     :video_url,
     :num_pics,
     :obstacles,
-    :hero_file_name,
-    :hero_content_type,
-    :hero_file_size,
-    :hero_updated_at,
-    :map_photo_file_name,
-    :map_photo_content_type,
-    :map_photo_file_size,
-    :map_photo_updated_at,
   ].freeze
 
   # Overwrite this method to customize how skateparks are displayed

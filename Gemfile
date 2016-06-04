@@ -20,6 +20,7 @@ gem "pg"
 gem "puma"
 gem "sass-rails", "~> 5.0"
 gem 'simple_form'
+gem 'sitemap_generator'
 gem "slim"
 gem "sprockets-rails"
 gem "therubyracer"
