@@ -78,3 +78,26 @@
     }
   }
 }
+
+
+#react-search-bar {
+  position: fixed;
+  top: 10px;
+  right: 100px;
+  width: 300px;
+  z-index: 999999999999;
+
+  .react-search-form {
+    input {
+      width: 300px;
+    }
+  }
+
+  .react-search-results {
+    background-color: white;
+
+    .item > a {
+      color: black;
+    }
+  }
+}

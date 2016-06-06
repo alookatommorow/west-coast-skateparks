@@ -46,10 +46,6 @@ var SearchContainer = React.createClass({
     this.setState({skateparks: response});
   },
 
-  successFunction: function(response) {
-    this.setState({ results: response, showSearchResults: true });
-  },
-
   errorFunction: function(response) {
     console.log("yer fuckin up");
   },
@@ -58,9 +54,8 @@ var SearchContainer = React.createClass({
     return (
 
       <div>
-        <div>Fuck ur bum</div>
-        <SearchForm handleChange={this.handleChange} />
-        <SearchResults results={this.state.results} query={this.state.query} />
+        <SearchForm handleChange={this.handleChange} results={this.state.results} query={this.state.query} />
+        <SearchResults className="react-search-results" results={this.state.results} query={this.state.query} />
       </div>
     );
   }

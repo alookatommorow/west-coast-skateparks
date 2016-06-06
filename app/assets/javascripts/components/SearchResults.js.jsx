@@ -17,16 +17,15 @@ var SearchResults = React.createClass({
     var results = this.props.results.map(function(skatepark) {
       var resultDisplay = skatepark.name+", "+skatepark.location.city+", "+stateDisplay[skatepark.location.state]
       var stringus = createBoldString(resultDisplay);
-      return <div key={skatepark.id}>
-              <div>{stringus}</div>
+      return <div className="item" key={skatepark.id}>
+              <a href={"/skateparks/"+skatepark.id}>{stringus}</a>
             </div>
     });
 
     return (
-      <div>
+      <div className="react-search-results ui divided selection list">
         {results}
       </div>
     );
   }
-
 });
