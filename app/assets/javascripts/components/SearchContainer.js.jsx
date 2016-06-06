@@ -14,9 +14,8 @@ var SearchContainer = React.createClass({
 
   searchSkateparks: function(query) {
     var regExp = new RegExp(query);
-    console.log(regExp);
-    return this.state.skateparks.filter(function(skatepark){
-      return skatepark.name.match("ten");
+    return this.state.skateparks.filter(function(skatepark) {
+      return skatepark.name.match(regExp) || skatepark.location.city.match(regExp);
     });
   },
 
@@ -44,7 +43,6 @@ var SearchContainer = React.createClass({
   },
 
   storeAllSkateparks: function(response) {
-    console.log(response);
     this.setState({skateparks: response});
   },
 
