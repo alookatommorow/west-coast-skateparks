@@ -1,10 +1,5 @@
 var SearchResults = React.createClass({
   render: function(){
-    var stateDisplay = {
-      "california": "CA",
-      "oregon": "OR",
-      "washington": "WA"
-    }
     var query = this.props.query;
     var regExp = new RegExp(query);
 

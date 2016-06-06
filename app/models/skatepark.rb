@@ -58,6 +58,8 @@ class Skatepark < ActiveRecord::Base
     {
       id: id,
       name: name,
+      city: city,
+      state: state,
       latitude: latitude,
       longitude: longitude,
       picture: map_photo(:thumb),

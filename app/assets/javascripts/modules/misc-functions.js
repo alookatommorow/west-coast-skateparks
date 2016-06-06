@@ -10,3 +10,9 @@ function titleize(string) {
     return word.charAt(0).toUpperCase() + word.slice(1);
   }).join(' ');
 }
+
+var stateDisplay = {
+  "california": "CA",
+  "oregon": "OR",
+  "washington": "WA"
+}
