@@ -12,6 +12,7 @@ RSpec.describe Skateparks::SearchesController, type: :controller do
       location = create(:location, city: "Hayward")
       create_list(:skatepark, 2, location: location)
       skatepark = create(:skatepark)
+      create(:location, city: "Boner Point", skatepark: skatepark)
 
       get :show, search: "hayward"
 

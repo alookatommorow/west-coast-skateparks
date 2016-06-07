@@ -84,6 +84,10 @@ class Skatepark < ActiveRecord::Base
     skatepark_images.any?
   end
 
+  def to_param
+    [id, name.parameterize, city.parameterize].join("-")
+  end
+
   private
 
     def bucket_url
