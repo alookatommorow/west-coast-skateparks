@@ -85,7 +85,7 @@ class Skatepark < ActiveRecord::Base
   end
 
   def to_param
-    [id, name.parameterize].join("-")
+    [id, name.parameterize, city.parameterize].join("-")
   end
 
   private
