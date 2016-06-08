@@ -82,22 +82,29 @@
 
 #react-search-bar {
   position: fixed;
-  top: 10px;
-  right: 100px;
-  width: 300px;
+  top: 6px;
+  right: 10px;
+  width: 350px;
   z-index: 999999999999;
 
   .react-search-form {
     input {
       width: 300px;
+      border-radius: 2px;
     }
   }
 
   #react-search-results {
     background-color: white;
+    max-height: 750px;
+    overflow-y: auto;
 
     .item > a {
       color: black;
+    }
+
+    @media #{$mobile} {
+      max-height: 500px;
     }
   }
 }

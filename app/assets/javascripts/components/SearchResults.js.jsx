@@ -1,29 +1,32 @@
 var SearchResults = React.createClass({
-  getInitialState: function() {
-    return {
-      activeElement: null
-    }
-  },
 
   componentDidMount: function() {
     window.addEventListener('keydown', this.handleKeydown);
   },
 
   componentDidUpdate: function() {
-    var firstResult = document.getElementById("react-search-results").firstChild
-    if (firstResult) {
-      this.addSelect(firstResult);
-    }
+    this.selectFirstResult();
   },
 
   allResultElements: function() {
-    return document.getElementById("react-search-results").childNodes
+    return document.getElementById("react-search-results").childNodes;
   },
 
-  handleMouseEnter: function(event) {
+  handleMouseEnter: function() {
     var activeElement =  document.getElementById("active-search-result");
     if (activeElement) {
       this.deselect(activeElement);
+    }
+  },
+
+  handleMouseLeave: function(event) {
+    this.selectFirstResult();
+  },
+
+  selectFirstResult: function() {
+    var firstResult = document.getElementById("react-search-results").firstChild;
+    if (firstResult) {
+      this.addSelect(firstResult);
     }
   },
 
@@ -49,10 +52,11 @@ var SearchResults = React.createClass({
       break;
 
       case 13: // down
+        event.preventDefault();
         this.visitSelectedLink();
       break;
 
-      default: console.log; // exit this handler for other keys
+      default: return; // exit this handler for other keys
     }
   },
 
@@ -78,7 +82,7 @@ var SearchResults = React.createClass({
     }
   },
 
-  visitSelectedLink: function() {
+  visitSelectedLink: function(event) {
     var currentResult = document.getElementById("active-search-result");
     if (currentResult) {
       currentResult.firstChild.click();
@@ -107,7 +111,7 @@ var SearchResults = React.createClass({
     }.bind(this));
 
     return (
-      <div id="react-search-results" className=" ui divided selection list" onKeyDown={this.handleKeyDown} >
+      <div id="react-search-results" className="ui divided selection list" onKeyDown={this.handleKeyDown} onMouseLeave={this.handleMouseLeave} >
         {results}
       </div>
     );
