@@ -22,9 +22,7 @@ var SearchContainer = React.createClass({
   handleChange: function(event) {
     var query = event.target.value;
     if (query === '') {
-      this.setState({
-        results: [],
-      });
+      this.setState({results: []});
     } else {
       var results = this.searchSkateparks(query);
       this.setState({
@@ -46,6 +44,11 @@ var SearchContainer = React.createClass({
     this.setState({skateparks: response});
   },
 
+  exitResults: function() {
+    document.getElementById("react-search-form").reset();
+    this.setState({results: []});
+  },
+
   errorFunction: function(response) {
     console.log("yer fuckin up");
   },
@@ -55,7 +58,7 @@ var SearchContainer = React.createClass({
 
       <div>
         <SearchForm handleChange={this.handleChange} results={this.state.results} query={this.state.query} />
-        <SearchResults className="react-search-results" results={this.state.results} query={this.state.query} />
+        <SearchResults className="react-search-results" results={this.state.results} exitResults={this.exitResults} query={this.state.query} />
       </div>
     );
   }

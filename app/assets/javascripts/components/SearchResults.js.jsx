@@ -2,6 +2,7 @@ var SearchResults = React.createClass({
 
   componentDidMount: function() {
     window.addEventListener('keydown', this.handleKeydown);
+    window.addEventListener('click', this.handleOutsideClick);
   },
 
   componentDidUpdate: function() {
@@ -19,8 +20,14 @@ var SearchResults = React.createClass({
     }
   },
 
-  handleMouseLeave: function(event) {
+  handleMouseLeave: function() {
     this.selectFirstResult();
+  },
+
+  handleOutsideClick: function(event) {
+   if (event.target.className !== "item") {
+    this.props.exitResults();
+   }
   },
 
   selectFirstResult: function() {
@@ -43,17 +50,21 @@ var SearchResults = React.createClass({
   handleKeydown: function(event) {
     event = event || window.event;
     switch(event.which || event.keyCode) {
-      case 38: //up
-        this.selectPreviousResult();
-      break;
-
       case 40: // down
         this.selectNextResult();
+      break;
+
+      case 38: //up
+        this.selectPreviousResult();
       break;
 
       case 13: // down
         event.preventDefault();
         this.visitSelectedLink();
+      break;
+
+      case 27:
+        this.props.exitResults();
       break;
 
       default: return; // exit this handler for other keys
