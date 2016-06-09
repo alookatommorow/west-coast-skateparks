@@ -63,7 +63,7 @@
         .name, .item-header {
           position: absolute;
           top: 50%;
-          transform: translateY(-50%)
+          transform: translateY(-50%);
         }
 
         img {
@@ -79,23 +79,28 @@
   }
 }
 
-
 #react-search-bar {
   position: fixed;
-  top: 6px;
-  right: 130px;
-  width: 350px;
-  z-index: 999999999999;
+  top: 0;
+  right: 15px;
+  z-index: 9999;
+  text-align: right;
 
-  #react-search-form {
+  .ui.search {
+    margin-top: 10px;
+
     input {
       width: 300px;
-      border-radius: 2px;
+      border-radius: 3px;
+      height: 30px;
     }
   }
 
   #react-search-results {
+    margin-top: 9px;
     background-color: white;
+    text-align: left;
+    width: 500px;
     max-height: 750px;
     overflow-y: auto;
 
@@ -105,6 +110,7 @@
 
     @media #{$mobile} {
       max-height: 500px;
+      width: 300px;
     }
   }
 }
