@@ -6,14 +6,8 @@ var SearchResults = React.createClass({
   },
 
   componentDidUpdate: function() {
+    this.deselectActive();
     this.selectFirstResult();
-  },
-
-  handleMouseEnter: function() {
-    var activeElement =  document.getElementById("active-search-result");
-    if (activeElement) {
-      this.deselect(activeElement);
-    }
   },
 
   handleMouseLeave: function() {
@@ -41,6 +35,13 @@ var SearchResults = React.createClass({
   deselect: function(element) {
     element.className = "item";
     element.id = "";
+  },
+
+  deselectActive: function() {
+    var activeElement =  document.getElementById("active-search-result");
+    if (activeElement) {
+      this.deselect(activeElement);
+    }
   },
 
   handleKeydown: function(event) {
@@ -102,7 +103,7 @@ var SearchResults = React.createClass({
     var results = this.props.results.map(function(skatepark, index) {
       var resultDisplay = skatepark.name+", "+skatepark.location.city+", "+stateDisplay[skatepark.location.state];
       var stringus = createBoldString(resultDisplay);
-      return <div className="item" key={skatepark.id} onMouseEnter={this.handleMouseEnter}>
+      return <div className="item" key={skatepark.id} onMouseEnter={this.deselectActive}>
               <a href={"/skateparks/"+skatepark.id}>{stringus}</a>
             </div>
     }.bind(this));
