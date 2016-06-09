@@ -9,10 +9,6 @@ var SearchResults = React.createClass({
     this.selectFirstResult();
   },
 
-  allResultElements: function() {
-    return document.getElementById("react-search-results").childNodes;
-  },
-
   handleMouseEnter: function() {
     var activeElement =  document.getElementById("active-search-result");
     if (activeElement) {
@@ -48,46 +44,36 @@ var SearchResults = React.createClass({
   },
 
   handleKeydown: function(event) {
-    event = event || window.event;
-    switch(event.which || event.keyCode) {
-      case 40: // down
-        this.selectNextResult();
-      break;
+    var currentResult = document.getElementById("active-search-result");
+    if (currentResult) {
+      event = event || window.event;
+      switch(event.which || event.keyCode) {
+        case 40: // down
+          this.selectNextResult(currentResult, currentResult.nextSibling);
+        break;
 
-      case 38: //up
-        this.selectPreviousResult();
-      break;
+        case 38: //up
+          this.selectNextResult(currentResult, currentResult.previousSibling);
+        break;
 
-      case 13: // down
-        event.preventDefault();
-        this.visitSelectedLink();
-      break;
+        case 13: // down
+          event.preventDefault();
+          this.visitSelectedLink();
+        break;
 
-      case 27:
-        this.props.exitResults();
-      break;
+        case 27:
+          this.props.exitResults();
+        break;
 
-      default: return; // exit this handler for other keys
+        default: return; // exit this handler for other keys
+      }
     }
   },
 
-  selectNextResult: function() {
-    var currentResult = document.getElementById("active-search-result");
-    var nextResult = currentResult.nextSibling;
-    if (nextResult) {
-      this.deselect(currentResult);
-      this.addSelect(nextResult);
-    } else {
-      return;
-    }
-  },
-
-  selectPreviousResult: function() {
-    var currentResult = document.getElementById("active-search-result");
-    var previousResult = currentResult.previousSibling;
-    if (previousResult) {
-      this.deselect(currentResult);
-      this.addSelect(previousResult);
+  selectNextResult: function(current, next) {
+    if (next) {
+      this.deselect(current);
+      this.addSelect(next);
     } else {
       return;
     }
