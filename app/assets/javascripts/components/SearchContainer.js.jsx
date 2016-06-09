@@ -13,7 +13,7 @@ var SearchContainer = React.createClass({
   },
 
   searchSkateparks: function(query) {
-    var regExp = new RegExp(query);
+    var regExp = new RegExp(query, 'i');
     return this.state.skateparks.filter(function(skatepark) {
       return skatepark.name.match(regExp) || skatepark.location.city.match(regExp);
     });

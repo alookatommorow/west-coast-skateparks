@@ -89,7 +89,7 @@ var SearchResults = React.createClass({
 
   render: function(){
     var query = this.props.query;
-    var regExp = new RegExp(query);
+    var regExp = new RegExp(query, 'i');
 
     var createBoldString = function(string) {
       var matchIndex = string.match(regExp).index;
