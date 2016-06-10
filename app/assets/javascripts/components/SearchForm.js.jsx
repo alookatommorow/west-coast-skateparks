@@ -1,4 +1,3 @@
-
 var SearchForm = React.createClass({
   render: function() {
     return (
