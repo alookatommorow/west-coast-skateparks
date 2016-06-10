@@ -5,7 +5,8 @@ RSpec.feature 'Visitor searches skatepark' do
     skatepark = create(:skatepark)
 
     visit root_path
-    first('.search-nav').click
+
+    find('.search-nav').trigger('click')  #normal click method was erroring out
     fill_in 'search', with: 'ragamuffin skank'
     submit_search
 
