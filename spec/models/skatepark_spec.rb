@@ -33,7 +33,7 @@ RSpec.describe Skatepark, type: :model do
     end
   end
 
-  context '#nearby_parks' do
+  describe '#nearby_parks' do
     it 'returns an array of nearby skateparks' do
       skatepark = create(:skatepark)
       nearby_park = create(:skatepark, :nearby)
@@ -44,7 +44,7 @@ RSpec.describe Skatepark, type: :model do
     end
   end
 
-  context '#favorited_by?' do
+  describe '#favorited_by?' do
     it 'returns true if skatepark has been favorited by user' do
       user = create(:user)
       skatepark = create(:skatepark)
@@ -61,7 +61,7 @@ RSpec.describe Skatepark, type: :model do
     end
   end
 
-  context '#visited_by?' do
+  describe '#visited_by?' do
     it 'returns true if skatepark has been visited by user' do
       user = create(:user)
       skatepark = create(:skatepark)
@@ -78,7 +78,7 @@ RSpec.describe Skatepark, type: :model do
     end
   end
 
-  context '#ratings?' do
+  describe '#ratings?' do
     it 'returns true when a skatepark has ratings' do
       user = create(:user)
       skatepark = create(:skatepark)
@@ -90,7 +90,7 @@ RSpec.describe Skatepark, type: :model do
     end
   end
 
-  context '#reviews?' do
+  describe '#reviews?' do
     it 'returns true when a skatepark has reviews' do
       user = create(:user)
       skatepark = create(:skatepark)
