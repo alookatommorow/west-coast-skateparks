@@ -33,8 +33,6 @@ WebMock.disable_net_connect!(allow_localhost: true, allow: 'codeclimate.com')
 # use `describe 'Feature', type: :feature, js: true` to use this driver
 Capybara.javascript_driver = :webkit
 
-Capybara.default_max_wait_time = 15
-
 # tests use regular (faster) driver if they don't require js
 Capybara.default_driver = :rack_test
 
