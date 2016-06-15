@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  context '#display_name' do
+  describe '#display_name' do
     it 'returns name if user has a name' do
       user = create(:user)
 
@@ -15,7 +15,7 @@ RSpec.describe User, type: :model do
     end
   end
 
-  context '#dups' do
+  describe '#dups' do
     it 'returns an array of skateparks in common between favorite and visited' do
       user = create(:user)
       skateparks = create_list(:skatepark, 3)
@@ -30,7 +30,7 @@ RSpec.describe User, type: :model do
     end
   end
 
-  context '#map_data' do
+  describe '#map_data' do
     it 'returns a hash with data needed for map generation' do
       user = create(:user)
       skateparks = create_list(:skatepark, 3)
@@ -52,7 +52,7 @@ RSpec.describe User, type: :model do
     end
   end
 
-  context '#admin?' do
+  describe '#admin?' do
     it 'returns true if user is an admin' do
       user = build(:user, :admin)
 
@@ -66,7 +66,7 @@ RSpec.describe User, type: :model do
     end
   end
 
-  context '#favorites?' do
+  describe '#favorites?' do
     it 'returns true if user has favorites' do
       user = create(:favorite).user
 
@@ -80,7 +80,7 @@ RSpec.describe User, type: :model do
     end
   end
 
-  context '#visits?' do
+  describe '#visits?' do
     it 'returns true if user has visits' do
       user = create(:visit).user
 
@@ -94,7 +94,7 @@ RSpec.describe User, type: :model do
     end
   end
 
-  context '#favorite_parks' do
+  describe '#favorite_parks' do
     it "returns user's favorited parks" do
       user = create(:user)
       skatepark = create(:favorite, user: user).skatepark

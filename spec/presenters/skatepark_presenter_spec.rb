@@ -18,7 +18,7 @@ RSpec.describe SkateparkPresenter do
     end
   end
 
-  context '#average_rating' do
+  describe '#average_rating' do
     it 'returns the average of all ratings for a skatepark' do
       users = create_list(:user, 3)
       skatepark = SkateparkPresenter.new(create(:skatepark))

@@ -56,12 +56,13 @@ function MapGenerator(map, skateparks) {
   function createMarker(skatepark, type){
     var latLng = { lat: skatepark.latitude, lng: skatepark.longitude };
     var infowindow = new infowindowGenerator(skatepark).generateInfowindow();
+    var title = titleize(skatepark.city + ', ' + stateDisplay[skatepark.state])
     var marker = new google.maps.Marker({
       position: latLng,
       infowindow: infowindow,
       map: map,
       icon: 'https://maps.google.com/mapfiles/ms/icons/' + legend[type] + '.png',
-      title: skatepark.city + ', ' + skatepark.state + ' (' + type + ')'
+      title: title
     });
     if (type === 'main') {
       marker.main = true;

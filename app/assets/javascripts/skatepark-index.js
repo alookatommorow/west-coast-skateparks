@@ -45,13 +45,12 @@ $(document).ready(function(){
     $(".index-menu-container").slideDown();
   });
 
-  ////// infinity scroll //////
+  ////// infinite scroll //////
   $(window).scroll(infiniteScroll);
 
   function infiniteScroll() {
     var scrolledToBottom = ($(document).height() - $(window).height()) - 500 <= $(window).scrollTop();
     var morePagesLeft = pageCount < $("[data-total-pages]").data("total-pages");
-
 
     if (scrolledToBottom && currentStateLink && morePagesLeft) {
       updatePageNumber();
@@ -69,7 +68,7 @@ $(document).ready(function(){
 
   function appendSkateparks(response) {
     var $skateparks = $($(response)[$(response).length - 1]).children();
-    $skateparks.hide().appendTo(".selection.list").fadeIn(400);
+    $skateparks.hide().appendTo(".state-list").fadeIn(400);
     $("#back-to-top").show();
   }
 

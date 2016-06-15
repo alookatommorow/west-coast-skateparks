@@ -1,9 +1,9 @@
 require 'rails_helper'
 
 RSpec.feature 'User visits skatepark' do
-  xscenario 'it is added to their visited parks', js: true do
+  scenario 'it is added to their visited parks', js: true do
     user = create(:user)
-    skatepark = create(:skatepark)
+    skatepark = create(:skatepark, name: "fruit boot city")
 
     sign_in_user(user)
     visit skatepark_path(skatepark)
