@@ -128,17 +128,35 @@
 
     .item {
       background: white;
+      display: flex;
 
       &:hover {
         background-color: $gray
       }
 
-      p {
-        color: black;
-      }
+      .link-section {
+        flex: 1;
+        position: relative;
 
-      .item-header {
-        font-weight: bold;
+        p {
+          color: black;
+          position: absolute;
+          top: 50%;
+          transform: translateY(-50%)
+        }
+
+        .item-header {
+          font-weight: bold;
+        }
+
+        .index-image {
+          width: 200px;
+          float: right;
+
+          @media #{$mobile} {
+            width: 100px;
+          }
+        }
       }
     }
   }
