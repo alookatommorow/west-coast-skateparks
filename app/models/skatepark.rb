@@ -27,12 +27,6 @@ class Skatepark < ActiveRecord::Base
 
   scope :in_state, -> (state) { joins(:location).where("locations.state = ?", state) }
 
-  scope :search, -> (query) {
-    joins(:location).
-      where("name LIKE ? OR locations.city LIKE ?", "%#{query}%", "%#{query}%").
-      order("locations.city", :name)
-  }
-
   scope :nearby_to, -> (object) {
     joins(:location).
       where('locations.latitude BETWEEN ? AND ?', object.latitude - 0.4, object.latitude + 0.4).
