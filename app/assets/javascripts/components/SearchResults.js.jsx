@@ -88,11 +88,8 @@ var SearchResults = React.createClass({
   },
 
   render: function(){
-    var query = this.props.query;
-    var regExp = new RegExp(query, 'i');
 
-    var createBoldString = function(string) {
-      var matchIndex = string.match(regExp).index;
+    var createBoldString = function(string, matchIndex, query) {
       var output = titleize(string);
       var first = output.slice(0, matchIndex);
       var bold = output.slice(matchIndex, matchIndex + query.length);
@@ -100,11 +97,11 @@ var SearchResults = React.createClass({
       return <span>{first}<span className="bold">{bold}</span>{last}</span>;
     }
 
-    var results = this.props.results.map(function(skatepark, index) {
+    var results = this.props.results.map(function(skatepark) {
       var resultDisplay = skatepark.name+", "+skatepark.location.city+", "+stateDisplay[skatepark.location.state];
-      var stringus = createBoldString(resultDisplay);
+      var boldedResultDisplay = createBoldString(resultDisplay, skatepark.matchIndex, this.props.query);
       return <div className="item" key={skatepark.id} onMouseEnter={this.deselectActive}>
-              <a href={"/skateparks/"+skatepark.id}>{stringus}</a>
+              <a href={"/skateparks/"+skatepark.id}>{boldedResultDisplay}</a>
             </div>
     }.bind(this));
 

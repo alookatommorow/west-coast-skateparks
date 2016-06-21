@@ -14,12 +14,11 @@
 .ui.divided.selection.list.state-list data-total-pages=skateparks.total_pages
   - skateparks.each do |park|
     = link_to park, class: "item" do
-      .ui.grid
-        .left.aligned.five.wide.column
-          p.item-header #{park.city.titleize}
-        .left.aligned.five.wide.column
-          p #{park.name.titleize}
-        .left.aligned.six.wide.column
-          = image_tag("#{park.hero}", class: "ui small image float-right")
+      .link-section
+        p.item-header #{park.city.titleize}
+      .link-section
+        p #{park.name.titleize}
+      .link-section
+        = image_tag("#{park.hero}", class: "index-image")
   - if skateparks.empty?
     h1 AINT NO PARKS BY THAT LETTER MY G

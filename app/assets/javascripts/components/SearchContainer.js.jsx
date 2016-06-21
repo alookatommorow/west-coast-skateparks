@@ -13,14 +13,25 @@ var SearchContainer = React.createClass({
   },
 
   searchSkateparks: function(query) {
-    var regExp = new RegExp(query, 'i');
-    return this.state.skateparks.filter(function(skatepark) {
-      return skatepark.name.match(regExp) || skatepark.location.city.match(regExp);
-    });
+    return this.state.skateparks.filter(this.filterAndAddIndexOfMatch(query));
+  },
+
+  filterAndAddIndexOfMatch: function(query) {
+    return function(skatepark) {
+      if (skatepark.name.indexOf(query) !== -1) {
+        skatepark.matchIndex = skatepark.name.indexOf(query);
+        return true;
+      } else if (skatepark.location.city.indexOf(query) !== -1) {
+        skatepark.matchIndex = skatepark.location.city.indexOf(query);
+        return true;
+      } else {
+        return false;
+      }
+    }
   },
 
   handleChange: function(event) {
-    var query = event.target.value;
+    var query = event.target.value.toLowerCase();
     if (query === '') {
       this.setState({results: []});
     } else {
@@ -55,7 +66,6 @@ var SearchContainer = React.createClass({
 
   render: function() {
     return (
-
       <div>
         <SearchForm handleChange={this.handleChange} results={this.state.results} query={this.state.query} />
         <SearchResults className="react-search-results" results={this.state.results} exitResults={this.exitResults} query={this.state.query} />
