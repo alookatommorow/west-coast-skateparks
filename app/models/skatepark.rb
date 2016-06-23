@@ -1,8 +1,7 @@
 class Skatepark < ActiveRecord::Base
   LOCATION_ATTRIBUTES = %i(address city state zip_code latitude longitude)
 
-  validates :name, presence: true
-  validates :identifier, uniqueness: true
+  validates :name, presence: true, uniqueness: true
 
   has_many :favorites, dependent: :destroy
   has_many :users_who_faved, through: :favorites, source: :user
@@ -15,7 +14,7 @@ class Skatepark < ActiveRecord::Base
   has_many :skatepark_images, dependent: :destroy
   has_one :location, dependent: :destroy
 
-  delegate(*LOCATION_ATTRIBUTES, :has_coordinates?, to: :location)
+  delegate(*LOCATION_ATTRIBUTES, :has_coordinates?, to: :location, allow_nil: true)
 
   has_attached_file :hero, default_url: "https://storage.googleapis.com/west-coast-skateparks/default-header.jpg"
   # validates_attachment_presence :hero
@@ -81,7 +80,11 @@ class Skatepark < ActiveRecord::Base
   end
 
   def to_param
-    [id, name.parameterize, city.parameterize].join("-")
+    if city
+      [id, name.parameterize, city.parameterize].join("-")
+    else
+      [id, name.parameterize].join("-")
+    end
   end
 
   def next_park
