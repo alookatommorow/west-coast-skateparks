@@ -84,9 +84,15 @@ class Skatepark < ActiveRecord::Base
     [id, name.parameterize, city.parameterize].join("-")
   end
 
-  private
-
-    def bucket_url
-      'https://storage.googleapis.com/west-coast-skateparks'
+  def next_park
+    if id < Skatepark.last.id
+      Skatepark.find(id+1)
     end
+  end
+
+  def previous_park
+    if id > Skatepark.first.id
+      Skatepark.find(id-1)
+    end
+  end
 end
