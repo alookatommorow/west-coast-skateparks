@@ -1,7 +1,6 @@
 FactoryGirl.define do
   factory :skatepark do
     sequence(:name) { |i| "cribbage#{i}" }
-    sequence(:identifier) { |i| "swag#{i}" }
     num_pics 3
     location
 
