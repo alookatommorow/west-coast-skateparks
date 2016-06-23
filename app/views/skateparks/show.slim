@@ -22,3 +22,6 @@
 = content_for :analytics_event
   javascript:
     analytics.page("Skatepark", #{raw skatepark_json(@skatepark)});
+
+= content_for :page_title
+  title= "West Coast Skateparks | #{@skatepark.name.titleize}, #{@skatepark.city.titleize}, #{@skatepark.state.capitalize} "

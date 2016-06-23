@@ -20,6 +20,12 @@ var SearchResults = React.createClass({
    }
   },
 
+  handleClick: function(event) {
+    if (event.target.firstChild) {
+      window.location = event.target.firstChild.href;
+    }
+  },
+
   selectFirstResult: function() {
     var firstResult = document.getElementById("react-search-results").firstChild;
     if (firstResult) {
@@ -100,7 +106,7 @@ var SearchResults = React.createClass({
     var results = this.props.results.map(function(skatepark) {
       var resultDisplay = skatepark.name+", "+skatepark.location.city+", "+stateDisplay[skatepark.location.state];
       var boldedResultDisplay = createBoldString(resultDisplay, skatepark.matchIndex, this.props.query);
-      return <div className="item" key={skatepark.id} onMouseEnter={this.deselectActive}>
+      return <div className="item" key={skatepark.id} onMouseEnter={this.deselectActive} onClick={this.handleClick}>
               <a href={"/skateparks/"+skatepark.id}>{boldedResultDisplay}</a>
             </div>
     }.bind(this));

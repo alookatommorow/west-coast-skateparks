@@ -3,9 +3,10 @@ header.skatepark-show-header style="background-image: linear-gradient( rgba(0, 0
     h1= skatepark.name.titleize
     h3 #{skatepark.city.titleize}, #{skatepark.state.capitalize}
   .header-skatepark-arrows
-    - if skatepark.id > 1
-      = link_to skatepark_path(skatepark.id - 1), class: "left-arrow" do
+    - if skatepark.previous_park
+      = link_to skatepark_path(skatepark.previous_park), class: "left-arrow" do
         i.angle.left.icon
-    - if skatepark.id < last
-      = link_to skatepark_path(skatepark.id + 1), class: "right-arrow" do
+    - if skatepark.next_park
+      = link_to skatepark_path(skatepark.next_park), class: "right-arrow" do
         i.angle.right.icon
+
