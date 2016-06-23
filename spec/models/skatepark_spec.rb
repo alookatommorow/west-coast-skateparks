@@ -101,4 +101,34 @@ RSpec.describe Skatepark, type: :model do
       expect(skatepark.reviews?).to be true
     end
   end
+
+  describe "#next_park" do
+    it "returns the next skatepark" do
+      skatepark = create(:skatepark)
+      next_park = create(:skatepark)
+
+      expect(skatepark.next_park).to eq(next_park)
+    end
+
+    it "returns nil if no next skatepark" do
+      skatepark = create(:skatepark)
+
+      expect(skatepark.next_park).to eq(nil)
+    end
+  end
+
+  describe "#previous_park" do
+    it "returns the previous skatepark" do
+      previous_park = create(:skatepark)
+      skatepark = create(:skatepark)
+
+      expect(skatepark.previous_park).to eq(previous_park)
+    end
+
+    it "returns nil if no next skatepark" do
+      skatepark = create(:skatepark)
+
+      expect(skatepark.previous_park).to eq(nil)
+    end
+  end
 end
