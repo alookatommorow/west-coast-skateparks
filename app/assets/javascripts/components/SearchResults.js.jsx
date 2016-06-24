@@ -102,10 +102,10 @@ var SearchResults = React.createClass({
       var last = output.slice(matchIndex + query.length);
       return <span>{first}<span className="bold">{bold}</span>{last}</span>;
     }
-
+    var resultDisplay, boldedResultDisplay;
     var results = this.props.results.map(function(skatepark) {
-      var resultDisplay = skatepark.name+", "+skatepark.location.city+", "+stateDisplay[skatepark.location.state];
-      var boldedResultDisplay = createBoldString(resultDisplay, skatepark.matchIndex, this.props.query);
+      resultDisplay = skatepark.name+", "+skatepark.location.city+", "+stateDisplay[skatepark.location.state];
+      boldedResultDisplay = createBoldString(resultDisplay, skatepark.matchIndex, this.props.query);
       return <div className="item" key={skatepark.id} onMouseEnter={this.deselectActive} onClick={this.handleClick}>
               <a href={"/skateparks/"+skatepark.id}>{boldedResultDisplay}</a>
             </div>
