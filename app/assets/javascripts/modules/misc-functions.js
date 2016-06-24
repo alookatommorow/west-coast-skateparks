@@ -17,11 +17,11 @@ function titleize(string) {
 }
 
 function formatSpecialCharacters(string) {
-  if (string.indexOf("/")) {
-    var slashIndex = string.indexOf("/");
+  var slashIndex = string.indexOf("/");
+  var dashIndex = string.indexOf("-");
+  if (slashIndex !== -1) {
     return capitalizeAfterSpecialCharacters(string, slashIndex);
-  } else if (string.indexOf("-"))  {
-    var dashIndex = string.indexOf("-");
+  } else if (dashIndex !== -1)  {
     return capitalizeAfterSpecialCharacters(string, dashIndex);
   } else {
     return string;
