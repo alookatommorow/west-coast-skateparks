@@ -1,8 +1,9 @@
 #skatepark-photos data-toggle-container=true
   -if skatepark.pictures?
     .photo-display
-      i.arrow.circle.left.icon.prev.carousel-button data-carousel="prev"
-      i.arrow.circle.right.icon.next.carousel-button data-carousel="next"
+      - if skatepark.more_than_one_picture?
+        i.arrow.circle.left.icon.prev.carousel-button data-carousel="prev"
+        i.arrow.circle.right.icon.next.carousel-button data-carousel="next"
       .carousel-image-container
         - skatepark.skatepark_images.each do |image|
           .skatepark-show-image

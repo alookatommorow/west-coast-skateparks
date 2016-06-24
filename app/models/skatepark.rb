@@ -79,6 +79,10 @@ class Skatepark < ActiveRecord::Base
     skatepark_images.any?
   end
 
+  def more_than_one_picture?
+    skatepark_images.count > 1
+  end
+
   def to_param
     if city
       [id, name.parameterize, city.parameterize].join("-")
