@@ -65,4 +65,22 @@ $(document).ready(function() {
     selectNextThumb($thumbs.eq(nextIndex).children());
     currentIndex = nextIndex;
   });
+
+  //key navigation logic
+  if ($("[data-dashboard-link='#skatepark-photos']").hasClass("selected")) {
+    $(document).on('keydown', function(event) {
+      event = event || window.event;
+      switch(event.which || event.keyCode) {
+        case 37: // left
+          showPrev();
+        break;
+
+        case 39: //right
+          showNext();
+        break;
+
+        default: return; // exit this handler for other keys
+      }
+    });
+  }
 });
