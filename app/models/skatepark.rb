@@ -36,6 +36,10 @@ class Skatepark < ActiveRecord::Base
     Skatepark.includes(:location).nearby_to(self).where.not(id: id)
   end
 
+  def self.in_order
+    includes(:location).order("locations.state", "locations.city", :name)
+  end
+
   def map_data
     {
       skateparks: {
@@ -92,14 +96,22 @@ class Skatepark < ActiveRecord::Base
   end
 
   def next_park
-    if id < Skatepark.last.id
-      Skatepark.find(id+1)
+    ordered_parks = Skatepark.in_order
+    next_park = ordered_parks[ordered_parks.index(self) + 1]
+    if next_park
+      next_park
+    else
+      ordered_parks.first
     end
   end
 
   def previous_park
-    if id > Skatepark.first.id
-      Skatepark.find(id-1)
+    ordered_parks = Skatepark.in_order
+    previous_park = ordered_parks[ordered_parks.index(self) - 1]
+    if previous_park
+      previous_park
+    else
+      ordered_parks.last
     end
   end
 end
