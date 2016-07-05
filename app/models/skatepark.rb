@@ -97,16 +97,21 @@ class Skatepark < ActiveRecord::Base
 
   def next_park
     ordered_parks = Skatepark.in_order
-    current_index = ordered_parks.index(self)
-    next_park = ordered_parks[current_index + 1]
-    next_park if next_park
+    next_park = ordered_parks[ordered_parks.index(self) + 1]
+    if next_park
+      next_park
+    else
+      ordered_parks.first
+    end
   end
 
   def previous_park
     ordered_parks = Skatepark.in_order
-    current_index = ordered_parks.index(self)
-    if current_index > 0
-      ordered_parks[current_index - 1]
+    previous_park = ordered_parks[ordered_parks.index(self) - 1]
+    if previous_park
+      previous_park
+    else
+      ordered_parks.last
     end
   end
 end

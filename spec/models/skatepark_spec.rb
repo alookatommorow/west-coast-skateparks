@@ -110,10 +110,10 @@ RSpec.describe Skatepark, type: :model do
       expect(skatepark.next_park).to eq(next_park)
     end
 
-    it "returns nil if no next skatepark" do
+    it "returns first skatepark if no next skatepark" do
       skatepark = create(:skatepark)
 
-      expect(skatepark.next_park).to eq(nil)
+      expect(skatepark.next_park).to eq(skatepark)
     end
   end
 
@@ -125,10 +125,10 @@ RSpec.describe Skatepark, type: :model do
       expect(skatepark.previous_park).to eq(previous_park)
     end
 
-    it "returns nil if no previous skatepark" do
+    it "returns last skatepark if no previous skatepark" do
       skatepark = create(:skatepark)
 
-      expect(skatepark.previous_park).to eq(nil)
+      expect(skatepark.previous_park).to eq(skatepark)
     end
   end
 end
