@@ -3,6 +3,14 @@ body {
   background-color: $gray;
 }
 
+// disable image highlighting bc of annoyance w photo carousel
+img {
+   -ms-user-select: none;      /* IE 10+ */
+   -moz-user-select: none;     /* Firefox all */
+   -webkit-user-select: none;  /* Chrome all / Safari all */
+   user-select: none;          /* Likely future */
+}
+
 .ui.menu.nav-menu {
   border-radius: 0;
   margin: 0;
