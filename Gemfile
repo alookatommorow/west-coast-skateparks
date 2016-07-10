@@ -9,6 +9,7 @@ gem "awesome_print"
 gem "aws-sdk", "< 2.0"
 gem "bcrypt", "~> 3.1.7"
 gem "bourbon"  #added to prevent high voltage bourbon unreadable error
+gem 'buttercms-rails'
 gem "geokit"
 gem "gmaps4rails"
 gem "high_voltage", "~> 3.0.0"
