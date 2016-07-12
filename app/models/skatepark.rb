@@ -53,7 +53,7 @@ class Skatepark < ActiveRecord::Base
 
   def hashify_with_picture
     {
-      id: id,
+      slug: to_param,
       name: name,
       city: city,
       state: state,
