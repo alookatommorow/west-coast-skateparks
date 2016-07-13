@@ -8,10 +8,10 @@ RSpec.describe Skatepark, type: :model do
       expected = {
         skateparks: {
           nearby: skatepark.nearby_parks.map(&:hashify_with_picture),
-          main: [skatepark.hashify_with_picture]
+          main: [skatepark.hashify_with_picture],
         },
         mapCenter: [skatepark.latitude, skatepark.longitude],
-        zoom: 9
+        zoom: 9,
       }
 
       expect(skatepark.map_data).to eq(expected)
@@ -23,13 +23,29 @@ RSpec.describe Skatepark, type: :model do
       expected = {
         skateparks: {
           nearby: [],
-          main: [skatepark.hashify_with_picture]
+          main: [skatepark.hashify_with_picture],
         },
         mapCenter: [skatepark.latitude, skatepark.longitude],
-        zoom: 9
+        zoom: 9,
       }
 
       expect(skatepark.map_data).to eq(expected)
+    end
+  end
+
+  describe "#hashify_with_picture" do
+    it "returns a hash with skatepark data for map marker" do
+      skatepark = create(:skatepark)
+
+      expect(skatepark.hashify_with_picture).to eq(
+        slug: skatepark.to_param,
+        name: skatepark.name,
+        city: skatepark.city,
+        state: skatepark.state,
+        latitude: skatepark.latitude,
+        longitude: skatepark.longitude,
+        picture: skatepark.map_photo(:thumb),
+      )
     end
   end
 
