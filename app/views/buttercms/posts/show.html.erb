@@ -18,6 +18,8 @@
 <!-- Post body -->
 <%= @post.body.html_safe %>
 
+<%= image_tag(post.featured_image) if post.featured_image %>
+
 <!-- Link to Next Post -->
 <% if @next_post %>
   <%= link_to @next_post.title, buttercms_post_path(@next_post.slug), :title => @next_post.title %>
