@@ -1,8 +1,9 @@
-<h2>Posts</h2>
-
+<%= render partial: "header" %>
 <!-- List of posts -->
-<% @posts.each do |post| %>
-  <%= link_to post.title, buttercms_post_path(post.slug) %>
+<% @sorted_posts.each do |post| %>
+  <div>
+    <%= link_to post.title, buttercms_post_path(post.slug) %>
+  </div>
 <% end %>
 
 <!-- Pagination links -->
