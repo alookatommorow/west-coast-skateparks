@@ -1,10 +1,28 @@
 .news-container {
-  padding: 25px;
-  max-width: 700px;
+  padding: 0 25px 25px 25px;
+  max-width: 900px;
   margin: 0 auto;
+
+  h2 {
+    margin-bottom: 10px;
+  }
+
+  div {
+    margin-bottom: 10px;
+  }
 
   .post-title {
     text-align: center;
+    color: $dark-blue;
+
+    .published {
+      color: $blue;
+    }
+  }
+
+  .post-body {
+    font-size: 18px;
+    margin-bottom: 20px;
   }
 
   .image-container {

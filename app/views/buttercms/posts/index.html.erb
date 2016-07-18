@@ -1,10 +1,24 @@
 <%= render partial: "header" %>
-<!-- List of posts -->
-<% @sorted_posts.each do |post| %>
-  <div>
-    <%= link_to post.title, buttercms_post_path(post.slug) %>
-  </div>
-<% end %>
+<div class="ui divided selection list posts-index-container">
+  <!-- List of posts -->
+  <% @sorted_posts.each do |post| %>
+    <%= link_to buttercms_post_path(post.slug), class: "item" do %>
+      <div class="post-section">
+        <div class="date-title">
+          <div class="title">
+            <%= post.title %>
+          </div>
+          <div class="date">
+            <%= post.published.slice(0, 10) %>
+          </div>
+        </div>
+      </div>
+      <div class="post-section">
+        <%= image_tag(post.featured_image) if post.featured_image %>
+      </div>
+    <% end %>
+  <% end %>
+</div>
 
 <!-- Pagination links -->
 <div>

@@ -9,13 +9,17 @@
         <!-- Post title -->
         <h2><%= @post.title %></h2>
         <!-- Publish date -->
-        <%= @post.published.slice(0, 10) %>
+        <div class="published">
+            <%= @post.published.slice(0, 10) %>
+        </div>
     </div>
 
     <div class="ui divider"></div>
 
     <!-- Post body -->
-    <%= @post.body.html_safe %>
+    <div class="post-body">
+        <%= @post.body.html_safe %>
+    </div>
 
     <div class="image-container">
         <%= image_tag(@post.featured_image) if @post.featured_image %>
@@ -29,7 +33,7 @@
 
     <!-- Link to Next Post -->
     <% if @next_post %>
-      <%= link_to @next_post.title, buttercms_post_path(@next_post.slug), :title => @next_post.title %>
+      <%= link_to "next", buttercms_post_path(@next_post.slug), :title => '@next_post.title' %>
     <% end %>
 
 </div>

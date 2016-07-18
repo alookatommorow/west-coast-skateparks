@@ -1,0 +1,33 @@
+.ui.divided.selection.list.posts-index-container {
+  padding: 25px;
+  max-width: 900px;
+  margin: 0 auto;
+
+  .item {
+    display: flex;
+    align-items: center;
+    color: black;
+
+    .post-section {
+      flex: 1;
+      text-align: center;
+
+      .date-title div {
+        padding: 10px 0;
+      }
+
+      .title {
+        font-size: 20px;
+        color: $blue;
+      }
+
+      .date {
+        color: $orange;
+      }
+    }
+  }
+
+  img {
+    max-width: 200px;
+  }
+}
