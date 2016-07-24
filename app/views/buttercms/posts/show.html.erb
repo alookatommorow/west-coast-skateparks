@@ -1,0 +1,56 @@
+<%= content_for :html_title, @post.seo_title %>
+<%= content_for :meta_description, @post.meta_description %>
+
+<%= render partial: "header" %>
+
+<div class="news-container">
+
+    <div class="post-title" >
+        <!-- Post title -->
+        <h2><%= @post.title %></h2>
+        <!-- Publish date -->
+        <div class="published">
+            <%= @post.published.slice(0, 10) %>
+        </div>
+    </div>
+
+    <div class="ui divider"></div>
+
+    <!-- Post body -->
+    <div class="post-body">
+        <%= @post.body.html_safe %>
+    </div>
+
+    <div class="image-container">
+        <%= image_tag(@post.featured_image) if @post.featured_image %>
+    </div>
+    <!-- Post categories -->
+    <div>Categories:
+        <% @post.categories.each do |category| %>
+          <%= link_to category.name, buttercms_category_path(category.slug), :title => category.name %>
+        <% end %>
+    </div>
+
+    <!-- Link to Next Post -->
+    <% if @next_post %>
+      <%= link_to "next", buttercms_post_path(@next_post.slug), :title => '@next_post.title' %>
+    <% end %>
+
+</div>
+<!--
+// For commenting, we recommend https://disqus.com/
+// Create a Disqus account and paste your snippet below
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = 'XXXXXXXX';
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+-->
