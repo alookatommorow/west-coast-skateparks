@@ -1,6 +1,6 @@
 .ui.divided.selection.list.posts-index-container {
   padding: 25px;
-  max-width: 900px;
+  width: 900px;
   margin: 0 auto;
 
   .item {
@@ -28,6 +28,26 @@
   }
 
   img {
-    max-width: 200px;
+    max-width: 150px;
+  }
+
+  @media #{$mobile} {
+    padding: 0;
+    width: 300px;
+
+    .item {
+      display: block;
+
+      .post-section {
+
+        .date-title div {
+          padding: 5px 0;
+        }
+
+        .title {
+          font-size: 13px;
+        }
+      }
+    }
   }
 }
