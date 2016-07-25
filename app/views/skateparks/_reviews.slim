@@ -11,9 +11,13 @@
             .default.text Select Rating...
             .menu
               .item data-value="1" 1
+              .item data-value="1.5" 1.5
               .item data-value="2" 2
+              .item data-value="2.5" 2.5
               .item data-value="3" 3
+              .item data-value="3.5" 3.5
               .item data-value="4" 4
+              .item data-value="4.5" 4.5
               .item data-value="5" 5
           = submit_tag "Rate", class: 'ui button'
           .ui.error.message
@@ -29,9 +33,11 @@
     .user-rating data-rating-display=true
       - if skatepark.average_rating
         h4 User Rating
-        - (skatepark.average_rating.to_i).times do
+        - num_stars(skatepark.average_rating).times do
           i.large.star.icon
-        - (5-skatepark.average_rating.to_i).times do
+        - num_half_stars(skatepark.average_rating).times do
+          i.large.star.half.empty.icon
+        - num_empty_stars(skatepark.average_rating).times do
           i.large.star.icon.shaded
       - else
         = link_to new_session_path, class: "ui button" do

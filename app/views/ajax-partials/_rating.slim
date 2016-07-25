@@ -1,5 +1,7 @@
 h4 User Rating
-- (skatepark.average_rating.to_i).times do
+- num_stars(skatepark.average_rating).times do
   i.large.star.icon
-- (5-skatepark.average_rating.to_i).times do
+- num_half_stars(skatepark.average_rating).times do
+  i.large.star.half.empty.icon
+- num_empty_stars(skatepark.average_rating).times do
   i.large.star.icon.shaded

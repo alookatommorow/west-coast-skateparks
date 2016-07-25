@@ -6,7 +6,8 @@ class SkateparkPresenter < SimpleDelegator
 
   def average_rating
     if model.ratings.any?
-      model.ratings.average(:rating)
+      raw_avg = model.ratings.average(:rating)
+      (raw_avg * 2).ceil.to_f / 2
     end
   end
 
