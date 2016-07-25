@@ -2,9 +2,11 @@
   .stars
     .content-left
       - if skatepark.rating
-        - (skatepark.rating.to_i).times do
+        - num_stars(skatepark.rating).times do
           i.large.star.icon
-        - (5-skatepark.rating.to_i).times do
+        - num_half_stars(skatepark.rating).times do
+          i.large.star.half.empty.icon
+        - num_empty_stars(skatepark.rating).times do
           i.large.star.icon.shaded
         p
           | #{rating_phrase[skatepark.rating.to_i][0]}
