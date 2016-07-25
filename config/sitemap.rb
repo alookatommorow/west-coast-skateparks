@@ -4,10 +4,12 @@ SitemapGenerator::Sitemap.public_path = 'tmp/sitemaps/'
 
 SitemapGenerator::Sitemap.create do
   add skateparks_path
+  add buttercms_blog_path
 
   Skatepark.find_each do |skatepark|
     add skatepark_path(skatepark), lastmod: skatepark.updated_at
   end
+
   # Put links creation logic here.
   #
   # The root path '/' and sitemap index file are added automatically for you.
