@@ -1,4 +1,18 @@
 .skatepark-show-dashboard
+  .address-container
+    .address
+      a href="https://maps.google.com/maps?saddr='Current Location'&daddr=#{skatepark.formatted_address}" target="_blank"
+        div
+          i.marker.icon
+          | #{skatepark.formatted_address}
+        div.get-directions Get Directions
+    .weather
+      .weather-header Weather
+      img src="#{weather['icon_url']}"
+      div= weather["weather"]
+      div
+        | #{weather["temp_f"]}&deg F
+  .ui.divider
   .stars
     .content-left
       - if skatepark.rating
@@ -22,14 +36,6 @@
           = render "favorites/button",
             favorite: @favorite, user: current_user, skatepark: @skatepark
   .ui.divider
-  .address-container
-    .address
-      a href="https://maps.google.com/maps?saddr='Current Location'&daddr=#{skatepark.formatted_address}" target="_blank"
-        div
-          i.marker.icon
-          | #{skatepark.formatted_address}
-        div.get-directions Get Directions
-  .ui.divider
   .links-container
     .links
       a#info-link.selected href="#" data-dashboard-link="#skatepark-photos"
@@ -44,3 +50,6 @@
       a#reviews-link href="#" data-dashboard-link="#skatepark-reviews"
         i.write.square.icon
         span Rate
+      a#weather-link href="#" data-dashboard-link="#skatepark-weather" data-lat="#{skatepark.latitude}" data-long="#{skatepark.longitude}"
+        i.umbrella.icon
+        span Weather

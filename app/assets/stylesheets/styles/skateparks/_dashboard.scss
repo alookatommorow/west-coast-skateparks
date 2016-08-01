@@ -79,11 +79,21 @@
   }
 
   .address-container {
-    text-align: center;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .weather {
+      text-align: center;
+      font-size: 15px;
+
+      .weather-header {
+        font-size: 18px;
+      }
+    }
 
     .address {
-      display: inline-block;
-      font-size: 18px;
 
       a {
 
@@ -119,16 +129,24 @@
             color: $orange;
           }
         }
-      }
 
-      @media #{$mobile} {
-        margin: 0;
-        text-align: center;
-        height: initial;
-        line-height: initial;
+        .weather {
+          position: absolute;
+          top: 50%;
+          transform: translateY(-50%);
+        }
       }
     }
+
+    @media #{$mobile} {
+      display: block;
+      margin: 0;
+      text-align: center;
+      height: initial;
+      line-height: initial;
+    }
   }
+
 
   .links-container {
     text-align: center;
