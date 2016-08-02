@@ -1,12 +1,8 @@
 #user-actions {
   text-align: center;
-  width: 350px;
+  width: 330px;
   display: flex;
-  justify-content: space-around;
-
-  .inline-button {
-    display: inline-block;
-  }
+  justify-content: space-between;
 
   .ui.button {
     margin: 0;
@@ -29,5 +25,9 @@
         color: $orange;
       }
     }
+  }
+
+  @media #{$mobile} {
+    margin: 0 auto;
   }
 }

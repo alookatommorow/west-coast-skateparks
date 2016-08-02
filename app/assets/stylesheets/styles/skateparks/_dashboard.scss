@@ -1,11 +1,6 @@
 .skatepark-show-dashboard {
   padding: 25px;
 
-  @media #{$mobile} {
-    width: 100%;
-    margin-top: 15px;
-  }
-
   .stars {
     font-size: 20px;
     display: flex;
@@ -51,6 +46,7 @@
 
     @media #{$mobile} {
       text-align: center;
+      display: block;
     }
   }
 
@@ -95,20 +91,11 @@
         }
       }
     }
-
-    @media #{$mobile} {
-      display: block;
-      margin: 0;
-      text-align: center;
-      height: initial;
-      line-height: initial;
-    }
   }
 
 
   .links-container {
     text-align: center;
-    margin-top: 30px;
 
     .links {
       display: inline-flex;
@@ -116,8 +103,6 @@
       width: 50%;
 
       a {
-        display: inline-block;
-        text-align: center;
         font-family: "Dirty-Bakers-Dozen", sans-serif;
         color: $dark-blue;
         font-size: 30px;
