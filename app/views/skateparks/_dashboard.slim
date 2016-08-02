@@ -1,6 +1,6 @@
 .skatepark-show-dashboard
   .stars
-    .content-left
+    .stars-container
       - if skatepark.rating
         - num_stars(skatepark.rating).times do
           i.large.star.icon
@@ -11,16 +11,23 @@
         p
           | #{rating_phrase[skatepark.rating.to_i][0]}
           span  #{rating_phrase[skatepark.rating.to_i][1]}
-    .content-right
-      #user-actions
-        - if logged_in?
-          div data-signed-in=true
-        span data-ajax-container=true
-          = render "visits/button",
-            visit: @visit, user: current_user, skatepark: @skatepark
-        span data-ajax-container=true
-          = render "favorites/button",
-            favorite: @favorite, user: current_user, skatepark: @skatepark
+    .ui.divider
+    .weather
+      .weather-header Weather
+      img src="#{weather[:icon_url]}"
+      div= weather[:weather]
+      div
+        | #{weather[:temp_f]}&deg F
+    .ui.divider
+    #user-actions
+      - if logged_in?
+        div data-signed-in=true
+      div data-ajax-container=true
+        = render "visits/button",
+          visit: @visit, user: current_user, skatepark: @skatepark
+      div data-ajax-container=true
+        = render "favorites/button",
+          favorite: @favorite, user: current_user, skatepark: @skatepark
   .ui.divider
   .address-container
     .address

@@ -13,6 +13,7 @@ gem 'buttercms-rails'
 gem "geokit"
 gem "gmaps4rails"
 gem "high_voltage", "~> 3.0.0"
+gem "httparty"
 gem "jquery-rails"
 gem "kaminari"
 gem "less-rails", "~> 2.7.1"

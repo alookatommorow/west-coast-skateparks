@@ -1,49 +1,11 @@
 .skatepark-show-dashboard {
   padding: 25px;
 
-  .content-left {
-    display: inline-block;
-  }
-
-  .content-right {
-    display: inline-block;
-    float: right;
-
-    .button {
-      border-radius: 0;
-      background-color: $blue;
-
-      p {
-        color: white;
-        font-size: 15px;
-        font-weight: lighter;
-        letter-spacing: 2px;
-      }
-
-      i {
-        font-size: 18px;
-      }
-
-      &:last-child {
-        margin-left: 15px;
-      }
-
-      &:hover {
-        p {
-          color: $orange;
-        }
-      }
-    }
-
-    @media #{$mobile} {
-      width: 100%;
-      float: none;
-      margin-top: 15px;
-    }
-  }
-
   .stars {
     font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 
     i.star {
       color: $orange;
@@ -73,17 +35,26 @@
       }
     }
 
+    .weather {
+      text-align: center;
+      font-size: 15px;
+
+      .weather-header {
+        font-size: 18px;
+      }
+    }
+
     @media #{$mobile} {
       text-align: center;
+      display: block;
     }
   }
 
   .address-container {
-    text-align: center;
+    font-size: 18px;
 
     .address {
-      display: inline-block;
-      font-size: 18px;
+      text-align: center;
 
       a {
 
@@ -102,7 +73,6 @@
           font-size: 16px;
           font-style: italic;
           color: $dark-blue;
-          text-align: center;
         }
 
         &:hover {
@@ -120,19 +90,12 @@
           }
         }
       }
-
-      @media #{$mobile} {
-        margin: 0;
-        text-align: center;
-        height: initial;
-        line-height: initial;
-      }
     }
   }
 
+
   .links-container {
     text-align: center;
-    margin-top: 30px;
 
     .links {
       display: inline-flex;
@@ -140,8 +103,6 @@
       width: 50%;
 
       a {
-        display: inline-block;
-        text-align: center;
         font-family: "Dirty-Bakers-Dozen", sans-serif;
         color: $dark-blue;
         font-size: 30px;

@@ -3,6 +3,7 @@ class SkateparksController < ApplicationController
     @skatepark = SkateparkPresenter.new(
       Skatepark.includes({ reviews: :user }, :ratings).find(params[:id])
     )
+    @weather = Weather::Client.new(@skatepark.latitude, @skatepark.longitude).weather
     assign_associations
   end
 

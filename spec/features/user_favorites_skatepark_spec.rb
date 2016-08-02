@@ -6,8 +6,10 @@ RSpec.feature 'User favorites skatepark' do
     skatepark = create(:skatepark)
 
     sign_in_user(user)
+    stub_weather
     visit skatepark_path(skatepark)
-    click_button 'Favorite'
+
+    click_on 'Favorite'
     click_link 'My Profile'
 
     expect(page).to have_text(skatepark.name.titleize)
