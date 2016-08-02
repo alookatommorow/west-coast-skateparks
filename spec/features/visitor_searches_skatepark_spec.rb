@@ -10,6 +10,8 @@ RSpec.feature 'Visitor searches skatepark' do
     expect(page).to have_text(skatepark.name.titleize)
     expect(page).not_to have_text('No Results')
 
+    stub_weather
+
     click_link skatepark.name.titleize
 
     expect(page).to have_text(skatepark.address)
