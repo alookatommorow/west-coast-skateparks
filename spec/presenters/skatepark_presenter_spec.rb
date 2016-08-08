@@ -37,4 +37,13 @@ RSpec.describe SkateparkPresenter do
       expect(skatepark.average_rating).to eq(nil)
     end
   end
+
+  describe "#formatted_address" do
+    it "returns a properly formatted address" do
+      location = create(:location, city: "Dirty Browntown", zip_code: 90210)
+      skatepark = SkateparkPresenter.new(create(:skatepark, location: location))
+
+      expect(skatepark.formatted_address).to eq("520 E 3rd Ave, Dirty Browntown, CA 90210")
+    end
+  end
 end

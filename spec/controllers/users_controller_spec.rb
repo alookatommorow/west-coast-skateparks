@@ -30,4 +30,20 @@ RSpec.describe UsersController, type: :controller do
       expect(flash[:signed_up]).to eq(true)
     end
   end
+
+  describe "#update" do
+    context "when user tries to update with invalid info" do
+      it 'lets them know they are barning' do
+        user = create(:user)
+        session[:id] = user.id
+
+        put :update, id: user.id,
+          user: {
+            username: "",
+          }
+
+        expect(flash[:error]).to eq("Username can't be blank")
+      end
+    end
+  end
 end
