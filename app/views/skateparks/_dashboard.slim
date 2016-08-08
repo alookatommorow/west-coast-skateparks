@@ -12,13 +12,14 @@
           | #{rating_phrase[skatepark.rating.to_i][0]}
           span  #{rating_phrase[skatepark.rating.to_i][1]}
     .ui.divider
-    .weather
-      .weather-header Weather
-      img src="#{weather[:icon_url]}"
-      div= weather[:weather]
-      div
-        | #{weather[:temp_f]}&deg F
-    .ui.divider
+    - if weather
+      .weather
+        .weather-header Weather
+        img src="#{weather[:icon_url]}"
+        div= weather[:weather]
+        div
+          | #{weather[:temp_f]}&deg F
+      .ui.divider
     #user-actions
       - if logged_in?
         div data-signed-in=true
