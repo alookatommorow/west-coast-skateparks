@@ -1,6 +1,6 @@
 #user-actions {
   text-align: center;
-  width: 330px;
+  width: 390px;
   display: flex;
   justify-content: space-between;
 
@@ -29,5 +29,11 @@
 
   @media #{$mobile} {
     margin: 0 auto;
+    display: block;
+    width: 250px;
+
+    .new_visit, .edit_visit {
+      margin-bottom: 10px;
+    }
   }
 }
