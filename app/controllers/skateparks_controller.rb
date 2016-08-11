@@ -17,8 +17,10 @@ class SkateparksController < ApplicationController
     end
 
     def get_weather
-      if @skatepark.latitude
-        @weather = Weather::Client.new(@skatepark.latitude, @skatepark.longitude).weather
+      unless Rails.env.development?
+        if @skatepark.latitude
+          @weather = Weather::Client.new(@skatepark.latitude, @skatepark.longitude).weather
+        end
       end
     end
 end

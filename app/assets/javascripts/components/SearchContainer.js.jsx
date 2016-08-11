@@ -9,17 +9,17 @@ var SearchContainer = React.createClass({
   },
 
   componentWillMount: function() {
-    this.getSkateparks();
+    console.log(this.props.skateparks)
   },
 
   searchSkateparks: function(query) {
-    return this.state.skateparks.filter(this.filterAndAddIndexOfMatch(query));
+    return this.props.skateparks.filter(this.filterAndAddIndexOfMatch(query));
   },
 
   filterAndAddIndexOfMatch: function(query) {
     return function(skatepark) {
       if (skatepark.name.indexOf(query) !== -1 || skatepark.location.city.indexOf(query) !== -1) {
-        skatepark.string = skatepark.name+", "+skatepark.location.city+", "+stateDisplay[skatepark.location.state]
+        skatepark.string = skatepark.name+", "+skatepark.location.city+", "+stateDisplay[skatepark.location.state];
         skatepark.matchIndex = skatepark.string.indexOf(query);
         return true;
       } else {
