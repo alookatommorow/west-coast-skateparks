@@ -3,13 +3,8 @@ var SearchContainer = React.createClass({
     return {
       query: null,
       results: [],
-      skateparks: null,
       showSearchResults: false
     }
-  },
-
-  componentWillMount: function() {
-    // console.log(this.props.skateparks)
   },
 
   searchSkateparks: function(query) {
@@ -39,18 +34,6 @@ var SearchContainer = React.createClass({
         results: results
       });
     }
-  },
-
-  getSkateparks: function() {
-    $.ajax({
-      url: '/api/skateparks',
-    })
-    .done(this.storeAllSkateparks)
-    .fail(this.errorFunction);
-  },
-
-  storeAllSkateparks: function(response) {
-    this.setState({skateparks: response});
   },
 
   exitResults: function() {

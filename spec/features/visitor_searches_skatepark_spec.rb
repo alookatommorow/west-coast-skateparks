@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.feature 'Visitor searches skatepark' do
   scenario 'they see a working link to the skatepark', js: true do
     skatepark = create(:skatepark)
+    stub_skateparks_json
 
     visit root_path
     fill_in 'react-search-input', with: skatepark.name

@@ -9,7 +9,6 @@ namespace :skateparks do
           { only: [:city, :state] }
         })
 
-    file_name = "skateparks.json"
     local_file_path = "/tmp/skateparks.json"
 
     File.open(local_file_path, 'w') do |file|
@@ -26,12 +25,9 @@ namespace :skateparks do
     bucket = s3.buckets[ENV['S3_BUCKET']]
     path = "skateparks_json/skateparks.json"
 
-    begin
-      object = bucket.objects[path]
-      object.write(file: local_file_path)
-    rescue StandardError => e
-      raise e
-    end
+    object = bucket.objects[path]
+    object.write(file: local_file_path)
+
     puts "Saved skateparks to S3"
   end
 end

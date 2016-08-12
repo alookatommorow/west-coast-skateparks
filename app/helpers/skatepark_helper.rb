@@ -1,5 +1,3 @@
-require 'open-uri'
-
 module SkateparkHelper
   def rating_phrase
     {
@@ -36,7 +34,6 @@ module SkateparkHelper
   end
 
   def skateparks_json
-    url = "https://s3-us-west-1.amazonaws.com/west-coast-skateparks/skateparks_json/skateparks.json"
-    open(url) {|f| f.read }
+    JSON.parse(File.open("app/support/skateparks.json").read)
   end
 end
