@@ -1,3 +1,5 @@
+require 'open-uri'
+
 module SkateparkHelper
   def rating_phrase
     {
@@ -31,5 +33,10 @@ module SkateparkHelper
 
   def num_stars(rating)
     rating.to_f.floor
+  end
+
+  def skateparks_json
+    url = "https://s3-us-west-1.amazonaws.com/west-coast-skateparks/skateparks_json/skateparks.json"
+    open(url) {|f| f.read }
   end
 end

@@ -2,7 +2,6 @@ require 'aws'
 
 namespace :skateparks do
   desc 'Fetch fresh skateparks.json and upload to s3'
-
   task fetch_skateparks: :environment do
     skateparks = Skatepark.includes(:location).all.as_json(
         only: [:id, :name],

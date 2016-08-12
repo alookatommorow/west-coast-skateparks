@@ -9,7 +9,7 @@ var SearchContainer = React.createClass({
   },
 
   componentWillMount: function() {
-    console.log(this.props.skateparks)
+    // console.log(this.props.skateparks)
   },
 
   searchSkateparks: function(query) {
