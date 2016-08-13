@@ -32,4 +32,8 @@ module SkateparkHelper
   def num_stars(rating)
     rating.to_f.floor
   end
+
+  def skateparks_json
+    JSON.parse(File.open("app/support/skateparks.json").read)
+  end
 end

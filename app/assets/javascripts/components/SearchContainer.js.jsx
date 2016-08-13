@@ -3,26 +3,19 @@ var SearchContainer = React.createClass({
     return {
       query: null,
       results: [],
-      skateparks: null,
       showSearchResults: false
     }
   },
 
-  componentWillMount: function() {
-    this.getSkateparks();
-  },
-
   searchSkateparks: function(query) {
-    return this.state.skateparks.filter(this.filterAndAddIndexOfMatch(query));
+    return this.props.skateparks.filter(this.filterAndAddIndexOfMatch(query));
   },
 
   filterAndAddIndexOfMatch: function(query) {
     return function(skatepark) {
-      if (skatepark.name.indexOf(query) !== -1) {
-        skatepark.matchIndex = skatepark.name.indexOf(query);
-        return true;
-      } else if (skatepark.location.city.indexOf(query) !== -1) {
-        skatepark.matchIndex = skatepark.location.city.indexOf(query);
+      if (skatepark.name.indexOf(query) !== -1 || skatepark.location.city.indexOf(query) !== -1) {
+        skatepark.string = skatepark.name+", "+skatepark.location.city+", "+stateDisplay[skatepark.location.state];
+        skatepark.matchIndex = skatepark.string.indexOf(query);
         return true;
       } else {
         return false;
@@ -41,18 +34,6 @@ var SearchContainer = React.createClass({
         results: results
       });
     }
-  },
-
-  getSkateparks: function() {
-    $.ajax({
-      url: '/api/skateparks',
-    })
-    .done(this.storeAllSkateparks)
-    .fail(this.errorFunction);
-  },
-
-  storeAllSkateparks: function(response) {
-    this.setState({skateparks: response});
   },
 
   exitResults: function() {
