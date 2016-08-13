@@ -4,25 +4,25 @@ gem "rails", "4.2.6"
 
 gem "administrate"
 gem "administrate-field-image"
-gem "autoprefixer-rails", "~> 6.0"
+gem "autoprefixer-rails"
 gem "awesome_print"
 gem "aws-sdk", "< 2.0"
-gem "bcrypt", "~> 3.1.7"
+gem "bcrypt"
 gem "bourbon"  #added to prevent high voltage bourbon unreadable error
 gem 'buttercms-rails'
 gem "geokit"
 gem "gmaps4rails"
-gem "high_voltage", "~> 3.0.0"
+gem "high_voltage"
 gem "httparty"
 gem "jquery-rails"
 gem "kaminari"
-gem "less-rails", "~> 2.7.1"
-gem "less-rails-semantic_ui", "~> 2.1.8.2"
-gem "paperclip", "~> 4.3"
+gem "less-rails"
+gem "less-rails-semantic_ui"
+gem "paperclip", "< 4.3.6"
 gem "pg"
 gem "puma"
-gem 'react-rails', '~> 1.6.0'
-gem "sass-rails", "~> 5.0"
+gem 'react-rails'
+gem "sass-rails"
 gem 'simple_form'
 gem 'sitemap_generator'
 gem "slim"
