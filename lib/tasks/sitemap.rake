@@ -1,5 +1,5 @@
 # sitemap.rake
-require 'aws'
+require 'aws-sdk'
 
 namespace :sitemap do
   desc 'Upload the sitemap files to S3'

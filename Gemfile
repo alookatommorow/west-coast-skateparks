@@ -6,7 +6,7 @@ gem "administrate"
 gem "administrate-field-image"
 gem "autoprefixer-rails"
 gem "awesome_print"
-gem "aws-sdk", "< 2.0"
+gem "aws-sdk"
 gem "bcrypt"
 gem "bourbon"  #added to prevent high voltage bourbon unreadable error
 gem 'buttercms-rails'
@@ -18,7 +18,7 @@ gem "jquery-rails"
 gem "kaminari"
 gem "less-rails"
 gem "less-rails-semantic_ui"
-gem "paperclip", "< 4.3.6"
+gem "paperclip"
 gem "pg"
 gem "puma"
 gem 'react-rails'
