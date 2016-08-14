@@ -1,4 +1,4 @@
-require 'aws'
+require 'aws-sdk'
 
 namespace :skateparks do
   desc 'Fetch fresh skateparks.json and upload to s3'
