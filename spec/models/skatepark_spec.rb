@@ -35,7 +35,7 @@ RSpec.describe Skatepark, type: :model do
 
   describe "#hashify_with_picture" do
     it "returns a hash with skatepark data for map marker" do
-      skatepark = create(:skatepark)
+      skatepark = create(:skatepark, rating: "2.5")
 
       expect(skatepark.hashify_with_picture).to eq(
         slug: skatepark.to_param,
@@ -45,6 +45,7 @@ RSpec.describe Skatepark, type: :model do
         latitude: skatepark.latitude,
         longitude: skatepark.longitude,
         picture: skatepark.map_photo(:thumb),
+        rating: skatepark.rating
       )
     end
   end
