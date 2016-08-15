@@ -60,6 +60,7 @@ class Skatepark < ActiveRecord::Base
       latitude: latitude,
       longitude: longitude,
       picture: map_photo(:thumb),
+      rating: rating
     }
   end
 
