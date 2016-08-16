@@ -10,6 +10,23 @@
     #map {
       height: 500px;
       width: 100%;
+
+      #content {
+        height: 50%;
+        text-align: center;
+
+        img {
+          height: 50px;
+        }
+
+        i.star {
+          color: $orange;
+
+          &.shaded {
+            color: $dark-blue;
+          }
+        }
+      }
     }
 
     .user-map-buttons {
@@ -127,7 +144,7 @@
   .ui.card, .ui.card img {
     border-radius: 0;
   }
-  
+
   .ui.card {
     p.name,
     p.date {

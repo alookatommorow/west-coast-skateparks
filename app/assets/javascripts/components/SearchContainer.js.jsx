@@ -5,7 +5,6 @@ var SearchContainer = React.createClass({
       results: [],
       skateparks: null,
       loading: false,
-      showSearchResults: false
     }
   },
 

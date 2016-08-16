@@ -106,7 +106,7 @@ var SearchResults = React.createClass({
     var resultDisplay, boldedResultDisplay, link, results;
 
     if (this.props.query) {
-      if (this.props.results.length === 0 && this.props.query !== "") {
+      if (this.props.results.length === 0) {
         results = <div className="item"><span className="bold">No Results</span></div>
       } else if (this.props.results.length > 0) {
         results = this.props.results.map(function(skatepark) {
