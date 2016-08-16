@@ -37,7 +37,6 @@ var SearchContainer = React.createClass({
   },
 
   storeAllSkateparks: function(response) {
-    console.log("skateparks retrieved");
     this.setState({skateparks: response, loading: false});
   },
 
