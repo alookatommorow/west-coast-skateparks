@@ -20,8 +20,8 @@ function infowindowGenerator(skatepark) {
   }
 
   function countStars(rating) {
-    stars.wholeStars = parseInt(rating);
-    if (Number(rating) % 1 != 0) {
+    stars.wholeStars = parseInt(rating, 10);
+    if (Number(rating) % 1 !== 0) {
       stars.halfStars = 1;
     } else {
       stars.halfStars = 0;
