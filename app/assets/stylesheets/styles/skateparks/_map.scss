@@ -10,6 +10,23 @@
       width: 100%;
       margin-left: auto;
       margin-right: auto;
+
+      #content {
+        height: 50%;
+        text-align: center;
+
+        img {
+          height: 50px;
+        }
+
+        i.star {
+          color: $orange;
+
+          &.shaded {
+            color: $dark-blue;
+          }
+        }
+      }
     }
 
     #map-missing {
