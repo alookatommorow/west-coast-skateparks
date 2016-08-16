@@ -43,7 +43,7 @@ var SearchContainer = React.createClass({
   handleChange: function(event) {
     var query = event.target.value.toLowerCase();
     if (query === '') {
-      this.setState({results: []});
+      this.setState({results: [], query: null});
     } else {
       var results = this.searchSkateparks(query);
       this.setState({
@@ -55,7 +55,7 @@ var SearchContainer = React.createClass({
 
   exitResults: function() {
     document.getElementById("react-search-form").reset();
-    this.setState({results: []});
+    this.setState({results: [], query: null});
   },
 
   errorFunction: function(response) {
