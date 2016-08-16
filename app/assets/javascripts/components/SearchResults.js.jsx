@@ -103,15 +103,21 @@ var SearchResults = React.createClass({
       return <span>{first}<span className="bold">{bold}</span>{last}</span>;
     }
 
-    var resultDisplay, boldedResultDisplay, link;
+    var resultDisplay, boldedResultDisplay, link, results;
 
-    var results = this.props.results.map(function(skatepark) {
-      boldedResultDisplay = createBoldString(skatepark.string, skatepark.matchIndex, this.props.query);
-      link = "/skateparks/"+skatepark.id+"-"+skatepark.name.replace(/\//g, "-").replace(/\./, "").split(" ").join("-")+"-"+skatepark.location.city.replace(/\(|\)|\./g, "").split(" ").join("-");
-      return <div className="item" key={skatepark.id} onMouseEnter={this.deselectActive} onClick={this.handleClick}>
-              <a href={link}>{boldedResultDisplay}</a>
-            </div>
-    }.bind(this));
+    if (this.props.query) {
+      if (this.props.results.length === 0 && this.props.query !== "") {
+        results = <div className="item"><span className="bold">No Results</span></div>
+      } else if (this.props.results.length > 0) {
+        results = this.props.results.map(function(skatepark) {
+          boldedResultDisplay = createBoldString(skatepark.string, skatepark.matchIndex, this.props.query);
+          link = "/skateparks/"+skatepark.id+"-"+skatepark.name.replace(/\//g, "-").replace(/\./, "").split(" ").join("-")+"-"+skatepark.location.city.replace(/\(|\)|\./g, "").split(" ").join("-");
+          return <div className="item" key={skatepark.id} onMouseEnter={this.deselectActive} onClick={this.handleClick}>
+                  <a href={link}>{boldedResultDisplay}</a>
+                </div>
+        }.bind(this));
+      }
+    }
 
     return (
       <div id="react-search-results" className="ui divided selection list" onKeyDown={this.handleKeyDown} onMouseLeave={this.handleMouseLeave} >

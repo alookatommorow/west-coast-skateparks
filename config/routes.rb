@@ -33,6 +33,10 @@ Rails.application.routes.draw do
     end
   end
 
+  namespace :api do
+    resources :skateparks, only: :index
+  end
+
   resources :skateparks do
     resource :map, only: :show, controller: 'skateparks/maps'
     resources :favorites, only: %i(create destroy)
