@@ -1,7 +1,7 @@
 class Skatepark < ActiveRecord::Base
   LOCATION_ATTRIBUTES = %i(address city state zip_code latitude longitude)
 
-  validates :name, presence: true, uniqueness: true
+  validates :name, presence: true
 
   has_many :favorites, dependent: :destroy
   has_many :users_who_faved, through: :favorites, source: :user
