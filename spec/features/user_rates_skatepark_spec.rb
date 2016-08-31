@@ -6,7 +6,6 @@ RSpec.feature 'User rates skatepark' do
     skatepark = create(:skatepark)
 
     sign_in_user(user)
-    stub_weather
     visit skatepark_path(skatepark)
 
     click_on 'Rate'

@@ -6,7 +6,6 @@ RSpec.feature 'User visits skatepark' do
     skatepark = create(:skatepark, name: "fruit boot city")
 
     sign_in_user(user)
-    stub_weather
     visit skatepark_path(skatepark)
     click_button 'Been Here'
     click_link 'My Profile'
