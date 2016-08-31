@@ -13,7 +13,8 @@ module Weather
       {
         icon_url: response["icon_url"],
         weather: response["weather"],
-        temp_f: response["temp_f"]
+        temp_f: response["temp_f"],
+        wind: response["wind_string"]
       }
     end
   end

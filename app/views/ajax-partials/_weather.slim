@@ -1,0 +1,6 @@
+- if weather
+  .weather-header Weather
+  img src="#{weather[:icon_url]}"
+  div= weather[:weather]
+  div
+    | #{weather[:temp_f]}&deg F

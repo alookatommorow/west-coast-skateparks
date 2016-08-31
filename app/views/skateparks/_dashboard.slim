@@ -12,14 +12,13 @@
           | #{rating_phrase[skatepark.rating.to_i][0]}
           span  #{rating_phrase[skatepark.rating.to_i][1]}
     .ui.divider
-    - if weather
-      .weather
-        .weather-header Weather
-        img src="#{weather[:icon_url]}"
-        div= weather[:weather]
-        div
-          | #{weather[:temp_f]}&deg F
-      .ui.divider
+    .weather data-ajax-container=true
+      img class="loading-icon" src="#{image_url('loading.svg')}"
+      = link_to skatepark_weather_path(skatepark.id), data: { ajax_weather: true, latitude: "#{skatepark.latitude}", longitude: "#{skatepark.longitude}" } do
+        button.ui.button
+          div Local Weather
+          img src="http://icons-ak.wxug.com/i/c/k/partlycloudy.gif"
+    .ui.divider
     #user-actions
       - if logged_in?
         div data-signed-in=true

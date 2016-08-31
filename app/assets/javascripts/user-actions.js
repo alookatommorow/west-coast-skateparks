@@ -16,6 +16,25 @@ $(document).ready(function() {
     resetForm(this);
   });
 
+  $("[data-ajax-container]").on("click", "[data-ajax-weather]", function (event) {
+    event.preventDefault();
+    $.ajax({
+      url: this.href,
+      data: {
+        latitude: $(this).data("latitude"),
+        longitude: $(this).data("longitude")
+      },
+      beforeSend: function() {
+        $(this).hide();
+        $(this).prev(".loading-icon").show();
+      }.bind(this)
+    })
+    .done(renderButtonResponse.bind(this))
+    .fail(function(response){
+      console.log("error", response);
+    });
+  });
+
   function sweetAlert() {
     return swal({
       title: "Hold Up!",

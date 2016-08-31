@@ -39,6 +39,7 @@ Rails.application.routes.draw do
 
   resources :skateparks do
     resource :map, only: :show, controller: 'skateparks/maps'
+    resource :weather, only: :show, controller: 'skateparks/weather'
     resources :favorites, only: %i(create destroy)
     resources :visits, only: %i(create destroy)
   end

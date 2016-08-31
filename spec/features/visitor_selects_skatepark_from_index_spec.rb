@@ -21,8 +21,6 @@ RSpec.feature 'Visitor selects skatepark from index' do
     expect(page).to have_text(wa_skatepark.name.titleize)
     expect(page).not_to have_text(or_skatepark.name.titleize)
 
-    stub_weather
-
     click_link wa_skatepark.name.titleize
 
     expect(page).to have_text(wa_skatepark.address)
