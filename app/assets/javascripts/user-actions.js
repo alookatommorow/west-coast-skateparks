@@ -26,7 +26,7 @@ $(document).ready(function() {
       },
       beforeSend: function() {
         $(this).hide();
-        $(this).prev(".loading-icon").show();
+        $(this).prev(".loader").show();
       }.bind(this)
     })
     .done(renderButtonResponse.bind(this))

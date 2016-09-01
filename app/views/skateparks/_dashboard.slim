@@ -13,7 +13,7 @@
           span  #{rating_phrase[skatepark.rating.to_i][1]}
     .ui.divider
     .weather data-ajax-container=true
-      img class="loading-icon" src="#{image_url('loading.svg')}"
+      .loader
       = link_to skatepark_weather_path(skatepark.id), data: { ajax_weather: true, latitude: "#{skatepark.latitude}", longitude: "#{skatepark.longitude}" } do
         button.ui.button
           div Local Weather

@@ -16,7 +16,7 @@ function infowindowGenerator(skatepark) {
     // id='content' is a Google Maps requirement
     countStars(skatepark.rating);
     starIcons = generateStarHtml();
-    return "<div id='content'><a href='/skateparks/"+skatepark.slug+"'><div><img src='"+skatepark.picture+ "' ></div><strong>"+titleize(skatepark.name)+"</strong><div>" + starIcons + "</div></a></div>";
+    return "<div id='content'><a href='/skateparks/"+skatepark.slug+"'><div><img src='"+skatepark.picture+ "' ></div><strong>"+titleize(skatepark.name)+"</strong><div>" + titleize(skatepark.city) + "</div><div>" + starIcons + "</div></a></div>";
   }
 
   function countStars(rating) {
