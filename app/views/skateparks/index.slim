@@ -5,24 +5,23 @@
       class: 'state-button' do
         .state-image
           img src="https://storage.googleapis.com/west-coast-skateparks/states/ca-largeseal.png"
-        .state-label data-mobile-link=true CA
+        .state-label CA
         .state-label-mobile California
     = link_to skateparks_state_path(state: 'oregon', page: 1),
       data: { state_link: "oregon" },
       class: 'state-button' do
         .state-image
           img src="https://storage.googleapis.com/west-coast-skateparks/states/or-largeseal.png"
-        .state-label data-mobile-link=true OR
+        .state-label OR
         .state-label-mobile Oregon
     = link_to skateparks_state_path(state: 'washington', page: 1),
       data: { state_link: "washington" },
       class: 'state-button' do
         .state-image
           img src="https://storage.googleapis.com/west-coast-skateparks/states/wa-largeseal.png"
-        .state-label data-mobile-link=true WA
+        .state-label WA
         .state-label-mobile Washington
-.ui.centered.grid.container
-  .parks-container
+.parks-container
 
 a#back-to-top href="#top"
   i#up-arrow.angle.double.up.icon

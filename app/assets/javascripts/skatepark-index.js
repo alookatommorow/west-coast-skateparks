@@ -15,6 +15,7 @@ $(document).ready(function(){
     $(".active").removeClass("active");
     $(this).addClass("active");
     if ($(".state-label-mobile").css("display") !== "none") {
+      $(".show-mobile-menu").show();
       $(".state-menu").slideUp(function(){
         $.get(this.href, renderSkateparks);
       }.bind(this));
@@ -35,9 +36,8 @@ $(document).ready(function(){
   });
 
   $(".parks-container").on("click", ".show-mobile-menu", function(){
-    $(".parks-container").children().remove();
-    $(".active").removeClass("active");
     $(".state-menu").slideDown();
+    $(".show-mobile-menu").hide();
   });
 
   ////// infinite scroll //////
