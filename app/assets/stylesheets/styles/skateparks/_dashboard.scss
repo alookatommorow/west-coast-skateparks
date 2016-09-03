@@ -38,9 +38,17 @@
     .weather {
       text-align: center;
       font-size: 15px;
+      height: 110px;
 
-      .weather-header {
-        font-size: 18px;
+      .weather-loading-container {
+        display: none;
+        height: 110px;
+      }
+
+      .ui.button {
+        position: relative;
+        top: 50%;
+        transform: translateY(-50%);
       }
     }
 

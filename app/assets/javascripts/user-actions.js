@@ -26,7 +26,7 @@ $(document).ready(function() {
       },
       beforeSend: function() {
         $(this).hide();
-        $(this).prev(".loader").show();
+        $(this).prev(".weather-loading-container").show();
       }.bind(this)
     })
     .done(renderButtonResponse.bind(this))
