@@ -8,27 +8,21 @@ $(document).ready(function(){
     if ($(this).hasClass("active")) {
       return;
     }
-
     trackStateLinkClick(this); // .bind failed TravisCI
     pageCount = 1;
     currentStateLink = this.href;
 
     $(".active").removeClass("active");
     $(this).addClass("active");
-    $.get(this.href, renderSkateparks);
-  });
-
-  //////// Show skateparks by state mobile ////////
-  $("a[data-mobile-state-link]").on("click", function(event){
-    event.preventDefault();
-    $(".index-menu-container").slideUp(function(){
+    if ($(".state-label-mobile").css("display") !== "none") {
+      $(".state-menu").slideUp(function(){
+        $.get(this.href, renderSkateparks);
+      }.bind(this));
+    } else {
       $.get(this.href, renderSkateparks);
-    }.bind(this));
-
-    trackStateLinkClick(this);
-    pageCount = 1;
-    currentStateLink = this.href;
+    }
   });
+
 
   /////// Show skatepark by Letter ////////
   $(".parks-container").on("click", "a[data-skatepark-letter-link]", function(event) {
@@ -42,7 +36,8 @@ $(document).ready(function(){
 
   $(".parks-container").on("click", ".show-mobile-menu", function(){
     $(".parks-container").children().remove();
-    $(".index-menu-container").slideDown();
+    $(".active").removeClass("active");
+    $(".state-menu").slideDown();
   });
 
   ////// infinite scroll //////

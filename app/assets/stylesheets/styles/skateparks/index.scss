@@ -1,12 +1,12 @@
-.index-menu-container {
-  width: 80%;
-  margin: 0 auto;
+#top {
   text-align: center;
 
   .state-menu {
+    width: 950px;
+    margin: 0 auto;
     display: flex;
 
-    a.state-button {
+    .state-button {
       background-color: $blue;
       color: white;
       width: 33.333%;
@@ -16,61 +16,69 @@
         background-color: $dark-blue;
       }
 
+      .state-image {
+        height: 190px;
+        padding: 20px 0;
+
+        img {
+          width: 150px;
+        }
+      }
+
       .state-label {
         font-size: 3em;
         font-family: 'Dirty-Bakers-Dozen', sans-serif;
         padding-bottom: 15px;
+      }
 
-        @media #{$tablet} {
-          font-size: 1.5em;
+      .state-label-mobile {
+        display: none;
+      }
+    }
+
+    @media #{$tablet} {
+      width: 700px;
+
+      .state-label {
+        font-size: 1.5em;
+      }
+    }
+
+    @media #{$mobile} {
+      width: 85%;
+      display: inline-block;
+
+      .state-button {
+        margin: 0 auto 10px auto;
+        width: 90%;
+        padding: 5px 10px;
+        display: flex;
+        align-items: center;
+
+        .state-image {
+          background-color: $blue;
+          height: 85px;
+          padding: 0;
+
+          img {
+            width: 80px;
+          }
+        }
+
+        .state-label {
+          display: none;
+        }
+
+        .state-label-mobile {
+          display: inherit;
+          margin-left: 10%;
+          font-size: 1.3em;
+          font-family: 'Dirty-Bakers-Dozen', sans-serif;
         }
       }
-
-      img {
-        width: 150px;
-        height: auto;
-        padding: 20px 0;
-      }
-    }
-
-    @media #{$mobile} {
-      display: none;
     }
   }
 }
-
-
-.ui.centered.grid.container {
-  margin-top: 0;
-
-  .sixteen.wide.column.mobile-menu {
-    background-color: $blue;
-    color: white;
-    font-size: 1.5em;
-    font-family: 'Dirty-Bakers-Dozen', sans-serif;
-    margin-bottom: 1%;
-    display: none;
-
-    &:hover {
-      color: $orange;
-      background-color: $dark-blue;
-    }
-
-    .state-text {
-      position: absolute;
-      top: 31%;
-    }
-
-    .state-image {
-      float: right;
-    }
-
-    @media #{$mobile} {
-      display: inline-block;
-    }
-  }
-}
-
 
 .parks-container {
   margin-bottom: 3%;

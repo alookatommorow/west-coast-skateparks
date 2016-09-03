@@ -1,40 +1,26 @@
-#top.index-menu-container
+#top
   .state-menu
     = link_to skateparks_state_path(state: 'california', page: 1),
       data: { state_link: "california" },
       class: 'state-button' do
-        img src="https://storage.googleapis.com/west-coast-skateparks/states/ca-largeseal.png"
-        .state-label CA
+        .state-image
+          img src="https://storage.googleapis.com/west-coast-skateparks/states/ca-largeseal.png"
+        .state-label data-mobile-link=true CA
+        .state-label-mobile California
     = link_to skateparks_state_path(state: 'oregon', page: 1),
       data: { state_link: "oregon" },
       class: 'state-button' do
-        img src="https://storage.googleapis.com/west-coast-skateparks/states/or-largeseal.png"
-        .state-label OR
+        .state-image
+          img src="https://storage.googleapis.com/west-coast-skateparks/states/or-largeseal.png"
+        .state-label data-mobile-link=true OR
+        .state-label-mobile Oregon
     = link_to skateparks_state_path(state: 'washington', page: 1),
       data: { state_link: "washington" },
       class: 'state-button' do
-        img src="https://storage.googleapis.com/west-coast-skateparks/states/wa-largeseal.png"
-        .state-label WA
-
-  / Mobile links
-  = link_to skateparks_state_path(state: 'california', page: 1),
-    data: { mobile_state_link: "california" },
-    class: "sixteen wide column mobile-menu" do
-      div.state-text
-        p California
-      div.state-image= image_tag("https://storage.googleapis.com/west-coast-skateparks/states/ca-largeseal.png", class: "ui tiny image")
-  = link_to skateparks_state_path(state: 'oregon', page: 1),
-    data: { mobile_state_link: "oregon" },
-    class: "sixteen wide column mobile-menu" do
-      div.state-text
-        p Oregon
-      div.state-image= image_tag("https://storage.googleapis.com/west-coast-skateparks/states/or-largeseal.png", class: "ui tiny image")
-  = link_to skateparks_state_path(state: 'washington', page: 1),
-    data: { mobile_state_link: "washington" },
-    class: "sixteen wide column mobile-menu" do
-      div.state-text
-        p Washington
-      div.state-image= image_tag("https://storage.googleapis.com/west-coast-skateparks/states/wa-largeseal.png", class: "ui tiny image")
+        .state-image
+          img src="https://storage.googleapis.com/west-coast-skateparks/states/wa-largeseal.png"
+        .state-label data-mobile-link=true WA
+        .state-label-mobile Washington
 .ui.centered.grid.container
   .parks-container
 
