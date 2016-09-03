@@ -1,4 +1,6 @@
 .skatepark-show-dashboard
+  - if logged_in?
+    div data-signed-in=true
   .stars
     .stars-container
       - if skatepark.rating
@@ -21,14 +23,10 @@
           img src="http://icons-ak.wxug.com/i/c/k/partlycloudy.gif"
     .ui.divider
     #user-actions
-      - if logged_in?
-        div data-signed-in=true
-      div data-ajax-container=true
-        .button-loading-container
-          .loader
+      .visit.button-container data-ajax-container=true
         = render "visits/button",
           visit: @visit, user: current_user, skatepark: @skatepark
-      div data-ajax-container=true
+      .favorite.button-container data-ajax-container=true
         = render "favorites/button",
           favorite: @favorite, user: current_user, skatepark: @skatepark
   .ui.divider
