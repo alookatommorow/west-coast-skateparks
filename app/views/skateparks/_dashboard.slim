@@ -24,6 +24,8 @@
       - if logged_in?
         div data-signed-in=true
       div data-ajax-container=true
+        .button-loading-container
+          .loader
         = render "visits/button",
           visit: @visit, user: current_user, skatepark: @skatepark
       div data-ajax-container=true
