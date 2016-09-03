@@ -7,6 +7,7 @@ $(document).ready(function() {
     } else {
       sweetAlert();
     }
+    $(this).hide();
     event.preventDefault();
   });
 
@@ -57,8 +58,18 @@ $(document).ready(function() {
   }
 
   function ajaxPost(form, callback) {
-    $.post(form.action, $(form).serialize())
-      .success(callback.bind(form));
+    $.ajax({
+      url: form.action,
+      method: "POST",
+      data: $(form).serialize(),
+      beforeSend: function() {
+        $(form).prev(".button-loading-container").show();
+      }
+    })
+    .done(callback.bind(form))
+    .fail(function(response){
+      console.log("error", response);
+    });
   }
 
   function resetForm(form) {

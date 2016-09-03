@@ -1,39 +1,58 @@
 #user-actions {
-  text-align: center;
-  width: 390px;
-  display: flex;
-  justify-content: space-between;
 
-  .ui.button {
-    margin: 0;
-    border-radius: 0;
-    background-color: $blue;
+  .button-container {
+    display: inline-block;
+    text-align: center;
 
-    p {
-      color: white;
-      font-size: 15px;
-      font-weight: lighter;
-      letter-spacing: 2px;
+    &.visit {
+      float: left;
+      min-width: 225px;
     }
 
-    i {
-      font-size: 18px;
+    &.favorite {
+      float: right;
+      min-width: 165px;
     }
 
-    &:hover {
+    .button-loading-container {
+      display: none;
+      height: 48px;
+    }
+
+    .ui.button {
+      margin: 0;
+      border-radius: 0;
+      background-color: $blue;
+
       p {
-        color: $orange;
+        color: white;
+        font-size: 15px;
+        font-weight: lighter;
+        letter-spacing: 2px;
+      }
+
+      i {
+        font-size: 18px;
+      }
+
+      &:hover {
+        p {
+          color: $orange;
+        }
       }
     }
-  }
 
-  @media #{$mobile} {
-    margin: 0 auto;
-    display: block;
-    width: 250px;
+    @media #{$tablet} {
+      display: block;
 
-    .new_visit, .edit_visit {
-      margin-bottom: 10px;
+      &.visit {
+        float: none;
+        margin-bottom: 15px;
+      }
+
+      &.favorite {
+        float: none;
+      }
     }
   }
 }
