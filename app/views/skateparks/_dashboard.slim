@@ -16,7 +16,7 @@
     .ui.divider
     .weather data-ajax-container=true
       .weather-loading-container
-        .loader
+        .loading-icon
       = link_to skatepark_weather_path(skatepark.id), data: { ajax_weather: true, latitude: "#{skatepark.latitude}", longitude: "#{skatepark.longitude}" } do
         button.ui.button
           div Local Weather
