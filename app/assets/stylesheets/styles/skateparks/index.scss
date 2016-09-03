@@ -1,37 +1,41 @@
-.ui.three.item.menu.state-menu {
-  margin-top: 1%;
+.index-menu-container {
+  width: 80%;
+  margin: 0 auto;
+  text-align: center;
 
-  a.item.state-button.active {
-    color: $orange;
-    background-color: $dark-blue;
-  }
+  .state-menu {
+    display: flex;
 
-  a.item.state-button {
-    background-color: $blue;
-    color: white;
+    a.state-button {
+      background-color: $blue;
+      color: white;
+      width: 33.333%;
 
-    &:hover {
-      color: $orange;
-      background-color: $dark-blue;
-    }
+      &:hover, &.active {
+        color: $orange;
+        background-color: $dark-blue;
+      }
 
-    .state-label {
-      font-size: 3em;
-      font-family: 'Dirty-Bakers-Dozen', sans-serif;
-      min-width: min-content;
+      .state-label {
+        font-size: 3em;
+        font-family: 'Dirty-Bakers-Dozen', sans-serif;
+        padding-bottom: 15px;
 
-      @media #{$tablet} {
-        font-size: 1em;
+        @media #{$tablet} {
+          font-size: 1.5em;
+        }
+      }
+
+      img {
+        width: 150px;
+        height: auto;
+        padding: 20px 0;
       }
     }
 
-    .ui.centered.image {
-      margin-bottom: 5%;
+    @media #{$mobile} {
+      display: none;
     }
-  }
-
-  @media #{$mobile} {
-    display: none;
   }
 }
 
