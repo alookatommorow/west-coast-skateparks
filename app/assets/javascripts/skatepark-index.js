@@ -35,6 +35,7 @@ $(document).ready(function(){
     $.get(this.href, renderSkateparks);
   });
 
+  /////// Click show menu (mobile) ////////
   $(".parks-container").on("click", ".show-mobile-menu", function(){
     $(".state-menu").slideDown();
     $(".show-mobile-menu").hide();
@@ -79,6 +80,24 @@ $(document).ready(function(){
       var state = $(link).data("state-link") || $(link).data("mobile-state-link");
       analytics.track("Clicked State Link", { state: state });
     }
+  }
+
+  // bug fixes for resizing, worth it?
+  if (window.location.pathname === '/skateparks') {
+    $(window).resize(function() {
+      if (window.innerWidth > 767 ) {
+        if ($(".state-menu").css("display") !== "flex") {
+          $(".state-menu").css("display", "flex");
+          $(".show-mobile-menu").hide();
+        }
+      } else {
+        if ($(".state-menu").css("display") !== "none" && $(".parks-container").children().length > 0) {
+          $(".state-menu").css("display", "inline-block")
+          $(".show-mobile-menu").show();
+          $(".state-menu").slideUp();
+        }
+      }
+    });
   }
 });
 
