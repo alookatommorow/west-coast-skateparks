@@ -1,7 +1,27 @@
 .about-page {
-  padding: 0 30px 30px 30px;
+  display: flex;
+  justify-content: space-around;
+  padding: 0 25px;
 
-  .ui.stackable.two.column.grid {
-    margin-top: 0;
+  .skatepark-info {
+    margin-right: 10px;
+    flex: 1;
+  }
+
+  .rating-system {
+    flex: 1;
+    margin-left: 10px;
+  }
+
+  @media #{$mobile} {
+    display: block;
+
+    .skatepark-info {
+      margin: 0;
+    }
+
+    .rating-system {
+      margin: 20px 0;
+    }
   }
 }
