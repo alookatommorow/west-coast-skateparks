@@ -1,176 +1,94 @@
-.ui.three.item.menu.state-menu {
-  margin-top: 1%;
+#top {
+  text-align: center;
 
-  a.item.state-button.active {
-    color: $orange;
-    background-color: $dark-blue;
-  }
+  .state-menu {
+    width: 950px;
+    margin: 0 auto;
+    display: flex;
 
-  a.item.state-button {
-    background-color: $blue;
-    color: white;
+    .state-button {
+      background-color: $blue;
+      color: white;
+      width: 33.333%;
 
-    &:hover {
-      color: $orange;
-      background-color: $dark-blue;
-    }
+      &:hover, &.active {
+        color: $orange;
+        background-color: $dark-blue;
+      }
 
-    .state-label {
-      font-size: 3em;
-      font-family: 'Dirty-Bakers-Dozen', sans-serif;
-      min-width: min-content;
+      .state-image {
+        height: 190px;
+        padding: 20px 0;
 
-      @media #{$tablet} {
-        font-size: 1em;
+        img {
+          width: 150px;
+        }
+      }
+
+      .state-label {
+        font-size: 3em;
+        font-family: 'Dirty-Bakers-Dozen', sans-serif;
+        padding-bottom: 15px;
+      }
+
+      .state-label-mobile {
+        display: none;
       }
     }
 
-    .ui.centered.image {
-      margin-bottom: 5%;
-    }
-  }
+    @media #{$tablet} {
+      width: 700px;
 
-  @media #{$mobile} {
-    display: none;
-  }
-}
-
-
-.ui.centered.grid.container {
-  margin-top: 0;
-
-  .sixteen.wide.column.mobile-menu {
-    background-color: $blue;
-    color: white;
-    font-size: 1.5em;
-    font-family: 'Dirty-Bakers-Dozen', sans-serif;
-    margin-bottom: 1%;
-    display: none;
-
-    &:hover {
-      color: $orange;
-      background-color: $dark-blue;
-    }
-
-    .state-text {
-      position: absolute;
-      top: 31%;
-    }
-
-    .state-image {
-      float: right;
+      .state-label {
+        font-size: 1.5em;
+      }
     }
 
     @media #{$mobile} {
-      display: inline-block;
-    }
-  }
-}
-
-
-.parks-container {
-  margin-bottom: 3%;
-  width: 100%;
-  min-height: 39em;
-
-  .show-mobile-menu {
-    background-color: $blue;
-    color: $orange;
-    margin-bottom: 2%;
-    padding: 1% 0;
-    font-family: 'Dirty-Bakers-Dozen', sans-serif;
-    display: none;
-
-    div {
-      display: inline-block;
-    }
-
-    .arrow-icon-left {
-      float: left;
-      margin-left: 1%;
-    }
-
-    .arrow-icon-right {
-      float: right;
-      margin-right: 1%;
-    }
-
-    &:hover {
-      cursor: pointer;
-    }
-
-    @media #{$mobile} {
-      display: block;
-    }
-  }
-
-  .letter-links {
-    background-color: white;
-    padding: 0 3%;
-
-    .link {
-      color: $blue;
-      padding: 1% 1%;
+      width: 85%;
       display: inline-block;
 
-      &:hover {
-        cursor: pointer;
-        background-color: $gray
-      }
+      .state-button {
+        margin: 0 auto 10px auto;
+        width: 90%;
+        padding: 5px 10px;
+        display: flex;
+        align-items: center;
 
-      @media #{$mobile} {
-        padding: 1% 2%;
-      }
-    }
-  }
+        .state-image {
+          height: 85px;
+          padding: 0;
 
-  .ui.selection.list {
-    position: relative;
-
-    .item {
-      background: white;
-      display: flex;
-
-      &:hover {
-        background-color: $gray
-      }
-
-      .link-section {
-        flex: 1;
-        position: relative;
-
-        p {
-          color: black;
-          position: absolute;
-          top: 50%;
-          transform: translateY(-50%);
-        }
-
-        .item-header {
-          font-weight: bold;
-        }
-
-        .index-image {
-          width: 200px;
-          float: right;
-
-          @media #{$mobile} {
-            width: 100px;
+          img {
+            width: 80px;
           }
         }
+
+        .state-label {
+          display: none;
+        }
+
+        .state-label-mobile {
+          display: inherit;
+          margin-left: 10%;
+          font-size: 1em;
+          font-family: 'Dirty-Bakers-Dozen', sans-serif;
+        }
       }
     }
   }
+}
 
-  .states-header {
-    background-color: $orange;
-    color: $blue;
-    text-align: center;
-    font-family: 'Dirty-Bakers-Dozen', sans-serif;
-    font-size: 2em;
-    margin-bottom: 1%;
+.parks-container {
+  padding: 0 25px;
+  margin: 25px 0;
+  text-align: center;
+
+  @media #{$mobile} {
+    margin: 0;
   }
 }
+
 
 a#back-to-top {
   position: fixed;

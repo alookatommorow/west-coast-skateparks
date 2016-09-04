@@ -1,0 +1,111 @@
+.parks-container {
+
+  .letter-links {
+    background-color: white;
+    padding: 0 3%;
+
+    .link {
+      color: $blue;
+      padding: 1% 1%;
+      display: inline-block;
+
+      &:hover {
+        cursor: pointer;
+        background-color: $gray
+      }
+
+      @media #{$mobile} {
+        padding: 1% 2%;
+      }
+    }
+  }
+
+  .show-mobile-menu {
+    background-color: $blue;
+    color: $orange;
+    margin-bottom: 2%;
+    padding: 1% 1%;
+    font-family: 'Dirty-Bakers-Dozen', sans-serif;
+    display: none;
+
+    div {
+      display: inline-block;
+    }
+
+    .icon {
+      margin: 0;
+    }
+
+    .arrow-icon-left {
+      float: left;
+    }
+
+    .arrow-icon-right {
+      float: right;
+    }
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  .states-header {
+    background-color: $orange;
+    color: $blue;
+    text-align: center;
+    font-family: 'Dirty-Bakers-Dozen', sans-serif;
+    font-size: 2em;
+    margin-bottom: 1%;
+  }
+
+  .ui.selection.list {
+
+    .item {
+      background: white;
+      display: flex;
+
+      &:hover {
+        background-color: $gray
+      }
+
+      .link-section {
+        flex: 1;
+        position: relative;
+
+        p {
+          color: black;
+          position: absolute;
+          top: 50%;
+          transform: translateY(-50%);
+        }
+
+        .item-header {
+          font-weight: bold;
+        }
+
+        .index-image {
+          width: 200px;
+          float: right;
+
+          @media #{$mobile} {
+            width: 100px;
+          }
+        }
+      }
+    }
+  }
+
+  @media #{$mobile} {
+
+    .show-mobile-menu {
+      display: block;
+    }
+  }
+}
+
+.no-parks-by-letter {
+  text-align: center;
+  font-family: 'Dirty-Bakers-Dozen', sans-serif;
+  font-size: 2em;
+  color: $orange;
+}

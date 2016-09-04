@@ -8,27 +8,22 @@ $(document).ready(function(){
     if ($(this).hasClass("active")) {
       return;
     }
-
     trackStateLinkClick(this); // .bind failed TravisCI
     pageCount = 1;
     currentStateLink = this.href;
 
     $(".active").removeClass("active");
     $(this).addClass("active");
-    $.get(this.href, renderSkateparks);
-  });
-
-  //////// Show skateparks by state mobile ////////
-  $("a[data-mobile-state-link]").on("click", function(event){
-    event.preventDefault();
-    $(".index-menu-container").slideUp(function(){
+    if ($(".state-label-mobile").css("display") !== "none") {
+      $(".show-mobile-menu").show();
+      $(".state-menu").slideUp(function(){
+        $.get(this.href, renderSkateparks);
+      }.bind(this));
+    } else {
       $.get(this.href, renderSkateparks);
-    }.bind(this));
-
-    trackStateLinkClick(this);
-    pageCount = 1;
-    currentStateLink = this.href;
+    }
   });
+
 
   /////// Show skatepark by Letter ////////
   $(".parks-container").on("click", "a[data-skatepark-letter-link]", function(event) {
@@ -40,9 +35,10 @@ $(document).ready(function(){
     $.get(this.href, renderSkateparks);
   });
 
+  /////// Click show menu (mobile) ////////
   $(".parks-container").on("click", ".show-mobile-menu", function(){
-    $(".parks-container").children().remove();
-    $(".index-menu-container").slideDown();
+    $(".state-menu").slideDown();
+    $(".show-mobile-menu").hide();
   });
 
   ////// infinite scroll //////
@@ -84,6 +80,24 @@ $(document).ready(function(){
       var state = $(link).data("state-link") || $(link).data("mobile-state-link");
       analytics.track("Clicked State Link", { state: state });
     }
+  }
+
+  // bug fixes for resizing, worth it?
+  if (window.location.pathname === '/skateparks') {
+    $(window).resize(function() {
+      if (window.innerWidth > 767 ) {
+        if ($(".state-menu").css("display") !== "flex") {
+          $(".state-menu").css("display", "flex");
+          $(".show-mobile-menu").hide();
+        }
+      } else {
+        if ($(".state-menu").css("display") !== "none" && $(".parks-container").children().length > 0) {
+          $(".state-menu").css("display", "inline-block")
+          $(".show-mobile-menu").show();
+          $(".state-menu").slideUp();
+        }
+      }
+    });
   }
 });
 
