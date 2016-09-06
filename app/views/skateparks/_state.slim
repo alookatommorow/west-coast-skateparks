@@ -11,6 +11,8 @@
     = link_to letter,
       skateparks_state_letter_path(state_id: state, letter: letter, page: 1),
       data: { skatepark_letter_link: true }, class: "link"
+.loading-container
+  .loading-icon
 .ui.divided.selection.list.state-list data-total-pages=skateparks.total_pages
   - skateparks.each do |park|
     = link_to park, class: "item" do
