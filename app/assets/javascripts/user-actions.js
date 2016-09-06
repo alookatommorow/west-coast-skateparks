@@ -7,7 +7,7 @@ $(document).ready(function() {
     } else {
       sweetAlert();
     }
-    $(this).hide();
+
     event.preventDefault();
   });
 
@@ -63,6 +63,7 @@ $(document).ready(function() {
       method: "POST",
       data: $(form).serialize(),
       beforeSend: function() {
+        $(form).hide();
         $(form).prev(".button-loading-container").show();
       }
     })
