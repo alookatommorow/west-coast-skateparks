@@ -6,26 +6,9 @@ function displayFlashMessage() {
 }
 
 function titleize(string) {
-  var newby = formatSpecialCharacters(string);
-  return newby.split(' ').map(function(word){
-    if (word.charAt(0) === '(') {
-      return word.charAt(0) + word.charAt(1).toUpperCase() + word.slice(2);
-    } else {
-      return word.charAt(0).toUpperCase() + word.slice(1);
-    }
-  }).join(' ');
-}
-
-function formatSpecialCharacters(string) {
-  var slashIndex = string.indexOf("/");
-  var dashIndex = string.indexOf("-");
-  if (slashIndex !== -1) {
-    return capitalizeAfterSpecialCharacters(string, slashIndex);
-  } else if (dashIndex !== -1)  {
-    return capitalizeAfterSpecialCharacters(string, dashIndex);
-  } else {
-    return string;
-  }
+  return string.replace(new RegExp("(?:\\b|_)([a-z])", "g"), function(char) {
+      return char.toUpperCase();
+  });
 }
 
 function capitalizeAfterSpecialCharacters(string, index) {
