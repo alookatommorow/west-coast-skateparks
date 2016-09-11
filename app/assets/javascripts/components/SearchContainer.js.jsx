@@ -14,10 +14,14 @@ var SearchContainer = React.createClass({
 
   filterAndAddIndexOfMatch: function(query) {
     return function(skatepark) {
-      if (skatepark.name.indexOf(query) !== -1 || skatepark.location.city.indexOf(query) !== -1) {
-        skatepark.string = skatepark.name+", "+skatepark.location.city+", "+stateDisplay[skatepark.location.state];
-        skatepark.matchIndex = skatepark.string.indexOf(query);
-        return true;
+      if (skatepark.location) { // to prevent search from breaking during skatepark creation
+        if (skatepark.name.indexOf(query) !== -1 || skatepark.location.city.indexOf(query) !== -1) {
+          skatepark.string = skatepark.name+", "+skatepark.location.city+", "+stateDisplay[skatepark.location.state];
+          skatepark.matchIndex = skatepark.string.indexOf(query);
+          return true;
+        } else {
+          return false;
+        }
       } else {
         return false;
       }
