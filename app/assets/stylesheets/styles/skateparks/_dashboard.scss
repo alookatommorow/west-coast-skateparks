@@ -104,46 +104,48 @@
 
   .links-container {
     text-align: center;
+    background-color: $gray;
 
     .links {
       display: inline-flex;
-      justify-content: space-between;
-      width: 50%;
+      width: 100%;
+
 
       a {
+        flex: 1;
         font-family: "Dirty-Bakers-Dozen", sans-serif;
-        color: $dark-blue;
+        color: $orange;
+        padding: 25px;
         font-size: 30px;
         text-transform: uppercase;
+        border-radius: 4px;;
 
         i {
           line-height: 50px;
           font-size: 50px;
           margin: 0;
+          color: $blue;
         }
 
         span {
           display: block;
+          color: $blue;
         }
 
         &:hover, &.selected {
-          i {
-            color: $orange;
-          }
+          background-color: #cacbcd;
+
         }
       }
 
-      @media #{$tablet} {
-        margin-top: 10px;
-        width: 80%;
-        justify-content: space-around;
-      }
-
       @media #{$mobile} {
-        margin-top: 0;
 
-        a span {
-          display: none;
+        a {
+          padding: 10px;
+
+          span {
+            display: none;
+          }
         }
       }
     }
