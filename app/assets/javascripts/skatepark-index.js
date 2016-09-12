@@ -96,7 +96,7 @@ $(document).ready(function(){
           $(".show-mobile-menu").hide();
         }
       } else {
-        if ($(".state-menu").css("display") !== "none" && $(".parks-container").children().length > 0) {
+        if ($(".state-menu").css("display") !== "none" && $(".parks-container").children().length > 1) {
           $(".state-menu").css("display", "inline-block")
           $(".show-mobile-menu").show();
           $(".state-menu").slideUp();
