@@ -133,8 +133,11 @@
         }
 
         &:hover, &.selected {
-          background-color: #cacbcd;
+          background-color: #e0e1e2;
 
+          i {
+            color: $orange;
+          }
         }
       }
 
