@@ -11,7 +11,7 @@
       color: white;
       width: 33.333%;
 
-      &:hover, &.active {
+      &:hover {
         color: $orange;
         background-color: $dark-blue;
       }

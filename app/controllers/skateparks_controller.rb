@@ -6,6 +6,10 @@ class SkateparksController < ApplicationController
     assign_associations
   end
 
+  def index
+    @skateparks = Skatepark.includes(:location).all
+  end
+
   private
 
     def assign_associations
