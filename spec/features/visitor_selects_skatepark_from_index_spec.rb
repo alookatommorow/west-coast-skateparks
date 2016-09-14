@@ -21,7 +21,8 @@ RSpec.feature 'Visitor selects skatepark from index' do
     expect(page).to have_text(wa_skatepark.name.titleize)
     expect(page).not_to have_text(or_skatepark.name.titleize)
 
-    click_link wa_skatepark.name.titleize
+    #use this syntax because of bug when trying to click inline block links
+    find('a.index-link').click
 
     expect(page).to have_text(wa_skatepark.address)
   end
