@@ -13,14 +13,13 @@
       data: { skatepark_letter_link: true }, class: "link"
 .loading-container
   .loading-icon
-.ui.divided.selection.list.state-list data-total-pages=skateparks.total_pages
-  - skateparks.each do |park|
-    = link_to park, class: "item" do
-      .link-section
-        p.item-header #{park.city.titleize}
-      .link-section
-        p #{park.name.titleize}
-      .link-section
-        = image_tag("#{park.hero}", class: "index-image")
-  - if skateparks.empty?
-    h1.no-parks-by-letter No parks by that letter
+.state-list data-total-pages=skateparks.total_pages
+  - skateparks.each do |skatepark|
+    .card-container
+      = link_to skatepark do
+        .skatepark-card
+          .card-image
+            =image_tag("#{skatepark.map_photo.url}")
+          .card-header= skatepark.city.titleize
+          - if skatepark.city
+            .card-sub= skatepark.name.titleize

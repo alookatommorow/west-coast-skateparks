@@ -1,15 +1,3 @@
-.grid-experiment-container
-  - @skateparks.each_slice(4) do |row|
-    - row.each do |skatepark|
-      .experiment-column
-        .skatepark-card
-          .card-image
-            =image_tag("#{skatepark.map_photo.url}")
-          .card-header= skatepark.name.titleize
-          - if skatepark.city
-            .card-sub= skatepark.city.titleize
-
-
 #top
   .state-menu
     = link_to skateparks_state_path(state: 'california', page: 1),
