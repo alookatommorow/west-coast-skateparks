@@ -1,3 +1,58 @@
+.grid-experiment-container {
+  margin: 0 auto;
+  width: 90%;
+
+  // .experiment-row {
+  //   display: inline-block;
+
+  //   &:before, &:after {
+  //     content: "";
+  //     display: table;
+  //     clear: both;
+  //   }
+
+  .experiment-column {
+    display: inline-block;
+    min-height: 1px;
+    width: 25%;
+
+    .skatepark-card {
+      text-align: center;
+      margin: 5px;
+      background-color: white;
+      box-shadow: 0px 2px 4px 0px rgba(34, 36, 38, 0.12), 0px 2px 10px 0px rgba(34, 36, 38, 0.15);
+
+      .card-image img {
+        width: 180px;
+        height: 120px;
+        padding: 10px 0;
+        object-fit: cover;
+      }
+
+      .card-header {
+        font-weight: bold;
+        padding-bottom: 5px;
+      }
+
+      .card-sub {
+        padding-bottom: 10px;
+      }
+    }
+
+    @media #{$tablet} {
+      width: 33.33%;
+    }
+
+    @media #{$mobile} {
+      width: 50%;
+    }
+  }
+
+}
+
+
+
+
 .ui.divided.selection.list.posts-index-container {
   padding: 25px;
   max-width: 900px;
