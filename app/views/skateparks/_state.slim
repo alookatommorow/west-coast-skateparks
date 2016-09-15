@@ -14,6 +14,8 @@
 .loading-container
   .loading-icon
 .state-list data-total-pages=skateparks.total_pages
+  - if skateparks.empty?
+    .no-parks-by-letter no skateparks by that letter
   - skateparks.each do |skatepark|
     .card-container
       = link_to skatepark, class: "index-link" do
