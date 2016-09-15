@@ -95,6 +95,10 @@
         .card-sub {
           padding-bottom: 10px;
         }
+
+        &:hover {
+          background-color: $gray;
+        }
       }
     }
   }
