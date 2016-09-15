@@ -6,10 +6,11 @@ namespace :sitemap do
   task upload_to_s3: :environment do
     puts "Starting sitemap upload to S3..."
 
-    s3 = AWS::S3.new(access_key_id: ENV['AWS_ACCESS_KEY_ID'],
+    s3 = Aws::S3::Client.new(access_key_id: ENV['AWS_ACCESS_KEY_ID'],
                      secret_access_key: ENV['AWS_SECRET_ACCESS_KEY'])
+    resource = Aws::S3::Resource.new(client: s3)
 
-    bucket = s3.buckets[ENV['S3_BUCKET']]
+    bucket = resource.bucket(ENV['S3_BUCKET'])
 
     Dir.entries(File.join(Rails.root, "tmp", "sitemaps")).each do |file_name|
       next if ['.', '..', '.DS_Store'].include? file_name
@@ -17,8 +18,8 @@ namespace :sitemap do
       file = File.join(Rails.root, "tmp", "sitemaps", file_name)
 
       begin
-        object = bucket.objects[path]
-        object.write(file: file)
+        object = bucket.object(path)
+        object.upload_file(file)
       rescue StandardError => e
         raise e
       end
