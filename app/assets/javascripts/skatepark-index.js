@@ -35,6 +35,7 @@ $(document).ready(function(){
     pageCount = 1;
     currentStateLink = this.href;
 
+    $(this).addClass("active");
     $(".state-list").hide();
     $(".loading-container").show();
     $.get(this.href, renderSkateparks);
