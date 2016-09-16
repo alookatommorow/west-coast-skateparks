@@ -1,12 +1,11 @@
 #skatepark-info data-toggle-container=true
   .info-display
-    .ui.segment
-      .ui.list
+    .segment
+      .list
         - skatepark.attributes.each do |attribute, value|
           .item.skatepark-info-attribute
-            .ui.grid
-              .left.aligned.four.wide.column= attribute.titleize
-              .left.aligned.twelve.wide.column= value
+            .attribute-column= attribute.titleize
+            .value-column= value
 
 
 
