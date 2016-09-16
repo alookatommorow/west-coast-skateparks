@@ -11,12 +11,10 @@ function titleize(string) {
   });
 }
 
-function capitalizeAfterSpecialCharacters(string, index) {
-  return string.substr(0, index + 1) + string.charAt(index + 1).toUpperCase() + string.substr(index + 2)
-}
-
 var stateDisplay = {
   "california": "CA",
   "oregon": "OR",
   "washington": "WA"
 }
+
+
