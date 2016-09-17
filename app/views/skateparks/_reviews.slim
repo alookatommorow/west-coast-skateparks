@@ -2,10 +2,10 @@
   - if logged_in?
     .opinions-container data-ajax-container=true
       .rating-form-container
-        = form_tag ratings_path, class: "ui form rating-form", data: { ajax_form: "[data-rating-display]" } do
+        = form_tag ratings_path, class: "rating-form", data: { ajax_form: "[data-rating-display]" } do
           = hidden_field_tag :user_id, current_user.id
           = hidden_field_tag :skatepark_id, skatepark.id
-          .ui.selection.dropdown.field
+          .selection.dropdown.field
             = hidden_field_tag :rating, nil
             i.dropdown.icon
             .default.text Select Rating...
@@ -19,16 +19,16 @@
               .item data-value="4" 4
               .item data-value="4.5" 4.5
               .item data-value="5" 5
-          = submit_tag "Rate", class: 'ui button'
-          .ui.error.message
+          = submit_tag "Rate", class: 'basic-button'
+          .error.message
       .review-form-container
-        = form_tag reviews_path, class: "ui form review-form", data: { ajax_form: "[data-reviews-display]" } do
+        = form_tag reviews_path, class: "review-form", data: { ajax_form: "[data-reviews-display]" } do
           = hidden_field_tag :user_id, current_user.id
           = hidden_field_tag :skatepark_id, skatepark.id
           .field
             = text_area_tag :review, nil, placeholder: 'Write review here...', class: ""
-          = submit_tag 'Review', class: "ui button"
-          .ui.error.message
+          = submit_tag 'Review', class: "basic-button"
+          .error.message
   .rating-reviews
     .user-rating data-rating-display=true
       - if skatepark.average_rating
