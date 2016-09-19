@@ -9,7 +9,7 @@ $(document).ready(function() {
   })
 
   sessionValidation('session');
-  sessionValidation('user');
+  // sessionValidation('user');
 
   function opinionValidation(type) {
     var options = { fields: {} };
@@ -76,6 +76,9 @@ var validationTypes = {
     counterpart: "textarea",
     input: "textarea",
   },
+  user: {
+
+  }
 }
 
 var validators = {
