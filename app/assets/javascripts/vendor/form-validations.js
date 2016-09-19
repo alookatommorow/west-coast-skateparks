@@ -1,5 +1,16 @@
 $(document).ready(function() {
-  opinionValidation('rating');
+
+
+
+
+
+
+
+
+
+
+
+  // opinionValidation('rating');
   opinionValidation('review');
 
   sessionValidation('session');
@@ -56,3 +67,51 @@ $(document).ready(function() {
     $('.'+type).form(options);
   }
 });
+
+var validationTypes = {
+  rating: {
+    validation: "empty",
+    prompt: "Please select a rating"
+  },
+  rating: {
+    validation: "empty",
+    prompt: "Please write a review"
+  },
+}
+
+var validators = {
+  empty: function(input) {
+    return input.length > 0
+  },
+
+  email: {
+    prompt: "Please enter a valid email",
+    validate: function(input) {
+      var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      return re.test(email);
+    }
+  }
+}
+
+function FormValidator(className, input) {
+  this.validationKey = validationTypes[className.split("-")[0]];
+  this.input = input;
+}
+
+FormValidator.prototype.validateForm = function() {
+  var prompt = this.validationKey.prompt;
+  var errorList = "<ul class='error-list'>"
+  var validator = validators[this.validationKey.validation];
+
+  if (validator($(this.input[0]).val())) {
+    return true;
+  } else {
+    return errorList +"<li>"+ prompt +"</li>" + "</ul>";
+  }
+}
+
+
+
+
+
+

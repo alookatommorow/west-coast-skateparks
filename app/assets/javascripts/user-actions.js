@@ -13,8 +13,18 @@ $(document).ready(function() {
 
   $("[data-ajax-container]").on("submit", "[data-ajax-form]", function (event) {
     event.preventDefault();
-    ajaxPost(this, renderFormResponse);
-    resetForm(this)
+
+    var className = this.className
+    var formInput = $(this).find("input.validate");
+    var validation = new FormValidator(className, formInput).validateForm();
+
+    if (validation === true) {
+      ajaxPost(this, renderFormResponse);
+      resetForm(this);
+    } else {
+      $(this).find(".error.message").html(validation).show();
+    }
+
   });
 
   $("[data-ajax-container]").on("click", "[data-ajax-weather]", function (event) {
@@ -80,6 +90,7 @@ $(document).ready(function() {
 
   function resetForm(form) {
     if ($(form).children(".dropdown").length > 0) {
+      $(form).find("input.validate").removeAttr("value");
       $(".dropdown .text").text("Select Rating...").addClass("default");
     } else {
       form.reset();
