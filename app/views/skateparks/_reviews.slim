@@ -6,7 +6,7 @@
           = hidden_field_tag :user_id, current_user.id
           = hidden_field_tag :skatepark_id, skatepark.id
           .selection.dropdown.field
-            = hidden_field_tag :rating, nil, class: "validate empty"
+            = hidden_field_tag :rating, nil, class: "validate"
             i.dropdown.icon
             .default.text Select Rating...
             .menu
@@ -26,7 +26,7 @@
           = hidden_field_tag :user_id, current_user.id
           = hidden_field_tag :skatepark_id, skatepark.id
           .field
-            = text_area_tag :review, nil, placeholder: 'Write review here...', class: ""
+            = text_area_tag :review, nil, placeholder: 'Write review here...', class: "validate"
           = submit_tag 'Review', class: "basic-button"
           .error.message
   .rating-reviews

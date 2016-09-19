@@ -14,6 +14,25 @@ form textarea {
   font-size: 1em;
   line-height: 1.2857;
   resize: vertical;
+
+  &.error {
+    background: #fff6f6;
+    border-color: #e0b4b4;
+    color: #9f3a38;
+
+    ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+      color: #9f3a38;
+    }
+    ::-moz-placeholder { /* Firefox 19+ */
+      color: #9f3a38;
+    }
+    :-ms-input-placeholder { /* IE 10+ */
+      color: #9f3a38;
+    }
+    :-moz-placeholder { /* Firefox 18- */
+      color: #9f3a38;
+    }
+  }
 }
 
 form textarea:not([rows]) {
@@ -33,4 +52,6 @@ textarea:focus {
 
 .field {
   margin: 0em 0em 1em;
+
+
 }

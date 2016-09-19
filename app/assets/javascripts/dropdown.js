@@ -14,6 +14,7 @@ $(document).ready(function() {
 
     var selectedVal = $(this).data("value");
 
+    $(this).parent().parent().removeClass("error");
     $(this).parent().siblings("input").val(selectedVal);
     $(this).parent().siblings(".text").removeClass("default").text(selectedVal);
     hideDropdownMenu();

@@ -13,18 +13,14 @@ $(document).ready(function() {
 
   $("[data-ajax-container]").on("submit", "[data-ajax-form]", function (event) {
     event.preventDefault();
+    event.stopPropagation();
 
-    var className = this.className
-    var formInput = $(this).find("input.validate");
-    var validation = new FormValidator(className, formInput).validateForm();
+    var validation = new FormValidator(this).validateForm();
 
-    if (validation === true) {
+    if (validation) {
       ajaxPost(this, renderFormResponse);
       resetForm(this);
-    } else {
-      $(this).find(".error.message").html(validation).show();
     }
-
   });
 
   $("[data-ajax-container]").on("click", "[data-ajax-weather]", function (event) {

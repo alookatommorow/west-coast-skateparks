@@ -1,17 +1,12 @@
 $(document).ready(function() {
 
-
-
-
-
-
-
-
-
-
-
-  // opinionValidation('rating');
-  opinionValidation('review');
+  $("textarea.validate").focus(function() {
+    event.stopPropagation();
+    console.log("event firing");
+    if ($(this).hasClass("error")) {
+      $(this).removeClass("error");
+    }
+  })
 
   sessionValidation('session');
   sessionValidation('user');
@@ -71,17 +66,21 @@ $(document).ready(function() {
 var validationTypes = {
   rating: {
     validation: "empty",
-    prompt: "Please select a rating"
+    prompt: "Please select a rating",
+    input: "input",
+    counterpart: ".selection.dropdown"
   },
-  rating: {
+  review: {
     validation: "empty",
-    prompt: "Please write a review"
+    prompt: "Please write a review",
+    counterpart: "textarea",
+    input: "textarea",
   },
 }
 
 var validators = {
   empty: function(input) {
-    return input.length > 0
+    return input.length > 0;
   },
 
   email: {
@@ -93,20 +92,28 @@ var validators = {
   }
 }
 
-function FormValidator(className, input) {
-  this.validationKey = validationTypes[className.split("-")[0]];
-  this.input = input;
+function FormValidator(form) {
+  this.form = form;
+  this.validationKey = validationTypes[form.className.split("-")[0]];
+  this.errors = [];
+
+
 }
 
 FormValidator.prototype.validateForm = function() {
   var prompt = this.validationKey.prompt;
-  var errorList = "<ul class='error-list'>"
+  var input = $(this.form).find(this.validationKey.input + ".validate");
+  var errorList = "<ul class='error-list'>";
   var validator = validators[this.validationKey.validation];
+  var counterpart = this.validationKey.counterpart;
 
-  if (validator($(this.input[0]).val())) {
+  if (validator($(input[0]).val())) {
+    $(".error.message").hide();
     return true;
   } else {
-    return errorList +"<li>"+ prompt +"</li>" + "</ul>";
+    errorList += "<li>"+ prompt +"</li>" + "</ul>";
+    $(this.form).find(counterpart).addClass("error");
+    $(this.form).find(".error.message").html(errorList).show();
   }
 }
 
