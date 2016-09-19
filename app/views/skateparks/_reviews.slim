@@ -40,21 +40,21 @@
         - num_empty_stars(skatepark.average_rating).times do
           i.large.star.icon.shaded
       - else
-        = link_to new_session_path, class: "ui button" do
+        = link_to new_session_path, class: "basic-button" do
           h4 Sign in and be the first to rate!
-    .ui.comments.reviews data-reviews-display=true
+    .comments.reviews data-reviews-display=true
       - if skatepark.reviews?
         h4 Reviews
         - skatepark.reviews.each do |review|
           .comment
-            a.avatar
+            .avatar
               img src="#{review.user.avatar.url(:thumb)}"
             .content
-              .author.inline-block= review.user.display_name
-              .metadata.inline-block
-                .date.inline-block= review.created_at.strftime("%m/%d/%y")
+              .author= review.user.display_name
+              .metadata
+                .date= review.created_at.strftime("%m/%d/%y")
               .text= review.review
       - else
-        = link_to new_session_path, class: "ui button" do
+        = link_to new_session_path, class: "basic-button" do
           h4 Sign in and be the first to review!
 

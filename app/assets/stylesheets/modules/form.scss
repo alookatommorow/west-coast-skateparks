@@ -21,6 +21,10 @@ form textarea:not([rows]) {
   height: 12em;
   min-height: 8em;
   max-height: 24em;
+
+  @media #{$mobile} {
+    max-width: 100%;
+  }
 }
 
 textarea:focus {
