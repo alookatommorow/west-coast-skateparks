@@ -1,0 +1,78 @@
+.comments {
+  margin: 1.5em 0em;
+  max-width: 650px;
+
+  .comment {
+    position: relative;
+    background: none;
+    margin: 0.5em 0em 0em;
+    padding: 0.5em 0em 0em;
+    border: none;
+    border-top: none;
+    line-height: 1.2;
+
+    .avatar {
+      display: block;
+      width: 2.5em;
+      height: auto;
+      float: left;
+      margin: 0.2em 0em 0em;
+
+      img {
+        display: block;
+        margin: 0em auto;
+        width: 100%;
+        height: 100%;
+        border-radius: 0.25rem;
+      }
+    }
+
+    .avatar ~ .content {
+      margin-left: 3.5em;
+    }
+
+    .content {
+      display: block;
+
+      .author {
+        font-size: 1em;
+        color: rgba(0, 0, 0, 0.87);
+        font-weight: bold;
+        display: inline-block;
+      }
+
+      .metadata {
+        display: inline-block;
+        margin-left: 0.5em;
+        color: rgba(0, 0, 0, 0.4);
+        font-size: 0.875em;
+
+        &:last-child {
+          margin-right: 0em;
+        }
+      }
+
+      .metadata > * {
+        display: inline-block;
+        margin: 0em 0.5em 0em 0em;
+      }
+
+      .text {
+        margin: 0.25em 0em 0.5em;
+        font-size: 1em;
+        word-wrap: break-word;
+        color: rgba(0, 0, 0, 0.87);
+        line-height: 1.3;
+      }
+    }
+  }
+
+  @media #{$mobile} {
+    max-width: 285px;
+  }
+}
+
+.comments:last-child {
+    margin-bottom: 0em;
+}
+
