@@ -19,12 +19,13 @@ $(document).ready(function() {
     hideDropdownMenu();
   });
 
+
   function toggleDropdown() {
     if ($dropdown.hasClass("active")) {
       $dropdown.children(".menu").slideToggle(200, function() {
         $dropdown.removeClass("active upward");
+        unbindDropdownCloseListener();
       });
-      unbindDropdownCloseListener();
     } else {
       var distanceToBottom = $(window).scrollTop() + $(window).height() - $dropdown.offset().top;
       var classString = distanceToBottom < 273 ? "active upward" : "active";

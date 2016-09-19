@@ -80,7 +80,7 @@ $(document).ready(function() {
 
   function resetForm(form) {
     if ($(form).children(".dropdown").length > 0) {
-      $(".text").text("Select Rating...").addClass("default");
+      $(".dropdown .text").text("Select Rating...").addClass("default");
     } else {
       form.reset();
     }
