@@ -1,24 +1,30 @@
 $(document).ready(function() {
-  $('.ui.dropdown').dropdown(); // dropdown on rate form
 
   $("[data-ajax-container]").on("submit", "[data-ajax-button]", function (event) {
+    event.preventDefault();
+
     if ($("[data-signed-in]").length > 0) {
-      ajaxPost(this, renderButtonResponse);
+      ajaxPostWithLoader(this, renderButtonResponse);
     } else {
       sweetAlert();
     }
-
-    event.preventDefault();
   });
 
+
   $("[data-ajax-container]").on("submit", "[data-ajax-form]", function (event) {
-    ajaxPost(this, renderFormResponse);
     event.preventDefault();
-    resetForm(this);
+
+    var validation = new FormValidator(this).validateForm();
+
+    if (validation) {
+      ajaxPost(this, renderFormResponse);
+      resetForm(this);
+    }
   });
 
   $("[data-ajax-container]").on("click", "[data-ajax-weather]", function (event) {
     event.preventDefault();
+
     $.ajax({
       url: this.href,
       data: {
@@ -58,6 +64,11 @@ $(document).ready(function() {
   }
 
   function ajaxPost(form, callback) {
+    $.post(form.action, $(form).serialize())
+      .success(callback.bind(form));
+  }
+
+  function ajaxPostWithLoader(form, callback) {
     $.ajax({
       url: form.action,
       method: "POST",
@@ -75,7 +86,8 @@ $(document).ready(function() {
 
   function resetForm(form) {
     if ($(form).children(".dropdown").length > 0) {
-      $(form).children(".dropdown").dropdown("restore defaults");
+      $(form).find("input.validate").removeAttr("value");
+      $(".dropdown .text").text("Select Rating...").addClass("default");
     } else {
       form.reset();
     }

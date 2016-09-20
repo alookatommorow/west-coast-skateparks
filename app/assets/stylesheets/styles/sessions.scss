@@ -1,20 +1,19 @@
-.form-container {
+.session-container {
   height: 100%;
 
-  &#sign-in-container {
+  &.sign-in {
     background: url("https://storage.googleapis.com/west-coast-skateparks/headers/burndog-bw.jpg") center center no-repeat;
     background-attachment: fixed;
     background-size: cover;
   }
 
-  &#sign-up-container {
+  &.sign-up {
     background: url("https://storage.googleapis.com/west-coast-skateparks/headers/marginal-bw.jpg") center center no-repeat;
     background-attachment: fixed;
     background-size: cover;
   }
 
-  .sign-in-form,
-  .sign-up-form {
+  .session-form-container {
     padding: 30px;
     width: 500px;
     margin: 30px auto;

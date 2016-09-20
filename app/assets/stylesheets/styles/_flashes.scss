@@ -1,4 +1,6 @@
-#flashes {
+.flashes {
+  display: block;
+  visibility: hidden;
   position: absolute;
   top: 50px;
   right: 0;
@@ -8,4 +10,8 @@
   padding-right: 40px;
   z-index: 999420999;
   opacity: 0.8;
+
+  &.visible {
+    visibility: visible;
+  }
 }

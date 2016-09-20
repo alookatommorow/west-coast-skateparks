@@ -1,15 +1,15 @@
-.form-container#sign-in-container
+.session-container.sign-in
   .ui.dimmer
     .ui.loader
-  .sign-in-form.ui.form
-    = form_for :session, url: sessions_path, html: { class: "ui form session" } do |f|
+  .session-form-container
+    = form_for :session, url: sessions_path, html: { class: "auth-form" } do |f|
       .field
-        = f.text_field :username, placeholder: 'Username'
+        = f.text_field :username, placeholder: 'Username', class: "validate username"
       .field
-        = f.password_field :password, placeholder: 'Password'
-      = f.submit 'Sign In', class: 'ui button sign-in-button'
-      .ui.error.message
-    .ui.horizontal.divider Or
+        = f.password_field :password, placeholder: 'Password', class: "validate password"
+      = f.submit 'Sign In', class: 'basic-button sign-in-button'
+      .error.message
+    .horizontal.divider Or
     button#fb-login.ui.labeled.icon.primary.button.social-login
       '
       i.facebook.square.icon

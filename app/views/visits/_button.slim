@@ -4,12 +4,12 @@
   = form_for [skatepark, visit],
     method: :delete,
     data: { ajax_button: true } do
-      button.ui.button
+    button.basic-button
         i.red.remove.icon.inline-block
         p.inline-block Never Been Here
 - else
   = form_for [skatepark, Visit.new],
     data: { ajax_button: true } do
-      button.ui.button
+    button.basic-button
         i.green.checkmark.icon.inline-block
         p.inline-block Been Here

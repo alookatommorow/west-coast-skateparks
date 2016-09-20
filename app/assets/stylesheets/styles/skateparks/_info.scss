@@ -3,15 +3,20 @@
   width: 65%;
   margin: 0 auto;
 
-  .item.skatepark-info-attribute {
+  .skatepark-info-attribute {
     font-size: 14px;
 
-    .ui.grid {
-      margin: 0;
+    .attribute-column, .value-column {
+      padding: 1rem;
+    }
 
-      .twelve.wide {
-        color: gray;
-      }
+    .attribute-column {
+      float: left;
+      width: 150px;
+    }
+
+    .value-column {
+      color: gray;
     }
   }
 

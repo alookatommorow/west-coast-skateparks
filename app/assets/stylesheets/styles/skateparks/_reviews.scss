@@ -7,13 +7,13 @@
     width: 500px;
     float: right;
 
-    .ui.button {
+    .basic-button {
       background-color: $blue;
       border-radius: 0;
       color: white;
     }
 
-    .rating-form-container .button {
+    .rating-form-container .basic-button {
       margin-left: 20px;
     }
   }
@@ -37,7 +37,7 @@
       font-size: 16px;
     }
 
-    .button {
+    .basic-button {
       border-radius: 0;
       color: white;
       background-color: $blue;

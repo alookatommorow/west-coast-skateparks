@@ -13,15 +13,15 @@
         p
           | #{rating_phrase[skatepark.rating.to_i][0]}
           span  #{rating_phrase[skatepark.rating.to_i][1]}
-    .ui.divider
+    .divider
     .weather data-ajax-container=true
       .weather-loading-container
         .loading-icon
       = link_to skatepark_weather_path(skatepark.id), data: { ajax_weather: true, latitude: "#{skatepark.latitude}", longitude: "#{skatepark.longitude}" } do
-        button.ui.button
+        button.basic-button
           div Local Weather
           img src="http://icons-ak.wxug.com/i/c/k/partlycloudy.gif"
-    .ui.divider
+    .divider
     #user-actions
       .visit.button-container data-ajax-container=true
         = render "visits/button",
@@ -29,7 +29,7 @@
       .favorite.button-container data-ajax-container=true
         = render "favorites/button",
           favorite: @favorite, user: current_user, skatepark: @skatepark
-  .ui.divider
+  .divider
   .address-container
     .address
       a href="https://maps.google.com/maps?saddr='Current Location'&daddr=#{skatepark.formatted_address}" target="_blank"
@@ -37,7 +37,7 @@
           i.marker.icon
           | #{skatepark.formatted_address}
         div.get-directions Get Directions
-  .ui.divider
+  .divider
   .links-container
     .links
       a#info-link.selected href="#" data-dashboard-link="#skatepark-photos"

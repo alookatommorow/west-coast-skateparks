@@ -2,11 +2,11 @@
   - if logged_in?
     .opinions-container data-ajax-container=true
       .rating-form-container
-        = form_tag ratings_path, class: "ui form rating-form", data: { ajax_form: "[data-rating-display]" } do
+        = form_tag ratings_path, class: "rating-form", data: { ajax_form: "[data-rating-display]" } do
           = hidden_field_tag :user_id, current_user.id
           = hidden_field_tag :skatepark_id, skatepark.id
-          .ui.selection.dropdown.field
-            = hidden_field_tag :rating, nil
+          .selection.dropdown.field
+            = hidden_field_tag :rating, nil, class: "validate rating"
             i.dropdown.icon
             .default.text Select Rating...
             .menu
@@ -19,16 +19,16 @@
               .item data-value="4" 4
               .item data-value="4.5" 4.5
               .item data-value="5" 5
-          = submit_tag "Rate", class: 'ui button'
-          .ui.error.message
+          = submit_tag "Rate", class: 'basic-button'
+          .error.message
       .review-form-container
-        = form_tag reviews_path, class: "ui form review-form", data: { ajax_form: "[data-reviews-display]" } do
+        = form_tag reviews_path, class: "review-form", data: { ajax_form: "[data-reviews-display]" } do
           = hidden_field_tag :user_id, current_user.id
           = hidden_field_tag :skatepark_id, skatepark.id
           .field
-            = text_area_tag :review, nil, placeholder: 'Write review here...', class: ""
-          = submit_tag 'Review', class: "ui button"
-          .ui.error.message
+            = text_area_tag :review, nil, placeholder: 'Write review here...', class: "validate review"
+          = submit_tag 'Review', class: "basic-button"
+          .error.message
   .rating-reviews
     .user-rating data-rating-display=true
       - if skatepark.average_rating
@@ -40,21 +40,21 @@
         - num_empty_stars(skatepark.average_rating).times do
           i.large.star.icon.shaded
       - else
-        = link_to new_session_path, class: "ui button" do
+        = link_to new_session_path, class: "basic-button" do
           h4 Sign in and be the first to rate!
-    .ui.comments.reviews data-reviews-display=true
+    .comments.reviews data-reviews-display=true
       - if skatepark.reviews?
         h4 Reviews
         - skatepark.reviews.each do |review|
           .comment
-            a.avatar
+            .avatar
               img src="#{review.user.avatar.url(:thumb)}"
             .content
-              .author.inline-block= review.user.display_name
-              .metadata.inline-block
-                .date.inline-block= review.created_at.strftime("%m/%d/%y")
+              .author= review.user.display_name
+              .metadata
+                .date= review.created_at.strftime("%m/%d/%y")
               .text= review.review
       - else
-        = link_to new_session_path, class: "ui button" do
+        = link_to new_session_path, class: "basic-button" do
           h4 Sign in and be the first to review!
 

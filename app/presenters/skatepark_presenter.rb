@@ -1,4 +1,5 @@
 class SkateparkPresenter < SimpleDelegator
+
   def attributes
     present_attributes.slice('info', 'hours')
     .merge(titleized_attributes)
@@ -38,7 +39,13 @@ class SkateparkPresenter < SimpleDelegator
     end
 
     def titleized_attributes
-      to_titleize.tap { |attrs| attrs.each { |k, v| attrs[k] = v.titleize if v } }
+      to_titleize.tap { |attrs| attrs.each { |k, v|
+          if k == 'size'
+            v << ' sq ft'
+          elsif v
+            attrs[k] = v.titleize
+          end
+      } }
     end
 
     def to_titleize
