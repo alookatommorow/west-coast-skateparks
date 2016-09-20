@@ -2,14 +2,21 @@
   - if logged_in?
     div data-signed-in=true
   .stars
-    .stars-container
+    .rating-container
       - if skatepark.rating
-        - num_stars(skatepark.rating).times do
-          i.large.star.icon
-        - num_half_stars(skatepark.rating).times do
-          i.large.star.half.empty.icon
-        - num_empty_stars(skatepark.rating).times do
-          i.large.star.icon.shaded
+        .stars-container
+          - num_stars(skatepark.rating).times do
+            span.fa-stack.fa-2x
+              i.fa.fa-star.fa-stack-1x
+              i.fa.fa-star.fa-stack-1x
+          - num_half_stars(skatepark.rating).times do
+            span.fa-stack.fa-2x
+              i.fa.fa-star.fa-stack-1x.bg-star
+              i.fa.fa-star-half-o.fa-stack-1x
+          - num_empty_stars(skatepark.rating).times do
+            span.fa-stack.fa-2x
+              i.fa.fa-star.fa-stack-1x.bg-star
+              i.fa.fa-star-o.fa-stack-1x
         p
           | #{rating_phrase[skatepark.rating.to_i][0]}
           span  #{rating_phrase[skatepark.rating.to_i][1]}
