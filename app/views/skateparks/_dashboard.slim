@@ -41,21 +41,21 @@
     .address
       a href="https://maps.google.com/maps?saddr='Current Location'&daddr=#{skatepark.formatted_address}" target="_blank"
         div
-          i.marker.icon
+          i.fa.fa-map-marker.fa-2x.fa-fw
           | #{skatepark.formatted_address}
         div.get-directions Get Directions
   .divider
   .links-container
     .links
       a#info-link.selected href="#" data-dashboard-link="#skatepark-photos"
-        i.photo.icon
+        i.fa.fa-camera-retro.fa-4x
         span Photos
       a#info-link href="#" data-dashboard-link="#skatepark-info"
-        i.info.circle.icon
+        i.fa.fa-info.fa-4x
         span Info
       a#map-link href="" data-dashboard-link="#skatepark-map"
-        i.compass.icon
+        i.fa.fa-map-marker.fa-4x
         span Map
       a#reviews-link href="#" data-dashboard-link="#skatepark-reviews"
-        i.write.square.icon
+        i.fa.fa-comments.fa-4x
         span Rate
