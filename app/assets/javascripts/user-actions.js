@@ -1,19 +1,18 @@
 $(document).ready(function() {
 
   $("[data-ajax-container]").on("submit", "[data-ajax-button]", function (event) {
+    event.preventDefault();
+
     if ($("[data-signed-in]").length > 0) {
       ajaxPostWithLoader(this, renderButtonResponse);
     } else {
       sweetAlert();
     }
-
-    event.preventDefault();
   });
 
 
   $("[data-ajax-container]").on("submit", "[data-ajax-form]", function (event) {
     event.preventDefault();
-    event.stopPropagation();
 
     var validation = new FormValidator(this).validateForm();
 
@@ -25,6 +24,7 @@ $(document).ready(function() {
 
   $("[data-ajax-container]").on("click", "[data-ajax-weather]", function (event) {
     event.preventDefault();
+
     $.ajax({
       url: this.href,
       data: {
