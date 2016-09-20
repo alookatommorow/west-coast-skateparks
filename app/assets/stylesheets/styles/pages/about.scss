@@ -3,6 +3,10 @@
   justify-content: space-around;
   padding: 0 25px;
 
+  p {
+    margin-top: 1%;
+  }
+
   .category {
     margin-top: 0;
     text-align: center;
@@ -16,6 +20,10 @@
   .rating-system {
     flex: 1;
     margin-left: 10px;
+
+    i {
+      color: $orange;
+    }
   }
 
   @media #{$mobile} {

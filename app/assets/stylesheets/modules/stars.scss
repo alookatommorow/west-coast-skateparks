@@ -1,0 +1,11 @@
+.stars-container {
+
+  i {
+    color: $orange;
+    margin-left: 10px;
+
+    &:first-child {
+      margin: 0;
+    }
+  }
+}

@@ -7,33 +7,6 @@
     align-items: center;
     justify-content: space-between;
 
-    .stars-container {
-
-      span {
-        margin-left: 10px;
-
-        &:first-child {
-          margin: 0;
-        }
-      }
-
-      span.fa-stack {
-        width: 1em;
-        line-height: 1em;
-        height: 1em;
-      }
-
-      i {
-        color: $orange;
-
-        &.bg-star {
-          color: $blue;
-        }
-      }
-
-
-    }
-
     p {
       font-size: 18px;
       font-weight: bold;
