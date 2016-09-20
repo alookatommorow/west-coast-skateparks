@@ -34,7 +34,7 @@
       justify-content: space-around;
       margin-top: 15px;
 
-      .ui.button {
+      .basic-button {
         border-radius: 0;
         background-color: $blue;
         color: white;
@@ -63,7 +63,7 @@
       width: 48%;
     }
 
-    .ui.selection.list .item {
+    .selection.list .item {
       padding-left: 10px;
       border-radius: 0;
       display: flex;
@@ -119,7 +119,7 @@
       margin: 0 auto;
       width: 65%;
 
-      .ui.card {
+      .card {
         border-radius: 0;
         margin: 0 auto;
       }
@@ -141,11 +141,11 @@
   float: left;
   width: 20%;
 
-  .ui.card, .ui.card img {
+  .card, .card img {
     border-radius: 0;
   }
 
-  .ui.card {
+  .card {
     p.name,
     p.date {
       margin-bottom: 0;
@@ -159,7 +159,7 @@
   .edit-button {
     margin: 10px auto;
 
-    .button {
+    .basic-button {
       background-color: $blue;
       color: white;
       margin: 0 auto;

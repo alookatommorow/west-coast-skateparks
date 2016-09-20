@@ -1,4 +1,4 @@
-.ui.card
+.card
   .image
     = image_tag @user.avatar.url
   .content
@@ -17,4 +17,4 @@
       i.write.icon
       p.inline-block= @user.reviews.count
   .edit-button
-    = link_to "Edit Info", edit_user_path(@user), class: "ui button"
+    = link_to "Edit Info", edit_user_path(@user), class: "basic-button"
