@@ -13,13 +13,13 @@ var validationTypes = {
   rating: {
     prompt: "Please select a rating",
     counterpart: ".selection.dropdown",
-    validator: "empty",
+    validator: "empty"
   },
 
   review: {
     prompt: "Please write a review",
     counterpart: "textarea",
-    validator: "empty",
+    validator: "empty"
   },
 
   email: {
@@ -31,7 +31,7 @@ var validationTypes = {
   password: {
     prompt: 'Password must be at least 6 characters',
     counterpart: "[placeholder='Password']",
-    validator: "length",
+    validator: "length"
   },
 
   username: {
