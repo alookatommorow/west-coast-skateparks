@@ -34,6 +34,14 @@
     padding-top: 0em;
   }
 
+  &.divided .item {
+    border-top: 1px solid rgba(34, 36, 38, 0.15);
+
+    &:first-child {
+      border-top: none;
+    }
+  }
+
   &.selection {
 
     .item {
