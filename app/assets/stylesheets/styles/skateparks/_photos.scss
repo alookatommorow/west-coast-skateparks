@@ -6,7 +6,7 @@
     height: 720px;
     position: relative;
 
-    i.icon {
+    i {
       color: $blue;
       position: absolute;
       top: 50%;
@@ -62,7 +62,7 @@
     @media #{$tablet} {
       height: 620px;
 
-      i.icon {
+      i {
         font-size: 35px;
         line-height: 35px;
 
@@ -77,7 +77,6 @@
 
       .carousel-image-container {
         height: 620px;
-        width: 90%;
 
         .skatepark-show-image img {
           max-height: 600px;
@@ -88,7 +87,7 @@
     @media #{$mobile} {
       height: 340px;
 
-      i.icon {
+      i {
         font-size: 30px;
         line-height: 30px;
 
@@ -98,6 +97,10 @@
 
         &.next {
           right: 0;
+        }
+
+        &:hover {
+          color: $blue;
         }
       }
 

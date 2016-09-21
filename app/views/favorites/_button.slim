@@ -5,11 +5,11 @@
     method: :delete,
     data: { ajax_button: true } do
       button.basic-button
-        i.fa.fa-heart-o.fa-fw
+        i.fa.fa-heart-o
         p Unfavorite
 - else
   = form_for [skatepark, Favorite.new],
     data: { ajax_button: true } do
       button.basic-button
-        i.fa.red.fa-heart.fa-fw
+        i.fa.red.fa-heart
         p Favorite

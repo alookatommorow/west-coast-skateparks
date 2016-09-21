@@ -14,8 +14,7 @@ $(document).ready(function(){
 
     $(".active").removeClass("active");
     $(this).addClass("active");
-    $(".state-list").hide();
-    $(".loading-container").show();
+    showLoader();
 
     if ($(".state-label-mobile").css("display") !== "none") {
       $(".show-mobile-menu").show();
@@ -27,6 +26,16 @@ $(document).ready(function(){
     }
   });
 
+  /////// Show skateparks via state header (to leave letter view) ////////
+  $(".parks-container").on("click", "a[data-state-link]", function(event) {
+    event.preventDefault();
+    pageCount = 1;
+    currentStateLink = this.href;
+
+    showLoader();
+    $.get(this.href, renderSkateparks);
+  });
+
 
   /////// Show skatepark by Letter ////////
   $(".parks-container").on("click", "a[data-skatepark-letter-link]", function(event) {
@@ -35,8 +44,7 @@ $(document).ready(function(){
     pageCount = 1;
     currentStateLink = this.href;
 
-    $(".state-list").hide();
-    $(".loading-container").show();
+    showLoader();
     $.get(this.href, renderSkateparks);
   });
 
@@ -45,6 +53,18 @@ $(document).ready(function(){
     $(".state-menu").slideDown();
     $(".show-mobile-menu").hide();
   });
+
+  ////// show skateparks ajax callback //////
+  function renderSkateparks(response) {
+    $(".parks-container").html(response);
+    $("#back-to-top").hide();
+  }
+
+  ////// show loader //////
+  function showLoader() {
+    $(".state-list").hide();
+    $(".loading-container").show();
+  }
 
   ////// infinite scroll //////
   $(window).scroll(infiniteScroll);
@@ -60,11 +80,6 @@ $(document).ready(function(){
         $(window).scroll(infiniteScroll);
       });
     }
-  }
-
-  function renderSkateparks(response) {
-    $(".parks-container").html(response);
-    $("#back-to-top").hide();
   }
 
   function appendSkateparks(response) {
