@@ -34,14 +34,6 @@
     padding-top: 0em;
   }
 
-  &.divided .item {
-    border-top: 1px solid rgba(34, 36, 38, 0.15);
-
-    &:first-child {
-      border-top: none;
-    }
-  }
-
   &.selection {
 
     .item {
@@ -56,6 +48,16 @@
 
       &:hover {
         background: rgba(0,0,0,0.03);
+      }
+    }
+
+    &.divided .item {
+      border-top: 1px solid rgba(34, 36, 38, 0.15);
+      margin: 0em;
+      border-radius: 0em;
+
+      &:first-child {
+        border-top: none;
       }
     }
   }

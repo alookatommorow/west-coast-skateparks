@@ -120,7 +120,7 @@ var SearchResults = React.createClass({
     }
 
     return (
-      <div id="react-search-results" className="ui divided selection list" onKeyDown={this.handleKeyDown} onMouseLeave={this.handleMouseLeave} >
+      <div id="react-search-results" className="divided selection list" onKeyDown={this.handleKeyDown} onMouseLeave={this.handleMouseLeave} >
         {results}
       </div>
     );

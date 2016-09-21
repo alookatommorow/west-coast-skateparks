@@ -4,4 +4,12 @@ $(document).ready(function() {
     $(".react-search-container").animate({width:'toggle'});
     $("#react-search-input").trigger("click").focus();
   });
+
+  $("#react-search-input").focus(function() {
+    $(".react-search-container i").fadeTo(100, 1);
+  });
+
+  $("#react-search-input").focusout(function() {
+    $(".react-search-container i").fadeTo(100, 0.5);
+  });
 });
