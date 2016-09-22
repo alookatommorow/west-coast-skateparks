@@ -1,0 +1,59 @@
+.menu-container.nav-menu {
+  border-radius: 0;
+  margin: 0;
+  background-color: $blue;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 999;
+  min-height: 49px;
+
+  a.item, #burger {
+    color: white;
+    font-weight: bold;
+
+    &:hover {
+      color: $orange;
+      background-color: $dark-blue;
+    }
+  }
+
+  #burger {
+    max-width: max-content;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  #mobile-search {
+    display: none;
+
+    @media #{$mobile} {
+      display: inline;
+    }
+  }
+
+  .item.mobile-nav-item {
+    display: none;
+  }
+
+  input[type=checkbox] {
+    display: none;
+
+    &:checked ~ .item.nav-item {
+      display: block;
+    }
+  }
+
+  @media #{$mobile} {
+    .item.nav-item {
+      display: none;
+    }
+
+    .item.mobile-nav-item {
+      display: block;
+    }
+  }
+}

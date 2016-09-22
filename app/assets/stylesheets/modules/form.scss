@@ -35,13 +35,13 @@ form {
     resize: vertical;
 
     &:not([rows]) {
-      width: 500px;
+      width: 400px;
       height: 12em;
       min-height: 8em;
       max-height: 24em;
 
-      @media #{$mobile} {
-        max-width: 100%;
+      @media #{$tablet} {
+        max-width: 265px;
       }
     }
 

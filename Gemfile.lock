@@ -161,8 +161,6 @@ GEM
       less (~> 2.6.0)
       sprockets (> 2, < 4)
       tilt
-    less-rails-semantic_ui (2.2.3.0)
-      less-rails (>= 2.6.0, < 2.8.0)
     libv8 (3.16.14.15)
     loofah (2.0.3)
       nokogiri (>= 1.5.9)
@@ -362,7 +360,6 @@ DEPENDENCIES
   kaminari
   launchy
   less-rails
-  less-rails-semantic_ui
   paperclip
   pg
   pry-byebug

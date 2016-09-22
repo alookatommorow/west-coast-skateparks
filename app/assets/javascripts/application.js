@@ -14,7 +14,6 @@
 //= require jquery_ujs
 //= require underscore
 //= require gmaps/google
-//= require semantic_ui/semantic_ui
 //= require_tree ../../../vendor/assets/javascripts/.
 //= require react
 //= require react_ujs
