@@ -1,9 +1,9 @@
 function infowindowGenerator(skatepark) {
   var stars = {};
   var starIcons = {
-    wholeStars: "<i class='small star icon'></i>",
-    halfStars: "<i class='small star half empty icon'></i>",
-    emptyStars: "<i class='small star icon shaded'></i>"
+    wholeStars: "<i class='fa fa-star'></i>",
+    halfStars: "<i class='fa fa-star-half-o.'></i>",
+    emptyStars: "<i class='fa fa-star-o'></i>"
   }
 
   this.generateInfowindow = function() {

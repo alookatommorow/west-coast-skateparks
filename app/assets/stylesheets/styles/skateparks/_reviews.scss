@@ -13,8 +13,16 @@
       color: white;
     }
 
-    .rating-form-container .basic-button {
-      margin-left: 20px;
+    .rating-form-container {
+      margin-bottom: 1em;
+
+      .field {
+        margin: 0;
+      }
+
+      .basic-button {
+        margin-left: 20px;
+      }
     }
   }
 
@@ -54,11 +62,17 @@
 
     .opinions-container {
       width: 300px;
-    }
 
-    .reviews {
-      width: 300px;
-      font-size: 16px;
+      .rating-form-container {
+
+        .field {
+          margin-bottom: 1em;
+        }
+
+        .basic-button {
+          margin-left: 0;
+        }
+      }
     }
   }
 

@@ -1,5 +1,6 @@
 .session-container {
   height: 100%;
+  width: 100%;
 
   &.sign-in {
     background: url("https://storage.googleapis.com/west-coast-skateparks/headers/burndog-bw.jpg") center center no-repeat;
@@ -34,25 +35,26 @@
       border-radius: 0;
       width: 350px;
       margin: 8px 0;
-      text-align: left;
       font-size: 20px;
-
-      span {
-        padding-left: 15px;
-      }
-
-      @media #{$mobile} {
-        font-size: 16px;
-        width: 300px;
-
-        span {
-          padding-left: 12px;
-        }
-      }
     }
 
     @media #{$mobile} {
-      width: 95%;
+      width: 280px;
+      padding: 10px;
+      top: 75px;
+
+      .sign-in-button {
+        font-size: 15px;
+      }
+
+      .social-login {
+        font-size: 14px;
+        width: 250px;
+
+        .fa {
+          padding-top: 10px;
+        }
+      }
     }
   }
 
@@ -63,6 +65,10 @@
       color: $blue;
       font-weight: bold;
       font-size: 18px;
+
+      @media #{$mobile} {
+        font-size: 15px;
+      }
     }
   }
 }

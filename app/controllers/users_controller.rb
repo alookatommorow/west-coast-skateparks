@@ -16,10 +16,7 @@ class UsersController < ApplicationController
   end
 
   def edit
-    @user = User.includes(
-      favorite_parks: :location,
-      visited_parks: :location,
-    ).find(params[:id])
+    @user = User.find(params[:id])
   end
 
   def create

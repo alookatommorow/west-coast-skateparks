@@ -5,11 +5,11 @@
     method: :delete,
     data: { ajax_button: true } do
     button.basic-button
-        i.red.remove.icon.inline-block
+        i.fa.fa-remove.red
         p.inline-block Never Been Here
 - else
   = form_for [skatepark, Visit.new],
     data: { ajax_button: true } do
     button.basic-button
-        i.green.checkmark.icon.inline-block
+        i.fa.fa-check.green
         p.inline-block Been Here

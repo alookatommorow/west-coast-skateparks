@@ -1,16 +1,14 @@
 .user-edit-container
-  .user-dashboard
-    = render "profile_card", user: @user
-  .edit-form-container
-    .ui.form
-      = simple_form_for @user do |f|
-        .field
-          label.label for="user_username" Username
-          = f.input_field :username
-        .field
-          label.label for="user_name" Name
-          = f.input_field :name
-        .field
-          label.label for="user_avatar" Picture
-          = f.input_field :avatar
-        = f.submit 'Update', class: "ui button"
+  h1 Edit Your Profile
+  .form
+    = simple_form_for @user do |f|
+      .field
+        label.label for="user_username" Username
+        = f.input_field :username
+      .field
+        label.label for="user_name" Name
+        = f.input_field :name
+      .field
+        label.label for="user_avatar" Picture
+        = f.input_field :avatar
+      = f.submit 'Update', class: "basic-button"

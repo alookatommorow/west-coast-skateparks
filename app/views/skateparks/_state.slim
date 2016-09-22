@@ -1,11 +1,12 @@
 .show-mobile-menu
   .arrow-icon-left
-    i.arrow.down.icon
+    i.fa.fa-toggle-down
   .show-menu-text Show Menu
   .arrow-icon-right
-    i.arrow.down.icon
+    i.fa.fa-toggle-down
 .states-header
-  p= state.titleize
+  = link_to skateparks_state_path(state: state, page: 1), data: { state_link: state }, class: 'state-button' do
+    p= state.titleize
 .letter-links
   - ("A".."Z").each do |letter|
     = link_to letter,

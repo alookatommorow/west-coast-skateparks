@@ -1,5 +1,5 @@
 <%= render partial: "header" %>
-<div class="ui divided selection list posts-index-container">
+<div class="divided selection list posts-index-container">
   <!-- List of posts -->
   <% @sorted_posts.each do |post| %>
     <%= link_to buttercms_post_path(post.slug), class: "item" do %>

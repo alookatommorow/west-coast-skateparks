@@ -1,6 +1,6 @@
 .session-container.sign-in
-  .ui.dimmer
-    .ui.loader
+  .dimmer
+    .loading-icon
   .session-form-container
     = form_for :session, url: sessions_path, html: { class: "auth-form" } do |f|
       .field
@@ -10,13 +10,13 @@
       = f.submit 'Sign In', class: 'basic-button sign-in-button'
       .error.message
     .horizontal.divider Or
-    button#fb-login.ui.labeled.icon.primary.button.social-login
+    button#fb-login.basic-button.labeled.icon.primary.social-login
       '
-      i.facebook.square.icon
+      i.fa.fa-facebook-square
       span.social-login Login with Facebook
-    button#goog-login.ui.red.labeled.icon.button.social-login
+    button#goog-login.basic-button.red.labeled.icon.social-login
       '
-      i.google.plus.square.icon
+      i.fa.fa-google-plus-square
       span Login with Google
 
     p.sign-up-link= link_to "Don't have a WCS account? Sign up", new_user_path

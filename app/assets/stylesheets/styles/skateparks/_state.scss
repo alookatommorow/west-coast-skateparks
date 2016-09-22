@@ -32,7 +32,7 @@
       display: inline-block;
     }
 
-    .icon {
+    i {
       margin: 0;
     }
 
@@ -51,11 +51,13 @@
 
   .states-header {
     background-color: $orange;
-    color: $blue;
     text-align: center;
     font-family: 'Dirty-Bakers-Dozen', sans-serif;
     font-size: 2em;
     margin-bottom: 1%;
+    a {
+      color: $blue;
+    }
   }
 
   .loading-container {

@@ -1,24 +1,23 @@
 .user-edit-container {
-  padding: 0 30px 30px 30px;
+  h1 {
+    text-align: center;
+    color: $blue;
+  }
 
-  .edit-form-container {
-    width: 80%;
-    float: right;
+  .form {
+    width: 75%;
+    margin: 0 auto;
 
-    .ui.form {
-      width: 80%;
+    input {
+      margin-top: 10px;
+    }
+
+    .basic-button {
       margin: 0 auto;
-
-      input {
-        margin-top: 10px;
-      }
-
-      .button {
-        background-color: $blue;
-        color: white;
-        border-radius: 0;
-        width: 100%;
-      }
+      background-color: $blue;
+      color: white;
+      border-radius: 0;
+      width: 100%;
     }
   }
 }

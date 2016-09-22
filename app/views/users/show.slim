@@ -5,15 +5,15 @@
     #map.user-map
     .user-map-buttons
       #toggle-favorite-container.hidden
-        #toggle-favorite.ui.button Hide Favorites
+        #toggle-favorite.basic-button Hide Favorites
       #toggle-visited-container.hidden
-        #toggle-visited.ui.button Hide Visited
+        #toggle-visited.basic-button Hide Visited
       #toggle-both-container.hidden
-        #toggle-both.ui.button Hide THRASHED
+        #toggle-both.basic-button Hide THRASHED
   .favorites-visits
     .favorites
       h4 Favorites
-      .ui.divided.selection.list
+      .divided.selection.list
         - @user.favorite_parks.each do |park|
           = link_to park, class: "item" do
             .link-section
@@ -24,7 +24,7 @@
               = image_tag("#{park.hero}")
     .visits
       h4 Visits
-      .ui.divided.selection.list
+      .divided.selection.list
         - @user.visited_parks.each do |park|
           = link_to park, class: "item" do
             .link-section

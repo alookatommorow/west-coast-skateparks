@@ -1,4 +1,4 @@
-.ui.card
+.card
   .image
     = image_tag @user.avatar.url
   .content
@@ -8,13 +8,13 @@
       p.date Joined #{@user.created_at.strftime("%Y")}
   .extra.content
     .user-stat
-      i.heart.icon
+      i.fa.fa-heart
       p.inline-block= @user.favorites.count
     .user-stat
-      i.checkmark.icon
+      i.fa.fa-check
       p.inline-block= @user.visits.count
     .user-stat
-      i.write.icon
+      i.fa.fa-comments
       p.inline-block= @user.reviews.count
   .edit-button
-    = link_to "Edit Info", edit_user_path(@user), class: "ui button"
+    = link_to "Edit Info", edit_user_path(@user), class: "basic-button"

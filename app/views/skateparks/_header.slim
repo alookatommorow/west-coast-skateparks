@@ -4,7 +4,7 @@ header.skatepark-show-header style="background-image: linear-gradient( rgba(0, 0
     h3 #{skatepark.city.titleize}, #{skatepark.state.capitalize}
   .header-skatepark-arrows
     = link_to skatepark_path(skatepark.previous_park), class: "left-arrow" do
-      i.angle.left.icon
+      i.fa.fa-angle-left
     = link_to skatepark_path(skatepark.next_park), class: "right-arrow" do
-      i.angle.right.icon
+      i.fa.fa-angle-right
 

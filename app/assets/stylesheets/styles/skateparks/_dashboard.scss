@@ -7,14 +7,6 @@
     align-items: center;
     justify-content: space-between;
 
-    i.star {
-      color: $orange;
-
-      &.shaded {
-        color: $dark-blue;
-      }
-    }
-
     p {
       font-size: 18px;
       font-weight: bold;
