@@ -73,6 +73,10 @@
         a {
           color: black;
         }
+
+        &.active:not(.no-results) {
+          background-color: $gray;
+        }
       }
 
       @media #{$mobile} {
