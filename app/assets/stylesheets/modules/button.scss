@@ -23,8 +23,6 @@
     background-color: #cacbcd;
   }
 
-
-
   &.primary {
     background-color: #2185d0;
     color: #ffffff;
@@ -49,10 +47,11 @@
 
   &.labeled.icon {
     position: relative;
-    padding-left: 4.07142857em;
     padding-right: 1.5em;
+    padding-left: 4.07142857em;
+    text-align: left;
 
-    .icon {
+    .fa {
       top: 0em;
       left: 0em;
       padding-top: 15px;
@@ -66,6 +65,7 @@
       background-color: rgba(0,0,0,0.05);
       color: '';
       box-shadow: -1px 0px 0px 0px transparent inset;
+      box-sizing: border-box;
 
       &:after {
         display: block;
