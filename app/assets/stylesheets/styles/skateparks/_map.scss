@@ -15,16 +15,16 @@
         height: 50%;
         text-align: center;
 
+        a {
+          color: $blue;
+        }
+
         img {
           height: 50px;
         }
 
-        i.star {
+        i.fa {
           color: $orange;
-
-          &.shaded {
-            color: $dark-blue;
-          }
         }
       }
     }
@@ -43,7 +43,7 @@
     top: 20px;
     right: 100px;
 
-    .button {
+    .basic-button {
       font-size: 15px;
       background-color: $blue;
       color: white;
