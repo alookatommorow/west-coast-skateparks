@@ -25,7 +25,7 @@ $(document).ready(function () {
   });
 
   function hideSessionForm() {
-    $(".ui.dimmer").addClass("active");
+    $(".dimmer").addClass("active");
     $(".session-form-container").hide();
   }
 });

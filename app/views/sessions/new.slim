@@ -1,6 +1,6 @@
 .session-container.sign-in
-  .ui.dimmer
-    .ui.loader
+  .dimmer
+    .loading-icon
   .session-form-container
     = form_for :session, url: sessions_path, html: { class: "auth-form" } do |f|
       .field
