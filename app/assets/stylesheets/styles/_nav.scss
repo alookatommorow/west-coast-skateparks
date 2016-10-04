@@ -8,6 +8,13 @@
   width: 100%;
   z-index: 999;
   min-height: 49px;
+  border: 0;
+  box-shadow: none;
+
+
+  .menu {
+    min-height: 49px;
+  }
 
   a.item, #burger {
     color: white;
@@ -21,9 +28,14 @@
 
   #burger {
     max-width: max-content;
+    border-radius: 0;
 
     &:hover {
       cursor: pointer;
+    }
+
+    &:before {
+      content: none;
     }
   }
 
