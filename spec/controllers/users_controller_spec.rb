@@ -32,6 +32,20 @@ RSpec.describe UsersController, type: :controller do
   end
 
   describe "#update" do
+    context "when user updates info" do
+      it 'verifies their righteousness' do
+        user = create(:user)
+        session[:id] = user.id
+
+        put :update, id: user.id,
+          user: {
+            username: "butthead",
+          }
+
+        expect(flash[:notice]).to eq("Righteous.")
+        expect(response).to redirect_to(user)
+      end
+    end
     context "when user tries to update with invalid info" do
       it 'lets them know they are barning' do
         user = create(:user)
@@ -43,6 +57,7 @@ RSpec.describe UsersController, type: :controller do
           }
 
         expect(flash[:error]).to eq("Username can't be blank")
+        expect(response).to render_template("edit")
       end
     end
   end
