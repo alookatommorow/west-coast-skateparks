@@ -6,7 +6,7 @@
 
 West Coast Skateparks (WCS) is an informational directory of every skatepark in the western states of the United States (California, Oregon, and Washington).  Skatepark listings include an address and map for each skatepark along with other pertinent details such as hours, size, and date opened.  Users can track visits and favorites and leave ratings and reviews.  Pictures coming soon.
 
-![Screenshot](https://github.com/alookatommorow/west-coast-skateparks/blob/master/public/wcs.png)
+![Screenshot](https://storage.googleapis.com/john-hess/portfolio/wcs.png)
 
 ##Deployment
 
