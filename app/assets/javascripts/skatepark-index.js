@@ -26,21 +26,9 @@ $(document).ready(function(){
     }
   });
 
-  /////// Show skateparks via state header (to leave letter view) ////////
-  $(".parks-container").on("click", "a[data-state-link]", function(event) {
+  /////// Show skateparks by letter or state header ////////
+  $(".parks-container").on("click", "a[data-state-link], a[data-skatepark-letter-link]", function(event) {
     event.preventDefault();
-    pageCount = 1;
-    currentStateLink = this.href;
-
-    showLoader();
-    $.get(this.href, renderSkateparks);
-  });
-
-
-  /////// Show skatepark by Letter ////////
-  $(".parks-container").on("click", "a[data-skatepark-letter-link]", function(event) {
-    event.preventDefault();
-
     pageCount = 1;
     currentStateLink = this.href;
 
