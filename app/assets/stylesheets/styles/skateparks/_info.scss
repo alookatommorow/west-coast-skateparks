@@ -5,23 +5,31 @@
 
   .skatepark-info-attribute {
     font-size: 14px;
+    display: flex;
 
     .attribute-column, .value-column {
       padding: 1rem;
     }
 
     .attribute-column {
-      float: left;
-      width: 150px;
+      flex: 1;
     }
 
     .value-column {
       color: gray;
+      flex: 5;
     }
   }
 
   @media #{$mobile} {
-    width: 85%;
+    width: 90%;
+
+    .skatepark-info-attribute {
+
+      .value-column {
+        flex: 4;
+      }
+    }
   }
 }
 
