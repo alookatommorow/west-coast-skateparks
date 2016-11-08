@@ -45,7 +45,7 @@ $(document).ready(function(){
   ////// show skateparks ajax callback //////
   function renderSkateparks(response) {
     $(".parks-container").html(response);
-    $("#back-to-top").hide();
+    $("#back-to-top").css("display", "none");
   }
 
   ////// show loader //////
@@ -73,7 +73,7 @@ $(document).ready(function(){
   function appendSkateparks(response) {
     var $skateparks = $($(response)[$(response).length - 1]).children();
     $skateparks.hide().appendTo(".state-list").fadeIn(400);
-    $("#back-to-top").show();
+    $("#back-to-top").css("display", "flex");
   }
 
   function updatePageNumber() {
