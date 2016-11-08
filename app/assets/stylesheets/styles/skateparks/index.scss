@@ -98,7 +98,7 @@
 a#back-to-top {
   position: fixed;
   right: 0;
-  padding-right: 10px;
+  padding: 5px 10px 5px 5px;
   bottom: 50px;
   font-size: 3em;
   background-color: $orange;
@@ -109,6 +109,8 @@ a#back-to-top {
   &:hover {
     padding-right: 25px;
   }
+
+
 }
 
 .no-parks-by-letter {
