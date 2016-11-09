@@ -29,3 +29,26 @@ $(document).ready(function () {
     $(".session-form-container").hide();
   }
 });
+
+function sendUserData(response) {
+  $.ajax({
+    url: '/vendor/sessions',
+    data: response,
+    method: 'post'
+  })
+  .done(function(response){
+    if (isNaN(response)) {
+      $('#session-modal').modal('hide');
+      $('#flashes').remove();
+      $('body').append(response);
+      displayFlashMessage();
+    } else {
+      window.location = '/users/'+response+'?from_vendor=true';
+    }
+  })
+  .fail(function(response){
+    console.log(response);
+  });
+}
+
+

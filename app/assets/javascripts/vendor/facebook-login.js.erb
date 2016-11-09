@@ -52,23 +52,4 @@ function checkLoginState() {
   });
 }
 
-function sendUserData(response) {
-  $.ajax({
-    url: '/sessions/create_with_auth',
-    data: response,
-    method: 'post'
-  })
-  .done(function(response){
-    if (isNaN(response)) {
-      $('#session-modal').modal('hide');
-      $('#flashes').remove();
-      $('body').append(response);
-      displayFlashMessage();
-    } else {
-      window.location = '/users/'+response+'?from_auth=true';
-    }
-  })
-  .fail(function(response){
-    console.log(response);
-  });
-}
+
