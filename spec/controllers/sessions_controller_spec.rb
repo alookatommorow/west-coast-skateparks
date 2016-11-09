@@ -26,4 +26,17 @@ RSpec.describe SessionsController, type: :controller do
       expect(flash[:error]).to eq('Sign in failed')
     end
   end
+
+  describe '#destroy' do
+    it "clears the session and redirects with a flash message" do
+      id = 25
+      session[:id] = id
+
+      delete :destroy, id: id
+
+      expect(session[:id]).to be(nil)
+      expect(response).to redirect_to(root_path)
+      expect(flash[:notice]).to be_present
+    end
+  end
 end
