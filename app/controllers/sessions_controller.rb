@@ -13,38 +13,12 @@ class SessionsController < ApplicationController
     login
   end
 
-  def create_with_auth
-    if params[:email].blank?
-      flash.now[:error] = 'No email detected, please create an account or add email to your Facebook'
-      render partial: 'flashes'
-    else
-      user = User.find_by_email(params[:email])
-      user = User.create(auth_params) if user.nil?
-      session[:id] = user.id
-      render json: user.id
-    end
-  end
-
   def destroy
     logout
     redirect_to root_path, flash: { notice: BYE_MESSAGES.sample }
   end
 
   private
-
-    def auth_params
-      {
-        name: params[:name],
-        email: params[:email],
-        username: params[:email],
-        avatar: avatar,
-        password: SecureRandom.hex(20) # or this
-      }
-    end
-
-    def avatar
-      URI.parse(params[:avatar]) if params[:avatar].present?
-    end
 
     def login
       if user_authenticated?
