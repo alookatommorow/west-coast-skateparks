@@ -37,6 +37,10 @@ Rails.application.routes.draw do
     resources :skateparks, only: :index
   end
 
+  namespace :vendor do
+    resources :sessions, only: :create
+  end
+
   resources :skateparks do
     resource :map, only: :show, controller: 'skateparks/maps'
     resource :weather, only: :show, controller: 'skateparks/weather'
