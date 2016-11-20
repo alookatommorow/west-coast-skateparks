@@ -1,5 +1,5 @@
 #West Coast Skateparks
-[![Build Status](https://circleci.com/gh//alookatommorow/west-coast-skateparks.svg?style=shield&circle-token=8e91707df3579252f2c9c733a2968f29b83b2cd3)
+[![Build Status](https://circleci.com/gh/alookatommorow/west-coast-skateparks.svg?style=shield&circle-token=8e91707df3579252f2c9c733a2968f29b83b2cd3)
 [![Dependency Status](https://gemnasium.com/alookatommorow/west-coast-skateparks.svg)](https://gemnasium.com/alookatommorow/west-coast-skateparks)
 [![Code Climate](https://codeclimate.com/github/alookatommorow/west-coast-skateparks/badges/gpa.svg)](https://codeclimate.com/github/alookatommorow/west-coast-skateparks)
 [![Test Coverage](https://codeclimate.com/github/alookatommorow/west-coast-skateparks/badges/coverage.svg)](https://codeclimate.com/github/alookatommorow/west-coast-skateparks/coverage)
