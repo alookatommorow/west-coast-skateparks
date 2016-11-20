@@ -1,5 +1,5 @@
 #West Coast Skateparks
-[![Build Status](https://travis-ci.org/alookatommorow/west-coast-skateparks.svg?branch=master)](https://travis-ci.org/alookatommorow/west-coast-skateparks)
+[![Build Status](https://circleci.com/gh//alookatommorow/west-coast-skateparks.svg?style=shield&circle-token=8e91707df3579252f2c9c733a2968f29b83b2cd3)
 [![Dependency Status](https://gemnasium.com/alookatommorow/west-coast-skateparks.svg)](https://gemnasium.com/alookatommorow/west-coast-skateparks)
 [![Code Climate](https://codeclimate.com/github/alookatommorow/west-coast-skateparks/badges/gpa.svg)](https://codeclimate.com/github/alookatommorow/west-coast-skateparks)
 [![Test Coverage](https://codeclimate.com/github/alookatommorow/west-coast-skateparks/badges/coverage.svg)](https://codeclimate.com/github/alookatommorow/west-coast-skateparks/coverage)
@@ -16,13 +16,11 @@ West Coast Skateparks is deployed to Heroku. Visit the app [here](https://west-c
 
 West Coast Skateparks was created using [Ruby on Rails](rubyonrails.org).  The database is [PostgreSQL](http://www.postgresql.org/). Dynamic content is added using [Jquery](https://jquery.com/) and [AJAX](http://api.jquery.com/jquery.ajax/).
 
-West Coast Skateparks uses [Semantic UI](http://semantic-ui.com/) for front-end pleasantries.
-
 Maps are generated using the [Google Maps API](https://developers.google.com/maps/documentation/javascript/).
 
 ##Contribute
 
-WCS is a work in progress.  Pending the final touches to the database and a UI/UX enhancement, the app will be officially launched, making it the premiere source for skatepark information in the western U.S.  If you would like to clone the repo and make a contribution, please feel free!
+If you would like to clone the repo and make a contribution, please feel free!
 
 Clone the repo from your command line
 
