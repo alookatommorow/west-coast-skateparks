@@ -1,0 +1,3 @@
+exclude_paths:
+  - app/fields/paperclip_field.rb
+  - app/helpers/analytics_helper.rb
