@@ -15,7 +15,10 @@
 # The `.rspec` file also contains a few flags that are not defaults but that
 # users commonly want.
 require 'simplecov'
-SimpleCov.start
+SimpleCov.start do
+  add_filter "app/helpers/analytics_helper.rb"
+  add_filter "app/fields/paperclip_field.rb"
+end
 
 ENV['RAILS_ENV'] ||= 'test'
 

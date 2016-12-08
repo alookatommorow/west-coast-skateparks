@@ -89,11 +89,7 @@ class Skatepark < ActiveRecord::Base
   end
 
   def to_param
-    if city
-      [id, name.parameterize, city.parameterize].join("-")
-    else
-      [id, name.parameterize].join("-")
-    end
+    [id, name.parameterize, city.parameterize, state.parameterize].join("-")
   end
 
   def next_park

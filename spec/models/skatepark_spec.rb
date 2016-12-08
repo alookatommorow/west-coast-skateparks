@@ -148,4 +148,29 @@ RSpec.describe Skatepark, type: :model do
       expect(skatepark.previous_park).to eq(skatepark)
     end
   end
+
+  describe "#more_than_one_picture?" do
+    it "returns true if skatepark has more than one picture" do
+      skatepark = create(:skatepark)
+      skatepark_image = create(:skatepark_image, skatepark_id: skatepark.id)
+      skatepark_image_two = create(:skatepark_image, skatepark_id: skatepark.id)
+
+      expect(skatepark.more_than_one_picture?).to eq(true)
+    end
+
+    it "returns false if skatepark has one or fewer pictures" do
+      skatepark = create(:skatepark)
+      skatepark_image = create(:skatepark_image, skatepark_id: skatepark.id)
+
+      expect(skatepark.more_than_one_picture?).to eq(false)
+    end
+  end
+
+  describe "#to_param" do
+    it "returns properly formatted param" do
+      skatepark = create(:skatepark)
+
+      expect(skatepark.to_param).to eq("#{skatepark.id}-#{skatepark.name}-#{skatepark.city}-#{skatepark.state}")
+    end
+  end
 end
