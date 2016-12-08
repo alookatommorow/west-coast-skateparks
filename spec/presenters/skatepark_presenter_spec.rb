@@ -10,7 +10,8 @@ RSpec.describe SkateparkPresenter do
       titleized_attributes = {
         'material' => 'Bullshit Garbage',
         'builder' => 'Bob',
-        'obstacles' => 'Poo Debris, Debris' }
+        'obstacles' => 'Poo Debris, Debris',
+        'size' => '5000 sq ft' }
       expected_attributes = titleized_attributes.merge(show_attributes.select { |_k, v| v.present? })
 
       expect(skatepark.attributes).to eq(expected_attributes)

@@ -33,6 +33,7 @@ FactoryGirl.define do
       opened nil
       builder 'bob'
       obstacles 'poo debris, debris'
+      size '5000'
     end
   end
 
