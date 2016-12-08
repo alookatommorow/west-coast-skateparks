@@ -165,4 +165,12 @@ RSpec.describe Skatepark, type: :model do
       expect(skatepark.more_than_one_picture?).to eq(false)
     end
   end
+
+  describe "#to_param" do
+    it "returns properly formatted param" do
+      skatepark = create(:skatepark)
+
+      expect(skatepark.to_param).to eq("#{skatepark.id}-#{skatepark.name}-#{skatepark.city}-#{skatepark.state}")
+    end
+  end
 end
