@@ -13,6 +13,14 @@ class Skatepark < ActiveRecord::Base
   has_many :users_who_reviewed, through: :reviews, source: :user
   has_many :skatepark_images, dependent: :destroy
   has_one :location, dependent: :destroy
+  has_and_belongs_to_many :nearby_parks,
+                          class_name: "Skatepark",
+                          join_table: :nearby_parks,
+                          foreign_key: :skatepark_id,
+                          association_foreign_key: :nearby_park_id,
+                          uniq: true
+  accepts_nested_attributes_for :location
+  after_create :associate_nearby_parks, if: :has_coordinates?
 
   delegate(*LOCATION_ATTRIBUTES, :has_coordinates?, to: :location, allow_nil: true)
 
@@ -31,10 +39,6 @@ class Skatepark < ActiveRecord::Base
       where('locations.latitude BETWEEN ? AND ?', object.latitude - 0.4, object.latitude + 0.4).
       where('locations.longitude BETWEEN ? AND ?', object.longitude - 0.4, object.longitude + 0.4)
   }
-
-  def nearby_parks
-    Skatepark.includes(:location).nearby_to(self).where.not(id: id)
-  end
 
   def self.in_order
     includes(:location).order("locations.state", "locations.city", :name)
@@ -60,7 +64,7 @@ class Skatepark < ActiveRecord::Base
       latitude: latitude,
       longitude: longitude,
       picture: map_photo(:thumb),
-      rating: rating
+      rating: rating,
     }
   end
 
@@ -111,4 +115,14 @@ class Skatepark < ActiveRecord::Base
       ordered_parks.last
     end
   end
+
+  private
+
+    def associate_nearby_parks
+      skateparks = self.class.includes(:location).nearby_to(self).where.not(id: id)
+      skateparks.each do |skatepark|
+        self.nearby_parks << skatepark unless self.nearby_parks.include?(skatepark)
+        skatepark.nearby_parks << self unless skatepark.nearby_parks.include?(self)
+      end
+    end
 end
