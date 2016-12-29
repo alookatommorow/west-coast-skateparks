@@ -2,6 +2,7 @@ source "https://rubygems.org"
 ruby "2.2.3"
 gem "rails", "4.2.7.1"
 
+gem "active_model_serializers", "~> 0.10.0"
 gem "administrate"
 gem "administrate-field-image"
 gem "autoprefixer-rails"

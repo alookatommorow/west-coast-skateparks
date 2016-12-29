@@ -4,7 +4,7 @@ function infowindowGenerator(skatepark) {
     wholeStars: "<i class='fa fa-star'></i>",
     halfStars: "<i class='fa fa-star-half-o.'></i>",
     emptyStars: "<i class='fa fa-star-o'></i>"
-  }
+  };
 
   this.generateInfowindow = function() {
     return new google.maps.InfoWindow({
@@ -16,7 +16,7 @@ function infowindowGenerator(skatepark) {
     // id='content' is a Google Maps requirement
     countStars(skatepark.rating);
     starIcons = generateStarHtml();
-    return "<div id='content'><a href='/skateparks/"+skatepark.slug+"'><div><img src='"+skatepark.picture+ "' ></div><strong>"+titleize(skatepark.name)+"</strong><div>" + titleize(skatepark.city) + "</div><div>" + starIcons + "</div></a></div>";
+    return "<div id='content'><a href='/skateparks/"+skatepark.slug+"'><div><img src='"+skatepark.map_photo+ "' ></div><strong>"+titleize(skatepark.name)+"</strong><div>" + titleize(skatepark.city) + "</div><div>" + starIcons + "</div></a></div>";
   }
 
   function countStars(rating) {

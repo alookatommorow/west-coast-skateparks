@@ -20,6 +20,7 @@ class Skatepark < ActiveRecord::Base
                           association_foreign_key: :nearby_park_id,
                           uniq: true
   accepts_nested_attributes_for :location
+
   after_create :associate_nearby_parks, if: :has_coordinates?
 
   delegate(*LOCATION_ATTRIBUTES, :has_coordinates?, to: :location, allow_nil: true)
@@ -42,30 +43,6 @@ class Skatepark < ActiveRecord::Base
 
   def self.in_order
     includes(:location).order("locations.state", "locations.city", :name)
-  end
-
-  def map_data
-    {
-      skateparks: {
-        main: [hashify_with_picture],
-        nearby: nearby_parks.map(&:hashify_with_picture),
-      },
-      mapCenter: [latitude, longitude],
-      zoom: 9,
-    }
-  end
-
-  def hashify_with_picture
-    {
-      slug: to_param,
-      name: name,
-      city: city,
-      state: state,
-      latitude: latitude,
-      longitude: longitude,
-      picture: map_photo(:thumb),
-      rating: rating,
-    }
   end
 
   def favorited_by?(user)

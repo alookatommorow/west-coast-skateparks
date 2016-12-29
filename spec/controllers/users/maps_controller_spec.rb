@@ -12,7 +12,10 @@ RSpec.describe Users::MapsController, type: :controller do
       create(:favorite, user: user, skatepark: skateparks.third)
       create(:visit, user: user, skatepark: skateparks.third)
 
-      expected = user.map_data.to_json
+      expected = {
+        user: UserSerializer.new(user),
+        zoom: 6,
+      }.to_json
 
       get :show, user_id: user.id
       expect(response.body).to eq(expected)

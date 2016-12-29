@@ -1,111 +1,155 @@
 function generateMap(response) {
-  var map = new google.maps.Map(document.getElementById('map'), {
-    zoom: response.zoom
-  });
+  var MAPBUILDER = (function () {
+    var builder = {},
+        gMap = google.maps.Map, // declare gMaps dependencies at top of module
+        gMapMarker = google.maps.Marker,
+        map = new gMap(document.getElementById('map'), { zoom: response.zoom }),
+        markerContainer = [];
 
-  new MapGenerator(map, response.skateparks).initializeMap();
-}
-
-function MapGenerator(map, skateparks) {
-  var types = Object.keys(skateparks);
-  var legend = { favorite: 'purple-dot', visited: 'yellow-dot', both: 'blue-dot', nearby: 'green-dot', main: 'red-dot' };
-  var toggleable = { favorite: [], visited: [], both: [], nearby: [], main: [] };
-  var allMarkers = [];
-
-  this.initializeMap = function() {
-    generateMarkers();
-    setMapCenter();
-    setStyles();
-    showButtons();
-  };
-
-  function generateMarkers() {
-    types.forEach(function(type) {
-      skateparks[type].forEach(function (skatepark) {
-        var marker = createMarker(skatepark, type);
-        toggleable[type].push(marker);
-        allMarkers.push(marker);
-        bindCloseInfowindowsListenerToMarker(marker);
-      });
-      bindVisibilityListenerToButton(type);
-    });
-  }
-
-  function setMapCenter() {
-    if (toggleable.main.length > 0) {
-      map.setCenter(toggleable.main[0].position);
-    } else if (allMarkers.length > 0) {
-      map.setCenter(allMarkers[0].position);
-    } else {
-      map.setCenter(new google.maps.LatLng(37.7833, -122.4167));
-    }
-  }
-
-  function setStyles() {
     map.setOptions({styles: mapStyles});
-  }
 
-  function showButtons() {
-    for (var type in toggleable) {
-      if (toggleable[type].length > 0) {
-        $('#toggle-'+type+'-container').removeClass('hidden').addClass('inline-block');
+    // sets map center to main skatepark, or first skatepark associated with user
+    builder._setMapCenter = function () {
+      var skatepark = this.skatepark;
+
+      if (skatepark) {
+        map.setCenter({ lat: skatepark.latitude, lng: skatepark.longitude });
+      } else {
+        map.setCenter(markerContainer[0].position);
       }
-    }
-  }
+    };
 
-  function createMarker(skatepark, type){
-    var latLng = { lat: skatepark.latitude, lng: skatepark.longitude };
-    var infowindow = new infowindowGenerator(skatepark).generateInfowindow();
-    var title = titleize(skatepark.city + ', ' + stateDisplay[skatepark.state])
-    var marker = new google.maps.Marker({
-      position: latLng,
-      infowindow: infowindow,
-      map: map,
-      icon: 'https://maps.google.com/mapfiles/ms/icons/' + legend[type] + '.png',
-      title: title
-    });
-    if (type === 'main') {
-      marker.main = true;
-    } else if (type === 'nearby') {
-      marker.setVisible(false);
-    }
-    return marker;
-  }
+    // binds click so buttons toggle visibility of corresponding markers e.g., "Hide Favorites"
+    builder._bindClickToVisibilityButtons = function () {
+      var categorizedMarkers = this.categorizedMarkers,
+          categories = Object.keys(categorizedMarkers);
 
-  // private methods
-  function bindVisibilityListenerToButton(type) {
-    var buttonId = '#toggle-' + type;
-    $(document).on('click', buttonId, function (event) {
-      var $button = $(event.target);
-      var action = $button.text().split(' ');
+      categories.forEach(function (category) { 
+        var buttonId = "#toggle-" + category;
 
-      toggleMarkerVisibility(toggleable[type], action[0]);
-      toggleButtonText($button, action);
-    });
-  }
+        $(document).on('click', buttonId, function (event) {
+          var $button = $(event.target),
+              action = $button.text().split(' ');
 
-  function toggleButtonText(button, action) {
-    action[0] = (action[0] === 'Hide') ? 'Show' : 'Hide';
-    button.text(action.join(' '));
-  }
-
-  function bindCloseInfowindowsListenerToMarker(marker) {
-    marker.addListener('click', function() {
-      allMarkers.forEach(function(marker){
-        marker.infowindow.close();
+          toggleMarkerVisibility(categorizedMarkers[category], action[0]);
+          toggleButtonText($button, action);
+        });
       });
-      marker.infowindow.open(map, marker);
-    });
+
+      function toggleMarkerVisibility(markers, visibility) {
+        visibility = (visibility === 'Hide') ? false : true;
+        markers.forEach(function (marker) {
+          marker.infowindow.close();
+          marker.setVisible(visibility);
+        });
+      }
+
+      function toggleButtonText(button, action) {
+        action[0] = (action[0] === 'Hide') ? 'Show' : 'Hide';
+        button.text(action.join(' '));
+      }
+    };
+
+    // show visibility toggle buttons
+    builder._showButtons = function () {
+      var categorizedMarkers = this.categorizedMarkers;
+      for (var category in categorizedMarkers) {
+        if (categorizedMarkers[category].length > 0) {
+          $('#toggle-'+category+'-container').removeClass('hidden').addClass('inline-block');
+        }
+      }
+    };
+
+    // create map marker out of skatepark argument
+    builder.createMarker = function(skatepark) {
+      var markerColors = this.markerColors;
+      var marker = new gMapMarker({
+        position: { lat: skatepark.latitude, lng: skatepark.longitude },
+        // refactor infowindowGenerator logic
+        infowindow: new infowindowGenerator(skatepark).generateInfowindow(),
+        map: map,
+        title: titleize(skatepark.city + ', ' + stateDisplay[skatepark.state]),
+        main: (skatepark.category === "main"),
+        icon: "https://maps.google.com/mapfiles/ms/icons/" + markerColors[skatepark.category] + ".png"
+      });
+
+      if (skatepark.category === "nearby") {
+        marker.setVisible(false);
+      }
+      markerContainer.push(marker);
+      this.categorizedMarkers[skatepark.category].push(marker);
+      bindInfoWindowClick(marker);
+
+      // refactor this
+      function bindInfoWindowClick(marker) {
+        marker.addListener('click', function() {
+          markerContainer.forEach(function(marker) {
+            marker.infowindow.close();
+          });
+          marker.infowindow.open(map, marker);
+        });
+      }
+    };
+
+    // Method for map creation
+    builder.initialize = function() {
+      this.generateMarkers();
+      this._setMapCenter(); // _underscore prefix means method is private
+      this._bindClickToVisibilityButtons();
+      this._showButtons();
+    };
+
+    return builder;
+  }());
+
+
+
+
+  // Add attributes and methods to MAPBUILDER for SKATEPARK PAGE
+  if (response.skatepark) {
+    MAPBUILDER.skatepark = response.skatepark;
+    MAPBUILDER.categorizedMarkers = {main: [], nearby: []};
+    MAPBUILDER.markerColors = {main: "red-dot", nearby: "green-dot"};
+    MAPBUILDER.generateMarkers = function () {
+      var skatepark = this.skatepark,
+          createMarker = this.createMarker.bind(this);
+
+      skatepark.category = "main";
+      createMarker(skatepark);
+
+      skatepark.nearby_parks.forEach(function (nearbyPark) {
+        nearbyPark.category = "nearby";
+        createMarker(nearbyPark);
+      });
+    };
   }
 
-  function toggleMarkerVisibility(markers, visibility) {
-    visibility = (visibility === 'Hide') ? false : true;
-    markers.forEach(function (marker) {
-      if (marker.main) {
-        return;
-      }
-      marker.infowindow.close();
-      marker.setVisible(visibility);
-    });
+  // Add attributes and methods to MAPBUILD for USER PAGE
+  else if (response.user) {
+    MAPBUILDER.user = response.user;
+    MAPBUILDER.categorizedMarkers = {favorite: [], visited: [], both: []};
+    MAPBUILDER.markerColors = {favorite: 'purple-dot', visited: 'yellow-dot', both: 'blue-dot'};
+    MAPBUILDER.generateMarkers = function () {
+      var user = this.user,
+          createMarker = this.createMarker.bind(this);
+
+      user.favorite_parks.forEach(function (skatepark) {
+        skatepark.category = "favorite";
+        createMarker(skatepark);
+      });
+
+      user.visited_parks.forEach(function (skatepark) {
+        skatepark.category = "visited";
+        createMarker(skatepark);
+      });
+
+      user.dups.forEach(function (skatepark) {
+        skatepark.category = "both";
+        createMarker(skatepark);
+      });
+    };
   }
+
+  // Initialize Map
+  MAPBUILDER.initialize();
 }

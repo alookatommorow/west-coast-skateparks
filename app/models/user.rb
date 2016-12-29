@@ -38,19 +38,4 @@ class User < ActiveRecord::Base
   def visits?
     visits.any?
   end
-
-  def map_data
-    {
-      skateparks: {
-        favorite: (favorite_parks - dups).map(&:hashify_with_picture),
-        visited: (visited_parks - dups).map(&:hashify_with_picture),
-        both: dups.map(&:hashify_with_picture),
-      },
-      zoom: 6,
-    }
-  end
-
-  def dups
-    @dups ||= favorite_parks & visited_parks
-  end
 end

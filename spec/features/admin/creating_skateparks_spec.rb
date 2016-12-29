@@ -15,7 +15,7 @@ RSpec.feature "Admin can create skateparks" do
     fill_in "Material", with: "plexi-glass"
     click_button "Create Skatepark"
 
-    expect(page).to have_content "Skatepark has been created."
+    expect(page).to have_content "Skatepark was successfully created."
     expect(page).to have_content "Fekken Perk"
     expect(page).to have_content "56 56th st."
     expect(page).to have_content "Modesto"
@@ -29,12 +29,11 @@ RSpec.feature "Admin can create skateparks" do
     fill_in "State", with: "California"
     click_button "Create Skatepark"
 
-    expect(page).to have_content "Location city can't be blank"
+    expect(page).to have_content "Citycan't be blank"
 
     fill_in "City", with: "Nowheresville"
     click_button "Create Skatepark"
 
-    expect(page).to have_content "Skatepark has been created."
     expect(page).to have_content "Nowhere park"
     expect(page).to have_content "Nowheresville"
   end
