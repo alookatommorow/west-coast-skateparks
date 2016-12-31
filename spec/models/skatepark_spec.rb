@@ -61,7 +61,8 @@ RSpec.describe Skatepark, type: :model do
 
   describe "#next_park" do
     it "returns the next skatepark" do
-      next_park = create(:skatepark, :washington, name: "bangcock")
+      washington = create(:location, state: "washington")
+      next_park = create(:skatepark, location: washington, name: "bangcock")
       skatepark = create(:skatepark)
 
       expect(skatepark.next_park).to eq(next_park)
@@ -76,7 +77,8 @@ RSpec.describe Skatepark, type: :model do
 
   describe "#previous_park" do
     it "returns the previous skatepark" do
-      skatepark = create(:skatepark, :oregon, name: "Xulu Testicle")
+      oregon = create(:location, state: "oregon")
+      skatepark = create(:skatepark, name: "Xulu Testicle", location: oregon)
       previous_park = create(:skatepark)
 
       expect(skatepark.previous_park).to eq(previous_park)

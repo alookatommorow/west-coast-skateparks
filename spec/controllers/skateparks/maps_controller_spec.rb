@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Skateparks::MapsController, type: :controller do
   describe '#show' do
-    it 'serves JSON object with skatepark and nearby_parks' do
+    it 'serves JSON object with skatepark and neighbor_parks' do
       skateparks = create_list(:skatepark, 2)
       expected = {
         skatepark: SkateparkSerializer.new(skateparks.first),

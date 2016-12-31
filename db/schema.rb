@@ -39,13 +39,13 @@ ActiveRecord::Schema.define(version: 20161222201559) do
 
   add_index "locations", ["skatepark_id"], name: "index_locations_on_skatepark_id", using: :btree
 
-  create_table "nearby_parks", id: false, force: :cascade do |t|
+  create_table "neighbors", force: :cascade do |t|
     t.integer "skatepark_id"
-    t.integer "nearby_park_id"
+    t.integer "neighbor_park_id"
   end
 
-  add_index "nearby_parks", ["nearby_park_id", "skatepark_id"], name: "index_nearby_parks_on_nearby_park_id_and_skatepark_id", unique: true, using: :btree
-  add_index "nearby_parks", ["skatepark_id", "nearby_park_id"], name: "index_nearby_parks_on_skatepark_id_and_nearby_park_id", unique: true, using: :btree
+  add_index "neighbors", ["neighbor_park_id", "skatepark_id"], name: "index_neighbors_on_neighbor_park_id_and_skatepark_id", unique: true, using: :btree
+  add_index "neighbors", ["skatepark_id", "neighbor_park_id"], name: "index_neighbors_on_skatepark_id_and_neighbor_park_id", unique: true, using: :btree
 
   create_table "ratings", force: :cascade do |t|
     t.integer  "user_id"

@@ -11,10 +11,10 @@ class SkateparkSerializer < ActiveModel::Serializer
     :rating,
   )
 
-  has_many :nearby_parks
+  has_many :neighbor_parks
 
-  def nearby_parks
-    object.nearby_parks.includes(:location)
+  def neighbor_parks
+    object.neighbor_parks.includes(:location)
   end
 
   def slug

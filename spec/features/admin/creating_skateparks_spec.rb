@@ -38,23 +38,26 @@ RSpec.feature "Admin can create skateparks" do
     expect(page).to have_content "Nowheresville"
   end
 
-  context "when there are other skateparks nearby" do
-    let(:location)     { create(:location, latitude: 37.780845, longitude: -122.403060) }
-    let!(:nearby_park) { create(:skatepark, location: location) }
-    let!(:far_park)    { create(:skatepark) }
+  context "when there are other neighboring skateparks" do
+    let(:nearby)          { create(:location, latitude: 9.7777, longitude: -12.0001) }
+    let!(:neighbor_park)  { create(:skatepark, location: nearby) }
+    let!(:far_park)       { create(:skatepark, :far) }
 
-    scenario "nearby parks are automatically associated" do
+    scenario "neighbor parks are automatically associated" do
       fill_in "Name", with: "Fekken Perk"
       fill_in "City", with: "San Francisco"
       fill_in "State", with: "California"
-      fill_in "Latitude", with: 37.80081
-      fill_in "Longitude", with: -122.506969
+      fill_in "Latitude", with: 9.9999
+      fill_in "Longitude", with: -12.2666
       click_button "Create Skatepark"
 
       skatepark = Skatepark.last
-      expect(skatepark.nearby_parks).to include(nearby_park)
-      expect(skatepark.nearby_parks).not_to include(far_park)
-      expect(nearby_park.nearby_parks).to include(skatepark)
+      expect(skatepark.neighbor_parks).to include(neighbor_park)
+      expect(skatepark.neighbor_parks).not_to include(far_park)
+      expect(neighbor_park.reload.neighbor_parks).to include(skatepark)
+
+      skatepark.destroy
+      expect(neighbor_park.neighbor_parks).to be_empty
     end
   end
 end

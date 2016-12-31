@@ -1,5 +1,6 @@
 class Skatepark < ActiveRecord::Base
   LOCATION_ATTRIBUTES = %i(address city state zip_code latitude longitude)
+  LOCATION_METHODS = %i(has_coordinates? new_coordinates?)
 
   validates :name, presence: true
 
@@ -13,17 +14,14 @@ class Skatepark < ActiveRecord::Base
   has_many :users_who_reviewed, through: :reviews, source: :user
   has_many :skatepark_images, dependent: :destroy
   has_one :location, dependent: :destroy
-  has_and_belongs_to_many :nearby_parks,
-                          class_name: "Skatepark",
-                          join_table: :nearby_parks,
-                          foreign_key: :skatepark_id,
-                          association_foreign_key: :nearby_park_id,
-                          uniq: true
+  has_many :neighbors
+  has_many :neighbor_parks, through: :neighbors, dependent: :destroy
   accepts_nested_attributes_for :location
 
-  after_create :associate_nearby_parks, if: :has_coordinates?
+  after_create :associate_neighbor_parks, if: :has_coordinates?
+  before_save :associate_neighbor_parks, if: :new_coordinates?
 
-  delegate(*LOCATION_ATTRIBUTES, :has_coordinates?, to: :location, allow_nil: true)
+  delegate(*LOCATION_ATTRIBUTES, *LOCATION_METHODS, to: :location, allow_nil: true)
 
   has_attached_file :hero, default_url: "https://storage.googleapis.com/west-coast-skateparks/default-header.jpg"
   # validates_attachment_presence :hero
@@ -34,12 +32,6 @@ class Skatepark < ActiveRecord::Base
   validates_attachment_content_type :map_photo, content_type: /\Aimage/
 
   scope :in_state, -> (state) { joins(:location).where("locations.state = ?", state) }
-
-  scope :nearby_to, -> (object) {
-    joins(:location).
-      where('locations.latitude BETWEEN ? AND ?', object.latitude - 0.4, object.latitude + 0.4).
-      where('locations.longitude BETWEEN ? AND ?', object.longitude - 0.4, object.longitude + 0.4)
-  }
 
   def self.in_order
     includes(:location).order("locations.state", "locations.city", :name)
@@ -95,11 +87,18 @@ class Skatepark < ActiveRecord::Base
 
   private
 
-    def associate_nearby_parks
-      skateparks = self.class.includes(:location).nearby_to(self).where.not(id: id)
-      skateparks.each do |skatepark|
-        self.nearby_parks << skatepark unless self.nearby_parks.include?(skatepark)
-        skatepark.nearby_parks << self unless skatepark.nearby_parks.include?(self)
+    def associate_neighbor_parks
+      self.neighbor_parks.destroy_all # refresh in case coordinates are being edited on existing park
+      find_neighbor_parks.each do |skatepark|
+        self.neighbor_parks << skatepark
       end
+    end
+
+    def find_neighbor_parks
+      radius = 0.4
+
+      self.class.joins(:location).where.not(id: self.id).
+        where("locations.latitude BETWEEN ? AND ?", self.latitude - radius, self.latitude + radius).
+        where("locations.longitude BETWEEN ? AND ?", self.longitude - radius, self.longitude + radius)
     end
 end

@@ -117,7 +117,7 @@ function generateMap(response) {
       skatepark.category = "main";
       createMarker(skatepark);
 
-      skatepark.nearby_parks.forEach(function (nearbyPark) {
+      skatepark.neighbor_parks.forEach(function (nearbyPark) {
         nearbyPark.category = "nearby";
         createMarker(nearbyPark);
       });
