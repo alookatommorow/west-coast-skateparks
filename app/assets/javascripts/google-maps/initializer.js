@@ -15,11 +15,23 @@ function generateMap(response) {
   var MAPBUILDER = (function () {
     var builder = {},
         gMap = google.maps.Map, // declare gMaps dependencies at top of module
-        gMapMarker = google.maps.Marker,
         map = new gMap(document.getElementById('map'), { zoom: response.zoom }),
         markerContainer = [];
 
     map.setOptions({styles: mapStyles});
+
+    // these variables remain unchanged for every instance of Marker/InfoWindow objects,
+    // assigning them to its prototype ensures that they are only created once.
+    Marker.prototype.map = map;
+    Marker.prototype.gMapsMarker = google.maps.Marker;
+
+    // method for map creation
+    builder.initialize = function() {
+      this.generateMarkers();
+      this._setMapCenter(); // _underscore prefix == private method
+      this._bindClickToVisibilityButtons();
+      this._showButtons();
+    };
 
     // sets map center to main skatepark, or first skatepark associated with user
     builder._setMapCenter = function () {
@@ -75,20 +87,7 @@ function generateMap(response) {
 
     // create map marker out of skatepark argument
     builder.createMarker = function(skatepark) {
-      var markerColors = this.markerColors,
-          marker = new gMapMarker({
-            position: { lat: skatepark.latitude, lng: skatepark.longitude },
-            // refactor infowindowGenerator logic
-            infowindow: new infowindowGenerator(skatepark).generateInfowindow(),
-            map: map,
-            title: titleize(skatepark.city + ', ' + stateDisplay[skatepark.state]),
-            main: (skatepark.category === "main"),
-            icon: "https://maps.google.com/mapfiles/ms/icons/" + markerColors[skatepark.category] + ".png"
-          });
-
-      if (skatepark.category === "nearby") {
-        marker.setVisible(false);
-      }
+      var marker = new Marker(skatepark);
       markerContainer.push(marker);
       this.categorizedMarkers[skatepark.category].push(marker);
       bindInfoWindowClick(marker);
@@ -103,25 +102,24 @@ function generateMap(response) {
       }
     };
 
-    // Method for map creation
-    builder.initialize = function() {
-      this.generateMarkers();
-      this._setMapCenter(); // _underscore prefix means method is private
-      this._bindClickToVisibilityButtons();
-      this._showButtons();
-    };
-
     return builder;
   }());
 
 
-
-
-  // Add attributes and methods to MAPBUILDER for SKATEPARK PAGE
   if (response.skatepark) {
-    MAPBUILDER.skatepark = response.skatepark;
+    configureMapBuilderForSkateparkPage(response.skatepark);
+  } else if (response.user) {
+    configureMapBuilderForUserPage(response.user);
+  }
+
+  // initialize map
+  MAPBUILDER.initialize();
+
+
+  // add attributes and methods to MAPBUILDER for SKATEPARK PAGE
+  function configureMapBuilderForSkateparkPage(skatepark) {
+    MAPBUILDER.skatepark = skatepark;
     MAPBUILDER.categorizedMarkers = {main: [], nearby: []};
-    MAPBUILDER.markerColors = {main: "red-dot", nearby: "green-dot"};
     MAPBUILDER.generateMarkers = function () {
       var skatepark = this.skatepark,
           createMarker = this.createMarker.bind(this);
@@ -136,32 +134,28 @@ function generateMap(response) {
     };
   }
 
-  // Add attributes and methods to MAPBUILDER for USER PAGE
-  else if (response.user) {
-    MAPBUILDER.user = response.user;
+  // add attributes and methods to MAPBUILDER for USER PAGE
+  function configureMapBuilderForUserPage(user) {
+    MAPBUILDER.user = user;
     MAPBUILDER.categorizedMarkers = {favorite: [], visited: [], both: []};
-    MAPBUILDER.markerColors = {favorite: 'purple-dot', visited: 'yellow-dot', both: 'blue-dot'};
     MAPBUILDER.generateMarkers = function () {
       var user = this.user,
-          createMarker = this.createMarker.bind(this);
+          createMarker = this.createMarker.bind(this),
+          userSkateparks = {
+            favorite: user.favorite_parks,
+            visited: user.visited_parks,
+            both: user.dups
+          };
 
-      user.favorite_parks.forEach(function (skatepark) {
-        skatepark.category = "favorite";
-        createMarker(skatepark);
-      });
+      for (var category in userSkateparks) {
+        var skateparks = userSkateparks[category];
 
-      user.visited_parks.forEach(function (skatepark) {
-        skatepark.category = "visited";
-        createMarker(skatepark);
-      });
-
-      user.dups.forEach(function (skatepark) {
-        skatepark.category = "both";
-        createMarker(skatepark);
-      });
+        for (var i = 0, max = skateparks.length; i < max; i++) {
+          var skatepark = skateparks[i];
+          skatepark.category = category;
+          createMarker(skatepark);
+        }
+      }
     };
   }
-
-  // Initialize Map
-  MAPBUILDER.initialize();
 }
