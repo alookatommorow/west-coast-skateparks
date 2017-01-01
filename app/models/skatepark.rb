@@ -31,7 +31,7 @@ class Skatepark < ActiveRecord::Base
   # validates_attachment_presence :map_photo
   validates_attachment_content_type :map_photo, content_type: /\Aimage/
 
-  scope :in_state, -> (state) { joins(:location).where("locations.state = ?", state) }
+  scope :in_state, -> (state) { joins(:location).merge(Location.in_state(state)) }
 
   def self.in_order
     includes(:location).order("locations.state", "locations.city", :name)
@@ -89,16 +89,13 @@ class Skatepark < ActiveRecord::Base
 
     def associate_neighbor_parks
       self.neighbor_parks.destroy_all # refresh in case coordinates are being edited on existing park
-      find_neighbor_parks.each do |skatepark|
-        self.neighbor_parks << skatepark
-      end
+      find_neighbor_parks.each { |skatepark| self.neighbor_parks << skatepark }
     end
 
     def find_neighbor_parks
-      radius = 0.4
-
-      self.class.joins(:location).where.not(id: self.id).
-        where("locations.latitude BETWEEN ? AND ?", self.latitude - radius, self.latitude + radius).
-        where("locations.longitude BETWEEN ? AND ?", self.longitude - radius, self.longitude + radius)
+      self.class.
+        joins(:location).
+        where.not(id: self.id).
+        merge(Location.neighbors_of(self.location))
     end
 end
