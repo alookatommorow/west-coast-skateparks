@@ -12,12 +12,7 @@ class CreateNeighbors < ActiveRecord::Migration
       print "Associating neighbor parks..."
       Skatepark.all.each do |skatepark|
         next unless skatepark.has_coordinates?
-
-        neighbor_parks = Skatepark.includes(:location).nearby_to(skatepark).where.not(id: skatepark.id)
-        neighbor_parks.each do |park|
-          # we only have to do this check once, when we're updating the existing records
-          skatepark.neighbor_parks << park unless skatepark.neighbor_parks.include?(park)
-        end
+        skatepark.send(:associate_neighbor_parks)
         print "."
       end
       puts "DONEZO"
