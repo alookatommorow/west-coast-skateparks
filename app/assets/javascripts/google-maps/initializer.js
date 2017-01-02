@@ -24,6 +24,7 @@ function generateMap(response) {
     // assigning them to its prototype ensures that they are only created once.
     Marker.prototype.map = map;
     Marker.prototype.gMapsMarker = google.maps.Marker;
+    InfoWindow.prototype.gMapsInfoWindow = google.maps.InfoWindow;
 
     // method for map creation
     builder.initialize = function() {
