@@ -5,4 +5,4 @@ header.header
   .header__actions
     = link_to "Show #{page.page_title}", [namespace, page.resource], class: "button"
 
-= render "form", skatepark: page.resource
+= render "form", page: page

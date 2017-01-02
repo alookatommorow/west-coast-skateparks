@@ -1,29 +1,19 @@
-= simple_form_for([:admin, skatepark], class: "form") do |f|
-  = f.input :hero
-  = f.input :map_photo
-  = f.input :name
-  = f.simple_fields_for(:location) do |ff|
-    = ff.input :address
-    = ff.input :city
-    = ff.input :state
-    = ff.input :zip_code
-    = ff.input :latitude
-    = ff.input :longitude
-  = f.input :rating
-  = f.input :material
-  = f.input :designer
-  = f.input :builder
-  = f.input :opened
-  = f.input :hours
-  = f.input :size
-  = f.input :notes
-  = f.input :info
-  = f.input :helmet
-  = f.input :lights
-  = f.input :photo_cred
-  = f.input :photo_url
-  = f.input :video_url
-  / not sure if we're still using this
-  = f.input :num_pics
-  = f.input :obstacles
-  = f.submit
+= form_for([namespace, page.resource], class: "form") do |f|
+  - if page.resource.errors.any?
+    #error_explanation
+      h2 #{pluralize(page.resource.errors.count, "error")} prohibited this 
+        #{page.resource_name} from being saved:
+      ul
+        - page.resource.errors.full_messages.each do |message|
+          li= message
+
+  = f.fields_for(:location, page.resource.location) do |ff|
+    - ["Address", "City", "State", "Zip Code", "Latitude", "Longitude"].each do |attribute|
+      = nested_attribute_field_for(attribute, ff)
+
+  - page.attributes.each do |attribute|
+    div class=["field-unit", "field-unit--#{attribute.html_class}"]
+      = render_field attribute, f: f
+
+  .form-actions
+    = f.submit

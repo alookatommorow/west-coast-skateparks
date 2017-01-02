@@ -121,6 +121,6 @@ class SkateparkDashboard < Administrate::BaseDashboard
   # across all pages of the admin dashboard.
   #
   def display_resource(skatepark)
-    skatepark.name
+    skatepark.name.titleize
   end
 end

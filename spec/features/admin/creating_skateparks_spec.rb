@@ -29,7 +29,7 @@ RSpec.feature "Admin can create skateparks" do
     fill_in "State", with: "California"
     click_button "Create Skatepark"
 
-    expect(page).to have_content "Citycan't be blank"
+    expect(page).to have_content "Location city can't be blank"
 
     fill_in "City", with: "Nowheresville"
     click_button "Create Skatepark"
