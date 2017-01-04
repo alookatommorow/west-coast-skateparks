@@ -34,15 +34,21 @@ function generateMap(response) {
       this._showButtons();
     };
 
-    // sets map center to main skatepark, or first skatepark associated with user
+    // sets map center to main skatepark, or first skatepark associated with user, or SF
     builder._setMapCenter = function () {
-      var skatepark = this.skatepark;
+      var skatepark = this.skatepark,
+          SANFRAN = [37.7749, -122.4194],
+          mapCenter;
 
       if (skatepark) {
-        map.setCenter({ lat: skatepark.latitude, lng: skatepark.longitude });
+        mapCenter = {lat: skatepark.latitude, lng: skatepark.longitude};
+      } else if (markerContainer[0] !== undefined) {
+        mapCenter = markerContainer[0].position;
       } else {
-        map.setCenter(markerContainer[0].position);
+        mapCenter = {lat: SANFRAN[0], lng: SANFRAN[1]};
       }
+
+      map.setCenter(mapCenter);
     };
 
     // binds click so buttons toggle visibility of corresponding markers e.g., "Hide Favorites"
