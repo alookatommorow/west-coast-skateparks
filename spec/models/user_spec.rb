@@ -15,43 +15,6 @@ RSpec.describe User, type: :model do
     end
   end
 
-  describe '#dups' do
-    it 'returns an array of skateparks in common between favorite and visited' do
-      user = create(:user)
-      skateparks = create_list(:skatepark, 3)
-
-      create(:favorite, user: user, skatepark: skateparks.first)
-      create(:visit, user: user, skatepark: skateparks.second)
-
-      create(:favorite, user: user, skatepark: skateparks.third)
-      create(:visit, user: user, skatepark: skateparks.third)
-
-      expect(user.dups).to eq([skateparks.third])
-    end
-  end
-
-  describe '#map_data' do
-    it 'returns a hash with data needed for map generation' do
-      user = create(:user)
-      skateparks = create_list(:skatepark, 3)
-
-      create(:favorite, user: user, skatepark: skateparks.first)
-      create(:visit, user: user, skatepark: skateparks.second)
-
-      create(:favorite, user: user, skatepark: skateparks.third)
-      create(:visit, user: user, skatepark: skateparks.third)
-
-      expect(user.map_data).to eq(
-        skateparks: {
-          favorite: (user.favorite_parks - user.dups).map(&:hashify_with_picture),
-          visited: (user.visited_parks - user.dups).map(&:hashify_with_picture),
-          both: user.dups.map(&:hashify_with_picture)
-        },
-        zoom: 6
-      )
-    end
-  end
-
   describe '#admin?' do
     it 'returns true if user is an admin' do
       user = build(:user, :admin)

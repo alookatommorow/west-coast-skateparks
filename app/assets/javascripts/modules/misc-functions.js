@@ -15,6 +15,6 @@ var stateDisplay = {
   "california": "CA",
   "oregon": "OR",
   "washington": "WA"
-}
+};
 
 

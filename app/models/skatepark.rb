@@ -1,5 +1,6 @@
 class Skatepark < ActiveRecord::Base
   LOCATION_ATTRIBUTES = %i(address city state zip_code latitude longitude)
+  LOCATION_METHODS = %i(has_coordinates? new_coordinates?)
 
   validates :name, presence: true
 
@@ -13,8 +14,14 @@ class Skatepark < ActiveRecord::Base
   has_many :users_who_reviewed, through: :reviews, source: :user
   has_many :skatepark_images, dependent: :destroy
   has_one :location, dependent: :destroy
+  has_many :neighbors
+  has_many :neighbor_parks, through: :neighbors, dependent: :destroy
+  accepts_nested_attributes_for :location
 
-  delegate(*LOCATION_ATTRIBUTES, :has_coordinates?, to: :location, allow_nil: true)
+  after_create :associate_neighbor_parks, if: :has_coordinates?
+  before_save :associate_neighbor_parks, if: :new_coordinates?
+
+  delegate(*LOCATION_ATTRIBUTES, *LOCATION_METHODS, to: :location, allow_nil: true)
 
   has_attached_file :hero, default_url: "https://storage.googleapis.com/west-coast-skateparks/default-header.jpg"
   # validates_attachment_presence :hero
@@ -24,44 +31,10 @@ class Skatepark < ActiveRecord::Base
   # validates_attachment_presence :map_photo
   validates_attachment_content_type :map_photo, content_type: /\Aimage/
 
-  scope :in_state, -> (state) { joins(:location).where("locations.state = ?", state) }
-
-  scope :nearby_to, -> (object) {
-    joins(:location).
-      where('locations.latitude BETWEEN ? AND ?', object.latitude - 0.4, object.latitude + 0.4).
-      where('locations.longitude BETWEEN ? AND ?', object.longitude - 0.4, object.longitude + 0.4)
-  }
-
-  def nearby_parks
-    Skatepark.includes(:location).nearby_to(self).where.not(id: id)
-  end
+  scope :in_state, -> (state) { joins(:location).merge(Location.in_state(state)) }
 
   def self.in_order
     includes(:location).order("locations.state", "locations.city", :name)
-  end
-
-  def map_data
-    {
-      skateparks: {
-        main: [hashify_with_picture],
-        nearby: nearby_parks.map(&:hashify_with_picture),
-      },
-      mapCenter: [latitude, longitude],
-      zoom: 9,
-    }
-  end
-
-  def hashify_with_picture
-    {
-      slug: to_param,
-      name: name,
-      city: city,
-      state: state,
-      latitude: latitude,
-      longitude: longitude,
-      picture: map_photo(:thumb),
-      rating: rating
-    }
   end
 
   def favorited_by?(user)
@@ -111,4 +84,18 @@ class Skatepark < ActiveRecord::Base
       ordered_parks.last
     end
   end
+
+  private
+
+    def associate_neighbor_parks
+      self.neighbor_parks.destroy_all # refresh in case coordinates are being edited on existing park
+      find_neighbor_parks.each { |skatepark| self.neighbor_parks << skatepark }
+    end
+
+    def find_neighbor_parks
+      self.class.
+        joins(:location).
+        where.not(id: self.id).
+        merge(Location.neighbors_of(self.location))
+    end
 end

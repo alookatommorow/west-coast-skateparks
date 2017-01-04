@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160725020726) do
+ActiveRecord::Schema.define(version: 20161222201559) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -38,6 +38,14 @@ ActiveRecord::Schema.define(version: 20160725020726) do
   end
 
   add_index "locations", ["skatepark_id"], name: "index_locations_on_skatepark_id", using: :btree
+
+  create_table "neighbors", force: :cascade do |t|
+    t.integer "skatepark_id"
+    t.integer "neighbor_park_id"
+  end
+
+  add_index "neighbors", ["neighbor_park_id", "skatepark_id"], name: "index_neighbors_on_neighbor_park_id_and_skatepark_id", unique: true, using: :btree
+  add_index "neighbors", ["skatepark_id", "neighbor_park_id"], name: "index_neighbors_on_skatepark_id_and_neighbor_park_id", unique: true, using: :btree
 
   create_table "ratings", force: :cascade do |t|
     t.integer  "user_id"

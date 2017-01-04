@@ -1,66 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe Skatepark, type: :model do
-  describe '#map_data' do
-    it 'returns a hash with data needed for map generation' do
-      skatepark = create_list(:skatepark, 2).first
-
-      expected = {
-        skateparks: {
-          nearby: skatepark.nearby_parks.map(&:hashify_with_picture),
-          main: [skatepark.hashify_with_picture],
-        },
-        mapCenter: [skatepark.latitude, skatepark.longitude],
-        zoom: 9,
-      }
-
-      expect(skatepark.map_data).to eq(expected)
-    end
-
-    it 'assigns empty array as value of nearby key' do
-      skatepark = create(:skatepark)
-
-      expected = {
-        skateparks: {
-          nearby: [],
-          main: [skatepark.hashify_with_picture],
-        },
-        mapCenter: [skatepark.latitude, skatepark.longitude],
-        zoom: 9,
-      }
-
-      expect(skatepark.map_data).to eq(expected)
-    end
-  end
-
-  describe "#hashify_with_picture" do
-    it "returns a hash with skatepark data for map marker" do
-      skatepark = create(:skatepark, rating: "2.5")
-
-      expect(skatepark.hashify_with_picture).to eq(
-        slug: skatepark.to_param,
-        name: skatepark.name,
-        city: skatepark.city,
-        state: skatepark.state,
-        latitude: skatepark.latitude,
-        longitude: skatepark.longitude,
-        picture: skatepark.map_photo(:thumb),
-        rating: skatepark.rating
-      )
-    end
-  end
-
-  describe '#nearby_parks' do
-    it 'returns an array of nearby skateparks' do
-      skatepark = create(:skatepark)
-      nearby_park = create(:skatepark, :nearby)
-      far_far_away = create(:skatepark, :far)
-
-      expect(skatepark.nearby_parks).to include(nearby_park)
-      expect(skatepark.nearby_parks).to_not include(far_far_away)
-    end
-  end
-
   describe '#favorited_by?' do
     it 'returns true if skatepark has been favorited by user' do
       user = create(:user)
@@ -121,7 +61,8 @@ RSpec.describe Skatepark, type: :model do
 
   describe "#next_park" do
     it "returns the next skatepark" do
-      next_park = create(:skatepark, :washington, name: "bangcock")
+      washington = create(:location, state: "washington")
+      next_park = create(:skatepark, location: washington, name: "bangcock")
       skatepark = create(:skatepark)
 
       expect(skatepark.next_park).to eq(next_park)
@@ -136,7 +77,8 @@ RSpec.describe Skatepark, type: :model do
 
   describe "#previous_park" do
     it "returns the previous skatepark" do
-      skatepark = create(:skatepark, :oregon, name: "Xulu Testicle")
+      oregon = create(:location, state: "oregon")
+      skatepark = create(:skatepark, name: "Xulu Testicle", location: oregon)
       previous_park = create(:skatepark)
 
       expect(skatepark.previous_park).to eq(previous_park)
@@ -152,15 +94,15 @@ RSpec.describe Skatepark, type: :model do
   describe "#more_than_one_picture?" do
     it "returns true if skatepark has more than one picture" do
       skatepark = create(:skatepark)
-      skatepark_image = create(:skatepark_image, skatepark_id: skatepark.id)
-      skatepark_image_two = create(:skatepark_image, skatepark_id: skatepark.id)
+      create(:skatepark_image, skatepark_id: skatepark.id)
+      create(:skatepark_image, skatepark_id: skatepark.id)
 
       expect(skatepark.more_than_one_picture?).to eq(true)
     end
 
     it "returns false if skatepark has one or fewer pictures" do
       skatepark = create(:skatepark)
-      skatepark_image = create(:skatepark_image, skatepark_id: skatepark.id)
+      create(:skatepark_image, skatepark_id: skatepark.id)
 
       expect(skatepark.more_than_one_picture?).to eq(false)
     end
