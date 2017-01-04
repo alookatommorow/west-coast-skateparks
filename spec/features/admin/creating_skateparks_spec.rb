@@ -7,12 +7,26 @@ RSpec.feature "Admin can create skateparks" do
   end
 
   scenario "successfully" do
-    fill_in "Name", with: "Fekken Perk"
     fill_in "Address", with: "56 56th st."
     fill_in "City", with: "Modesto"
     fill_in "State", with: "Washington"
+    fill_in "Name", with: "Fekken Perk"
     fill_in "Rating", with: "5"
     fill_in "Material", with: "plexi-glass"
+    fill_in "Designer", with: "Barny Inc."
+    fill_in "Builder", with: "Bob"
+    fill_in "Opened", with: "Never."
+    fill_in "Hours", with: "12am - 6am"
+    fill_in "Size", with: "5600"
+    fill_in "Notes", with: "THIS PARK IS SICK"
+    fill_in "Info", with: "FUCK"
+    fill_in "Helmet", with: "YEE"
+    fill_in "Lights", with: "NAW"
+    fill_in "Photo cred", with: "Atiba"
+    fill_in "Photo url", with: "https://barn.com/kook.jpeg"
+    fill_in "Video url", with: "https://barn.com/kook.mp4"
+    fill_in "Obstacles", with: "Flat ground"
+
     click_button "Create Skatepark"
 
     expect(page).to have_content "Skatepark was successfully created."

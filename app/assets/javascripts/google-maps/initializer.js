@@ -149,12 +149,14 @@ function generateMap(response) {
           };
 
       for (var category in userSkateparks) {
-        var skateparks = userSkateparks[category];
+        if ({}.hasOwnProperty.call(userSkateparks, category)) { // codeclimate recommendation
+          var skateparks = userSkateparks[category];
 
-        for (var i = 0, max = skateparks.length; i < max; i++) {
-          var skatepark = skateparks[i];
-          skatepark.category = category;
-          createMarker(skatepark);
+          for (var i = 0, max = skateparks.length; i < max; i++) {
+            var skatepark = skateparks[i];
+            skatepark.category = category;
+            createMarker(skatepark);
+          }
         }
       }
     };
