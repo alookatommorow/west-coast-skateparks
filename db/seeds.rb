@@ -10,13 +10,13 @@ admin = User.create(
 
 # trashed parks for admin
 20.times do
-  admin.favorite_parks << Skatepark.find(index[:favorite] += 1)
+  admin.favorites << Skatepark.find(index[:favorite] += 1)
   admin.visited_parks << Skatepark.find(index[:visit] += 1)
 end
 
-# favorited parks for admin
+# favorites for admin
 20.times do
-  admin.favorite_parks << Skatepark.find(index[:favorite] += 1)
+  admin.favorites << Skatepark.find(index[:favorite] += 1)
   index[:visit] += 1
 end
 

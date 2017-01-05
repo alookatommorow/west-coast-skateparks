@@ -10,8 +10,8 @@ class SkateparkDashboard < Administrate::BaseDashboard
   ATTRIBUTE_TYPES = {
     hero: PaperclipField,
     map_photo: PaperclipField,
-    favorites: Field::HasMany,
-    users_who_faved: Field::HasMany.with_options(class_name: "User"),
+    # favorites: Field::HasMany,
+    # users_who_faved: Field::HasMany.with_options(class_name: "User"),
     visits: Field::HasMany,
     users_who_visited: Field::HasMany.with_options(class_name: "User"),
     ratings: Field::HasMany,
@@ -51,15 +51,15 @@ class SkateparkDashboard < Administrate::BaseDashboard
   COLLECTION_ATTRIBUTES = [
     :location,
     :name,
-    :favorites,
+    # :favorites,
     :visits,
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = [
-    :favorites,
-    :users_who_faved,
+    # :favorites,
+    # :users_who_faved,
     :visits,
     :users_who_visited,
     :ratings,

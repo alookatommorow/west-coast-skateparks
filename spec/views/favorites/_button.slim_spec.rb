@@ -1,27 +1,26 @@
 require "rails_helper"
 
 RSpec.describe "/favorites/_button.slim", type: :view do
+  let(:user) { create(:user) }
+  let(:skatepark) { create(:skatepark) }
+
   it "renders Favorite button if favorite does not exist" do
     render partial: "button", locals: {
-      favorite: nil,
-      user: create(:user),
-      skatepark: create(:skatepark),
+      user: user,
+      skatepark: skatepark,
     }
 
     expect(rendered).to match(/Favorite/)
-    expect(rendered).not_to match(/delete/)
   end
 
   it "renders Unfavorite button if favorite exists" do
-    favorite = create(:favorite)
+    user.favorites << skatepark
 
     render partial: "button", locals: {
-      favorite: favorite,
-      user: favorite.user,
-      skatepark: favorite.skatepark,
+      user: user,
+      skatepark: skatepark,
     }
 
     expect(rendered).to match(/Unfavorite/)
-    expect(rendered).to match(/delete/)
   end
 end

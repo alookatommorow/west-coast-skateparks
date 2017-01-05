@@ -29,20 +29,6 @@ RSpec.describe User, type: :model do
     end
   end
 
-  describe '#favorites?' do
-    it 'returns true if user has favorites' do
-      user = create(:favorite).user
-
-      expect(user.favorites?).to eq(true)
-    end
-
-    it 'returns false if user does not have favorites' do
-      user = build(:user)
-
-      expect(user.favorites?).to eq(false)
-    end
-  end
-
   describe '#visits?' do
     it 'returns true if user has visits' do
       user = create(:visit).user
@@ -54,16 +40,6 @@ RSpec.describe User, type: :model do
       user = build(:user)
 
       expect(user.visits?).to eq(false)
-    end
-  end
-
-  describe '#favorite_parks' do
-    it "returns user's favorited parks" do
-      user = create(:user)
-      skatepark = create(:favorite, user: user).skatepark
-
-      fav_park = user.favorite_parks.first
-      expect(fav_park).to eq(skatepark)
     end
   end
 end

@@ -6,10 +6,10 @@ RSpec.describe Users::MapsController, type: :controller do
       user = create(:user)
       skateparks = create_list(:skatepark, 3)
 
-      create(:favorite, user: user, skatepark: skateparks.first)
+      user.favorites << skateparks.first
       create(:visit, user: user, skatepark: skateparks.second)
 
-      create(:favorite, user: user, skatepark: skateparks.third)
+      user.favorites << skateparks.third
       create(:visit, user: user, skatepark: skateparks.third)
 
       expected = {

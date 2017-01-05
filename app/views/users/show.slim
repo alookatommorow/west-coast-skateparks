@@ -14,7 +14,7 @@
     .favorites
       h4 Favorites
       .divided.selection.list
-        - @user.favorite_parks.each do |park|
+        - @user.favorites.each do |park|
           = link_to park, class: "item" do
             .link-section
               .city= park.city.titleize + ", " + state_abbrev[park.state]

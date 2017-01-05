@@ -4,8 +4,7 @@ class Skatepark < ActiveRecord::Base
 
   validates :name, presence: true
 
-  has_many :favorites, dependent: :destroy
-  has_many :users_who_faved, through: :favorites, source: :user
+  has_and_belongs_to_many :favoriters, join_table: "favorites", class_name: "User"
   has_many :visits, dependent: :destroy
   has_many :users_who_visited, through: :visits, source: :user
   has_many :ratings, dependent: :destroy

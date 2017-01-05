@@ -29,7 +29,7 @@
           visit: @visit, user: current_user, skatepark: @skatepark
       .favorite.button-container data-ajax-container=true
         = render "favorites/button",
-          favorite: @favorite, user: current_user, skatepark: @skatepark
+          user: current_user, skatepark: @skatepark
   .divider
   .address-container
     .address

@@ -18,7 +18,7 @@ module AnalyticsHelper
       skatepark_name: skatepark.name,
       city: skatepark.city,
       state: skatepark.state,
-      favorite_count: skatepark.favorites.count,
+      favorite_count: skatepark.favoriters.count,
       visit_count: skatepark.visits.count,
       admin_rating: skatepark.rating,
     }.to_json

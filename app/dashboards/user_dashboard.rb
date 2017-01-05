@@ -17,8 +17,8 @@ class UserDashboard < Administrate::BaseDashboard
     admin: Field::Boolean,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
-    favorite_parks: Field::HasMany.with_options(class_name: "Skatepark"),
-    visited_parks: Field::HasMany.with_options(class_name: "Skatepark")
+    # favorites: Field::HasMany.with_options(join_table: "favorites", class_name: "Skatepark"),
+    # visited_parks: Field::HasMany.with_options(class_name: "Skatepark"),
   }
 
   # COLLECTION_ATTRIBUTES
@@ -30,7 +30,7 @@ class UserDashboard < Administrate::BaseDashboard
     :avatar,
     :id,
     :username,
-    :email
+    :email,
   ]
 
   # SHOW_PAGE_ATTRIBUTES
@@ -46,13 +46,13 @@ class UserDashboard < Administrate::BaseDashboard
     :email,
     :admin,
     :ratings,
-    :reviews
+    :reviews,
   ]
 
   # Overwrite this method to customize how users are displayed
   # across all pages of the admin dashboard.
   #
-  # def display_resource(user)
-  #   "User ##{user.id}"
-  # end
+  def display_resource(user)
+    "#{user.name} (#{user.email})"
+  end
 end

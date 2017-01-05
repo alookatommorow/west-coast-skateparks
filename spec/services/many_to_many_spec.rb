@@ -3,15 +3,6 @@ require 'rails_helper'
 
 RSpec.describe ManyToMany do
   describe '.create' do
-    it 'creates an ActiveRecord object with appropriate foreign keys' do
-      user = create(:user)
-      skatepark = create(:skatepark)
-      ManyToMany.create(Favorite, {user_id: user.id, skatepark_id: skatepark.id})
-
-      expect(Favorite.last.user_id).to eq(user.id)
-      expect(Favorite.last.skatepark_id).to eq(skatepark.id)
-    end
-
     it 'creates an ActiveRecord object with foreign keys and named attribute' do
       user = create(:user)
       skatepark = create(:skatepark)
