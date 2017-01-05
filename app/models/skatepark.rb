@@ -4,10 +4,11 @@ class Skatepark < ActiveRecord::Base
 
   validates :name, presence: true
 
-  has_and_belongs_to_many :favoriters, join_table: "favorites", class_name: "User"
-  has_and_belongs_to_many :visitors, join_table: "visits", class_name: "User"
-  # has_many :visits, dependent: :destroy
-  has_many :users_who_visited, through: :visits, source: :user
+  has_and_belongs_to_many :favoriters,
+    join_table: "favorites", class_name: "User", dependent: :destroy
+  has_and_belongs_to_many :visitors,
+    join_table: "visits", class_name: "User", dependent: :destroy
+
   has_many :ratings, dependent: :destroy
   has_many :users_who_rated, through: :ratings, source: :user
   has_many :reviews, dependent: :destroy
@@ -35,14 +36,6 @@ class Skatepark < ActiveRecord::Base
 
   def self.in_order
     includes(:location).order("locations.state", "locations.city", :name)
-  end
-
-  def favorited_by?(user)
-    users_who_faved.include?(user)
-  end
-
-  def visited_by?(user)
-    users_who_visited.include?(user)
   end
 
   def ratings?

@@ -10,24 +10,15 @@ class User < ActiveRecord::Base
   has_and_belongs_to_many :visits,
     join_table: "visits", class_name: "Skatepark", dependent: :destroy
 
-  # has_many :visits, dependent: :destroy
-  # has_many :visited_parks, through: :visits, source: :skatepark
-
   has_many :ratings, dependent: :destroy
   has_many :rated_parks, through: :ratings, source: :skatepark
 
   has_many :reviews, dependent: :destroy
   has_many :reviewed_parks, through: :reviews, source: :skatepark
 
-  has_attached_file(
-    :avatar,
-    styles: { thumb: '100x100>' },
+  has_attached_file(:avatar, styles: { thumb: '100x100>' },
     default_url: 'https://33.media.tumblr.com/avatar_ee7f0ba1cb58_128.png')
   validates_attachment_content_type :avatar, content_type: /\Aimage/
-
-  def admin?
-    admin
-  end
 
   def display_name
     name ? name : username
@@ -39,9 +30,5 @@ class User < ActiveRecord::Base
 
   def has_visited?(skatepark_id)
     visits.exists?(skatepark_id)
-  end
-
-  def visits?
-    visits.any?
   end
 end
