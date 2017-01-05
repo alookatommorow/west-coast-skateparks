@@ -25,7 +25,7 @@
     .visits
       h4 Visits
       .divided.selection.list
-        - @user.visited_parks.each do |park|
+        - @user.visits.each do |park|
           = link_to park, class: "item" do
             .link-section
               .city= park.city.titleize + ", " + state_abbrev[park.state]

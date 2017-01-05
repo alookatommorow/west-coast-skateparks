@@ -28,18 +28,4 @@ RSpec.describe User, type: :model do
       expect(user.admin?).to eq(false)
     end
   end
-
-  describe '#visits?' do
-    it 'returns true if user has visits' do
-      user = create(:visit).user
-
-      expect(user.visits?).to eq(true)
-    end
-
-    it 'returns false if user does not have visits' do
-      user = build(:user)
-
-      expect(user.visits?).to eq(false)
-    end
-  end
 end

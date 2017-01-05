@@ -35,16 +35,4 @@ RSpec.describe ManyToMany do
       expect(Rating.last.rating).to eq(2)
     end
   end
-
-  describe '.destroy' do
-    it 'destroys the ManyToMany' do
-      user = create(:user)
-      skatepark = create(:skatepark)
-      visit = create(:visit, skatepark_id: skatepark.id, user_id: user.id)
-
-      ManyToMany.destroy(Visit, skatepark_id: skatepark.id, user_id: user.id)
-
-      expect(Visit.find_by(id: visit.id)).to eq(nil)
-    end
-  end
 end

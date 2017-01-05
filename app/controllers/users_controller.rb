@@ -31,7 +31,11 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.includes(favorites: :location, visited_parks: :location).find(params[:id])
+    @user = User.includes(
+      favorites: :location,
+      visits: :location,
+    ).find(params[:id])
+
     flash.now[:notice] = "Welcome, #{@user.display_name}" if params[:from_vendor]
   end
 

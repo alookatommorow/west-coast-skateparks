@@ -150,7 +150,7 @@ function generateMap(response) {
           createMarker = this.createMarker.bind(this),
           userSkateparks = {
             favorite: user.favorites,
-            visited: user.visited_parks,
+            visited: user.visits,
             both: user.dups
           };
 

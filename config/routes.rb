@@ -1,15 +1,14 @@
 Rails.application.routes.draw do
+  scope module: "buttercms" do
+    get "/categories/:slug" => "categories#show", :as => :buttercms_category
+    get "/author/:slug" => "authors#show", :as => :buttercms_author
 
-  scope :module => 'buttercms' do
-    get '/categories/:slug' => 'categories#show', :as => :buttercms_category
-    get '/author/:slug' => 'authors#show', :as => :buttercms_author
+    get "/news/rss" => "feeds#rss", :format => "rss", :as => :buttercms_blog_rss
+    get "/news/atom" => "feeds#atom", :format => "atom", :as => :buttercms_blog_atom
+    get "/news/sitemap.xml" => "feeds#sitemap", :format => "xml", :as => :buttercms_blog_sitemap
 
-    get '/news/rss' => 'feeds#rss', :format => 'rss', :as => :buttercms_blog_rss
-    get '/news/atom' => 'feeds#atom', :format => 'atom', :as => :buttercms_blog_atom
-    get '/news/sitemap.xml' => 'feeds#sitemap', :format => 'xml', :as => :buttercms_blog_sitemap
-
-    get '/news(/page/:page)' => 'posts#index', :defaults => {:page => 1}, :as => :buttercms_blog
-    get '/news/:slug' => 'posts#show', :as => :buttercms_post
+    get "/news(/page/:page)" => "posts#index", :defaults => { page: 1 }, :as => :buttercms_blog
+    get "/news/:slug" => "posts#show", :as => :buttercms_post
   end
 
   namespace :admin do
@@ -47,8 +46,10 @@ Rails.application.routes.draw do
     member do
       patch :favorite
       patch :unfavorite
+
+      patch :visit
+      patch :unvisit
     end
-    resources :visits, only: %i(create destroy)
   end
 
   resources :ratings, only: :create

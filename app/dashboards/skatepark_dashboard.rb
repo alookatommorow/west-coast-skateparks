@@ -12,8 +12,8 @@ class SkateparkDashboard < Administrate::BaseDashboard
     map_photo: PaperclipField,
     # favorites: Field::HasMany,
     # users_who_faved: Field::HasMany.with_options(class_name: "User"),
-    visits: Field::HasMany,
-    users_who_visited: Field::HasMany.with_options(class_name: "User"),
+    # visits: Field::HasMany,
+    # users_who_visited: Field::HasMany.with_options(class_name: "User"),
     ratings: Field::HasMany,
     users_who_rated: Field::HasMany.with_options(class_name: "User"),
     reviews: Field::HasMany,
@@ -49,10 +49,12 @@ class SkateparkDashboard < Administrate::BaseDashboard
   # By default, it's limited to four items to reduce clutter on index pages.
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = [
-    :location,
+    :id,
+    :map_photo,
     :name,
+    :location,
     # :favorites,
-    :visits,
+    # :visits,
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
@@ -60,8 +62,8 @@ class SkateparkDashboard < Administrate::BaseDashboard
   SHOW_PAGE_ATTRIBUTES = [
     # :favorites,
     # :users_who_faved,
-    :visits,
-    :users_who_visited,
+    # :visits,
+    # :users_who_visited,
     :ratings,
     :users_who_rated,
     :reviews,

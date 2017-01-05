@@ -7,10 +7,10 @@ RSpec.describe Users::MapsController, type: :controller do
       skateparks = create_list(:skatepark, 3)
 
       user.favorites << skateparks.first
-      create(:visit, user: user, skatepark: skateparks.second)
+      user.visits << skateparks.second
 
       user.favorites << skateparks.third
-      create(:visit, user: user, skatepark: skateparks.third)
+      user.visits << skateparks.third
 
       expected = {
         user: UserSerializer.new(user),

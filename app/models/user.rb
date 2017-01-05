@@ -5,10 +5,13 @@ class User < ActiveRecord::Base
   validates :username, :email, uniqueness: true
   validates_format_of :email, with: /\A.+@.+\..{2,}\z/
 
-  has_and_belongs_to_many :favorites, join_table: "favorites", class_name: "Skatepark"
+  has_and_belongs_to_many :favorites,
+    join_table: "favorites", class_name: "Skatepark", dependent: :destroy
+  has_and_belongs_to_many :visits,
+    join_table: "visits", class_name: "Skatepark", dependent: :destroy
 
-  has_many :visits, dependent: :destroy
-  has_many :visited_parks, through: :visits, source: :skatepark
+  # has_many :visits, dependent: :destroy
+  # has_many :visited_parks, through: :visits, source: :skatepark
 
   has_many :ratings, dependent: :destroy
   has_many :rated_parks, through: :ratings, source: :skatepark
@@ -30,8 +33,12 @@ class User < ActiveRecord::Base
     name ? name : username
   end
 
-  def has_favorite?(skatepark_id)
+  def has_favorited?(skatepark_id)
     favorites.exists?(skatepark_id)
+  end
+
+  def has_visited?(skatepark_id)
+    visits.exists?(skatepark_id)
   end
 
   def visits?

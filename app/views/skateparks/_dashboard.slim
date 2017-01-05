@@ -25,11 +25,9 @@
     .divider
     #user-actions
       .visit.button-container data-ajax-container=true
-        = render "visits/button",
-          visit: @visit, user: current_user, skatepark: @skatepark
+        = render "visits/button", user: current_user, skatepark: @skatepark
       .favorite.button-container data-ajax-container=true
-        = render "favorites/button",
-          user: current_user, skatepark: @skatepark
+        = render "favorites/button", user: current_user, skatepark: @skatepark
   .divider
   .address-container
     .address

@@ -1,9 +1,10 @@
 class SkateparksController < ApplicationController
+  before_action :set_skatepark, only: %i(favorite unfavorite visit unvisit)
+
   def show
     @skatepark = SkateparkPresenter.new(
       Skatepark.includes({ reviews: :user }, :ratings).find(params[:id])
     )
-    assign_associations
   end
 
   def index
@@ -11,15 +12,23 @@ class SkateparksController < ApplicationController
   end
 
   def favorite
-    @skatepark = Skatepark.find(params[:id])
     @skatepark.favoriters << current_user
     render_favorite_button
   end
 
   def unfavorite
-    @skatepark = Skatepark.find(params[:id])
     @skatepark.favoriters.destroy(current_user)
     render_favorite_button
+  end
+
+  def visit
+    @skatepark.visitors << current_user
+    render_visit_button
+  end
+
+  def unvisit
+    @skatepark.visitors.destroy(current_user)
+    render_visit_button
   end
 
   private
@@ -31,9 +40,14 @@ class SkateparksController < ApplicationController
       }
     end
 
-    def assign_associations
-      if logged_in?
-        @visit = current_user.visits.where(skatepark_id: @skatepark.id).take
-      end
+    def render_visit_button
+      render partial: "visits/button", locals: {
+        user: current_user,
+        skatepark: @skatepark,
+      }
+    end
+
+    def set_skatepark
+      @skatepark = Skatepark.find(params[:id])
     end
 end
