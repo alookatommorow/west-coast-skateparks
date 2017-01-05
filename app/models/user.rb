@@ -20,15 +20,15 @@ class User < ActiveRecord::Base
     default_url: 'https://33.media.tumblr.com/avatar_ee7f0ba1cb58_128.png')
   validates_attachment_content_type :avatar, content_type: /\Aimage/
 
-  def display_name
-    name ? name : username
-  end
-
   def has_favorited?(skatepark_id)
     favorites.exists?(skatepark_id)
   end
 
   def has_visited?(skatepark_id)
     visits.exists?(skatepark_id)
+  end
+
+  def to_s
+    name ? name : username
   end
 end

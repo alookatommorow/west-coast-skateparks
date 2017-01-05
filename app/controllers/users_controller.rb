@@ -36,7 +36,7 @@ class UsersController < ApplicationController
       visits: :location,
     ).find(params[:id])
 
-    flash.now[:notice] = "Welcome, #{@user.display_name}" if params[:from_vendor]
+    flash.now[:notice] = "Welcome, #{@user}" if params[:from_vendor]
   end
 
   private
