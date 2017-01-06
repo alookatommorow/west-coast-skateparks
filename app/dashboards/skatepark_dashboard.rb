@@ -10,10 +10,6 @@ class SkateparkDashboard < Administrate::BaseDashboard
   ATTRIBUTE_TYPES = {
     hero: PaperclipField,
     map_photo: PaperclipField,
-    favorites: Field::HasMany,
-    users_who_faved: Field::HasMany.with_options(class_name: "User"),
-    visits: Field::HasMany,
-    users_who_visited: Field::HasMany.with_options(class_name: "User"),
     ratings: Field::HasMany,
     users_who_rated: Field::HasMany.with_options(class_name: "User"),
     reviews: Field::HasMany,
@@ -39,6 +35,8 @@ class SkateparkDashboard < Administrate::BaseDashboard
     video_url: Field::String,
     num_pics: Field::Number,
     obstacles: Field::Text,
+    favoriters: Field::HasMany.with_options(class_name: "User"),
+    visitors: Field::HasMany.with_options(class_name: "User"),
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
   }.freeze
@@ -49,19 +47,15 @@ class SkateparkDashboard < Administrate::BaseDashboard
   # By default, it's limited to four items to reduce clutter on index pages.
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = [
-    :location,
+    :id,
+    :map_photo,
     :name,
-    :favorites,
-    :visits,
+    :location,
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = [
-    :favorites,
-    :users_who_faved,
-    :visits,
-    :users_who_visited,
     :ratings,
     :users_who_rated,
     :reviews,
@@ -86,6 +80,8 @@ class SkateparkDashboard < Administrate::BaseDashboard
     :video_url,
     :num_pics,
     :obstacles,
+    :favoriters,
+    :visitors,
     :created_at,
     :updated_at,
 

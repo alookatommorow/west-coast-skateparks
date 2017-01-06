@@ -1,15 +1,16 @@
 .button-loading-container
   .loading-icon
-- if favorite.present?
-  = form_for [skatepark, favorite],
-    method: :delete,
+- if user.try(:has_favorited?, skatepark.id)
+  = form_tag unfavorite_skatepark_path(skatepark),
+    method: :patch,
     data: { ajax_button: true } do
       button.basic-button
         i.fa.fa-heart-o
         p Unfavorite
 - else
-  = form_for [skatepark, Favorite.new],
+  = form_tag favorite_skatepark_path(skatepark),
+    method: :patch,
     data: { ajax_button: true } do
-      button.basic-button
-        i.fa.red.fa-heart
-        p Favorite
+    button.basic-button
+      i.fa.red.fa-heart
+      p Favorite

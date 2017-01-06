@@ -1,40 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe Skatepark, type: :model do
-  describe '#favorited_by?' do
-    it 'returns true if skatepark has been favorited by user' do
-      user = create(:user)
-      skatepark = create(:skatepark)
-      create(:favorite, user_id: user.id, skatepark_id: skatepark.id)
-
-      expect(skatepark.favorited_by?(user)).to be true
-    end
-
-    it 'returns false if skatepark has not been favorited by user' do
-      user = create(:user)
-      skatepark = create(:skatepark)
-
-      expect(skatepark.favorited_by?(user)).to be false
-    end
-  end
-
-  describe '#visited_by?' do
-    it 'returns true if skatepark has been visited by user' do
-      user = create(:user)
-      skatepark = create(:skatepark)
-      create(:visit, user_id: user.id, skatepark_id: skatepark.id)
-
-      expect(skatepark.visited_by?(user)).to be true
-    end
-
-    it 'returns false if skatepark has not been visited by user' do
-      user = create(:user)
-      skatepark = create(:skatepark)
-
-      expect(skatepark.visited_by?(user)).to be false
-    end
-  end
-
   describe '#ratings?' do
     it 'returns true when a skatepark has ratings' do
       user = create(:user)

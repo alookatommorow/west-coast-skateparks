@@ -8,17 +8,16 @@ class UserDashboard < Administrate::BaseDashboard
   # which determines how the attribute is displayed
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
-    avatar: PaperclipField,
-    ratings: Field::HasMany,
-    reviews: Field::HasMany,
     id: Field::Number,
+    avatar: PaperclipField,
     username: Field::String,
     email: Field::String,
     admin: Field::Boolean,
+    favorites: Field::HasMany.with_options(class_name: "Skatepark"),
+    visits: Field::HasMany.with_options(class_name: "Skatepark"),
+    ratings: Field::HasMany,
+    reviews: Field::HasMany,
     created_at: Field::DateTime,
-    updated_at: Field::DateTime,
-    favorite_parks: Field::HasMany.with_options(class_name: "Skatepark"),
-    visited_parks: Field::HasMany.with_options(class_name: "Skatepark")
   }
 
   # COLLECTION_ATTRIBUTES
@@ -27,10 +26,11 @@ class UserDashboard < Administrate::BaseDashboard
   # By default, it's limited to four items to reduce clutter on index pages.
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = [
-    :avatar,
     :id,
+    :avatar,
     :username,
-    :email
+    :favorites,
+    :visits,
   ]
 
   # SHOW_PAGE_ATTRIBUTES
@@ -45,14 +45,13 @@ class UserDashboard < Administrate::BaseDashboard
     :username,
     :email,
     :admin,
-    :ratings,
-    :reviews
   ]
 
   # Overwrite this method to customize how users are displayed
   # across all pages of the admin dashboard.
   #
-  # def display_resource(user)
-  #   "User ##{user.id}"
-  # end
+  def display_resource(user)
+    name = user.name.present? ? "#{user.name} " : ""
+    name + "(#{user.email})"
+  end
 end

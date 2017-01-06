@@ -7,11 +7,11 @@ RSpec.describe SessionsController, type: :controller do
 
       post :create, session: {
         username: user.username,
-        password: user.password
+        password: user.password,
       }
 
       expect(session[:id]).to eq(user.id)
-      expect(flash[:notice]).to eq("Welcome, #{user.display_name}")
+      expect(flash[:notice]).to eq("Welcome, #{user}")
     end
 
     it 'flashes like a bitch if it shits the bed' do
@@ -19,7 +19,7 @@ RSpec.describe SessionsController, type: :controller do
 
       post :create, session: {
         username: user.username,
-        password: user.password
+        password: user.password,
       }
 
       expect(session[:id]).to be_nil

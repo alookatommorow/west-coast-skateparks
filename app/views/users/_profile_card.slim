@@ -4,7 +4,7 @@
   .content
     .header= @user.username
     .meta
-      p.name= @user.display_name
+      p.name= @user
       p.date Joined #{@user.created_at.strftime("%Y")}
   .extra.content
     .user-stat

@@ -1,14 +1,15 @@
 .button-loading-container
   .loading-icon
-- if visit.present?
-  = form_for [skatepark, visit],
-    method: :delete,
+- if user.try(:has_visited?, skatepark.id)
+  = form_tag unvisit_skatepark_path(skatepark),
+    method: :patch,
     data: { ajax_button: true } do
     button.basic-button
         i.fa.fa-remove.red
         p.inline-block Never Been Here
 - else
-  = form_for [skatepark, Visit.new],
+  = form_tag visit_skatepark_path(skatepark),
+    method: :patch,
     data: { ajax_button: true } do
     button.basic-button
         i.fa.fa-check.green

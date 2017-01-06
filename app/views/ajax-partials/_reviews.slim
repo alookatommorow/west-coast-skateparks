@@ -4,7 +4,7 @@ h4 Reviews
     .avatar
       img src="#{review.user.avatar.url(:thumb)}"
     .content
-      .author= review.user.display_name
+      .author= review.user
       .metadata
         .date= review.created_at.strftime("%m/%d/%y")
       .text= review.review
