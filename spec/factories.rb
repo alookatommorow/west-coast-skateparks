@@ -3,21 +3,16 @@ FactoryGirl.define do
     sequence(:name) { |i| "cribbage#{i}" }
     num_pics 3
     location
-    after(:build) do |skatepark|
-      skatepark.class.skip_callback(:create, :after, :associate_neigbor_parks)
-    end
 
     trait :nearby do
       after(:build) do |skatepark|
         skatepark.location = build(:location, :nearby)
-        skatepark.class.skip_callback(:create, :after, :associate_neigbor_parks)
       end
     end
 
     trait :far do
       after(:build) do |skatepark|
         skatepark.location = build(:location, :far)
-        skatepark.class.skip_callback(:create, :after, :associate_neigbor_parks)
       end
     end
 
