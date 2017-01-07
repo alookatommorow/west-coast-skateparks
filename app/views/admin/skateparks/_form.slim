@@ -1,7 +1,7 @@
 = form_for([namespace, page.resource], class: "form") do |f|
   - if page.resource.errors.any?
     #error_explanation
-      h2 #{pluralize(page.resource.errors.count, "error")} prohibited this 
+      h2 #{pluralize(page.resource.errors.count, "error")} prohibited this
         #{page.resource_name} from being saved:
       ul
         - page.resource.errors.full_messages.each do |message|
@@ -9,7 +9,14 @@
 
   = f.fields_for(:location, page.resource.location) do |ff|
     - ["Address", "City", "State", "Zip Code", "Latitude", "Longitude"].each do |attribute|
-      = nested_attribute_field_for(attribute, ff)
+      - if attribute == "State"
+        .field-unit.field-unit--select
+          .field-unit__label
+            = ff.label :state
+          .field-unit__field
+            = ff.select :state, ["california", "oregon"]
+      - else
+        = nested_attribute_field_for(attribute, ff)
 
   - page.attributes.each do |attribute|
     div class=["field-unit", "field-unit--#{attribute.html_class}"]
