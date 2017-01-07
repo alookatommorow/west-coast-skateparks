@@ -8,7 +8,11 @@ RSpec.describe Skateparks::StatesController, type: :controller do
     let!(:or_skateparks) { create_list(:skatepark, 3, location: oregon) }
 
     it 'renders the _state partial' do
-      expect(get :show, state: 'oregon').to render_template('_state')
+      expect(get :show,
+        params: {
+          state: 'oregon'
+        }
+      ).to render_template('_state')
     end
 
     context "with skateparks in different states" do
@@ -16,7 +20,9 @@ RSpec.describe Skateparks::StatesController, type: :controller do
       let!(:wa_skatepark) { create(:skatepark, location: washington) }
 
       it 'renders the skateparks in a state (paginated)' do
-        get :show, state: 'oregon', page: 1
+        get :show, params: {
+          state: 'oregon', page: 1
+        }
 
         or_skateparks.each do |sp|
           expect(response.body).to include(sp.city.titleize)

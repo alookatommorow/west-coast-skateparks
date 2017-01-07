@@ -17,7 +17,9 @@ RSpec.describe Users::MapsController, type: :controller do
         zoom: 6,
       }.to_json
 
-      get :show, user_id: user.id
+      get :show, params: {
+        user_id: user.id
+      }
       expect(response.body).to eq(expected)
     end
   end

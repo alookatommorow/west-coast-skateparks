@@ -11,7 +11,7 @@ RSpec.describe Vendor::SessionsController do
         avatar: 'http://government-cheese.gov/test_image.png'
       }
 
-      post :create, vendor_auth_params
+      post :create, params: vendor_auth_params
 
       expect(User.last.name).to eq('DudeBroMan')
       expect(User.last.email).to eq('cheeselover@swag.net')
@@ -24,7 +24,9 @@ RSpec.describe Vendor::SessionsController do
     it 'signs in a user if one can be found by email' do
       user = create(:user)
 
-      post :create, email: user.email
+      post :create, params: {
+        email: user.email
+      }
 
       expect(session[:id]).to eq(user.id)
       expect(response.body).to eq(user.id.to_json)
@@ -38,7 +40,7 @@ RSpec.describe Vendor::SessionsController do
           email: nil
         }
 
-        expect(post :create, vendor_auth_params).to render_template('_flashes')
+        expect(post :create, params: vendor_auth_params).to render_template('_flashes')
         expect(flash[:error]).to eq('No email detected, please create an account or add email to your Facebook')
       end
     end

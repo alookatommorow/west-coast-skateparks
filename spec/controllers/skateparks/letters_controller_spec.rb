@@ -6,7 +6,9 @@ RSpec.describe Skateparks::LettersController, type: :controller do
   describe "#show" do
     it "renders skatepark table" do
       expect(
-        get :show, state_id: "rancho cookamonga", letter: "bitch", page: 1
+        get :show, params: {
+          state_id: "rancho cookamonga", letter: "bitch", page: 1
+        }
       ).to render_template("_state")
     end
 
@@ -19,7 +21,9 @@ RSpec.describe Skateparks::LettersController, type: :controller do
       skatepark_a_washington = create(:skatepark, location: assholeland)
       skatepark_b = create(:skatepark, location: butteholeland)
 
-      get :show, state_id: "oregon", letter: "a", page: 1
+      get :show, params: {
+        state_id: "oregon", letter: "a", page: 1
+      }
 
       expect(response.body).to include("Oregon")
       expect(response.body).to include(skatepark_a.name.titleize)
