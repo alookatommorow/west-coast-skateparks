@@ -14,7 +14,7 @@
           .field-unit__label
             = ff.label :state
           .field-unit__field
-            = ff.select :state, ["california", "oregon"]
+            = ff.select :state, ["california", "oregon", "washington"]
       - else
         = nested_attribute_field_for(attribute, ff)
 

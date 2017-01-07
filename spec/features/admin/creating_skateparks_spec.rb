@@ -9,9 +9,9 @@ RSpec.feature "Admin can create skateparks" do
   scenario "successfully" do
     fill_in "Address", with: "56 56th st."
     fill_in "City", with: "Modesto"
-    fill_in "State", with: "Washington"
+    select "washington", from: "State"
     fill_in "Name", with: "Fekken Perk"
-    fill_in "Rating", with: "5"
+    select "5", from: "Rating"
     fill_in "Material", with: "plexi-glass"
     fill_in "Designer", with: "Barny Inc."
     fill_in "Builder", with: "Bob"
@@ -33,14 +33,14 @@ RSpec.feature "Admin can create skateparks" do
     expect(page).to have_content "Fekken Perk"
     expect(page).to have_content "56 56th st."
     expect(page).to have_content "Modesto"
-    expect(page).to have_content "Washington"
+    expect(page).to have_content "washington"
     expect(page).to have_content "plexi-glass"
   end
 
   scenario "with incomplete location" do
     fill_in "Name", with: "Nowhere park"
-    fill_in "Rating", with: "5"
-    fill_in "State", with: "California"
+    select "5", from: "Rating"
+    select "california", from: "State"
     click_button "Create Skatepark"
 
     expect(page).to have_content "Location city can't be blank"
@@ -60,7 +60,7 @@ RSpec.feature "Admin can create skateparks" do
     scenario "neighbor parks are automatically associated" do
       fill_in "Name", with: "Fekken Perk"
       fill_in "City", with: "San Francisco"
-      fill_in "State", with: "California"
+      select "california", from: "State"
       fill_in "Latitude", with: 9.9999
       fill_in "Longitude", with: -12.2666
       click_button "Create Skatepark"
