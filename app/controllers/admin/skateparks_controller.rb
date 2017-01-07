@@ -37,6 +37,8 @@ module Admin
           :opened,
           :hours,
           :size,
+          :hero,
+          :map_photo,
           :notes,
           :info,
           :helmet,

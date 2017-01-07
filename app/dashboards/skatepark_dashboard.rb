@@ -19,7 +19,7 @@ class SkateparkDashboard < Administrate::BaseDashboard
     id: Field::Number,
     name: Field::String,
     identifier: Field::String,
-    rating: Field::String,
+    rating: Field::Select.with_options(collection: ["1", "1.5", "2", "2.5", "3", "3.5", "4", "4.5", "5"]),
     material: Field::String,
     designer: Field::String,
     builder: Field::String,
