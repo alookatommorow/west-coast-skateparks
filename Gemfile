@@ -1,6 +1,6 @@
 source "https://rubygems.org"
 ruby "2.2.3"
-gem "rails", "4.2.7.1"
+gem "rails", "5.0.1"
 
 gem "active_model_serializers", "~> 0.10.0"
 gem "administrate", "~> 0.3.0"
@@ -39,7 +39,6 @@ end
 group :development do
   gem "bullet"
   gem "spring-commands-rspec"
-  gem "quiet_assets"
   gem "web-console", "~> 3.1.1"
 end
 
@@ -68,5 +67,6 @@ group :test do
   gem "factory_girl_rails"
   gem "database_cleaner"
   gem "rake"
+  gem "rails-controller-testing"
   gem "webmock"
 end
