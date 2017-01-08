@@ -34,6 +34,11 @@
       justify-content: space-around;
       margin-top: 15px;
 
+      /* this captures #toggle-visited-container, #toggle-favorite-container etc */
+      > div {
+        display: none;
+      }
+
       .basic-button {
         border-radius: 0;
         background-color: $blue;

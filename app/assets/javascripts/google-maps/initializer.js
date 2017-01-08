@@ -10,7 +10,6 @@ function initMap() {
     });
 }
 
-
 function generateMap(response) {
   var MAPBUILDER = (function () {
     var builder = {},
@@ -56,7 +55,7 @@ function generateMap(response) {
       var categorizedMarkers = this.categorizedMarkers,
           categories = Object.keys(categorizedMarkers);
 
-      categories.forEach(function (category) { 
+      categories.forEach(function (category) {
         var buttonId = "#toggle-" + category;
 
         $(document).on('click', buttonId, function (event) {
@@ -87,7 +86,7 @@ function generateMap(response) {
       var categorizedMarkers = this.categorizedMarkers;
       for (var category in categorizedMarkers) {
         if (categorizedMarkers[category].length > 0) {
-          $('#toggle-'+category+'-container').removeClass('hidden').addClass('inline-block');
+          $('#toggle-'+category+'-container').show();
         }
       }
     };
