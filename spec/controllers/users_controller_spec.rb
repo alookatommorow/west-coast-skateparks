@@ -6,12 +6,16 @@ RSpec.describe UsersController, type: :controller do
       it 'ejaculates in their face with a flash error' do
         user = create(:user)
 
-        get :show, id: user.id + 1
+        get :show, params: {
+          id: user.id + 1
+        }
 
         expect(flash[:error]).to eq("Sign in to see your profile")
 
         session[:id] = user.id
-        get :show, id: user.id + 1
+        get :show, params: {
+          id: user.id + 1
+        }
 
         expect(flash[:error]).to eq("That's not your profile")
       end
@@ -20,12 +24,13 @@ RSpec.describe UsersController, type: :controller do
 
   describe "#create" do
     it "sets flash[:signed_up] to true for analytics" do
-      post :create,
+      post :create, params: {
         user: {
           username: "buttstuff",
           email: "sacklick@69.gmail.com",
           password: "FUCKUBRO",
         }
+      }
 
       expect(flash[:signed_up]).to eq(true)
     end
@@ -37,10 +42,12 @@ RSpec.describe UsersController, type: :controller do
         user = create(:user)
         session[:id] = user.id
 
-        put :update, id: user.id,
+        put :update, params: {
+          id: user.id,
           user: {
             username: "butthead",
           }
+        }
 
         expect(flash[:notice]).to eq("Righteous.")
         expect(response).to redirect_to(user)
@@ -51,10 +58,12 @@ RSpec.describe UsersController, type: :controller do
         user = create(:user)
         session[:id] = user.id
 
-        put :update, id: user.id,
+        put :update, params: {
+          id: user.id,
           user: {
             username: "",
           }
+        }
 
         expect(flash[:error]).to eq("Username can't be blank")
         expect(response).to render_template("edit")

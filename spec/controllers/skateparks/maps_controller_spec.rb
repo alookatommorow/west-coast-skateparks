@@ -9,7 +9,9 @@ RSpec.describe Skateparks::MapsController, type: :controller do
         zoom: 9,
       }.to_json
 
-      get :show, skatepark_id: skateparks.first.id
+      get :show, params: {
+        skatepark_id: skateparks.first.id
+      }
       expect(response.body).to eq(expected)
     end
   end

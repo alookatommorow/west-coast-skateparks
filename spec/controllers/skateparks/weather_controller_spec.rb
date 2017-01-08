@@ -6,7 +6,9 @@ RSpec.describe Skateparks::WeatherController, type: :controller do
       skatepark = create(:skatepark)
       stub_weather
 
-      get :show, skatepark_id: skatepark.id, latitude: skatepark.latitude, longitude: skatepark.longitude
+      get :show, params: {
+        skatepark_id: skatepark.id, latitude: skatepark.latitude, longitude: skatepark.longitude
+      }
 
       expect(response).to render_template('_weather')
     end

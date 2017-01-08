@@ -6,7 +6,9 @@ RSpec.describe RatingsController, type: :controller do
       skatepark = create(:skatepark)
       user = create(:user)
 
-      post :create, skatepark_id: skatepark.id, user_id: user.id, rating: 5
+      post :create, params: {
+        skatepark_id: skatepark.id, user_id: user.id, rating: 5
+      }
 
       expect(Rating.last.skatepark).to eq(skatepark)
       expect(Rating.last.user).to eq(user)

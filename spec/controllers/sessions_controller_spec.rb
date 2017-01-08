@@ -5,9 +5,11 @@ RSpec.describe SessionsController, type: :controller do
     it 'signs a user in and redirects with flash message' do
       user = create(:user)
 
-      post :create, session: {
-        username: user.username,
-        password: user.password,
+      post :create, params: {
+        session: {
+          username: user.username,
+          password: user.password,
+        }
       }
 
       expect(session[:id]).to eq(user.id)
@@ -17,9 +19,11 @@ RSpec.describe SessionsController, type: :controller do
     it 'flashes like a bitch if it shits the bed' do
       user = build(:user)
 
-      post :create, session: {
-        username: user.username,
-        password: user.password,
+      post :create, params: {
+        session: {
+          username: user.username,
+          password: user.password,
+        }
       }
 
       expect(session[:id]).to be_nil
@@ -32,7 +36,9 @@ RSpec.describe SessionsController, type: :controller do
       id = 25
       session[:id] = id
 
-      delete :destroy, id: id
+      delete :destroy, params: {
+        id: id
+      }
 
       expect(session[:id]).to be(nil)
       expect(response).to redirect_to(root_path)

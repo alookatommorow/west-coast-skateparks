@@ -1,5 +1,6 @@
 Rails.application.configure do
   Paperclip.options[:command_path] = "/usr/local/bin/"
+  config.assets.quiet = true
   config.cache_classes = false
   config.eager_load = false
   config.consider_all_requests_local       = true
