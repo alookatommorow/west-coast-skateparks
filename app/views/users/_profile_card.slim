@@ -9,12 +9,12 @@
   .extra.content
     .user-stat
       i.fa.fa-heart
-      p.inline-block= @user.favorites.count
+      p= @user.favorites.count
     .user-stat
       i.fa.fa-check
-      p.inline-block= @user.visits.count
+      p= @user.visits.count
     .user-stat
       i.fa.fa-comments
-      p.inline-block= @user.reviews.count
+      p= @user.reviews.count
   .edit-button
     = link_to "Edit Info", edit_user_path(@user), class: "basic-button"

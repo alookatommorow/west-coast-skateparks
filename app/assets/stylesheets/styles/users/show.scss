@@ -151,9 +151,13 @@
   }
 
   .card {
-    p.name,
-    p.date {
-      margin-bottom: 0;
+    .user-stat {
+      display: flex;
+      align-items: center;
+    }
+
+    .content p {
+      margin: 0 0 0 10px;
     }
   }
 
