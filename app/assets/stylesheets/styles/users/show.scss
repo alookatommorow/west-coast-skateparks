@@ -85,8 +85,17 @@
           width: 100%;
           height: 100%;
 
+          i {
+            font-size: 24px;
+            color: $blue;
+          }
+
           &:hover {
             background-color: $gray;
+
+            i {
+              color: $orange;
+            }
           }
         }
       }
