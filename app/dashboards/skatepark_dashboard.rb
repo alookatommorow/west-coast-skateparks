@@ -11,9 +11,7 @@ class SkateparkDashboard < Administrate::BaseDashboard
     hero: PaperclipField,
     map_photo: PaperclipField,
     ratings: Field::HasMany,
-    users_who_rated: Field::HasMany.with_options(class_name: "User"),
     reviews: Field::HasMany,
-    users_who_reviewed: Field::HasMany.with_options(class_name: "User"),
     skatepark_images: Field::HasMany,
     location: Field::HasOne,
     id: Field::Number,
@@ -33,7 +31,6 @@ class SkateparkDashboard < Administrate::BaseDashboard
     photo_cred: Field::String,
     photo_url: Field::String,
     video_url: Field::String,
-    num_pics: Field::Number,
     obstacles: Field::Text,
     favoriters: Field::HasMany.with_options(class_name: "User"),
     visitors: Field::HasMany.with_options(class_name: "User"),
@@ -56,10 +53,6 @@ class SkateparkDashboard < Administrate::BaseDashboard
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = [
-    :ratings,
-    :users_who_rated,
-    :reviews,
-    :users_who_reviewed,
     :skatepark_images,
     :location,
     :id,
@@ -78,8 +71,9 @@ class SkateparkDashboard < Administrate::BaseDashboard
     :photo_cred,
     :photo_url,
     :video_url,
-    :num_pics,
     :obstacles,
+    :ratings,
+    :reviews,
     :favoriters,
     :visitors,
     :created_at,
@@ -109,7 +103,6 @@ class SkateparkDashboard < Administrate::BaseDashboard
     :photo_cred,
     :photo_url,
     :video_url,
-    :num_pics,
     :obstacles,
   ].freeze
 

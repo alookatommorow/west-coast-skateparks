@@ -5,16 +5,12 @@ class User < ActiveRecord::Base
   validates :username, :email, uniqueness: true
   validates_format_of :email, with: /\A.+@.+\..{2,}\z/
 
+  has_many :ratings, dependent: :destroy
+  has_many :reviews, dependent: :destroy
   has_and_belongs_to_many :favorites,
     join_table: "favorites", class_name: "Skatepark", dependent: :destroy
   has_and_belongs_to_many :visits,
     join_table: "visits", class_name: "Skatepark", dependent: :destroy
-
-  has_many :ratings, dependent: :destroy
-  has_many :rated_parks, through: :ratings, source: :skatepark
-
-  has_many :reviews, dependent: :destroy
-  has_many :reviewed_parks, through: :reviews, source: :skatepark
 
   has_attached_file(:avatar, styles: { thumb: '100x100>' },
     default_url: 'https://33.media.tumblr.com/avatar_ee7f0ba1cb58_128.png')

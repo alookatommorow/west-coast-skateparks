@@ -8,7 +8,7 @@ gem "autoprefixer-rails"
 gem "awesome_print"
 gem "aws-sdk"
 gem "bcrypt"
-gem "bourbon"  #added to prevent high voltage bourbon unreadable error
+gem "bourbon" # added to prevent high voltage bourbon unreadable error
 gem 'buttercms-rails'
 gem "font-awesome-rails"
 gem "geokit"
@@ -30,7 +30,6 @@ gem "therubyracer"
 gem "turbolinks"
 gem "uglifier", ">= 1.3.0"
 gem "underscore-rails"
-
 
 group :assets do
   gem "coffee-rails"

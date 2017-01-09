@@ -1,7 +1,6 @@
 FactoryGirl.define do
   factory :skatepark do
     sequence(:name) { |i| "cribbage#{i}" }
-    num_pics 3
     location
 
     trait :nearby do
