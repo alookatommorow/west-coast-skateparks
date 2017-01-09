@@ -4,15 +4,13 @@ class Skatepark < ActiveRecord::Base
 
   validates :name, presence: true
 
+  has_many :ratings, dependent: :destroy
+  has_many :reviews, dependent: :destroy
   has_and_belongs_to_many :favoriters,
     join_table: "favorites", class_name: "User", dependent: :destroy
   has_and_belongs_to_many :visitors,
     join_table: "visits", class_name: "User", dependent: :destroy
 
-  has_many :ratings, dependent: :destroy
-  has_many :users_who_rated, through: :ratings, source: :user
-  has_many :reviews, dependent: :destroy
-  has_many :users_who_reviewed, through: :reviews, source: :user
   has_many :skatepark_images, dependent: :destroy
   has_one :location, dependent: :destroy
   has_many :neighbors
@@ -25,11 +23,9 @@ class Skatepark < ActiveRecord::Base
   delegate(*LOCATION_ATTRIBUTES, *LOCATION_METHODS, to: :location, allow_nil: true)
 
   has_attached_file :hero, default_url: "https://storage.googleapis.com/west-coast-skateparks/default-header.jpg"
-  # validates_attachment_presence :hero
   validates_attachment_content_type :hero, content_type: /\Aimage/
 
   has_attached_file :map_photo, default_url: "https://storage.googleapis.com/west-coast-skateparks/logo-small.png", styles: { thumb: "300x200>" }
-  # validates_attachment_presence :map_photo
   validates_attachment_content_type :map_photo, content_type: /\Aimage/
 
   scope :in_state, -> (state) { joins(:location).merge(Location.in_state(state)) }

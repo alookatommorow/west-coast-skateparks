@@ -1,10 +1,21 @@
 class RatingsController < ApplicationController
   def create
-    ManyToMany.create(Rating, params)
-    render partial: 'ajax-partials/rating', locals: {
+    Rating.create(rating_params)
+
+    render partial: "form", locals: {
       skatepark: SkateparkPresenter.new(
         Skatepark.includes(:ratings).find(params[:skatepark_id])
       )
     }
   end
+
+  private
+
+    def rating_params
+      {
+        user_id: params[:user_id],
+        skatepark_id: params[:skatepark_id],
+        rating: params[:rating],
+      }
+    end
 end
