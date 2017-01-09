@@ -4,9 +4,13 @@ $(document).ready(function() {
     event.preventDefault();
 
     if ($("[data-signed-in]").length > 0) {
-      ajaxPostWithLoader(this, renderButtonResponse);
+      if ($(this).data("remove-container")) {
+        confirmRemoval(this);
+      } else {
+        ajaxPostWithLoader(this, renderButtonResponse);
+      }
     } else {
-      sweetAlert();
+      signInPrompt();
     }
   });
 
@@ -42,7 +46,19 @@ $(document).ready(function() {
     });
   });
 
-  function sweetAlert() {
+  function confirmRemoval(form) {
+    return swal({
+      title: "Hold Up!",
+      text: "Are you sure you want to remove this park?",
+      type: "warning",
+      confirmButtonText: "Remove",
+      showCancelButton: true
+    }, function() {
+      ajaxPostWithLoader(form, removeContainer);
+    });
+  }
+
+  function signInPrompt() {
     return swal({
       title: "Hold Up!",
       text: "You must be signed in to do that",
@@ -57,6 +73,10 @@ $(document).ready(function() {
   function renderFormResponse(response) {
     $container = $(this).data("ajax-form");
     $($container).html(response);
+  }
+
+  function removeContainer() {
+    $(this).closest("[data-ajax-container]").remove();
   }
 
   function renderButtonResponse(response) {
