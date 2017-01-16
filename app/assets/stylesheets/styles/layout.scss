@@ -1,3 +1,7 @@
+.debug {
+  border: 1px solid red;
+}
+
 // disable image highlighting bc of annoyance w photo carousel
 img {
    -ms-user-select: none;      /* IE 10+ */
@@ -5,7 +9,6 @@ img {
    -webkit-user-select: none;  /* Chrome all / Safari all */
    user-select: none;          /* Likely future */
 }
-
 
 html,
 body {
@@ -28,7 +31,6 @@ body {
   color: rgba(0, 0, 0, 0.87);
   font-smoothing: antialiased;
 }
-
 
 /*******************************
              Headers
@@ -76,7 +78,6 @@ h5:last-child {
   margin-bottom: 0em;
 }
 
-
 /*******************************
              Text
 *******************************/
@@ -94,7 +95,6 @@ p {
   }
 }
 
-
 /*-------------------
         Links
 --------------------*/
@@ -107,12 +107,9 @@ a {
   }
 }
 
-
-
 /*******************************
           Highlighting
 *******************************/
-
 
 /* Site */
 ::-webkit-selection {

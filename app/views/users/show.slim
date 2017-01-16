@@ -1,38 +1,48 @@
-.user-show-container
+.user-show-container data-signed-in=true
   .user-dashboard
     = render "profile_card", user: @user
   .user-map-container
     #map.user-map
     .user-map-buttons
-      #toggle-favorite-container.hidden
+      #toggle-favorite-container
         #toggle-favorite.basic-button Hide Favorites
-      #toggle-visited-container.hidden
+      #toggle-visited-container
         #toggle-visited.basic-button Hide Visited
-      #toggle-both-container.hidden
+      #toggle-both-container
         #toggle-both.basic-button Hide THRASHED
   .favorites-visits
     .favorites
       h4 Favorites
       .divided.selection.list
         - @user.favorites.each do |park|
-          = link_to park, class: "item" do
-            .link-section
-              .city= park.city.titleize + ", " + state_abbrev[park.state]
-            .link-section
-              .name= park.name.titleize
-            .link-section
-              = image_tag("#{park.hero}")
+          .user-park-display data-ajax-container=true
+            = link_to park, class: "item" do
+              .link-section.city-name
+                .city= park.city.titleize + ", " + state_abbrev[park.state]
+                .name= park.name.titleize
+              .link-section.image
+                = image_tag("#{park.hero}")
+            = form_tag unfavorite_skatepark_path(park),
+              method: :patch,
+              data: { ajax_button: true, remove_container: true }, class: "remove" do
+                button.remove-button
+                  i.fa.fa-times
     .visits
       h4 Visits
       .divided.selection.list
         - @user.visits.each do |park|
-          = link_to park, class: "item" do
-            .link-section
-              .city= park.city.titleize + ", " + state_abbrev[park.state]
-            .link-section
-              .name= park.name.titleize
-            .link-section
-              = image_tag("#{park.hero}")
+          .user-park-display data-ajax-container=true
+            = link_to park, class: "item" do
+              .link-section.city-name
+                .city= park.city.titleize + ", " + state_abbrev[park.state]
+                .name= park.name.titleize
+              .link-section.image
+                = image_tag("#{park.hero}")
+            = form_tag unvisit_skatepark_path(park),
+              method: :patch,
+              data: { ajax_button: true, remove_container: true }, class: "remove" do
+                button.remove-button
+                  i.fa.fa-times
 
 - if flash[:signed_up]
   = content_for :analytics_event

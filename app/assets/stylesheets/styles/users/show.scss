@@ -34,6 +34,11 @@
       justify-content: space-around;
       margin-top: 15px;
 
+      /* this captures #toggle-visited-container, #toggle-favorite-container etc */
+      > div {
+        display: none;
+      }
+
       .basic-button {
         border-radius: 0;
         background-color: $blue;
@@ -63,35 +68,69 @@
       width: 48%;
     }
 
-    .selection.list .item {
-      padding-left: 10px;
-      border-radius: 0;
+    .user-park-display {
       display: flex;
-      background: white;
-      color: black;
+      align-items: stretch;
 
-      &:hover {
-        background-color: $gray
+      .remove {
+        width: 10%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        .remove-button {
+          border: none;
+          background: white;
+          cursor: pointer;
+          width: 100%;
+          height: 100%;
+
+          i {
+            font-size: 24px;
+            color: $blue;
+          }
+
+          &:hover {
+            background-color: $gray;
+
+            i {
+              color: $orange;
+            }
+          }
+        }
       }
 
-      .link-section {
-        text-align: left;
-        flex: 1;
-        position: relative;
+      .item {
+        width: 90%;
+        padding-left: 15px;
+        border-radius: 0;
+        display: flex;
+        align-items: center;
+        background: white;
+        color: black;
 
-        .city {
-          font-weight: bold;
+        &:hover {
+          background-color: $gray
         }
 
-        .name, .city {
-          position: absolute;
-          top: 50%;
-          transform: translateY(-50%)
-        }
+        .link-section {
+          text-align: left;
+          position: relative;
+          flex: 1;
 
-        img {
-          margin: auto 0;
-          width: 100%;
+          .city {
+            font-weight: bold;
+            margin-bottom: 10px;
+          }
+
+          .remove-button {
+            text-align: center;
+          }
+
+          img {
+            margin: auto 0;
+            width: 100%;
+          }
         }
       }
     }
@@ -146,9 +185,13 @@
   }
 
   .card {
-    p.name,
-    p.date {
-      margin-bottom: 0;
+    .user-stat {
+      display: flex;
+      align-items: center;
+    }
+
+    .content p {
+      margin: 0 0 0 10px;
     }
   }
 

@@ -2,8 +2,10 @@
   -if skatepark.pictures?
     .photo-display
       - if skatepark.more_than_one_picture?
-        i.fa.fa-toggle-left.prev.carousel-button data-carousel="prev"
-        i.fa.fa-toggle-right.next.carousel-button data-carousel="next"
+        .carousel-button.prev data-carousel="prev"
+          i.fa.fa-angle-left
+        .carousel-button.next data-carousel="next"
+          i.fa.fa-angle-right
       .carousel-image-container
         - skatepark.skatepark_images.each do |image|
           .skatepark-show-image
