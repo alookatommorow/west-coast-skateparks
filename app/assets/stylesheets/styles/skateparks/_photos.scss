@@ -124,14 +124,16 @@
         margin: auto 10px auto 0;
         display: inline-block;
         cursor: pointer;
-
-        .active-photo {
-          border: 2px solid $orange;
-        }
+        padding: 3px;
 
         img {
+          border: 2px solid transparent;
           max-width: 150px;
           max-height: 150px;
+
+          &.active-photo {
+            border-color: $orange;
+          }
 
           @media #{$tablet} {
             max-width: 100px;
