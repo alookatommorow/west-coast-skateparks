@@ -5,6 +5,7 @@ $(document).ready(function() {
 
     if ($("[data-signed-in]").length > 0) {
       if ($(this).data("remove-container")) {
+        $(".flashes").remove();
         confirmRemoval(this);
       } else {
         ajaxPostWithLoader(this, renderButtonResponse);
