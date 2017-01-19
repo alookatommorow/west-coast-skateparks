@@ -1,9 +1,8 @@
 var MAPBUILDER = (function () {
   var builder = {},
       gMap,
-      map;
-
-  builder.markerContainer = [];
+      map,
+      markerContainer = [];
 
   // method for map creation
   builder.initialize = function() {
@@ -30,7 +29,6 @@ var MAPBUILDER = (function () {
   // sets map center to main skatepark, or first skatepark associated with user, or SF
   builder._setMapCenter = function () {
     var skatepark = this.skatepark,
-        markerContainer = this.markerContainer,
         SANFRAN = [37.7749, -122.4194],
         mapCenter;
 
@@ -88,8 +86,7 @@ var MAPBUILDER = (function () {
 
   // create map marker out of skatepark argument
   builder.createMarker = function(skatepark) {
-    var marker = new Marker(skatepark),
-        markerContainer = this.markerContainer;
+    var marker = new Marker(skatepark);
     markerContainer.push(marker);
     this.categorizedMarkers[skatepark.category].push(marker);
     bindInfoWindowClick(marker);
@@ -104,5 +101,10 @@ var MAPBUILDER = (function () {
     }
   };
 
+  builder.removeMarker = function(skateparkId) {
+    var marker = $.grep(markerContainer, function(park){ return park.id === skateparkId; })[0];
+    marker.setMap(null);
+  };
+
   return builder;
-})();
+}());

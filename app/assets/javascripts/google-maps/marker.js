@@ -7,7 +7,8 @@ function Marker(skatepark) {
     map: this.map,
     title: titleize(skatepark.city + ', ' + stateDisplay[skatepark.state]),
     main: (skatepark.category === "main"),
-    icon: "https://maps.google.com/mapfiles/ms/icons/" + this.colorOptions[skatepark.category] + ".png"
+    icon: "https://maps.google.com/mapfiles/ms/icons/" + this.colorOptions[skatepark.category] + ".png",
+    id: skatepark.id
   });
 
   if (skatepark.category === "nearby") {
