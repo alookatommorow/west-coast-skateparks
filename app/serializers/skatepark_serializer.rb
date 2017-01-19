@@ -13,10 +13,6 @@ class SkateparkSerializer < ActiveModel::Serializer
 
   has_many :neighbor_parks
 
-  def neighbor_parks
-    object.neighbor_parks.includes(:location)
-  end
-
   def slug
     object.to_param
   end
