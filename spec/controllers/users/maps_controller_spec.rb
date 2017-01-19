@@ -12,14 +12,10 @@ RSpec.describe Users::MapsController, type: :controller do
       user.favorites << skateparks.third
       user.visits << skateparks.third
 
-      expected = {
-        user: UserSerializer.new(user),
-        zoom: 6,
-      }.to_json
+      expected = UserSerializer.new(user).to_json
 
-      get :show, params: {
-        user_id: user.id
-      }
+      get :show, params: { user_id: user.id }
+
       expect(response.body).to eq(expected)
     end
   end
