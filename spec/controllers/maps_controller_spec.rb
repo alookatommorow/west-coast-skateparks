@@ -9,7 +9,7 @@ RSpec.describe MapsController, type: :controller do
 
         get :show, params: {
           id: skateparks.first.id,
-          type: "skateparks",
+          resource_name: "skateparks",
         }
 
         expect(response.body).to eq(expected)
@@ -31,7 +31,7 @@ RSpec.describe MapsController, type: :controller do
 
         get :show, params: {
           id: user.id,
-          type: "users",
+          resource_name: "users",
         }
 
         expect(response.body).to eq(expected)
