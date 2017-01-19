@@ -1,9 +1,10 @@
 function initMap() {
   var location = window.location.href.split('/'),
       id = location.pop().split("?")[0],
-      resourceName = location.pop();
+      resourceName = location.pop(),
+      resourceUrl = "/maps/" + id + "?type=" + resourceName;
 
-  $.get('/'+resourceName+'/'+id+'/map').
+  $.get(resourceUrl).
     done(generateMap).
     fail(function(response){
       console.log("error", response);
