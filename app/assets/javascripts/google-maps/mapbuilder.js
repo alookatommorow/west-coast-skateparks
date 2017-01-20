@@ -79,9 +79,13 @@ var MAPBUILDER = (function () {
     var categorizedMarkers = this.categorizedMarkers;
     for (var category in categorizedMarkers) {
       if (categorizedMarkers[category].length > 0) {
-        $('#toggle-'+category+'-container').show();
+        $("#toggle-"+category+"-container").show();
       }
     }
+  };
+
+  builder._hideButton = function(category) {
+    $("#toggle-"+category+"-container").hide();
   };
 
   // create map marker out of skatepark argument
@@ -102,8 +106,15 @@ var MAPBUILDER = (function () {
   };
 
   builder.removeMarker = function(skateparkId) {
-    var marker = $.grep(markerContainer, function(park){ return park.id === skateparkId; })[0];
+    var marker = markerContainer.deleteById(skateparkId),
+        markersInCategory = this.categorizedMarkers[marker.category];
+
     marker.setMap(null);
+    markersInCategory.deleteById(skateparkId);
+
+    if (markersInCategory.length < 1) {
+      this._hideButton(marker.category);
+    }
   };
 
   return builder;
