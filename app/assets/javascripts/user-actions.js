@@ -55,7 +55,7 @@ $(document).ready(function() {
       confirmButtonText: "Remove",
       showCancelButton: true
     }, function() {
-      ajaxPostWithLoader(form, removeContainer);
+      ajaxPostWithLoader(form, removeContainerAndMarker);
     });
   }
 
@@ -76,8 +76,11 @@ $(document).ready(function() {
     $($container).html(response);
   }
 
-  function removeContainer() {
+  function removeContainerAndMarker() {
     $(this).closest("[data-ajax-container]").remove();
+
+    var skateparkId = $(this).data("skatepark-id");
+    MAPBUILDER.removeMarker(skateparkId);
   }
 
   function renderButtonResponse(response) {

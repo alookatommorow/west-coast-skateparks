@@ -70,7 +70,6 @@
 
     .user-park-display {
       display: flex;
-      align-items: stretch;
 
       .remove {
         flex: 1;
@@ -79,7 +78,7 @@
         justify-content: center;
 
         .remove-button {
-          border: none;
+          border-radius: 0;
           background: white;
           cursor: pointer;
           width: 100%;

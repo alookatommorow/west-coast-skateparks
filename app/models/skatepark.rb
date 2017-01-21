@@ -13,12 +13,7 @@ class Skatepark < ActiveRecord::Base
 
   has_many :skatepark_images, dependent: :destroy
   has_one :location, dependent: :destroy
-  has_many :neighbors
-  has_many :neighbor_parks, through: :neighbors, dependent: :destroy
   accepts_nested_attributes_for :location
-
-  after_create :associate_neighbor_parks, if: :has_coordinates?
-  before_save :associate_neighbor_parks, if: :new_coordinates?
 
   delegate(*LOCATION_ATTRIBUTES, *LOCATION_METHODS, to: :location, allow_nil: true)
 
@@ -34,24 +29,12 @@ class Skatepark < ActiveRecord::Base
     includes(:location).order("locations.state", "locations.city", :name)
   end
 
-  def ratings?
-    ratings.any?
-  end
-
-  def reviews?
-    reviews.any?
-  end
-
-  def pictures?
-    skatepark_images.any?
-  end
-
-  def more_than_one_picture?
-    skatepark_images.count > 1
-  end
-
-  def to_param
-    [id, name.parameterize, city.parameterize, state.parameterize].join("-")
+  def neighbor_parks
+    self.class.
+      joins(:location).
+      includes(:location).
+      where.not(id: self.id).
+      merge(Location.neighbors_of(self.location))
   end
 
   def next_park
@@ -74,17 +57,23 @@ class Skatepark < ActiveRecord::Base
     end
   end
 
-  private
+  def ratings?
+    ratings.any?
+  end
 
-    def associate_neighbor_parks
-      self.neighbor_parks.destroy_all # refresh in case coordinates are being edited on existing park
-      find_neighbor_parks.each { |skatepark| self.neighbor_parks << skatepark }
-    end
+  def reviews?
+    reviews.any?
+  end
 
-    def find_neighbor_parks
-      self.class.
-        joins(:location).
-        where.not(id: self.id).
-        merge(Location.neighbors_of(self.location))
-    end
+  def pictures?
+    skatepark_images.any?
+  end
+
+  def more_than_one_picture?
+    skatepark_images.count > 1
+  end
+
+  def to_param
+    [id, name.parameterize, city.parameterize, state.parameterize].join("-")
+  end
 end

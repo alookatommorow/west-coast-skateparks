@@ -24,8 +24,9 @@
                 = image_tag("#{park.hero}")
             = form_tag unfavorite_skatepark_path(park),
               method: :patch,
-              data: { ajax_button: true, remove_container: true }, class: "remove" do
-                button.remove-button
+              data: { skatepark_id: park.id, ajax_button: true, remove_container: true },
+              class: "remove" do
+                button.remove-button.basic-button
                   i.fa.fa-times
     .visits
       h4 Visits
@@ -40,8 +41,9 @@
                 = image_tag("#{park.hero}")
             = form_tag unvisit_skatepark_path(park),
               method: :patch,
-              data: { ajax_button: true, remove_container: true }, class: "remove" do
-                button.remove-button
+              data: { skatepark_id: park.id, ajax_button: true, remove_container: true },
+              class: "remove" do
+                button.remove-button.basic-button
                   i.fa.fa-times
 
 - if flash[:signed_up]
