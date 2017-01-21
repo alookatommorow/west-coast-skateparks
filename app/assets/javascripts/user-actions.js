@@ -55,7 +55,7 @@ $(document).ready(function() {
       confirmButtonText: "Remove",
       showCancelButton: true
     }, function() {
-      ajaxPostWithLoader(form, removeContainerAndMarker);
+      ajaxPost(form, removeContainerAndMarker);
     });
   }
 
