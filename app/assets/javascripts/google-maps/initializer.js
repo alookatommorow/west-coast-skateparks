@@ -1,9 +1,10 @@
 function initMap() {
   var location = window.location.href.split('/'),
       id = location.pop().split("?")[0],
-      resourceName = location.pop();
+      resourceName = location.pop(),
+      resourceUrl = "/maps/" + id + "?resource_name=" + resourceName;
 
-  $.get('/'+resourceName+'/'+id+'/map').
+  $.get(resourceUrl).
     done(generateMap).
     fail(function(response){
       console.log("error", response);
@@ -11,116 +12,14 @@ function initMap() {
 }
 
 function generateMap(response) {
-  var MAPBUILDER = (function () {
-    var builder = {},
-        gMap = google.maps.Map, // declare gMaps dependencies at top of module
-        map = new gMap(document.getElementById('map'), { zoom: response.zoom }),
-        markerContainer = [];
-
-    map.setOptions({styles: mapStyles});
-
-    // these variables remain unchanged for every instance of Marker/InfoWindow objects,
-    // assigning them to its prototype ensures that they are only created once.
-    Marker.prototype.map = map;
-    Marker.prototype.gMapsMarker = google.maps.Marker;
-    InfoWindow.prototype.gMapsInfoWindow = google.maps.InfoWindow;
-
-    // method for map creation
-    builder.initialize = function() {
-      this.generateMarkers();
-      this._setMapCenter(); // _underscore prefix == private method
-      this._bindClickToVisibilityButtons();
-      this._showButtons();
-    };
-
-    // sets map center to main skatepark, or first skatepark associated with user, or SF
-    builder._setMapCenter = function () {
-      var skatepark = this.skatepark,
-          SANFRAN = [37.7749, -122.4194],
-          mapCenter;
-
-      if (skatepark) {
-        mapCenter = {lat: skatepark.latitude, lng: skatepark.longitude};
-      } else if (markerContainer[0] !== undefined) {
-        mapCenter = markerContainer[0].position;
-      } else {
-        mapCenter = {lat: SANFRAN[0], lng: SANFRAN[1]};
-      }
-
-      map.setCenter(mapCenter);
-    };
-
-    // binds click so buttons toggle visibility of corresponding markers e.g., "Hide Favorites"
-    builder._bindClickToVisibilityButtons = function () {
-      var categorizedMarkers = this.categorizedMarkers,
-          categories = Object.keys(categorizedMarkers);
-
-      categories.forEach(function (category) {
-        var buttonId = "#toggle-" + category;
-
-        $(document).on('click', buttonId, function (event) {
-          var $button = $(event.target),
-              action = $button.text().split(' ');
-
-          toggleMarkerVisibility(categorizedMarkers[category], action[0]);
-          toggleButtonText($button, action);
-        });
-      });
-
-      function toggleMarkerVisibility(markers, visibility) {
-        visibility = (visibility === 'Hide') ? false : true;
-        markers.forEach(function (marker) {
-          marker.infowindow.close();
-          marker.setVisible(visibility);
-        });
-      }
-
-      function toggleButtonText(button, action) {
-        action[0] = (action[0] === 'Hide') ? 'Show' : 'Hide';
-        button.text(action.join(' '));
-      }
-    };
-
-    // show visibility toggle buttons
-    builder._showButtons = function () {
-      var categorizedMarkers = this.categorizedMarkers;
-      for (var category in categorizedMarkers) {
-        if (categorizedMarkers[category].length > 0) {
-          $('#toggle-'+category+'-container').show();
-        }
-      }
-    };
-
-    // create map marker out of skatepark argument
-    builder.createMarker = function(skatepark) {
-      var marker = new Marker(skatepark);
-      markerContainer.push(marker);
-      this.categorizedMarkers[skatepark.category].push(marker);
-      bindInfoWindowClick(marker);
-
-      function bindInfoWindowClick(marker) {
-        marker.addListener('click', function() {
-          markerContainer.forEach(function(marker) {
-            marker.infowindow.close();
-          });
-          marker.infowindow.open(map, marker);
-        });
-      }
-    };
-
-    return builder;
-  }());
-
-
-  if (response.skatepark) {
-    configureMapBuilderForSkateparkPage(response.skatepark);
-  } else if (response.user) {
-    configureMapBuilderForUserPage(response.user);
+  if (response.email) {
+    configureMapBuilderForUserPage(response);
+  } else {
+    configureMapBuilderForSkateparkPage(response);
   }
 
   // initialize map
   MAPBUILDER.initialize();
-
 
   // add attributes and methods to MAPBUILDER for SKATEPARK PAGE
   function configureMapBuilderForSkateparkPage(skatepark) {

@@ -19,9 +19,7 @@ Rails.application.routes.draw do
     root controller: DashboardManifest::ROOT_DASHBOARD, action: :index
   end
 
-  resources :users, only: [:show, :create, :new, :edit, :update] do
-    resource :map, only: :show, controller: 'users/maps'
-  end
+  resources :users, only: [:show, :create, :new, :edit, :update]
 
   resources :sessions, only: [:create, :destroy, :new]
   post '/sessions/create_with_auth', to: 'sessions#create_with_auth'
@@ -41,8 +39,8 @@ Rails.application.routes.draw do
   end
 
   resources :skateparks do
-    resource :map, only: :show, controller: 'skateparks/maps'
     resource :weather, only: :show, controller: 'skateparks/weather'
+
     member do
       patch :favorite
       patch :unfavorite
@@ -51,6 +49,8 @@ Rails.application.routes.draw do
       patch :unvisit
     end
   end
+
+  resources :maps, only: :show
 
   resources :ratings, only: :create
   resources :reviews, only: :create
