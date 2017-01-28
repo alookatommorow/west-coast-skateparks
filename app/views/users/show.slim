@@ -13,10 +13,10 @@
   .favorites-visits
     .favorites
       h4 Favorites
-      .divided.selection.list
+      .list
         - @user.favorites.each do |park|
-          .user-park-display data-ajax-container=true
-            = link_to park, class: "item" do
+          .user-park-display.item data-ajax-container=true
+            = link_to park, class: "park-link" do
               .link-section.city-name
                 .city= park.city.titleize + ", " + state_abbrev[park.state]
                 .name= park.name.titleize
@@ -26,14 +26,14 @@
               method: :patch,
               data: { skatepark_id: park.id, ajax_button: true, remove_container: true },
               class: "remove" do
-                button.remove-button
+                button.remove-button.basic-button
                   i.fa.fa-times
     .visits
       h4 Visits
-      .divided.selection.list
+      .list
         - @user.visits.each do |park|
-          .user-park-display data-ajax-container=true
-            = link_to park, class: "item" do
+          .user-park-display.item data-ajax-container=true
+            = link_to park, class: "park-link" do
               .link-section.city-name
                 .city= park.city.titleize + ", " + state_abbrev[park.state]
                 .name= park.name.titleize
@@ -43,7 +43,7 @@
               method: :patch,
               data: { skatepark_id: park.id, ajax_button: true, remove_container: true },
               class: "remove" do
-                button.remove-button
+                button.remove-button.basic-button
                   i.fa.fa-times
 
 - if flash[:signed_up]

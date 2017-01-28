@@ -1,7 +1,8 @@
 function displayFlashMessage() {
-  $('.flashes').addClass("fly-in-left visible");
+  var $flashes = $(".flashes");
+  $flashes.addClass("fly-in-left visible");
   setTimeout(function () {
-    $('.flashes').addClass("fly-out-left");
+    $flashes.addClass("fly-out-left");
   }, 2000);
 }
 
