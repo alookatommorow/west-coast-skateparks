@@ -9,7 +9,7 @@
       .carousel-image-container
         - skatepark.skatepark_images.each do |image|
           .skatepark-show-image
-            img src="#{image.photo.url}"
+            img src="#{image.photo.url}" alt="#{skatepark.name}, #{skatepark.city}, #{skatepark.state}"
       .photo-thumbnails
         - skatepark.skatepark_images.each do |image|
           .skatepark-show-thumbnail
