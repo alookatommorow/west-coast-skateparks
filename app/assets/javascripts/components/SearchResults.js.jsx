@@ -27,7 +27,7 @@ var SearchResults = React.createClass({
   },
 
   selectFirstResult: function() {
-    var firstResult = document.getElementById("react-search-results").firstChild;
+    var firstResult = document.getElementById("search-results-list").firstChild;
     if (firstResult) {
       this.addSelect(firstResult);
     }
@@ -68,7 +68,7 @@ var SearchResults = React.createClass({
           this.visitSelectedLink();
         break;
 
-        case 27:
+        case 27: // esc
           this.props.exitResults();
         break;
 
@@ -96,32 +96,40 @@ var SearchResults = React.createClass({
   render: function(){
 
     var createBoldString = function(string, matchIndex, query) {
-      var output = titleize(string);
-      var first = output.slice(0, matchIndex);
-      var bold = output.slice(matchIndex, matchIndex + query.length);
-      var last = output.slice(matchIndex + query.length);
+      var output = titleize(string),
+          first = output.slice(0, matchIndex),
+          bold = output.slice(matchIndex, matchIndex + query.length),
+          last = output.slice(matchIndex + query.length);
       return <span>{first}<span className="bold">{bold}</span>{last}</span>;
     }
 
-    var resultDisplay, boldedResultDisplay, link, results;
+    var numResults = this.props.results.length,
+        matchText = "Matches",
+        resultsDisplay,
+        boldedResultDisplay,
+        link,
+        numResultsDisplay;
 
     if (this.props.query) {
-      if (this.props.results.length === 0) {
-        results = <div className="item no-results"><span className="bold">No Results</span></div>
-      } else if (this.props.results.length > 0) {
-        results = this.props.results.map(function(skatepark) {
-          boldedResultDisplay = createBoldString(skatepark.string, skatepark.matchIndex, this.props.query);
-          link = "/skateparks/"+skatepark.id+"-"+skatepark.name.replace(/\//g, "-").replace(/\./, "").split(" ").join("-")+"-"+skatepark.location.city.replace(/\(|\)|\./g, "").split(" ").join("-")+"-"+skatepark.location.state;
-          return <div className="item" key={skatepark.id} onMouseEnter={this.deselectActive} onClick={this.handleClick}>
-                  <a href={link}>{boldedResultDisplay}</a>
-                </div>
-        }.bind(this));
+      if (numResults === 1) {
+        matchText = "Match"
       }
+      numResultsDisplay = <div className="item num-results"><span className="bold">{numResults} {matchText}</span></div>;
+      resultsDisplay = this.props.results.map(function(skatepark) {
+        boldedResultDisplay = createBoldString(skatepark.string, skatepark.matchIndex, this.props.query);
+        link = "/skateparks/"+skatepark.id+"-"+skatepark.name.replace(/\//g, "-").replace(/\./, "").split(" ").join("-")+"-"+skatepark.location.city.replace(/\(|\)|\./g, "").split(" ").join("-")+"-"+skatepark.location.state;
+        return <div className="item" key={skatepark.id} onMouseEnter={this.deselectActive} onClick={this.handleClick}>
+                <a href={link}>{boldedResultDisplay}</a>
+              </div>
+      }.bind(this));
     }
 
     return (
       <div id="react-search-results" className="divided selection list" onKeyDown={this.handleKeyDown} onMouseLeave={this.handleMouseLeave} >
-        {results}
+        {numResultsDisplay}
+        <div id="search-results-list">
+          {resultsDisplay}
+        </div>
       </div>
     );
   }
