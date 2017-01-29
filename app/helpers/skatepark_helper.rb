@@ -13,6 +13,10 @@ module SkateparkHelper
     "#{@skatepark.name.titleize} - #{@skatepark.city.titleize}, #{state_abbrev[@skatepark.state]}"
   end
 
+  def skatepark_description
+    "#{@skatepark.name.titleize} in #{@skatepark.city.titleize}, #{state_abbrev[@skatepark.state]}"
+  end
+
   def state_abbrev
     {
       "california" => "CA",

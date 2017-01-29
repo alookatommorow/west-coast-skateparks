@@ -19,9 +19,11 @@
   meta property="og:description" content=@skatepark.formatted_address
   meta property="fb:app_id" content="1520128344956383"
 
+  meta name="description" content=skatepark_description
+
 = content_for :analytics_event
   javascript:
     analytics.page("Skatepark", #{raw skatepark_json(@skatepark)});
 
 = content_for :page_title
-  title= "#{@skatepark.name.titleize}, #{@skatepark.city.titleize}, #{@skatepark.state.capitalize} | West Coast Skateparks"
+  title= "#{@skatepark.name.titleize}, #{@skatepark.city.titleize}, #{state_abbrev[@skatepark.state]} | West Coast Skateparks"
