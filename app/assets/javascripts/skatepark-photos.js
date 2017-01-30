@@ -67,8 +67,8 @@ $(document).ready(function() {
   });
 
   //key navigation logic
-  if ($("[data-dashboard-link='#skatepark-photos']").hasClass("selected")) {
-    $(document).on('keydown', function(event) {
+  $(document).on('keydown', function(event) {
+    if (!$("#react-search-input").is(":focus") && $("[data-dashboard-link='#skatepark-photos']").hasClass("selected") ) {
       event = event || window.event;
       switch(event.which || event.keyCode) {
         case 37: // left
@@ -81,6 +81,6 @@ $(document).ready(function() {
 
         default: return; // exit this handler for other keys
       }
-    });
-  }
+    }
+  });
 });

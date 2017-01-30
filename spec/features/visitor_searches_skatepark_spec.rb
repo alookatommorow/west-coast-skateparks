@@ -8,7 +8,7 @@ RSpec.feature 'Visitor searches skatepark' do
     find('.display-search').click
 
     fill_in 'react-search-input', with: "Turd nugget"
-    expect(page).to have_text("No Results")
+    expect(page).to have_text("0 Matches")
     fill_in 'react-search-input', with: skatepark.name
     expect(page).to have_text(skatepark.name.titleize)
 

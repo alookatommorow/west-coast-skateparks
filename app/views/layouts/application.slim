@@ -11,7 +11,11 @@ html
     - if content_for? :og_metadata
       = yield :og_metadata
     - else
-      = render "default_open_graph_metatags"
+      = render "default_og_metatags"
+    - if content_for? :metadata
+      = yield :metadata
+    - else
+      = render "default_metatags"
 
     meta name='viewport' content='width=device-width, initial-scale=1'
   body
