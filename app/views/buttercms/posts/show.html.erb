@@ -1,5 +1,9 @@
-<%= content_for :html_title, @post.seo_title %>
-<%= content_for :meta_description, @post.meta_description %>
+<% content_for :page_title do %>
+    <title><%= @post.seo_title %></title>
+<% end %>
+<% content_for :metadata do %>
+ <meta name="description" content="<%= @post.meta_description %>"%>
+<% end %>
 
 <%= render partial: "header" %>
 

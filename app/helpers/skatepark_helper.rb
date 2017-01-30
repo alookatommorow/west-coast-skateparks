@@ -9,7 +9,7 @@ module SkateparkHelper
     }
   end
 
-  def skatepark_meta_title
+  def skatepark_og_meta_title
     "#{@skatepark.name.titleize} - #{@skatepark.city.titleize}, #{state_abbrev[@skatepark.state]}"
   end
 

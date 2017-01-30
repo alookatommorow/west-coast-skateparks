@@ -28,6 +28,12 @@
 a#back-to-top href="#top"
   i#up-arrow.fa.fa-angle-double-up
 
+= content_for :page_title
+  title="Skateparks | West Coast Skateparks"
+
+= content_for :metadata
+  meta name="description" content="Browse all skateparks by state and city"
+
 = content_for :analytics_event
   javascript:
     analytics.page("Skateparks Index");
