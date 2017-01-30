@@ -14,7 +14,7 @@ module SkateparkHelper
   end
 
   def skatepark_description
-    "#{@skatepark.name.titleize} in #{@skatepark.city.titleize}, #{state_abbrev[@skatepark.state]}"
+    "#{@skatepark.name.titleize} in #{@skatepark.city.titleize}, #{state_abbrev[@skatepark.state]} - photos, map, and info"
   end
 
   def state_abbrev
