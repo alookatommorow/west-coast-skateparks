@@ -1,6 +1,16 @@
 require 'csv'
 require 'forgery'
 
+CSV.foreach('db/skatepark_seed.csv', headers: true, header_converters: :symbol, encoding:'iso-8859-1:utf-8') do |row|
+  Skatepark.create(Hash[row])
+end
+
+CSV.foreach('db/location_seed.csv', headers: true, header_converters: :symbol, encoding:'iso-8859-1:utf-8') do |row|
+  Location.create(Hash[row])
+end
+
+puts 'Skateparks have been seeded'
+
 abort unless Rails.env.development?
 
 # admin
