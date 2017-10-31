@@ -1,4 +1,4 @@
-var SearchResults = React.createClass({
+var SearchResults = createReactClass({
 
   componentDidMount: function() {
     window.addEventListener('keydown', this.handleKeydown);
