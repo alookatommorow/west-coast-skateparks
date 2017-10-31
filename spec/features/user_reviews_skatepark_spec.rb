@@ -9,8 +9,8 @@ RSpec.feature 'User reviews skatepark' do
     visit skatepark_path(skatepark)
 
     click_on 'Rate'
-    fill_in 'Write review here...', with: 'This park IZ PRETTY CHILL -eatmyshortz'
-    click_on 'Review'
+    fill_in 'review', with: 'This park IZ PRETTY CHILL -eatmyshortz'
+    click_on 'Review'   
 
     expect(page).to have_text(user.name)
     expect(page).to have_text('This park IZ PRETTY CHILL -eatmyshortz')

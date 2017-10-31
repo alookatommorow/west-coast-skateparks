@@ -12,12 +12,12 @@ RSpec.feature 'User rates skatepark' do
 
     expect(page).to have_text('Sign in and be the first to rate!')
 
-    find('#rating', visible: false).set '1'
+    find('.selection.dropdown').click
+
+    find("1").click
 
     find('.rating-form-container').click_on 'Rate'
 
     expect(page).to have_text('User Rating')
   end
 end
-
-

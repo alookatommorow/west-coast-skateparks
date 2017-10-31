@@ -60,12 +60,13 @@ group :production do
 end
 
 group :test do
-  gem "codeclimate-test-reporter", require: nil
   gem "capybara"
-  gem "capybara-webkit"
-  gem "factory_girl_rails"
+  gem 'chromedriver-helper'
+  gem "codeclimate-test-reporter", require: nil
   gem "database_cleaner"
+  gem "factory_girl_rails"
   gem "rake"
   gem "rails-controller-testing"
+  gem "selenium-webdriver"
   gem "webmock"
 end
