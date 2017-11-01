@@ -14,7 +14,7 @@ RSpec.feature 'User rates skatepark' do
 
     find('.selection.dropdown').click
 
-    find("1").click
+    find("[data-value='1']").click
 
     find('.rating-form-container').click_on 'Rate'
 
