@@ -27,21 +27,16 @@ require 'bundler/setup'
 Bundler.require
 require 'pry-byebug'
 require 'capybara/rspec'
-require 'capybara/webkit'
 require 'database_cleaner'
 require 'webmock/rspec'
 
 WebMock.disable_net_connect!(allow_localhost: true, allow: 'codeclimate.com')
 
 # use `describe 'Feature', type: :feature, js: true` to use this driver
-Capybara.javascript_driver = :webkit
+# Capybara.javascript_driver = :webkit
 
 # tests use regular (faster) driver if they don't require js
 Capybara.default_driver = :rack_test
-
-Capybara::Webkit.configure do |config|
-  config.allow_unknown_urls
-end
 
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
@@ -49,6 +44,12 @@ RSpec.configure do |config|
   config.after(:suite) do
     FileUtils.rm_rf(Dir["#{Rails.root}/spec/test_files/"])
   end
+  
+  Capybara.register_driver :chrome do |app|
+    Capybara::Selenium::Driver.new(app, browser: :chrome)
+  end
+
+  Capybara.javascript_driver = :chrome
 
   # rspec-expectations config goes here. You can use an alternate
   # assertion/expectation library such as wrong or the stdlib/minitest

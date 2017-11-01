@@ -1,4 +1,4 @@
-var SearchContainer = React.createClass({
+var SearchContainer = createReactClass({
   getInitialState: function() {
     return {
       query: null,

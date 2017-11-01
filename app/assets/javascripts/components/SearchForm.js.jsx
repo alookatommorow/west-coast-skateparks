@@ -1,4 +1,4 @@
-var SearchForm = React.createClass({
+var SearchForm = createReactClass({
   render: function() {
     var loadingInput = <input id="react-search-input" placeholder="Loading, please wait..." className="prompt" type='text' name='query' onChange={this.props.handleChange} />
     var readyInput = <input id="react-search-input" className="prompt" type='text' name='query' onChange={this.props.handleChange} />
