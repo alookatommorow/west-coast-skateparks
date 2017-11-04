@@ -81,4 +81,24 @@ RSpec.describe Skatepark, type: :model do
       expect(skatepark.to_param).to eq("#{skatepark.id}-#{skatepark.name}-#{skatepark.city}-#{skatepark.state}")
     end
   end
+
+  describe '#average_rating' do
+    it 'returns the average of all ratings for a skatepark' do
+      users = create_list(:user, 3)
+      skatepark = create(:skatepark)
+
+      users.each_with_index do |user, rating|
+        Rating.create(
+          user_id: user.id, skatepark_id: skatepark.id, rating: rating + 2)
+      end
+
+      expect(skatepark.average_rating).to eq(3)
+    end
+
+    it 'returns a nil if skatepark has not been rated' do
+      skatepark = create(:skatepark)
+
+      expect(skatepark.average_rating).to eq(nil)
+    end
+  end
 end

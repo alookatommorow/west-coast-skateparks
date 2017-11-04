@@ -1,15 +1,7 @@
 class SkateparkPresenter < SimpleDelegator
-
   def attributes
     present_attributes.slice('info', 'hours')
     .merge(titleized_attributes)
-  end
-
-  def average_rating
-    if model.ratings.any?
-      raw_avg = model.ratings.average(:rating)
-      (raw_avg * 2).ceil.to_f / 2
-    end
   end
 
   def model

@@ -18,24 +18,4 @@ RSpec.describe SkateparkPresenter do
       expect(skatepark.attributes.key?('openend')).to eq(false)
     end
   end
-
-  describe '#average_rating' do
-    it 'returns the average of all ratings for a skatepark' do
-      users = create_list(:user, 3)
-      skatepark = SkateparkPresenter.new(create(:skatepark))
-
-      users.each_with_index do |user, rating|
-        Rating.create(
-          user_id: user.id, skatepark_id: skatepark.id, rating: rating + 2)
-      end
-
-      expect(skatepark.average_rating).to eq(3)
-    end
-
-    it 'returns a nil if skatepark has not been rated' do
-      skatepark = SkateparkPresenter.new(create(:skatepark))
-
-      expect(skatepark.average_rating).to eq(nil)
-    end
-  end
 end

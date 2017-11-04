@@ -37,6 +37,13 @@ class Skatepark < ActiveRecord::Base
       merge(Location.neighbors_of(self.location))
   end
 
+  def average_rating
+    if ratings.any?
+      raw_avg = ratings.average(:rating)
+      (raw_avg * 2).ceil.to_f / 2
+    end
+  end
+
   def next_park
     ordered_parks = Skatepark.in_order
     next_park = ordered_parks[ordered_parks.index(self) + 1]
