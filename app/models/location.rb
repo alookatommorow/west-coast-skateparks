@@ -23,4 +23,12 @@ class Location < ActiveRecord::Base
   def new_coordinates?
     self.latitude_changed? && self.longitude_changed?
   end
+
+  def to_s
+    if zip_code
+      address + ", " + city.titleize + ", " + states["#{state}"] + " " + zip_code
+    else
+      address
+    end
+  end
 end
