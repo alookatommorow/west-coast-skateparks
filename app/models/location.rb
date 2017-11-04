@@ -1,4 +1,10 @@
 class Location < ActiveRecord::Base
+  STATE_ABBREVS = {
+    "california" => "CA",
+    "oregon" => "OR",
+    "washington" => "WA",
+  }.freeze
+
   belongs_to :skatepark
   validates :city, :state, presence: true
 
@@ -25,10 +31,10 @@ class Location < ActiveRecord::Base
   end
 
   def to_s
-    if zip_code
-      address + ", " + city.titleize + ", " + states["#{state}"] + " " + zip_code
-    else
-      address
-    end
+    (address + ", " + 
+      city.titleize + ", " + 
+      STATE_ABBREVS[state] + " " + 
+      (zip_code || "")
+    ).strip
   end
 end

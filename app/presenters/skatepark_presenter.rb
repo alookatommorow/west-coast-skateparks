@@ -10,14 +10,6 @@ class SkateparkPresenter < SimpleDelegator
 
   private
 
-    def states
-      {
-        'california' => 'CA',
-        'oregon' => 'OR',
-        'washington' => 'WA',
-      }
-    end
-
     def present_attributes
       model.attributes.select { |_k, v| v.present? }
     end

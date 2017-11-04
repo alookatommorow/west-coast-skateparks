@@ -23,8 +23,7 @@
   meta name="description" content=skatepark_description
 
 = content_for :page_title
-  title="#{@skatepark.name.titleize}, #{@skatepark.city.titleize}, #{state_abbrev[@skatepark.state]} | West Coast Skateparks"
-
+  title= "#{skatepark_og_meta_title} | West Coast Skateparks"
 = content_for :analytics_event
   javascript:
     analytics.page("Skatepark", #{raw skatepark_json(@skatepark)});

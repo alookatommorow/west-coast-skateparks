@@ -10,19 +10,11 @@ module SkateparkHelper
   end
 
   def skatepark_og_meta_title
-    "#{@skatepark.name.titleize} - #{@skatepark.city.titleize}, #{state_abbrev[@skatepark.state]}"
+    "#{@skatepark.name.titleize} - #{@skatepark.city.titleize}, #{state_abbrevs[@skatepark.state]}"
   end
 
   def skatepark_description
-    "#{@skatepark.name.titleize} in #{@skatepark.city.titleize}, #{state_abbrev[@skatepark.state]} - photos, map, and info"
-  end
-
-  def state_abbrev
-    {
-      "california" => "CA",
-      "oregon" => "OR",
-      "washington" => "WA",
-    }
+    "#{@skatepark.name.titleize} in #{@skatepark.city.titleize}, #{state_abbrevs[@skatepark.state]} - photos, map, and info"
   end
 
   def num_empty_stars(rating)
@@ -35,5 +27,9 @@ module SkateparkHelper
 
   def num_stars(rating)
     rating.to_f.floor
+  end
+
+  def state_abbrevs
+    Location::STATE_ABBREVS
   end
 end
