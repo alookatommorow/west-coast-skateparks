@@ -1,6 +1,17 @@
 class Skatepark < ActiveRecord::Base
   LOCATION_ATTRIBUTES = %i(address city state zip_code latitude longitude)
   LOCATION_METHODS = %i(has_coordinates? new_coordinates?)
+  VISIBLE_ATTRIBUTES = %w(
+    info
+    hours
+    material
+    designer
+    builder
+    opened
+    size
+    lights
+    obstacles
+  )
 
   validates :name, presence: true
 
@@ -62,6 +73,10 @@ class Skatepark < ActiveRecord::Base
     else
       ordered_parks.last
     end
+  end
+
+  def present_attributes
+    attributes.slice(*VISIBLE_ATTRIBUTES).select { |_k, v| v.present? }
   end
 
   def ratings?

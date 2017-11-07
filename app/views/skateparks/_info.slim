@@ -2,7 +2,13 @@
   .info-display
     .segment
       .list
-        - skatepark.attributes.each do |attribute, value|
+        - skatepark.present_attributes.each do |attribute, value|
+          - if attribute == "size"
+            - value << " sq ft"
+          - if attribute == "hours"
+            - value = value.capitalize
+          - value = value.try(:titleize) unless %w(info hours size).include?(attribute)
+
           .item.skatepark-info-attribute
             .attribute-column= attribute.titleize
             .value-column= value
