@@ -31,10 +31,10 @@
   .divider
   .address-container
     .address
-      a href="https://maps.google.com/maps?saddr='Current Location'&daddr=#{skatepark.formatted_address}" target="_blank"
+      a href="https://maps.google.com/maps?saddr='Current Location'&daddr=#{skatepark.location}" target="_blank"
         div
           i.fa.fa-map-marker.fa-2x.fa-fw
-          | #{skatepark.formatted_address}
+          | #{skatepark.location}
         div.get-directions Get Directions
   .divider
   .links-container

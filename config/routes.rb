@@ -22,7 +22,6 @@ Rails.application.routes.draw do
   resources :users, only: [:show, :create, :new, :edit, :update]
 
   resources :sessions, only: [:create, :destroy, :new]
-  post '/sessions/create_with_auth', to: 'sessions#create_with_auth'
 
   namespace :skateparks do
     resource :state, only: :show do

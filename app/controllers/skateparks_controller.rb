@@ -2,9 +2,7 @@ class SkateparksController < ApplicationController
   before_action :set_skatepark, only: %i(favorite unfavorite visit unvisit)
 
   def show
-    @skatepark = SkateparkPresenter.new(
-      Skatepark.includes({ reviews: :user }, :ratings).find(params[:id])
-    )
+    @skatepark = Skatepark.includes({reviews: :user }, :ratings).find(params[:id])
   end
 
   def index

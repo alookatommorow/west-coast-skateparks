@@ -1,6 +1,17 @@
 class Skatepark < ActiveRecord::Base
   LOCATION_ATTRIBUTES = %i(address city state zip_code latitude longitude)
   LOCATION_METHODS = %i(has_coordinates? new_coordinates?)
+  VISIBLE_ATTRIBUTES = %w(
+    info
+    hours
+    material
+    designer
+    builder
+    opened
+    size
+    lights
+    obstacles
+  )
 
   validates :name, presence: true
 
@@ -37,6 +48,13 @@ class Skatepark < ActiveRecord::Base
       merge(Location.neighbors_of(self.location))
   end
 
+  def average_rating
+    if ratings.any?
+      raw_avg = ratings.average(:rating)
+      (raw_avg * 2).ceil.to_f / 2
+    end
+  end
+
   def next_park
     ordered_parks = Skatepark.in_order
     next_park = ordered_parks[ordered_parks.index(self) + 1]
@@ -55,6 +73,10 @@ class Skatepark < ActiveRecord::Base
     else
       ordered_parks.last
     end
+  end
+
+  def present_attributes
+    attributes.slice(*VISIBLE_ATTRIBUTES).select { |_k, v| v.present? }
   end
 
   def ratings?

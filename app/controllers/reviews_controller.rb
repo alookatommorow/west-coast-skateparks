@@ -3,9 +3,7 @@ class ReviewsController < ApplicationController
     Review.create(review_params)
 
     render partial: 'form', locals: {
-      skatepark: SkateparkPresenter.new(
-        Skatepark.includes(reviews: :user).find(params[:skatepark_id])
-      )
+      skatepark: Skatepark.includes(reviews: :user).find(params[:skatepark_id])
     }
   end
 

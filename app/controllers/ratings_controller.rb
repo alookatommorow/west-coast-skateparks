@@ -3,9 +3,7 @@ class RatingsController < ApplicationController
     Rating.create(rating_params)
 
     render partial: "form", locals: {
-      skatepark: SkateparkPresenter.new(
-        Skatepark.includes(:ratings).find(params[:skatepark_id])
-      )
+      skatepark: Skatepark.includes(:ratings).find(params[:skatepark_id])
     }
   end
 

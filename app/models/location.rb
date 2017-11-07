@@ -1,4 +1,10 @@
 class Location < ActiveRecord::Base
+  STATE_ABBREVS = {
+    "california" => "CA",
+    "oregon" => "OR",
+    "washington" => "WA",
+  }.freeze
+
   belongs_to :skatepark
   validates :city, :state, presence: true
 
@@ -22,5 +28,13 @@ class Location < ActiveRecord::Base
 
   def new_coordinates?
     self.latitude_changed? && self.longitude_changed?
+  end
+
+  def to_s
+    (address + ", " + 
+      city.titleize + ", " + 
+      STATE_ABBREVS[state] + " " + 
+      (zip_code || "")
+    ).strip
   end
 end
