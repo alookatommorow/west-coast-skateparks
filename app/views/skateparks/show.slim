@@ -1,5 +1,8 @@
 .skatepark-show-container
-  = render 'header', skatepark: @skatepark, last: Skatepark.last.id
+  = render 'header',
+           skatepark: @skatepark,
+           previous_park: @previous_park,
+           next_park: @next_park
   = render 'dashboard', skatepark: @skatepark, weather: @weather
   = render 'photos', skatepark: @skatepark
   = render 'info', skatepark: @skatepark
