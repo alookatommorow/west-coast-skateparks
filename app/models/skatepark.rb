@@ -36,10 +36,6 @@ class Skatepark < ActiveRecord::Base
 
   scope :in_state, -> (state) { joins(:location).merge(Location.in_state(state)) }
 
-  def self.in_order
-    includes(:location).order("locations.state", "locations.city", :name)
-  end
-
   def neighbor_parks
     self.class.
       joins(:location).
@@ -56,23 +52,13 @@ class Skatepark < ActiveRecord::Base
   end
 
   def next_park
-    ordered_parks = Skatepark.in_order
     next_park = ordered_parks[ordered_parks.index(self) + 1]
-    if next_park
-      next_park
-    else
-      ordered_parks.first
-    end
+    next_park ? next_park : ordered_parks.first
   end
 
   def previous_park
-    ordered_parks = Skatepark.in_order
     previous_park = ordered_parks[ordered_parks.index(self) - 1]
-    if previous_park
-      previous_park
-    else
-      ordered_parks.last
-    end
+    previous_park ? previous_park : ordered_parks.last
   end
 
   def present_attributes
@@ -98,4 +84,10 @@ class Skatepark < ActiveRecord::Base
   def to_param
     [id, name.parameterize, city.parameterize, state.parameterize].join("-")
   end
+
+  private
+
+    def ordered_parks
+      @ordered_parks ||= Skatepark.includes(:location).order("locations.state", "locations.city", :name)
+    end
 end
