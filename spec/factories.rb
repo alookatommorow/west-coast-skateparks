@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :skatepark do
     sequence(:name) { |i| "cribbage#{i}" }
     location

@@ -64,7 +64,7 @@ group :test do
   gem 'chromedriver-helper'
   gem "codeclimate-test-reporter", require: nil
   gem "database_cleaner"
-  gem "factory_girl_rails"
+  gem "factory_bot_rails"
   gem "rake"
   gem "rails-controller-testing"
   gem "selenium-webdriver"
