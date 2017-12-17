@@ -3,6 +3,7 @@ class SkateparksController < ApplicationController
 
   def show
     @skatepark = Skatepark.includes({reviews: :user }, :ratings).find(params[:id])
+    @next_park, @previous_park = [@skatepark.next_park, @skatepark.previous_park]
   end
 
   def index
