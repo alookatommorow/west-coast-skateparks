@@ -1,5 +1,10 @@
 var MAPBUILDER = (function () {
   var builder = {},
+
+      // try to get rid of these 2?
+      gInfoWindow,
+      gMarker,
+
       gMap,
       map,
       markerContainer = [];
@@ -15,7 +20,9 @@ var MAPBUILDER = (function () {
 
   builder._initialSetUp = function() {
     var zoom = (this.skatepark ? 9 : 6);
+    gInfoWindow = google.maps.InfoWindow;
     gMap = google.maps.Map;
+    gMarker = google.maps.Marker;
     map = new gMap(document.getElementById('map'), { zoom: zoom });
     map.setOptions({styles: mapStyles});
 
@@ -37,7 +44,6 @@ var MAPBUILDER = (function () {
     }
 
     function setUserMapCenter() {
-
       if (navigator.geolocation) {
         // set to user location
         navigator.geolocation.getCurrentPosition(function(position) {
@@ -46,11 +52,26 @@ var MAPBUILDER = (function () {
             lng: position.coords.longitude
           }
 
+          createUserMarker(userLocation);
           map.setCenter(userLocation);
+
         }, handleNoLocation);
       } else {
         handleNoLocation();
       }
+    }
+
+    function createUserMarker(userLocation) {
+      var infowindow = new gInfoWindow({content: "<div>Your location</div>"}),
+          marker = new gMarker({
+            position: userLocation,
+            map: map,
+            icon: "https://maps.google.com/mapfiles/ms/icons/orange-dot.png",
+          });
+
+      marker.addListener("click", function() {
+        infowindow.open(map, marker);
+      });
     }
 
     function handleNoLocation() {
