@@ -1,10 +1,5 @@
 var MAPBUILDER = (function () {
   var builder = {},
-
-      // try to get rid of these 2?
-      gInfoWindow,
-      gMarker,
-
       gMap,
       map,
       markerContainer = [];
@@ -20,9 +15,7 @@ var MAPBUILDER = (function () {
 
   builder._initialSetUp = function() {
     var zoom = (this.skatepark ? 9 : 6);
-    gInfoWindow = google.maps.InfoWindow;
     gMap = google.maps.Map;
-    gMarker = google.maps.Marker;
     map = new gMap(document.getElementById('map'), { zoom: zoom });
     map.setOptions({styles: mapStyles});
 
@@ -33,7 +26,8 @@ var MAPBUILDER = (function () {
     InfoWindow.prototype.gMapsInfoWindow = google.maps.InfoWindow;
   };
 
-  // sets map center to main skatepark, or first skatepark associated with user, or SF
+  // sets map center to main skatepark, user location, 
+  // first skatepark associated with user, or SF
   builder._setMapCenter = function () {
     var skatepark = this.skatepark;
 
@@ -45,33 +39,18 @@ var MAPBUILDER = (function () {
 
     function setUserMapCenter() {
       if (navigator.geolocation) {
-        // set to user location
         navigator.geolocation.getCurrentPosition(function(position) {
-          var userLocation = {
-            lat: position.coords.latitude,
-            lng: position.coords.longitude
-          }
+          var user = {
+                latitude: position.coords.latitude,
+                longitude: position.coords.longitude
+              },
+              marker = new Marker(user);
 
-          createUserMarker(userLocation);
-          map.setCenter(userLocation);
-
+          map.setCenter(marker.position);
         }, handleNoLocation);
       } else {
         handleNoLocation();
       }
-    }
-
-    function createUserMarker(userLocation) {
-      var infowindow = new gInfoWindow({content: "<div>Your location</div>"}),
-          marker = new gMarker({
-            position: userLocation,
-            map: map,
-            icon: "https://maps.google.com/mapfiles/ms/icons/orange-dot.png",
-          });
-
-      marker.addListener("click", function() {
-        infowindow.open(map, marker);
-      });
     }
 
     function handleNoLocation() {
