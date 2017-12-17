@@ -28,19 +28,41 @@ var MAPBUILDER = (function () {
 
   // sets map center to main skatepark, or first skatepark associated with user, or SF
   builder._setMapCenter = function () {
-    var skatepark = this.skatepark,
-        SANFRAN = [37.7749, -122.4194],
-        mapCenter;
+    var skatepark = this.skatepark;
 
-    if (skatepark) {
-      mapCenter = {lat: skatepark.latitude, lng: skatepark.longitude};
-    } else if (markerContainer[0] !== undefined) {
-      mapCenter = markerContainer[0].position;
-    } else {
-      mapCenter = {lat: SANFRAN[0], lng: SANFRAN[1]};
+    if (skatepark) { // skatepark show page
+      map.setCenter({ lat: skatepark.latitude, lng: skatepark.longitude });
+    } else { // user show page
+      setUserMapCenter();
     }
 
-    map.setCenter(mapCenter);
+    function setUserMapCenter() {
+
+      if (navigator.geolocation) {
+        // set to user location
+        navigator.geolocation.getCurrentPosition(function(position) {
+          var userLocation = {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude
+          }
+
+          map.setCenter(userLocation);
+        }, handleNoLocation);
+      } else {
+        handleNoLocation();
+      }
+    }
+
+    function handleNoLocation() {
+      var SANFRAN = {lat: 37.7749, lng: -122.4194},
+          userHasSavedParks = (markerContainer[0] !== undefined);
+
+      if (userHasSavedParks) {
+        map.setCenter(markerContainer[0].position) // set to first saved park
+      } else {
+        map.setCenter(SANFRAN); // set to SF
+      }
+    }
   };
 
   // binds click so buttons toggle visibility of corresponding markers e.g., "Hide Favorites"
