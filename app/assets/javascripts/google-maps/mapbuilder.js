@@ -42,7 +42,8 @@ var MAPBUILDER = (function () {
         navigator.geolocation.getCurrentPosition(function(position) {
           var user = {
                 latitude: position.coords.latitude,
-                longitude: position.coords.longitude
+                longitude: position.coords.longitude,
+                category: "user"
               },
               marker = new Marker(user);
 

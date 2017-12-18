@@ -1,52 +1,35 @@
 // wrapper around google maps Marker to add our custom setup
 // while exposing a simple constructor to the MAPBUILDER
 function Marker(object) {
-  var marker,
-      map = this.map;
-      gMarker = this.gMapsMarker,
-      colorOptions = this.colorOptions;
+  var map = this.map;
+      colors = this.colors,
+      marker = new this.gMapsMarker({
+        position: {lat: object.latitude, lng: object.longitude},
+        infowindow: new InfoWindow(object),
+        map: map,
+        category: object.category,
+        icon: "https://maps.google.com/mapfiles/ms/icons/" + colors[object.category] + ".png"
+      });
 
-  if (object.id) {
-    return generateSkateparkMarker(object);
-  } else {
-    return generateUserMarker(object);
-  }
+  if (object.id) { // skatepark
+    var skatepark = object;
 
-  function generateSkateparkMarker(skatepark) {
-    var marker = new gMarker({
-      position: { lat: skatepark.latitude, lng: skatepark.longitude },
-      infowindow: new InfoWindow(skatepark),
-      map: map,
-      title: titleize(skatepark.city + ', ' + stateDisplay[skatepark.state]),
-      category: skatepark.category,
-      icon: "https://maps.google.com/mapfiles/ms/icons/" + colorOptions[skatepark.category] + ".png",
-      id: skatepark.id
-    });
+    marker.title = titleize(skatepark.city + ', ' + stateDisplay[skatepark.state]);
+    marker.id = skatepark.id;
 
     if (skatepark.category === "nearby") {
       marker.setVisible(false);
     }
-
-    return marker;
-  }
-
-  function generateUserMarker(user) {
-    var marker = new gMarker({
-      position: {lat: user.latitude, lng: user.longitude},
-      map: map,
-      icon: "https://maps.google.com/mapfiles/ms/icons/"+colorOptions['user']+".png",
-      infowindow: new InfoWindow(user)
-    });
-
+  } else { // user
     marker.addListener('click', function() {
       marker.infowindow.open(map, marker);
     });
-
-    return marker;
   }
+
+  return marker;
 }
 
-Marker.prototype.colorOptions = {
+Marker.prototype.colors = {
   main: "red-dot",
   nearby: "green-dot",
   favorite: "purple-dot",
