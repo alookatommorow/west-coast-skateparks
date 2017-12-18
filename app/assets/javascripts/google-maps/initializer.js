@@ -12,32 +12,14 @@ function initMap() {
 }
 
 function generateMap(response) {
-  if (response.email) {
-    configureMapBuilderForUserPage(response);
+  if (response["is_skatepark?"]) {
+    MAPBUILDER.skatepark = response;
   } else {
-    configureMapBuilderForSkateparkPage(response);
+    configureMapBuilderForUserPage(response);
   }
 
   // initialize map
   MAPBUILDER.initialize();
-
-  // add attributes and methods to MAPBUILDER for SKATEPARK PAGE
-  function configureMapBuilderForSkateparkPage(skatepark) {
-    MAPBUILDER.skatepark = skatepark;
-    MAPBUILDER.categorizedMarkers = {main: [], nearby: []};
-    MAPBUILDER.generateMarkers = function () {
-      var skatepark = this.skatepark,
-          createMarker = this.createMarker.bind(this);
-
-      skatepark.category = "main";
-      createMarker(skatepark);
-
-      skatepark.neighbor_parks.forEach(function (nearbyPark) {
-        nearbyPark.category = "nearby";
-        createMarker(nearbyPark);
-      });
-    };
-  }
 
   // add attributes and methods to MAPBUILDER for USER PAGE
   function configureMapBuilderForUserPage(user) {
@@ -61,6 +43,34 @@ function generateMap(response) {
             skatepark.category = category;
             createMarker(skatepark);
           }
+        }
+      }
+    };
+
+    MAPBUILDER.setMapCenter = function () {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function(position) {
+          var marker = new Marker({
+            latitude: position.coords.latitude,
+            longitude: position.coords.longitude,
+            category: "user"
+          });
+
+          map.setCenter(marker.position);
+        }, handleNoLocation.bind(this));
+      } else {
+        handleNoLocation.bind(this)();
+      }
+
+      function handleNoLocation() {
+        var SANFRAN = {lat: 37.7749, lng: -122.4194},
+            markerContainer = this.markerContainer,
+            userHasSavedParks = (markerContainer[0] !== undefined);
+
+        if (userHasSavedParks) {
+          map.setCenter(markerContainer[0].position) // set to first saved park
+        } else {
+          map.setCenter(SANFRAN); // set to SF
         }
       }
     };

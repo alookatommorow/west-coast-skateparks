@@ -1,69 +1,54 @@
-var MAPBUILDER = (function () {
-  var builder = {},
-      gMap,
-      map,
-      markerContainer = [];
+var MAPBUILDER = (function ($) {
+  var builder = {
+    markerContainer: [],
+    categorizedMarkers: {main: [], nearby: []}
+  };
 
   // method for map creation
   builder.initialize = function() {
     this._initialSetUp();
-    this.generateMarkers();
-    this._setMapCenter();
+    this.generateMarkers(); // no _ because these two "public" methods can be stubbed
+    this.setMapCenter();    // to build maps for users as well as skateparks
     this._bindClickToVisibilityButtons();
     this._showButtons();
   };
 
   builder._initialSetUp = function() {
-    var zoom = (this.skatepark ? 9 : 6);
-    gMap = google.maps.Map;
-    map = new gMap(document.getElementById('map'), { zoom: zoom });
+    var zoom = (this.skatepark ? 9 : 6),
+        googleMaps = google.maps;
+        gMap = googleMaps.Map;
+        map = new gMap(document.getElementById('map'), { zoom: zoom });
+
     map.setOptions({styles: mapStyles});
 
     // these variables remain unchanged for every instance of Marker/InfoWindow objects,
     // assigning them to its prototype ensures that they are only created once.
     Marker.prototype.map = map;
-    Marker.prototype.gMapsMarker = google.maps.Marker;
-    InfoWindow.prototype.gMapsInfoWindow = google.maps.InfoWindow;
+    Marker.prototype.gMapsMarker = googleMaps.Marker;
+    InfoWindow.prototype.gMapsInfoWindow = googleMaps.InfoWindow;
+
+    // map must be exposed to outside in order to tweak on user page
+    this.map = map
   };
 
-  // sets map center to main skatepark, user location, 
-  // first skatepark associated with user, or SF
-  builder._setMapCenter = function () {
-    var skatepark = this.skatepark;
+  builder.generateMarkers = function() {
+    var skatepark = this.skatepark,
+        createMarker = this.createMarker.bind(this);
 
-    if (skatepark) { // skatepark show page
-      map.setCenter({ lat: skatepark.latitude, lng: skatepark.longitude });
-    } else { // user show page
-      setUserMapCenter();
-    }
+    skatepark.category = "main";
+    createMarker(skatepark);
 
-    function setUserMapCenter() {
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(function(position) {
-          var user = {
-                latitude: position.coords.latitude,
-                longitude: position.coords.longitude,
-                category: "user"
-              },
-              marker = new Marker(user);
+    skatepark.neighbor_parks.forEach(function (nearbyPark) {
+      nearbyPark.category = "nearby";
+      createMarker(nearbyPark);
+    });
+  };
 
-          map.setCenter(marker.position);
-        }, handleNoLocation);
-      } else {
-        handleNoLocation();
-      }
-    }
+  builder.setMapCenter = function () {
+    var skatepark = this.skatepark,
+        map = this.map;
 
-    function handleNoLocation() {
-      var SANFRAN = {lat: 37.7749, lng: -122.4194},
-          userHasSavedParks = (markerContainer[0] !== undefined);
-
-      if (userHasSavedParks) {
-        map.setCenter(markerContainer[0].position) // set to first saved park
-      } else {
-        map.setCenter(SANFRAN); // set to SF
-      }
-    }
+    map.setCenter({ lat: skatepark.latitude, lng: skatepark.longitude });
   };
 
   // binds click so buttons toggle visibility of corresponding markers e.g., "Hide Favorites"
@@ -113,7 +98,10 @@ var MAPBUILDER = (function () {
 
   // create map marker out of skatepark argument
   builder.createMarker = function(skatepark) {
-    var marker = new Marker(skatepark);
+    var map = this.map,
+        marker = new Marker(skatepark),
+        markerContainer = this.markerContainer;
+
     markerContainer.push(marker);
     this.categorizedMarkers[skatepark.category].push(marker);
     bindInfoWindowClick(marker);
@@ -129,7 +117,8 @@ var MAPBUILDER = (function () {
   };
 
   builder.removeMarker = function(skateparkId) {
-    var marker = markerContainer.deleteById(skateparkId),
+    var markerContainer = this.markerContainer,
+        marker = markerContainer.deleteById(skateparkId),
         markersInCategory = this.categorizedMarkers[marker.category];
 
     marker.setMap(null);
@@ -141,4 +130,4 @@ var MAPBUILDER = (function () {
   };
 
   return builder;
-}());
+}(jQuery));

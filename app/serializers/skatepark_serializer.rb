@@ -9,6 +9,7 @@ class SkateparkSerializer < ActiveModel::Serializer
     :longitude,
     :map_photo,
     :rating,
+    :is_skatepark?,
   )
 
   has_many :neighbor_parks
@@ -19,5 +20,9 @@ class SkateparkSerializer < ActiveModel::Serializer
 
   def map_photo
     object.map_photo(:thumb)
+  end
+
+  def is_skatepark?
+    true
   end
 end
