@@ -18,7 +18,7 @@ gem "httparty"
 gem "jquery-rails"
 gem "kaminari"
 gem "paperclip"
-gem "pg"
+gem "pg", ">= 0.18", "< 1.0"
 gem "puma"
 gem 'react-rails'
 gem "sass-rails"
