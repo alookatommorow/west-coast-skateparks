@@ -5,6 +5,7 @@ html
       = yield :page_title
     - else
       title West Coast Skateparks
+    = render 'analytics'
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true
     = csrf_meta_tags
     = favicon_link_tag 'favicon.ico'
@@ -25,6 +26,5 @@ html
     = render 'hero' unless non_header_page?
 
     = yield
-
-    = render "analytics"
+    
     = render 'javascripts', skatepark: @skatepark, user: @user
