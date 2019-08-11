@@ -1,12 +1,20 @@
 // wrapper around google maps infowindow to add our custom setup
 // while exposing a simple constructor to the MAPBUILDER
-function InfoWindow(skatepark) {
-  this.stars = {};
-  this.skatepark = skatepark;
-  this.rating = skatepark.rating;
+function InfoWindow(object) {
+  var content;
+
+  if (object.id) { // if skatepark
+    this.stars = {};
+    this.skatepark = object;
+    this.rating = object.rating;
+
+    content = this.generateContentString(object);
+  } else {
+    content = "<div>Your location</div>"
+  }
 
   return new this.gMapsInfoWindow({
-    content: this.generateContentString(skatepark)
+    content: content
   });
 }
 
