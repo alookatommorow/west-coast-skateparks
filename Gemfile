@@ -20,7 +20,7 @@ gem "kaminari"
 gem "paperclip"
 gem "pg", ">= 0.18", "< 1.0"
 gem "puma"
-gem 'react-rails'
+gem 'react_on_rails'
 gem "sass-rails"
 gem 'simple_form'
 gem 'sitemap_generator'
