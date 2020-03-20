@@ -20,16 +20,17 @@ gem "kaminari"
 gem "paperclip"
 gem "pg", ">= 0.18", "< 1.0"
 gem "puma"
-gem 'react_on_rails'
+gem "react_on_rails", "~> 11.3"
 gem "sass-rails"
-gem 'simple_form'
-gem 'sitemap_generator'
+gem "simple_form"
+gem "sitemap_generator"
 gem "slim"
 gem "sprockets-rails"
 gem "therubyracer"
 gem "turbolinks"
 gem "uglifier", ">= 1.3.0"
 gem "underscore-rails"
+gem "webpacker", "~> 4.2.2"
 
 group :assets do
   gem "coffee-rails"

@@ -955,6 +955,8 @@ GEM
     puma (4.0.1)
       nio4r (~> 2.0)
     rack (2.0.7)
+    rack-proxy (0.6.5)
+      rack
     rack-test (0.6.3)
       rack (>= 1.0)
     rails (5.0.7.2)
@@ -1089,6 +1091,10 @@ GEM
       addressable (>= 2.3.6)
       crack (>= 0.3.2)
       hashdiff (>= 0.4.0, < 2.0.0)
+    webpacker (4.2.2)
+      activesupport (>= 4.2)
+      rack-proxy (>= 0.6.1)
+      railties (>= 4.2)
     websocket-driver (0.6.5)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.4)
@@ -1134,7 +1140,7 @@ DEPENDENCIES
   rails-controller-testing
   rails_12factor
   rake
-  react_on_rails
+  react_on_rails (~> 11.3)
   rspec-rails
   sass-rails
   selenium-webdriver
@@ -1150,6 +1156,7 @@ DEPENDENCIES
   underscore-rails
   web-console (~> 3.1.1)
   webmock
+  webpacker (~> 4.2.2)
 
 RUBY VERSION
    ruby 2.4.2p198
