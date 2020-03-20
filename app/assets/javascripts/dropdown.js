@@ -1,4 +1,4 @@
-$(document).ready(function() {
+$(document).on('turbolinks:load', function () {
   var $dropdown = $(".dropdown:not(i)");
 
   ///  toggle dropdown  ///

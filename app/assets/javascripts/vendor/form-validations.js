@@ -1,4 +1,4 @@
-$(document).ready(function() {
+$(document).on('turbolinks:load', function () {
 
   $("textarea.validate").focus(function() {
     if ($(this).hasClass("error")) {
@@ -86,9 +86,3 @@ FormValidator.prototype.validateForm = function() {
     return true;
   }
 }
-
-
-
-
-
-

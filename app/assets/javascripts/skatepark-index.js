@@ -1,4 +1,4 @@
-$(document).ready(function(){
+$(document).on('turbolinks:load', function () {
   var pageCount = 1;
   var currentStateLink;
 
@@ -108,4 +108,3 @@ $(document).ready(function(){
     });
   }
 });
-

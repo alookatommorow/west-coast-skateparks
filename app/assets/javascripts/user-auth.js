@@ -1,4 +1,4 @@
-$(document).ready(function () {
+$(document).on('turbolinks:load', function () {
 
   initGoogleAuth();
 
@@ -50,5 +50,3 @@ function sendUserData(response) {
     console.log(response);
   });
 }
-
-

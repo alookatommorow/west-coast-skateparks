@@ -1,4 +1,4 @@
-$(document).ready(function() {
+$(document).on('turbolinks:load', function () {
   $(".display-search").click(function() {
     $(this).hide();
     $(".react-search-container").animate({width:'toggle'});
