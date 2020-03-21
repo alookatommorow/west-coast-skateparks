@@ -6,8 +6,8 @@ html
     - else
       title West Coast Skateparks
     = render 'analytics'
-    = render 'javascripts', skatepark: @skatepark, user: @user
     = javascript_pack_tag 'application'
+    = render 'javascripts', skatepark: @skatepark, user: @user
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
 
     = csrf_meta_tags
