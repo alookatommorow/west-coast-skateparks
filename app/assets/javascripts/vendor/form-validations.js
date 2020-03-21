@@ -1,4 +1,4 @@
-$(document).on('turbolinks:load', function () {
+$(document).on('turbolinks:load', function() {
 
   $("textarea.validate").focus(function() {
     if ($(this).hasClass("error")) {

@@ -1,4 +1,4 @@
-$(document).on('turbolinks:load', function () {
+$(document).on('turbolinks:load', function() {
   if ($('.skateparks.show').length) {
     var alreadyInitializedMap = false;
 
@@ -16,5 +16,4 @@ $(document).on('turbolinks:load', function () {
       }
     });
   }
-
 });
