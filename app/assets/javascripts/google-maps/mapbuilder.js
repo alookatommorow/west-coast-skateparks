@@ -50,7 +50,7 @@ var MAPBUILDER = (function () {
 
     categories.forEach(function (category) {
       var buttonId = "#toggle-" + category;
-      $('#skatepark-map').on('click', buttonId, function (event) {
+      $('#map-toggle-buttons').on('click', buttonId, function (event) {
         var $button = $(event.target),
             action = $button.text().split(' ');
 
