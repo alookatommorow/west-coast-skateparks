@@ -17,4 +17,7 @@
 import "core-js/stable";
 import "regenerator-runtime/runtime";
 
-console.log('Hello World from Webpacker')
+import ReactOnRails from 'react-on-rails';
+import SearchContainer from '../components/SearchContainer';
+
+ReactOnRails.register({ SearchContainer });
