@@ -6,9 +6,10 @@ html
     - else
       title West Coast Skateparks
     = render 'analytics'
-    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
-    = javascript_pack_tag 'application'
     = render 'javascripts', skatepark: @skatepark, user: @user
+    = javascript_pack_tag 'application'
+    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
+
     = csrf_meta_tags
     = favicon_link_tag 'favicon.ico'
     - if content_for? :og_metadata
