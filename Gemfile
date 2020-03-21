@@ -61,13 +61,13 @@ end
 
 group :test do
   gem "capybara"
-  gem 'chromedriver-helper'
   gem "codeclimate-test-reporter", require: nil
   gem "database_cleaner"
   gem "factory_bot_rails"
   gem "rake"
   gem "rails-controller-testing"
   gem "selenium-webdriver"
+  gem "webdrivers", '~> 4.0'
   gem "webmock"
 end
 
