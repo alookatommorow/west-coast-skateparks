@@ -65,7 +65,7 @@ ActiveRecord::Schema.define(version: 20170119010509) do
     t.datetime "updated_at",         null: false
     t.string   "photo_file_name"
     t.string   "photo_content_type"
-    t.integer  "photo_file_size"
+    t.bigint   "photo_file_size"
     t.datetime "photo_updated_at"
     t.index ["skatepark_id"], name: "index_skatepark_images_on_skatepark_id", using: :btree
   end
@@ -92,11 +92,11 @@ ActiveRecord::Schema.define(version: 20170119010509) do
     t.datetime "updated_at"
     t.string   "hero_file_name"
     t.string   "hero_content_type"
-    t.integer  "hero_file_size"
+    t.bigint   "hero_file_size"
     t.datetime "hero_updated_at"
     t.string   "map_photo_file_name"
     t.string   "map_photo_content_type"
-    t.integer  "map_photo_file_size"
+    t.bigint   "map_photo_file_size"
     t.datetime "map_photo_updated_at"
   end
 
@@ -110,7 +110,7 @@ ActiveRecord::Schema.define(version: 20170119010509) do
     t.string   "name"
     t.string   "avatar_file_name"
     t.string   "avatar_content_type"
-    t.integer  "avatar_file_size"
+    t.bigint   "avatar_file_size"
     t.datetime "avatar_updated_at"
     t.index ["email"], name: "index_users_on_email", using: :btree
   end

@@ -48,6 +48,7 @@ end
 group :development, :test do
   gem "bundler-audit", require: false
   gem "dotenv-rails"
+  gem "factory_bot_rails"
   gem "launchy"
   gem "pry-rails"
   gem "pry-byebug"
@@ -63,7 +64,6 @@ group :test do
   gem "capybara"
   gem "codeclimate-test-reporter", require: nil
   gem "database_cleaner"
-  gem "factory_bot_rails"
   gem "rake"
   gem "rails-controller-testing"
   gem "selenium-webdriver"
