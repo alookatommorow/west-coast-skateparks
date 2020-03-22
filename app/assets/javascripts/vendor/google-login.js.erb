@@ -4,14 +4,12 @@ function initGoogleAuth(){
     gapi.auth2.init({
       client_id: "<%= ENV.fetch('GOOGLE_CLIENT_ID') %>"
     });
-  });
-}
 
-function googleSignIn() {
-  gapi.auth2.getAuthInstance().signIn().then(function(result){
-    onSignIn(result);
-  }, function(err) {
-    console.log(err);
+    gapi.auth2.getAuthInstance().signIn().then(function(result){
+      onSignIn(result);
+    }, function(err) {
+      console.log(err);
+    });
   });
 }
 
