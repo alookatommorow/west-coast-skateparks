@@ -45,9 +45,10 @@
       a#info-link href="#" data-dashboard-link="#skatepark-info"
         i.fa.fa-info.fa-4x
         span Info
-      a#map-link href="" data-dashboard-link="#skatepark-map"
-        i.fa.fa-map-marker.fa-4x
-        span Map
+      - if @skatepark.has_coordinates?
+        a#map-link href="" data-dashboard-link="#skatepark-map"
+          i.fa.fa-map-marker.fa-4x
+          span Map
       a#reviews-link href="#" data-dashboard-link="#skatepark-reviews"
         i.fa.fa-comments.fa-4x
         span Rate

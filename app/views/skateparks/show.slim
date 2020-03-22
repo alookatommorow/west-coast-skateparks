@@ -6,7 +6,8 @@
   = render 'dashboard', skatepark: @skatepark, weather: @weather
   = render 'photos', skatepark: @skatepark
   = render 'info', skatepark: @skatepark
-  = render 'map', skatepark: @skatepark
+  - if @skatepark.has_coordinates?
+    = render 'map', skatepark: @skatepark
   = render 'reviews', skatepark: @skatepark
 
 = content_for :og_metadata

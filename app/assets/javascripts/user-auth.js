@@ -1,32 +1,31 @@
-$(document).ready(function () {
+$(document).on('turbolinks:load', function() {
+  if ($('.sessions.new').length || $('.users.new').length) {
+    //////// sign-in/sign-up validation ////////
+    $(".auth-form").submit(function(event) {
+      var validation = new FormValidator(this).validateForm();
+      if (validation) {
+        return true;
+      } else {
+        event.preventDefault();
+      }
+    });
 
-  initGoogleAuth();
+    //////// FB login ////////
+    $('#fb-login').click(function(){
+      hideSessionForm();
+      FB.login(checkLoginState);
+    });
 
-  //////// sign-in/sign-up validation ////////
-  $(".auth-form").submit(function(event) {
-    var validation = new FormValidator(this).validateForm();
-    if (validation) {
-      return true;
-    } else {
-      event.preventDefault();
+    //////// Goog login ////////
+    $('#goog-login').click(function(){
+      initGoogleAuth();
+      hideSessionForm();
+    });
+
+    function hideSessionForm() {
+      $(".dimmer").addClass("active");
+      $(".session-form-container").hide();
     }
-  });
-
-  //////// FB login ////////
-  $('#fb-login').click(function(){
-    hideSessionForm();
-    FB.login(checkLoginState);
-  });
-
-  //////// Goog login ////////
-  $('#goog-login').click(function(){
-    hideSessionForm();
-    googleSignIn();
-  });
-
-  function hideSessionForm() {
-    $(".dimmer").addClass("active");
-    $(".session-form-container").hide();
   }
 });
 
@@ -50,5 +49,3 @@ function sendUserData(response) {
     console.log(response);
   });
 }
-
-

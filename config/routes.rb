@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'hello_world', to: 'hello_world#index'
   scope module: "buttercms" do
     get "/categories/:slug" => "categories#show", :as => :buttercms_category
     get "/author/:slug" => "authors#show", :as => :buttercms_author

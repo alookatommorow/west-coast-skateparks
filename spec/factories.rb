@@ -14,31 +14,23 @@ FactoryBot.define do
         skatepark.location = build(:location, :far)
       end
     end
-
-    trait :presentable do
-      material 'bullshit garbage'
-      opened nil
-      builder 'bob'
-      obstacles 'poo debris, debris'
-      size '5000'
-    end
   end
 
   factory :location do
     sequence(:city) { |i| "hayward#{i}" }
-    state 'california'
-    address '520 E 3rd Ave'
-    latitude 35.0021
-    longitude -113.0051
+    state { 'california' }
+    address { '520 E 3rd Ave' }
+    latitude { 35.0021 }
+    longitude { -113.0051 }
 
     trait :nearby do
-      latitude 35.3045
-      longitude -113.0380
+      latitude { 35.3045 }
+      longitude { -113.0380 }
     end
 
     trait :far do
-      latitude 36.8021
-      longitude -113.0051
+      latitude { 36.8021 }
+      longitude { -113.0051 }
     end
   end
 
@@ -46,12 +38,12 @@ FactoryBot.define do
     sequence(:username) { |n| "swaggy#{n}" }
     sequence(:email) { |n| "swag#{n}@swag.swag" }
     sequence(:name) { |n| "Swaggity#{n} Swag" }
-    avatar nil
-    password 'swagmethfout'
-    admin false
+    avatar { nil }
+    password { 'swagmethfout' }
+    admin { false }
 
     trait :admin do
-      admin true
+      admin { true }
     end
   end
 
@@ -68,7 +60,7 @@ FactoryBot.define do
   factory :rating do
     user
     skatepark
-    rating 5
+    rating { 5 }
   end
 
   factory :skatepark_image do

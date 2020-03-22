@@ -20,16 +20,16 @@ gem "kaminari"
 gem "paperclip"
 gem "pg", ">= 0.18", "< 1.0"
 gem "puma"
-gem 'react-rails'
+gem "react_on_rails", "~> 11.3"
 gem "sass-rails"
-gem 'simple_form'
-gem 'sitemap_generator'
+gem "simple_form"
+gem "sitemap_generator"
 gem "slim"
 gem "sprockets-rails"
-gem "therubyracer"
 gem "turbolinks"
 gem "uglifier", ">= 1.3.0"
 gem "underscore-rails"
+gem "webpacker", "~> 4.2.2"
 
 group :assets do
   gem "coffee-rails"
@@ -61,12 +61,14 @@ end
 
 group :test do
   gem "capybara"
-  gem 'chromedriver-helper'
   gem "codeclimate-test-reporter", require: nil
   gem "database_cleaner"
   gem "factory_bot_rails"
   gem "rake"
   gem "rails-controller-testing"
   gem "selenium-webdriver"
+  gem "webdrivers", '~> 4.0'
   gem "webmock"
 end
+
+gem 'mini_racer', platforms: :ruby

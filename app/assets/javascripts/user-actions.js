@@ -1,4 +1,4 @@
-$(document).ready(function() {
+$(document).on('turbolinks:load', function() {
 
   $("[data-ajax-container]").on("submit", "[data-ajax-button]", function (event) {
     event.preventDefault();

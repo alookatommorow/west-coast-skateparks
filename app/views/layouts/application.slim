@@ -6,7 +6,10 @@ html
     - else
       title West Coast Skateparks
     = render 'analytics'
-    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true
+    = javascript_pack_tag 'application'
+    = render 'javascripts'
+    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
+
     = csrf_meta_tags
     = favicon_link_tag 'favicon.ico'
     - if content_for? :og_metadata
@@ -19,12 +22,10 @@ html
       = render "default_metatags"
 
     meta name='viewport' content='width=device-width, initial-scale=1'
-  body
+  body class='#{controller.controller_name} #{controller.action_name}'
     = render '/skateparks/searches/react_search'
     = render 'nav'
     = render 'flashes'
     = render 'hero' unless non_header_page?
 
     = yield
-    
-    = render 'javascripts', skatepark: @skatepark, user: @user

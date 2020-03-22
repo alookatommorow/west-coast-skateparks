@@ -1,5 +1,4 @@
-$(document).ready(function() {
-
+$(document).on('turbolinks:load', function() {
   var currentIndex = 0,
       $photos = $('.carousel-image-container div'),
       lastIndex = $photos.length - 1,
