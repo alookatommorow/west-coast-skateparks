@@ -41,10 +41,6 @@ group :development do
   gem "web-console", "~> 3.1.1"
 end
 
-group :development, :production do
-  gem "forgery", "0.6.0"
-end
-
 group :development, :test do
   gem "bundler-audit", require: false
   gem "dotenv-rails"
