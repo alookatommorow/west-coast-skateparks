@@ -17,7 +17,7 @@ $(document).on('turbolinks:load', function() {
     });
 
     //////// Goog login ////////
-    $('#goog-login').click(async function(){
+    $('#goog-login').click(function(){
       initGoogleAuth();
       hideSessionForm();
     });
