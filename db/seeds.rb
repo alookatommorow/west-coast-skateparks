@@ -64,7 +64,7 @@ with_err_handling do
       skatepark_id: park_id,
       user_id: reviewer.id,
     )
-    review.update!(review: ['It sucked ass.', 'Chill.', 'Magnificent Crete.'].sample(1))
+    review.update!(review: ['It sucked ass.', 'Chill.', 'Magnificent Crete.'].sample(1).first)
     print "."
   end
   puts

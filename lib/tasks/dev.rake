@@ -1,13 +1,21 @@
 require "open3"
 require "unix_colors"
-# TODO: Schedule backups for Prod DB
 
 namespace :dev do
+  desc "Reset DB and seed with Skateparks and Users"
   task reset_db: :environment do
+    abort bold("Don't run this in prodlike environments") unless Rails.env.development?
+
     puts "Resetting db..."
     Rake::Task["db:drop"].invoke
     Rake::Task["db:create"].invoke
     Rake::Task["db:migrate"].invoke
+    Rake::Task["dev:seed_db"].invoke
+  end
+
+  desc "Restore skateparks from prod (see `dev:restore_skateparks`) and seed Users"
+  task seed_db: :environment do
+    abort bold("Don't run this in prodlike environments") unless Rails.env.development?
     Rake::Task["dev:restore_skateparks"].invoke
     # User seed data depends on Skateparks
     Rake::Task["db:seed"].invoke
@@ -15,12 +23,10 @@ namespace :dev do
 
   desc "Restore local Skateparks and Locations from a current dump of prod DB. (Requires heroku cli and access to WCS app)"
   task restore_skateparks: :environment do
-    unless Rails.env.development?
-      abort bold("Only run this in development environment. For prodlike environments use `heroku:pg:backups`")
-    end
+    abort bold("Don't run this in prodlike environments") unless Rails.env.development?
 
     with_err_handling do
-      dump_env = "staging"
+      dump_env = "production"
       puts bold("Restoring local Skatepark data from #{dump_env}...")
 
       puts "  Creating dump of #{dump_env} Skatepark data..."
