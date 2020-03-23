@@ -46,7 +46,6 @@ group :development, :test do
   gem "dotenv-rails"
   gem "launchy"
   gem "pry-rails"
-  gem "pry-byebug"
   gem "rspec-rails"
 end
 
