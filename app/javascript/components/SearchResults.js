@@ -12,13 +12,10 @@ function SearchResults(props) {
   }, [results]);
 
   useEffect(() => {
+    // update the listener whenever results or active result change
     window.addEventListener('keydown', handleKeyDown);
-    window.addEventListener('click', handleOutsideClick);
 
-    return () => {
-      window.removeEventListener('keydown', handleKeyDown);
-      window.removeEventListener('click', handleOutsideClick);
-    }
+    return () => window.removeEventListener('keydown', handleKeyDown);
   }, [results, activeResultIndex]);
 
   const handleMouseLeave = () => {
@@ -29,12 +26,6 @@ function SearchResults(props) {
   const handleMouseEnter = () => {
     setMouseIsActive(true);
     setActiveResultIndex(null);
-  };
-
-  const handleOutsideClick = event => {
-    if (event.target.className !== "item") {
-      exitResults();
-    }
   };
 
   const handleClick = event => {
@@ -80,8 +71,13 @@ function SearchResults(props) {
   };
 
   const visitSelectedLink = () => {
-    Turbolinks.clearCache();
     Turbolinks.visit(generateLink(results[activeResultIndex]));
+  };
+
+  const handleLinkClick = event => {
+    event.preventDefault();
+    event.stopPropagation();
+    Turbolinks.visit(event.currentTarget.href);
   };
 
   const generateLink = skatepark => {
@@ -107,7 +103,7 @@ function SearchResults(props) {
     numResultsDisplay = <div className="item num-results"><span className="bold">{numResults} {matchText}</span></div>;
     resultsDisplay = results.map((skatepark, index) => (
       <div className={`item${index === activeResultIndex ? ' active' : ''}`} key={skatepark.id} onMouseEnter={handleMouseEnter} onClick={handleClick}>
-        <a href={generateLink(skatepark)}>{createBoldString(skatepark.string, skatepark.matchIndex, query)}</a>
+        <a href={generateLink(skatepark)} onClick={handleLinkClick}>{createBoldString(skatepark.string, skatepark.matchIndex, query)}</a>
       </div>
     ));
   }

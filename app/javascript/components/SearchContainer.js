@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import SearchForm from './SearchForm';
 import SearchResults from './SearchResults';
 
@@ -7,6 +7,7 @@ function SearchContainer() {
   const [results, setResults] = useState([]);
   const [skateparks, setSkateparks] = useState(null);
   const [loading, setLoading] = useState(false);
+  const containerRef = useRef(null);
 
   useEffect(() => {
     if (!query) {
@@ -15,6 +16,11 @@ function SearchContainer() {
       setResults(searchSkateparks(query));
     }
   }, [query]);
+
+  useEffect(() => {
+    document.addEventListener('click', handleClickOutside);
+    return () => document.removeEventListener('click', handleClickOutside);
+  }, []);
 
   const searchSkateparks = searchQuery => skateparks.filter(filterAndAddIndexOfMatch(searchQuery));
 
@@ -36,8 +42,7 @@ function SearchContainer() {
     if (!skateparks) {
       setLoading(true);
       $.get('/api/skateparks')
-      .done(storeAllSkateparks)
-      .fail(errorFunction);
+      .done(storeAllSkateparks);
     }
   };
 
@@ -63,12 +68,19 @@ function SearchContainer() {
     setQuery(null);
   };
 
-  const errorFunction = () => {
-    console.log("yer fuckin up");
-  };
+  const handleClickOutside = event => {
+    // check if search is active, click is outside component, and target is not search trigger icon
+    if (
+      containerRef.current &&
+        !event.target.classList.contains("display-search") &&
+        !containerRef.current.contains(event.target)
+    ) {
+      exitResults();
+    }
+  }
 
   return (
-    <div className="react-search-container">
+    <div className="react-search-container" ref={containerRef}>
       <SearchForm handleChange={handleChange} loading={loading} getSkateparks={getSkateparks} results={results} query={query} />
       <SearchResults className="react-search-results" results={results} exitResults={exitResults} query={query} />
     </div>
