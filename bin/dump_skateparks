@@ -1,0 +1,11 @@
+#!/bin/sh
+# Create dump of Prod DB Skateparks and Locations
+set -e
+
+dump_env="$1"
+
+echo "Getting DATABASE_URL for $dump_env DB..."
+db_url="$(heroku config:get DATABASE_URL -r $dump_env)"
+
+echo "Creating dump of Skateparks data from $dump_env DB..."
+pg_dump $db_url --data-only -t skateparks -t locations -Fc > tmp/${dump_env}_skateparks.dump

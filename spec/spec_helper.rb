@@ -25,7 +25,6 @@ ENV['RAILS_ENV'] ||= 'test'
 ENV['BUNDLE_GEMFILE'] = File.expand_path('../../Gemfile', __FILE__)
 require 'bundler/setup'
 Bundler.require
-require 'pry-byebug'
 require 'capybara/rspec'
 require 'database_cleaner'
 require 'webmock/rspec'

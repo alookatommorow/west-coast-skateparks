@@ -9,7 +9,7 @@ gem "awesome_print"
 gem "aws-sdk"
 gem "bcrypt"
 gem "bourbon" # added to prevent high voltage bourbon unreadable error
-gem 'buttercms-rails'
+gem "buttercms-rails"
 gem "font-awesome-rails"
 gem "geokit"
 gem "gmaps4rails"
@@ -41,16 +41,11 @@ group :development do
   gem "web-console", "~> 3.1.1"
 end
 
-group :development, :production do
-  gem "forgery", "0.6.0"
-end
-
 group :development, :test do
   gem "bundler-audit", require: false
   gem "dotenv-rails"
   gem "launchy"
   gem "pry-rails"
-  gem "pry-byebug"
   gem "rspec-rails"
 end
 
