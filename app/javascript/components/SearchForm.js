@@ -8,11 +8,7 @@ const SearchForm = props => {
     <div className="search">
       <form id="react-search-form">
         <div className="icon input" onClick={getSkateparks}>
-          {loading ? (
-            <input id="react-search-input" placeholder="Loading, please wait..." className="prompt" type="text" name="query" onChange={handleChange} />
-           ) : (
-              <input id="react-search-input" className="prompt" type="text" name="query" onChange={handleChange} />
-           )}
+          <input id="react-search-input" placeholder={loading ? 'Loading, please wait...' : 'e.g. San Francisco'} className="prompt" type="text" name="query" onChange={handleChange} />
           <i className="fa fa-search"></i>
         </div>
       </form>

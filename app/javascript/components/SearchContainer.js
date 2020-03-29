@@ -10,17 +10,24 @@ function SearchContainer() {
   const containerRef = useRef(null);
 
   useEffect(() => {
+    document.addEventListener('click', handleClickOutside);
+    return () => document.removeEventListener('click', handleClickOutside);
+  }, []);
+
+  useEffect(() => {
     if (!query) {
       setResults([]);
-    } else {
+    } else if (!loading) {
       setResults(searchSkateparks(query));
     }
   }, [query]);
 
   useEffect(() => {
-    document.addEventListener('click', handleClickOutside);
-    return () => document.removeEventListener('click', handleClickOutside);
-  }, []);
+    // if query was input during skaeparks data load, apply query after load
+    if (query && query !== '') {
+      setResults(searchSkateparks(query));
+    }
+  }, [skateparks]);
 
   const searchSkateparks = searchQuery => skateparks.filter(filterAndAddIndexOfMatch(searchQuery));
 
