@@ -3,8 +3,9 @@
            skatepark: @skatepark,
            previous_park: @previous_park,
            next_park: @next_park
-  = render 'dashboard', skatepark: @skatepark, weather: @weather
   = render 'photos', skatepark: @skatepark
+  = render 'dashboard', skatepark: @skatepark, weather: @weather
+
   = render 'info', skatepark: @skatepark
   - if @skatepark.has_coordinates?
     = render 'map', skatepark: @skatepark
