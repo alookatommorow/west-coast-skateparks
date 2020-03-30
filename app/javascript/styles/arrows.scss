@@ -1,0 +1,19 @@
+@import '../../assets/stylesheets/base/_variables';
+
+#photo-root {
+  .slick-next:before, .slick-prev:before {
+    color: $blue;
+  }
+
+  .rodal-dialog {
+    padding: 30px 40px;
+
+    .slick-slider, .slick-list, .slick-track, .slick-slide div {
+      height: 100%;
+    }
+  }
+
+  .rodal-mask {
+    background: rgba(0, 0, 0, 0.6);
+  }
+}

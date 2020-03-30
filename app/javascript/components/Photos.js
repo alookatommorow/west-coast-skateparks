@@ -1,9 +1,15 @@
 import React, { useState } from 'react';
-import Slider from "react-slick";
+import Slider from 'react-slick';
+import Rodal from 'rodal';
+
+// include styles
+import 'rodal/lib/rodal.css';
+
+import useToggle from '../hooks/useToggle';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import styles from '../styles/photos';
-import '../styles/arrows';
+import styles from '../styles/photos.module.scss';
+import '../styles/arrows.scss';
 
 const settings = {
   dots: true,
@@ -13,8 +19,14 @@ const settings = {
   slidesToScroll: 1,
 };
 
+const bigSettings = {
+  dots: true,
+  speed: 500,
+  slidesToShow: 1,
+  slidesToScroll: 1,
+};
 
-// center mode and variableWidth don't work together
+// centerMode and variableWidth don't work together
 
 function Photos(props) {
   // const { photos } = props;
@@ -23,18 +35,45 @@ function Photos(props) {
   const openModal = () => {
     alert('hey snoopy')
   }
+
+  const {
+    isShowing: modalIsShowing,
+    toggle: toggleModalIsShowing,
+  } = useToggle(false);
+
   return (
     <div id="photo-root" className={styles.root}>
-      <Slider {...settings}>
-        {photos.map(photo => (
-          <div className={styles.outerPhotoContainer}>
-            <div className={styles.photoContainer}>
-              <img onClick={openModal} className={styles.photo} src={photo} />
+        <Slider {...settings}>
+          {photos.map((photo, index) => (
+            <div key={`wcs-photo-${index}`} className={styles.outerPhotoContainer}>
+              <div className={styles.photoContainer}>
+                <img onClick={toggleModalIsShowing} className={styles.photo} src={photo} />
+              </div>
             </div>
-          </div>
-        ))}
-      </Slider>
+          ))}
+        </Slider>
 
+      <Rodal
+        visible={modalIsShowing}
+        onClose={toggleModalIsShowing}
+        width={90}
+        height={80}
+        measure="%"
+        enterAnimation="zoom"
+        exitAnimation="zoom"
+      >
+        <div className={styles.modalSlickContainer}>
+          <Slider {...bigSettings}>
+            {photos.map((photo, index) => (
+              <div key={`wcs-modal-photo-${index}`} className={styles.outerPhotoContainer}>
+                <div className={styles.photoContainer}>
+                  <img className={styles.bigPhoto} src={photo} />
+                </div>
+              </div>
+            ))}
+          </Slider>
+        </div>
+      </Rodal>
     </div>
   );
 };
