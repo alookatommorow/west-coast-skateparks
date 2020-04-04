@@ -1,15 +1,35 @@
 .skatepark-show-container
-  = render 'header',
+  .sidebar
+    h1= @skatepark.name.titleize
+    h2 #{@skatepark.city.titleize}, #{@skatepark.state.capitalize}
+    .stars-container
+      - num_stars(@skatepark.rating).times do
+        i.fas.fa-star
+      - num_half_stars(@skatepark.rating).times do
+        .half-star-container
+          i.fas.fa-star-half
+          i.empty.far.fa-star-half
+      - num_empty_stars(@skatepark.rating).times do
+        i.far.fa-star
+    p.location
+      | #{@skatepark.location}
+      i.fa.fa-copy
+      / p
+        | #{rating_phrase[@skatepark.rating.to_i][0]}
+        span  #{rating_phrase[@skatepark.rating.to_i][1]}
+  .photos
+    = render 'photos', skatepark: @skatepark
+  / = render 'header',
            skatepark: @skatepark,
            previous_park: @previous_park,
            next_park: @next_park
-  = render 'photos', skatepark: @skatepark
-  = render 'dashboard', skatepark: @skatepark, weather: @weather
 
-  = render 'info', skatepark: @skatepark
-  - if @skatepark.has_coordinates?
+  / = render 'dashboard', skatepark: @skatepark, weather: @weather
+
+  / = render 'info', skatepark: @skatepark
+  / - if @skatepark.has_coordinates?
     = render 'map', skatepark: @skatepark
-  = render 'reviews', skatepark: @skatepark
+  / = render 'reviews', skatepark: @skatepark
 
 = content_for :og_metadata
   meta name="twitter:card" content="summary_large_image"

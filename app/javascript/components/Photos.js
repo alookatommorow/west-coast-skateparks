@@ -16,6 +16,7 @@ const settings = {
   speed: 500,
   slidesToShow: 1,
   variableWidth: true,
+  // centerMode: true,
   slidesToScroll: 1,
 };
 
@@ -29,8 +30,10 @@ const bigSettings = {
 // centerMode and variableWidth don't work together
 
 function Photos(props) {
-  const { photos } = props;
-  // const photos = ['https://s3-us-west-1.amazonaws.com/west-coast-skateparks/skatepark_images/photos/000/000/623/original/lake_20forest-01.jpg?1459397429', 'https://s3-us-west-1.amazonaws.com/west-coast-skateparks/skatepark_images/photos/000/000/627/original/lake_20forest-05.jpg?1459397434', 'https://s3-us-west-1.amazonaws.com/west-coast-skateparks/skatepark_images/photos/000/000/625/original/lake_20forest-03.jpg?1459397432'];
+  // const { photos } = props;
+  const photos = ['https://s3-us-west-1.amazonaws.com/west-coast-skateparks/skatepark_images/photos/000/000/623/original/lake_20forest-01.jpg?1459397429', 'https://s3-us-west-1.amazonaws.com/west-coast-skateparks/skatepark_images/photos/000/000/627/original/lake_20forest-05.jpg?1459397434', 'https://s3-us-west-1.amazonaws.com/west-coast-skateparks/skatepark_images/photos/000/000/625/original/lake_20forest-03.jpg?1459397432'];
+
+  console.log(photos)
 
   const {
     isShowing: modalIsShowing,

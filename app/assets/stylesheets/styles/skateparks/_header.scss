@@ -1,56 +1,79 @@
 .skatepark-show-container {
+  display: flex;
   margin-top: 49px;
   padding-bottom: 30px;
+  min-height: 100%;
+  justify-content: space-between;
 
-  .skatepark-show-header {
-    position: relative;
-    background-size: cover;
-    background-position: 0 -25px;
-    height: 200px;
+  .sidebar {
+    min-height: 100%;
+    background: white;
+    padding: 30px;
+    width: 25%;
+    box-shadow: 0px 2px 1px -1px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.14), 0px 1px 3px 0px rgba(0,0,0,0.12);
 
-    .header-skatepark-name {
+    h1 {
+      margin-bottom: 0;
+    }
+
+    h2 {
+      font-size: 1.28rem;
+      margin: 0;
+      font-weight: lighter;
+      letter-spacing: 2px;
+    }
+
+    .stars-container {
+      display: flex;
+      font-size: 20px;
+    }
+
+    .half-star-container {
       position: relative;
-      top: 45px;
-      text-align: center;
-      color: $orange;
+      margin-left: 10px;
+      width: 22.5px;
 
-      h1 {
-        margin-bottom: 5px;
-      }
-
-      h2 {
-        font-size: 1.28rem;
-        margin: 0;
-        font-weight: lighter;
-        color: white;
-        letter-spacing: 2px;
-      }
-    }
-
-    .header-skatepark-arrows {
-      font-size: 40px;
-
-      a {
+      i {
         position: absolute;
-        bottom: 10px;
-        color: white;
 
-        &.right-arrow {
-          right: 10px;
+        &:first-of-type {
+          left: 0;
         }
 
-        &.left-arrow {
-          left: 10px;
-        }
-
-        &:hover {
-          color: $orange;
+        &.fa-star-half.empty {
+          right: 0;
         }
       }
     }
 
-    @media #{$tablet} {
-      background-position: center 0;
+    i {
+      color: $orange;
+      margin: 10px 0 0 10px;
+
+      &.fa-star-half.empty {
+        transform: scaleX(-1);
+      }
+
+      &:first-of-type, &.fa-star-half.empty {
+        margin-left: 0;
+      }
     }
+
+    p.location {
+      margin-top: 15px;
+      font-size: 14px;
+
+      i {
+        color: $blue;
+        font-size: 15px;
+        margin: 0 0 0 10px;
+        cursor: pointer;
+      }
+    }
+  }
+
+  .photos {
+    width: 60%;
+    padding: 40px;
   }
 }
