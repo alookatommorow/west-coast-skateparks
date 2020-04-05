@@ -2,34 +2,42 @@
   .sidebar
     h1= @skatepark.name.titleize
     h2 #{@skatepark.city.titleize}, #{@skatepark.state.capitalize}
-    .stars-container
-      - num_stars(@skatepark.rating).times do
-        i.fas.fa-star
-      - num_half_stars(@skatepark.rating).times do
-        .half-star-container
-          i.fas.fa-star-half
-          i.empty.far.fa-star-half
-      - num_empty_stars(@skatepark.rating).times do
-        i.far.fa-star
+    - num_stars(@skatepark.rating).times do
+      i.star.fas.fa-star
+    - num_half_stars(@skatepark.rating).times do
+      i.star.fas.fa-star-half-alt
+    - num_empty_stars(@skatepark.rating).times do
+      i.star.far.fa-star
     p.location
       | #{@skatepark.location}
       i.fa.fa-copy
+    .actions
+      button.btn
+        i.fa.fa-check
+      button.btn
+        i.fa.fa-heart
+      button.btn
+        i.fa.fa-map-marked-alt
+    .info-container
+      - @skatepark.present_attributes.each do |attribute, value|
+        .col
+          - if attribute == "size"
+            - value << " sq ft"
+          - if attribute == "hours"
+            - value = value.capitalize
+          - value = value.try(:titleize) unless %w(info hours size).include?(attribute)
+          i class= "fa #{info_icons[attribute]}"
+          p= value
+      - if @skatepark.info.present?
+        p.info= @skatepark.info
+
       / p
         | #{rating_phrase[@skatepark.rating.to_i][0]}
         span  #{rating_phrase[@skatepark.rating.to_i][1]}
-  .photos
-    = render 'photos', skatepark: @skatepark
-  / = render 'header',
-           skatepark: @skatepark,
-           previous_park: @previous_park,
-           next_park: @next_park
-
-  / = render 'dashboard', skatepark: @skatepark, weather: @weather
-
-  / = render 'info', skatepark: @skatepark
-  / - if @skatepark.has_coordinates?
+  .map-photos
+    .photos
+      = render 'photos', skatepark: @skatepark
     = render 'map', skatepark: @skatepark
-  / = render 'reviews', skatepark: @skatepark
 
 = content_for :og_metadata
   meta name="twitter:card" content="summary_large_image"

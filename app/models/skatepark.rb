@@ -2,7 +2,6 @@ class Skatepark < ActiveRecord::Base
   LOCATION_ATTRIBUTES = %i(address city state zip_code latitude longitude)
   LOCATION_METHODS = %i(has_coordinates? new_coordinates?)
   VISIBLE_ATTRIBUTES = %w(
-    info
     hours
     material
     designer
