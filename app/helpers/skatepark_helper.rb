@@ -44,7 +44,7 @@ module SkateparkHelper
       "hours" => "fa-clock",
       "obstacles" => "fa-wave-square",
       "helmet" => "fa-hard-hat",
-      "lights" => "fa-hard-hat",
+      "lights" => "fa-lightbulb",
     }
   end
 end

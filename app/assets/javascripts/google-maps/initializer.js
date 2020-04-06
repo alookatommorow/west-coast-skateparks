@@ -1,5 +1,4 @@
 function initMap() {
-  console.log('initi tittye')
   var location = window.location.href.split('/'),
       id = location.pop().split("?")[0],
       resourceName = location.pop(),
