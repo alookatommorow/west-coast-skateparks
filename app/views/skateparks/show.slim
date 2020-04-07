@@ -43,6 +43,14 @@
                 p.date= review.created_at.strftime("%m/%d/%y")
               p.text "#{review.review}"
 
+      - if @skatepark.average_rating
+        h4 User Rating
+        - num_stars(@skatepark.average_rating).times do
+          i.star.fas.fa-star
+        - num_half_stars(@skatepark.average_rating).times do
+          i.star.fas.fa-star-half-alt
+        - num_empty_stars(@skatepark.average_rating).times do
+          i.star.far.fa-star
       / p
         | #{rating_phrase[@skatepark.rating.to_i][0]}
         span  #{rating_phrase[@skatepark.rating.to_i][1]}
