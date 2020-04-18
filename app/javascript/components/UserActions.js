@@ -9,6 +9,7 @@ function UserActions(props) {
     hasFavorited: initialHasFavorited,
     hasVisited: initialHasVisited,
     skateparkId,
+    address,
     user,
   } = props;
 
@@ -36,6 +37,8 @@ function UserActions(props) {
 
   const toggleHasAction = name =>
     name === 'visit' ? setHasVisited(!hasVisited) : setHasFavorited(!hasFavorited);
+
+  const modifiedAddress = address.replace(/ &/g, ',');
 
   return (
     <React.Fragment>
@@ -65,9 +68,14 @@ function UserActions(props) {
         >
           <i className="fa fa-heart"></i>
         </button>
-        <button className="btn">
+        <a
+          className="btn"
+          rel="nofollow noopener"
+          target="_blank"
+          href={`https://maps.google.com/maps?saddr='Current Location'&daddr=${modifiedAddress}`}
+        >
           <i className="fa fa-map-marked-alt"></i>
-        </button>
+        </a>
       </div>
     </React.Fragment>
   );

@@ -12,7 +12,7 @@
       p.location
         | #{@skatepark.location}
         i.fa.fa-copy
-      = react_component "UserActions", props: { hasFavorited: @has_favorited, hasVisited: @has_visited, skateparkId: @skatepark.id, user: current_user }
+      = react_component "UserActions", props: { hasFavorited: @has_favorited, hasVisited: @has_visited, skateparkId: @skatepark.id, address: @skatepark.location.to_s, user: current_user }
       .info-container
         - @skatepark.present_attributes.each do |attribute, value|
           .col
