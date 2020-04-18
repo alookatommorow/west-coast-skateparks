@@ -13,9 +13,25 @@
     left: 0;
     min-height: 100%;
     background: white;
-    padding: 30px;
+
     width: 35%;
     box-shadow: 0px 2px 1px -1px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.14), 0px 1px 3px 0px rgba(0,0,0,0.12);
+
+    .sidebar-content {
+      padding: 30px;
+      position: relative;
+    }
+
+    .user-indicators {
+      position: absolute;
+      right: 0;
+      top: 0;
+      padding: 30px;
+
+      i:nth-child(2) {
+        margin-left: 10px;
+      }
+    }
 
     h1 {
       margin-bottom: 0;
@@ -73,8 +89,13 @@
           margin-right: 0;
         }
 
-        &:hover {
+        &:not(:disabled):hover {
           color: $orange;
+        }
+
+        &:disabled {
+          background: grey;
+          cursor: default;
         }
       }
     }

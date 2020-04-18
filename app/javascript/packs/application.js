@@ -20,5 +20,6 @@ import "regenerator-runtime/runtime";
 import ReactOnRails from 'react-on-rails';
 import SearchContainer from '../components/SearchContainer';
 import Photos from '../components/Photos';
+import UserActions from '../components/UserActions';
 
-ReactOnRails.register({ SearchContainer, Photos });
+ReactOnRails.register({ SearchContainer, Photos, UserActions });
