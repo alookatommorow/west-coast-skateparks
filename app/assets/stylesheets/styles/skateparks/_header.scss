@@ -13,7 +13,6 @@
     left: 0;
     min-height: 100%;
     background: white;
-
     width: 35%;
     box-shadow: 0px 2px 1px -1px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.14), 0px 1px 3px 0px rgba(0,0,0,0.12);
 
@@ -24,9 +23,9 @@
 
     .user-indicators {
       position: absolute;
-      right: 0;
-      top: 0;
-      padding: 30px;
+      right: 30px;
+      top: 30px;
+      padding-top: 5px;
 
       i:nth-child(2) {
         margin-left: 10px;
@@ -70,6 +69,7 @@
       display: flex;
 
       .btn {
+        position: relative;
         background: $blue;
         color: white;
         width: 40px;
@@ -81,9 +81,19 @@
         align-items: center;
         margin-right: 10px;
         box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
-        transition: color 0.3s ease;
+        transition: color 0.3s ease, background 0.3s ease;
         cursor: pointer;
         outline: 0;
+
+        i.fa-ban {
+          position: absolute;
+          font-size: 30px;
+        }
+
+        i.fa-slash {
+          position: absolute;
+          font-size: 15px;
+        }
 
         &:last-child {
           margin-right: 0;
@@ -91,6 +101,11 @@
 
         &:not(:disabled):hover {
           color: $orange;
+          background-color: $dark-blue;
+
+          .fa-ban, .fa-map-marked-alt {
+            color: $orange;
+          }
         }
 
         &:disabled {

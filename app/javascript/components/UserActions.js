@@ -57,7 +57,14 @@ function UserActions(props) {
           disabled={!user || visitIsLoading}
           onClick={handleClick}
         >
-          <i className="fa fa-check"></i>
+          {hasVisited && <i className="fa fa-slash red"></i>}
+          <i className="fa fa-check green"></i>
+          {/* {hasVisited ? (
+            <i className="fa fa-times red"></i>
+          ) : (
+            <i className = "fa fa-check green"></i>
+
+          )} */}
         </button>
         <button
           className="btn"
@@ -66,7 +73,13 @@ function UserActions(props) {
           disabled={!user || favoriteIsLoading}
           onClick={handleClick}
         >
-          <i className="fa fa-heart"></i>
+          {hasFavorited && <i className="fa fa-slash red"></i>}
+          <i className="fa fa-heart red"></i>
+          {/* {hasFavorited ? (
+            <i className="fa fa-heart-broken red"></i>
+          ): (
+            <i className="fa fa-heart red"></i>
+          )} */}
         </button>
         <a
           className="btn"
