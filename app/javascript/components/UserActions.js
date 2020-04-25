@@ -25,11 +25,11 @@ function UserActions(props) {
 
     $.ajax({
       url: `/skateparks/${skateparkId}/${value}`,
-      method: "PATCH",
+      method: 'PATCH',
     }).done(() => {
       toggleHasAction(name);
       setIsLoading(name, false);
-    })
+    });
   }
 
   const setIsLoading = (name, isLoading) =>

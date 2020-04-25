@@ -26,17 +26,7 @@
         - if @skatepark.info.present?
           p.info= @skatepark.info
       .comments.reviews
-        - if @skatepark.reviews?
-          h4 Reviews
-          - @skatepark.reviews.each do |review|
-            .comment
-              .avatar
-                img src="#{review.user.avatar.url(:thumb)}"
-              .content
-                .headers
-                  p.author= review.user
-                  p.date= review.created_at.strftime("%m/%d/%y")
-                p.text "#{review.review}"
+        = react_component "ReviewForm", props: { skateparkId: @skatepark.id, userId: current_user&.id, reviews: @reviews }
 
         - if @skatepark.average_rating
           h4 User Rating

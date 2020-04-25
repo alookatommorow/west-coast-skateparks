@@ -21,5 +21,7 @@ import ReactOnRails from 'react-on-rails';
 import SearchContainer from '../components/SearchContainer';
 import Photos from '../components/Photos';
 import UserActions from '../components/UserActions';
+import ReviewForm from '../components/ReviewForm';
+import Modal from '../components/Modal';
 
-ReactOnRails.register({ SearchContainer, Photos, UserActions });
+ReactOnRails.register({ SearchContainer, Photos, UserActions, ReviewForm, Modal });

@@ -3,6 +3,12 @@ class SkateparksController < ApplicationController
 
   def show
     @skatepark = Skatepark.includes({ reviews: :user }, :ratings, :skatepark_images, :location).find(params[:id])
+    @reviews = ActiveModelSerializers::SerializableResource.new(
+      @skatepark.reviews,
+      adapter: :attributes,
+      each_serializer: ReviewSerializer
+    ).as_json
+
     if current_user
       @has_favorited = current_user.has_favorited?(@skatepark.id)
       @has_visited = current_user.has_visited?(@skatepark.id)
@@ -35,21 +41,21 @@ class SkateparksController < ApplicationController
 
   private
 
-    def render_favorite_button
-      render partial: "favorites/button", locals: {
-        user: current_user,
-        skatepark: @skatepark,
-      }
-    end
+  def render_favorite_button
+    render partial: "favorites/button", locals: {
+      user: current_user,
+      skatepark: @skatepark,
+    }
+  end
 
-    def render_visit_button
-      render partial: "visits/button", locals: {
-        user: current_user,
-        skatepark: @skatepark,
-      }
-    end
+  def render_visit_button
+    render partial: "visits/button", locals: {
+      user: current_user,
+      skatepark: @skatepark,
+    }
+  end
 
-    def set_skatepark
-      @skatepark = Skatepark.find(params[:id])
-    end
+  def set_skatepark
+    @skatepark = Skatepark.find(params[:id])
+  end
 end
