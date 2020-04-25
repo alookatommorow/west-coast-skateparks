@@ -2,7 +2,7 @@ source "https://rubygems.org"
 ruby "2.4.2"
 gem "rails", "~> 5.0.2"
 
-gem "active_model_serializers", "~> 0.10.0"
+gem "active_model_serializers", "~> 0.10.10"
 gem "administrate", "~> 0.3.0"
 gem "autoprefixer-rails"
 gem "awesome_print"

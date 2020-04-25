@@ -1097,7 +1097,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  active_model_serializers (~> 0.10.0)
+  active_model_serializers (~> 0.10.10)
   administrate (~> 0.3.0)
   autoprefixer-rails
   awesome_print
