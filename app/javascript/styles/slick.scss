@@ -1,0 +1,9 @@
+@import '../../assets/stylesheets/base/_variables';
+
+.slick-next:before, .slick-prev:before {
+  color: $blue;
+}
+
+.slick-slider, .slick-list, .slick-track, .slick-slide div {
+  height: 100%;
+}

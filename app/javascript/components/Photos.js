@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Slider from 'react-slick';
-import Rodal from 'rodal';
+import Modal from './Modal';
 
 // include styles
 import 'rodal/lib/rodal.css';
@@ -9,7 +9,7 @@ import useToggle from '../hooks/useToggle';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import styles from '../styles/photos.module.scss';
-import '../styles/arrows.scss';
+import '../styles/slick.scss';
 
 const settings = {
   dots: true,
@@ -26,12 +26,11 @@ const bigSettings = {
   slidesToShow: 1,
   slidesToScroll: 1,
 };
-
 // centerMode and variableWidth don't work together
 
 function Photos(props) {
-  const { photos } = props;
-  // const photos = ['https://s3-us-west-1.amazonaws.com/west-coast-skateparks/skatepark_images/photos/000/000/623/original/lake_20forest-01.jpg?1459397429', 'https://s3-us-west-1.amazonaws.com/west-coast-skateparks/skatepark_images/photos/000/000/627/original/lake_20forest-05.jpg?1459397434', 'https://s3-us-west-1.amazonaws.com/west-coast-skateparks/skatepark_images/photos/000/000/625/original/lake_20forest-03.jpg?1459397432'];
+  // const { photos } = props;
+  const photos = ['https://s3-us-west-1.amazonaws.com/west-coast-skateparks/skatepark_images/photos/000/000/623/original/lake_20forest-01.jpg?1459397429', 'https://s3-us-west-1.amazonaws.com/west-coast-skateparks/skatepark_images/photos/000/000/627/original/lake_20forest-05.jpg?1459397434', 'https://s3-us-west-1.amazonaws.com/west-coast-skateparks/skatepark_images/photos/000/000/625/original/lake_20forest-03.jpg?1459397432'];
 
   const {
     isShowing: modalIsShowing,
@@ -40,37 +39,35 @@ function Photos(props) {
 
   return (
     <div id="photo-root" className={styles.root}>
-        <Slider {...settings}>
-          {photos.map((photo, index) => (
-            <div key={`wcs-photo-${index}`} className={styles.outerPhotoContainer}>
-              <div className={styles.photoContainer}>
-                <img onClick={toggleModalIsShowing} className={styles.photo} src={photo} />
-              </div>
+      <Slider {...settings}>
+        {photos.map((photo, index) => (
+          <div key={`wcs-photo-${index}`} className={styles.outerPhotoContainer}>
+            <div className={styles.photoContainer}>
+              <img onClick={toggleModalIsShowing} className={styles.photo} src={photo} />
             </div>
-          ))}
-        </Slider>
+          </div>
+        ))}
+      </Slider>
 
-      <Rodal
-        visible={modalIsShowing}
+      <Modal
+        isVisible={modalIsShowing}
         onClose={toggleModalIsShowing}
-        width={90}
-        height={80}
-        measure="%"
-        enterAnimation="zoom"
-        exitAnimation="zoom"
+        height="80%"
       >
-        <div className={styles.modalSlickContainer}>
-          <Slider {...bigSettings}>
-            {photos.map((photo, index) => (
-              <div key={`wcs-modal-photo-${index}`} className={styles.outerPhotoContainer}>
-                <div className={styles.photoContainer}>
-                  <img className={styles.bigPhoto} src={photo} />
+        <Modal.Body className={styles.modalContentContainer}>
+          <div className={styles.modalSlickContainer}>
+            <Slider {...bigSettings}>
+              {photos.map((photo, index) => (
+                <div key={`wcs-modal-photo-${index}`} className={styles.outerPhotoContainer}>
+                  <div className={styles.photoContainer}>
+                    <img className={styles.bigPhoto} src={photo} />
+                  </div>
                 </div>
-              </div>
-            ))}
-          </Slider>
-        </div>
-      </Rodal>
+              ))}
+            </Slider>
+          </div>
+        </Modal.Body>
+      </Modal>
     </div>
   );
 };
