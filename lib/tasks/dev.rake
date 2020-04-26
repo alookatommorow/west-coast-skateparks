@@ -2,6 +2,8 @@ require "open3"
 require "unix_colors"
 
 namespace :dev do
+  # TODO: PASS SQL DUMP FILE AS ARGUMENT
+  # download tmp/dump.sql cache
   desc "Reset DB and seed with Skateparks and Users"
   task reset_db: :environment do
     abort bold("Don't run this in prodlike environments") unless Rails.env.development?
@@ -9,8 +11,10 @@ namespace :dev do
     puts "Resetting db..."
     Rake::Task["db:drop"].invoke
     Rake::Task["db:create"].invoke
-    Rake::Task["db:migrate"].invoke
+    Rake::Task["db:schema:load"].invoke
     Rake::Task["dev:seed_db"].invoke
+    Rake::Task["db:migrate"].invoke
+    Rake::Task["db:seed"].invoke
   end
 
   desc "Restore skateparks from prod (see `dev:restore_skateparks`) and seed Users"
@@ -18,7 +22,6 @@ namespace :dev do
     abort bold("Don't run this in prodlike environments") unless Rails.env.development?
     Rake::Task["dev:restore_skateparks"].invoke
     # User seed data depends on Skateparks
-    Rake::Task["db:seed"].invoke
   end
 
   desc "Restore local Skateparks and Locations from a current dump of prod DB. (Requires heroku cli and access to WCS app)"

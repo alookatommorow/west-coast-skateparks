@@ -1,3 +1,17 @@
+# == Schema Information
+#
+# Table name: skatepark_images
+#
+#  id                 :integer          not null, primary key
+#  caption            :string
+#  skatepark_id       :integer
+#  created_at         :datetime         not null
+#  updated_at         :datetime         not null
+#  photo_file_name    :string
+#  photo_content_type :string
+#  photo_file_size    :bigint
+#  photo_updated_at   :datetime
+#
 class SkateparkImage < ActiveRecord::Base
   belongs_to :skatepark
 

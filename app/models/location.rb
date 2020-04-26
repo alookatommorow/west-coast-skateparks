@@ -1,3 +1,16 @@
+# == Schema Information
+#
+# Table name: locations
+#
+#  id           :integer          not null, primary key
+#  skatepark_id :integer
+#  address      :string
+#  city         :string
+#  state        :string
+#  zip_code     :string
+#  latitude     :float
+#  longitude    :float
+#
 class Location < ActiveRecord::Base
   STATE_ABBREVS = {
     "california" => "CA",

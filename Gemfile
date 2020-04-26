@@ -36,6 +36,7 @@ group :assets do
 end
 
 group :development do
+  gem "annotate"
   gem "bullet"
   gem "spring-commands-rspec"
   gem "web-console", "~> 3.1.1"
