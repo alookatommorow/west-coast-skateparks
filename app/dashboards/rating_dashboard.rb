@@ -11,7 +11,8 @@ class RatingDashboard < Administrate::BaseDashboard
     skatepark: Field::BelongsTo,
     user: Field::BelongsTo,
     id: Field::Number,
-    rating: Field::Number,
+    stars: Field::Number,
+    review: Field::Text,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
   }
@@ -24,7 +25,7 @@ class RatingDashboard < Administrate::BaseDashboard
   COLLECTION_ATTRIBUTES = [
     :skatepark,
     :user,
-    :rating,
+    :stars,
   ]
 
   # SHOW_PAGE_ATTRIBUTES
@@ -33,7 +34,8 @@ class RatingDashboard < Administrate::BaseDashboard
     :skatepark,
     :user,
     :id,
-    :rating,
+    :stars,
+    :review,
     :created_at,
     :updated_at,
   ]
@@ -44,13 +46,14 @@ class RatingDashboard < Administrate::BaseDashboard
   FORM_ATTRIBUTES = [
     :skatepark,
     :user,
-    :rating,
+    :stars,
+    :review
   ]
 
   # Overwrite this method to customize how ratings are displayed
   # across all pages of the admin dashboard.
   #
-  # def display_resource(rating)
-  #   "Rating ##{rating.id}"
-  # end
+  def display_resource(rating)
+    "Rating ##{rating.id} - #{rating.skatepark.name}"
+  end
 end

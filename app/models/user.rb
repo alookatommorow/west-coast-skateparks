@@ -1,3 +1,24 @@
+# == Schema Information
+#
+# Table name: users
+#
+#  id                  :integer          not null, primary key
+#  admin               :boolean          default(FALSE)
+#  avatar_content_type :string
+#  avatar_file_name    :string
+#  avatar_file_size    :bigint
+#  avatar_updated_at   :datetime
+#  email               :string
+#  name                :string
+#  password_digest     :string
+#  username            :string
+#  created_at          :datetime
+#  updated_at          :datetime
+#
+# Indexes
+#
+#  index_users_on_email  (email)
+#
 class User < ActiveRecord::Base
   has_secure_password
   validates :username, :email, presence: true

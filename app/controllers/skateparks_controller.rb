@@ -2,11 +2,16 @@ class SkateparksController < ApplicationController
   before_action :set_skatepark, only: %i(favorite unfavorite visit unvisit)
 
   def show
-    @skatepark = Skatepark.includes({ reviews: :user }, :ratings, :skatepark_images, :location).find(params[:id])
-    @reviews = ActiveModelSerializers::SerializableResource.new(
-      @skatepark.reviews,
+    @skatepark = Skatepark.includes(
+      { ratings: :user },
+      :skatepark_images,
+      :location
+    ).find(params[:id])
+
+    @ratings = ActiveModelSerializers::SerializableResource.new(
+      @skatepark.ratings,
       adapter: :attributes,
-      each_serializer: ReviewSerializer
+      each_serializer: RatingSerializer
     ).as_json
 
     if current_user

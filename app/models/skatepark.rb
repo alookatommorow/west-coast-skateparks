@@ -1,3 +1,36 @@
+# == Schema Information
+#
+# Table name: skateparks
+#
+#  id                     :integer          not null, primary key
+#  name                   :string
+#  identifier             :string
+#  rating                 :string
+#  material               :string
+#  designer               :string
+#  builder                :string
+#  opened                 :string
+#  hours                  :text
+#  size                   :string
+#  notes                  :text
+#  info                   :text
+#  helmet                 :string
+#  lights                 :string
+#  photo_cred             :string
+#  photo_url              :string
+#  video_url              :string
+#  obstacles              :text
+#  created_at             :datetime
+#  updated_at             :datetime
+#  hero_file_name         :string
+#  hero_content_type      :string
+#  hero_file_size         :bigint
+#  hero_updated_at        :datetime
+#  map_photo_file_name    :string
+#  map_photo_content_type :string
+#  map_photo_file_size    :bigint
+#  map_photo_updated_at   :datetime
+#
 class Skatepark < ActiveRecord::Base
   LOCATION_ATTRIBUTES = %i(address city state zip_code latitude longitude)
   LOCATION_METHODS = %i(has_coordinates? new_coordinates?)
@@ -45,7 +78,7 @@ class Skatepark < ActiveRecord::Base
 
   def average_rating
     if ratings.any?
-      raw_avg = ratings.average(:rating)
+      raw_avg = ratings.average(:stars)
       (raw_avg * 2).ceil.to_f / 2
     end
   end

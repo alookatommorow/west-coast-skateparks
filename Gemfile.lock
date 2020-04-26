@@ -57,6 +57,9 @@ GEM
       rails (>= 4.2, < 5.1)
       sass-rails (~> 5.0)
       selectize-rails (~> 0.6)
+    annotate (3.1.1)
+      activerecord (>= 3.2, < 7.0)
+      rake (>= 10.4, < 14.0)
     arel (7.1.4)
     autoprefixer-rails (6.7.7.2)
       execjs
@@ -935,7 +938,13 @@ GEM
       mime-types
       mimemagic (~> 0.3.0)
       terrapin (~> 0.6.0)
+    parallel (1.19.1)
     pg (0.21.0)
+    pgsync (0.5.3)
+      parallel
+      pg (>= 0.18.2)
+      slop (>= 4.8.1)
+      tty-spinner
     pry (0.12.2)
       coderay (~> 1.1.0)
       method_source (~> 0.9.0)
@@ -1046,6 +1055,7 @@ GEM
     slim (4.0.1)
       temple (>= 0.7.6, < 0.9)
       tilt (>= 2.0.6, < 2.1)
+    slop (4.8.1)
     spring (2.1.0)
     spring-commands-rspec (1.0.4)
       spring (>= 0.9.1)
@@ -1062,6 +1072,9 @@ GEM
     thor (0.20.3)
     thread_safe (0.3.6)
     tilt (2.0.9)
+    tty-cursor (0.7.1)
+    tty-spinner (0.9.3)
+      tty-cursor (~> 0.7)
     turbolinks (5.2.0)
       turbolinks-source (~> 5.2)
     turbolinks-source (5.2.0)
@@ -1099,6 +1112,7 @@ PLATFORMS
 DEPENDENCIES
   active_model_serializers (~> 0.10.10)
   administrate (~> 0.3.0)
+  annotate
   autoprefixer-rails
   awesome_print
   aws-sdk
@@ -1124,6 +1138,7 @@ DEPENDENCIES
   mini_racer
   paperclip
   pg (>= 0.18, < 1.0)
+  pgsync
   pry-rails
   puma
   rails (~> 5.0.2)
