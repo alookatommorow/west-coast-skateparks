@@ -12,6 +12,7 @@
   font-size: 15px;
   font-weight: bold;
   color: #62626e;
+  // transition: opacity 3s ease;
 }
 
 .modalContent {
@@ -52,4 +53,23 @@
   padding: 10px 20px;
   display: flex;
   justify-content: flex-end;
+}
+
+// classes for CSSTransition
+.enter {
+  opacity: 0;
+}
+
+.enterActive {
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+
+.exit {
+  opacity: 1;
+}
+
+.exitActive {
+  opacity: 0;
+  transition: opacity 0.3s ease;
 }

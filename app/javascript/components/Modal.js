@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useEffect, createRef } from "react";
 import { createPortal } from "react-dom";
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
 import styles from '../styles/modal.module.scss';
 
@@ -53,20 +54,24 @@ export default function Modal({ children, onClose, isVisible, height }) {
     onClose();
   }
 
-  return isVisible && (
-    createPortal(
-      <div className={styles.modalContainer} role="dialog" aria-modal="true" onClick={handleContentClick}>
-        <div className={styles.modalContent} ref={modalRef} style={height && {height: `${height}`}}>
-          <modalContext.Provider value={{ onClose }}>
-            <button className={styles.closeBtn} title="close modal" onClick={onClose}>
-              <i className="fas fa-times"></i>
-            </button>
-            {children}
-          </modalContext.Provider>
-        </div>
-      </div>,
-      document.body
-  ));
+  return (
+    <TransitionGroup component={null}>
+      {isVisible && (
+        <CSSTransition timeout={300} classNames={{ ...styles }}>
+          <div className={styles.modalContainer} role="dialog" aria-modal="true" onClick={handleContentClick}>
+            <div className={styles.modalContent} ref={modalRef} style={height && {height: `${height}`}}>
+              <modalContext.Provider value={{ onClose }}>
+                <button className={styles.closeBtn} title="close modal" onClick={onClose}>
+                  <i className="fas fa-times"></i>
+                </button>
+                {children}
+              </modalContext.Provider>
+            </div>
+          </div>
+        </CSSTransition>
+      )}
+    </TransitionGroup>
+  );
 }
 
 Modal.Header = function ModalHeader(props) {

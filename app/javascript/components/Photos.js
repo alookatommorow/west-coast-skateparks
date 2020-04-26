@@ -2,9 +2,6 @@ import React, { useState } from 'react';
 import Slider from 'react-slick';
 import Modal from './Modal';
 
-// include styles
-import 'rodal/lib/rodal.css';
-
 import useToggle from '../hooks/useToggle';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -20,17 +17,17 @@ const settings = {
   slidesToScroll: 1,
 };
 
+// centerMode and variableWidth don't work together
 const bigSettings = {
   dots: true,
   speed: 500,
   slidesToShow: 1,
   slidesToScroll: 1,
 };
-// centerMode and variableWidth don't work together
 
 function Photos(props) {
-  // const { photos } = props;
-  const photos = ['https://s3-us-west-1.amazonaws.com/west-coast-skateparks/skatepark_images/photos/000/000/623/original/lake_20forest-01.jpg?1459397429', 'https://s3-us-west-1.amazonaws.com/west-coast-skateparks/skatepark_images/photos/000/000/627/original/lake_20forest-05.jpg?1459397434', 'https://s3-us-west-1.amazonaws.com/west-coast-skateparks/skatepark_images/photos/000/000/625/original/lake_20forest-03.jpg?1459397432'];
+  const { photos } = props;
+  // const photos = ['https://s3-us-west-1.amazonaws.com/west-coast-skateparks/skatepark_images/photos/000/000/623/original/lake_20forest-01.jpg?1459397429', 'https://s3-us-west-1.amazonaws.com/west-coast-skateparks/skatepark_images/photos/000/000/627/original/lake_20forest-05.jpg?1459397434', 'https://s3-us-west-1.amazonaws.com/west-coast-skateparks/skatepark_images/photos/000/000/625/original/lake_20forest-03.jpg?1459397432'];
 
   const {
     isShowing: modalIsShowing,
@@ -48,7 +45,6 @@ function Photos(props) {
           </div>
         ))}
       </Slider>
-
       <Modal
         isVisible={modalIsShowing}
         onClose={toggleModalIsShowing}
