@@ -21,6 +21,14 @@ function ReviewForm(props) {
     }
   }, [rating]);
 
+  useEffect(() => {
+    if (!modalIsShowing) {
+      setRatingError('');
+      setRating(0);
+      setReview(null);
+    }
+  }, [modalIsShowing]);
+
   const handleSubmit = event => {
     event.preventDefault();
 
