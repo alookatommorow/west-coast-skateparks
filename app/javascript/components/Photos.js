@@ -26,13 +26,16 @@ const bigSettings = {
 };
 
 function Photos(props) {
-  const { photos } = props;
-  // const photos = ['https://s3-us-west-1.amazonaws.com/west-coast-skateparks/skatepark_images/photos/000/000/623/original/lake_20forest-01.jpg?1459397429', 'https://s3-us-west-1.amazonaws.com/west-coast-skateparks/skatepark_images/photos/000/000/627/original/lake_20forest-05.jpg?1459397434', 'https://s3-us-west-1.amazonaws.com/west-coast-skateparks/skatepark_images/photos/000/000/625/original/lake_20forest-03.jpg?1459397432'];
+  // const { photos } = props;
+  const photos = ['https://s3-us-west-1.amazonaws.com/west-coast-skateparks/skatepark_images/photos/000/000/623/original/lake_20forest-01.jpg?1459397429', 'https://s3-us-west-1.amazonaws.com/west-coast-skateparks/skatepark_images/photos/000/000/627/original/lake_20forest-05.jpg?1459397434', 'https://s3-us-west-1.amazonaws.com/west-coast-skateparks/skatepark_images/photos/000/000/625/original/lake_20forest-03.jpg?1459397432'];
 
   const {
     isShowing: modalIsShowing,
     toggle: toggleModalIsShowing,
   } = useToggle(false);
+
+  const slider1 = useRef();
+  const slider2 = useRef();
 
   return (
     <div id="photo-root" className={styles.root}>
@@ -40,7 +43,7 @@ function Photos(props) {
         {photos.map((photo, index) => (
           <div key={`wcs-photo-${index}`} className={styles.outerPhotoContainer}>
             <div className={styles.photoContainer}>
-              <img onClick={toggleModalIsShowing} className={styles.photo} src={photo} />
+              <img loading="lazy" onClick={toggleModalIsShowing} className={styles.photo} src={photo} />
             </div>
           </div>
         ))}
