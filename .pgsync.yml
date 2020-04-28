@@ -1,0 +1,33 @@
+# source database URL
+# database URLs take the format of:
+#   postgres://user:password@host:port/dbname
+#
+# we recommend a command which outputs a database URL
+# so sensitive information is not included in this file
+#
+# we *highly recommend* you use sslmode=verify-full when possible
+# see https://ankane.org/postgres-sslmode-explained for more info
+from: $(heroku config:get DATABASE_URL -r production)?sslmode=require
+
+# TODO: Set up sslmode=verify-full
+# https://ankane.org/postgres-sslmode-explained
+# from: $(heroku config:get DATABASE_URL -r production)?sslmode=verify-full
+
+# destination database URL
+to: postgres://localhost:5432/west-coast-skateparks_development
+
+# exclude tables
+exclude:
+  - schema_migrations
+  - ar_internal_metadata
+
+# TODO: Add group for just skateparks
+# define groups
+# groups:
+#   group1:
+#     - table1
+#     - table2
+
+# protect sensitive information
+data_rules:
+  email: unique_email

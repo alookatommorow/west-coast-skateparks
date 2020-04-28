@@ -54,17 +54,16 @@ with_err_handling do
   print "  Creating buttery Reviews & Ratings for some Skateparks..."
   skateparks.pluck(:id).map do |park_id|
     reviewer = users[rand(0...users.length)]
+    reviews  = ['It sucked ass.', 'Chill.', 'Magnificent Crete.']
+
     rating = Rating.find_or_initialize_by(
       skatepark_id: park_id,
       user_id: reviewer.id,
     )
-    rating.update!(rating: rand(1..5)) # Magnificent Crete. 1 star. Heh
-
-    review = Review.find_or_initialize_by(
-      skatepark_id: park_id,
-      user_id: reviewer.id,
+    rating.update!(
+      stars: rand(1..5),
+      review: reviews.sample(1).first,
     )
-    review.update!(review: ['It sucked ass.', 'Chill.', 'Magnificent Crete.'].sample(1).first)
     print "."
   end
   puts
