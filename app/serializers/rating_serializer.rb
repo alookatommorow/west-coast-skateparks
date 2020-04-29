@@ -1,5 +1,9 @@
-class ReviewSerializer < ActiveModel::Serializer
-  attributes :review, :avatar, :created_at, :author
+class RatingSerializer < ActiveModel::Serializer
+  attributes :stars,
+             :review,
+             :avatar,
+             :author,
+             :created_at
 
   def avatar
     object.user&.avatar&.url(:thumb)

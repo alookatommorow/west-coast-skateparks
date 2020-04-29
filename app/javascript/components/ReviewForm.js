@@ -3,9 +3,10 @@ import useToggle from '../hooks/useToggle';
 import Modal from './Modal';
 
 function ReviewForm(props) {
-  const { skateparkId, userId, reviews } = props;
+  const { skateparkId, userId, ratings } = props;
 
   const maxStars = 5;
+  // TODO: Rename to stars and figure out how maxStars fits in
   const [rating, setRating] = useState(0);
   const [ratingError, setRatingError] = useState('');
   const [review, setReview] = useState(null);
@@ -34,19 +35,26 @@ function ReviewForm(props) {
 
     if (isValid()) {
       $.ajax({
-        url: `/reviews`,
+        url: `/ratings`,
         method: 'POST',
         data: {
-          rating,
+          stars: rating,
           review,
           skatepark_id: skateparkId,
           user_id: userId,
         }
-      }).done(() => {
-        toggleHasAction(name);
+      }).done(response => {
+        ratings.push(response)
+        clearForm()
+        toggleModalIsShowing();
         setIsLoading(name, false);
       });
     }
+  }
+
+  const clearForm = () => {
+    setRating(0);
+    setReview('');
   }
 
   const handleClick = event => {
@@ -115,8 +123,8 @@ function ReviewForm(props) {
           <p>Write a review</p>
         </div>
       </div>
-      {reviews.length > 0 ? (
-        reviews.map((review, i) => (
+      {ratings.length > 0 ? (
+        ratings.map((review, i) => (
           <div className="comment" key={`review-${i}`}>
             <div className="avatar">
               <img src={`${review.avatar}`} />
@@ -126,7 +134,7 @@ function ReviewForm(props) {
                 <p className="author">{review.author}</p>
                 <p className="date">{review.created_at}</p>
               </div>
-              <p className="text">"{review.review}"</p>
+              <p className="text">{review.review}</p>
             </div>
           </div>
         ))
