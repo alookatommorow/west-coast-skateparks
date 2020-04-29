@@ -1,9 +1,6 @@
 <script src="https://apis.google.com/js/platform.js" async defer></script>
 <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-
-<% if fetch_gmaps? %>
-  <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV.fetch('GOOGLE_KEY') %>" async defer data-turbolinks-eval="false"></script>
-<% end %>
+<script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV.fetch('GOOGLE_KEY') %>" async defer data-turbolinks-eval="false"></script>
 
 <% if Rails.env.test? %>
   <%= javascript_tag do %>
