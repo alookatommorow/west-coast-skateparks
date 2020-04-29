@@ -31,14 +31,15 @@ Modal.Footer = function ModalFooter(props) {
   return <div className={styles.modalFooter}>{props.children}</div>;
 };
 
-Modal.Footer.CloseBtn = function CloseBtn(props) {
+Modal.Footer.CloseBtn = function CloseBtn() {
   const { onClose } = useContext(modalContext);
   return (
     <button
-      {...props}
-      className={styles.closeBtn}
+      className="basic-button"
       title="close modal"
       onClick={onClose}
-    />
+    >
+      Cancel
+    </button>
   );
 };

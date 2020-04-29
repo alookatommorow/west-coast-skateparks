@@ -10,6 +10,7 @@ export default function ModalComponent({ children, onClose, height, styles, cont
     }
 
     document.addEventListener('keydown', keyListener);
+    document.body.style.overflow = 'hidden';
 
     return () => {
       document.removeEventListener('keydown', keyListener);

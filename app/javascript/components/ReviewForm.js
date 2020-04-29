@@ -148,10 +148,13 @@ function ReviewForm(props) {
             {renderEmptyStars()}
             <p className={`error-message-v2 ${showError && 'visible'}`}>{ratingError}</p>
             <textarea onChange={handleChange} />
-            <button className="basic-button regular" type="submit">
-              send the thing
-            </button>
           </Modal.Body>
+          <Modal.Footer>
+            <Modal.Footer.CloseBtn />
+            <button className="basic-button regular" type="submit">
+              Submit
+            </button>
+          </Modal.Footer>
         </form>
       </Modal>
     </React.Fragment>

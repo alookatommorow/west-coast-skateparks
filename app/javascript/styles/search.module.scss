@@ -9,15 +9,17 @@
   top: 50%;
   transform: translateY(-50%);
   right: 0;
-  transition: opacity 1s ease, width 1s ease;
+  transition: opacity 0.5s ease, width 0.5s ease;
   width: 300px;
 }
 
 .exit {
   opacity: 1;
+  width: 300px;
 }
 
 .exitActive {
+  width: 0;
   opacity: 0;
-  transition: opacity 1s ease, width 1s ease;
+  transition: opacity 0.5s ease, width 0.5s ease;
 }

@@ -18,12 +18,25 @@ function SearchContainer() {
   } = useToggle(false);
 
   useEffect(() => {
-    document.addEventListener('click', handleClickOutside);
-    return () => document.removeEventListener('click', handleClickOutside);
-  }, []);
+    function handleClickOutside(event) {
+      // check if search is active, click is outside component, and target is not search trigger icon
+      if (
+        searchIsShowing && !containerRef.current.contains(event.target)
+      ) {
+        exitResults();
+        toggleSearchIsShowing();
+      }
+    }
 
-  useEffect(() => {
-    if (!skateparks) getSkateparks();
+    console.log(searchIsShowing, containerRef.current)
+    if (searchIsShowing) {
+      document.addEventListener('click', handleClickOutside);
+      console.log('adding')
+      if (!skateparks) getSkateparks();
+    } else if (containerRef.current) {
+      console.log('removing')
+      document.removeEventListener('click', handleClickOutside);
+    }
   }, [searchIsShowing]);
 
   useEffect(() => {
@@ -87,22 +100,11 @@ function SearchContainer() {
     setQuery(null);
   };
 
-  const handleClickOutside = event => {
-    // check if search is active, click is outside component, and target is not search trigger icon
-    if (
-      containerRef.current &&
-        !event.target.classList.contains("display-search") &&
-        !containerRef.current.contains(event.target)
-    ) {
-      exitResults();
-    }
-  }
-
   return (
     <div id="react-search">
       <TransitionGroup component={null}>
         {!searchIsShowing && (
-          <CSSTransition timeout={1000} classNames={{ ...styles }}>
+          <CSSTransition timeout={500} classNames={{ ...styles }}>
             <div
               className="display-search"
               role="button"
@@ -114,7 +116,7 @@ function SearchContainer() {
           </CSSTransition>
         )}
         {searchIsShowing && (
-          <CSSTransition timeout={1000} classNames={{ ...styles }}>
+          <CSSTransition timeout={500} classNames={{ ...styles }}>
             <div className="react-search-container" ref={containerRef}>
               <SearchForm
                 handleChange={handleChange}
