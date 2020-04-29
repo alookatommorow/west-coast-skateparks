@@ -1,44 +1,36 @@
-import React, { useEffect, createRef } from "react";
+import React, { useEffect, createRef } from 'react';
 
-export default function ModalComponent({ children, onClose, isVisible, height, styles, context }) {
+export default function ModalComponent({ children, onClose, height, styles, context }) {
   const modalRef = createRef();
 
-  const keyListener = e => {
-    const listener = keyListenersMap.get(e.keyCode);
-    return listener && listener(e);
-  }
-
   useEffect(() => {
-    console.log(modalRef.current)
-    if (isVisible) {
-      document.body.style.overflow = 'hidden';
-      document.addEventListener('keydown', keyListener);
-      console.log('adding')
+    function keyListener(e) {
+      const listener = keyListenersMap.get(e.keyCode);
+      return listener && listener(e);
     }
 
+    document.addEventListener('keydown', keyListener);
+
     return () => {
-      console.log('return firing')
-      console.log(modalRef.current)
       document.removeEventListener('keydown', keyListener);
       document.body.style.overflow = 'auto';
     }
-  }, [isVisible]);
+  });
 
   const handleTabKey = e => {
-    const focusableModalElements = modalRef.current.querySelectorAll(
+    const focasable = modalRef.current.querySelectorAll(
       'a[href], button, textarea, input[type="text"], input[type="radio"], input[type="checkbox"], select'
     );
-    const firstElement = focusableModalElements[0];
-    const lastElement =
-      focusableModalElements[focusableModalElements.length - 1];
+    const first = focasable[0];
+    const last = focasable[focasable.length - 1];
 
-    if (!e.shiftKey && document.activeElement !== firstElement) {
-      firstElement.focus();
+    if (e.shiftKey && document.activeElement === first) {
+      last.focus();
       return e.preventDefault();
     }
 
-    if (e.shiftKey && document.activeElement !== lastElement) {
-      lastElement.focus();
+    if (!e.shiftKey && document.activeElement === last) {
+      first.focus();
       e.preventDefault();
     }
   };
