@@ -1,4 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
+
+import styles from '../styles/search.module.scss';
+import useToggle from '../hooks/useToggle';
 import SearchForm from './SearchForm';
 import SearchResults from './SearchResults';
 
@@ -8,11 +12,19 @@ function SearchContainer() {
   const [skateparks, setSkateparks] = useState(null);
   const [loading, setLoading] = useState(false);
   const containerRef = useRef(null);
+  const {
+    isShowing: searchIsShowing,
+    toggle: toggleSearchIsShowing,
+  } = useToggle(false);
 
   useEffect(() => {
     document.addEventListener('click', handleClickOutside);
     return () => document.removeEventListener('click', handleClickOutside);
   }, []);
+
+  useEffect(() => {
+    if (!skateparks) getSkateparks();
+  }, [searchIsShowing]);
 
   useEffect(() => {
     if (!query) {
@@ -87,9 +99,39 @@ function SearchContainer() {
   }
 
   return (
-    <div className="react-search-container" ref={containerRef}>
-      <SearchForm handleChange={handleChange} loading={loading} getSkateparks={getSkateparks} results={results} query={query} />
-      <SearchResults className="react-search-results" results={results} exitResults={exitResults} query={query} />
+    <div id="react-search">
+      <TransitionGroup component={null}>
+        {!searchIsShowing && (
+          <CSSTransition timeout={1000} classNames={{ ...styles }}>
+            <div
+              className="display-search"
+              role="button"
+              tabIndex="0"
+              onClick={toggleSearchIsShowing}
+            >
+              <i className="large fa fa-search"></i>
+            </div>
+          </CSSTransition>
+        )}
+        {searchIsShowing && (
+          <CSSTransition timeout={1000} classNames={{ ...styles }}>
+            <div className="react-search-container" ref={containerRef}>
+              <SearchForm
+                handleChange={handleChange}
+                loading={loading}
+                results={results}
+                query={query}
+              />
+              <SearchResults
+                className="react-search-results"
+                results={results}
+                exitResults={exitResults}
+                query={query}
+              />
+            </div>
+          </CSSTransition>
+        )}
+      </TransitionGroup>
     </div>
   );
 };
