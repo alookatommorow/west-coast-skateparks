@@ -4,9 +4,11 @@ import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
 import styles from '../styles/modal.module.scss';
 
+const DEFAULT_HEIGHT = 'auto';
+const DEFAULT_WIDTH = '60%';
 const modalContext = createContext();
 
-export default function Modal({ children, onClose, isVisible, height }) {
+export default function Modal({ children, onClose, isVisible, height, width }) {
   const modalRef = createRef();
 
   useEffect(() => {
@@ -58,8 +60,20 @@ export default function Modal({ children, onClose, isVisible, height }) {
     <TransitionGroup component={null}>
       {isVisible && (
         <CSSTransition timeout={300} classNames={{ ...styles }}>
-          <div className={styles.modalContainer} role="dialog" aria-modal="true" onClick={handleContentClick}>
-            <div className={styles.modalContent} ref={modalRef} style={height && {height: `${height}`}}>
+          <div
+            className={styles.modalContainer}
+            role="dialog"
+            aria-modal="true"
+            onClick={handleContentClick}
+          >
+            <div
+              className={styles.modalContent}
+              ref={modalRef}
+              style={{
+                height: `${height || DEFAULT_HEIGHT}`,
+                width: `${width || DEFAULT_WIDTH}`,
+              }}
+            >
               <modalContext.Provider value={{ onClose }}>
                 <button className={styles.closeBtn} title="close modal" onClick={onClose}>
                   <i className="fas fa-times"></i>
