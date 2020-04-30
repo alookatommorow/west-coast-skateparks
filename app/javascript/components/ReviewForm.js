@@ -10,11 +10,11 @@ function ReviewForm(props) {
   const [rating, setRating] = useState(0);
   const [ratingError, setRatingError] = useState('');
   const [review, setReview] = useState(null);
+  const showError = ratingError.length > 0;
   const {
     isShowing: modalIsShowing,
     toggle: toggleModalIsShowing,
   } = useToggle(false);
-  const showError = ratingError.length > 0;
 
   useEffect(() => {
     if (rating > 0 && ratingError !== '') {
@@ -36,10 +36,9 @@ function ReviewForm(props) {
           user_id: userId,
         }
       }).done(response => {
-        ratings.push(response)
+        ratings.unshift(response)
         clearForm()
         toggleModalIsShowing();
-        setIsLoading(name, false);
       });
     }
   }
@@ -91,6 +90,7 @@ function ReviewForm(props) {
 
   const renderEmptyStars = () => {
     if (rating > 4) return;
+
     return [...Array(maxStars - rating)].map((e, i) => (
       <label htmlFor={rating + i + 1} key={`star-${rating + i + 1}`}>
         <input
@@ -106,6 +106,26 @@ function ReviewForm(props) {
     ));
   }
 
+  const sortedRatings = () => {
+    if (!userId) return ratings;
+
+    const userRatings = [];
+    const otherRatings = [];
+
+    ratings.map(rating => {
+      if (rating.author_id === userId) {
+        userRatings.push(rating);
+      } else {
+        otherRatings.push(rating);
+      }
+    });
+
+    return { userRatings, otherRatings };
+  }
+
+  const { userRatings, otherRatings } = sortedRatings();
+  const allRatings = userRatings.concat(otherRatings);
+
   return (
     <React.Fragment>
       <div className="review-header-container">
@@ -115,8 +135,8 @@ function ReviewForm(props) {
           <p>Write a review</p>
         </div>
       </div>
-      {ratings.length > 0 ? (
-        ratings.map((review, i) => (
+      {allRatings.length > 0 ? (
+        allRatings.map((review, i) => (
           <div className="comment" key={`review-${i}`}>
             <div className="avatar">
               <img src={`${review.avatar}`} />
@@ -134,17 +154,25 @@ function ReviewForm(props) {
         <p>No reviews at this time</p>
       )}
       <Modal isVisible={modalIsShowing} onClose={toggleModalIsShowing}>
-        <form onSubmit={handleSubmit} className="review-form">
-          <Modal.Body>
-            {renderStars()}
-            {renderEmptyStars()}
-            <p className={`error-message-v2 ${showError && 'visible'}`}>{ratingError}</p>
-            <textarea onChange={handleChange} />
-            <button className="basic-button regular" type="submit">
-              send the thing
-            </button>
-          </Modal.Body>
-        </form>
+        <Modal.Body>
+          {userRatings.length === 2 ? (
+              <div className="review-modal-warning">
+                <i className="fas fa-radiation"></i>
+                <p>You only get two reviews per park. Now go skate!</p>
+                <i className="fas fa-radiation"></i>
+              </div>
+            ) : (
+              <form onSubmit={handleSubmit} className="review-form">
+                {renderStars()}
+                {renderEmptyStars()}
+                <p className={`error-message-v2 ${showError && 'visible'}`}>{ratingError}</p>
+                <textarea onChange={handleChange} />
+                <button className="basic-button regular" type="submit">
+                  send the thing
+                </button>
+            </form>
+          )}
+        </Modal.Body>
       </Modal>
     </React.Fragment>
   );
