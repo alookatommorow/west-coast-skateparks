@@ -36,10 +36,9 @@ function ReviewForm(props) {
           user_id: userId,
         }
       }).done(response => {
-        ratings.push(response)
+        ratings.unshift(response)
         clearForm()
         toggleModalIsShowing();
-        setIsLoading(name, false);
       });
     }
   }
@@ -106,6 +105,24 @@ function ReviewForm(props) {
     ));
   }
 
+  const sortedRatings = () => {
+    if (!userId) return ratings;
+
+    const userRatings = [];
+    const otherRatings = [];
+
+    ratings.map(rating => {
+      if (rating.author_id === userId) {
+        userRatings.push(rating)
+      } else {
+        otherRatings.push(rating)
+      }
+    })
+
+
+    return userRatings.concat(otherRatings)
+  }
+
   return (
     <React.Fragment>
       <div className="review-header-container">
@@ -116,7 +133,7 @@ function ReviewForm(props) {
         </div>
       </div>
       {ratings.length > 0 ? (
-        ratings.map((review, i) => (
+        sortedRatings().map((review, i) => (
           <div className="comment" key={`review-${i}`}>
             <div className="avatar">
               <img src={`${review.avatar}`} />

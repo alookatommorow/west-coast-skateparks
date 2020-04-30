@@ -27,7 +27,7 @@ class Rating < ActiveRecord::Base
 
   validates :stars, inclusion: 1..5
 
-  validate :two_max_per_user_per_park
+  validate :two_max_per_user_per_park, on: :create
 
   private
 
