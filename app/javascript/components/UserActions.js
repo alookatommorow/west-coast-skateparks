@@ -94,7 +94,9 @@ function UserActions(props) {
         </button>
       </div>
       <WarningModal
-        text="U gotta sign in bitch"
+        mainText="U gotta sign in bitch"
+        confirmText="Sign In"
+        href="/sessions/new"
         onClose={toggleWarningModalIsShowing}
         isVisible={warningModalIsShowing}
       />

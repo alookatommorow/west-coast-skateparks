@@ -58,7 +58,12 @@ export default function ModalComponent({ children, onClose, className, styles, c
         ref={modalRef}
       >
         <context.Provider value={{ onClose }}>
-          <button className={styles.closeBtn} title="close modal" onClick={onClose}>
+          <button
+            className={styles.closeBtn}
+            title="close modal"
+            type="button"
+            onClick={onClose}
+          >
             <i className="fas fa-times"></i>
           </button>
           {children}

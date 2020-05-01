@@ -15,7 +15,7 @@
 }
 
 .modalContent {
-  padding: 30px;
+  padding: 20px;
   position: relative;
   border-radius: 3px;
   box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.5);
@@ -41,17 +41,21 @@
   top: 20px;
   font-size: 20px;
   cursor: pointer;
+  z-index: 1;
 }
 
 .modalBody {
   flex-grow: 1;
-  padding: 14px 29px 14px 19px;
+  padding: 15px 0;
 }
 
 .modalFooter {
-  padding: 10px 20px;
   display: flex;
   justify-content: flex-end;
+
+  :nth-child(2) {
+    margin-left: 20px;
+  }
 }
 
 // classes for CSSTransition
