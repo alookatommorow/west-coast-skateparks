@@ -1,37 +1,31 @@
 import React, { useState, useEffect } from 'react';
 import useToggle from 'hooks/useToggle';
 import Modal from 'components/Modal';
+import ReviewComponent from './components';
 
 function ReviewForm(props) {
   const { skateparkId, userId, ratings } = props;
 
-  const maxStars = 5;
   // TODO: Rename to stars and figure out how maxStars fits in
-  const [rating, setRating] = useState(0);
+  const [stars, setStars] = useState(0);
   const [ratingError, setRatingError] = useState('');
   const [review, setReview] = useState(null);
-  const showError = ratingError.length > 0;
   const {
     isShowing: modalIsShowing,
     toggle: toggleModalIsShowing,
   } = useToggle(false);
 
   useEffect(() => {
-    if (rating > 0 && ratingError !== '') {
+    if (stars > 0 && ratingError !== '') {
       setRatingError('');
     }
-  }, [rating]);
+  }, [stars]);
 
   useEffect(() => {
-    if (!modalIsShowing) {
-      setRatingError('');
-      setRating(0);
-      setReview(null);
-    }
+    if (!modalIsShowing) clearForm();
   }, [modalIsShowing]);
 
   const handleSubmit = event => {
-    console.log('submitting')
     event.preventDefault();
 
     if (isValid()) {
@@ -39,33 +33,34 @@ function ReviewForm(props) {
         url: `/ratings`,
         method: 'POST',
         data: {
-          stars: rating,
+          stars,
           review,
           skatepark_id: skateparkId,
           user_id: userId,
         }
       }).done(response => {
-        ratings.unshift(response)
-        clearForm()
+        ratings.unshift(response);
         toggleModalIsShowing();
       });
     }
   }
 
   const clearForm = () => {
-    setRating(0);
+    setStars(0);
     setReview('');
+    setReview(null);
+    setRatingError('');
   }
 
   const handleClick = event => {
     const {currentTarget: { value }} = event;
-    let newRating = parseInt(value, 10);
+    let newStars = parseInt(value, 10);
 
-    if (newRating === rating) {
-      newRating -= 1;
+    if (newStars === stars) {
+      newStars -= 1;
     }
 
-    setRating(newRating);
+    setStars(newStars);
   };
 
   const handleChange = event => setReview(event.target.value);
@@ -73,7 +68,7 @@ function ReviewForm(props) {
   const isValid = () => {
     let valid = true;
 
-    if (rating < 1) {
+    if (stars < 1) {
       setRatingError('Please add a rating');
       valid = false;
     }
@@ -81,58 +76,27 @@ function ReviewForm(props) {
     return valid;
   }
 
-  const renderStars = () => {
-    return [...Array(rating)].map((e, i) => (
-      <label htmlFor={i + 1} key={`star-${i + 1}`}>
-        <input
-          type="radio"
-          name="rating"
-          onChange={handleClick}
-          id={i + 1}
-          value={i + 1}
-          checked={rating === i + 1}
-        />
-        <i className="star fas fa-star" />
-      </label>
-    ));
-  }
-
-  const renderEmptyStars = () => {
-    if (rating > 4) return;
-
-    return [...Array(maxStars - rating)].map((e, i) => (
-      <label htmlFor={rating + i + 1} key={`star-${rating + i + 1}`}>
-        <input
-          type="radio"
-          name="rating"
-          id={rating + i + 1}
-          value={rating + i + 1}
-          checked={rating === (rating + i + 1)}
-          onChange={handleClick}
-        />
-        <i className={`star far fa-star ${showError && 'error'}`} />
-      </label>
-    ));
-  }
-
   const sortedRatings = () => {
     let numUserRatings = 0;
-    const userRatings = [];
-    const otherRatings = [];
+    let allRatings = ratings;
 
-    ratings.map(rating => {
-      if (userId && rating.author_id === userId) {
-        numUserRatings += 1;
-        userRatings.push(rating);
-      } else {
-        otherRatings.push(rating);
-      }
-    });
+    if (userId) {
+      const userRatings = [];
+      const otherRatings = [];
 
-    return {
-      numUserRatings,
-      allRatings: userRatings.concat(otherRatings),
-    };
+      ratings.map(rating => {
+        if (userId && rating.author_id === userId) {
+          numUserRatings += 1;
+          userRatings.push(rating);
+        } else {
+          otherRatings.push(rating);
+        }
+      });
+
+      allRatings = userRatings.concat(otherRatings)
+    }
+
+    return { numUserRatings, allRatings };
   }
 
   const { numUserRatings, allRatings } = sortedRatings();
@@ -164,30 +128,17 @@ function ReviewForm(props) {
       ) : (
         <p>No reviews yet</p>
       )}
-      <Modal isVisible={modalIsShowing} onClose={toggleModalIsShowing}>
-        {numUserRatings === 2 ? (
-          <Modal.Body className="modal-warning">
-            <i className="fas fa-radiation"></i>
-            <p>You only get two reviews per park. Now go skate!</p>
-            <i className="fas fa-radiation"></i>
-          </Modal.Body>
-        ) : (
-          <form onSubmit={handleSubmit} className="review-form">
-            <Modal.Body>
-              {renderStars()}
-              {renderEmptyStars()}
-              <p className={`error-message-v2 ${showError && 'visible'}`}>{ratingError}</p>
-              <textarea onChange={handleChange} />
-            </Modal.Body>
-            <Modal.Footer>
-              <Modal.Footer.CloseBtn />
-              <button className="basic-button regular" type="submit">
-                Submit
-              </button>
-            </Modal.Footer>
-          </form>
-        )}
-      </Modal>
+      <ReviewComponent
+        isVisible={modalIsShowing}
+        onClose={toggleModalIsShowing}
+        ratingError={ratingError}
+        stars={stars}
+        handleSubmit={handleSubmit}
+        handleChange={handleChange}
+        handleClick={handleClick}
+        userId={userId}
+        numUserRatings={numUserRatings}
+      />
     </React.Fragment>
   );
 };
