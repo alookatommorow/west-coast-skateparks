@@ -19,24 +19,18 @@ function SearchContainer() {
 
   useEffect(() => {
     function handleClickOutside(event) {
-      // check if search is active, click is outside component, and target is not search trigger icon
-      if (
-        searchIsShowing && !containerRef.current.contains(event.target)
-      ) {
+      // check if click is outside component and close if so
+      if (!containerRef.current.contains(event.target)) {
         exitResults();
         toggleSearchIsShowing();
       }
     }
 
-    console.log(searchIsShowing, containerRef.current)
     if (searchIsShowing) {
       document.addEventListener('click', handleClickOutside);
-      console.log('adding')
       if (!skateparks) getSkateparks();
-    } else if (containerRef.current) {
-      console.log('removing')
-      document.removeEventListener('click', handleClickOutside);
     }
+    return () => document.removeEventListener('click', handleClickOutside);
   }, [searchIsShowing]);
 
   useEffect(() => {
