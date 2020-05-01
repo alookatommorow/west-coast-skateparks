@@ -1,7 +1,7 @@
 import React, { createContext, useContext } from "react";
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import ModalComponent from './components';
-import styles from '../../styles/modal.module.scss';
+import styles from 'styles/modal.module.scss';
 
 const modalContext = createContext();
 

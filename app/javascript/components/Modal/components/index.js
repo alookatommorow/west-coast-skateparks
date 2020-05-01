@@ -1,6 +1,4 @@
 import React, { useEffect, createRef } from 'react';
-const DEFAULT_HEIGHT = 'auto';
-const DEFAULT_WIDTH = '60%';
 
 export default function ModalComponent({ children, onClose, className, styles, context }) {
   const modalRef = createRef();

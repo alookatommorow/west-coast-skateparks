@@ -1,12 +1,12 @@
 import React, { useState, useRef } from 'react';
 import Slider from 'react-slick';
-import Modal from './Modal';
+import Modal from 'components/Modal';
 
-import useToggle from '../hooks/useToggle';
+import useToggle from 'hooks/useToggle';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import styles from '../styles/photos.module.scss';
-import '../styles/slick.scss';
+import styles from 'styles/photos.module.scss';
+import 'styles/slick.scss';
 
 const settings = {
   dots: true,
