@@ -15,6 +15,11 @@
   padding: 0 10px;
 }
 
+.photoModal {
+  height: 90%;
+  width: 90%;
+}
+
 .bigPhoto {
   max-height: 100%;
   max-width: 100%;
@@ -28,4 +33,6 @@
 
 .modalContentContainer {
   height: 100%;
+  padding-left: 40px;
+  padding-right: 40px;
 }

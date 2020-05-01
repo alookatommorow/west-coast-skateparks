@@ -1,7 +1,8 @@
 import React, { createContext, useContext } from "react";
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import ModalComponent from './components';
-import styles from '../../styles/modal.module.scss';
+import styles from 'styles/modal.module.scss';
+import { classNames } from 'utils/styles';
 
 const modalContext = createContext();
 
@@ -24,7 +25,9 @@ Modal.Header = function ModalHeader(props) {
 };
 
 Modal.Body = function ModalBody(props) {
-  return <div className={`${styles.modalBody} ${props.className}`}>{props.children}</div>;
+  const { className, children } = props;
+
+  return <div className={classNames(styles.modalBody, className)}>{children}</div>;
 };
 
 Modal.Footer = function ModalFooter(props) {
@@ -37,6 +40,7 @@ Modal.Footer.CloseBtn = function CloseBtn() {
     <button
       className="basic-button"
       title="close modal"
+      type="button"
       onClick={onClose}
     >
       Cancel

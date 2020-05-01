@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
-import styles from '../styles/search.module.scss';
-import useToggle from '../hooks/useToggle';
-import SearchForm from './SearchForm';
-import SearchResults from './SearchResults';
+import styles from 'styles/search.module.scss';
+import useToggle from 'hooks/useToggle';
+import SearchForm from './components/SearchForm';
+import SearchResults from './components/SearchResults';
 
 function SearchContainer() {
   const [query, setQuery] = useState(null);

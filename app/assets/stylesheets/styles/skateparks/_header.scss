@@ -126,7 +126,7 @@ i.star {
           margin-right: 0;
         }
 
-        &:not(:disabled):hover {
+        &:hover {
           color: $orange;
           background-color: $dark-blue;
 
@@ -181,10 +181,11 @@ i.star {
     padding: 40px 60px;
   }
 
-  .review-modal-warning {
+  .modal-warning {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 50px 15px;
 
     p {
       margin: 0;
@@ -205,6 +206,10 @@ i.star {
     opacity: 0;
     width: 0;
     height: 0;
+  }
+
+  label {
+    cursor: pointer;
   }
 
   .review-stars-container {
