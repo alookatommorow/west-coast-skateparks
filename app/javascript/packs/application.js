@@ -18,11 +18,11 @@ import "core-js/stable";
 import "regenerator-runtime/runtime";
 
 import ReactOnRails from 'react-on-rails';
-import SearchContainer from '../components/SearchContainer';
+import Search from '../containers/Search';
 import Photos from '../components/Photos';
 import UserActions from '../components/UserActions';
 import ReviewForm from '../components/ReviewForm';
 import Modal from '../components/Modal';
 import WarningModal from '../components/WarningModal';
 
-ReactOnRails.register({ SearchContainer, Photos, UserActions, ReviewForm, Modal, WarningModal });
+ReactOnRails.register({ Search, Photos, UserActions, ReviewForm, Modal, WarningModal });
