@@ -22,7 +22,16 @@ function ReviewForm(props) {
     }
   }, [rating]);
 
+  useEffect(() => {
+    if (!modalIsShowing) {
+      setRatingError('');
+      setRating(0);
+      setReview(null);
+    }
+  }, [modalIsShowing]);
+
   const handleSubmit = event => {
+    console.log('submitting')
     event.preventDefault();
 
     if (isValid()) {
@@ -154,25 +163,28 @@ function ReviewForm(props) {
         <p>No reviews at this time</p>
       )}
       <Modal isVisible={modalIsShowing} onClose={toggleModalIsShowing}>
-        <Modal.Body>
-          {userRatings.length === 2 ? (
-              <div className="review-modal-warning">
-                <i className="fas fa-radiation"></i>
-                <p>You only get two reviews per park. Now go skate!</p>
-                <i className="fas fa-radiation"></i>
-              </div>
-            ) : (
-              <form onSubmit={handleSubmit} className="review-form">
-                {renderStars()}
-                {renderEmptyStars()}
-                <p className={`error-message-v2 ${showError && 'visible'}`}>{ratingError}</p>
-                <textarea onChange={handleChange} />
-                <button className="basic-button regular" type="submit">
-                  send the thing
-                </button>
-            </form>
-          )}
-        </Modal.Body>
+        {userRatings.length === 2 ? (
+          <Modal.Body className="review-modal-warning">
+            <i className="fas fa-radiation"></i>
+            <p>You only get two reviews per park. Now go skate!</p>
+            <i className="fas fa-radiation"></i>
+          </Modal.Body>
+        ) : (
+          <form onSubmit={handleSubmit} className="review-form">
+            <Modal.Body>
+              {renderStars()}
+              {renderEmptyStars()}
+              <p className={`error-message-v2 ${showError && 'visible'}`}>{ratingError}</p>
+              <textarea onChange={handleChange} />
+            </Modal.Body>
+            <Modal.Footer>
+              <Modal.Footer.CloseBtn />
+              <button className="basic-button regular" type="submit">
+                Submit
+              </button>
+            </Modal.Footer>
+          </form>
+        )}
       </Modal>
     </React.Fragment>
   );

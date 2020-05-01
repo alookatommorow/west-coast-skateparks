@@ -50,6 +50,14 @@ function UserActions(props) {
       )}
 
       <div className="actions">
+        <a
+          className="btn"
+          rel="nofollow noopener"
+          target="_blank"
+          href={`https://maps.google.com/maps?saddr='Current Location'&daddr=${modifiedAddress}`}
+        >
+          <i className="fa fa-map-marked-alt"></i>
+        </a>
         <button
           className="btn"
           name={'visit'}
@@ -81,14 +89,6 @@ function UserActions(props) {
             <i className="fa fa-heart red"></i>
           )} */}
         </button>
-        <a
-          className="btn"
-          rel="nofollow noopener"
-          target="_blank"
-          href={`https://maps.google.com/maps?saddr='Current Location'&daddr=${modifiedAddress}`}
-        >
-          <i className="fa fa-map-marked-alt"></i>
-        </a>
       </div>
     </React.Fragment>
   );
