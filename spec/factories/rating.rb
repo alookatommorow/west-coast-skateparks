@@ -2,6 +2,6 @@ FactoryBot.define do
   factory :rating do
     user
     skatepark
-    rating { 5 }
+    stars { 5 }
   end
 end

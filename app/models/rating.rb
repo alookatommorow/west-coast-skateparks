@@ -26,4 +26,14 @@ class Rating < ActiveRecord::Base
   validates :stars,     presence: true
 
   validates :stars, inclusion: 1..5
+
+  validate :two_max_per_user_per_park, on: :create
+
+  private
+
+  def two_max_per_user_per_park
+    return if self.class.where(skatepark: skatepark, user: user).count < 2
+
+    errors.add(:user, "can't have more than two ratings per park")
+  end
 end

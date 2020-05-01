@@ -3,6 +3,7 @@ class RatingSerializer < ActiveModel::Serializer
              :review,
              :avatar,
              :author,
+             :author_id,
              :created_at
 
   def avatar
@@ -11,6 +12,10 @@ class RatingSerializer < ActiveModel::Serializer
 
   def author
     object.user.to_s
+  end
+
+  def author_id
+    object.user_id
   end
 
   def created_at

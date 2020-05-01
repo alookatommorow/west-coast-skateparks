@@ -9,7 +9,7 @@ class SkateparksController < ApplicationController
     ).find(params[:id])
 
     @ratings = ActiveModelSerializers::SerializableResource.new(
-      @skatepark.ratings,
+      @skatepark.ratings.order(created_at: :desc),
       adapter: :attributes,
       each_serializer: RatingSerializer
     ).as_json

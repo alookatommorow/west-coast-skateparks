@@ -180,6 +180,23 @@ i.star {
     width: 65%;
     padding: 40px 60px;
   }
+
+  .review-modal-warning {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    p {
+      margin: 0;
+      padding: 0 30px;
+      font-size: 24px;
+    }
+
+    i {
+      color: orange;
+      font-size: 36px;
+    }
+  }
 }
 
 .review-form {
