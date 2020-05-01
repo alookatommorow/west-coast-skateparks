@@ -51,8 +51,7 @@ function Photos(props) {
       <Modal
         isVisible={modalIsShowing}
         onClose={toggleModalIsShowing}
-        height="90%"
-        width="90%"
+        className={styles.photoModal}
       >
         <Modal.Body className={styles.modalContentContainer}>
           <div className={styles.modalSlickContainer}>

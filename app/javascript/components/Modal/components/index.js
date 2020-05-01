@@ -1,6 +1,8 @@
 import React, { useEffect, createRef } from 'react';
+const DEFAULT_HEIGHT = 'auto';
+const DEFAULT_WIDTH = '60%';
 
-export default function ModalComponent({ children, onClose, height, styles, context }) {
+export default function ModalComponent({ children, onClose, className, styles, context }) {
   const modalRef = createRef();
 
   useEffect(() => {
@@ -47,8 +49,16 @@ export default function ModalComponent({ children, onClose, height, styles, cont
   }
 
   return (
-    <div className={styles.modalContainer} role="dialog" aria-modal="true" onClick={handleContentClick}>
-      <div className={styles.modalContent} ref={modalRef} style={height && { height: `${height}` }}>
+    <div
+      className={styles.modalContainer}
+      role="dialog"
+      aria-modal="true"
+      onClick={handleContentClick}
+    >
+      <div
+        className={`${styles.modalContent} ${className}`}
+        ref={modalRef}
+      >
         <context.Provider value={{ onClose }}>
           <button className={styles.closeBtn} title="close modal" onClick={onClose}>
             <i className="fas fa-times"></i>
