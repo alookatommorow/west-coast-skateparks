@@ -31,6 +31,7 @@ function ReviewForm(props) {
   }, [modalIsShowing]);
 
   const handleSubmit = event => {
+    console.log('submitting')
     event.preventDefault();
 
     if (isValid()) {

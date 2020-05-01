@@ -16,32 +16,32 @@ export default function Modal({ children, onClose, isVisible, height, width }) {
       const listener = keyListenersMap.get(e.keyCode);
       return listener && listener(e);
     }
+
     if (isVisible) {
       document.body.style.overflow = 'hidden';
+      document.addEventListener('keydown', keyListener);
     }
-    document.addEventListener('keydown', keyListener);
 
     return () => {
       document.removeEventListener('keydown', keyListener);
       document.body.style.overflow = 'auto';
     }
-  });
+  }, [isVisible]);
 
   const handleTabKey = e => {
     const focusableModalElements = modalRef.current.querySelectorAll(
       'a[href], button, textarea, input[type="text"], input[type="radio"], input[type="checkbox"], select'
     );
     const firstElement = focusableModalElements[0];
-    const lastElement =
-      focusableModalElements[focusableModalElements.length - 1];
+    const lastElement = focusableModalElements[focusableModalElements.length - 1];
 
-    if (!e.shiftKey && document.activeElement !== firstElement) {
-      firstElement.focus();
+    if (e.shiftKey && document.activeElement === firstElement) {
+      lastElement.focus();
       return e.preventDefault();
     }
 
-    if (e.shiftKey && document.activeElement !== lastElement) {
-      lastElement.focus();
+    if (!e.shiftKey && document.activeElement === lastElement) {
+      firstElement.focus();
       e.preventDefault();
     }
   };
@@ -100,14 +100,16 @@ Modal.Footer = function ModalFooter(props) {
   return <div className={styles.modalFooter}>{props.children}</div>;
 };
 
-Modal.Footer.CloseBtn = function CloseBtn(props) {
+Modal.Footer.CloseBtn = function CloseBtn() {
   const { onClose } = useContext(modalContext);
   return (
     <button
-      {...props}
-      className={styles.closeBtn}
+      type="button"
+      className="basic-button"
       title="close modal"
       onClick={onClose}
-    />
+    >
+      Cancel
+    </button>
   );
 };
