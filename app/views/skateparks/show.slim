@@ -26,7 +26,7 @@
         - if @skatepark.info.present?
           p.info= @skatepark.info
       .comments.reviews
-        = react_component "ReviewForm", props: { skateparkId: @skatepark.id, userId: current_user&.id, ratings: @ratings }
+        = react_component "Reviews", props: { skateparkId: @skatepark.id, userId: current_user&.id, ratings: @ratings }
 
         - if @skatepark.average_rating
           h4 User Rating

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import useToggle from '../hooks/useToggle';
-import Modal from './Modal';
+import useToggle from '../../hooks/useToggle';
+import Modal from '../../components/Modal';
 
 function ReviewForm(props) {
   const { skateparkId, userId, ratings } = props;
