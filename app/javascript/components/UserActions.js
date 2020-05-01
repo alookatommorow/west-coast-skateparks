@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
-
-
+import WarningModal from './WarningModal';
 import useToggle from '../hooks/useToggle';
-
 
 function UserActions(props) {
   const {
@@ -17,8 +15,14 @@ function UserActions(props) {
   const [hasVisited, setHasVisited] = useState(initialHasVisited);
   const [visitIsLoading, setVisitIsLoading] = useState(false);
   const [favoriteIsLoading, setFavoriteIsLoading] = useState(false);
+  const {
+    isShowing: warningModalIsShowing,
+    toggle: toggleWarningModalIsShowing,
+  } = useToggle(false);
 
   const handleClick = event => {
+    if (!user) return toggleWarningModalIsShowing();
+
     const { currentTarget: { name, value }} = event;
 
     setIsLoading(name, true);
@@ -48,7 +52,6 @@ function UserActions(props) {
           { hasFavorited && <i className="fa fa-heart red"></i> }
         </div>
       )}
-
       <div className="actions">
         <a
           className="btn"
@@ -62,7 +65,7 @@ function UserActions(props) {
           className="btn"
           name={'visit'}
           value={hasVisited ? 'unvisit' : 'visit'}
-          disabled={!user || visitIsLoading}
+          disabled={visitIsLoading}
           onClick={handleClick}
         >
           {hasVisited && <i className="fa fa-slash red"></i>}
@@ -78,7 +81,7 @@ function UserActions(props) {
           className="btn"
           name={'favorite'}
           value={hasFavorited ? 'unfavorite' : 'favorite'}
-          disabled={!user || favoriteIsLoading}
+          disabled={favoriteIsLoading}
           onClick={handleClick}
         >
           {hasFavorited && <i className="fa fa-slash red"></i>}
@@ -90,6 +93,11 @@ function UserActions(props) {
           )} */}
         </button>
       </div>
+      <WarningModal
+        text="U gotta sign in bitch"
+        onClose={toggleWarningModalIsShowing}
+        isVisible={warningModalIsShowing}
+      />
     </React.Fragment>
   );
 };

@@ -126,7 +126,7 @@ i.star {
           margin-right: 0;
         }
 
-        &:not(:disabled):hover {
+        &:hover {
           color: $orange;
           background-color: $dark-blue;
 
@@ -181,7 +181,7 @@ i.star {
     padding: 40px 60px;
   }
 
-  .review-modal-warning {
+  .modal-warning {
     display: flex;
     justify-content: space-between;
     align-items: center;

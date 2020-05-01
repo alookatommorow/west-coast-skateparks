@@ -116,24 +116,26 @@ function ReviewForm(props) {
   }
 
   const sortedRatings = () => {
-    if (!userId) return ratings;
-
+    let numUserRatings = 0;
     const userRatings = [];
     const otherRatings = [];
 
     ratings.map(rating => {
-      if (rating.author_id === userId) {
+      if (userId && rating.author_id === userId) {
+        numUserRatings += 1;
         userRatings.push(rating);
       } else {
         otherRatings.push(rating);
       }
     });
 
-    return { userRatings, otherRatings };
+    return {
+      numUserRatings,
+      allRatings: userRatings.concat(otherRatings),
+    };
   }
 
-  const { userRatings, otherRatings } = sortedRatings();
-  const allRatings = userRatings.concat(otherRatings);
+  const { numUserRatings, allRatings } = sortedRatings();
 
   return (
     <React.Fragment>
@@ -160,11 +162,11 @@ function ReviewForm(props) {
           </div>
         ))
       ) : (
-        <p>No reviews at this time</p>
+        <p>No reviews yet</p>
       )}
       <Modal isVisible={modalIsShowing} onClose={toggleModalIsShowing}>
-        {userRatings.length === 2 ? (
-          <Modal.Body className="review-modal-warning">
+        {numUserRatings === 2 ? (
+          <Modal.Body className="modal-warning">
             <i className="fas fa-radiation"></i>
             <p>You only get two reviews per park. Now go skate!</p>
             <i className="fas fa-radiation"></i>
