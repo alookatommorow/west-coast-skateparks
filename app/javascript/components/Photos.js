@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React from 'react';
 import Slider from 'react-slick';
 import Modal from 'components/Modal';
 
@@ -13,29 +13,20 @@ const settings = {
   speed: 500,
   slidesToShow: 1,
   variableWidth: true,
-  // centerMode: true,
-  slidesToScroll: 1,
-};
-
-// centerMode and variableWidth don't work together
-const bigSettings = {
-  dots: true,
-  speed: 500,
-  slidesToShow: 1,
+  centerMode: true,
   slidesToScroll: 1,
 };
 
 function Photos(props) {
-  // const { photos } = props;
-  const photos = ['https://s3-us-west-1.amazonaws.com/west-coast-skateparks/skatepark_images/photos/000/000/623/original/lake_20forest-01.jpg?1459397429', 'https://s3-us-west-1.amazonaws.com/west-coast-skateparks/skatepark_images/photos/000/000/627/original/lake_20forest-05.jpg?1459397434', 'https://s3-us-west-1.amazonaws.com/west-coast-skateparks/skatepark_images/photos/000/000/625/original/lake_20forest-03.jpg?1459397432'];
-
+  const { photos } = props;
+  // const photos = ['https://s3-us-west-1.amazonaws.com/west-coast-skateparks/skatepark_images/photos/000/000/623/original/lake_20forest-01.jpg?1459397429', 'https://s3-us-west-1.amazonaws.com/west-coast-skateparks/skatepark_images/photos/000/000/627/original/lake_20forest-05.jpg?1459397434', 'https://s3-us-west-1.amazonaws.com/west-coast-skateparks/skatepark_images/photos/000/000/625/original/lake_20forest-03.jpg?1459397432'];
   const {
     isShowing: modalIsShowing,
     toggle: toggleModalIsShowing,
   } = useToggle(false);
 
-  const slider1 = useRef();
-  const slider2 = useRef();
+  // const slider1 = useRef();
+  // const slider2 = useRef();
 
   return (
     <div id="photo-root" className={styles.root}>
@@ -56,7 +47,7 @@ function Photos(props) {
       >
         <Modal.Body className={styles.modalContentContainer}>
           <div className={styles.modalSlickContainer}>
-            <Slider {...bigSettings}>
+            <Slider {...settings}>
               {photos.map((photo, index) => (
                 <div key={`wcs-modal-photo-${index}`} className={styles.outerPhotoContainer}>
                   <div className={styles.photoContainer}>
