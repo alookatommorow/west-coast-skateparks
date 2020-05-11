@@ -3,12 +3,13 @@
     .sidebar-content
       h1= @skatepark.name.titleize
       h2 #{@skatepark.city.titleize}, #{@skatepark.state.capitalize}
-      - num_stars(@skatepark.rating).times do
-        i.star.fas.fa-star
-      - num_half_stars(@skatepark.rating).times do
-        i.star.fas.fa-star-half-alt
-      - num_empty_stars(@skatepark.rating).times do
-        i.star.far.fa-star
+      .stars-container
+        - num_stars(@skatepark.rating).times do
+          i.star.fas.fa-star
+        - num_half_stars(@skatepark.rating).times do
+          i.star.fas.fa-star-half-alt
+        - num_empty_stars(@skatepark.rating).times do
+          i.star.far.fa-star
       p.location
         | #{@skatepark.location}
         i.fa.fa-copy
@@ -26,16 +27,7 @@
         - if @skatepark.info.present?
           p.info= @skatepark.info
       .comments.reviews
-        = react_component "Reviews", props: { skateparkId: @skatepark.id, userId: current_user&.id, ratings: @ratings }
-
-        - if @skatepark.average_rating
-          h4 User Rating
-          - num_stars(@skatepark.average_rating).times do
-            i.star.fas.fa-star
-          - num_half_stars(@skatepark.average_rating).times do
-            i.star.fas.fa-star-half-alt
-          - num_empty_stars(@skatepark.average_rating).times do
-            i.star.far.fa-star
+        = react_component "Reviews", props: { skateparkId: @skatepark.id, userId: current_user&.id, ratings: @ratings, averageRating: @skatepark.average_rating }
         / p
           | #{rating_phrase[@skatepark.rating.to_i][0]}
           span  #{rating_phrase[@skatepark.rating.to_i][1]}

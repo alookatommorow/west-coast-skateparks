@@ -10,6 +10,7 @@ function ReviewForm(props) {
   const [stars, setStars] = useState(0);
   const [ratingError, setRatingError] = useState('');
   const [review, setReview] = useState(null);
+  const [averageRating, setAverageRating] = useState(props.averageRating);
   const {
     isShowing: modalIsShowing,
     toggle: toggleModalIsShowing,
@@ -30,7 +31,7 @@ function ReviewForm(props) {
 
     if (isValid()) {
       $.ajax({
-        url: `/ratings`,
+        url: '/ratings',
         method: 'POST',
         data: {
           stars,
@@ -40,6 +41,8 @@ function ReviewForm(props) {
         }
       }).done(response => {
         ratings.unshift(response);
+        // TO DO: restructure response with average as separate key
+        setAverageRating(response.new_average);
         toggleModalIsShowing();
       });
     }
@@ -93,10 +96,45 @@ function ReviewForm(props) {
         }
       });
 
-      allRatings = userRatings.concat(otherRatings)
+      allRatings = userRatings.concat(otherRatings);
     }
 
     return { numUserRatings, allRatings };
+  }
+
+  const renderStars = (stars, keyPrefix, tiny = false) => {
+    let isInteger = true;
+    let wholeStars = Number(stars);
+    let emptyStars = 5 - wholeStars;
+
+    if (!Number.isInteger(wholeStars)) {
+      isInteger = false;
+      wholeStars = Math.floor(wholeStars);
+      emptyStars = Math.floor(emptyStars);
+    }
+
+    return (
+      <div>
+        {[...Array(wholeStars)].map((_e, i) => (
+          <i
+            key={`${keyPrefix}-${i}`}
+            className={`star fas fa-star${tiny ? ' tiny' : ''}`}
+          />
+        ))}
+        {!isInteger && (
+          <i
+            key={`${keyPrefix}-half`}
+            className={`star fas fa-star-half-alt${tiny ? ' tiny' : ''}`}
+          />
+        )}
+        {[...Array(emptyStars)].map((_e, i) => (
+          <i
+            key={`${keyPrefix}-${5 - i}`}
+            className={`star far fa-star${tiny ? ' tiny' : ''}`}
+          />
+        ))}
+      </div>
+    );
   }
 
   const { numUserRatings, allRatings } = sortedRatings();
@@ -111,20 +149,25 @@ function ReviewForm(props) {
         </div>
       </div>
       {allRatings.length > 0 ? (
-        allRatings.map((review, i) => (
-          <div className="comment" key={`review-${i}`}>
-            <div className="avatar">
-              <img src={`${review.avatar}`} />
-            </div>
-            <div className="content">
-              <div className="headers">
-                <p className="author">{review.author}</p>
-                <p className="date">{review.created_at}</p>
+        <React.Fragment>
+          {allRatings.map((rating, i) => (
+            <div className="comment" key={`rating-${i}`}>
+              <div className="avatar">
+                <img src={`${rating.avatar}`} />
               </div>
-              <p className="text">{review.review}</p>
+              <div className="content">
+                <div className="headers">
+                  <p className="author">{rating.author}</p>
+                  <p className="date">{rating.created_at}</p>
+                </div>
+                {renderStars(rating.stars, `review-stars-${i}`, true) }
+                <p className="text">{rating.review}</p>
+              </div>
             </div>
-          </div>
-        ))
+          ))}
+          <h4>User Rating</h4>
+          {renderStars(averageRating, 'average-rating')}
+        </React.Fragment>
       ) : (
         <p>No reviews yet</p>
       )}
@@ -138,6 +181,7 @@ function ReviewForm(props) {
         handleClick={handleClick}
         userId={userId}
         numUserRatings={numUserRatings}
+        averageRating={averageRating}
       />
     </React.Fragment>
   );

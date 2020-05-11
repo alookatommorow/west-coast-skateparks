@@ -12,7 +12,6 @@ function WarningModal(props) {
         <i className="fas fa-radiation"></i>
       </Modal.Body>
       <Modal.Footer>
-        <Modal.Footer.CloseBtn />
         {href ? (
           <a href={href} className="basic-button regular">
             {confirmText}

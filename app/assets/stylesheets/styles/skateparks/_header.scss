@@ -9,18 +9,31 @@ i.star {
   }
 
   &.error {
-    color: #9f3a38;
+    color: #f0130e;
+  }
+
+  &.tiny {
+    margin: 3px 0 0 3px;
+    font-size: 12px;
+
+    &:first-of-type {
+      margin-left: 0;
+    }
   }
 }
 
 .skatepark-show-container {
   position: relative;
   display: flex;
-  flex-direction: column;
   margin-top: 49px;
   padding-bottom: 30px;
   min-height: 100%;
   align-items: flex-end;
+  flex-direction: column;
+
+  @media #{$mobile} {
+    background: white;
+  }
 
   .sidebar {
     position: absolute;
@@ -31,10 +44,24 @@ i.star {
     width: 35%;
     box-shadow: 0px 2px 1px -1px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.14), 0px 1px 3px 0px rgba(0,0,0,0.12);
 
+    @media #{$mobile} {
+      width: 100%;
+      min-height: initial;
+      position: relative;
+      box-shadow: none;
+    }
+
     .sidebar-content {
       padding: 30px;
       position: relative;
+
+      @media #{$mobile} {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
     }
+
 
     .user-indicators {
       position: absolute;
@@ -44,6 +71,12 @@ i.star {
 
       i:nth-child(2) {
         margin-left: 10px;
+      }
+    }
+
+    @media #{$mobile} {
+      h1, h2 {
+        text-align: center;
       }
     }
 
@@ -146,6 +179,10 @@ i.star {
   .info-container {
     margin-top: 24px;
 
+    @media #{$mobile} {
+      width: 100%;
+    }
+
     p.info {
       margin-top: 24px;
     }
@@ -173,12 +210,22 @@ i.star {
     i.star {
       margin-top: 0;
     }
+
+    @media #{$mobile} {
+      width: 100%;
+    }
   }
 
   .map-photos {
     position: relative;
     width: 65%;
-    padding: 40px 60px;
+    padding: 40px;
+
+    @media #{$mobile} {
+      width: 100%;
+      background: white;
+      padding: 0 30px 30px 30px;
+    }
   }
 
   .modal-warning {
@@ -186,6 +233,10 @@ i.star {
     justify-content: space-between;
     align-items: center;
     padding: 50px 15px;
+
+    @media #{$mobile} {
+      padding: 30px 0;
+    }
 
     p {
       margin: 0;
