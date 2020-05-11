@@ -52,6 +52,7 @@ function Photos(props) {
         isVisible={modalIsShowing}
         onClose={toggleModalIsShowing}
         className={styles.photoModal}
+        fullScreenMobile
       >
         <Modal.Body className={styles.modalContentContainer}>
           <div className={styles.modalSlickContainer}>
@@ -59,7 +60,7 @@ function Photos(props) {
               {photos.map((photo, index) => (
                 <div key={`wcs-modal-photo-${index}`} className={styles.outerPhotoContainer}>
                   <div className={styles.photoContainer}>
-                    <img className={styles.bigPhoto} src={photo} />
+                    <img loading="lazy" className={styles.bigPhoto} src={photo} />
                   </div>
                 </div>
               ))}

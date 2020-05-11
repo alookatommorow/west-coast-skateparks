@@ -1,6 +1,7 @@
 import React, { useEffect, createRef } from 'react';
+import { classNames } from '../../../utils/styles';
 
-export default function ModalComponent({ children, onClose, className, styles, context }) {
+export default function ModalComponent({ children, onClose, className, styles, context, fullScreenMobile }) {
   const modalRef = createRef();
 
   useEffect(() => {
@@ -54,17 +55,32 @@ export default function ModalComponent({ children, onClose, className, styles, c
       onClick={handleContentClick}
     >
       <div
-        className={`${styles.modalContent} ${className}`}
+        className={
+          classNames(
+            styles.modalContent,
+            className,
+            { [styles.fullScreenMobile]: !!fullScreenMobile },
+          )
+        }
         ref={modalRef}
       >
         <context.Provider value={{ onClose }}>
           <button
-            className={styles.closeBtn}
+            className={
+              classNames(
+                styles.closeBtn,
+                { [styles.fullScreenMobile]: !!fullScreenMobile }
+              )
+            }
             title="close modal"
             type="button"
             onClick={onClose}
           >
-            <i className="fas fa-times"></i>
+            {fullScreenMobile ? (
+              <i class="fas fa-arrow-left"></i>
+            ) : (
+              <i className="fas fa-times"></i>
+            )}
           </button>
           {children}
         </context.Provider>

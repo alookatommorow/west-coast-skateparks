@@ -3,12 +3,13 @@
     .sidebar-content
       h1= @skatepark.name.titleize
       h2 #{@skatepark.city.titleize}, #{@skatepark.state.capitalize}
-      - num_stars(@skatepark.rating).times do
-        i.star.fas.fa-star
-      - num_half_stars(@skatepark.rating).times do
-        i.star.fas.fa-star-half-alt
-      - num_empty_stars(@skatepark.rating).times do
-        i.star.far.fa-star
+      .stars-container
+        - num_stars(@skatepark.rating).times do
+          i.star.fas.fa-star
+        - num_half_stars(@skatepark.rating).times do
+          i.star.fas.fa-star-half-alt
+        - num_empty_stars(@skatepark.rating).times do
+          i.star.far.fa-star
       p.location
         | #{@skatepark.location}
         i.fa.fa-copy
