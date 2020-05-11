@@ -9,7 +9,16 @@ i.star {
   }
 
   &.error {
-    color: #9f3a38;
+    color: #f0130e;
+  }
+
+  &.tiny {
+    margin: 3px 0 0 3px;
+    font-size: 12px;
+
+    &:first-of-type {
+      margin-left: 0;
+    }
   }
 }
 
