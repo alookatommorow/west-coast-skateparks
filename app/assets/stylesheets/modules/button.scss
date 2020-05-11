@@ -1,3 +1,9 @@
+.button-base {
+  border: none;
+  padding: 0;
+  background: transparent;
+}
+
 .basic-button {
   font-size: 1rem;
   cursor: pointer;
@@ -7,7 +13,6 @@
   border: none;
   vertical-align: baseline;
   background: #e0e1e2 none;
-  margin: 0em 0.25em 0em 0em;
   padding: 0.78571429em 1.5em 0.78571429em;
   text-transform: none;
   text-shadow: none;
@@ -18,6 +23,7 @@
   text-decoration: none;
   border-radius: 0.28571429rem;
   color: rgba(0, 0, 0, 0.6);
+  transition: background 0.3s ease, color 0.3s ease;
 
   &:hover {
     background-color: #cacbcd;
@@ -42,6 +48,16 @@
 
     &:hover {
       background-color: #d41616;
+    }
+  }
+
+  &.regular {
+    background: $blue;
+    color: #ffffff;
+
+    &:hover {
+      background: $dark-blue;
+      color: $orange;
     }
   }
 
@@ -79,6 +95,3 @@
     }
   }
 }
-
-
-

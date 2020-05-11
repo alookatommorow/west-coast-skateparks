@@ -25,7 +25,7 @@
   }
 
   &.error {
-    box-shadow: 0px 0px 0px 1px #e0b4b4 inset,0px 0px 0px 0px transparent;
+    box-shadow: 0px 0px 0px 1px #faf4f6 inset,0px 0px 0px 0px transparent;
     background-color: #fff6f6;
     color: #9f3a38;
 
@@ -76,3 +76,20 @@
   }
 }
 
+.error-message-v2 {
+  padding: 0;
+  opacity: 0;
+  margin: 0;
+  transition: all 0.3s ease;
+  color: #e8221e;
+  max-height: 0;
+
+  &.visible {
+    box-shadow: 0px 0px 0px 1px #e8221e inset,0px 0px 0px 0px transparent;
+    background: #f8f8f9;
+    margin: 10px 0;
+    max-height: 40px;
+    opacity: 1;
+    padding: 5px;
+  }
+}

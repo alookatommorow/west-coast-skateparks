@@ -1,19 +1,26 @@
 class RatingsController < ApplicationController
-  def create
-    Rating.create(rating_params)
+  around_action :with_err_handling, only: :create
 
-    render partial: "form", locals: {
-      skatepark: Skatepark.includes(:ratings).find(params[:skatepark_id])
-    }
+  def create
+    rating = Rating.create!(rating_params)
+    render json: rating, status: :created
   end
 
   private
 
-    def rating_params
-      {
-        user_id: params[:user_id],
-        skatepark_id: params[:skatepark_id],
-        rating: params[:rating],
-      }
-    end
+  def rating_params
+    {
+      user_id:      params[:user_id],
+      skatepark_id: params[:skatepark_id],
+      stars:        params[:stars],
+      review:       params[:review],
+    }
+  end
+
+  def with_err_handling
+    yield
+  rescue StandardError => e
+    Rails.logger.error "YA FUQCT SQUILLY UP #{e.class}: #{e.message}"
+    render json: { error: "You FUQT UP: #{e.message}" }, status: :bad_request
+  end
 end

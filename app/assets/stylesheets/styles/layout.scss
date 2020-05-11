@@ -152,3 +152,8 @@ input, textarea {
   color: $orange;
 }
 
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}

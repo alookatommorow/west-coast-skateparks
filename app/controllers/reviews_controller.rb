@@ -1,10 +1,8 @@
 class ReviewsController < ApplicationController
   def create
-    Review.create(review_params)
+    Review.create!(review_params)
 
-    render partial: 'form', locals: {
-      skatepark: Skatepark.includes(reviews: :user).find(params[:skatepark_id])
-    }
+    head :ok
   end
 
   private

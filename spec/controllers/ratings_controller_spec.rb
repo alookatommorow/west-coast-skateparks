@@ -7,12 +7,17 @@ RSpec.describe RatingsController, type: :controller do
       user = create(:user)
 
       post :create, params: {
-        skatepark_id: skatepark.id, user_id: user.id, rating: 5
+        skatepark_id: skatepark.id, user_id: user.id, stars: 5
       }
 
-      expect(Rating.last.skatepark).to eq(skatepark)
-      expect(Rating.last.user).to eq(user)
-      expect(Rating.last.rating).to eq(5)
+      rating = Rating.last
+      json_response = JSON.parse(response.body)
+
+      expect(rating.skatepark).to eq(skatepark)
+      expect(rating.user).to eq(user)
+      expect(rating.stars).to eq(5)
+      expect(json_response['stars']).to eq 5
+      expect(json_response['new_average']).to eq skatepark.average_rating
     end
   end
 end

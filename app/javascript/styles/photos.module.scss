@@ -1,0 +1,38 @@
+.root {
+  margin: 0 auto;
+}
+
+.photo {
+  max-height: 450px;
+  max-width: 100%;
+  cursor: pointer;
+}
+
+.photoContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 10px;
+}
+
+.photoModal {
+  height: 90%;
+  width: 90%;
+}
+
+.bigPhoto {
+  max-height: 100%;
+  max-width: 100%;
+  cursor: pointer;
+}
+
+.modalSlickContainer {
+  position: relative;
+  height: 100%;
+}
+
+.modalContentContainer {
+  height: 100%;
+  padding-left: 40px;
+  padding-right: 40px;
+}

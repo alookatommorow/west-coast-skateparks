@@ -51,11 +51,9 @@
             .avatar
               img src="#{review.user.avatar.url(:thumb)}"
             .content
-              .author= review.user
-              .metadata
-                .date= review.created_at.strftime("%m/%d/%y")
-              .text= review.review
+              p.author= review.user
+              p.date= review.created_at.strftime("%m/%d/%y")
+              p.text= review.review
       - else
         = link_to new_session_path, class: "basic-button" do
           h4 Sign in and be the first to review!
-

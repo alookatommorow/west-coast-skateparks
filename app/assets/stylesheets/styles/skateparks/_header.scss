@@ -1,56 +1,274 @@
+i.star {
+  color: $orange;
+  margin: 10px 0 0 10px;
+  font-size: 18px;
+  transition: color 0.3s ease;
+
+  &:first-of-type {
+    margin-left: 0;
+  }
+
+  &.error {
+    color: #f0130e;
+  }
+
+  &.tiny {
+    margin: 3px 0 0 3px;
+    font-size: 12px;
+
+    &:first-of-type {
+      margin-left: 0;
+    }
+  }
+}
+
 .skatepark-show-container {
+  position: relative;
+  display: flex;
   margin-top: 49px;
   padding-bottom: 30px;
+  min-height: 100%;
+  align-items: flex-end;
+  flex-direction: column;
 
-  .skatepark-show-header {
-    position: relative;
-    background-size: cover;
-    background-position: 0 -25px;
-    height: 200px;
+  @media #{$mobile} {
+    background: white;
+  }
 
-    .header-skatepark-name {
+  .sidebar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    min-height: 100%;
+    background: white;
+    width: 35%;
+    box-shadow: 0px 2px 1px -1px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.14), 0px 1px 3px 0px rgba(0,0,0,0.12);
+
+    @media #{$mobile} {
+      width: 100%;
+      min-height: initial;
       position: relative;
-      top: 45px;
-      text-align: center;
-      color: $orange;
+      box-shadow: none;
+    }
 
-      h1 {
-        margin-bottom: 5px;
-      }
+    .sidebar-content {
+      padding: 30px;
+      position: relative;
 
-      h2 {
-        font-size: 1.28rem;
-        margin: 0;
-        font-weight: lighter;
-        color: white;
-        letter-spacing: 2px;
+      @media #{$mobile} {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
       }
     }
 
-    .header-skatepark-arrows {
-      font-size: 40px;
 
-      a {
-        position: absolute;
-        bottom: 10px;
+    .user-indicators {
+      position: absolute;
+      right: 30px;
+      top: 30px;
+      padding-top: 5px;
+
+      i:nth-child(2) {
+        margin-left: 10px;
+      }
+    }
+
+    @media #{$mobile} {
+      h1, h2 {
+        text-align: center;
+      }
+    }
+
+    h1 {
+      margin-bottom: 0;
+    }
+
+    h2 {
+      font-size: 1.28rem;
+      margin: 0;
+      font-weight: lighter;
+      letter-spacing: 2px;
+    }
+
+    p.location {
+      margin-top: 15px;
+      font-size: 14px;
+
+      i {
+        color: $blue;
+        font-size: 15px;
+        margin: 0 0 0 10px;
+        cursor: pointer;
+      }
+    }
+
+    .review-header-container,
+    .write-review-button {
+      display: flex;
+      align-items: center;
+    }
+
+    .review-header-container {
+      justify-content: space-between;
+
+      .write-review-button {
+        cursor: pointer;
+
+        p {
+          margin-left: 5px;
+        }
+      }
+
+      h4 {
+        margin: 0;
+      }
+    }
+
+    .actions {
+      display: flex;
+
+      .btn {
+        position: relative;
+        background: $blue;
         color: white;
+        width: 40px;
+        height: 40px;
+        border: none;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-right: 10px;
+        box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+        transition: color 0.3s ease, background 0.3s ease;
+        cursor: pointer;
+        outline: 0;
 
-        &.right-arrow {
-          right: 10px;
+        i.fa-ban {
+          position: absolute;
+          font-size: 30px;
         }
 
-        &.left-arrow {
-          left: 10px;
+        i.fa-slash {
+          position: absolute;
+          font-size: 15px;
+        }
+
+        &:last-child {
+          margin-right: 0;
         }
 
         &:hover {
           color: $orange;
+          background-color: $dark-blue;
+
+          .fa-ban, .fa-map-marked-alt {
+            color: $orange;
+          }
+        }
+
+        &:disabled {
+          background: grey;
+          cursor: default;
         }
       }
     }
+  }
 
-    @media #{$tablet} {
-      background-position: center 0;
+  .info-container {
+    margin-top: 24px;
+
+    @media #{$mobile} {
+      width: 100%;
     }
+
+    p.info {
+      margin-top: 24px;
+    }
+
+    .col {
+      margin-top: 8px;
+      display: flex;
+      align-items: center;
+
+      i {
+        margin-right: 20px;
+        width: 24px;
+        color: $blue;
+      }
+
+      p {
+        flex: 1;
+      }
+    }
+  }
+
+  .comments.reviews {
+    margin-top: 40px;
+
+    i.star {
+      margin-top: 0;
+    }
+
+    @media #{$mobile} {
+      width: 100%;
+    }
+  }
+
+  .map-photos {
+    position: relative;
+    width: 65%;
+    padding: 40px;
+
+    @media #{$mobile} {
+      width: 100%;
+      background: white;
+      padding: 0 30px 30px 30px;
+    }
+  }
+
+  .modal-warning {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 50px 15px;
+
+    @media #{$mobile} {
+      padding: 30px 0;
+    }
+
+    p {
+      margin: 0;
+      padding: 0 30px;
+      font-size: 24px;
+    }
+
+    i {
+      color: orange;
+      font-size: 36px;
+    }
+  }
+}
+
+.review-form {
+  input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+
+  label {
+    cursor: pointer;
+  }
+
+  .review-stars-container {
+    width: auto;
+  }
+
+  textarea {
+    margin: 20px 0;
+    border-radius: 3px;
   }
 }

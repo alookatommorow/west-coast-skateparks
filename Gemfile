@@ -2,7 +2,7 @@ source "https://rubygems.org"
 ruby "2.4.2"
 gem "rails", "~> 5.0.2"
 
-gem "active_model_serializers", "~> 0.10.0"
+gem "active_model_serializers", "~> 0.10.10"
 gem "administrate", "~> 0.3.0"
 gem "autoprefixer-rails"
 gem "awesome_print"
@@ -10,7 +10,7 @@ gem "aws-sdk"
 gem "bcrypt"
 gem "bourbon" # added to prevent high voltage bourbon unreadable error
 gem "buttercms-rails"
-gem "font-awesome-rails"
+gem "font-awesome-sass", "~> 5.12.0"
 gem "geokit"
 gem "gmaps4rails"
 gem "high_voltage"
@@ -36,7 +36,9 @@ group :assets do
 end
 
 group :development do
+  gem "annotate"
   gem "bullet"
+  gem "pgsync"
   gem "spring-commands-rspec"
   gem "web-console", "~> 3.1.1"
 end

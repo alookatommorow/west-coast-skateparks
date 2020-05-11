@@ -1,7 +1,4 @@
 .menu-container {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
   margin: 1rem 0em;
   font-family: 'Lato', 'Helvetica Neue', Arial, Helvetica, sans-serif;
@@ -22,20 +19,13 @@
     line-height: 1;
     text-decoration: none;
     -webkit-tap-highlight-color: transparent;
-    -webkit-box-flex: 0;
-    -webkit-flex: 0 0 auto;
-        -ms-flex: 0 0 auto;
-            flex: 0 0 auto;
-    -webkit-user-select: none;
-       -moz-user-select: none;
-        -ms-user-select: none;
-            user-select: none;
+    flex: 0 0 auto;
+    user-select: none;
     background: none;
     padding: 0.92857143em 1.14285714em;
     text-transform: none;
     color: rgba(0, 0, 0, 0.87);
     font-weight: normal;
-    -webkit-transition: background 0.1s ease, box-shadow 0.1s ease, color 0.1s ease;
     transition: background 0.1s ease, box-shadow 0.1s ease, color 0.1s ease;
   }
 
@@ -44,21 +34,12 @@
   }
 
   &:not(.vertical) > .menu {
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
     display: flex;
   }
 
   &:not(.vertical) .item {
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
     display: flex;
-    -webkit-box-align: center;
-    -webkit-align-items: center;
-        -ms-flex-align: center;
-            align-items: center;
+    align-items: center;
   }
 
   &:after {
@@ -79,11 +60,7 @@
 
 @media #{$mobile} {
   .stackable.menu-container {
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-    -webkit-flex-direction: column;
-        -ms-flex-direction: column;
-            flex-direction: column;
+    flex-direction: column;
   }
   .stackable.menu-container .item {
     width: 100%;

@@ -1,14 +1,40 @@
 .skatepark-show-container
-  = render 'header',
-           skatepark: @skatepark,
-           previous_park: @previous_park,
-           next_park: @next_park
-  = render 'dashboard', skatepark: @skatepark, weather: @weather
-  = render 'photos', skatepark: @skatepark
-  = render 'info', skatepark: @skatepark
-  - if @skatepark.has_coordinates?
+  .sidebar
+    .sidebar-content
+      h1= @skatepark.name.titleize
+      h2 #{@skatepark.city.titleize}, #{@skatepark.state.capitalize}
+      .stars-container
+        - num_stars(@skatepark.rating).times do
+          i.star.fas.fa-star
+        - num_half_stars(@skatepark.rating).times do
+          i.star.fas.fa-star-half-alt
+        - num_empty_stars(@skatepark.rating).times do
+          i.star.far.fa-star
+      p.location
+        | #{@skatepark.location}
+        i.fa.fa-copy
+      = react_component "UserActions", props: { hasFavorited: @has_favorited, hasVisited: @has_visited, skateparkId: @skatepark.id, address: @skatepark.location.to_s, user: current_user }
+      .info-container
+        - @skatepark.present_attributes.each do |attribute, value|
+          .col
+            - if attribute == "size"
+              - value << " sq ft"
+            - if attribute == "hours"
+              - value = value.capitalize
+            - value = value.try(:titleize) unless %w(info hours size).include?(attribute)
+            i class= "fa #{info_icons[attribute]}"
+            p= value
+        - if @skatepark.info.present?
+          p.info= @skatepark.info
+      .comments.reviews
+        = react_component "Reviews", props: { skateparkId: @skatepark.id, userId: current_user&.id, ratings: @ratings, averageRating: @skatepark.average_rating }
+        / p
+          | #{rating_phrase[@skatepark.rating.to_i][0]}
+          span  #{rating_phrase[@skatepark.rating.to_i][1]}
+  .map-photos
+    .photos
+      = render 'photos', skatepark: @skatepark
     = render 'map', skatepark: @skatepark
-  = render 'reviews', skatepark: @skatepark
 
 = content_for :og_metadata
   meta name="twitter:card" content="summary_large_image"

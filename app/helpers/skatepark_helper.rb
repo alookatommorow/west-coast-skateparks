@@ -32,4 +32,19 @@ module SkateparkHelper
   def state_abbrevs
     Location::STATE_ABBREVS
   end
+
+  def info_icons
+    {
+      "material" => "fa-layer-group",
+      "opened" => "fa-baby",
+      "info" => "fa-info",
+      "designer" => "fa-drafting-compass",
+      "builder" => "fa-hammer",
+      "size" => "fa-ruler",
+      "hours" => "fa-clock",
+      "obstacles" => "fa-wave-square",
+      "helmet" => "fa-hard-hat",
+      "lights" => "fa-lightbulb",
+    }
+  end
 end

@@ -1,6 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
-import SearchForm from './SearchForm';
-import SearchResults from './SearchResults';
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
+
+import styles from 'styles/search.module.scss';
+import useToggle from 'hooks/useToggle';
+import SearchForm from './components/SearchForm';
+import SearchResults from './components/SearchResults';
 
 function SearchContainer() {
   const [query, setQuery] = useState(null);
@@ -8,11 +12,26 @@ function SearchContainer() {
   const [skateparks, setSkateparks] = useState(null);
   const [loading, setLoading] = useState(false);
   const containerRef = useRef(null);
+  const {
+    isShowing: searchIsShowing,
+    toggle: toggleSearchIsShowing,
+  } = useToggle(false);
 
   useEffect(() => {
-    document.addEventListener('click', handleClickOutside);
+    function handleClickOutside(event) {
+      // check if click is outside component and close if so
+      if (!containerRef.current.contains(event.target)) {
+        exitResults();
+        toggleSearchIsShowing();
+      }
+    }
+
+    if (searchIsShowing) {
+      document.addEventListener('click', handleClickOutside);
+      if (!skateparks) getSkateparks();
+    }
     return () => document.removeEventListener('click', handleClickOutside);
-  }, []);
+  }, [searchIsShowing]);
 
   useEffect(() => {
     if (!query) {
@@ -75,21 +94,40 @@ function SearchContainer() {
     setQuery(null);
   };
 
-  const handleClickOutside = event => {
-    // check if search is active, click is outside component, and target is not search trigger icon
-    if (
-      containerRef.current &&
-        !event.target.classList.contains("display-search") &&
-        !containerRef.current.contains(event.target)
-    ) {
-      exitResults();
-    }
-  }
-
   return (
-    <div className="react-search-container" ref={containerRef}>
-      <SearchForm handleChange={handleChange} loading={loading} getSkateparks={getSkateparks} results={results} query={query} />
-      <SearchResults className="react-search-results" results={results} exitResults={exitResults} query={query} />
+    <div id="react-search">
+      <TransitionGroup component={null}>
+        {!searchIsShowing && (
+          <CSSTransition timeout={500} classNames={{ ...styles }}>
+            <div
+              className="display-search"
+              role="button"
+              tabIndex="0"
+              onClick={toggleSearchIsShowing}
+            >
+              <i className="large fa fa-search"></i>
+            </div>
+          </CSSTransition>
+        )}
+        {searchIsShowing && (
+          <CSSTransition timeout={500} classNames={{ ...styles }}>
+            <div className="react-search-container" ref={containerRef}>
+              <SearchForm
+                handleChange={handleChange}
+                loading={loading}
+                results={results}
+                query={query}
+              />
+              <SearchResults
+                className="react-search-results"
+                results={results}
+                exitResults={exitResults}
+                query={query}
+              />
+            </div>
+          </CSSTransition>
+        )}
+      </TransitionGroup>
     </div>
   );
 };
