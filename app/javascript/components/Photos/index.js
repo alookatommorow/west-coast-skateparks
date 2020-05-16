@@ -10,8 +10,8 @@ import { slickSettings } from './utils';
 import { MOBILE_WIDTH } from './constants';
 
 function Photos(props) {
-  // const { photos } = props;
-  const photos = ['https://s3-us-west-1.amazonaws.com/west-coast-skateparks/skatepark_images/photos/000/001/808/original/newberg-01.jpg?1459399047', 'https://s3-us-west-1.amazonaws.com/west-coast-skateparks/skatepark_images/photos/000/001/809/original/newberg-02.jpg?1459399048', 'https://s3-us-west-1.amazonaws.com/west-coast-skateparks/skatepark_images/photos/000/001/810/original/newberg-03.jpg?1459399050', 'https://s3-us-west-1.amazonaws.com/west-coast-skateparks/skatepark_images/photos/000/001/811/original/newberg-04.jpg?1459399052', 'https://s3-us-west-1.amazonaws.com/west-coast-skateparks/skatepark_images/photos/000/001/812/original/newberg-05.jpg?1459399054', 'https://s3-us-west-1.amazonaws.com/west-coast-skateparks/skatepark_images/photos/000/001/813/original/newberg-06.jpg?1459399056'];
+  const { photos } = props;
+  // const photos = ['https://s3-us-west-1.amazonaws.com/west-coast-skateparks/skatepark_images/photos/000/001/808/original/newberg-01.jpg?1459399047', 'https://s3-us-west-1.amazonaws.com/west-coast-skateparks/skatepark_images/photos/000/001/809/original/newberg-02.jpg?1459399048', 'https://s3-us-west-1.amazonaws.com/west-coast-skateparks/skatepark_images/photos/000/001/810/original/newberg-03.jpg?1459399050', 'https://s3-us-west-1.amazonaws.com/west-coast-skateparks/skatepark_images/photos/000/001/811/original/newberg-04.jpg?1459399052', 'https://s3-us-west-1.amazonaws.com/west-coast-skateparks/skatepark_images/photos/000/001/812/original/newberg-05.jpg?1459399054', 'https://s3-us-west-1.amazonaws.com/west-coast-skateparks/skatepark_images/photos/000/001/813/original/newberg-06.jpg?1459399056'];
   const [isDesktop, setIsDesktop] = useState(window.innerWidth > MOBILE_WIDTH);
   const [currentSlide, setCurrentSlide] = useState(0);
   const afterChange = current => setCurrentSlide(current);

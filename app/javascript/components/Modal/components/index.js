@@ -77,7 +77,24 @@ export default function ModalComponent({ children, onClose, className, styles, c
             onClick={onClose}
           >
             {fullScreenMobile ? (
-              <i className="fas fa-arrow-left"></i>
+              <React.Fragment>
+                <i
+                  className={
+                    classNames(
+                      'fas',
+                      'fa-arrow-left',
+                      styles.mobileArrowLeftIcon
+                  )}
+                ></i>
+                <i
+                  className={
+                    classNames(
+                      'fas',
+                      'fa-times',
+                      styles.mobileTimesIcon
+                    )}
+                ></i>
+              </React.Fragment>
             ) : (
               <i className="fas fa-times"></i>
             )}

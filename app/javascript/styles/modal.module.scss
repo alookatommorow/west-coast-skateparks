@@ -60,12 +60,13 @@
   @media #{$mobile} {
     &.fullScreenMobile {
       left: 20px;
+      right: initial;
     }
   }
 }
 
 .modalBody {
-  flex-grow: 1;
+  // flex-grow: 1;
   padding: 15px 0;
 }
 
@@ -75,6 +76,20 @@
 
   :nth-child(2) {
     margin-left: 20px;
+  }
+}
+
+.mobileArrowLeftIcon {
+  display: none;
+
+  @media #{$mobile} {
+    display: block;
+  }
+}
+
+.mobileTimesIcon {
+  @media #{$mobile} {
+    display: none;
   }
 }
 
