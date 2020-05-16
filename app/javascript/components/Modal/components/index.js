@@ -77,7 +77,7 @@ export default function ModalComponent({ children, onClose, className, styles, c
             onClick={onClose}
           >
             {fullScreenMobile ? (
-              <i class="fas fa-arrow-left"></i>
+              <i className="fas fa-arrow-left"></i>
             ) : (
               <i className="fas fa-times"></i>
             )}
