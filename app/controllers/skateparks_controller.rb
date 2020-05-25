@@ -44,6 +44,9 @@ class SkateparksController < ApplicationController
     render_visit_button
   end
 
+  def search; end
+
+
   private
 
   def render_favorite_button
