@@ -8,14 +8,10 @@
   font-size: 1rem;
   cursor: pointer;
   display: inline-block;
-  min-height: 1em;
   outline: none;
   border: none;
-  vertical-align: baseline;
   background: #e0e1e2 none;
   padding: 0.78571429em 1.5em 0.78571429em;
-  text-transform: none;
-  text-shadow: none;
   font-weight: bold;
   line-height: 1em;
   font-style: normal;
@@ -58,40 +54,6 @@
     &:hover {
       background: $dark-blue;
       color: $orange;
-    }
-  }
-
-  &.labeled.icon {
-    position: relative;
-    padding-right: 1.5em;
-    padding-left: 4.07142857em;
-    text-align: left;
-
-    .fa {
-      top: 0em;
-      left: 0em;
-      padding-top: 15px;
-      position: absolute;
-      height: 100%;
-      line-height: 1;
-      border-radius: 0px;
-      text-align: center;
-      margin: 0em;
-      width: 2.57142857em;
-      background-color: rgba(0,0,0,0.05);
-      color: '';
-      box-shadow: -1px 0px 0px 0px transparent inset;
-      box-sizing: border-box;
-
-      &:after {
-        display: block;
-        position: absolute;
-        width: 100%;
-        top: 50%;
-        text-align: center;
-        -webkit-transform: translateY(-50%);
-        transform: translateY(-50%);
-      }
     }
   }
 }

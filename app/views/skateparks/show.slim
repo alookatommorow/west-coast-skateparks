@@ -13,7 +13,13 @@
       p.location
         | #{@skatepark.location}
         i.fa.fa-copy
-      = react_component "UserActions", props: { hasFavorited: @has_favorited, hasVisited: @has_visited, slug: @skatepark.slug, address: @skatepark.location.to_s, user: current_user }
+      = react_component "UserActions", props: {\
+        hasFavorited: @has_favorited,
+        hasVisited: @has_visited,
+        slug: @skatepark.slug,
+        address: @skatepark.location.to_s,
+        user: current_user\
+      }
       .info-container
         - @skatepark.present_attributes.each do |attribute, value|
           .col
@@ -27,10 +33,12 @@
         - if @skatepark.info.present?
           p.info= @skatepark.info
       .comments.reviews
-        = react_component "Reviews", props: { skateparkId: @skatepark.id, userId: current_user&.id, ratings: @ratings, averageRating: @skatepark.average_rating }
-        / p
-          | #{rating_phrase[@skatepark.rating.to_i][0]}
-          span  #{rating_phrase[@skatepark.rating.to_i][1]}
+        = react_component "Reviews", props: {\
+          skateparkId: @skatepark.id,
+          userId: current_user&.id,
+          ratings: @ratings,
+          averageRating: @skatepark.average_rating\
+        }
   .map-photos
     .photos
       = render 'photos', skatepark: @skatepark
