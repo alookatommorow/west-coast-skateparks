@@ -6,7 +6,7 @@ function UserActions(props) {
   const {
     hasFavorited: initialHasFavorited,
     hasVisited: initialHasVisited,
-    skateparkId,
+    slug,
     address,
     user,
   } = props;
@@ -28,7 +28,7 @@ function UserActions(props) {
     setIsLoading(name, true);
 
     $.ajax({
-      url: `/skateparks/${skateparkId}/${value}`,
+      url: `/skateparks/${slug}/${value}`,
       method: 'PATCH',
     }).done(() => {
       toggleHasAction(name);
