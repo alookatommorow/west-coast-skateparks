@@ -1,5 +1,5 @@
 # Set the host name for URL creation
-SitemapGenerator::Sitemap.default_host = "http://www.westcoastskateparks.com"
+SitemapGenerator::Sitemap.default_host = "https://www.westcoastskateparks.com"
 SitemapGenerator::Sitemap.public_path = 'tmp/sitemaps/'
 
 SitemapGenerator::Sitemap.create do
