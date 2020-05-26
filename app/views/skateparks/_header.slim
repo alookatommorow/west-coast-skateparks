@@ -1,9 +1,0 @@
-header.skatepark-show-header style="background-image: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url('#{skatepark.hero.url}');"
-  .header-skatepark-name
-    h1= skatepark.name.titleize
-    h2 #{skatepark.city.titleize}, #{skatepark.state.capitalize}
-  .header-skatepark-arrows
-    = link_to skatepark_path(previous_park), class: "left-arrow" do
-      i.fa.fa-angle-left
-    = link_to skatepark_path(next_park), class: "right-arrow" do
-      i.fa.fa-angle-right

@@ -9,13 +9,10 @@ class SkateparkSerializer < ActiveModel::Serializer
     :longitude,
     :map_photo,
     :rating,
+    :slug
   )
 
   has_many :neighbor_parks
-
-  def slug
-    object.to_param
-  end
 
   def map_photo
     object.map_photo(:thumb)

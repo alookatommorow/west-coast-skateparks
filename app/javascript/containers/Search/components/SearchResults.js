@@ -71,7 +71,7 @@ function SearchResults(props) {
   };
 
   const visitSelectedLink = () => {
-    Turbolinks.visit(generateLink(results[activeResultIndex]));
+    Turbolinks.visit(`/skateparks/${results[activeResultIndex].slug}`);
   };
 
   const handleLinkClick = event => {
@@ -80,10 +80,6 @@ function SearchResults(props) {
     Turbolinks.visit(event.currentTarget.href);
   };
 
-  const generateLink = skatepark => {
-    return "/skateparks/" + skatepark.id + "-" + skatepark.name.replace(/\//g, "-").replace(/\./, "").split(" ").join("-") +
-      "-" + skatepark.location.city.replace(/\(|\)|\./g, "").split(" ").join("-") + "-" + skatepark.location.state;
-  };
 
   const createBoldString = (string, matchIndex, query) => {
     const output = titleize(string);
@@ -103,7 +99,7 @@ function SearchResults(props) {
     numResultsDisplay = <div className="item num-results"><span className="bold">{numResults} {matchText}</span></div>;
     resultsDisplay = results.map((skatepark, index) => (
       <div className={`item${index === activeResultIndex ? ' active' : ''}`} key={skatepark.id} onMouseEnter={handleMouseEnter} onClick={handleClick}>
-        <a href={generateLink(skatepark)} onClick={handleLinkClick}>{createBoldString(skatepark.string, skatepark.matchIndex, query)}</a>
+        <a href={`/skateparks/${skatepark.slug}`} onClick={handleLinkClick}>{createBoldString(skatepark.string, skatepark.matchIndex, query)}</a>
       </div>
     ));
   }

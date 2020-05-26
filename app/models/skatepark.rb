@@ -3,35 +3,42 @@
 # Table name: skateparks
 #
 #  id                     :integer          not null, primary key
-#  name                   :string
-#  identifier             :string
-#  rating                 :string
-#  material               :string
-#  designer               :string
 #  builder                :string
-#  opened                 :string
-#  hours                  :text
-#  size                   :string
-#  notes                  :text
-#  info                   :text
+#  designer               :string
 #  helmet                 :string
-#  lights                 :string
-#  photo_cred             :string
-#  photo_url              :string
-#  video_url              :string
-#  obstacles              :text
-#  created_at             :datetime
-#  updated_at             :datetime
-#  hero_file_name         :string
 #  hero_content_type      :string
+#  hero_file_name         :string
 #  hero_file_size         :bigint
 #  hero_updated_at        :datetime
-#  map_photo_file_name    :string
+#  hours                  :text
+#  identifier             :string
+#  info                   :text
+#  lights                 :string
 #  map_photo_content_type :string
+#  map_photo_file_name    :string
 #  map_photo_file_size    :bigint
 #  map_photo_updated_at   :datetime
+#  material               :string
+#  name                   :string
+#  notes                  :text
+#  obstacles              :text
+#  opened                 :string
+#  photo_cred             :string
+#  photo_url              :string
+#  rating                 :string
+#  size                   :string
+#  slug                   :string
+#  video_url              :string
+#  created_at             :datetime
+#  updated_at             :datetime
+#
+# Indexes
+#
+#  index_skateparks_on_slug  (slug) UNIQUE
 #
 class Skatepark < ActiveRecord::Base
+  extend FriendlyId
+
   LOCATION_ATTRIBUTES = %i(address city state zip_code latitude longitude)
   LOCATION_METHODS = %i(has_coordinates? new_coordinates?)
   VISIBLE_ATTRIBUTES = %w(
@@ -44,6 +51,8 @@ class Skatepark < ActiveRecord::Base
     lights
     obstacles
   )
+
+  friendly_id :to_param, use: [:slugged, :finders]
 
   validates :name, presence: true
 
@@ -114,7 +123,7 @@ class Skatepark < ActiveRecord::Base
   end
 
   def to_param
-    [id, name.parameterize, city.parameterize, state.parameterize].join("-")
+    [name.parameterize, city.parameterize, state.parameterize].join("-")
   end
 
   private
