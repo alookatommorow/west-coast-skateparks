@@ -1,4 +1,5 @@
 class SkateparksController < ApplicationController
+  before_action :redirect_if_old_url, only: :show
   before_action :set_skatepark, only: %i(favorite unfavorite visit unvisit)
 
   def show
@@ -62,5 +63,14 @@ class SkateparksController < ApplicationController
 
   def set_skatepark
     @skatepark = Skatepark.find(params[:id])
+  end
+
+  def redirect_if_old_url
+    split_param = params[:id].split('-')
+    if split_param[0].to_i > 0
+      split_param.shift
+      url = split_param.join('-')
+      redirect_to skatepark_path(url)
+    end
   end
 end
