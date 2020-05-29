@@ -86,20 +86,10 @@ class Skatepark < ActiveRecord::Base
   end
 
   def average_rating
-    if ratings.any?
+    if ratings.exists?
       raw_avg = ratings.average(:stars)
       (raw_avg * 2).ceil.to_f / 2
     end
-  end
-
-  def next_park
-    next_park = ordered_parks[ordered_parks.index(self) + 1]
-    next_park ? next_park : ordered_parks.first
-  end
-
-  def previous_park
-    previous_park = ordered_parks[ordered_parks.index(self) - 1]
-    previous_park ? previous_park : ordered_parks.last
   end
 
   def present_attributes
@@ -107,15 +97,11 @@ class Skatepark < ActiveRecord::Base
   end
 
   def ratings?
-    ratings.any?
-  end
-
-  def reviews?
-    reviews.any?
+    ratings.exists?
   end
 
   def pictures?
-    skatepark_images.any?
+    skatepark_images.exists?
   end
 
   def more_than_one_picture?
@@ -125,10 +111,4 @@ class Skatepark < ActiveRecord::Base
   def to_param
     [name.parameterize, city.parameterize, state.parameterize].join("-")
   end
-
-  private
-
-    def ordered_parks
-      @ordered_parks ||= Skatepark.includes(:location).order("locations.state", "locations.city", :name)
-    end
 end
