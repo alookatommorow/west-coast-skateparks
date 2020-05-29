@@ -68,6 +68,10 @@ class SkateparksController < ApplicationController
   def redirect_if_old_url
     split_param = params[:id].split('-')
     if split_param[0].to_i > 0
+      if %w(california oregon washington).exclude?(split_param.last)
+        location = Location.find_by(skatepark_id: split_param[0].to_i)
+        split_param << location.state
+      end
       split_param.shift
       url = split_param.join('-')
       redirect_to skatepark_path(url), status: :moved_permanently
