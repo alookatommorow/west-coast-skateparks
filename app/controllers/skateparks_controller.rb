@@ -70,7 +70,7 @@ class SkateparksController < ApplicationController
     if split_param[0].to_i > 0
       split_param.shift
       url = split_param.join('-')
-      redirect_to skatepark_path(url)
+      redirect_to skatepark_path(url), status: :moved_permanently
     end
   end
 end
