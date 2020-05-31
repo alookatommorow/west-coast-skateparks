@@ -3,72 +3,23 @@ require 'rails_helper'
 RSpec.describe Skatepark, type: :model do
   describe '#ratings?' do
     it 'returns true when a skatepark has ratings' do
-      user = create(:user)
-      skatepark = create(:skatepark)
+      rating = create(:rating)
 
-      Rating.create(
-        user_id: user.id, skatepark_id: skatepark.id, rating: 5)
-
-      expect(skatepark.ratings?).to be true
-    end
-  end
-
-  describe '#reviews?' do
-    it 'returns true when a skatepark has reviews' do
-      user = create(:user)
-      skatepark = create(:skatepark)
-
-      Review.create(
-        user_id: user.id, skatepark_id: skatepark.id, review: 'meh')
-
-      expect(skatepark.reviews?).to be true
-    end
-  end
-
-  describe "#next_park" do
-    it "returns the next skatepark" do
-      washington = create(:location, state: "washington")
-      next_park = create(:skatepark, location: washington, name: "bangcock")
-      skatepark = create(:skatepark)
-
-      expect(skatepark.next_park).to eq(next_park)
-    end
-
-    it "returns first skatepark if no next skatepark" do
-      skatepark = create(:skatepark)
-
-      expect(skatepark.next_park).to eq(skatepark)
-    end
-  end
-
-  describe "#previous_park" do
-    it "returns the previous skatepark" do
-      oregon = create(:location, state: "oregon")
-      skatepark = create(:skatepark, name: "Xulu Testicle", location: oregon)
-      previous_park = create(:skatepark)
-
-      expect(skatepark.previous_park).to eq(previous_park)
-    end
-
-    it "returns last skatepark if no previous skatepark" do
-      skatepark = create(:skatepark)
-
-      expect(skatepark.previous_park).to eq(skatepark)
+      expect(rating.skatepark.ratings?).to be true
     end
   end
 
   describe "#more_than_one_picture?" do
     it "returns true if skatepark has more than one picture" do
       skatepark = create(:skatepark)
-      create(:skatepark_image, skatepark_id: skatepark.id)
-      create(:skatepark_image, skatepark_id: skatepark.id)
+      create_list(:skatepark_image, 2, skatepark: skatepark)
 
       expect(skatepark.more_than_one_picture?).to eq(true)
     end
 
     it "returns false if skatepark has one or fewer pictures" do
       skatepark = create(:skatepark)
-      create(:skatepark_image, skatepark_id: skatepark.id)
+      create(:skatepark_image, skatepark: skatepark)
 
       expect(skatepark.more_than_one_picture?).to eq(false)
     end
@@ -78,27 +29,28 @@ RSpec.describe Skatepark, type: :model do
     it "returns properly formatted param" do
       skatepark = create(:skatepark)
 
-      expect(skatepark.to_param).to eq("#{skatepark.id}-#{skatepark.name}-#{skatepark.city}-#{skatepark.state}")
+      expect(skatepark.to_param).to eq("#{skatepark.name}-#{skatepark.city}-#{skatepark.state}")
     end
   end
 
   describe '#average_rating' do
     it 'returns the average of all ratings for a skatepark' do
-      users = create_list(:user, 3)
+      users = create_list(:user, 2)
       skatepark = create(:skatepark)
 
-      users.each_with_index do |user, rating|
-        Rating.create(
-          user_id: user.id, skatepark_id: skatepark.id, rating: rating + 2)
+      users.each_with_index do |user, stars|
+        create(
+          :rating, user: user, skatepark: skatepark, stars: stars + 2
+        )
       end
 
-      expect(skatepark.average_rating).to eq(3)
+      expect(skatepark.average_rating).to eq(2.5)
     end
 
     it 'returns a nil if skatepark has not been rated' do
       skatepark = create(:skatepark)
 
-      expect(skatepark.average_rating).to eq(nil)
+      expect(skatepark.average_rating).to be nil
     end
   end
 end
