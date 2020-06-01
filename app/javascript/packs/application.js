@@ -24,5 +24,14 @@ import UserActions from '../components/UserActions';
 import Reviews from '../containers/Reviews';
 import Modal from '../components/Modal';
 import WarningModal from '../components/WarningModal';
+import AdvancedSearch from '../containers/AdvancedSearch';
 
-ReactOnRails.register({ Search, Photos, UserActions, Reviews, Modal, WarningModal });
+ReactOnRails.register({
+  Search,
+  Photos,
+  UserActions,
+  Reviews,
+  Modal,
+  WarningModal,
+  AdvancedSearch,
+});

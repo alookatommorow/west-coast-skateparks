@@ -6,7 +6,7 @@ import useToggle from 'hooks/useToggle';
 import SearchForm from './components/SearchForm';
 import SearchResults from './components/SearchResults';
 
-function SearchContainer() {
+function Search() {
   const [query, setQuery] = useState(null);
   const [results, setResults] = useState([]);
   const [skateparks, setSkateparks] = useState(null);
@@ -130,4 +130,4 @@ function SearchContainer() {
   );
 };
 
-export default props => <SearchContainer {...props} />
+export default props => <Search {...props} />

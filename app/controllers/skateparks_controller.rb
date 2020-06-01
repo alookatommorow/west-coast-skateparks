@@ -44,8 +44,11 @@ class SkateparksController < ApplicationController
     render_visit_button
   end
 
-  def search; end
-
+  def search
+    @ca_parks = skateparks_json(Skatepark.includes(:location).in_state('california'))
+    @or_parks = skateparks_json(Skatepark.includes(:location).in_state('oregon'))
+    @wa_parks = skateparks_json(Skatepark.includes(:location).in_state('washington'))
+  end
 
   private
 
@@ -81,5 +84,12 @@ class SkateparksController < ApplicationController
 
       redirect_to skatepark_path(split_param.join('-')), status: :moved_permanently
     end
+  end
+
+  def skateparks_json(skateparks)
+    ActiveModelSerializers::SerializableResource.new(
+      skateparks,
+      each_serializer: Search::SkateparkSerializer
+    ).as_json
   end
 end
