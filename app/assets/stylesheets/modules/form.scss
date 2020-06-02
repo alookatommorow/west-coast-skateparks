@@ -1,10 +1,6 @@
 form {
-  font-size: 1rem;
-  position: relative;
-  max-width: 100%;
 
   .field {
-    clear: both;
     margin: 0em 0em 1em;
 
     .label {
@@ -13,13 +9,11 @@ form {
       color: rgba(0,0,0,0.87);
       font-size: 0.92857143em;
       font-weight: bold;
-      text-transform: none;
     }
   }
 
   textarea {
     margin: 0em;
-    -webkit-appearance: none;
     tap-highlight-color: rgba(255, 255, 255, 0);
     padding: 0.78571429em 1em;
     background: #ffffff;
@@ -28,7 +22,6 @@ form {
     color: rgba(0, 0, 0, 0.87);
     border-radius: 0.28571429rem;
     box-shadow: 0em 0em 0em 0em transparent inset;
-    -webkit-transition: color 0.1s ease, border-color 0.1s ease;
     transition: color 0.1s ease, border-color 0.1s ease;
     font-size: 1em;
     line-height: 1.2857;
@@ -57,9 +50,7 @@ form {
     vertical-align: top;
     margin: 0em;
     outline: none;
-    -webkit-appearance: none;
     tap-highlight-color: rgba(255, 255, 255, 0);
-    line-height: 1.2142em;
     padding: 0.67861429em 1em;
     font-size: 1em;
     background: #ffffff;
@@ -67,7 +58,6 @@ form {
     color: rgba(0, 0, 0, 0.87);
     border-radius: 0.28571429rem;
     box-shadow: 0em 0em 0em 0em transparent inset;
-    -webkit-transition: color 0.1s ease, border-color 0.1s ease;
     transition: color 0.1s ease, border-color 0.1s ease;
 
     &.error {
@@ -79,6 +69,3 @@ form {
     }
   }
 }
-
-
-

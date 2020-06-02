@@ -16,7 +16,7 @@ function UserActions(props) {
   const [visitIsLoading, setVisitIsLoading] = useState(false);
   const [favoriteIsLoading, setFavoriteIsLoading] = useState(false);
   const {
-    isShowing: warningModalIsShowing,
+    toggleIsOn: warningModalIsShowing,
     toggle: toggleWarningModalIsShowing,
   } = useToggle(false);
 

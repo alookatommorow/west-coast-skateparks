@@ -252,16 +252,6 @@ i.star {
 }
 
 .review-form {
-  input[type="radio"] {
-    position: absolute;
-    opacity: 0;
-    width: 0;
-    height: 0;
-  }
-
-  label {
-    cursor: pointer;
-  }
 
   .review-stars-container {
     width: auto;

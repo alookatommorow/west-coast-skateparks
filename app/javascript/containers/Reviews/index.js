@@ -1,18 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import useToggle from 'hooks/useToggle';
-import Modal from 'components/Modal';
 import ReviewComponent from './components';
+import Stars from '../../components/Stars';
 
 function ReviewForm(props) {
   const { skateparkId, userId, ratings } = props;
 
-  // TODO: Rename to stars and figure out how maxStars fits in
   const [stars, setStars] = useState(0);
   const [ratingError, setRatingError] = useState('');
   const [review, setReview] = useState(null);
   const [averageRating, setAverageRating] = useState(props.averageRating);
   const {
-    isShowing: modalIsShowing,
+    toggleIsOn: modalIsShowing,
     toggle: toggleModalIsShowing,
   } = useToggle(false);
 
@@ -56,10 +55,11 @@ function ReviewForm(props) {
   }
 
   const handleClick = event => {
+    console.log('click firing')
     const {currentTarget: { value }} = event;
-    let newStars = parseInt(value, 10);
+    let newStars = Number(value);
 
-    if (newStars === stars) {
+    if (newStars === Number(stars)) {
       newStars -= 1;
     }
 
@@ -102,41 +102,6 @@ function ReviewForm(props) {
     return { numUserRatings, allRatings };
   }
 
-  const renderStars = (stars, keyPrefix, tiny = false) => {
-    let isInteger = true;
-    let wholeStars = Number(stars);
-    let emptyStars = 5 - wholeStars;
-
-    if (!Number.isInteger(wholeStars)) {
-      isInteger = false;
-      wholeStars = Math.floor(wholeStars);
-      emptyStars = Math.floor(emptyStars);
-    }
-
-    return (
-      <div>
-        {[...Array(wholeStars)].map((_e, i) => (
-          <i
-            key={`${keyPrefix}-${i}`}
-            className={`star fas fa-star${tiny ? ' tiny' : ''}`}
-          />
-        ))}
-        {!isInteger && (
-          <i
-            key={`${keyPrefix}-half`}
-            className={`star fas fa-star-half-alt${tiny ? ' tiny' : ''}`}
-          />
-        )}
-        {[...Array(emptyStars)].map((_e, i) => (
-          <i
-            key={`${keyPrefix}-${5 - i}`}
-            className={`star far fa-star${tiny ? ' tiny' : ''}`}
-          />
-        ))}
-      </div>
-    );
-  }
-
   const { numUserRatings, allRatings } = sortedRatings();
 
   return (
@@ -160,13 +125,20 @@ function ReviewForm(props) {
                   <p className="author">{rating.author}</p>
                   <p className="date">{rating.created_at}</p>
                 </div>
-                {renderStars(rating.stars, `review-stars-${i}`, true) }
+                <Stars
+                  stars={rating.stars}
+                  prefix={`review-stars-${i}`}
+                  tiny
+                />
                 <p className="text">{rating.review}</p>
               </div>
             </div>
           ))}
           <h4>User Rating</h4>
-          {renderStars(averageRating, 'average-rating')}
+          <Stars
+            stars={averageRating}
+            prefix="average-rating"
+          />
         </React.Fragment>
       ) : (
         <p>No reviews yet</p>

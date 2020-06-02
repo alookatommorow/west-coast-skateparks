@@ -13,7 +13,7 @@ function Search() {
   const [loading, setLoading] = useState(false);
   const containerRef = useRef(null);
   const {
-    isShowing: searchIsShowing,
+    toggleIsOn: searchIsShowing,
     toggle: toggleSearchIsShowing,
   } = useToggle(false);
 
