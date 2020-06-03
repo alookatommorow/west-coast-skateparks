@@ -9,9 +9,9 @@ function StarInput(props) {
     return [...Array(stars)].map((e, i) => (
       <label htmlFor={i + 1} key={`star-${i + 1}`}>
         <input
-          type="radio"
+          type="checkbox"
           name="rating"
-          onClick={handleClick}
+          onChange={handleClick}
           id={i + 1}
           value={i + 1}
           checked={stars === i + 1}
@@ -27,12 +27,12 @@ function StarInput(props) {
     return [...Array(maxStars - stars)].map((e, i) => (
       <label htmlFor={stars + i + 1} key={`star-${stars + i + 1}`}>
         <input
-          type="radio"
+          type="checkbox"
           name="stars"
           id={stars + i + 1}
           value={stars + i + 1}
           checked={stars === (stars + i + 1)}
-          onClick={handleClick}
+          onChange={handleClick}
         />
         <i className={`star far fa-star ${showError && 'error'}`} />
       </label>

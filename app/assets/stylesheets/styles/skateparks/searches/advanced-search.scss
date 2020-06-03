@@ -45,4 +45,65 @@
       }
     }
   }
+
+
+  .table {
+    margin-top: 56px;
+  }
+
+  .table .row {
+    display: flex;
+    color: #737c97;
+    padding: 16px 20px;
+    align-items: center;
+
+    &:not(.table-header) {
+      border-top: 1px solid #e9ebf2;
+
+      &:last-child {
+        border-bottom: 1px solid #e9ebf2;
+      }
+    }
+
+    &.active {
+      background: rgba(221, 242, 255, 0.2);
+    }
+  }
+
+  .sourcing-container.index .table-header {
+    font-size: 12px;
+  }
+
+  .table-header .column {
+    outline: none;
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    &.dark-text {
+      font-weight: bold;
+    }
+  }
+
+  .table-header .sort-arrow.asc {
+    transform: rotate(180deg);
+  }
+
+  .table-header img {
+    margin-left: 8px;
+  }
+
+  .table .column {
+    flex: 1;
+    display: flex;
+
+    &.dark-text {
+      color: #131e40;
+    }
+  }
+
+  .sourcing-container.index .column.applicants img {
+    margin-right: 4px;
+  }
 }

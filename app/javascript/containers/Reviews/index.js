@@ -55,7 +55,6 @@ function ReviewForm(props) {
   }
 
   const handleClick = event => {
-    console.log('click firing')
     const {currentTarget: { value }} = event;
     let newStars = Number(value);
 
