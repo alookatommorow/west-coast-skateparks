@@ -5,11 +5,10 @@ import { SKATEPARK_ATTRS } from './constants';
 
 function AdvancedSearch(props) {
   const { caParks, orParks, waParks } = props;
-  const [city, setCity] = useState(null);
+  const [fuzzyFilter, setfuzzyFilter] = useState(null);
+  const [cityFilter, setCityFilter] = useState(null);
   const [stars, setStars] = useState(1);
-  const [cityFilterIsOn, setCityFilterIsOn] = useState(false);
   const [name, setName] = useState(null);
-  const [nameFilterIsOn, setNameFilterIsOn] = useState(false);
   const [starsAtLeastIsOn, setStarsAtLeastIsOn] = useState(false);
   const [starsEqualIsOn, setStarsEqualIsOn] = useState(false);
   const [hasBeenSorted, setHasBeenSorted] = useState(false);
@@ -21,14 +20,11 @@ function AdvancedSearch(props) {
   const [sortDirection, setSortDirection] = useState('asc');
 
   useEffect(() => {
-    if (!city || city === '') setCityFilterIsOn(false);
-    else if (!cityFilterIsOn) setCityFilterIsOn(true);
-  }, [city]);
-
-  useEffect(() => {
-    if (!name || name === '') setNameFilterIsOn(false);
-    else if (!nameFilterIsOn) setNameFilterIsOn(true);
-  }, [name]);
+    if (fuzzyFilter) {
+      if (cityFilter) setCityFilter(null);
+      if (name) setName(null);
+    }
+  }, [fuzzyFilter]);
 
   useEffect(() => {
     if (!starsAtLeastIsOn && !starsEqualIsOn) setStarsAtLeastIsOn(true);
@@ -43,31 +39,48 @@ function AdvancedSearch(props) {
   }, [starsEqualIsOn]);
 
   useEffect(() => {
-    setSkateparks([
+    const newSkateparks = [
       ...(ca ? caParks : []),
       ...(or ? orParks : []),
       ...(wa ? waParks : []),
-    ]);
+    ];
+    setSkateparks(hasBeenSorted ? newSkateparks.sort(compareAttrs) : newSkateparks);
   }, [ca, or, wa]);
 
   useEffect(() => {
     if (hasBeenSorted) setSkateparks([...skateparks].sort(compareAttrs));
   }, [sortAttr, sortDirection]);
 
-  const handleCityChange = event => setCity(event.target.value);
+  const handleFuzzyChange = event => setfuzzyFilter(event.target.value);
+  const handleCityChange = event => setCityFilter(event.target.value);
   const handleNameChange = event => setName(event.target.value);
   const toggleStarsEqualIsOn = () => setStarsEqualIsOn(!starsEqualIsOn);
   const togglestarsAtLeastIsOn = () => setStarsAtLeastIsOn(!starsAtLeastIsOn);
-  const filterCity = cityToCheck => cityToCheck.indexOf(city) !== -1;
-  const filterName = nameToCheck => nameToCheck.indexOf(name) !== -1;
   const isSorted = attrToCheck => attrToCheck === sortAttr;
   const hasSortDirection = attrToCheck => attrToCheck === sortAttr ? ` ${sortDirection}` : '';
+  const filterParks = () => skateparks.filter(skatepark => filterSkateparks(skatepark));
+
+  const filterTextAttr = (skatepark, attr, filter) => {
+    if (!skatepark[attr]) return false;
+    if (skatepark.city === 'la habra') {
+      console.log(attr)
+    }
+    const matchIndex = skatepark[attr].toLowerCase().indexOf(filter.toLowerCase());
+
+    if (matchIndex !== -1) {
+      skatepark.matches[attr] = matchIndex;
+
+      return true;
+    }
+
+    return false;
+  }
 
   const handleStarsChange = event => {
     const { currentTarget: { value } } = event;
     let newStars = Number(value);
 
-    if (newStars === Number(stars)) {
+    if (newStars === Number(stars) && Number(stars) > 1) {
       newStars -= 1;
     }
 
@@ -75,20 +88,30 @@ function AdvancedSearch(props) {
   };
 
   const filterSkateparks = skatepark => {
-    if (cityFilterIsOn && (!skatepark.city || !filterCity(skatepark.city))) {
-      return false;
-    }
+    skatepark.matches = {};
 
-    if (nameFilterIsOn && (!skatepark.name || !filterName(skatepark.name))) {
-      return false;
-    }
+    if (fuzzyFilter && fuzzyFilter !== '') {
+      if (!filterTextAttr(skatepark, 'city', fuzzyFilter) || !filterTextAttr(skatepark, 'name', fuzzyFilter)) {
+        return false;
+      }
+    } else {
+      const cityFilterIsOn = cityFilter && cityFilter !== '';
+      if (cityFilterIsOn && !filterTextAttr(skatepark, 'city', cityFilter)) {
+        return false;
+      }
 
-    if (starsAtLeastIsOn && (Number(skatepark.rating) < Number(stars))) {
-      return false;
-    }
+      const nameFilterIsOn = name && name !== '';
+      if (nameFilterIsOn && !filterTextAttr(skatepark, 'name', name)) {
+        return false;
+      }
 
-    if (starsEqualIsOn && (Number(skatepark.rating) !== Number(stars))) {
-      return false;
+      if (starsAtLeastIsOn && (Number(skatepark.rating) < Number(stars))) {
+        return false;
+      }
+
+      if (starsEqualIsOn && (Number(skatepark.rating) !== Number(stars))) {
+        return false;
+      }
     }
 
     return true;
@@ -116,8 +139,6 @@ function AdvancedSearch(props) {
     return sortDirection === 'desc' ? (comparison * -1) : comparison;
   };
 
-  const filterParks = () => skateparks.filter(skatepark => filterSkateparks(skatepark));
-
   const handleTableHeaderClick = event => {
     const { currentTarget: { attributes: { name: { value } } } } = event;
     const newDirection = (sortAttr === value && sortDirection === 'asc') ? 'desc' : 'asc';
@@ -127,10 +148,54 @@ function AdvancedSearch(props) {
     setSortDirection(newDirection)
   }
 
+  const createBoldString = (filter, attrString, matchIndex) => {
+    let query = cityFilter;
+    if (filter === 'name') query = name;
+    if (fuzzyFilter && fuzzyFilter !== '') query = fuzzyFilter;
+
+    const output = titleize(attrString);
+    const first = output.slice(0, matchIndex);
+    const bold = output.slice(matchIndex, matchIndex + query.length);
+    const last = output.slice(matchIndex + query.length);
+
+    return <span>{first}<span className="bold">{bold}</span>{last}</span>;
+  };
+
+  const displayAttr = (park, attr) => {
+    if (park.matches && park.matches[attr] > -1) {
+      return createBoldString(attr, park[attr], park.matches[attr]);
+    } else if (park[attr] && (attr === 'name' || attr === 'city')) {
+      return titleize(park[attr])
+    }
+
+    return park[attr];
+  }
+
   return (
     <div className="advanced-search-container">
+      <h2>Quick Search</h2>
       <form>
         <div className="row">
+          <div className="field">
+            <input name="name" type="text" onChange={handleFuzzyChange} />
+          </div>
+        </div>
+      </form>
+      <h2>Advanced Search</h2>
+      <form>
+        <div className="row">
+          <div className="field">
+            <label htmlFor="name" className="label">
+              Name
+            </label>
+            <input name="name" type="text" onChange={handleNameChange} />
+          </div>
+          <div className="field">
+            <label className="label" htmlFor="city">
+              City
+            </label>
+            <input name="city" type="text" onChange={handleCityChange} />
+          </div>
           <div className="field column states">
             <label htmlFor="states" className="label">
               State
@@ -151,18 +216,6 @@ function AdvancedSearch(props) {
             </div>
           </div>
           <div className="field">
-            <label className="label" htmlFor="city">
-              City
-            </label>
-            <input name="city" type="text" onChange={handleCityChange} />
-          </div>
-          <div className="field">
-            <label htmlFor="name" className="label">
-              Name
-            </label>
-            <input name="name" type="text" onChange={handleNameChange} />
-          </div>
-          <div className="field">
             <label htmlFor="stars" className="label">
               Stars
             </label>
@@ -180,11 +233,11 @@ function AdvancedSearch(props) {
               <StarInput
                 stars={stars}
                 handleClick={handleStarsChange}
+                setStars={setStars}
               />
             </div>
           </div>
         </div>
-
       </form>
       <p>{skateparks.length}</p>
       <div className="table">
@@ -216,7 +269,7 @@ function AdvancedSearch(props) {
           >
             {SKATEPARK_ATTRS.map(attrObj => (
               <div className="column" key={`${park.slug}-${attrObj.name}`}>
-                {park[attrObj.name]}
+                {displayAttr(park, attrObj.name)}
               </div>
             ))}
           </a>

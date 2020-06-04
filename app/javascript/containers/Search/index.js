@@ -42,7 +42,7 @@ function Search() {
   }, [query]);
 
   useEffect(() => {
-    // if query was input during skaeparks data load, apply query after load
+    // if query was input during skateparks load, apply query after load
     if (query && query !== '') {
       setResults(searchSkateparks(query));
     }
@@ -56,9 +56,9 @@ function Search() {
         skatepark.string = skatepark.name+", "+skatepark.city+", "+stateDisplay[skatepark.state];
         skatepark.matchIndex = skatepark.string.indexOf(query);
         return true;
-      } else {
-        return false;
       }
+
+      return false;
     }
   };
 

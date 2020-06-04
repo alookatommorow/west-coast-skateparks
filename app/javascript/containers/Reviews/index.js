@@ -54,17 +54,6 @@ function ReviewForm(props) {
     setRatingError('');
   }
 
-  const handleClick = event => {
-    const {currentTarget: { value }} = event;
-    let newStars = Number(value);
-
-    if (newStars === Number(stars)) {
-      newStars -= 1;
-    }
-
-    setStars(newStars);
-  };
-
   const handleChange = event => setReview(event.target.value);
 
   const isValid = () => {
@@ -149,7 +138,7 @@ function ReviewForm(props) {
         stars={stars}
         handleSubmit={handleSubmit}
         handleChange={handleChange}
-        handleClick={handleClick}
+        setStars={setStars}
         userId={userId}
         numUserRatings={numUserRatings}
         averageRating={averageRating}

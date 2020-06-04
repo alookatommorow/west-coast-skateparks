@@ -2,8 +2,20 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 function StarInput(props) {
-  const { stars, handleClick, showError } = props;
+  const { stars, showError, setStars } = props;
   const maxStars = 5;
+
+  const handleStarsChange = event => {
+    const { currentTarget: { value } } = event;
+    const currentStars = Number(stars);
+    let newStars = Number(value);
+
+    if (newStars === currentStars && currentStars > 1) {
+      newStars -= 1;
+    }
+
+    setStars(newStars);
+  };
 
   const renderStars = () => {
     return [...Array(stars)].map((e, i) => (
@@ -11,7 +23,7 @@ function StarInput(props) {
         <input
           type="checkbox"
           name="rating"
-          onChange={handleClick}
+          onChange={handleStarsChange}
           id={i + 1}
           value={i + 1}
           checked={stars === i + 1}
@@ -32,7 +44,7 @@ function StarInput(props) {
           id={stars + i + 1}
           value={stars + i + 1}
           checked={stars === (stars + i + 1)}
-          onChange={handleClick}
+          onChange={handleStarsChange}
         />
         <i className={`star far fa-star ${showError && 'error'}`} />
       </label>
@@ -49,7 +61,7 @@ function StarInput(props) {
 
 StarInput.propTypes = {
   stars: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-  handleClick: PropTypes.func.isRequired,
+  setStars: PropTypes.func.isRequired,
   showError: PropTypes.bool,
 };
 

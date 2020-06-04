@@ -39,6 +39,10 @@
       .field {
         margin-right: 20px;
 
+        label {
+          font-size: 16px;
+        }
+
         .column {
           margin-right: 8px;
         }
@@ -54,9 +58,13 @@
       display: flex;
       align-items: center;
       color: $black;
-      text-transform: capitalize;
+
       padding: 16px 20px;
       transition: background 0.3s ease;
+
+      span.bold {
+        font-weight: bold;
+      }
 
       &:not(.table-header) {
         border-top: 1px solid #c4cacf;
@@ -100,13 +108,6 @@
       }
     }
   }
-
-
-
-
-
-
-
 
   .table .column {
     flex: 1;

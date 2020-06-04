@@ -10,7 +10,7 @@ function ReviewsComponent(props) {
     ratingError,
     handleSubmit,
     handleChange,
-    handleClick,
+    setStars,
     userId,
     stars,
     numUserRatings,
@@ -43,7 +43,7 @@ function ReviewsComponent(props) {
             <Modal.Body>
               <StarInput
                 stars={stars}
-                handleClick={handleClick}
+                setStars={setStars}
                 showError={showError}
               />
               <p className={`error-message-v2 ${showError && 'visible'}`}>{ratingError}</p>
