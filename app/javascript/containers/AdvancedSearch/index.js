@@ -5,26 +5,19 @@ import { SKATEPARK_ATTRS } from './constants';
 
 function AdvancedSearch(props) {
   const { caParks, orParks, waParks } = props;
-  const [fuzzyFilter, setfuzzyFilter] = useState(null);
-  const [cityFilter, setCityFilter] = useState(null);
   const [stars, setStars] = useState(1);
-  const [name, setName] = useState(null);
+  const [nameCity, setNameCity] = useState(null);
+  const [splitNameCity, setSplitNameCity] = useState(null);
   const [starsAtLeastIsOn, setStarsAtLeastIsOn] = useState(false);
   const [starsEqualIsOn, setStarsEqualIsOn] = useState(false);
   const [hasBeenSorted, setHasBeenSorted] = useState(false);
+  const { toggleIsOn: exactMatchIsOn, toggle: toggleExactMatchIsOn } = useToggle(false);
   const { toggleIsOn: ca, toggle: toggleCa } = useToggle(true);
   const { toggleIsOn: or, toggle: toggleOr } = useToggle(true);
   const { toggleIsOn: wa, toggle: toggleWa } = useToggle(true);
   const [skateparks, setSkateparks] = useState([...caParks, ...orParks, ...waParks ]);
   const [sortAttr, setSortAttr] = useState('state');
   const [sortDirection, setSortDirection] = useState('asc');
-
-  useEffect(() => {
-    if (fuzzyFilter) {
-      if (cityFilter) setCityFilter(null);
-      if (name) setName(null);
-    }
-  }, [fuzzyFilter]);
 
   useEffect(() => {
     if (!starsAtLeastIsOn && !starsEqualIsOn) setStarsAtLeastIsOn(true);
@@ -51,29 +44,56 @@ function AdvancedSearch(props) {
     if (hasBeenSorted) setSkateparks([...skateparks].sort(compareAttrs));
   }, [sortAttr, sortDirection]);
 
-  const handleFuzzyChange = event => setfuzzyFilter(event.target.value);
-  const handleCityChange = event => setCityFilter(event.target.value);
-  const handleNameChange = event => setName(event.target.value);
   const toggleStarsEqualIsOn = () => setStarsEqualIsOn(!starsEqualIsOn);
   const togglestarsAtLeastIsOn = () => setStarsAtLeastIsOn(!starsAtLeastIsOn);
   const isSorted = attrToCheck => attrToCheck === sortAttr;
   const hasSortDirection = attrToCheck => attrToCheck === sortAttr ? ` ${sortDirection}` : '';
   const filterParks = () => skateparks.filter(skatepark => filterSkateparks(skatepark));
+  const handleNameCityChange = event => {
+    const { target: { value } } = event;
+
+    if (value === '') {
+      setNameCity(null);
+      setSplitNameCity(value);
+    } else {
+      setNameCity(value);
+      setSplitNameCity(value.split(' '));
+    }
+  };
 
   const filterTextAttr = (skatepark, attr, filter) => {
     if (!skatepark[attr]) return false;
-    if (skatepark.city === 'la habra') {
-      console.log(attr)
+
+    let splitValue = skatepark[attr].toLowerCase().split(' ');
+    let hasMatch = false;
+    let matchIndex;
+
+    if (!exactMatchIsOn && splitValue.length > 1) {
+      if (Object.values(skatepark.matches[attr]) === splitValue.length) return true;
+
+      skatepark.displayHtmlStrings[attr] = splitValue.map((str, index) => {
+        if (!skatepark.matches[attr][str]) {
+          matchIndex = str.indexOf(filter.toLowerCase());
+          if (matchIndex > -1) {
+            hasMatch = true;
+            skatepark.matches[attr][str] = createBoldString(str, matchIndex, filter);
+            return skatepark.matches[attr][str];
+          }
+        } else {
+          hasMatch = true;
+          return skatepark.matches[attr][str];
+        }
+        return titleize(str);
+      }).join(' ');
+    } else {
+      matchIndex = skatepark[attr].toLowerCase().indexOf(filter.toLowerCase());
+      if (matchIndex > -1) {
+        skatepark.displayHtmlStrings[attr] = createBoldString(skatepark[attr], matchIndex, filter);
+        hasMatch = true;
+      }
     }
-    const matchIndex = skatepark[attr].toLowerCase().indexOf(filter.toLowerCase());
 
-    if (matchIndex !== -1) {
-      skatepark.matches[attr] = matchIndex;
-
-      return true;
-    }
-
-    return false;
+    return hasMatch;
   }
 
   const handleStarsChange = event => {
@@ -88,30 +108,37 @@ function AdvancedSearch(props) {
   };
 
   const filterSkateparks = skatepark => {
-    skatepark.matches = {};
+    skatepark.displayHtmlStrings = {};
+    skatepark.matches = { city: {}, name: {} };
 
-    if (fuzzyFilter && fuzzyFilter !== '') {
-      if (!filterTextAttr(skatepark, 'city', fuzzyFilter) || !filterTextAttr(skatepark, 'name', fuzzyFilter)) {
-        return false;
-      }
-    } else {
-      const cityFilterIsOn = cityFilter && cityFilter !== '';
-      if (cityFilterIsOn && !filterTextAttr(skatepark, 'city', cityFilter)) {
-        return false;
+    if (starsAtLeastIsOn && (Number(skatepark.rating) < Number(stars))) {
+      return false;
+    }
+
+    if (starsEqualIsOn && (Number(skatepark.rating) !== Number(stars))) {
+      return false;
+    }
+
+    if (nameCity) {
+      let nameCityMatch = false;
+
+      if (exactMatchIsOn) {
+        if (filterTextAttr(skatepark, 'city', nameCity) || filterTextAttr(skatepark, 'name', nameCity)) {
+          nameCityMatch = true;
+        }
+      } else {
+        splitNameCity.filter(query => query !== '').map(query => {
+          if (filterTextAttr(skatepark, 'city', query)) {
+            nameCityMatch = true;
+          }
+
+          if (filterTextAttr(skatepark, 'name', query)) {
+            nameCityMatch = true;
+          }
+        });
       }
 
-      const nameFilterIsOn = name && name !== '';
-      if (nameFilterIsOn && !filterTextAttr(skatepark, 'name', name)) {
-        return false;
-      }
-
-      if (starsAtLeastIsOn && (Number(skatepark.rating) < Number(stars))) {
-        return false;
-      }
-
-      if (starsEqualIsOn && (Number(skatepark.rating) !== Number(stars))) {
-        return false;
-      }
+      if (!nameCityMatch) return false;
     }
 
     return true;
@@ -148,22 +175,18 @@ function AdvancedSearch(props) {
     setSortDirection(newDirection)
   }
 
-  const createBoldString = (filter, attrString, matchIndex) => {
-    let query = cityFilter;
-    if (filter === 'name') query = name;
-    if (fuzzyFilter && fuzzyFilter !== '') query = fuzzyFilter;
-
-    const output = titleize(attrString);
+  const createBoldString = (attrString, matchIndex, filter) => {
+    let output = titleize(attrString);
     const first = output.slice(0, matchIndex);
-    const bold = output.slice(matchIndex, matchIndex + query.length);
-    const last = output.slice(matchIndex + query.length);
+    const bold = output.slice(matchIndex, matchIndex + filter.length);
+    const last = output.slice(matchIndex + filter.length);
 
-    return <span>{first}<span className="bold">{bold}</span>{last}</span>;
+    return `${first}<span class="orange">${bold}</span>${last}`;
   };
 
   const displayAttr = (park, attr) => {
-    if (park.matches && park.matches[attr] > -1) {
-      return createBoldString(attr, park[attr], park.matches[attr]);
+    if (park.displayHtmlStrings && park.displayHtmlStrings[attr]) {
+      return <span dangerouslySetInnerHTML={{ __html: park.displayHtmlStrings[attr] }} />;
     } else if (park[attr] && (attr === 'name' || attr === 'city')) {
       return titleize(park[attr])
     }
@@ -173,28 +196,18 @@ function AdvancedSearch(props) {
 
   return (
     <div className="advanced-search-container">
-      <h2>Quick Search</h2>
-      <form>
-        <div className="row">
-          <div className="field">
-            <input name="name" type="text" onChange={handleFuzzyChange} />
-          </div>
-        </div>
-      </form>
       <h2>Advanced Search</h2>
       <form>
         <div className="row">
           <div className="field">
-            <label htmlFor="name" className="label">
-              Name
+            <label htmlFor="name-city" className="label">
+              Name/City
             </label>
-            <input name="name" type="text" onChange={handleNameChange} />
-          </div>
-          <div className="field">
-            <label className="label" htmlFor="city">
-              City
+            <input name="name-city" type="text" onChange={handleNameCityChange} />
+            <label htmlFor="starsAtLeastIsOn">
+              <input name="starsAtLeastIsOn" type="checkbox" checked={exactMatchIsOn} onChange={toggleExactMatchIsOn} />
+                Use exact match
             </label>
-            <input name="city" type="text" onChange={handleCityChange} />
           </div>
           <div className="field column states">
             <label htmlFor="states" className="label">

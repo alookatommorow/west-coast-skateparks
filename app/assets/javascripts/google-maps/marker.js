@@ -5,7 +5,7 @@ function Marker(skatepark) {
     position: { lat: skatepark.latitude, lng: skatepark.longitude },
     infowindow: new InfoWindow(skatepark),
     map: this.map,
-    title: titleize(skatepark.city + ', ' + stateDisplay[skatepark.state]),
+    title: titleize(skatepark.city + ', ' + STATE_DISPLAY[skatepark.state]),
     category: skatepark.category,
     icon: "https://maps.google.com/mapfiles/ms/icons/" + this.colorOptions[skatepark.category] + ".png",
     id: skatepark.id

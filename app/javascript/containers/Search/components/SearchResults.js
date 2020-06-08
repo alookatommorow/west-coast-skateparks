@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { PropTypes } from 'prop-types';
+import BoldString from 'components/BoldString';
 
-function SearchResults(props) {
+export const SearchResults = function(props) {
   const { exitResults, results, query } = props;
 
   const [activeResultIndex, setActiveResultIndex] = useState(0);
@@ -80,35 +81,34 @@ function SearchResults(props) {
     Turbolinks.visit(event.currentTarget.href);
   };
 
-
-  const createBoldString = (string, matchIndex, query) => {
-    const output = titleize(string);
-    const first = output.slice(0, matchIndex);
-    const bold = output.slice(matchIndex, matchIndex + query.length);
-    const last = output.slice(matchIndex + query.length);
-
-    return <span>{first}<span className="bold">{bold}</span>{last}</span>;
-  };
-
   const numResults = results.length;
-  const matchText = numResults === 1 ? 'Match' : 'Matches';
-  let numResultsDisplay;
-  let resultsDisplay;
-
-  if (query) {
-    numResultsDisplay = <div className="item num-results"><span className="bold">{numResults} {matchText}</span></div>;
-    resultsDisplay = results.map((skatepark, index) => (
-      <div className={`item${index === activeResultIndex ? ' active' : ''}`} key={skatepark.slug} onMouseEnter={handleMouseEnter} onClick={handleClick}>
-        <a href={`/skateparks/${skatepark.slug}`} onClick={handleLinkClick}>{createBoldString(skatepark.string, skatepark.matchIndex, query)}</a>
-      </div>
-    ));
-  }
 
   return (
     <div id="react-search-results" className="divided selection list" onKeyDown={handleKeyDown} onMouseLeave={handleMouseLeave} >
-      {numResultsDisplay}
+      {query && (
+        <div className="item num-results">
+          <span className="bold">{numResults} {numResults === 1 ? 'Match' : 'Matches'}</span>
+        </div>
+      )}
       <div>
-        {resultsDisplay}
+        {query && results.map((skatepark, index) => (
+          <div
+            className={`item${index === activeResultIndex ? ' active' : ''}`}
+            key={skatepark.id} onMouseEnter={handleMouseEnter}
+            onClick={handleClick}
+          >
+            <a
+              href={generateLink(skatepark)}
+              onClick={handleLinkClick}
+            >
+              <BoldString
+                string={skatepark.string}
+                matchIndex={skatepark.matchIndex}
+                query={query}
+              />
+            </a>
+          </div>
+        ))}
       </div>
     </div>
   );

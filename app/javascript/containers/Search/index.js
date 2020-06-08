@@ -52,9 +52,13 @@ function Search() {
 
   const filterAndAddIndexOfMatch = () => {
     return function(skatepark) {
-      if (skatepark.name.indexOf(query) !== -1 || skatepark.city.indexOf(query) !== -1) {
-        skatepark.string = skatepark.name+", "+skatepark.city+", "+stateDisplay[skatepark.state];
-        skatepark.matchIndex = skatepark.string.indexOf(query);
+      let matchIndex = skatepark.name.indexOf(query);
+
+      if (matchIndex < 0) matchIndex = skatepark.city.indexOf(query);
+
+      if (matchIndex > -1) {
+        skatepark.string = skatepark.name + ", " + skatepark.city + ", " + STATE_DISPLAY[skatepark.state];
+        skatepark.matchIndex = matchIndex;
         return true;
       }
 
