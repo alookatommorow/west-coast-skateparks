@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200525220040) do
+ActiveRecord::Schema.define(version: 20200610171308) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -112,6 +112,12 @@ ActiveRecord::Schema.define(version: 20200525220040) do
     t.bigint   "map_photo_file_size"
     t.datetime "map_photo_updated_at"
     t.string   "slug"
+    t.string   "address"
+    t.string   "city"
+    t.float    "latitude"
+    t.float    "longitude"
+    t.string   "state"
+    t.string   "zip_code"
     t.index ["slug"], name: "index_skateparks_on_slug", unique: true, using: :btree
   end
 
