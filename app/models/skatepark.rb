@@ -3,7 +3,9 @@
 # Table name: skateparks
 #
 #  id                     :integer          not null, primary key
+#  address                :string
 #  builder                :string
+#  city                   :string
 #  designer               :string
 #  helmet                 :string
 #  hero_content_type      :string
@@ -13,7 +15,9 @@
 #  hours                  :text
 #  identifier             :string
 #  info                   :text
+#  latitude               :float
 #  lights                 :string
+#  longitude              :float
 #  map_photo_content_type :string
 #  map_photo_file_name    :string
 #  map_photo_file_size    :bigint
@@ -28,7 +32,9 @@
 #  rating                 :string
 #  size                   :string
 #  slug                   :string
+#  state                  :string
 #  video_url              :string
+#  zip_code               :string
 #  created_at             :datetime
 #  updated_at             :datetime
 #
