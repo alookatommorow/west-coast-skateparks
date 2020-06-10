@@ -47,21 +47,22 @@
 = content_for :og_metadata
   meta name="twitter:card" content="summary_large_image"
   /meta name="twitter:site" content="@dont_have_one"
-  meta name="twitter:title" content=skatepark_og_meta_title
+  meta name="twitter:title" content=skatepark_og_meta_title(@skatepark)
   meta name="twitter:image" content=@skatepark.hero.url
   meta name="twitter:description" content=@skatepark.location
 
-  meta property="og:title" content=skatepark_og_meta_title
+  meta property="og:title" content=skatepark_og_meta_title(@skatepark)
   meta property="og:url" content=request.original_url
   meta property="og:image" content=@skatepark.hero.url
   meta property="og:description" content=@skatepark.location
   meta property="fb:app_id" content="1520128344956383"
 
 = content_for :metadata
-  meta name="description" content=skatepark_description
+  meta name="description" content=skatepark_description(@skatepark)
 
 = content_for :page_title
-  title= "#{skatepark_og_meta_title} | West Coast Skateparks"
+  title= "#{skatepark_og_meta_title(@skatepark)} | West Coast Skateparks"
+  link href=request.original_url rel="canonical"
 = content_for :analytics_event
   javascript:
     analytics.page("Skatepark", #{raw skatepark_json(@skatepark)});
