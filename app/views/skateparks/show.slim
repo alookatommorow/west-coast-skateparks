@@ -63,6 +63,3 @@
 = content_for :page_title
   title= "#{skatepark_og_meta_title(@skatepark)} | West Coast Skateparks"
   link href=request.original_url rel="canonical"
-= content_for :analytics_event
-  javascript:
-    analytics.page("Skatepark", #{raw skatepark_json(@skatepark)});
