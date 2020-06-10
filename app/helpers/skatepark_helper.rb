@@ -9,12 +9,12 @@ module SkateparkHelper
     }
   end
 
-  def skatepark_og_meta_title
-    "#{@skatepark.name.titleize} - #{@skatepark.city.titleize}, #{state_abbrevs[@skatepark.state]}"
+  def skatepark_og_meta_title(skatepark)
+    "#{skatepark} - #{skatepark.city.titleize}, #{state_abbrevs[skatepark.state]}"
   end
 
-  def skatepark_description
-    "#{@skatepark.name.titleize} in #{@skatepark.city.titleize}, #{state_abbrevs[@skatepark.state]} - photos, map, and info"
+  def skatepark_description(skatepark)
+    "#{skatepark} in #{skatepark.city.titleize}, #{state_abbrevs[skatepark.state]} - photos, map, and info"
   end
 
   def num_empty_stars(rating)

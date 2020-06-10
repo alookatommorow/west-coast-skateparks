@@ -111,4 +111,8 @@ class Skatepark < ActiveRecord::Base
   def to_param
     [name.parameterize, city.parameterize, state.parameterize].join("-")
   end
+
+  def to_s
+    (name.downcase.include?("skatepark") ? name :  "#{name} skatepark").titleize
+  end
 end
