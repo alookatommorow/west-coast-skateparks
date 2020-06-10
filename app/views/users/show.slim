@@ -18,7 +18,7 @@
           .user-park-display.item data-ajax-container=true
             = link_to park, class: "park-link" do
               .link-section.city-name
-                .city= park.city.titleize + ", " + state_abbrevs[park.state]
+                .city= park.city.titleize + ", " + STATE_ABBREVS[park.state]
                 .name= park.name.titleize
               .link-section.image
                 = image_tag("#{park.hero}")
@@ -35,7 +35,7 @@
           .user-park-display.item data-ajax-container=true
             = link_to park, class: "park-link" do
               .link-section.city-name
-                .city= park.city.titleize + ", " + state_abbrevs[park.state]
+                .city= park.city.titleize + ", " + STATE_ABBREVS[park.state]
                 .name= park.name.titleize
               .link-section.image
                 = image_tag("#{park.hero}")

@@ -45,8 +45,7 @@
 class Skatepark < ActiveRecord::Base
   extend FriendlyId
 
-  LOCATION_ATTRIBUTES = %i(address city state zip_code latitude longitude)
-  LOCATION_METHODS = %i(has_coordinates? new_coordinates?)
+ STATES = %w(california oregon washington)
   VISIBLE_ATTRIBUTES = %w(
     hours
     material
@@ -60,7 +59,8 @@ class Skatepark < ActiveRecord::Base
 
   friendly_id :to_param, use: [:slugged, :finders]
 
-  validates :name, presence: true
+  validates :name, :city, :state, presence: true
+  validates :state, inclusion: { in: STATES }
 
   has_many :ratings, dependent: :destroy
   has_many :reviews, dependent: :destroy
@@ -70,10 +70,6 @@ class Skatepark < ActiveRecord::Base
     join_table: "visits", class_name: "User", dependent: :destroy
 
   has_many :skatepark_images, dependent: :destroy
-  has_one :location, dependent: :destroy
-  accepts_nested_attributes_for :location
-
-  delegate(*LOCATION_ATTRIBUTES, *LOCATION_METHODS, to: :location, allow_nil: true)
 
   has_attached_file :hero, default_url: "https://storage.googleapis.com/west-coast-skateparks/default-header.jpg"
   validates_attachment_content_type :hero, content_type: /\Aimage/
@@ -81,14 +77,21 @@ class Skatepark < ActiveRecord::Base
   has_attached_file :map_photo, default_url: "https://storage.googleapis.com/west-coast-skateparks/logo-small.png", styles: { thumb: "300x200>" }
   validates_attachment_content_type :map_photo, content_type: /\Aimage/
 
-  scope :in_state, -> (state) { joins(:location).merge(Location.in_state(state)) }
+  scope :in_state, -> (state) { where(state: state) }
 
   def neighbor_parks
+    radius = 0.4
     self.class.
-      joins(:location).
-      includes(:location).
       where.not(id: self.id).
-      merge(Location.neighbors_of(self.location))
+      where(
+        "latitude BETWEEN ? AND ?",
+        latitude - radius,
+        latitude + radius,
+      ).where(
+        "longitude BETWEEN ? AND ?",
+        longitude - radius,
+        longitude + radius
+      )
   end
 
   def average_rating
@@ -112,6 +115,10 @@ class Skatepark < ActiveRecord::Base
 
   def more_than_one_picture?
     skatepark_images.count > 1
+  end
+
+  def has_coordinates?
+    [latitude, longitude].all?(&:present?)
   end
 
   def to_param

@@ -6,8 +6,7 @@ class SkateparksController < ApplicationController
     @skatepark = Skatepark.includes(
       { ratings: :user },
       :skatepark_images,
-      :location
-    ).find(params[:id])
+    ).find(params[:slug])
 
     @ratings = ActiveModelSerializers::SerializableResource.new(
       @skatepark.ratings.order(created_at: :desc),
@@ -22,7 +21,7 @@ class SkateparksController < ApplicationController
   end
 
   def index
-    @skateparks = Skatepark.includes(:location).all
+    @skateparks = Skatepark.all
   end
 
   def favorite
@@ -62,21 +61,22 @@ class SkateparksController < ApplicationController
   end
 
   def set_skatepark
-    @skatepark = Skatepark.find(params[:id])
+    @skatepark = Skatepark.find(params[:slug])
   end
 
   def redirect_if_old_url
-    return unless Skatepark.find_by(slug: params[:id]).nil?
+    skatepark = Skatepark.find_by(slug: params[:slug])
 
-    split_param = params[:id].split('-')
+    # return unless skatepark not found (using old url)
+    return if skatepark.present?
+
+    split_param = params[:slug].split('-')
+
+    # if first part of param is number (ie '444-tapiola-park-astoria-oregon')
     if split_param[0].to_i > 0
-      if %w(california oregon washington).exclude?(split_param.last)
-        location = Location.find_by(skatepark_id: split_param[0].to_i)
-        split_param << location.state
-      end
-      split_param.shift if Skatepark.find_by(slug: split_param.join('-')).nil?
-      url = split_param.join('-')
-      redirect_to skatepark_path(url), status: :moved_permanently
+      split_param.shift
+
+      redirect_to skatepark_path(split_param.join('-')), status: :moved_permanently
     end
   end
 end

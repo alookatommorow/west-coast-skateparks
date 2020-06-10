@@ -5,11 +5,11 @@ class UserSerializer < ActiveModel::Serializer
   has_many :dups
 
   def favorites
-    object.favorites.includes(:location) - dups
+    object.favorites - dups
   end
 
   def visits
-    object.visits.includes(:location) - dups
+    object.visits - dups
   end
 
   def dups

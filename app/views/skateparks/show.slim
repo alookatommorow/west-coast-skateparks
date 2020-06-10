@@ -11,13 +11,13 @@
         - num_empty_stars(@skatepark.rating).times do
           i.star.far.fa-star
       p.location
-        | #{@skatepark.location}
+        | #{skatepark_location(@skatepark)}
         i.fa.fa-copy
       = react_component "UserActions", props: {\
         hasFavorited: @has_favorited,
         hasVisited: @has_visited,
         slug: @skatepark.slug,
-        address: @skatepark.location.to_s,
+        address: skatepark_location(@skatepark),
         user: current_user\
       }
       .info-container
@@ -49,12 +49,12 @@
   /meta name="twitter:site" content="@dont_have_one"
   meta name="twitter:title" content=skatepark_og_meta_title(@skatepark)
   meta name="twitter:image" content=@skatepark.hero.url
-  meta name="twitter:description" content=@skatepark.location
+  meta name="twitter:description" content=skatepark_location(@skatepark)
 
   meta property="og:title" content=skatepark_og_meta_title(@skatepark)
   meta property="og:url" content=request.original_url
   meta property="og:image" content=@skatepark.hero.url
-  meta property="og:description" content=@skatepark.location
+  meta property="og:description" content=skatepark_location(@skatepark)
   meta property="fb:app_id" content="1520128344956383"
 
 = content_for :metadata

@@ -98,7 +98,7 @@ function SearchResults(props) {
   if (query) {
     numResultsDisplay = <div className="item num-results"><span className="bold">{numResults} {matchText}</span></div>;
     resultsDisplay = results.map((skatepark, index) => (
-      <div className={`item${index === activeResultIndex ? ' active' : ''}`} key={skatepark.id} onMouseEnter={handleMouseEnter} onClick={handleClick}>
+      <div className={`item${index === activeResultIndex ? ' active' : ''}`} key={skatepark.slug} onMouseEnter={handleMouseEnter} onClick={handleClick}>
         <a href={`/skateparks/${skatepark.slug}`} onClick={handleLinkClick}>{createBoldString(skatepark.string, skatepark.matchIndex, query)}</a>
       </div>
     ));

@@ -1,4 +1,10 @@
 module SkateparkHelper
+  STATE_ABBREVS = {
+    "california" => "CA",
+    "oregon" => "OR",
+    "washington" => "WA",
+  }.freeze
+
   def rating_phrase
     {
       1 => ["Garbage", "Don't even bother, this place sucks"],
@@ -10,11 +16,11 @@ module SkateparkHelper
   end
 
   def skatepark_og_meta_title(skatepark)
-    "#{skatepark} - #{skatepark.city.titleize}, #{state_abbrevs[skatepark.state]}"
+    "#{skatepark} - #{skatepark.city.titleize}, #{STATE_ABBREVS[skatepark.state]}"
   end
 
   def skatepark_description(skatepark)
-    "#{skatepark} in #{skatepark.city.titleize}, #{state_abbrevs[skatepark.state]} - photos, map, and info"
+    "#{skatepark} in #{skatepark.city.titleize}, #{STATE_ABBREVS[skatepark.state]} - photos, map, and info"
   end
 
   def num_empty_stars(rating)
@@ -27,10 +33,6 @@ module SkateparkHelper
 
   def num_stars(rating)
     rating.to_f.floor
-  end
-
-  def state_abbrevs
-    Location::STATE_ABBREVS
   end
 
   def info_icons
@@ -46,5 +48,14 @@ module SkateparkHelper
       "helmet" => "fa-hard-hat",
       "lights" => "fa-lightbulb",
     }
+  end
+
+  def skatepark_location(skatepark)
+    (
+      skatepark.address + ", " +
+      skatepark.city.titleize + ", " +
+      STATE_ABBREVS[skatepark.state] + " " +
+      (skatepark.zip_code || "")
+    ).strip
   end
 end

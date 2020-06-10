@@ -52,10 +52,8 @@ function SearchContainer() {
 
   const filterAndAddIndexOfMatch = () => {
     return function(skatepark) {
-      if (!skatepark.location) return false;
-
-      if (skatepark.name.indexOf(query) !== -1 || skatepark.location.city.indexOf(query) !== -1) {
-        skatepark.string = skatepark.name+", "+skatepark.location.city+", "+stateDisplay[skatepark.location.state];
+      if (skatepark.name.indexOf(query) !== -1 || skatepark.city.indexOf(query) !== -1) {
+        skatepark.string = skatepark.name+", "+skatepark.city+", "+stateDisplay[skatepark.state];
         skatepark.matchIndex = skatepark.string.indexOf(query);
         return true;
       } else {

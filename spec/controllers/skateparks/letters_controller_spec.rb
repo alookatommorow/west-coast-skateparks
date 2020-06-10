@@ -13,13 +13,9 @@ RSpec.describe Skateparks::LettersController, type: :controller do
     end
 
     it "renders parks in a specific state who's name begins with letter param" do
-      anusland = create(:location, state: "oregon", city: "Anusland")
-      assholeland = create(:location, state: "slutland", city: "Assholeland")
-      butteholeland = create(:location, state: "hookerland", city: "Butteholeland")
-
-      skatepark_a = create(:skatepark, location: anusland)
-      skatepark_a_washington = create(:skatepark, location: assholeland)
-      skatepark_b = create(:skatepark, location: butteholeland)
+      skatepark_a = create(:skatepark, state: "oregon", city: "Anusland")
+      skatepark_a_washington = create(:skatepark, state: "slutland", city: "Assholeland")
+      skatepark_b = create(:skatepark, state: "hookerland", city: "Butteholeland")
 
       get :show, params: {
         state_id: "oregon", letter: "a", page: 1
