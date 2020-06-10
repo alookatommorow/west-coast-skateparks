@@ -66,6 +66,8 @@ class SkateparksController < ApplicationController
   end
 
   def redirect_if_old_url
+    return unless Skatepark.find(params[:id]).nil?
+
     split_param = params[:id].split('-')
     if split_param[0].to_i > 0
       if %w(california oregon washington).exclude?(split_param.last)
