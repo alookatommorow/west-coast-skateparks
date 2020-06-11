@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200610171308) do
+ActiveRecord::Schema.define(version: 20200611073408) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -84,7 +84,7 @@ ActiveRecord::Schema.define(version: 20200610171308) do
   end
 
   create_table "skateparks", force: :cascade do |t|
-    t.string   "name"
+    t.string   "name",                   null: false
     t.string   "identifier"
     t.string   "rating"
     t.string   "material"
@@ -113,10 +113,10 @@ ActiveRecord::Schema.define(version: 20200610171308) do
     t.datetime "map_photo_updated_at"
     t.string   "slug"
     t.string   "address"
-    t.string   "city"
+    t.string   "city",                   null: false
     t.float    "latitude"
     t.float    "longitude"
-    t.string   "state"
+    t.string   "state",                  null: false
     t.string   "zip_code"
     t.index ["slug"], name: "index_skateparks_on_slug", unique: true, using: :btree
   end

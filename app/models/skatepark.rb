@@ -5,7 +5,7 @@
 #  id                     :integer          not null, primary key
 #  address                :string
 #  builder                :string
-#  city                   :string
+#  city                   :string           not null
 #  designer               :string
 #  helmet                 :string
 #  hero_content_type      :string
@@ -23,7 +23,7 @@
 #  map_photo_file_size    :bigint
 #  map_photo_updated_at   :datetime
 #  material               :string
-#  name                   :string
+#  name                   :string           not null
 #  notes                  :text
 #  obstacles              :text
 #  opened                 :string
@@ -32,7 +32,7 @@
 #  rating                 :string
 #  size                   :string
 #  slug                   :string
-#  state                  :string
+#  state                  :string           not null
 #  video_url              :string
 #  zip_code               :string
 #  created_at             :datetime
@@ -45,7 +45,7 @@
 class Skatepark < ActiveRecord::Base
   extend FriendlyId
 
- STATES = %w(california oregon washington)
+  STATES = %w(california oregon washington)
   VISIBLE_ATTRIBUTES = %w(
     hours
     material
@@ -59,8 +59,8 @@ class Skatepark < ActiveRecord::Base
 
   friendly_id :to_param, use: [:slugged, :finders]
 
-  validates :name, :city, :state, presence: true
-  validates :state, inclusion: { in: STATES }
+  validates :name, :city, presence: true
+  validates :state, presence: true, inclusion: { in: STATES }
 
   has_many :ratings, dependent: :destroy
   has_many :reviews, dependent: :destroy
