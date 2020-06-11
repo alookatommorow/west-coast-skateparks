@@ -18,7 +18,6 @@ module Admin
 
     def new
       skatepark = Skatepark.new
-      skatepark.build_location
       render locals: {
         page: Administrate::Page::Form.new(dashboard, skatepark)
       }
@@ -29,6 +28,11 @@ module Admin
       def resource_params
         params.require(:skatepark).permit(
           :skatepark_image_ids,
+          :city,
+          :state,
+          :address,
+          :latitude,
+          :longitude,
           :name,
           :rating,
           :material,
@@ -47,7 +51,6 @@ module Admin
           :photo_url,
           :video_url,
           :obstacles,
-          location_attributes: Skatepark::LOCATION_ATTRIBUTES,
         )
       end
   end

@@ -17,8 +17,7 @@ RSpec.feature "Admin can edit skateparks" do
   end
 
   context "when coordinates" do
-    let(:neighbor_location) { create(:location, latitude: 10.0555, longitude: -11.0555) }
-    let!(:neighbor_park) { create(:skatepark, location: neighbor_location) }
+    let!(:neighbor_park) { create(:skatepark, latitude: 10.0555, longitude: -11.0555) }
 
     context "are added" do
       scenario "neighbor_parks are associated to skatepark" do
@@ -32,10 +31,8 @@ RSpec.feature "Admin can edit skateparks" do
     end
 
     context "are updated" do
-      let(:old_location)          { create(:location, latitude: 56.200, longitude: -56.666) }
-      let!(:skatepark)            { create(:skatepark, location: old_location) }
-      let(:old_neighbor_location) { create(:location, latitude: 56.000, longitude: -56.5656) }
-      let!(:old_neighbor_park)    { create(:skatepark, location: old_neighbor_location) }
+      let!(:skatepark)            { create(:skatepark, latitude: 56.200, longitude: -56.666) }
+      let!(:old_neighbor_park)    { create(:skatepark, latitude: 56.000, longitude: -56.5656) }
 
       scenario "old neighbors are unassociated, new ones are added" do
         fill_in "Latitude", with: 9.9999

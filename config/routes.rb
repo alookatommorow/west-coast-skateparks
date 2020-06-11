@@ -38,7 +38,7 @@ Rails.application.routes.draw do
     resources :sessions, only: :create
   end
 
-  resources :skateparks do
+  resources :skateparks, param: :slug do
     resource :weather, only: :show, controller: 'skateparks/weather'
 
     member do

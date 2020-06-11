@@ -13,7 +13,11 @@ class SkateparkDashboard < Administrate::BaseDashboard
     ratings: Field::HasMany,
     reviews: Field::HasMany,
     skatepark_images: Field::HasMany,
-    location: Field::HasOne,
+    city: Field::String,
+    state: Field::Select.with_options(collection: ["california", "oregon", "washington"]),
+    address: Field::String,
+    latitude: Field::Number.with_options(decimals: 2),
+    longitude: Field::Number.with_options(decimals: 2),
     id: Field::Number,
     name: Field::String,
     identifier: Field::String,
@@ -47,14 +51,22 @@ class SkateparkDashboard < Administrate::BaseDashboard
     :id,
     :map_photo,
     :name,
-    :location,
+    :city,
+    :state,
+    :address,
+    :latitude,
+    :longitude,
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = [
     :skatepark_images,
-    :location,
+    :city,
+    :state,
+    :address,
+    :latitude,
+    :longitude,
     :id,
     :name,
     :rating,
@@ -85,6 +97,11 @@ class SkateparkDashboard < Administrate::BaseDashboard
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = [
+    :city,
+    :state,
+    :address,
+    :latitude,
+    :longitude,
     :hero,
     :map_photo,
     :skatepark_images,

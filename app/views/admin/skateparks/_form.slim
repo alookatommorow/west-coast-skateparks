@@ -7,17 +7,6 @@
         - page.resource.errors.full_messages.each do |message|
           li= message
 
-  = f.fields_for(:location, page.resource.location) do |ff|
-    - ["Address", "City", "State", "Zip Code", "Latitude", "Longitude"].each do |attribute|
-      - if attribute == "State"
-        .field-unit.field-unit--select
-          .field-unit__label
-            = ff.label :state
-          .field-unit__field
-            = ff.select :state, ["california", "oregon", "washington"]
-      - else
-        = nested_attribute_field_for(attribute, ff)
-
   - page.attributes.each do |attribute|
     div class=["field-unit", "field-unit--#{attribute.html_class}"]
       = render_field attribute, f: f
