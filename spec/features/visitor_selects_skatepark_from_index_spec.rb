@@ -2,10 +2,8 @@ require 'rails_helper'
 
 RSpec.feature 'Visitor selects skatepark from index' do
   scenario 'Sees working links for skateparks from each state', js: true do
-    oregon = create(:location, state: "oregon", city: "Bend")
-    washington = create(:location, state: "washington", city: "Seattle")
-    or_skatepark = create(:skatepark, location: oregon)
-    wa_skatepark = create(:skatepark, location: washington)
+    or_skatepark = create(:skatepark, state: "oregon", city: "Bend")
+    wa_skatepark = create(:skatepark, state: "washington", city: "Seattle")
 
     visit root_path
     click_link "Skateparks"

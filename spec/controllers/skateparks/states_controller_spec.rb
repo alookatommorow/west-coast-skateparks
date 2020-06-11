@@ -4,8 +4,7 @@ RSpec.describe Skateparks::StatesController, type: :controller do
   render_views
 
   describe '#show' do
-    let(:oregon) { create(:location, state: "oregon") }
-    let!(:or_skateparks) { create_list(:skatepark, 3, location: oregon) }
+    let!(:or_skateparks) { create_list(:skatepark, 3, state: "oregon") }
 
     it 'renders the _state partial' do
       expect(get :show,
@@ -16,8 +15,7 @@ RSpec.describe Skateparks::StatesController, type: :controller do
     end
 
     context "with skateparks in different states" do
-      let(:washington) { create(:location, state: "washington") }
-      let!(:wa_skatepark) { create(:skatepark, location: washington) }
+      let!(:wa_skatepark) { create(:skatepark, state: "washington") }
 
       it 'renders the skateparks in a state (paginated)' do
         get :show, params: {

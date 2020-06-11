@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200611073408) do
+ActiveRecord::Schema.define(version: 20200611160858) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,17 +34,6 @@ ActiveRecord::Schema.define(version: 20200611073408) do
     t.index ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true, using: :btree
     t.index ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type", using: :btree
     t.index ["sluggable_type", "sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_type_and_sluggable_id", using: :btree
-  end
-
-  create_table "locations", force: :cascade do |t|
-    t.integer "skatepark_id"
-    t.string  "address"
-    t.string  "city"
-    t.string  "state"
-    t.string  "zip_code"
-    t.float   "latitude"
-    t.float   "longitude"
-    t.index ["skatepark_id"], name: "index_locations_on_skatepark_id", using: :btree
   end
 
   create_table "ratings", force: :cascade do |t|
@@ -146,5 +135,4 @@ ActiveRecord::Schema.define(version: 20200611073408) do
     t.index ["user_id"], name: "index_visits_on_user_id", using: :btree
   end
 
-  add_foreign_key "locations", "skateparks"
 end

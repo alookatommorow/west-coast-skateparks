@@ -53,8 +53,7 @@ RSpec.feature "Admin can create skateparks" do
   end
 
   context "when there are other neighboring skateparks" do
-    let(:nearby)          { create(:location, latitude: 9.7777, longitude: -12.0001) }
-    let!(:neighbor_park)  { create(:skatepark, location: nearby) }
+    let!(:neighbor_park)  { create(:skatepark, latitude: 9.7777, longitude: -12.0001) }
     let!(:far_park)       { create(:skatepark, :far) }
 
     scenario "neighbor parks are automatically associated" do
