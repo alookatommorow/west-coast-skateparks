@@ -7,14 +7,14 @@ class AddLocationColumnsToSkateparks < ActiveRecord::Migration[5.0]
     add_column :skateparks, :state, :string
     add_column :skateparks, :zip_code, :string
 
-    Skatepark.includes(:location).all.each do |skatepark|
-      skatepark.update!(
-        address: skatepark.address,
-        city: skatepark.city,
-        latitude: skatepark.latitude,
-        longitude: skatepark.longitude,
-        state: skatepark.state,
-        zip_code: skatepark.zip_code,
+    Location.includes(:skatepark).all.each do |loc|
+      loc.skatepark.update!(
+        address: loc.address,
+        city: loc.city,
+        latitude: loc.latitude,
+        longitude: loc.longitude,
+        state: loc.state,
+        zip_code: loc.zip_code,
       )
     end
   end
