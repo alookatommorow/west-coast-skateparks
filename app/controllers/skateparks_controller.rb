@@ -45,9 +45,10 @@ class SkateparksController < ApplicationController
   end
 
   def search
-    @ca_parks = skateparks_json(Skatepark.includes(:location).in_state('california'))
-    @or_parks = skateparks_json(Skatepark.includes(:location).in_state('oregon'))
-    @wa_parks = skateparks_json(Skatepark.includes(:location).in_state('washington'))
+    @ca_parks = skateparks_json(Skatepark.in_state('california'))
+    @or_parks = skateparks_json(Skatepark.in_state('oregon'))
+    @wa_parks = skateparks_json(Skatepark.in_state('washington'))
+    @query = params[:query]
   end
 
   private

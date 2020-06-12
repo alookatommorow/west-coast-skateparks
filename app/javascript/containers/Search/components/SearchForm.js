@@ -2,7 +2,7 @@ import React, { useEffect, createRef } from 'react';
 import { PropTypes } from 'prop-types';
 
 const SearchForm = props => {
-  const { handleChange, loading } = props;
+  const { handleChange, loading, query } = props;
   const inputRef = createRef();
 
   useEffect(() => {
@@ -10,7 +10,7 @@ const SearchForm = props => {
   });
 
   return (
-    <form id="react-search-form">
+    <form action={`/skateparks/search?query=${query}`} id="react-search-form">
       <input
         ref={inputRef}
         id="react-search-input"

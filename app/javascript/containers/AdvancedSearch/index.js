@@ -4,10 +4,10 @@ import StarInput from 'components/StarInput';
 import { SKATEPARK_ATTRS } from './constants';
 
 function AdvancedSearch(props) {
-  const { caParks, orParks, waParks } = props;
+  const { caParks, orParks, waParks, initialQuery } = props;
   const [stars, setStars] = useState(1);
-  const [nameCity, setNameCity] = useState(null);
-  const [splitNameCity, setSplitNameCity] = useState(null);
+  const [nameCity, setNameCity] = useState(initialQuery);
+  const [splitNameCity, setSplitNameCity] = useState(initialQuery && initialQuery.split(' '));
   const [starsAtLeastIsOn, setStarsAtLeastIsOn] = useState(false);
   const [starsEqualIsOn, setStarsEqualIsOn] = useState(false);
   const [hasBeenSorted, setHasBeenSorted] = useState(false);
@@ -52,13 +52,8 @@ function AdvancedSearch(props) {
   const handleNameCityChange = event => {
     const { target: { value } } = event;
 
-    if (value === '') {
-      setNameCity(null);
-      setSplitNameCity(value);
-    } else {
-      setNameCity(value);
-      setSplitNameCity(value.split(' '));
-    }
+    setNameCity(value);
+    setSplitNameCity(value.split(' '));
   };
 
   const filterTextAttr = (skatepark, attr, filter) => {
@@ -123,7 +118,11 @@ function AdvancedSearch(props) {
       let nameCityMatch = false;
 
       if (exactMatchIsOn) {
-        if (filterTextAttr(skatepark, 'city', nameCity) || filterTextAttr(skatepark, 'name', nameCity)) {
+        if (filterTextAttr(skatepark, 'city', nameCity)) {
+          nameCityMatch = true;
+        }
+
+        if (filterTextAttr(skatepark, 'name', nameCity)) {
           nameCityMatch = true;
         }
       } else {
@@ -143,6 +142,8 @@ function AdvancedSearch(props) {
 
     return true;
   }
+
+  // const filterNameCity = query
 
   const keySort = event => {
     const keyCode = event.code || event.which;
@@ -203,7 +204,7 @@ function AdvancedSearch(props) {
             <label htmlFor="name-city" className="label">
               Name/City
             </label>
-            <input name="name-city" type="text" onChange={handleNameCityChange} />
+            <input name="name-city" type="text" value={nameCity} onChange={handleNameCityChange} />
             <label htmlFor="starsAtLeastIsOn">
               <input name="starsAtLeastIsOn" type="checkbox" checked={exactMatchIsOn} onChange={toggleExactMatchIsOn} />
                 Use exact match

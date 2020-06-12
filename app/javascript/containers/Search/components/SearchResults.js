@@ -5,28 +5,21 @@ import BoldString from 'components/BoldString';
 export const SearchResults = function(props) {
   const { exitResults, results, query } = props;
 
-  const [activeResultIndex, setActiveResultIndex] = useState(0);
   const [mouseIsActive, setMouseIsActive] = useState(false);
 
   useEffect(() => {
-    setActiveResultIndex(0);
-  }, [results]);
-
-  useEffect(() => {
-    // update the listener whenever results or active result change
+    // update the listener whenever results change
     window.addEventListener('keydown', handleKeyDown);
 
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [results, activeResultIndex]);
+  }, [results]);
 
   const handleMouseLeave = () => {
-    setActiveResultIndex(0);
     setMouseIsActive(false);
   };
 
   const handleMouseEnter = () => {
     setMouseIsActive(true);
-    setActiveResultIndex(null);
   };
 
   const handleClick = event => {
@@ -35,44 +28,15 @@ export const SearchResults = function(props) {
     }
   };
 
-  const selectNext = () => {
-    if (activeResultIndex < results.length - 1) {
-      setActiveResultIndex(activeResultIndex + 1);
-    }
-  };
-
-  const selectPrevious = () => {
-    if (activeResultIndex > 0) {
-      setActiveResultIndex(activeResultIndex - 1);
-    }
-  };
-
   const handleKeyDown = event => {
     event = event || window.event;
     switch(event.which || event.keyCode) {
-      case 40: // down
-        if (!mouseIsActive) selectNext();
-      break;
-
-      case 38: //up
-        if (!mouseIsActive) selectPrevious();
-      break;
-
-      case 13: // enter
-        event.preventDefault();
-        visitSelectedLink();
-      break;
-
       case 27: // esc
         exitResults();
       break;
 
       default: return; // exit this handler for other keys
     }
-  };
-
-  const visitSelectedLink = () => {
-    Turbolinks.visit(`/skateparks/${results[activeResultIndex].slug}`);
   };
 
   const handleLinkClick = event => {
@@ -91,14 +55,15 @@ export const SearchResults = function(props) {
         </div>
       )}
       <div>
-        {query && results.map((skatepark, index) => (
+        {query && results.map(skatepark => (
           <div
-            className={`item${index === activeResultIndex ? ' active' : ''}`}
-            key={skatepark.id} onMouseEnter={handleMouseEnter}
+            className="item"
+            key={skatepark.id}
+            onMouseEnter={handleMouseEnter}
             onClick={handleClick}
           >
             <a
-              href={generateLink(skatepark)}
+              href={`/skateparks/${skatepark.slug}`}
               onClick={handleLinkClick}
             >
               <BoldString
