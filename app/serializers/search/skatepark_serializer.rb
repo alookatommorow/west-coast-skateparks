@@ -10,6 +10,7 @@ module Search
       :longitude,
       :map_photo,
       :rating,
+      :obstacles
     )
 
     def map_photo

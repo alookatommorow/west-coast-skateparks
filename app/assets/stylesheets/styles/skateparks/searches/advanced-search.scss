@@ -37,7 +37,8 @@
       }
 
       .field {
-        margin-right: 20px;
+        margin-right: 40px;
+        margin-bottom: 8px;
 
         label {
           font-size: 16px;
@@ -50,9 +51,14 @@
     }
   }
 
+  .num-results {
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 36px;
+  }
 
   .table {
-    margin-top: 56px;
+    margin-top: 24px;
 
     .row {
       display: flex;
@@ -105,11 +111,24 @@
   }
 
   .table .column {
+    margin-right: 10px;
     flex: 1;
     display: flex;
 
+    &.state {
+      text-transform: capitalize;
+    }
+
+    &.name, &.city, &.obstacles {
+      flex: 2;
+    }
+
     &.dark-text {
       color: #131e40;
+    }
+
+    &:last-child {
+      margin-right: 0;
     }
   }
 

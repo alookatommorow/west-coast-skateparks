@@ -8,10 +8,12 @@ function AdvancedSearch(props) {
   const [stars, setStars] = useState(1);
   const [nameCity, setNameCity] = useState(initialQuery);
   const [splitNameCity, setSplitNameCity] = useState(initialQuery && initialQuery.split(' '));
+  const [obstacles, setObstacles] = useState(null);
+  const [splitObstacles, setSplitObstacles] = useState(null);
   const [starsAtLeastIsOn, setStarsAtLeastIsOn] = useState(false);
   const [starsEqualIsOn, setStarsEqualIsOn] = useState(false);
   const [hasBeenSorted, setHasBeenSorted] = useState(false);
-  const { toggleIsOn: exactMatchIsOn, toggle: toggleExactMatchIsOn } = useToggle(false);
+  const { toggleIsOn: exactMatchIsOn, toggle: toggleExactMatchIsOn } = useToggle(true);
   const { toggleIsOn: ca, toggle: toggleCa } = useToggle(true);
   const { toggleIsOn: or, toggle: toggleOr } = useToggle(true);
   const { toggleIsOn: wa, toggle: toggleWa } = useToggle(true);
@@ -56,14 +58,21 @@ function AdvancedSearch(props) {
     setSplitNameCity(value.split(' '));
   };
 
-  const filterTextAttr = (skatepark, attr, filter) => {
+  const handleObstaclesChange = event => {
+    const { target: { value } } = event;
+
+    setObstacles(value);
+    setSplitObstacles(value.split(' '));
+  };
+
+  const filterTextAttr = (skatepark, attr, filter, useExact) => {
     if (!skatepark[attr]) return false;
 
     let splitValue = skatepark[attr].toLowerCase().split(' ');
     let hasMatch = false;
     let matchIndex;
 
-    if (!exactMatchIsOn && splitValue.length > 1) {
+    if (!useExact && splitValue.length > 1) {
       if (Object.values(skatepark.matches[attr]) === splitValue.length) return true;
 
       skatepark.displayHtmlStrings[attr] = splitValue.map((str, index) => {
@@ -104,7 +113,7 @@ function AdvancedSearch(props) {
 
   const filterSkateparks = skatepark => {
     skatepark.displayHtmlStrings = {};
-    skatepark.matches = { city: {}, name: {} };
+    skatepark.matches = { city: {}, name: {}, obstacles: {} };
 
     if (starsAtLeastIsOn && (Number(skatepark.rating) < Number(stars))) {
       return false;
@@ -114,24 +123,24 @@ function AdvancedSearch(props) {
       return false;
     }
 
-    if (nameCity) {
+    if (nameCity && nameCity !== '') {
       let nameCityMatch = false;
 
       if (exactMatchIsOn) {
-        if (filterTextAttr(skatepark, 'city', nameCity)) {
+        if (filterTextAttr(skatepark, 'city', nameCity, exactMatchIsOn)) {
           nameCityMatch = true;
         }
 
-        if (filterTextAttr(skatepark, 'name', nameCity)) {
+        if (filterTextAttr(skatepark, 'name', nameCity, exactMatchIsOn)) {
           nameCityMatch = true;
         }
       } else {
         splitNameCity.filter(query => query !== '').map(query => {
-          if (filterTextAttr(skatepark, 'city', query)) {
+          if (filterTextAttr(skatepark, 'city', query, exactMatchIsOn)) {
             nameCityMatch = true;
           }
 
-          if (filterTextAttr(skatepark, 'name', query)) {
+          if (filterTextAttr(skatepark, 'name', query, exactMatchIsOn)) {
             nameCityMatch = true;
           }
         });
@@ -140,10 +149,20 @@ function AdvancedSearch(props) {
       if (!nameCityMatch) return false;
     }
 
+    if (obstacles && obstacles !== '') {
+      let obstaclesMatch = false;
+
+      splitObstacles.filter(query => query !== '').map(query => {
+        if (filterTextAttr(skatepark, 'obstacles', query, false)) {
+          obstaclesMatch = true;
+        }
+      });
+
+      if (!obstaclesMatch) return false;
+    }
+
     return true;
   }
-
-  // const filterNameCity = query
 
   const keySort = event => {
     const keyCode = event.code || event.which;
@@ -188,12 +207,14 @@ function AdvancedSearch(props) {
   const displayAttr = (park, attr) => {
     if (park.displayHtmlStrings && park.displayHtmlStrings[attr]) {
       return <span dangerouslySetInnerHTML={{ __html: park.displayHtmlStrings[attr] }} />;
-    } else if (park[attr] && (attr === 'name' || attr === 'city')) {
+    } else if (park[attr] && (attr === 'name' || attr === 'city' || attr === 'obstacles')) {
       return titleize(park[attr])
     }
 
     return park[attr];
   }
+
+  const filteredParks = filterParks();
 
   return (
     <div className="advanced-search-container">
@@ -205,10 +226,6 @@ function AdvancedSearch(props) {
               Name/City
             </label>
             <input name="name-city" type="text" value={nameCity} onChange={handleNameCityChange} />
-            <label htmlFor="starsAtLeastIsOn">
-              <input name="starsAtLeastIsOn" type="checkbox" checked={exactMatchIsOn} onChange={toggleExactMatchIsOn} />
-                Use exact match
-            </label>
           </div>
           <div className="field column states">
             <label htmlFor="states" className="label">
@@ -251,16 +268,30 @@ function AdvancedSearch(props) {
               />
             </div>
           </div>
+          <div className="field">
+            <label htmlFor="obstacles" className="label">
+              Obstacles
+            </label>
+            <input name="obstacles" type="text" onChange={handleObstaclesChange} />
+          </div>
+        </div>
+        <div className="row">
+          <label htmlFor="starsAtLeastIsOn">
+            <input name="starsAtLeastIsOn" type="checkbox" checked={exactMatchIsOn} onChange={toggleExactMatchIsOn} />
+              Use exact match
+          </label>
         </div>
       </form>
-      <p>{skateparks.length}</p>
+      <p className="num-results">
+        {filteredParks.length} {`Result${filteredParks.length === 1 ? '' : 's'}`}
+      </p>
       <div className="table">
         <div className="row table-header">
           {
             SKATEPARK_ATTRS.map(attrObj => (
               <div
                 key={attrObj.name}
-                className="column"
+                className={`column ${attrObj.name}`}
                 name={attrObj.name}
                 role="button"
                 tabIndex="0"
@@ -275,14 +306,17 @@ function AdvancedSearch(props) {
             ))
           }
         </div>
-        {filterParks().map(park => (
+        {filteredParks.map(park => (
           <a
             href={`/skateparks/${park.slug}`}
             key={park.slug}
             className="row"
           >
             {SKATEPARK_ATTRS.map(attrObj => (
-              <div className="column" key={`${park.slug}-${attrObj.name}`}>
+              <div
+                className={`column ${attrObj.name}`}
+                key={`${park.slug}-${attrObj.name}`}
+              >
                 {displayAttr(park, attrObj.name)}
               </div>
             ))}
