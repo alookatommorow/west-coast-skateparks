@@ -2,22 +2,17 @@ import React, { useEffect, createRef } from 'react';
 import { PropTypes } from 'prop-types';
 
 const SearchForm = props => {
-  const { handleChange, loading, query } = props;
-  const inputRef = createRef();
-
-  useEffect(() => {
-    inputRef.current.focus();
-  });
+  const { handleChange, query, getSkateparks } = props;
 
   return (
     <form action={`/skateparks/search?query=${query}`} id="react-search-form">
       <input
-        ref={inputRef}
         id="react-search-input"
-        placeholder={loading ? 'Loading, please wait...' : 'e.g. San Francisco'}
+        placeholder={'e.g. San Francisco'}
         type="text"
         name="query"
         onChange={handleChange}
+        onFocus={getSkateparks}
       />
       <i className="fa fa-search"></i>
     </form>
@@ -26,7 +21,8 @@ const SearchForm = props => {
 
 SearchForm.propTypes = {
   handleChange: PropTypes.func.isRequired,
-  loading: PropTypes.bool.isRequired,
+  getSkateparks: PropTypes.func.isRequired,
+  query: PropTypes.string,
 };
 
 export default SearchForm;

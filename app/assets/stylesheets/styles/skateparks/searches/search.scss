@@ -66,9 +66,13 @@
       overflow-y: auto;
       position: absolute;
       right: 0;
+      border-radius: 3px;
+      box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
 
       .num-results {
-        text-align: center;
+        padding: 14px 0.5rem;
+        margin: 0;
+        font-size: 16px;
       }
 
       .item {
@@ -76,10 +80,6 @@
 
         a {
           color: black;
-        }
-
-        &.active:not(.num-results) {
-          background-color: $gray;
         }
       }
 

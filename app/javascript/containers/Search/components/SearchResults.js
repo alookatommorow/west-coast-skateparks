@@ -3,9 +3,7 @@ import { PropTypes } from 'prop-types';
 import BoldString from 'components/BoldString';
 
 export const SearchResults = function(props) {
-  const { exitResults, results, query } = props;
-
-  const [mouseIsActive, setMouseIsActive] = useState(false);
+  const { exitResults, results, query, isLoading } = props;
 
   useEffect(() => {
     // update the listener whenever results change
@@ -13,14 +11,6 @@ export const SearchResults = function(props) {
 
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [results]);
-
-  const handleMouseLeave = () => {
-    setMouseIsActive(false);
-  };
-
-  const handleMouseEnter = () => {
-    setMouseIsActive(true);
-  };
 
   const handleClick = event => {
     if (event.target.firstChild) {
@@ -48,18 +38,20 @@ export const SearchResults = function(props) {
   const numResults = results.length;
 
   return (
-    <div id="react-search-results" className="divided selection list" onKeyDown={handleKeyDown} onMouseLeave={handleMouseLeave} >
+    <div id="react-search-results" className="divided selection list" onKeyDown={handleKeyDown}>
       {query && (
-        <div className="item num-results">
-          <span className="bold">{numResults} {numResults === 1 ? 'Match' : 'Matches'}</span>
-        </div>
+          <p className="num-results">
+            {isLoading ?
+              'Loading...' :
+              `${numResults} ${numResults === 1 ? 'Match' : 'Matches'}`
+            }
+          </p>
       )}
       <div>
         {query && results.map(skatepark => (
           <div
             className="item"
-            key={skatepark.id}
-            onMouseEnter={handleMouseEnter}
+            key={`quick-search-${skatepark.slug}`}
             onClick={handleClick}
           >
             <a
@@ -83,6 +75,7 @@ SearchResults.propTypes = {
   exitResults: PropTypes.func.isRequired,
   results: PropTypes.array.isRequired,
   query: PropTypes.string,
+  isLoading: PropTypes.bool.isRequired,
 };
 
 export default props => <SearchResults {...props} />

@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import useToggle from 'hooks/useToggle';
 import StarInput from 'components/StarInput';
+import Stars from 'components/Stars';
 import { SKATEPARK_ATTRS } from './constants';
 
 function AdvancedSearch(props) {
@@ -209,6 +210,10 @@ function AdvancedSearch(props) {
       return <span dangerouslySetInnerHTML={{ __html: park.displayHtmlStrings[attr] }} />;
     } else if (park[attr] && (attr === 'name' || attr === 'city' || attr === 'obstacles')) {
       return titleize(park[attr])
+    } else if (park[attr] && (attr === 'rating')) {
+      return <Stars stars={park[attr]} prefix={`${park.slug}-stars`} tiny/>;
+    } else if (park[attr] && (attr === 'map_photo')) {
+      return <img src={park[attr]} />;
     }
 
     return park[attr];
@@ -287,6 +292,7 @@ function AdvancedSearch(props) {
       </p>
       <div className="table">
         <div className="row table-header">
+          <div className="column"/>
           {
             SKATEPARK_ATTRS.map(attrObj => (
               <div
@@ -312,14 +318,21 @@ function AdvancedSearch(props) {
             key={park.slug}
             className="row"
           >
-            {SKATEPARK_ATTRS.map(attrObj => (
-              <div
-                className={`column ${attrObj.name}`}
-                key={`${park.slug}-${attrObj.name}`}
-              >
-                {displayAttr(park, attrObj.name)}
-              </div>
-            ))}
+            <div
+              className="column photo"
+            >
+              {displayAttr(park, "map_photo")}
+            </div>
+            {SKATEPARK_ATTRS.map(attrObj => {
+              return (
+                <div
+                  className={`column ${attrObj.name}`}
+                  key={`${park.slug}-${attrObj.name}`}
+                >
+                  {displayAttr(park, attrObj.name)}
+                </div>
+              );
+            })}
           </a>
         ))}
       </div>
