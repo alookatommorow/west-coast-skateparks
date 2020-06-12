@@ -286,53 +286,49 @@ function AdvancedSearch(props) {
               Use exact match
           </label>
         </div>
-      </form>
-      <p className="num-results">
-        {filteredParks.length} {`Result${filteredParks.length === 1 ? '' : 's'}`}
-      </p>
-      <div className="table">
-        <div className="row table-header">
-          <div className="column"/>
-          {
-            SKATEPARK_ATTRS.map(attrObj => (
-              <div
-                key={attrObj.name}
-                className={`column ${attrObj.name}`}
-                name={attrObj.name}
-                role="button"
-                tabIndex="0"
-                onClick={handleTableHeaderClick}
-                onKeyDown={keySort}
-              >
-                {attrObj.text}
-                {isSorted(attrObj.name) && (
-                  <i className={`fas fa-arrow-down sort-arrow${hasSortDirection(attrObj.name)}`}></i>
-                )}
-              </div>
-            ))
-          }
+        <p className="num-results">
+          {filteredParks.length} {`Result${filteredParks.length === 1 ? '' : 's'}`}
+        </p>
+        <div className="field sort-by">
+          <label className="label">
+            Sort by
+          </label>
+          <div className="row">
+            {
+              SKATEPARK_ATTRS.map(attrObj => attrObj.name !== 'obstacles' && (
+                <div
+                  key={attrObj.name}
+                  className="sort-button"
+                  name={attrObj.name}
+                  role="button"
+                  tabIndex="0"
+                  onClick={handleTableHeaderClick}
+                  onKeyDown={keySort}
+                >
+                  {attrObj.text}
+                  {isSorted(attrObj.name) && (
+                    <i className={`fas fa-arrow-down sort-arrow${hasSortDirection(attrObj.name)}`}></i>
+                  )}
+                </div>
+              ))
+            }
+          </div>
         </div>
+      </form>
+      <div className="table">
         {filteredParks.map(park => (
           <a
             href={`/skateparks/${park.slug}`}
             key={park.slug}
             className="row"
           >
-            <div
-              className="column photo"
-            >
-              {displayAttr(park, "map_photo")}
+            <div className="photo">
+              {displayAttr(park, 'map_photo')}
             </div>
-            {SKATEPARK_ATTRS.map(attrObj => {
-              return (
-                <div
-                  className={`column ${attrObj.name}`}
-                  key={`${park.slug}-${attrObj.name}`}
-                >
-                  {displayAttr(park, attrObj.name)}
-                </div>
-              );
-            })}
+            <div className="main-text">
+              <p>{displayAttr(park, 'name')}</p>
+
+            </div>
           </a>
         ))}
       </div>

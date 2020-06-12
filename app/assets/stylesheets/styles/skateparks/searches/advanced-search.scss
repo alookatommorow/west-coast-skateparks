@@ -7,6 +7,10 @@
       padding: 5px 8px;
     }
 
+    .label {
+      font-size: 16px;
+    }
+
     .row {
       display: flex;
 
@@ -40,10 +44,6 @@
         margin-right: 40px;
         margin-bottom: 8px;
 
-        label {
-          font-size: 16px;
-        }
-
         .column {
           margin-right: 8px;
         }
@@ -55,6 +55,39 @@
     font-size: 18px;
     font-weight: bold;
     margin-top: 36px;
+  }
+
+  .sort-by {
+
+    .sort-button {
+      outline: none;
+      display: flex;
+      align-items: center;
+      font-size: 16px;
+      transition: color 0.3s ease;
+      padding: 10px;
+      margin-right: 20px;
+      border: 1px solid $dark-gray;
+      border-radius: 3px;
+
+      &:hover {
+        cursor: pointer;
+        color: $orange;
+      }
+
+      &.dark-text {
+        font-weight: bold;
+      }
+    }
+
+    .sort-arrow.asc {
+      transform: rotate(180deg);
+    }
+
+    i {
+      margin-left: 8px;
+      font-size: 12px;
+    }
   }
 
   .table {
@@ -80,55 +113,12 @@
       }
     }
 
-    .table-header {
-
-      .column {
-        outline: none;
-        display: flex;
-        align-items: center;
-        font-size: 16px;
-        transition: color 0.3s ease;
-
-        &:hover {
-          cursor: pointer;
-          color: $orange;
-        }
-
-        &.dark-text {
-          font-weight: bold;
-        }
-      }
-
-      .sort-arrow.asc {
-        transform: rotate(180deg);
-      }
-
-      i {
-        margin-left: 8px;
-        font-size: 12px;
-      }
-    }
-  }
-
-  .table .column {
-    margin-right: 10px;
-    flex: 1;
-    display: flex;
-
-    &.state {
+    .state {
       text-transform: capitalize;
     }
 
-    &.name, &.city, &.obstacles {
+    .name, .city, .obstacles {
       flex: 2;
-    }
-
-    &.dark-text {
-      color: #131e40;
-    }
-
-    &:last-child {
-      margin-right: 0;
     }
   }
 
