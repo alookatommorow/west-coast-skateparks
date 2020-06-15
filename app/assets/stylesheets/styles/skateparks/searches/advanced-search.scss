@@ -15,6 +15,7 @@
 
     .row {
       display: flex;
+      align-items: center;
 
       .column {
         display: flex;
@@ -85,6 +86,10 @@
         &:hover {
           background: $dark-gray
         }
+      }
+
+      img {
+        width: 100px;
       }
 
       .column {

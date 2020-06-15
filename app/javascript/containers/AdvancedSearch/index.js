@@ -40,8 +40,6 @@ function AdvancedSearch(props) {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  console.log(isMobile)
-
   useEffect(() => {
     if (starsAtLeastIsOn) setStarsEqualIsOn(false);
   }, [starsAtLeastIsOn]);
@@ -259,17 +257,41 @@ function AdvancedSearch(props) {
               State
             </label>
             <div className="row">
-              <label htmlFor="california">
-                <input name="california" type="checkbox" checked={ca} onChange={toggleCa} />
+              <label htmlFor="california" className="checkbox-container">
                 CA
+                <input
+                  id="california"
+                  name="california"
+                  type="checkbox"
+                  className="checkbox"
+                  checked={ca}
+                  onChange={toggleCa}
+                />
+                <span className="checkmark"/>
               </label>
-              <label htmlFor="oregon">
-                <input name="oregon" type="checkbox" checked={or} onChange={toggleOr} />
+              <label htmlFor="oregon" className="checkbox-container">
                 OR
+                <input
+                  id="oregon"
+                  name="oregon"
+                  type="checkbox"
+                  className="checkbox"
+                  checked={or}
+                  onChange={toggleOr}
+                />
+                <span className="checkmark"/>
               </label>
-              <label htmlFor="washington">
-                <input name="washington" type="checkbox" checked={wa} onChange={toggleWa} />
+              <label htmlFor="washington" className="checkbox-container">
                 WA
+                <input
+                  id="washington"
+                  name="washington"
+                  type="checkbox"
+                  className="checkbox"
+                  checked={wa}
+                  onChange={toggleWa}
+                />
+                <span className="checkmark"/>
               </label>
             </div>
           </div>
@@ -279,13 +301,33 @@ function AdvancedSearch(props) {
             </label>
             <div className="row">
               <div className="column">
-                <label htmlFor="starsAtLeastIsOn">
-                  <input name="starsAtLeastIsOn" type="checkbox" checked={starsAtLeastIsOn} onChange={togglestarsAtLeastIsOn} />
+                <label
+                  htmlFor="starsAtLeastIsOn"
+                  className="checkbox-container tiny"
+                >
                   at least
+                  <input
+                    id="starsAtLeastIsOn"
+                    name="starsAtLeastIsOn"
+                    type="checkbox"
+                    checked={starsAtLeastIsOn}
+                    onChange={togglestarsAtLeastIsOn}
+                  />
+                  <span className="checkmark" />
                 </label>
-                <label htmlFor="starsEqualIsOn">
-                  <input name="starsEqualIsOn" type="checkbox" checked={starsEqualIsOn} onChange={toggleStarsEqualIsOn} />
+                <label
+                  htmlFor="starsEqualIsOn"
+                  className="checkbox-container tiny"
+                >
                   equal to
+                  <input
+                    id="starsEqualIsOn"
+                    name="starsEqualIsOn"
+                    type="checkbox"
+                    checked={starsEqualIsOn}
+                    onChange={toggleStarsEqualIsOn}
+                  />
+                  <span className="checkmark" />
                 </label>
               </div>
               <StarInput
