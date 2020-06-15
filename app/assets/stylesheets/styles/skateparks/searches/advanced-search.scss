@@ -2,6 +2,8 @@
   padding: 40px;
 
   form {
+    margin-bottom: 24px;
+
     select {
       width: 50px;
       padding: 5px 8px;
@@ -41,8 +43,17 @@
       }
 
       .field {
-        margin-right: 40px;
-        margin-bottom: 8px;
+        padding-right: 40px;
+        margin-bottom: 16px;
+
+        &.name-city {
+          position: relative;
+
+          .row {
+            position: absolute;
+            bottom: -24px;
+          }
+        }
 
         .column {
           margin-right: 8px;
@@ -57,43 +68,7 @@
     margin-top: 36px;
   }
 
-  .sort-by {
-
-    .sort-button {
-      outline: none;
-      display: flex;
-      align-items: center;
-      font-size: 16px;
-      transition: color 0.3s ease;
-      padding: 10px;
-      margin-right: 20px;
-      border: 1px solid $dark-gray;
-      border-radius: 3px;
-
-      &:hover {
-        cursor: pointer;
-        color: $orange;
-      }
-
-      &.dark-text {
-        font-weight: bold;
-      }
-    }
-
-    .sort-arrow.asc {
-      transform: rotate(180deg);
-    }
-
-    i {
-      margin-left: 8px;
-      font-size: 12px;
-    }
-  }
-
-  .table {
-    margin-top: 24px;
-
-    .row {
+    a.row, .table-header {
       display: flex;
       align-items: center;
       color: $black;
@@ -111,18 +86,110 @@
           background: $dark-gray
         }
       }
+
+      .column {
+        margin-right: 10px;
+        flex: 1;
+        display: flex;
+
+        &.state {
+          text-transform: capitalize;
+        }
+
+        &.name, &.city, &.obstacles {
+          flex: 2;
+        }
+
+        &.dark-text {
+          color: #131e40;
+        }
+
+        &:last-child {
+          margin-right: 0;
+        }
+      }
+
+      .photo {
+        margin-right: 24px;
+      }
+
+      .name {
+        font-size: 16px;
+      }
     }
 
-    .state {
-      text-transform: capitalize;
+    .table-header {
+      .column {
+        align-items: center;
+        font-size: 16px;
+        transition: color 0.3s ease;
+
+        &:hover {
+          cursor: pointer;
+          color: $orange;
+        }
+      }
+
+      .sort-arrow.asc {
+        transform: rotate(180deg);
+      }
+
+      i {
+        margin-left: 8px;
+        font-size: 12px;
+      }
     }
 
-    .name, .city, .obstacles {
-      flex: 2;
-    }
-  }
+  @media #{$mobile} {
+    padding: 20px 14px;
 
-  .sourcing-container.index .column.applicants img {
-    margin-right: 4px;
+    .sort-button {
+      outline: none;
+      display: flex;
+      align-items: center;
+      font-size: 16px;
+      transition: color 0.3s ease;
+      padding: 10px;
+      margin-right: 20px;
+      border: 1px solid $dark-gray;
+      border-radius: 3px;
+
+      &.obstacles {
+        display: none;
+      }
+    }
+
+    .table-header {
+      padding: 16px 0;
+    }
+
+    a.row {
+      padding: 16px 0;
+
+      .column {
+        flex: none;
+      }
+    }
+
+    form {
+      .num-results {
+        margin-top: 12px;
+      }
+
+      > .row {
+        flex-wrap: wrap;
+        justify-content: space-between;
+
+        .field {
+          flex-basis: 48%;
+          padding: 0;
+          margin-bottom: 36px;
+
+          .row {
+            align-items: center;
+          }
+        }
+      }
+    }
   }
 }

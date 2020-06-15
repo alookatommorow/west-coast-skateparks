@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 function StarInput(props) {
-  const { stars, showError, setStars } = props;
+  const { stars, showError, setStars, tiny } = props;
   const maxStars = 5;
 
   const handleStarsChange = event => {
@@ -28,7 +28,7 @@ function StarInput(props) {
           value={i + 1}
           checked={stars === i + 1}
         />
-        <i className="star fas fa-star" />
+        <i className={`star fas fa-star ${showError && 'error'} ${tiny && 'tiny'}`} />
       </label>
     ));
   }
@@ -46,7 +46,7 @@ function StarInput(props) {
           checked={stars === (stars + i + 1)}
           onChange={handleStarsChange}
         />
-        <i className={`star far fa-star ${showError && 'error'}`} />
+        <i className={`star far fa-star ${showError && 'error'} ${tiny && 'tiny'}`} />
       </label>
     ));
   }
@@ -63,10 +63,12 @@ StarInput.propTypes = {
   stars: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   setStars: PropTypes.func.isRequired,
   showError: PropTypes.bool,
+  tiny: PropTypes.bool,
 };
 
 StarInput.defaultProps = {
   showError: false,
+  tiny: false,
 };
 
 export default props => <StarInput {...props} />

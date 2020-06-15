@@ -21,10 +21,26 @@ function AdvancedSearch(props) {
   const [skateparks, setSkateparks] = useState([...caParks, ...orParks, ...waParks ]);
   const [sortAttr, setSortAttr] = useState('state');
   const [sortDirection, setSortDirection] = useState('asc');
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 767);
 
   useEffect(() => {
     if (!starsAtLeastIsOn && !starsEqualIsOn) setStarsAtLeastIsOn(true);
   }, [stars]);
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (!isMobile && window.innerWidth <= 767) {
+        setIsMobile(true);
+      } else if (isMobile && window.innerWidth > 767) {
+        setIsMobile(false);
+      }
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  console.log(isMobile)
 
   useEffect(() => {
     if (starsAtLeastIsOn) setStarsEqualIsOn(false);
@@ -208,7 +224,7 @@ function AdvancedSearch(props) {
   const displayAttr = (park, attr) => {
     if (park.displayHtmlStrings && park.displayHtmlStrings[attr]) {
       return <span dangerouslySetInnerHTML={{ __html: park.displayHtmlStrings[attr] }} />;
-    } else if (park[attr] && (attr === 'name' || attr === 'city' || attr === 'obstacles')) {
+    } else if (park[attr] && (attr === 'name' || attr === 'city' || attr === 'state' || attr === 'obstacles')) {
       return titleize(park[attr])
     } else if (park[attr] && (attr === 'rating')) {
       return <Stars stars={park[attr]} prefix={`${park.slug}-stars`} tiny/>;
@@ -226,11 +242,17 @@ function AdvancedSearch(props) {
       <h2>Advanced Search</h2>
       <form>
         <div className="row">
-          <div className="field">
+          <div className="field name-city">
             <label htmlFor="name-city" className="label">
               Name/City
             </label>
             <input name="name-city" type="text" value={nameCity} onChange={handleNameCityChange} />
+            <div className="row">
+              <label htmlFor="exactMatchIsOn">
+                <input name="exactMatchIsOn" type="checkbox" checked={exactMatchIsOn} onChange={toggleExactMatchIsOn} />
+                Use exact match
+              </label>
+            </div>
           </div>
           <div className="field column states">
             <label htmlFor="states" className="label">
@@ -270,6 +292,7 @@ function AdvancedSearch(props) {
                 stars={stars}
                 handleClick={handleStarsChange}
                 setStars={setStars}
+                tiny={isMobile}
               />
             </div>
           </div>
@@ -280,58 +303,69 @@ function AdvancedSearch(props) {
             <input name="obstacles" type="text" onChange={handleObstaclesChange} />
           </div>
         </div>
-        <div className="row">
-          <label htmlFor="starsAtLeastIsOn">
-            <input name="starsAtLeastIsOn" type="checkbox" checked={exactMatchIsOn} onChange={toggleExactMatchIsOn} />
-              Use exact match
-          </label>
-        </div>
         <p className="num-results">
           {filteredParks.length} {`Result${filteredParks.length === 1 ? '' : 's'}`}
         </p>
-        <div className="field sort-by">
-          <label className="label">
-            Sort by
-          </label>
-          <div className="row">
-            {
-              SKATEPARK_ATTRS.map(attrObj => attrObj.name !== 'obstacles' && (
-                <div
-                  key={attrObj.name}
-                  className="sort-button"
-                  name={attrObj.name}
-                  role="button"
-                  tabIndex="0"
-                  onClick={handleTableHeaderClick}
-                  onKeyDown={keySort}
-                >
-                  {attrObj.text}
-                  {isSorted(attrObj.name) && (
-                    <i className={`fas fa-arrow-down sort-arrow${hasSortDirection(attrObj.name)}`}></i>
-                  )}
-                </div>
-              ))
-            }
-          </div>
-        </div>
       </form>
-      <div className="table">
-        {filteredParks.map(park => (
-          <a
-            href={`/skateparks/${park.slug}`}
-            key={park.slug}
-            className="row"
-          >
-            <div className="photo">
-              {displayAttr(park, 'map_photo')}
+      {isMobile && (
+        <div className="field">
+          <label className="label">Sort by</label>
+        </div>
+      )}
+      <div className="table-header">
+        {!isMobile && <div className="column photo" />}
+        {
+          SKATEPARK_ATTRS.map(attrObj => (
+            <div
+              key={attrObj.name}
+              className={`column sort-button ${attrObj.name}`}
+              name={attrObj.name}
+              role="button"
+              tabIndex="0"
+              onClick={handleTableHeaderClick}
+              onKeyDown={keySort}
+            >
+              {attrObj.text}
+              {isSorted(attrObj.name) && (
+                <i className={`fas fa-arrow-down sort-arrow${hasSortDirection(attrObj.name)}`}></i>
+              )}
             </div>
-            <div className="main-text">
-              <p>{displayAttr(park, 'name')}</p>
-
-            </div>
-          </a>
-        ))}
+          ))
+        }
       </div>
+      {filteredParks.map(park => (
+        <a
+          href={`/skateparks/${park.slug}`}
+          key={park.slug}
+          className="row"
+        >
+          <div
+            className="column photo"
+          >
+            {displayAttr(park, "map_photo")}
+          </div>
+          {isMobile ? (
+            <React.Fragment>
+              <div className="main-text">
+                <p className="name">{displayAttr(park, 'name')}</p>
+                <p>{displayAttr(park, 'city')},  {displayAttr(park, 'state')}</p>
+                {displayAttr(park, 'rating')}
+              </div>
+
+            </React.Fragment>
+          ) : (
+            SKATEPARK_ATTRS.map(attrObj => (
+              <div
+                className={`column ${attrObj.name}`}
+                key={`${park.slug}-${attrObj.name}`}
+              >
+                {displayAttr(park, attrObj.name)}
+              </div>
+            ))
+          )}
+
+        </a>
+      ))}
     </div>
   );
 };
