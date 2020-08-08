@@ -74,9 +74,16 @@ class SkateparksController < ApplicationController
 
     # if first part of param is number (ie '444-tapiola-park-astoria-oregon')
     if split_param[0].to_i > 0
-      split_param.shift
+      id = split_param.shift
 
-      redirect_to skatepark_path(split_param.join('-')), status: :moved_permanently
+      if split_param.present?
+        url_param = split_param.join('-')
+      else
+        skatepark = Skatepark.find(id)
+        url_param = skatepark.slug
+      end
+
+      redirect_to skatepark_url(url_param), status: :moved_permanently
     end
   end
 end
