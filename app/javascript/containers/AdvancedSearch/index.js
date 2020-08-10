@@ -36,9 +36,11 @@ function AdvancedSearch(props) {
       }
     };
 
+    console.log(isMobile)
+
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
-  }, []);
+  }, [isMobile]);
 
   useEffect(() => {
     if (starsAtLeastIsOn) setStarsEqualIsOn(false);
