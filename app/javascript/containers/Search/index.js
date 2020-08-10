@@ -6,43 +6,35 @@ import useToggle from 'hooks/useToggle';
 import SearchForm from './components/SearchForm';
 import SearchResults from './components/SearchResults';
 
-function SearchContainer() {
+function Search() {
   const [query, setQuery] = useState(null);
   const [results, setResults] = useState([]);
   const [skateparks, setSkateparks] = useState(null);
-  const [loading, setLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const containerRef = useRef(null);
-  const {
-    isShowing: searchIsShowing,
-    toggle: toggleSearchIsShowing,
-  } = useToggle(false);
 
   useEffect(() => {
     function handleClickOutside(event) {
       // check if click is outside component and close if so
       if (!containerRef.current.contains(event.target)) {
         exitResults();
-        toggleSearchIsShowing();
       }
     }
 
-    if (searchIsShowing) {
-      document.addEventListener('click', handleClickOutside);
-      if (!skateparks) getSkateparks();
-    }
+    document.addEventListener('click', handleClickOutside);
     return () => document.removeEventListener('click', handleClickOutside);
-  }, [searchIsShowing]);
+  }, []);
 
   useEffect(() => {
     if (!query) {
       setResults([]);
-    } else if (!loading) {
+    } else if (!isLoading) {
       setResults(searchSkateparks(query));
     }
   }, [query]);
 
   useEffect(() => {
-    // if query was input during skaeparks data load, apply query after load
+    // if query was input during skateparks load, apply query after load
     if (query && query !== '') {
       setResults(searchSkateparks(query));
     }
@@ -52,19 +44,23 @@ function SearchContainer() {
 
   const filterAndAddIndexOfMatch = () => {
     return function(skatepark) {
-      if (skatepark.name.indexOf(query) !== -1 || skatepark.city.indexOf(query) !== -1) {
-        skatepark.string = skatepark.name+", "+skatepark.city+", "+stateDisplay[skatepark.state];
-        skatepark.matchIndex = skatepark.string.indexOf(query);
+      let matchIndex = skatepark.name.indexOf(query);
+
+      if (matchIndex < 0) matchIndex = skatepark.city.indexOf(query);
+
+      if (matchIndex > -1) {
+        skatepark.string = skatepark.name + ", " + skatepark.city + ", " + STATE_DISPLAY[skatepark.state];
+        skatepark.matchIndex = matchIndex;
         return true;
-      } else {
-        return false;
       }
+
+      return false;
     }
   };
 
   const getSkateparks = () => {
     if (!skateparks) {
-      setLoading(true);
+      setIsLoading(true);
       $.get('/api/skateparks')
       .done(storeAllSkateparks);
     }
@@ -72,7 +68,7 @@ function SearchContainer() {
 
   const storeAllSkateparks = response => {
     setSkateparks(response);
-    setLoading(false);
+    setIsLoading(false);
   };
 
   const handleChange = event => {
@@ -94,40 +90,23 @@ function SearchContainer() {
 
   return (
     <div id="react-search">
-      <TransitionGroup component={null}>
-        {!searchIsShowing && (
-          <CSSTransition timeout={500} classNames={{ ...styles }}>
-            <div
-              className="display-search"
-              role="button"
-              tabIndex="0"
-              onClick={toggleSearchIsShowing}
-            >
-              <i className="large fa fa-search"></i>
-            </div>
-          </CSSTransition>
-        )}
-        {searchIsShowing && (
-          <CSSTransition timeout={500} classNames={{ ...styles }}>
-            <div className="react-search-container" ref={containerRef}>
-              <SearchForm
-                handleChange={handleChange}
-                loading={loading}
-                results={results}
-                query={query}
-              />
-              <SearchResults
-                className="react-search-results"
-                results={results}
-                exitResults={exitResults}
-                query={query}
-              />
-            </div>
-          </CSSTransition>
-        )}
-      </TransitionGroup>
+      <div className="react-search-container" ref={containerRef}>
+        <SearchForm
+          handleChange={handleChange}
+          results={results}
+          query={query}
+          getSkateparks={getSkateparks}
+        />
+        <SearchResults
+          className="react-search-results"
+          results={results}
+          exitResults={exitResults}
+          query={query}
+          isLoading={isLoading}
+        />
+      </div>
     </div>
   );
 };
 
-export default props => <SearchContainer {...props} />
+export default props => <Search {...props} />

@@ -1,0 +1,12 @@
+.star-input {
+  input[type="checkbox"] {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+
+  label {
+    cursor: pointer;
+  }
+}

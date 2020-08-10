@@ -20,7 +20,7 @@ function Photos(props) {
   const modalSettings = { ...settings, initialSlide: currentSlide };
   const slider = useRef();
   const {
-    isShowing: modalIsShowing,
+    toggleIsOn: modalIsShowing,
     toggle: toggleModalIsShowing,
   } = useToggle(false);
 

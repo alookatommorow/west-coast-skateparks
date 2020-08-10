@@ -43,7 +43,6 @@
       margin: 0em;
       color: rgba(0, 0, 0, 0.4);
       border-radius: 0.5em;
-      -webkit-transition: 0.1s color ease, 0.1s padding-left ease, 0.1s background-color ease;
       transition: 0.1s color ease, 0.1s padding-left ease, 0.1s background-color ease;
 
       &:hover {
@@ -55,10 +54,6 @@
       border-top: 1px solid rgba(34, 36, 38, 0.15);
       margin: 0em;
       border-radius: 0em;
-
-      &:first-child {
-        border-top: none;
-      }
     }
   }
 }
