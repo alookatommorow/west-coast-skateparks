@@ -57,7 +57,7 @@ function UserActions(props) {
           className="btn"
           rel="nofollow noopener"
           target="_blank"
-          href={`https://maps.google.com/maps?saddr='Current Location'&daddr=${modifiedAddress}`}
+          href={`https://www.google.com/maps/dir/?api=1&destination=${modifiedAddress}`}
         >
           <i className="fa fa-map-marked-alt"></i>
         </a>
