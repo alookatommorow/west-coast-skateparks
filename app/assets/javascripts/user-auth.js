@@ -10,12 +10,6 @@ $(document).on('turbolinks:load', function() {
       }
     });
 
-    //////// FB login ////////
-    $('#fb-login').click(function(){
-      hideSessionForm();
-      FB.login(checkLoginState);
-    });
-
     //////// Goog login ////////
     $('#goog-login').click(function(){
       initGoogleAuth();
