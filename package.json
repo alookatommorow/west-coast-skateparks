@@ -8,6 +8,7 @@
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-google-maps": "^9.4.5",
     "react-on-rails": "11.3.0",
     "react-slick": "0.25.2",
     "react-transition-group": "4.3.0",
