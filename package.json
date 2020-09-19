@@ -12,6 +12,7 @@
     "react-on-rails": "11.3.0",
     "react-slick": "0.25.2",
     "react-transition-group": "4.3.0",
+    "recompose": "^0.30.0",
     "slick-carousel": "1.8.1"
   },
   "devDependencies": {

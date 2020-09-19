@@ -1,12 +1,1 @@
-.landing-container
-  .landing-header
-    p West Coast Skateparks
-  .landing-copy
-    p Your guide to the skateparks of the Western U.S.
-  .landing-button
-    .call-to-action
-      = link_to "Find a park", skateparks_path
-
-= content_for :analytics_event
-  javascript:
-    analytics.page("Home");
+= react_component "Explore", props: { apiKey: ENV.fetch('GOOGLE_KEY') }

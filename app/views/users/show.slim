@@ -45,8 +45,3 @@
               class: "remove" do
                 button.remove-button.basic-button
                   i.fa.fa-times
-
-- if flash[:signed_up]
-  = content_for :analytics_event
-    javascript:
-      analytics.track("Signed Up", #{raw new_user_json(@user)});

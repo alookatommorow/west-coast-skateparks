@@ -25,6 +25,7 @@ import Reviews from '../containers/Reviews';
 import Modal from '../components/Modal';
 import WarningModal from '../components/WarningModal';
 import AdvancedSearch from '../containers/AdvancedSearch';
+import Explore from '../containers/Explore';
 
 ReactOnRails.register({
   Search,
@@ -34,4 +35,5 @@ ReactOnRails.register({
   Modal,
   WarningModal,
   AdvancedSearch,
+  Explore,
 });
