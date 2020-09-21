@@ -1,12 +1,17 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { compose, withProps } from 'recompose';
-import { PropTypes, DefaultProps } from 'prop-types';
-import { withGoogleMap, GoogleMap, Marker } from 'react-google-maps';
+import { PropTypes } from 'prop-types';
+import {
+  withGoogleMap,
+  GoogleMap,
+  Marker,
+  InfoWindow
+} from 'react-google-maps';
 import { DEFAULT_LAT, DEFAULT_LNG } from '../constants';
 
 const Map = compose(
   withProps({
-    loadingElement: <div style={{ height: `100%` }} />,
+    loadingElement: <div style={{ height: `100%` }} className="loading-icon" />,
     containerElement: <div className="map-container" />,
     mapElement: <div style={{ height: `100%` }} />,
   }),
@@ -16,27 +21,32 @@ const Map = compose(
     userLat,
     userLng,
     skateparks,
+    isLoading,
+    handleClick,
+    currentSkatepark,
   } = props;
-
-  const map = useRef();
-
-  if (map.current) {
-    console.log(map.current.getBounds());
-  }
 
   const [centerLat, setCenterLat] = useState(DEFAULT_LAT);
   const [centerLng, setCenterLng] = useState(DEFAULT_LNG);
+  const map = useRef();
+
+  if (map.current) {
+
+  }
 
   useEffect(() => {
     if (userLat) setCenterLat(userLat);
     if (userLng) setCenterLng(userLng);
   }, [userLat, userLng]);
 
-  return (
+  const closeInfoWindow = () => console.log('closed')
+
+  return !isLoading && (
     <GoogleMap
       defaultZoom={8}
-      center={{ lat: centerLat, lng: centerLng}}
+      defaultCenter={{ lat: centerLat, lng: centerLng}}
       ref={map}
+      defaultOptions={{ fullscreenControl: false }}
     >
       {userLat && userLng && (
         <Marker position={{ lat: userLat, lng: userLng }} />
@@ -45,10 +55,17 @@ const Map = compose(
         skatepark.latitude && skatepark.longitude && (
           <Marker
             key={`${skatepark.slug}-marker`}
+            onClick={handleClick}
             position={
               { lat: skatepark.latitude, lng: skatepark.longitude }
             }
-          />
+          >
+            {currentSkatepark && currentSkatepark.latitude === skatepark.latitude && (
+              <InfoWindow onCloseClick={closeInfoWindow}>
+                <p>heywassup</p>
+              </InfoWindow>
+            )}
+          </Marker>
         )
       ))}
     </GoogleMap>
@@ -56,11 +73,6 @@ const Map = compose(
 });
 
 Map.propTypes = {
-  userLat: PropTypes.number,
-  userLng: PropTypes.number,
-}
-
-Map.defaultProps = {
   userLat: PropTypes.number,
   userLng: PropTypes.number,
 }

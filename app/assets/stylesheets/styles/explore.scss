@@ -1,6 +1,34 @@
 #explore {
+  margin-top: 49px;
+  position: relative;
+
   .map-container {
     height: 500px;
     width: 100%;
+  }
+
+  .info-window {
+    position: absolute;
+    left: 10px;
+    top: 60px;
+    height: 400px;
+    width: 250px;
+    background: white;
+    padding: 10px;
+    text-align: center;
+
+    p.park-name {
+      font-weight: bold;
+    }
+
+    p {
+      text-transform: capitalize;
+      margin-bottom: 5px;
+    }
+
+    img {
+      margin-top: 16px;
+      width: 100%;
+    }
   }
 }
