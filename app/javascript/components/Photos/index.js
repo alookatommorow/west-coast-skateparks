@@ -10,7 +10,7 @@ import { DEV_PHOTOS as photos } from './constants';
 
 function Photos(props) {
   // comment out below line to use example photos in dev
-  const { photos } = props;
+  // const { photos } = props;
 
   const formattedPhotos = photos.map(photo => ({
     original: photo,
@@ -18,7 +18,9 @@ function Photos(props) {
     originalClass: styles.photo,
   }));
 
-  return <ImageGallery additionalClass={styles.root} items={formattedPhotos} />;
+  return photos.length > 0 && (
+    <ImageGallery additionalClass={styles.root} items={formattedPhotos} />
+  );
 };
 
 export default props => <Photos {...props} />

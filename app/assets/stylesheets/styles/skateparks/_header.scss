@@ -248,6 +248,14 @@ i.star {
         .image-gallery-image {
           max-height: 500px;
         }
+
+        @media #{$mobile} {
+          height: 300px;
+
+          .image-gallery-image {
+            max-height: 300px;
+          }
+        }
       }
 
       &.fullscreen {
@@ -265,6 +273,8 @@ i.star {
           }
         }
       }
+
+
     }
   }
 
