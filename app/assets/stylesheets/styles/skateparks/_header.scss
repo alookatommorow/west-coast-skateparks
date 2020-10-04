@@ -226,6 +226,46 @@ i.star {
       background: white;
       padding: 0 30px 30px 30px;
     }
+
+    .image-gallery-content {
+      width: 100%;
+
+      .image-gallery-slide {
+        background: black;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+      }
+
+      .image-gallery-image {
+        max-width: 100%;
+      }
+
+      &:not(.fullscreen) .image-gallery-slide {
+        height: 500px;
+
+        .image-gallery-image {
+          max-height: 500px;
+        }
+      }
+
+      &.fullscreen {
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        padding: 0 20px;
+
+        .image-gallery-slide {
+          height: 80vh;
+
+          .image-gallery-image {
+            max-height: 80vh;
+          }
+        }
+      }
+    }
   }
 
   .modal-warning {
