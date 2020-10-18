@@ -246,7 +246,9 @@ function AdvancedSearch(props) {
             <label htmlFor="name-city" className="label">
               Name/City
             </label>
-            <input name="name-city" type="text" value={nameCity} onChange={handleNameCityChange} />
+            <div className="input-container">
+              <input name="name-city" type="text" value={nameCity} onChange={handleNameCityChange} />
+            </div>
             <div className="row">
               <label htmlFor="exactMatchIsOn">
                 <input name="exactMatchIsOn" type="checkbox" checked={exactMatchIsOn} onChange={toggleExactMatchIsOn} />
@@ -258,9 +260,8 @@ function AdvancedSearch(props) {
             <label htmlFor="states" className="label">
               State
             </label>
-            <div className="row">
+            <div className="input-container row">
               <label htmlFor="california" className="checkbox-container">
-                CA
                 <input
                   id="california"
                   name="california"
@@ -270,9 +271,9 @@ function AdvancedSearch(props) {
                   onChange={toggleCa}
                 />
                 <span className="checkmark"/>
+                CA
               </label>
               <label htmlFor="oregon" className="checkbox-container">
-                OR
                 <input
                   id="oregon"
                   name="oregon"
@@ -282,9 +283,9 @@ function AdvancedSearch(props) {
                   onChange={toggleOr}
                 />
                 <span className="checkmark"/>
+                OR
               </label>
               <label htmlFor="washington" className="checkbox-container">
-                WA
                 <input
                   id="washington"
                   name="washington"
@@ -294,6 +295,7 @@ function AdvancedSearch(props) {
                   onChange={toggleWa}
                 />
                 <span className="checkmark"/>
+                WA
               </label>
             </div>
           </div>
@@ -301,13 +303,12 @@ function AdvancedSearch(props) {
             <label htmlFor="stars" className="label">
               Stars
             </label>
-            <div className="row">
+            <div className="row input-container">
               <div className="column">
                 <label
                   htmlFor="starsAtLeastIsOn"
                   className="checkbox-container tiny"
                 >
-                  at least
                   <input
                     id="starsAtLeastIsOn"
                     name="starsAtLeastIsOn"
@@ -316,12 +317,12 @@ function AdvancedSearch(props) {
                     onChange={togglestarsAtLeastIsOn}
                   />
                   <span className="checkmark" />
+                  at least
                 </label>
                 <label
                   htmlFor="starsEqualIsOn"
                   className="checkbox-container tiny"
                 >
-                  equal to
                   <input
                     id="starsEqualIsOn"
                     name="starsEqualIsOn"
@@ -330,6 +331,7 @@ function AdvancedSearch(props) {
                     onChange={toggleStarsEqualIsOn}
                   />
                   <span className="checkmark" />
+                  equal to
                 </label>
               </div>
               <StarInput

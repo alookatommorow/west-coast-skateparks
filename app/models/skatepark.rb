@@ -60,13 +60,13 @@ class Skatepark < ActiveRecord::Base
     'rails',
     'ledges',
     'banks',
-    'bowls',
+    'bowl',
     'quarterpipes',
     'bank to ledge',
+    'bank to curb',
     'double set',
-    'pyramid',
+    'pyramid/funbox',
     'manual pad',
-    'pyramid',
     'pool coping',
     'metal coping',
     'noping',
@@ -78,7 +78,16 @@ class Skatepark < ActiveRecord::Base
     'jersey barrier',
     'parking block',
     'pole jam',
-    'spine'
+    'spine',
+    'cradle',
+    'miniramp',
+    'tombstone',
+    'wallride',
+    'snakerun',
+    'brick stamped',
+    'volcano',
+    'vert ramp',
+    'lumps'
   ].freeze
 
   friendly_id :to_param, use: [:slugged, :finders]

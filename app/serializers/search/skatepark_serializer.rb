@@ -16,5 +16,9 @@ module Search
     def map_photo
       object.map_photo(:thumb)
     end
+
+    def obstacles
+      object.obstacles&.join(', ')
+    end
   end
 end
