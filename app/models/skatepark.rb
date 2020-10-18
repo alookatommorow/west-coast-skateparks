@@ -25,7 +25,7 @@
 #  material               :string
 #  name                   :string           not null
 #  notes                  :text
-#  obstacles              :text
+#  obstacles              :string           is an Array
 #  opened                 :string
 #  photo_cred             :string
 #  photo_url              :string
@@ -56,11 +56,36 @@ class Skatepark < ActiveRecord::Base
     lights
     obstacles
   )
+  OBSTACLES = [
+    'rails',
+    'ledges',
+    'banks',
+    'bowls',
+    'quarterpipes',
+    'bank to ledge',
+    'double set',
+    'pyramid',
+    'manual pad',
+    'pyramid',
+    'pool coping',
+    'metal coping',
+    'noping',
+    'euro gap',
+    'fullpipe',
+    'doorway',
+    'stairs',
+    'gaps',
+    'jersey barrier',
+    'parking block',
+    'pole jam',
+    'spine'
+  ].freeze
 
   friendly_id :to_param, use: [:slugged, :finders]
 
   validates :name, :city, presence: true
   validates :state, presence: true, inclusion: { in: STATES }
+  validate :whitelist_obstacles
 
   has_many :ratings, dependent: :destroy
   has_many :reviews, dependent: :destroy
@@ -127,5 +152,15 @@ class Skatepark < ActiveRecord::Base
 
   def to_s
     (name.downcase.include?("skatepark") ? name :  "#{name} skatepark").titleize
+  end
+
+  private
+
+  def whitelist_obstacles
+    return unless obstacles.present?
+
+    obstacles.map do |obstacle|
+      errors.add('The fucking obstacles is a farce') unless OBSTACLES.include?(obstacle)
+    end
   end
 end

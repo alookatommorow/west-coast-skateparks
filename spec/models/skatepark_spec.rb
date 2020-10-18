@@ -1,6 +1,14 @@
 require 'rails_helper'
 
 RSpec.describe Skatepark, type: :model do
+  describe 'validations' do
+    it 'validates obstacles' do
+      skatepark = build_stubbed(:skatepark, obstacles: ['fuck all'])
+
+
+    end
+  end
+
   describe '#ratings?' do
     it 'returns true when a skatepark has ratings' do
       rating = create(:rating)
