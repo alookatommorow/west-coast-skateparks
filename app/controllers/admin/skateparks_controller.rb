@@ -3,10 +3,9 @@ module Admin
     # To customize the behavior of this controller,
     # simply overwrite any of the RESTful actions. For example:
     #
-    # def index
-    #   super
-    #   @resources = Skatepark.all.paginate(10, params[:page])
-    # end
+    def create
+      binding.pry
+    end
 
     # Define a custom finder by overriding the `find_resource` method:
     # def find_resource(param)
@@ -25,33 +24,47 @@ module Admin
 
     private
 
-      def resource_params
-        params.require(:skatepark).permit(
-          :skatepark_image_ids,
-          :city,
-          :state,
-          :address,
-          :latitude,
-          :longitude,
-          :name,
-          :rating,
-          :material,
-          :designer,
-          :builder,
-          :opened,
-          :hours,
-          :size,
-          :hero,
-          :map_photo,
-          :notes,
-          :info,
-          :helmet,
-          :lights,
-          :photo_cred,
-          :photo_url,
-          :video_url,
-          :obstacles,
-        )
-      end
+    def resource_params
+      params.require(:skatepark).permit(
+        :skatepark_image_ids,
+        :city,
+        :state,
+        :address,
+        :latitude,
+        :longitude,
+        :name,
+        :rating,
+        :material,
+        :designer,
+        :builder,
+        :opened,
+        :hours,
+        :size,
+        :hero,
+        :map_photo,
+        :notes,
+        :info,
+        :helmet,
+        :lights,
+        :photo_cred,
+        :photo_url,
+        :video_url,
+        obstacles: [],
+      )
+    end
+
+    def read_param_value(data)
+      # if data.is_a?(ActionController::Parameters) && data[:type]
+      #   if data[:type] == Administrate::Field::Polymorphic.to_s
+      #     GlobalID::Locator.locate(data[:value])
+      #   else
+      #     raise "Unrecognised param data: #{data.inspect}"
+      #   end
+      # elsif data.is_a?(ActionController::Parameters)
+      #   data.transform_values { |v| read_param_value(v) }
+      # else
+      #   data
+      # end
+    end
   end
 end
