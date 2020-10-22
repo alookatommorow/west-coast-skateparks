@@ -5,7 +5,10 @@ RSpec.describe Skatepark, type: :model do
     it 'validates obstacles' do
       skatepark = build_stubbed(:skatepark, obstacles: ['fuck all'])
 
-
+      expect(skatepark.valid?).to be false
+      expect(skatepark.errors.messages[:whitelist_obstacles]).to eq(
+        ["The obstacles are fucked"]
+      )
     end
   end
 

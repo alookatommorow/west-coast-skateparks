@@ -87,7 +87,8 @@ class Skatepark < ActiveRecord::Base
     'brick stamped',
     'volcano',
     'vert ramp',
-    'lumps'
+    'lumps',
+    'hips'
   ].freeze
 
   friendly_id :to_param, use: [:slugged, :finders]
@@ -169,7 +170,7 @@ class Skatepark < ActiveRecord::Base
     return unless obstacles.present?
 
     obstacles.map do |obstacle|
-      errors.add('The fucking obstacles is a farce') unless OBSTACLES.include?(obstacle)
+      errors.add(:whitelist_obstacles, 'The obstacles are fucked') unless OBSTACLES.include?(obstacle)
     end
   end
 end

@@ -3,9 +3,10 @@ module Admin
     # To customize the behavior of this controller,
     # simply overwrite any of the RESTful actions. For example:
     #
-    def create
-      binding.pry
-    end
+    # def index
+    #   super
+    #   @resources = Skatepark.all.paginate(10, params[:page])
+    # end
 
     # Define a custom finder by overriding the `find_resource` method:
     # def find_resource(param)
@@ -51,20 +52,6 @@ module Admin
         :video_url,
         obstacles: [],
       )
-    end
-
-    def read_param_value(data)
-      # if data.is_a?(ActionController::Parameters) && data[:type]
-      #   if data[:type] == Administrate::Field::Polymorphic.to_s
-      #     GlobalID::Locator.locate(data[:value])
-      #   else
-      #     raise "Unrecognised param data: #{data.inspect}"
-      #   end
-      # elsif data.is_a?(ActionController::Parameters)
-      #   data.transform_values { |v| read_param_value(v) }
-      # else
-      #   data
-      # end
     end
   end
 end
