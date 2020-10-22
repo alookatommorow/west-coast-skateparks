@@ -25,33 +25,33 @@ module Admin
 
     private
 
-      def resource_params
-        params.require(:skatepark).permit(
-          :skatepark_image_ids,
-          :city,
-          :state,
-          :address,
-          :latitude,
-          :longitude,
-          :name,
-          :rating,
-          :material,
-          :designer,
-          :builder,
-          :opened,
-          :hours,
-          :size,
-          :hero,
-          :map_photo,
-          :notes,
-          :info,
-          :helmet,
-          :lights,
-          :photo_cred,
-          :photo_url,
-          :video_url,
-          :obstacles,
-        )
-      end
+    def resource_params
+      params.require(:skatepark).permit(
+        :skatepark_image_ids,
+        :city,
+        :state,
+        :address,
+        :latitude,
+        :longitude,
+        :name,
+        :rating,
+        :material,
+        :designer,
+        :builder,
+        :opened,
+        :hours,
+        :size,
+        :hero,
+        :map_photo,
+        :notes,
+        :info,
+        :helmet,
+        :lights,
+        :photo_cred,
+        :photo_url,
+        :video_url,
+        obstacles: [],
+      )
+    end
   end
 end

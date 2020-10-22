@@ -1,0 +1,10 @@
+.field-unit--predefined-array .field-unit__field {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.field-unit--predefined-array .field-unit__field-container {
+  display: flex;
+  align-items: center;
+  flex-basis: 20%;
+}

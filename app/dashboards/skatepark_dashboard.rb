@@ -16,6 +16,7 @@ class SkateparkDashboard < Administrate::BaseDashboard
     city: Field::String,
     state: Field::Select.with_options(collection: ["california", "oregon", "washington"]),
     address: Field::String,
+    zip_code: Field::String,
     latitude: Field::Number.with_options(decimals: 2),
     longitude: Field::Number.with_options(decimals: 2),
     id: Field::Number,
@@ -35,7 +36,9 @@ class SkateparkDashboard < Administrate::BaseDashboard
     photo_cred: Field::String,
     photo_url: Field::String,
     video_url: Field::String,
-    obstacles: Field::Text,
+    obstacles: Field::PredefinedArray.with_options(
+      members: Skatepark::OBSTACLES,
+    ),
     favoriters: Field::HasMany.with_options(class_name: "User"),
     visitors: Field::HasMany.with_options(class_name: "User"),
     created_at: Field::DateTime,

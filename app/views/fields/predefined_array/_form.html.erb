@@ -1,0 +1,11 @@
+<div class="field-unit__label">
+  <%= f.label field.attribute %>
+</div>
+<div class="field-unit__field">
+  <% field.options[:members].each do |member| %>
+    <div class="field-unit__field-container">
+      <%= f.check_box field.attribute, { multiple: true }, member, false %>
+      <%= f.label member %>
+    </div>
+  <% end %>
+</div>
