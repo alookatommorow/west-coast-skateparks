@@ -95,7 +95,7 @@ class Skatepark < ActiveRecord::Base
 
   validates :name, :city, presence: true
   validates :state, presence: true, inclusion: { in: STATES }
-  validate :whitelist_obstacles
+  # validate :whitelist_obstacles
 
   has_many :ratings, dependent: :destroy
   has_many :reviews, dependent: :destroy
