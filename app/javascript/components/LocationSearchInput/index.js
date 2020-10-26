@@ -5,19 +5,23 @@ import PlacesAutocomplete, {
 } from 'react-places-autocomplete';
 
 function LocationSearchInput(props) {
+  const { setIsLoading } = props;
+
   const [address, setAddress] = useState('');
 
   const handleChange = newAddress => setAddress(newAddress);
 
   const handleSelect = newAddress => {
+    setIsLoading(true)
     setAddress(newAddress);
     geocodeByAddress(newAddress)
       .then(results => getLatLng(results[0]))
-      .then(latLng => console.log('Success', latLng))
-      .catch(error => console.error('Error', error));
+      .then(latLng => props.handleSelect(latLng))
+      // to do - handle error
   };
 
   const searchOptions = {
+    componentRestrictions: { country: ['us'] },
     types: ['(cities)']
   }
 
@@ -27,46 +31,48 @@ function LocationSearchInput(props) {
   }
 
   return (
-    <PlacesAutocomplete
-      value={address}
-      onChange={handleChange}
-      onSelect={handleSelect}
-      searchOptions={searchOptions}
-    >
-      {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
-        <div>
-          <input
-            {...getInputProps({
-              placeholder: 'Search Places ...',
-              className: 'location-search-input',
-            })}
-          />
-          <div className="autocomplete-dropdown-container">
-            {loading && <div>Loading...</div>}
-            {suggestions.map(suggestion => {
-              if (shouldDisplayOption(suggestion)) {
-                const className = suggestion.active
-                  ? 'suggestion-item--active'
-                  : 'suggestion-item';
-                return(
-                  <div
-                    { ...getSuggestionItemProps(
-                      suggestion,
-                      {
-                        className,
-                      },
-                    )}
-                    key={suggestion.placeId}
-                  >
-                    <span>{suggestion.description}</span>
-                  </div>
-                );
-              }
-            })}
+    <form>
+      <PlacesAutocomplete
+        value={address}
+        onChange={handleChange}
+        onSelect={handleSelect}
+        searchOptions={searchOptions}
+      >
+        {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
+          <div className="field">
+            <input
+              {...getInputProps({
+                placeholder: 'Search Places ...',
+                className: 'location-search-input',
+              })}
+            />
+            <div className="autocomplete-dropdown-container selection divided list">
+              {loading && <div>Loading...</div>}
+              {suggestions.map(suggestion => {
+                if (shouldDisplayOption(suggestion)) {
+                  const className = suggestion.active
+                    ? 'item active'
+                    : 'item';
+                  return(
+                    <div
+                      { ...getSuggestionItemProps(
+                        suggestion,
+                        {
+                          className,
+                        },
+                      )}
+                      key={suggestion.placeId}
+                    >
+                      <span>{suggestion.description}</span>
+                    </div>
+                  );
+                }
+              })}
+            </div>
           </div>
-        </div>
-      )}
-    </PlacesAutocomplete>
+        )}
+      </PlacesAutocomplete>
+    </form>
   );
 }
 

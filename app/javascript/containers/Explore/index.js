@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import Map from './components/Map';
-import Stars from 'components/Stars';
 import LocationSearchInput from 'components/LocationSearchInput';
 
 function Explore(props) {
@@ -35,41 +34,32 @@ function Explore(props) {
     setSkateparks(response);
   };
 
-  const handleClick = marker => {
+  const handleClickMarker = marker => {
     setCurrentSkatepark(
       skateparks.find(skatepark => skatepark.latitude === marker.latLng.lat())
     );
   };
 
+  const handleSelectOption = latLng => {
+    setUserLat(latLng.lat);
+    setUserLng(latLng.lng);
+    setIsLoading(false);
+  };
+
   return (
     <div id="explore">
-
       <Map
         skateparks={skateparks}
         userLat={userLat}
         userLng={userLng}
         isLoading={isLoading}
-        handleClick={handleClick}
+        handleClick={handleClickMarker}
         currentSkatepark={currentSkatepark}
       />
-      <div className="info-window">
-        {currentSkatepark && (
-          <>
-            <p className="park-name">
-              {currentSkatepark.name}
-            </p>
-            <p>
-              {currentSkatepark.city}, {currentSkatepark.state}
-            </p>
-            <Stars
-              stars={currentSkatepark.rating}
-              tiny
-            />
-            <img src={currentSkatepark.map_photo} />
-          </>
-        )}
-      </div>
-      <LocationSearchInput />
+      <LocationSearchInput
+        handleSelect={handleSelectOption}
+        setIsLoading={setIsLoading}
+      />
     </div>
   );
 };

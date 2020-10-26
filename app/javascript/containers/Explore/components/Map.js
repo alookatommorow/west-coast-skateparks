@@ -7,6 +7,7 @@ import {
   Marker,
   InfoWindow
 } from 'react-google-maps';
+import Stars from 'components/Stars';
 import { DEFAULT_LAT, DEFAULT_LNG } from '../constants';
 
 const Map = compose(
@@ -30,45 +31,53 @@ const Map = compose(
   const [centerLng, setCenterLng] = useState(DEFAULT_LNG);
   const map = useRef();
 
-  if (map.current) {
-
-  }
-
   useEffect(() => {
     if (userLat) setCenterLat(userLat);
     if (userLng) setCenterLng(userLng);
   }, [userLat, userLng]);
 
-  const closeInfoWindow = () => console.log('closed')
-
-  return !isLoading && (
-    <GoogleMap
-      defaultZoom={8}
-      defaultCenter={{ lat: centerLat, lng: centerLng}}
-      ref={map}
-      defaultOptions={{ fullscreenControl: false }}
-    >
-      {userLat && userLng && (
-        <Marker position={{ lat: userLat, lng: userLng }} />
-      )}
-      {skateparks && skateparks.map(skatepark => (
-        skatepark.latitude && skatepark.longitude && (
-          <Marker
-            key={`${skatepark.slug}-marker`}
-            onClick={handleClick}
-            position={
-              { lat: skatepark.latitude, lng: skatepark.longitude }
-            }
-          >
-            {currentSkatepark && currentSkatepark.latitude === skatepark.latitude && (
-              <InfoWindow onCloseClick={closeInfoWindow}>
-                <p>heywassup</p>
-              </InfoWindow>
-            )}
-          </Marker>
-        )
-      ))}
-    </GoogleMap>
+  if (isLoading) return <div className="loading-icon" />;
+  else return (
+    <React.Fragment>
+      <GoogleMap
+        defaultZoom={8}
+        defaultCenter={{ lat: centerLat, lng: centerLng }}
+        ref={map}
+        defaultOptions={{ fullscreenControl: false }}
+      >
+        {userLat && userLng && (
+          <Marker position={{ lat: userLat, lng: userLng }} />
+        )}
+        {skateparks && skateparks.map(skatepark => (
+          skatepark.latitude && skatepark.longitude && (
+            <Marker
+              key={`${skatepark.slug}-marker`}
+              onClick={handleClick}
+              position={
+                { lat: skatepark.latitude, lng: skatepark.longitude }
+              }
+            />
+          )
+        ))}
+      </GoogleMap>
+      <div className="info-window">
+        {currentSkatepark && (
+          <>
+            <p className="park-name">
+              {currentSkatepark.name}
+            </p>
+            <p>
+              {currentSkatepark.city}, {currentSkatepark.state}
+            </p>
+            <Stars
+              stars={currentSkatepark.rating}
+              tiny
+            />
+            <img src={currentSkatepark.map_photo} />
+          </>
+        )}
+      </div>
+    </React.Fragment>
   );
 });
 

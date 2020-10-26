@@ -1,16 +1,17 @@
 #explore {
   margin-top: 49px;
-  position: relative;
 
   .map-container {
     height: 500px;
     width: 100%;
+    position: relative;
   }
 
   .info-window {
     position: absolute;
     left: 10px;
-    top: 60px;
+    top: 50%;
+    transform: translateY(-50%);
     height: 400px;
     width: 250px;
     background: white;

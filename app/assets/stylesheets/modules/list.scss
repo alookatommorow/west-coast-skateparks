@@ -1,18 +1,15 @@
 .list {
   list-style-type: none;
-  margin: 1em 0em;
-  padding: 0em 0em;
+  margin: 1em 0;
+  padding: 0;
 
   .item {
-    display: list-item;
-    table-layout: fixed;
-    list-style-type: none;
-    list-style-position: outside;
-    padding: 0.21428571em 0em;
+    background: white;
+    padding: 0.21428571em 0;
     line-height: 1.14285714em;
 
     &:first-child {
-      padding-top: 0em;
+      padding-top: 0;
     }
 
     &:after {
@@ -25,23 +22,21 @@
   }
 
   &:last-child {
-    margin-bottom: 0em;
-    padding-bottom: 0em;
+    margin-bottom: 0;
+    padding-bottom: 0;
   }
 
   &:first-child {
-    margin-top: 0em;
-    padding-top: 0em;
+    margin-top: 0;
+    padding-top: 0;
   }
 
   &.selection {
 
     .item {
       cursor: pointer;
-      background: transparent;
       padding: 0.5em 0.5em;
-      margin: 0em;
-      color: rgba(0, 0, 0, 0.4);
+      margin: 0;
       border-radius: 0.5em;
       transition: 0.1s color ease, 0.1s padding-left ease, 0.1s background-color ease;
 
@@ -52,8 +47,8 @@
 
     &.divided .item {
       border-top: 1px solid rgba(34, 36, 38, 0.15);
-      margin: 0em;
-      border-radius: 0em;
+      margin: 0;
+      border-radius: 0;
     }
   }
 }

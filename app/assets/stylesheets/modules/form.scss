@@ -1,19 +1,19 @@
 form {
 
   .field {
-    margin: 0em 0em 1em;
+    margin: 0 0 1em;
   }
 
   .label {
     display: block;
-    margin: 0em 0em 0.28571429rem 0em;
+    margin: 0 0 0.28571429rem 0;
     color: rgba(0,0,0,0.87);
     font-size: 0.92857143em;
     font-weight: bold;
   }
 
   textarea {
-    margin: 0em;
+    margin: 0;
     tap-highlight-color: rgba(255, 255, 255, 0);
     padding: 0.78571429em 1em;
     background: #ffffff;
@@ -21,7 +21,7 @@ form {
     outline: none;
     color: rgba(0, 0, 0, 0.87);
     border-radius: 0.28571429rem;
-    box-shadow: 0em 0em 0em 0em transparent inset;
+    box-shadow: 0 0 0 0 transparent inset;
     transition: color 0.1s ease, border-color 0.1s ease;
     font-size: 1em;
     line-height: 1.2857;
@@ -48,7 +48,7 @@ form {
   input[type="date"], input[type="datetime-local"], input[type="email"], input[type="number"], input[type="password"], input[type="search"], input[type="tel"], input[type="time"], input[type="text"], input[type="file"], input[type="url"] {
     width: 100%;
     vertical-align: top;
-    margin: 0em;
+    margin: 0;
     outline: none;
     tap-highlight-color: rgba(255, 255, 255, 0);
     padding: 0.67861429em 1em;
@@ -57,7 +57,7 @@ form {
     border: 1px solid rgba(34, 36, 38, 0.15);
     color: rgba(0, 0, 0, 0.87);
     border-radius: 0.28571429rem;
-    box-shadow: 0em 0em 0em 0em transparent inset;
+    box-shadow: 0 0 0 0 transparent inset;
     transition: color 0.1s ease, border-color 0.1s ease;
 
     &.error {
