@@ -23,10 +23,12 @@
       .info-container
         - @skatepark.present_attributes.each do |attribute, value|
           .col
-            - if attribute == "size"
-              - value << " sq ft"
-            - if attribute == "hours"
+            - if attribute == 'size'
+              - value << ' sq ft'
+            - if attribute == 'hours'
               - value = value.capitalize
+            - if attribute == 'obstacles'
+              - value = display_obstacles(value)
             - value = value.try(:titleize) unless %w(info hours size).include?(attribute)
             i class= "fa #{info_icons[attribute]}"
             p= value

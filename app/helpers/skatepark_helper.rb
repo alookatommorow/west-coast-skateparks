@@ -58,4 +58,8 @@ module SkateparkHelper
       (skatepark.zip_code || "")
     ).strip
   end
+
+  def display_obstacles(obstacles)
+    obstacles&.join(', ')&.titleize
+  end
 end

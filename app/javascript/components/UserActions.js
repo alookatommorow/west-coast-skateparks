@@ -92,6 +92,16 @@ function UserActions(props) {
             <i className="fa fa-heart red"></i>
           )} */}
         </button>
+        {user && user.admin && (
+          <a
+            className="btn"
+            rel="nofollow noopener"
+            target="_blank"
+            href={`/admin/skateparks/${slug}/edit`}
+          >
+            <i className="fa fa-pencil-alt"></i>
+          </a>
+        )}
       </div>
       <WarningModal
         mainText="Please sign in"
