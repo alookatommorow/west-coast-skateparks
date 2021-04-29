@@ -37,7 +37,8 @@ const Map = compose(
   }, [userLat, userLng]);
 
   if (isLoading) return <div className="loading-icon" />;
-  else return (
+
+  return (
     <React.Fragment>
       <GoogleMap
         defaultZoom={8}
@@ -46,7 +47,10 @@ const Map = compose(
         defaultOptions={{ fullscreenControl: false }}
       >
         {userLat && userLng && (
-          <Marker position={{ lat: userLat, lng: userLng }} />
+          <Marker
+            position={{ lat: userLat, lng: userLng }}
+            icon="http://earth.google.com/images/kml-icons/track-directional/track-8.png"
+          />
         )}
         {skateparks && skateparks.map(skatepark => (
           skatepark.latitude && skatepark.longitude && (

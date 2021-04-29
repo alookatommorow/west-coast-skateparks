@@ -5,6 +5,7 @@
     "@brainhubeu/react-carousel": "^1.19.26",
     "@rails/webpacker": "4.2.2",
     "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
+    "lodash": "^4.17.21",
     "npm": "^6.14.3",
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
@@ -12,7 +13,6 @@
     "react-google-maps": "^9.4.5",
     "react-image-gallery": "^1.0.8",
     "react-on-rails": "11.3.0",
-    "react-places-autocomplete": "^7.3.0",
     "react-transition-group": "4.3.0",
     "recompose": "^0.30.0"
   },

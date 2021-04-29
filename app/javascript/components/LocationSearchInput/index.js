@@ -1,17 +1,21 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import PlacesAutocomplete, {
   geocodeByAddress,
   getLatLng,
-} from 'react-places-autocomplete';
+} from 'components/PlacesAutocomplete';
 
 function LocationSearchInput(props) {
   const { setIsLoading } = props;
+  const places = useRef();
 
   const [address, setAddress] = useState('');
 
-  const handleChange = newAddress => setAddress(newAddress);
+  const handleChange = (newAddress) => {
+    setAddress(newAddress)
+  };
 
   const handleSelect = newAddress => {
+    console.log('selection is firing')
     setIsLoading(true)
     setAddress(newAddress);
     geocodeByAddress(newAddress)
@@ -25,11 +29,6 @@ function LocationSearchInput(props) {
     types: ['(cities)']
   }
 
-  const shouldDisplayOption = option => {
-    const text = option.description
-    return text.indexOf('CA, USA') > -1 || text.indexOf('OR, USA') > -1 || text.indexOf('WA, USA') > -1;
-  }
-
   return (
     <form>
       <PlacesAutocomplete
@@ -37,23 +36,24 @@ function LocationSearchInput(props) {
         onChange={handleChange}
         onSelect={handleSelect}
         searchOptions={searchOptions}
+        ref={places}
       >
-        {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
-          <div className="field">
-            <input
-              {...getInputProps({
-                placeholder: 'Search Places ...',
-                className: 'location-search-input',
-              })}
-            />
-            <div className="autocomplete-dropdown-container selection divided list">
-              {loading && <div>Loading...</div>}
-              {suggestions.map(suggestion => {
-                if (shouldDisplayOption(suggestion)) {
+        {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => {
+          return (
+            <div className="field">
+              <input
+                {...getInputProps({
+                  placeholder: 'Search Places ...',
+                  className: 'location-search-input',
+                })}
+              />
+              <div className="autocomplete-dropdown-container selection divided list">
+                {loading && <div>Loading...</div>}
+                {suggestions.map(suggestion => {
                   const className = suggestion.active
                     ? 'item active'
                     : 'item';
-                  return(
+                  return (
                     <div
                       { ...getSuggestionItemProps(
                         suggestion,
@@ -66,11 +66,11 @@ function LocationSearchInput(props) {
                       <span>{suggestion.description}</span>
                     </div>
                   );
-                }
-              })}
+                })}
+              </div>
             </div>
-          </div>
-        )}
+          )
+        }}
       </PlacesAutocomplete>
     </form>
   );
