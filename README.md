@@ -18,7 +18,6 @@ West Coast Skateparks is deployed to Heroku. Visit the app [here](https://west-c
 * [Jquery](https://jquery.com/) and [AJAX](http://api.jquery.com/jquery.ajax/)
 * [React](https://reactjs.org/) (skateparks search)
 * [AWS S3](https://aws.amazon.com/s3/) (photo storage)
-* [Butter CMS](https://buttercms.com/) (blog)
 
 ### Integrations
 * [Google Maps API](https://developers.google.com/maps/documentation/javascript/)
@@ -34,20 +33,29 @@ West Coast Skateparks is deployed to Heroku. Visit the app [here](https://west-c
 1. `nvm install v12` (or latest)
 1. `nvm alias default v12`
 ##### Setup Webpack Dev Server
-1. `brew install yarn`
+1. install npm
+1. install yarn (for webpacker) `brew install yarn`
+1. `npm install`
 1. `cd /path/to/west-coast-skateparks && yarn install`
 1. `bin/webpack-dev-server`
 #### Rails
 ##### Install Ruby
-1. [Install rbenv](https://github.com/rbenv/rbenv#installation)
+1. Install Ruby 2.6.5 with your preferred Ruby version manager
 1. `rbenv install 2.4.2`
 1. `gem install bundler`
 ##### Setup Rails App
 1. [Install Postgres](https://postgresapp.com/)
-1. `cd /path/to/west-coast-skateparks && bundle install`
-1. `rails dev:reset_db` (Requires heroku access, otherwise use `rails db:setup`)
+1. `bundle install`
+1. `bundle exec rails dev:reset_db` (Requires heroku access, otherwise use `rails db:setup`)
 1. `bundle exec rails s`
 1. Open `http://localhost:3000` and get to it
+
+#### Troubleshooting
+Mac M1 chip
+Ruby versions
+<!-- optflags=-Wno-error=implicit-function-declaration ASDF_RUBY_BUILD_VERSION=v20220630 asdf install ruby 2.6.5 -->
+PG gem
+https://gist.github.com/tomholford/f38b85e2f06b3ddb9b4593e841c77c9e
 
 ### Local DB Skateparks
 These tasks can be used to keep your local data as prodlike as possible. Each of them is idempotent and can be run as many times as you want. _Note: You'll need access to heroku to use these._

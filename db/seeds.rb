@@ -25,16 +25,16 @@ with_err_handling do
   )
 
   skateparks = Skatepark.take(30)
-  if skateparks.empty?
-    abort "\nNeed to seed skateparks first. Please run `#{bold("rails dev:restore_skateparks")}` and try again, or run `#{bold("rails dev:reset_db")}`"
-  end
+  # if skateparks.empty?
+  #   abort "\nNeed to seed skateparks first. Please run `#{bold("rails dev:restore_skateparks")}` and try again, or run `#{bold("rails dev:reset_db")}`"
+  # end
 
   puts "  Giving admin some favs and visits..."
-  thrashed, favs, visits = skateparks.each_slice(10).to_a
-  admin.update!(
-    favorites: thrashed + favs,
-    visits: thrashed + visits,
-  )
+  # thrashed, favs, visits = skateparks.each_slice(10).to_a
+  # admin.update!(
+  #   favorites: thrashed + favs,
+  #   visits: thrashed + visits,
+  # )
 
   users = User.where("email LIKE '%barnaby%'")
   if users.count < 20
@@ -52,21 +52,20 @@ with_err_handling do
   end
 
   print "  Creating buttery Reviews & Ratings for some Skateparks..."
-  skateparks.pluck(:id).map do |park_id|
-    reviewer = users[rand(0...users.length)]
-    reviews  = ['It sucked ass.', 'Chill.', 'Magnificent Crete.']
+  # skateparks.pluck(:id).map do |park_id|
+  #   reviewer = users[rand(0...users.length)]
+  #   reviews  = ['It sucked ass.', 'Chill.', 'Magnificent Crete.']
 
-    rating = Rating.find_or_initialize_by(
-      skatepark_id: park_id,
-      user_id: reviewer.id,
-    )
-    rating.update!(
-      stars: rand(1..5),
-      review: reviews.sample(1).first,
-    )
-    print "."
-  end
-  puts
+  #   rating = Rating.find_or_initialize_by(
+  #     skatepark_id: park_id,
+  #     user_id: reviewer.id,
+  #   )
+  #   rating.update!(
+  #     stars: rand(1..5),
+  #     review: reviews.sample(1).first,
+  #   )
+  #   print "."
+  # end
 
   puts bold(green("Done."))
 end
