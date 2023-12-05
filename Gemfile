@@ -1,5 +1,5 @@
 source "https://rubygems.org"
-ruby "2.6.5"
+ruby "3.0.0"
 gem "rails", "~> 6.0.3.2"
 
 gem "active_model_serializers", "~> 0.10.10"
@@ -58,14 +58,13 @@ group :production do
 end
 
 group :test do
-  gem "capybara"
+  gem "capybara", '~> 3.39.1'
   gem "codeclimate-test-reporter", require: nil
   gem "database_cleaner"
   gem "factory_bot_rails"
   gem "rake"
   gem "rails-controller-testing"
-  gem "selenium-webdriver"
-  gem "webdrivers", '~> 4.0'
+  gem "selenium-webdriver", '~> 4.15.0'
   gem "webmock"
 end
 

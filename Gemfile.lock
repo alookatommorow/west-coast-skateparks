@@ -1593,7 +1593,7 @@ GEM
     buttercms-rails (1.2.4)
       buttercms-ruby (~> 2.0.0)
     buttercms-ruby (2.0)
-    capybara (3.36.0)
+    capybara (3.39.2)
       addressable
       matrix
       mini_mime (>= 0.1.3)
@@ -1604,7 +1604,6 @@ GEM
       xpath (~> 3.2)
     case_transform (0.2)
       activesupport
-    childprocess (4.1.0)
     climate_control (0.2.0)
     codeclimate-test-reporter (1.0.9)
       simplecov (<= 0.13)
@@ -1707,7 +1706,7 @@ GEM
     momentjs-rails (2.29.4.1)
       railties (>= 3.1)
     multi_xml (0.6.0)
-    net-imap (0.3.7)
+    net-imap (0.4.7)
       date
       net-protocol
     net-pop (0.1.2)
@@ -1717,8 +1716,8 @@ GEM
     net-smtp (0.4.0)
       net-protocol
     nio4r (2.6.1)
-    nokogiri (1.13.10)
-      mini_portile2 (~> 2.8.0)
+    nokogiri (1.15.5)
+      mini_portile2 (~> 2.8.2)
       racc (~> 1.4)
     parallel (1.23.0)
     pg (0.21.0)
@@ -1764,8 +1763,9 @@ GEM
       activesupport (>= 5.0.0)
       minitest
       nokogiri (>= 1.6)
-    rails-html-sanitizer (1.5.0)
-      loofah (~> 2.19, >= 2.19.1)
+    rails-html-sanitizer (1.6.0)
+      loofah (~> 2.21)
+      nokogiri (~> 1.14)
     rails_12factor (0.0.3)
       rails_serve_static_assets
       rails_stdout_logging
@@ -1785,7 +1785,7 @@ GEM
       execjs (~> 2.5)
       rails (>= 3.2)
       rainbow (~> 3.0)
-    regexp_parser (2.8.2)
+    regexp_parser (2.8.3)
     rexml (3.2.6)
     rspec-core (3.12.2)
       rspec-support (~> 3.12.0)
@@ -1816,10 +1816,10 @@ GEM
       sprockets-rails
       tilt
     selectize-rails (0.12.6)
-    selenium-webdriver (4.1.0)
-      childprocess (>= 0.5, < 5.0)
+    selenium-webdriver (4.15.0)
       rexml (~> 3.2, >= 3.2.5)
-      rubyzip (>= 1.2.2)
+      rubyzip (>= 1.2.2, < 3.0)
+      websocket (~> 1.0)
     simple_form (5.3.0)
       actionpack (>= 5.2)
       activemodel (>= 5.2)
@@ -1834,7 +1834,7 @@ GEM
       temple (~> 0.10.0)
       tilt (>= 2.1.0)
     slop (4.10.1)
-    spring (3.1.1)
+    spring (4.1.3)
     spring-commands-rspec (1.0.4)
       spring (>= 0.9.1)
     sprockets (4.2.1)
@@ -1867,10 +1867,6 @@ GEM
       activemodel (>= 4.2)
       debug_inspector
       railties (>= 4.2)
-    webdrivers (4.7.0)
-      nokogiri (~> 1.6)
-      rubyzip (>= 1.3.0)
-      selenium-webdriver (> 3.141, < 5.0)
     webmock (3.19.1)
       addressable (>= 2.8.0)
       crack (>= 0.3.2)
@@ -1879,6 +1875,7 @@ GEM
       activesupport (>= 4.2)
       rack-proxy (>= 0.6.1)
       railties (>= 4.2)
+    websocket (1.2.10)
     websocket-driver (0.7.6)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
@@ -1901,7 +1898,7 @@ DEPENDENCIES
   bullet
   bundler-audit
   buttercms-rails
-  capybara
+  capybara (~> 3.39.1)
   codeclimate-test-reporter
   coffee-rails
   database_cleaner
@@ -1929,7 +1926,7 @@ DEPENDENCIES
   react_on_rails (~> 11.3)
   rspec-rails
   sass-rails
-  selenium-webdriver
+  selenium-webdriver (~> 4.15.0)
   simple_form
   sitemap_generator
   slim
@@ -1939,12 +1936,11 @@ DEPENDENCIES
   uglifier (>= 1.3.0)
   underscore-rails
   web-console (~> 3.1.1)
-  webdrivers (~> 4.0)
   webmock
   webpacker (~> 4.2.2)
 
 RUBY VERSION
-   ruby 2.6.5p114
+   ruby 3.0.0p0
 
 BUNDLED WITH
-   2.1.4
+   2.2.3
