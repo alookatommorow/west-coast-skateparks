@@ -36,7 +36,7 @@ with_err_handling do
 
   if User.count < 20
     puts "  Creating some Users..."
-    FactoryBot.create_list(:user, 20)
+    users = FactoryBot.create_list(:user, 20)
 
     print "  Creating buttery Reviews & Ratings for some Skateparks..."
     skateparks.pluck(:id).map do |park_id|
