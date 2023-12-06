@@ -3,12 +3,10 @@ require 'rails_helper'
 RSpec.describe Vendor::SessionsController do
   describe '#create' do
     it 'creates a user if one cannot be found by email, and signs them in' do
-      allow(URI).to receive(:parse)
       vendor_auth_params = {
         name: 'DudeBroMan',
         email: 'cheeselover@swag.net',
         username: 'cheeselover@swag.net',
-        avatar: 'http://government-cheese.gov/test_image.png'
       }
 
       post :create, params: vendor_auth_params
@@ -16,7 +14,6 @@ RSpec.describe Vendor::SessionsController do
       expect(User.last.name).to eq('DudeBroMan')
       expect(User.last.email).to eq('cheeselover@swag.net')
       expect(User.last.username).to eq(User.last.email)
-      expect(URI).to have_received(:parse).with('http://government-cheese.gov/test_image.png')
       expect(session[:id]).to eq(User.last.id)
       expect(response.body).to eq(User.last.id.to_json)
     end
@@ -34,7 +31,6 @@ RSpec.describe Vendor::SessionsController do
 
     context 'when user does not have email associated with their account' do
       it 'it cracks their bitch ass with a flash error' do
-        allow(URI).to receive(:parse)
         vendor_auth_params = {
           name: 'Irie Dingus',
           email: nil
