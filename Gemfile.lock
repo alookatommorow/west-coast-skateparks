@@ -1761,6 +1761,10 @@ GEM
     nokogiri (1.15.5)
       mini_portile2 (~> 2.8.2)
       racc (~> 1.4)
+    nokogiri (1.15.5-aarch64-linux)
+      racc (~> 1.4)
+    nokogiri (1.15.5-x86_64-linux)
+      racc (~> 1.4)
     parallel (1.23.0)
     pg (1.5.4)
     pgsync (0.7.4)
@@ -1932,10 +1936,6 @@ GEM
       addressable (>= 2.8.0)
       crack (>= 0.3.2)
       hashdiff (>= 0.4.0, < 2.0.0)
-    webpacker (4.2.2)
-      activesupport (>= 4.2)
-      rack-proxy (>= 0.6.1)
-      railties (>= 4.2)
     webrick (1.8.1)
     websocket (1.2.10)
     websocket-driver (0.7.6)
@@ -1946,7 +1946,9 @@ GEM
     zeitwerk (2.6.12)
 
 PLATFORMS
+  aarch64-linux
   ruby
+  x86_64-linux
 
 DEPENDENCIES
   active_model_serializers (~> 0.10.10)
@@ -1986,7 +1988,7 @@ DEPENDENCIES
   rails-controller-testing
   rails_12factor
   rake
-  react_on_rails (~> 11.3)
+  react_on_rails (~> 11.2, >= 11.2.2)
   rspec-rails
   sass-rails
   selenium-webdriver (~> 4.15.0)
@@ -2001,7 +2003,6 @@ DEPENDENCIES
   underscore-rails
   web-console (~> 3.1.1)
   webmock
-  webpacker (~> 4.2.2)
 
 RUBY VERSION
    ruby 3.2.2p53
