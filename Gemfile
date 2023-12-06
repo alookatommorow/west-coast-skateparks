@@ -1,6 +1,6 @@
 source "https://rubygems.org"
-ruby "3.0.0"
-gem "rails", "~> 6.0.3.2"
+ruby "3.2.2"
+gem "rails", "~> 7.1.2"
 
 gem "active_model_serializers", "~> 0.10.10"
 gem "administrate", "~> 0.14.0"
@@ -21,7 +21,7 @@ gem "jquery-rails"
 gem "kaminari"
 gem "kt-paperclip", "~> 6.4", ">= 6.4.1"
 gem 'mimemagic', github: 'mimemagicrb/mimemagic', ref: '01f92d86d15d85cfd0f20dabd025dcbd36a8a60f'
-gem "pg", ">= 0.18", "< 1.0"
+gem 'pg', '~> 1.5', '>= 1.5.4'
 gem "puma"
 gem "react_on_rails", "~> 11.3"
 gem "sass-rails"
@@ -70,3 +70,5 @@ group :test do
 end
 
 # gem 'mini_racer', platforms: :ruby
+
+gem "shakapacker", "= 7.1"

@@ -55,6 +55,8 @@ Mac M1 chip
 Ruby versions
 <!-- optflags=-Wno-error=implicit-function-declaration ASDF_RUBY_BUILD_VERSION=v20220630 asdf install ruby 2.6.5 -->
 PG gem
+gem install pg -- --with-pg-config=/opt/homebrew/opt/libpq/bin/pg_config
+gem install pg -v ‘0.21.0’ -- --with-cflags="-Wno-error=implicit-function-declaration"
 https://gist.github.com/tomholford/f38b85e2f06b3ddb9b4593e841c77c9e
 
 ### Local DB Skateparks
@@ -79,4 +81,4 @@ If you would like to clone the repo and make a contribution, please feel free!
 1. Follow instructions to [setup local env](#local-env-setup)
 1. Add some cool stuff
 1. Make sure tests pass
-1. Put in a PR
+1. Open a PR
