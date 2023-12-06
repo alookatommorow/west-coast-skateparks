@@ -16,6 +16,7 @@
 /tmp
 .DS_Store
 .env
+.tool-versions
 
 /public/system
 npm-debug.log

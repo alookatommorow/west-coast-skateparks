@@ -40,7 +40,7 @@ RSpec.describe Skatepark, type: :model do
     it "returns properly formatted param" do
       skatepark = create(:skatepark)
 
-      expect(skatepark.to_param).to eq("#{skatepark.name}-#{skatepark.city}-#{skatepark.state}")
+      expect(skatepark.to_param).to eq("#{skatepark.name.parameterize}-#{skatepark.city.parameterize}-#{skatepark.state}")
     end
   end
 

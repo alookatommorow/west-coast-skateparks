@@ -1,5 +1,5 @@
 source "https://rubygems.org"
-ruby "2.6.5"
+ruby "3.0.0"
 gem "rails", "~> 6.0.3.2"
 
 gem "active_model_serializers", "~> 0.10.10"
@@ -10,6 +10,7 @@ gem "aws-sdk"
 gem "bcrypt"
 gem "bourbon" # added to prevent high voltage bourbon unreadable error
 gem "buttercms-rails"
+gem "faker"
 gem "friendly_id"
 gem "font-awesome-sass", "~> 5.12.0"
 gem "geokit"
@@ -18,7 +19,8 @@ gem "high_voltage"
 gem "httparty"
 gem "jquery-rails"
 gem "kaminari"
-gem "paperclip"
+gem "kt-paperclip", "~> 6.4", ">= 6.4.1"
+gem 'mimemagic', github: 'mimemagicrb/mimemagic', ref: '01f92d86d15d85cfd0f20dabd025dcbd36a8a60f'
 gem "pg", ">= 0.18", "< 1.0"
 gem "puma"
 gem "react_on_rails", "~> 11.3"
@@ -57,15 +59,14 @@ group :production do
 end
 
 group :test do
-  gem "capybara"
+  gem "capybara", '~> 3.39.1'
   gem "codeclimate-test-reporter", require: nil
   gem "database_cleaner"
   gem "factory_bot_rails"
   gem "rake"
   gem "rails-controller-testing"
-  gem "selenium-webdriver"
-  gem "webdrivers", '~> 4.0'
+  gem "selenium-webdriver", '~> 4.15.0'
   gem "webmock"
 end
 
-gem 'mini_racer', platforms: :ruby
+# gem 'mini_racer', platforms: :ruby
