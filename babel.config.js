@@ -52,9 +52,6 @@ module.exports = function(api) {
       '@babel/plugin-transform-destructuring',
       [
         '@babel/plugin-transform-class-properties',
-        {
-          loose: true
-        }
       ],
       [
         '@babel/plugin-transform-object-rest-spread',

@@ -1,6 +1,19 @@
-// See the shakacode/shakapacker README and docs directory for advice on customizing your webpackConfig.
-const { generateWebpackConfig } = require('shakapacker')
+const { webpackConfig, merge } = require('shakapacker')
 
-const webpackConfig = generateWebpackConfig()
+const sassLoaderConfig = {
+  module: {
+    rules: [
+      {
+        test:/.scss$/, 
+        use: ["style-loader",
+              "css-loader",
+              "sass-loader" ],
+        test: /\.css$/, 
+        use: ["style-loader",
+              "css-loader"]
+     }
+    ],
+  },
+};
 
-module.exports = webpackConfig
+module.exports = merge(webpackConfig, sassLoaderConfig);
