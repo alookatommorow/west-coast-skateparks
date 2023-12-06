@@ -14,6 +14,7 @@ jobs:
       POSTGRES_DB: west-coast-skateparks_test
       POSTGRES_HOST: localhost
       RAILS_ENV: test
+      WEATHER_KEY: test-key
 
     services:
       postgres:
