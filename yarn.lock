@@ -3206,6 +3206,14 @@ raw-body@2.5.1:
     iconv-lite "0.4.24"
     unpipe "1.0.0"
 
+react-dom@^18.2.0:
+  version "18.2.0"
+  resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-18.2.0.tgz#22aaf38708db2674ed9ada224ca4aa708d821e3d"
+  integrity sha512-6IMTriUmvsjHUjNtEDudZfuDQUoWXVxKHhlEGSk81n4YFS+r/Kl99wXiwlVXtPBtJenozv2P+hxDsw9eA7Xo6g==
+  dependencies:
+    loose-envify "^1.1.0"
+    scheduler "^0.23.0"
+
 react-image-gallery@^1.3.0:
   version "1.3.0"
   resolved "https://registry.npmjs.org/react-image-gallery/-/react-image-gallery-1.3.0.tgz"
@@ -3216,9 +3224,9 @@ react-is@^16.13.1:
   resolved "https://registry.npmjs.org/react-is/-/react-is-16.13.1.tgz"
   integrity sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==
 
-react-on-rails@^13.4.0:
+react-on-rails@13.4.0:
   version "13.4.0"
-  resolved "https://registry.npmjs.org/react-on-rails/-/react-on-rails-13.4.0.tgz"
+  resolved "https://registry.yarnpkg.com/react-on-rails/-/react-on-rails-13.4.0.tgz#2dcae18413d3982e18fb6f53b950788abf337bf9"
   integrity sha512-BsBUYnA8759h9mH8QIbLcd2N5MqfcQ/k4PJ60sVm0dJZTxAv8fXt2cvphS7bdr1CWdBbvg5/wFdio3vvQ+q4NQ==
   dependencies:
     "@babel/runtime-corejs3" "^7.12.5"
@@ -3424,6 +3432,13 @@ sass@^1.69.5:
     chokidar ">=3.0.0 <4.0.0"
     immutable "^4.0.0"
     source-map-js ">=0.6.2 <2.0.0"
+
+scheduler@^0.23.0:
+  version "0.23.0"
+  resolved "https://registry.yarnpkg.com/scheduler/-/scheduler-0.23.0.tgz#ba8041afc3d30eb206a487b6b384002e4e61fdfe"
+  integrity sha512-CtuThmgHNg7zIZWAXi3AsyIzA3n4xx7aNyjwC2VJldO2LMVDhFK+63xGqq6CsJH4rTAt6/M+N4GhZiDYPx9eUw==
+  dependencies:
+    loose-envify "^1.1.0"
 
 schema-utils@^2.6.5:
   version "2.7.1"
