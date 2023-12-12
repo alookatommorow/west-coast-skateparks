@@ -23,7 +23,7 @@ with_err_handling do
     }
   end
 
-  Skatepark.insert_all(skateparks)
+  Skatepark.create(skateparks)
   skateparks = Skatepark.all
 
   puts bold("Seeding User data...")
@@ -53,7 +53,7 @@ with_err_handling do
       }
     end
 
-    User.insert_all(users)
+    User.create(users)
     users = User.all
 
     print "  Creating buttery Reviews & Ratings for some Skateparks..."
