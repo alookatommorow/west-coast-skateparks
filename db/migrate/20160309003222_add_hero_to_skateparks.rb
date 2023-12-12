@@ -1,4 +1,4 @@
-class AddHeroToSkateparks < ActiveRecord::Migration
+class AddHeroToSkateparks < ActiveRecord::Migration[5.0]
   def up
     add_attachment :skateparks, :hero
   end

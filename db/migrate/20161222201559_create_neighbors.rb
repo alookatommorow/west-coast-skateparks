@@ -1,4 +1,4 @@
-class CreateNeighbors < ActiveRecord::Migration
+class CreateNeighbors < ActiveRecord::Migration[5.0]
   def up
     create_table :neighbors do |t|
       t.integer :skatepark_id

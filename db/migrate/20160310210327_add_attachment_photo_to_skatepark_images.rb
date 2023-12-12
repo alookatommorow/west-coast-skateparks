@@ -1,4 +1,4 @@
-class AddAttachmentPhotoToSkateparkImages < ActiveRecord::Migration
+class AddAttachmentPhotoToSkateparkImages < ActiveRecord::Migration[5.0]
   def self.up
     change_table :skatepark_images do |t|
       t.attachment :photo
