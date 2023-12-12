@@ -1,4 +1,4 @@
-class CreateSkateparkImages < ActiveRecord::Migration
+class CreateSkateparkImages < ActiveRecord::Migration[5.0]
   def change
     create_table :skatepark_images do |t|
       t.string :caption

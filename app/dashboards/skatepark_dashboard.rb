@@ -36,7 +36,7 @@ class SkateparkDashboard < Administrate::BaseDashboard
     photo_cred: Field::String,
     photo_url: Field::String,
     video_url: Field::String,
-    obstacles: Field::PredefinedArray.with_options(
+    obstacles: PredefinedArray.with_options(
       members: Skatepark::OBSTACLES,
     ),
     favoriters: Field::HasMany.with_options(class_name: "User"),
