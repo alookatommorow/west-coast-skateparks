@@ -1,5 +1,5 @@
 require "unix_colors"
-require "factory_bot_rails"
+require "faker"
 
 def with_err_handling
   ActiveRecord::Base.transaction do
@@ -12,9 +12,19 @@ end
 
 with_err_handling do
   puts bold "Creating Skateparks..."
-  ['california', 'oregon', 'washington'].each do |state|
-    FactoryBot.create_list(:skatepark, 10, state: state)
+  skateparks = (1..40).map do
+    {
+      name: "#{Faker::Creature::Animal.unique.name} skatepark",
+      city: Faker::Tea.unique.variety,
+      state: ['california', 'oregon', 'washington'].sample,
+      address: Faker::Address.street_address,
+      latitude: Faker::Address.latitude,
+      longitude: Faker::Address.longitude,
+    }
   end
+
+  Skatepark.insert_all(skateparks)
+  skateparks = Skatepark.all
 
   puts bold("Seeding User data...")
   puts "  Creating admin..."
@@ -25,8 +35,6 @@ with_err_handling do
     password: "admin123",
   )
 
-  skateparks = Skatepark.all
-
   puts "  Giving admin some favs and visits..."
   thrashed, favs, visits = skateparks.each_slice(10).to_a
   admin.update!(
@@ -36,7 +44,17 @@ with_err_handling do
 
   if User.count < 20
     puts "  Creating some Users..."
-    users = FactoryBot.create_list(:user, 20)
+    users = (1..20).map do |i|
+      {
+        username: Faker::Internet.username,
+        email: "swag#{i}@swag.swag",
+        name: Faker::Name.name,
+        password_digest: Faker::Internet.password,
+      }
+    end
+
+    User.insert_all(users)
+    users = User.all
 
     print "  Creating buttery Reviews & Ratings for some Skateparks..."
     skateparks.pluck(:id).map do |park_id|
