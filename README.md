@@ -9,7 +9,7 @@ West Coast Skateparks (WCS) is an informational directory of every skatepark in 
 ![Screenshot](https://storage.googleapis.com/john-hess/portfolio/wcs.png)
 
 ## Deployment
-West Coast Skateparks is deployed to Heroku. Visit the app [here](https://west-coast-skateparks.herokuapp.com/)
+West Coast Skateparks is deployed using Heroku. Visit the app [here](https://www.west-coast-skateparks.com/)
 
 ## Technology
 ### Stack
@@ -25,60 +25,40 @@ West Coast Skateparks is deployed to Heroku. Visit the app [here](https://west-c
 * [Facebook Login](https://developers.facebook.com/docs/facebook-login/web)
 * [Weather Underground](https://www.wunderground.com/)
 
-## Local Env Setup
-### Fresh Install
+## Setup
 #### React
-##### Install Node
-1. `brew install nvm`
-1. `nvm install v12` (or latest)
-1. `nvm alias default v12`
+##### Install Node 
+1. Install Node with your preferred Node version manager
 ##### Setup Webpack Dev Server
-1. install npm
-1. install yarn (for webpacker) `brew install yarn`
-1. `npm install`
-1. `cd /path/to/west-coast-skateparks && yarn install`
-1. `bin/webpack-dev-server`
+1. install yarn `brew install yarn`
+1. `yarn install`
+1. run developement server `bin/shakapacker-dev-server`
 #### Rails
 ##### Install Ruby
-1. Install Ruby 2.6.5 with your preferred Ruby version manager
-1. `rbenv install 2.4.2`
+1. Install Ruby 3.2.2 with your preferred Ruby version manager
+##### Install Bundler
 1. `gem install bundler`
 ##### Setup Rails App
 1. [Install Postgres](https://postgresapp.com/)
 1. `bundle install`
-1. `bundle exec rails dev:reset_db` (Requires heroku access, otherwise use `rails db:setup`)
+1. `bundle exec rails db:setup`
 1. `bundle exec rails s`
 1. Open `http://localhost:3000` and get to it
 
-#### Troubleshooting
-Mac M1 chip
-Ruby versions
-<!-- optflags=-Wno-error=implicit-function-declaration ASDF_RUBY_BUILD_VERSION=v20220630 asdf install ruby 2.6.5 -->
-PG gem
-gem install pg -- --with-pg-config=/opt/homebrew/opt/libpq/bin/pg_config
-gem install pg -v ‘0.21.0’ -- --with-cflags="-Wno-error=implicit-function-declaration"
-https://gist.github.com/tomholford/f38b85e2f06b3ddb9b4593e841c77c9e
+#### Troubleshooting Mac M1 chips
+Mac M1 chip is known to cause issues with Ruby and PG gem installations
+##### Ruby
+The following command might help install Ruby when using asdf: `optflags=-Wno-error=implicit-function-declaration ASDF_RUBY_BUILD_VERSION=v20220630 asdf install ruby 3.2.2`
+##### PG Gem
+The following command might help install PG gem: 
+`gem install pg -v ‘0.21.0’ -- --with-cflags="-Wno-error=implicit-function-declaration"`
+See other troubleshooting tips [here](https://gist.github.com/tomholford/f38b85e2f06b3ddb9b4593e841c77c9e)
 
-### Local DB Skateparks
-These tasks can be used to keep your local data as prodlike as possible. Each of them is idempotent and can be run as many times as you want. _Note: You'll need access to heroku to use these._
-
-`rails dev:restore_skateparks`
-
- Downloads a dump of prod Skateparks and overwrites local DB with them. _Any Reviews, Ratings, Favorites, etc. that local users have with Skateparks will be lost._
-
-`rails dev:seed_db`
-
- Restores Skateparks, seeds an Admin user and some Reviews/Ratings. _This will not overwrite any existing users you've created._
-
-`rails dev:reset_db`
-
- Performs both the actions above after dropping, creating, and migrating your local DB. _This will overwrite all local data, so be 100% sure before you use it._
 
 ## Contribute
 If you would like to clone the repo and make a contribution, please feel free!
 
 1. Clone repo (`git clone git@github.com:alookatommorow/west-coast-skateparks.git`)
-1. Follow instructions to [setup local env](#local-env-setup)
+1. Follow instructions to [setup local env](#setup)
 1. Add some cool stuff
-1. Make sure tests pass
 1. Open a PR
