@@ -1,0 +1,19 @@
+{
+  "workbench.colorTheme": "Monokai",
+  "editor.tabSize": 2,
+  "editor.detectIndentation": false,
+  "files.trimTrailingWhitespace": true,
+  "eslint.format.enable": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit"
+  },
+  "eslint.validate": [
+    "javascript"
+  ],
+  "[typescript]": {
+    "editor.formatOnPaste": false,
+    "editor.formatOnSave": false,
+  },
+  "editor.formatOnPaste": true,
+  "editor.formatOnSave": true,
+}

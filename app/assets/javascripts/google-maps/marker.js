@@ -1,3 +1,8 @@
+var STATE_DISPLAY = {
+  california: 'CA',
+  oregon: 'OR',
+  washington: 'WA',
+};
 // wrapper around google maps Marker to add our custom setup
 // while exposing a simple constructor to the MAPBUILDER
 function Marker(skatepark) {
@@ -7,11 +12,11 @@ function Marker(skatepark) {
     map: this.map,
     title: titleize(skatepark.city + ', ' + STATE_DISPLAY[skatepark.state]),
     category: skatepark.category,
-    icon: "https://maps.google.com/mapfiles/ms/icons/" + this.colorOptions[skatepark.category] + ".png",
+    icon: 'https://maps.google.com/mapfiles/ms/icons/' + this.colorOptions[skatepark.category] + '.png',
     id: skatepark.id
   });
 
-  if (skatepark.category === "nearby") {
+  if (skatepark.category === 'nearby') {
     marker.setVisible(false);
   }
 
@@ -19,9 +24,9 @@ function Marker(skatepark) {
 }
 
 Marker.prototype.colorOptions = {
-  main: "red-dot",
-  nearby: "green-dot",
-  favorite: "purple-dot",
-  visited: "yellow-dot",
-  both: "blue-dot"
+  main: 'red-dot',
+  nearby: 'green-dot',
+  favorite: 'purple-dot',
+  visited: 'yellow-dot',
+  both: 'blue-dot'
 };

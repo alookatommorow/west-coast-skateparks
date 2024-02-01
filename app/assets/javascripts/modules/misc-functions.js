@@ -7,13 +7,7 @@ function displayFlashMessage() {
 }
 
 function titleize(string) {
-  return string.replace(new RegExp('(?:\\b|_)([a-z])', 'g'), function(char) {
+  return string.replace(new RegExp('(?:\\b|_)([a-z])', 'g'), function (char) {
     return char.toUpperCase();
   });
 }
-
-var STATE_DISPLAY = {
-  california: 'CA',
-  oregon: 'OR',
-  washington: 'WA',
-};
