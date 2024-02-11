@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Modal from 'components/Modal';
-import useToggle from 'hooks/useToggle';
+import { useToggle } from 'hooks/useToggle';
 import styles from 'styles/photos.module.scss';
 import 'react-image-gallery/styles/scss/image-gallery.scss';
 import ImageGallery from 'react-image-gallery';

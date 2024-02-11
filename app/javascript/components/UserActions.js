@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import WarningModal from './WarningModal';
-import useToggle from 'hooks/useToggle';
+import { useToggle } from 'hooks/useToggle';
 
 function UserActions(props) {
   const {
@@ -23,7 +23,9 @@ function UserActions(props) {
   const handleClick = event => {
     if (!user) return toggleWarningModalIsShowing();
 
-    const { currentTarget: { name, value }} = event;
+    const {
+      currentTarget: { name, value },
+    } = event;
 
     setIsLoading(name, true);
 
@@ -34,13 +36,17 @@ function UserActions(props) {
       toggleHasAction(name);
       setIsLoading(name, false);
     });
-  }
+  };
 
   const setIsLoading = (name, isLoading) =>
-    name === 'visit' ? setVisitIsLoading(isLoading) : setFavoriteIsLoading(isLoading);
+    name === 'visit'
+      ? setVisitIsLoading(isLoading)
+      : setFavoriteIsLoading(isLoading);
 
   const toggleHasAction = name =>
-    name === 'visit' ? setHasVisited(!hasVisited) : setHasFavorited(!hasFavorited);
+    name === 'visit'
+      ? setHasVisited(!hasVisited)
+      : setHasFavorited(!hasFavorited);
 
   const modifiedAddress = address.replace(/ &/g, ',');
 
@@ -48,14 +54,14 @@ function UserActions(props) {
     <React.Fragment>
       {(hasFavorited || hasVisited) && (
         <div className="user-indicators">
-          { hasVisited && <i className="fa fa-check green"></i> }
-          { hasFavorited && <i className="fa fa-heart red"></i> }
+          {hasVisited && <i className="fa fa-check green"></i>}
+          {hasFavorited && <i className="fa fa-heart red"></i>}
         </div>
       )}
       <div className="actions">
         <a
           className="btn"
-          rel="nofollow noopener"
+          rel="nofollow noopener noreferrer"
           target="_blank"
           href={`https://www.google.com/maps/dir/?api=1&destination=${modifiedAddress}`}
         >
@@ -95,7 +101,7 @@ function UserActions(props) {
         {user && user.admin && (
           <a
             className="btn"
-            rel="nofollow noopener"
+            rel="nofollow noopener noreferrer"
             target="_blank"
             href={`/admin/skateparks/${slug}/edit`}
           >
@@ -112,6 +118,6 @@ function UserActions(props) {
       />
     </React.Fragment>
   );
-};
+}
 
-export default props => <UserActions {...props} />
+export default props => <UserActions {...props} />;

@@ -3,13 +3,9 @@ class SkateparksController < ApplicationController
   before_action :set_skatepark, only: %i(favorite unfavorite visit unvisit)
 
   def show
-    @skatepark = Skatepark.includes(
-      { ratings: :user },
-      :skatepark_images,
-    ).find(params[:slug])
-
+    @skatepark = Skatepark.includes(:skatepark_images).find(params[:slug])
     @ratings = ActiveModelSerializers::SerializableResource.new(
-      @skatepark.ratings.order(created_at: :desc),
+      @skatepark.ratings.includes(:user).order(created_at: :desc),
       adapter: :attributes,
       each_serializer: RatingSerializer
     ).as_json

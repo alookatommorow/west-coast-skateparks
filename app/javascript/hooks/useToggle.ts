@@ -1,9 +1,7 @@
 import { useState } from 'react';
 
-const useToggle = intitial => {
+export const useToggle = (intitial: boolean) => {
   const [toggleIsOn, setToggleIsOn] = useState(intitial);
   const toggle = () => setToggleIsOn(!toggleIsOn);
   return { toggleIsOn, toggle };
 };
-
-export default useToggle;

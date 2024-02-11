@@ -130,7 +130,7 @@ class Skatepark < ActiveRecord::Base
   end
 
   def average_rating
-    if ratings.exists?
+    if ratings?
       raw_avg = ratings.average(:stars)
       (raw_avg * 2).ceil.to_f / 2
     end

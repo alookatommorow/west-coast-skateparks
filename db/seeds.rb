@@ -49,7 +49,7 @@ with_err_handling do
         username: Faker::Internet.username,
         email: "swag#{i}@swag.swag",
         name: Faker::Name.name,
-        password_digest: Faker::Internet.password,
+        password: Faker::Internet.password,
       }
     end
 

@@ -1,20 +1,31 @@
-import React from 'react';
+import React, { FormEvent, ChangeEvent } from 'react';
 import Modal from 'components/Modal';
 import WarningModal from 'components/WarningModal';
-import StarInput from 'components/StarInput';
+import { StarInput } from 'components/StarInput';
 
-function ReviewsComponent(props) {
-  const {
-    isVisible,
-    onClose,
-    ratingError,
-    handleSubmit,
-    handleChange,
-    setStars,
-    userId,
-    stars,
-    numUserRatings,
-  } = props;
+type ReviewsComponentProps = {
+  isVisible: boolean;
+  onClose: () => void;
+  ratingError: string;
+  handleSubmit: (event: FormEvent<HTMLFormElement>) => void;
+  userId: number;
+  stars: number;
+  setStars: React.Dispatch<React.SetStateAction<number>>;
+  numUserRatings: number;
+  handleChange: (event: ChangeEvent<HTMLTextAreaElement>) => void;
+};
+
+export const ReviewsComponent = ({
+  isVisible,
+  onClose,
+  ratingError,
+  handleSubmit,
+  handleChange,
+  setStars,
+  userId,
+  stars,
+  numUserRatings,
+}: ReviewsComponentProps) => {
   const showError = ratingError.length > 0;
 
   if (!userId) {
@@ -26,11 +37,11 @@ function ReviewsComponent(props) {
         onClose={onClose}
         isVisible={isVisible}
       />
-    )
+    );
   }
 
   return (
-    <React.Fragment>
+    <>
       <Modal isVisible={isVisible} onClose={onClose}>
         {numUserRatings === 2 ? (
           <Modal.Body className="modal-warning">
@@ -46,7 +57,9 @@ function ReviewsComponent(props) {
                 setStars={setStars}
                 showError={showError}
               />
-              <p className={`error-message-v2 ${showError && 'visible'}`}>{ratingError}</p>
+              <p className={`error-message-v2 ${showError && 'visible'}`}>
+                {ratingError}
+              </p>
               <textarea onChange={handleChange} />
             </Modal.Body>
             <Modal.Footer>
@@ -58,8 +71,6 @@ function ReviewsComponent(props) {
           </form>
         )}
       </Modal>
-    </React.Fragment>
+    </>
   );
 };
-
-export default props => <ReviewsComponent {...props} />
