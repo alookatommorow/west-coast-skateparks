@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import WarningModal from './WarningModal';
+import { WarningModal } from './WarningModal';
 import { useToggle } from 'hooks/useToggle';
 
 function UserActions(props) {

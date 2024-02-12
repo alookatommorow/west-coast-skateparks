@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 
-import { SearchForm } from './components/SearchForm';
-import { SearchResults } from './components/SearchResults';
+import { SearchForm } from './SearchForm';
+import { SearchResults } from './SearchResults';
+
 const STATE_DISPLAY = {
   california: 'CA',
   oregon: 'OR',
@@ -40,7 +41,6 @@ function Search() {
     };
 
     if (query) {
-      console.log('event listener added');
       document.addEventListener('click', handleClickOutside);
     }
 

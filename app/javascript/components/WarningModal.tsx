@@ -1,9 +1,23 @@
-import React, { useState, useEffect } from 'react';
-import Modal from 'components/Modal';
+import React from 'react';
+import { Modal } from './Modal';
 
-function WarningModal(props) {
-  const { isVisible, onClose, mainText, confirmText, href, onConfirm } = props;
+type WarningModalProps = {
+  isVisible: boolean;
+  onClose: () => void;
+  mainText: string;
+  confirmText: string;
+  href: string;
+  onConfirm?: () => void;
+};
 
+export const WarningModal = ({
+  isVisible,
+  onClose,
+  mainText,
+  confirmText,
+  href,
+  onConfirm,
+}: WarningModalProps) => {
   return (
     <Modal isVisible={isVisible} onClose={onClose}>
       <Modal.Body className="modal-warning">
@@ -28,6 +42,4 @@ function WarningModal(props) {
       </Modal.Footer>
     </Modal>
   );
-}
-
-export default props => <WarningModal {...props} />
+};

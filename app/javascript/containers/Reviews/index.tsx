@@ -1,6 +1,6 @@
 import React, { useState, useEffect, FormEvent, ChangeEvent } from 'react';
 import { useToggle } from '../../hooks/useToggle';
-import { ReviewsComponent } from './components';
+import { ReviewModal } from './ReviewModal';
 import Stars from '../../components/Stars';
 
 type Rating = {
@@ -17,7 +17,7 @@ type ReviewFormProps = {
   skateparkId: number;
   userId?: number;
   ratings: Rating[];
-  averageRating: number;
+  initialAverageRating: number;
 };
 
 export const Reviews = ({
@@ -150,7 +150,7 @@ export const Reviews = ({
         <p>No reviews yet</p>
       )}
       {userId && (
-        <ReviewsComponent
+        <ReviewModal
           isVisible={modalIsShowing}
           onClose={toggleModalIsShowing}
           ratingError={ratingError}

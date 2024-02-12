@@ -1,6 +1,6 @@
 import React from 'react';
-import { BoldString } from '../../../components/BoldString';
-import { SearchResult } from '../index';
+import { BoldString } from '../../components/BoldString';
+import { SearchResult } from './index';
 
 type SearchResultsProps = {
   results: SearchResult[];

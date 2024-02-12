@@ -43,8 +43,6 @@ function AdvancedSearch(props) {
       }
     };
 
-    console.log(isMobile);
-
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, [isMobile]);
@@ -397,7 +395,7 @@ function AdvancedSearch(props) {
                 stars={stars}
                 handleClick={handleStarsChange}
                 setStars={setStars}
-                tiny={isMobile}
+                isTiny={isMobile}
               />
             </div>
           </div>

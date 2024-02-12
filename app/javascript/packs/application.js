@@ -18,9 +18,9 @@ import ReactOnRails from 'react-on-rails';
 import Search from '../containers/Search';
 import Photos from '../components/Photos';
 import UserActions from '../components/UserActions';
-import { Reviews } from '../containers/Reviews/index';
-import Modal from '../components/Modal';
-import WarningModal from '../components/WarningModal';
+import { Reviews } from '../containers/Reviews';
+import { Modal } from '../components/Modal';
+import { WarningModal } from '../components/WarningModal';
 import AdvancedSearch from '../containers/AdvancedSearch';
 
 ReactOnRails.register({

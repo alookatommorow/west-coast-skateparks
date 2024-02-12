@@ -4,14 +4,14 @@ type StarInputProps = {
   stars: number;
   setStars: (numStars: number) => void;
   showError: boolean;
-  tiny: boolean;
+  isTiny?: boolean;
 };
 
 export const StarInput = ({
   stars,
   showError,
   setStars,
-  tiny,
+  isTiny,
 }: StarInputProps) => {
   const maxStars = 5;
 
@@ -33,12 +33,12 @@ export const StarInput = ({
           type="checkbox"
           name="rating"
           onChange={handleStarsChange}
-          id={i + 1}
+          id={`${i + 1}`}
           value={i + 1}
           checked={stars === i + 1}
         />
         <i
-          className={`star fas fa-star ${showError && 'error'} ${tiny && 'tiny'}`}
+          className={`star fas fa-star ${showError && 'error'} ${isTiny && 'tiny'}`}
         />
       </label>
     ));
@@ -58,7 +58,7 @@ export const StarInput = ({
           onChange={handleStarsChange}
         />
         <i
-          className={`star far fa-star ${showError && 'error'} ${tiny && 'tiny'}`}
+          className={`star far fa-star ${showError && 'error'} ${isTiny && 'tiny'}`}
         />
       </label>
     ));
