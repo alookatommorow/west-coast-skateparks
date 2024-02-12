@@ -1,5 +1,6 @@
 require "unix_colors"
 require "faker"
+require "open-uri"
 
 def with_err_handling
   ActiveRecord::Base.transaction do
@@ -25,14 +26,30 @@ with_err_handling do
 
   Skatepark.create(skateparks)
   skateparks = Skatepark.all
-  images = []
 
   puts bold("Creating park images...")
-  image = File.open(Rails.root.join('public/test_image.png'))
-  skateparks.each do |skatepark|
-    images.push(photo: image, skatepark: skatepark)
+  images = []
+  urls = [
+    'https://s3-us-west-1.amazonaws.com/west-coast-skateparks/skatepark_images/photos/000/001/808/original/newberg-01.jpg?1459399047',
+    'https://s3-us-west-1.amazonaws.com/west-coast-skateparks/skatepark_images/photos/000/001/813/original/newberg-06.jpg?1459399056'
+  ]
+
+  urls.each do |url|
+    images.push(
+      SkateparkImage.create(
+        photo: URI.parse(url),
+        skatepark: skateparks.first
+      )
+    )
   end
-  SkateparkImage.create(images)
+  (1..skateparks.length - 1).each do |i|
+    images.each do |image|
+      new_image = image.dup
+      new_image.skatepark = skateparks[i]
+      new_image.save
+    end
+  end
+
 
   puts bold("Seeding User data...")
   puts "  Creating admin..."
