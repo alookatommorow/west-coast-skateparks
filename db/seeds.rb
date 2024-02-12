@@ -25,6 +25,14 @@ with_err_handling do
 
   Skatepark.create(skateparks)
   skateparks = Skatepark.all
+  images = []
+
+  puts bold("Creating park images...")
+  image = File.open(Rails.root.join('public/test_image.png'))
+  skateparks.each do |skatepark|
+    images.push(photo: image, skatepark: skatepark)
+  end
+  SkateparkImage.create(images)
 
   puts bold("Seeding User data...")
   puts "  Creating admin..."
