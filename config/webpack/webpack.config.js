@@ -1,6 +1,6 @@
 // const { webpackConfig, merge } = require('shakapacker')
 
-const { generateWebpackConfig, merge } = require('shakapacker');
+import { generateWebpackConfig, merge } from 'shakapacker';
 
 const sassLoaderConfig = {
   module: {
@@ -17,4 +17,4 @@ const sassLoaderConfig = {
 
 const webpackConfig = generateWebpackConfig(sassLoaderConfig);
 
-module.exports = merge(sassLoaderConfig, webpackConfig);
+export default merge(sassLoaderConfig, webpackConfig);
