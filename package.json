@@ -12,6 +12,7 @@
     "@babel/preset-typescript": "^7.23.3",
     "@babel/runtime": "7",
     "@types/babel__core": "7",
+    "@types/react-transition-group": "^4.4.10",
     "@types/webpack": "5",
     "babel-loader": "8",
     "babel-plugin-macros": "^3.1.0",
@@ -58,6 +59,7 @@
     "eslint-plugin-promise": "^6.0.0",
     "eslint-plugin-react": "^7.33.2",
     "prettier": "^3.2.4",
+    "typed-scss-modules": "^8.0.0",
     "typescript": "^5.3.3",
     "webpack-dev-server": "4"
   }
