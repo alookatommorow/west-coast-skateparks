@@ -232,7 +232,7 @@ i.star {
 
       .image-gallery-slide {
         background: black;
-        display: flex;
+        display: flex !important;
         align-items: center;
         justify-content: center;
         width: 100%;
