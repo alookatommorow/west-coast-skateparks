@@ -1,9 +1,9 @@
 name: Rspec and Capybara
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   pull_request:
-    branches: [ main ]
+    branches: [main]
 
 jobs:
   test:
@@ -44,4 +44,4 @@ jobs:
         run: bundle exec rails db:setup
 
       - name: Run the test suite
-        run: bundle exec rspec --exclude-pattern "spec/features/**/*_spec.rb"
+        run: bundle exec rspec
