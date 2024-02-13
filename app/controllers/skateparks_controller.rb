@@ -1,6 +1,5 @@
 class SkateparksController < ApplicationController
   before_action :redirect_if_old_url, only: :show
-  before_action :set_skatepark, only: %i(favorite unfavorite visit unvisit)
 
   def show
     @skatepark = Skatepark.includes(:skatepark_images).find(params[:slug])
@@ -16,29 +15,7 @@ class SkateparksController < ApplicationController
     end
   end
 
-  def index
-    @skateparks = Skatepark.all
-  end
-
-  def favorite
-    @skatepark.favoriters << current_user
-    render_favorite_button
-  end
-
-  def unfavorite
-    @skatepark.favoriters.destroy(current_user)
-    render_favorite_button
-  end
-
-  def visit
-    @skatepark.visitors << current_user
-    render_visit_button
-  end
-
-  def unvisit
-    @skatepark.visitors.destroy(current_user)
-    render_visit_button
-  end
+  def index; end
 
   def search
     @ca_parks = skateparks_json(Skatepark.in_state('california').order(:city))
@@ -48,24 +25,6 @@ class SkateparksController < ApplicationController
   end
 
   private
-
-  def render_favorite_button
-    render partial: "favorites/button", locals: {
-      user: current_user,
-      skatepark: @skatepark,
-    }
-  end
-
-  def render_visit_button
-    render partial: "visits/button", locals: {
-      user: current_user,
-      skatepark: @skatepark,
-    }
-  end
-
-  def set_skatepark
-    @skatepark = Skatepark.find(params[:slug])
-  end
 
   def redirect_if_old_url
     skatepark = Skatepark.find_by(slug: params[:slug])
