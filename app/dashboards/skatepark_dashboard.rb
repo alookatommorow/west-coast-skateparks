@@ -39,8 +39,8 @@ class SkateparkDashboard < Administrate::BaseDashboard
     obstacles: PredefinedArray.with_options(
       members: Skatepark::OBSTACLES,
     ),
-    favoriters: Field::HasMany.with_options(class_name: "User"),
-    visitors: Field::HasMany.with_options(class_name: "User"),
+    favoriters: Field::HasMany.with_options,
+    visitors: Field::HasMany.with_options,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
   }.freeze
