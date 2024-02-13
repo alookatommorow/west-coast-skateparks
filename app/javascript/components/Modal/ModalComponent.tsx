@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useRef, MouseEvent } from 'react';
-import { classNames } from '../../../utils/styles';
-import styles from '../../../styles/modal.module.scss';
-import { ModalContext } from '../modalContext';
+import { classNames } from '../../utils/styles';
+import styles from '../../styles/modal.module.scss';
+import { ModalContext } from './ModalContext';
 
 type ModalComponentProps = {
   children: React.ReactNode;
@@ -73,8 +73,8 @@ const ModalComponent = ({ children }: ModalComponentProps) => {
       onClick={handleContentClick}
     >
       <div
-        className={classNames(styles.modalContent, className, {
-          [styles.fullScreenMobile]: !!fullScreenMobile,
+        className={classNames(styles.modalContent, className || '', {
+          [styles.fullScreenMobile]: Boolean(fullScreenMobile),
         })}
         ref={modalRef}
       >

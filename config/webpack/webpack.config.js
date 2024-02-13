@@ -1,6 +1,11 @@
-// const { webpackConfig, merge } = require('shakapacker')
+const { generateWebpackConfig, merge } = require('shakapacker');
+const ForkTSCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 
-import { generateWebpackConfig, merge } from 'shakapacker';
+const webpackConfig = generateWebpackConfig({
+  plugins: [new ForkTSCheckerWebpackPlugin()],
+});
+
+// import { generateWebpackConfig, merge } from 'shakapacker';
 
 const sassLoaderConfig = {
   module: {
@@ -14,7 +19,7 @@ const sassLoaderConfig = {
     ],
   },
 };
+// webpackConfig = merge()
+module.exports = merge(sassLoaderConfig, webpackConfig);
 
-const webpackConfig = generateWebpackConfig(sassLoaderConfig);
-
-export default merge(sassLoaderConfig, webpackConfig);
+// export default merge(sassLoaderConfig, webpackConfig);

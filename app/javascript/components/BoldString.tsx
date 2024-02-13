@@ -1,9 +1,10 @@
 import React from 'react';
+import { titleize } from '../utils';
 
 type BoldStringPops = {
-  length: number,
-  matchIndex: number,
-  string: string,
+  length: number;
+  matchIndex: number;
+  string: string;
 };
 
 export const BoldString = ({ string, matchIndex, length }: BoldStringPops) => {
@@ -12,5 +13,11 @@ export const BoldString = ({ string, matchIndex, length }: BoldStringPops) => {
   const bold = output.slice(matchIndex, matchIndex + length);
   const last = output.slice(matchIndex + length);
 
-  return <span>{first}<span className="orange">{bold}</span>{last}</span>;
+  return (
+    <span>
+      {first}
+      <span className="orange">{bold}</span>
+      {last}
+    </span>
+  );
 };

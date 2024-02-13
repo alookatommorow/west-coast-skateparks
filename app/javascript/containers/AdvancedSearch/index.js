@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useToggle } from 'hooks/useToggle';
 import { StarInput } from 'components/StarInput';
-import Stars from 'components/Stars';
+import { Stars } from 'components/Stars';
 import { SKATEPARK_ATTRS } from './constants';
 
 function AdvancedSearch(props) {

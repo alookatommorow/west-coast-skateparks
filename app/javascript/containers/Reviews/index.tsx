@@ -1,7 +1,7 @@
 import React, { useState, useEffect, FormEvent, ChangeEvent } from 'react';
 import { useToggle } from '../../hooks/useToggle';
 import { ReviewModal } from './ReviewModal';
-import Stars from '../../components/Stars';
+import { Stars } from '../../components/Stars';
 
 type Rating = {
   author: string;
@@ -138,13 +138,13 @@ export const Reviews = ({
                   <p className="author">{rating.author}</p>
                   <p className="date">{rating.created_at}</p>
                 </div>
-                <Stars stars={rating.stars} prefix={`review-stars-${i}`} tiny />
+                <Stars stars={rating.stars} tiny />
                 <p className="text">{rating.review}</p>
               </div>
             </div>
           ))}
           <h4>User Rating</h4>
-          <Stars stars={averageRating} prefix="average-rating" />
+          <Stars stars={averageRating} />
         </>
       ) : (
         <p>No reviews yet</p>

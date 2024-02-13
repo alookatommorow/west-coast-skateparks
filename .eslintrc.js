@@ -8,7 +8,7 @@ const prettierOptions = JSON.parse(
 module.exports = {
   env: {
     browser: true,
-    es2021: true
+    es2021: true,
   },
   extends: [
     'eslint:recommended',
@@ -19,17 +19,12 @@ module.exports = {
   parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaVersion: 'latest',
-    sourceType: 'module'
+    sourceType: 'module',
   },
-  plugins: [
-    '@typescript-eslint',
-    'react',
-    'jsx-a11y',
-    'prettier'
-  ],
+  plugins: ['@typescript-eslint', 'react', 'jsx-a11y', 'prettier'],
   rules: {
     'prettier/prettier': ['error', prettierOptions],
     'import/imports-first': 0,
     'import/newline-after-import': 0,
-  }
-}
+  },
+};

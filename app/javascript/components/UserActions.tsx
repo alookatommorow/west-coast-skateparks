@@ -1,16 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState, MouseEvent } from 'react';
 import { WarningModal } from './WarningModal';
-import { useToggle } from 'hooks/useToggle';
+import { useToggle } from '../hooks/useToggle';
 
-function UserActions(props) {
-  const {
-    hasFavorited: initialHasFavorited,
-    hasVisited: initialHasVisited,
-    slug,
-    address,
-    user,
-  } = props;
+type UserActionsProps = {
+  hasFavorited: boolean;
+  hasVisited: boolean;
+  slug: string;
+  address: string;
+  isAdmin: boolean;
+  userId?: number;
+};
 
+export const UserActions = ({
+  hasFavorited: initialHasFavorited,
+  hasVisited: initialHasVisited,
+  slug,
+  address,
+  isAdmin,
+  userId,
+}: UserActionsProps) => {
   const [hasFavorited, setHasFavorited] = useState(initialHasFavorited);
   const [hasVisited, setHasVisited] = useState(initialHasVisited);
   const [visitIsLoading, setVisitIsLoading] = useState(false);
@@ -20,8 +28,8 @@ function UserActions(props) {
     toggle: toggleWarningModalIsShowing,
   } = useToggle(false);
 
-  const handleClick = event => {
-    if (!user) return toggleWarningModalIsShowing();
+  const handleClick = async (event: MouseEvent<HTMLButtonElement>) => {
+    if (!userId) return toggleWarningModalIsShowing();
 
     const {
       currentTarget: { name, value },
@@ -29,21 +37,29 @@ function UserActions(props) {
 
     setIsLoading(name, true);
 
-    $.ajax({
-      url: `/skateparks/${slug}/${value}`,
-      method: 'PATCH',
-    }).done(() => {
+    try {
+      await fetch(`/api/skateparks/${slug}/${value}`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          user_id: userId,
+        }),
+      });
       toggleHasAction(name);
       setIsLoading(name, false);
-    });
+    } catch (error) {
+      console.log('***********', error);
+    }
   };
 
-  const setIsLoading = (name, isLoading) =>
+  const setIsLoading = (name: string, isLoading: boolean) =>
     name === 'visit'
       ? setVisitIsLoading(isLoading)
       : setFavoriteIsLoading(isLoading);
 
-  const toggleHasAction = name =>
+  const toggleHasAction = (name: string) =>
     name === 'visit'
       ? setHasVisited(!hasVisited)
       : setHasFavorited(!hasFavorited);
@@ -51,7 +67,7 @@ function UserActions(props) {
   const modifiedAddress = address.replace(/ &/g, ',');
 
   return (
-    <React.Fragment>
+    <>
       {(hasFavorited || hasVisited) && (
         <div className="user-indicators">
           {hasVisited && <i className="fa fa-check green"></i>}
@@ -98,7 +114,7 @@ function UserActions(props) {
             <i className="fa fa-heart red"></i>
           )} */}
         </button>
-        {user && user.admin && (
+        {isAdmin && (
           <a
             className="btn"
             rel="nofollow noopener noreferrer"
@@ -116,8 +132,6 @@ function UserActions(props) {
         onClose={toggleWarningModalIsShowing}
         isVisible={warningModalIsShowing}
       />
-    </React.Fragment>
+    </>
   );
-}
-
-export default props => <UserActions {...props} />;
+};

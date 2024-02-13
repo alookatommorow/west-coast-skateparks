@@ -1,12 +1,14 @@
-import React, { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
+import React from 'react';
 
-function Stars(props) {
-  const { stars, keyPrefix, tiny } = props;
+type StarsProps = {
+  stars: number;
+  tiny?: boolean;
+};
 
+export const Stars = ({ stars, tiny }: StarsProps) => {
   const renderStars = () => {
     let isInteger = true;
-    let wholeStars = Number(stars);
+    let wholeStars = stars;
     let emptyStars = 5 - wholeStars;
 
     if (!Number.isInteger(wholeStars)) {
@@ -19,42 +21,25 @@ function Stars(props) {
       <div>
         {[...Array(wholeStars)].map((_e, i) => (
           <i
-            key={`${keyPrefix}-${i}`}
+            key={`star-${i}`}
             className={`star fas fa-star${tiny ? ' tiny' : ''}`}
           />
         ))}
         {!isInteger && (
           <i
-            key={`${keyPrefix}-half`}
+            key={`star-half`}
             className={`star fas fa-star-half-alt${tiny ? ' tiny' : ''}`}
           />
         )}
         {[...Array(emptyStars)].map((_e, i) => (
           <i
-            key={`${keyPrefix}-${5 - i}`}
+            key={`star-${5 - i}`}
             className={`star far fa-star${tiny ? ' tiny' : ''}`}
           />
         ))}
       </div>
     );
-  }
+  };
 
-  return (
-    <React.Fragment>
-      { renderStars() }
-    </React.Fragment>
-  );
-}
-
-Stars.propTypes = {
-  stars: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-  keyPrefix: PropTypes.string,
-  tiny: PropTypes.bool,
+  return <React.Fragment>{renderStars()}</React.Fragment>;
 };
-
-Stars.defaultProps = {
-  keyPrefix: 'standard',
-  tiny: false,
-};
-
-export default props => <Stars {...props} />

@@ -1,9 +1,9 @@
 import React, { useContext } from 'react';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
-import ModalComponent from './components';
-import styles from 'styles/modal.module.scss';
-import { classNames } from 'utils/styles';
-import { ModalContext, ModalContextProps } from './modalContext';
+import ModalComponent from './ModalComponent';
+import styles from '../../styles/modal.module.scss';
+import { classNames } from '../../utils/styles';
+import { ModalContext, ModalContextProps } from './ModalContext';
 
 type ChildrenProps = {
   children: React.ReactNode;
@@ -47,7 +47,9 @@ Modal.Header = function ModalHeader({ children }: ChildrenProps) {
 
 Modal.Body = function ModalBody({ className, children }: ModalBodyProps) {
   return (
-    <div className={classNames(styles.modalBody, className)}>{children}</div>
+    <div className={classNames(styles.modalBody, className || '')}>
+      {children}
+    </div>
   );
 };
 

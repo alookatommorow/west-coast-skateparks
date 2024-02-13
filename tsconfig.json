@@ -16,7 +16,7 @@
     "allowJs": true,
     "plugins": [{ "name": "typescript-plugin-css-modules" }]
   },
-  "exclude": ["**/*.spec.ts", "node_modules", "vendor", "public"],
+  "exclude": ["node_modules", "vendor", "public"],
   "compileOnSave": false,
-  "include": ["app/javascript"],
+  // "include": ["app/javascript/**/*"],
 }
