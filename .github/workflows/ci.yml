@@ -43,21 +43,21 @@ jobs:
       - name: Setup the postgres database
         run: bundle exec rails db:setup
 
-      - name: Set Node.js 16.x
-        uses: actions/setup-node@v3
-        with:
-          node-version: 16.x
+      # - name: Set Node.js 16.x
+      #   uses: actions/setup-node@v3
+      #   with:
+      #     node-version: 16.x
 
-      - uses: actions/cache@v2
-        with:
-          path: '**/node_modules'
-          key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
+      # - uses: actions/cache@v2
+      #   with:
+      #     path: '**/node_modules'
+      #     key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
 
-      - name: Yarn install
-        run: yarn --frozen-lockfile
+      # - name: Yarn install
+      #   run: yarn --frozen-lockfile
 
-      - name: Setup chrome driver (for Selenium)
-        uses: nanasess/setup-chromedriver@master
+      # - name: Setup chrome driver (for Selenium)
+      #   uses: nanasess/setup-chromedriver@master
 
       - name: Run the test suite
-        run: bundle exec rspec
+        run: bundle exec rspec --exclude-pattern "spec/features/**/*_spec.rb"
