@@ -23,6 +23,18 @@ Rails.application.routes.draw do
 
   resources :sessions, only: [:create, :destroy, :new]
 
+  namespace :api do
+    resources :skateparks, only: :index, param: :slug do
+      member do
+        patch :favorite
+        patch :unfavorite
+
+        patch :visit
+        patch :unvisit
+      end
+    end
+  end
+
   namespace :skateparks do
     resource :state, only: :show do
       resource :letter, only: :show
@@ -30,24 +42,12 @@ Rails.application.routes.draw do
     get :search
   end
 
-  namespace :api do
-    resources :skateparks, only: :index
-  end
-
   namespace :vendor do
     resources :sessions, only: :create
   end
 
-  resources :skateparks, param: :slug do
+  resources :skateparks, only: [:index, :show], param: :slug do
     resource :weather, only: :show, controller: 'skateparks/weather'
-
-    member do
-      patch :favorite
-      patch :unfavorite
-
-      patch :visit
-      patch :unvisit
-    end
   end
 
   resources :maps, only: :show
