@@ -26,4 +26,5 @@ RSpec.configure do |config|
   config.use_transactional_fixtures = false
   config.infer_spec_type_from_file_location!
   config.include Helpers::Json, type: :request
+  config.include Helpers::Authentication, type: :request
 end

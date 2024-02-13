@@ -25,7 +25,8 @@ RSpec.feature "Admin can create skateparks" do
     fill_in "Photo cred", with: "Atiba"
     fill_in "Photo url", with: "https://barn.com/kook.jpeg"
     fill_in "Video url", with: "https://barn.com/kook.mp4"
-    fill_in "Obstacles", with: "Flat ground"
+    check "skatepark_obstacles_rails"
+    check "skatepark_obstacles_bowl"
 
     click_button "Create Skatepark"
 
@@ -35,6 +36,8 @@ RSpec.feature "Admin can create skateparks" do
     expect(page).to have_content "Modesto"
     expect(page).to have_content "washington"
     expect(page).to have_content "plexi-glass"
+    expect(page).to have_content "rails"
+    expect(page).to have_content "bowl"
   end
 
   scenario "with incomplete location" do
@@ -43,7 +46,7 @@ RSpec.feature "Admin can create skateparks" do
     select "california", from: "State"
     click_button "Create Skatepark"
 
-    expect(page).to have_content "Location city can't be blank"
+    expect(page).to have_content "City can't be blank"
 
     fill_in "City", with: "Nowheresville"
     click_button "Create Skatepark"

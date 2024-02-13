@@ -36,6 +36,7 @@ WebMock.disable_net_connect!(allow_localhost: true, allow: 'codeclimate.com')
 
 # tests use regular (faster) driver if they don't require js
 Capybara.default_driver = :rack_test
+Capybara.enable_aria_label = true
 
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration

@@ -59,7 +59,7 @@ export const ReviewModal = ({
             <p className={`error-message-v2 ${showError && 'visible'}`}>
               {ratingError}
             </p>
-            <textarea onChange={handleChange} />
+            <textarea name="review" onChange={handleChange} />
           </Modal.Body>
           <Modal.Footer>
             <Modal.Footer.CloseBtn />

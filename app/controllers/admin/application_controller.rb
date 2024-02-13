@@ -9,19 +9,19 @@ module Admin
     before_action :authenticate_admin
 
     def authenticate_admin
-      return if admin_signed_in
+      return if admin_signed_in?
       flash[:notice] = 'You need admin authentication to access that.'
       redirect_to root_path
     end
 
     private
 
-      def admin_signed_in
-        current_user && current_user.admin?
+      def admin_signed_in?
+        !!current_user&.admin?
       end
 
       def current_user
-        @current_user ||= User.where(id: session[:id]).first
+        @current_user ||= User.find_by(id: session[:id])
       end
 
     # Override this value to specify the number of elements to display at a time

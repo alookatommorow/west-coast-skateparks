@@ -116,15 +116,10 @@ export const Reviews = ({
     <>
       <div className="review-header-container">
         <h4>Reviews</h4>
-        <div
-          className="write-review-button"
-          role="button"
-          tabIndex={0}
-          onClick={toggleModalIsShowing}
-        >
+        <button className="write-review-button" onClick={toggleModalIsShowing}>
           <i className="fas fa-comments"></i>
           <p>Write a review</p>
-        </div>
+        </button>
       </div>
       {allRatings.length > 0 ? (
         <>

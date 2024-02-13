@@ -28,7 +28,6 @@ const ModalComponent = ({ children }: ModalComponentProps) => {
   });
 
   const handleTabKey = (event: KeyboardEvent) => {
-    console.log('tabbing');
     if (modalRef.current) {
       const focasable = modalRef.current.querySelectorAll(
         'a[href], button, textarea, input[type="text"], input[type="radio"], input[type="checkbox"], select',

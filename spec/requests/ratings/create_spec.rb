@@ -1,13 +1,14 @@
 require 'rails_helper'
 
-RSpec.describe RatingsController, type: :controller do
-  describe '#create' do
+RSpec.describe '/ratings' do
+  describe 'POST #create' do
     it 'creates a rating' do
       skatepark = create(:skatepark)
       user = create(:user)
+      stars = 5
 
-      post :create, params: {
-        skatepark_id: skatepark.id, user_id: user.id, stars: 5
+      post '/ratings', params: {
+        skatepark_id: skatepark.id, user_id: user.id, stars: stars
       }
 
       rating = Rating.last
@@ -16,8 +17,8 @@ RSpec.describe RatingsController, type: :controller do
       expect(rating.skatepark).to eq(skatepark)
       expect(rating.user).to eq(user)
       expect(rating.stars).to eq(5)
-      expect(json_response['stars']).to eq 5
-      expect(json_response['new_average']).to eq skatepark.average_rating
+      expect(json_body['stars']).to eq stars
+      expect(json_body['new_average']).to eq skatepark.average_rating
     end
   end
 end

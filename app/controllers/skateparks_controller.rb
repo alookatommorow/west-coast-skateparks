@@ -1,6 +1,4 @@
 class SkateparksController < ApplicationController
-  before_action :redirect_if_old_url, only: :show
-
   def show
     @skatepark = Skatepark.includes(:skatepark_images).find(params[:slug])
     @ratings = ActiveModelSerializers::SerializableResource.new(
@@ -25,29 +23,6 @@ class SkateparksController < ApplicationController
   end
 
   private
-
-  def redirect_if_old_url
-    skatepark = Skatepark.find_by(slug: params[:slug])
-
-    # return unless skatepark not found (using old url)
-    return if skatepark.present?
-
-    split_param = params[:slug].split('-')
-
-    # if first part of param is number (ie '444-tapiola-park-astoria-oregon')
-    if split_param[0].to_i > 0
-      id = split_param.shift
-
-      if split_param.present?
-        url_param = split_param.join('-')
-      else
-        skatepark = Skatepark.find(id)
-        url_param = skatepark.slug
-      end
-
-      redirect_to skatepark_url(url_param), status: :moved_permanently
-    end
-  end
 
   def skateparks_json(skateparks)
     ActiveModelSerializers::SerializableResource.new(

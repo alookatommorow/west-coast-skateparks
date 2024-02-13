@@ -28,7 +28,7 @@ export const StarInput = ({
 
   const renderStars = () => {
     return [...Array(stars)].map((e, i) => (
-      <label htmlFor={`${i + 1}`} key={`star-${i + 1}`}>
+      <label htmlFor={`${i + 1}`} aria-label={`${i + 1}`} key={`star-${i + 1}`}>
         <input
           type="checkbox"
           name="rating"
@@ -48,7 +48,11 @@ export const StarInput = ({
     if (stars > 4) return;
 
     return [...Array(maxStars - stars)].map((e, i) => (
-      <label htmlFor={`${stars + i + 1}`} key={`star-${stars + i + 1}`}>
+      <label
+        htmlFor={`${stars + i + 1}`}
+        aria-label={`${stars + i + 1}`}
+        key={`star-${stars + i + 1}`}
+      >
         <input
           type="checkbox"
           name="stars"

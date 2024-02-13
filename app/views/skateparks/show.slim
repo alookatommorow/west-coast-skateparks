@@ -14,8 +14,8 @@
         | #{skatepark_location(@skatepark)}
         i.fa.fa-copy
       = react_component "UserActions", props: {\
-        hasFavorited: @has_favorited,
-        hasVisited: @has_visited,
+        hasFavorited: !!@has_favorited,
+        hasVisited: !!@has_visited,
         slug: @skatepark.slug,
         address: skatepark_location(@skatepark),
         isAdmin: !!current_user&.admin?,
