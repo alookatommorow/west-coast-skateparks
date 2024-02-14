@@ -144,19 +144,17 @@ export const Reviews = ({
       ) : (
         <p>No reviews yet</p>
       )}
-      {userId && (
-        <ReviewModal
-          isVisible={modalIsShowing}
-          onClose={toggleModalIsShowing}
-          ratingError={ratingError}
-          stars={stars}
-          handleSubmit={handleSubmit}
-          handleChange={handleChange}
-          setStars={setStars}
-          userId={userId}
-          numUserRatings={numUserRatings}
-        />
-      )}
+      <ReviewModal
+        isVisible={modalIsShowing}
+        onClose={toggleModalIsShowing}
+        ratingError={ratingError}
+        stars={stars}
+        handleSubmit={handleSubmit}
+        handleChange={handleChange}
+        setStars={setStars}
+        userId={userId}
+        numUserRatings={numUserRatings}
+      />
     </>
   );
 };

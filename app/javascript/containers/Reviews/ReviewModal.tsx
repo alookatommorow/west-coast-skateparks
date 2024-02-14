@@ -8,7 +8,7 @@ type ReviewModalProps = {
   onClose: () => void;
   ratingError: string;
   handleSubmit: (event: FormEvent<HTMLFormElement>) => void;
-  userId: number;
+  userId?: number;
   stars: number;
   setStars: React.Dispatch<React.SetStateAction<number>>;
   numUserRatings: number;
