@@ -45,7 +45,10 @@
   .map-photos
     .photos
       = render 'photos', skatepark: @skatepark
-    = render 'map', skatepark: @skatepark
+    = react_component "GMap", props: {\
+        resourceName: 'skateparks',
+        resourceId: @skatepark.id,
+      }
 
 = content_for :og_metadata
   meta name="twitter:card" content="summary_large_image"
