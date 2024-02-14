@@ -3,7 +3,9 @@ class RatingsController < ApplicationController
 
   def create
     rating = Rating.create!(rating_params)
-    render json: rating, status: :created
+    render json: rating,
+           new_average: rating.skatepark.average_rating,
+           status: :created
   end
 
   private

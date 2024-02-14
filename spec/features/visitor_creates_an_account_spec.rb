@@ -32,7 +32,7 @@ RSpec.feature 'Visitor creates an account' do
       click_button 'Register'
 
       expect(current_path).to eq(new_user_path)
-      expect(page).to have_text(invalid_user.errors.full_messages.first)
+      expect(page).to have_text('Email has already been taken')
     end
   end
 end

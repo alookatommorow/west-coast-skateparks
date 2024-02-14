@@ -5,14 +5,11 @@ RSpec.feature 'Visitor searches skatepark' do
     skatepark = create(:skatepark)
 
     visit root_path
-    find('.display-search').click
 
-    fill_in 'react-search-input', with: "Turd nugget"
+    fill_in 'query', with: "Turd nugget"
     expect(page).to have_text("0 Matches")
-    fill_in 'react-search-input', with: skatepark.name
+    fill_in 'query', with: skatepark.name
     expect(page).to have_text(skatepark.name.titleize)
-
-    stub_weather
 
     click_link skatepark.name.titleize
 

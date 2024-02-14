@@ -7,13 +7,13 @@ RSpec.feature 'User visits skatepark' do
 
     sign_in_user(user)
     visit skatepark_path(skatepark)
-    click_button 'Been Here'
+    click_button 'visit'
     click_link 'My Profile'
 
     expect(page).to have_text(skatepark.name.titleize)
 
     visit skatepark_path(skatepark)
-    click_button "Never Been Here"
+    click_button 'visit'
     click_link 'My Profile'
 
     expect(page).not_to have_text(skatepark.name.titleize)

@@ -7,10 +7,10 @@ module SessionConcern
   end
 
   def current_user
-    @current_user ||= User.where(id: session[:id]).first
+    @current_user ||= User.find_by(id: session[:id])
   end
 
   def logged_in?
-    current_user
+    current_user.present?
   end
 end

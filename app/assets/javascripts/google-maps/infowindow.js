@@ -10,18 +10,18 @@ function InfoWindow(skatepark) {
   });
 }
 
-InfoWindow.prototype.generateContentString = function() {
+InfoWindow.prototype.generateContentString = function () {
   this.countStars();
   var skatepark = this.skatepark,
-      generatedStarIcons = this.generateStarHtml();
+    generatedStarIcons = this.generateStarHtml()
 
   // id='content' is a Google Maps requirement
-  return "<div id='content'><a href='/skateparks/" + skatepark.slug + "'><div><img loading='lazy' src='"+skatepark.map_photo+ "' ></div><strong>"+titleize(skatepark.name)+"</strong><div>" + titleize(skatepark.city) + "</div><div>" + generatedStarIcons + "</div></a></div>";
+  return "<div id='content'><a href='/skateparks/" + skatepark.slug + "'><div><img loading='lazy' src='" + skatepark.map_photo + "' ></div><strong>" + titleize(skatepark.name) + "</strong><div>" + titleize(skatepark.city) + "</div><div>" + generatedStarIcons + "</div></a></div>";
 };
 
-InfoWindow.prototype.countStars = function() {
+InfoWindow.prototype.countStars = function () {
   var stars = this.stars,
-      rating = this.rating;
+    rating = this.rating;
 
   stars.wholeStars = parseInt(rating, 10);
   if (Number(rating) % 1 !== 0) {
@@ -29,17 +29,17 @@ InfoWindow.prototype.countStars = function() {
   } else {
     stars.halfStars = 0;
   }
-  stars.emptyStars = 5- Math.ceil(Number(rating));
+  stars.emptyStars = 5 - Math.ceil(Number(rating));
 };
 
-InfoWindow.prototype.generateStarHtml = function() {
+InfoWindow.prototype.generateStarHtml = function () {
   var stars = this.stars,
-      starIcons = {
-        wholeStars: "<i class='fa fa-star'></i>",
-        halfStars: "<i class='fa fa-star-half-o.'></i>",
-        emptyStars: "<i class='fa fa-star-o'></i>"
-      },
-      starString = "";
+    starIcons = {
+      wholeStars: "<i class='fa fa-star'></i>",
+      halfStars: "<i class='fa fa-star-half-o.'></i>",
+      emptyStars: "<i class='fa fa-star-o'></i>"
+    },
+    starString = "";
 
   for (var star in stars) {
     if (stars[star] > 0) {

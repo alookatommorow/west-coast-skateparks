@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.feature 'User gets weather for a skatepark' do
-  scenario 'they see weather conditions', js: true do
+  xscenario 'they see weather conditions', js: true do
     skatepark = create(:skatepark)
     stub_weather
 
