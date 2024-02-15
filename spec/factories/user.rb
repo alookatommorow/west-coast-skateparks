@@ -9,9 +9,9 @@ FactoryBot.define do
 
     trait :admin do
       admin    { true }
-      username { "admin" }
-      email    { "admin@admin.admin" }
-      password { "admin" }
+      username { 'admin' }
+      email    { 'admin@admin.admin' }
+      password { 'admin' }
     end
   end
 end

@@ -9,7 +9,7 @@ module FlashesHelper
 
   private
 
-    def message_styles
-      { 'error' => 'error', 'success' => 'positive', 'notice' => 'info' }
-    end
+  def message_styles
+    { 'error' => 'error', 'success' => 'positive', 'notice' => 'info' }
+  end
 end

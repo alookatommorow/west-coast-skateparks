@@ -1,4 +1,4 @@
-require "administrate/base_dashboard"
+require 'administrate/base_dashboard'
 
 class SkateparkDashboard < Administrate::BaseDashboard
   # ATTRIBUTE_TYPES
@@ -14,7 +14,7 @@ class SkateparkDashboard < Administrate::BaseDashboard
     reviews: Field::HasMany,
     skatepark_images: Field::HasMany,
     city: Field::String,
-    state: Field::Select.with_options(collection: ["california", "oregon", "washington"]),
+    state: Field::Select.with_options(collection: %w[california oregon washington]),
     address: Field::String,
     zip_code: Field::String,
     latitude: Field::Number.with_options(decimals: 2),
@@ -22,7 +22,7 @@ class SkateparkDashboard < Administrate::BaseDashboard
     id: Field::Number,
     name: Field::String,
     identifier: Field::String,
-    rating: Field::Select.with_options(collection: ["1", "1.5", "2", "2.5", "3", "3.5", "4", "4.5", "5"]),
+    rating: Field::Select.with_options(collection: ['1', '1.5', '2', '2.5', '3', '3.5', '4', '4.5', '5']),
     material: Field::String,
     designer: Field::String,
     builder: Field::String,
@@ -37,12 +37,12 @@ class SkateparkDashboard < Administrate::BaseDashboard
     photo_url: Field::String,
     video_url: Field::String,
     obstacles: PredefinedArray.with_options(
-      members: Skatepark::OBSTACLES,
+      members: Skatepark::OBSTACLES
     ),
     favoriters: Field::HasMany.with_options,
     visitors: Field::HasMany.with_options,
     created_at: Field::DateTime,
-    updated_at: Field::DateTime,
+    updated_at: Field::DateTime
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -50,80 +50,79 @@ class SkateparkDashboard < Administrate::BaseDashboard
   #
   # By default, it's limited to four items to reduce clutter on index pages.
   # Feel free to add, remove, or rearrange items.
-  COLLECTION_ATTRIBUTES = [
-    :id,
-    :map_photo,
-    :name,
-    :city,
-    :state,
-    :address,
-    :latitude,
-    :longitude,
+  COLLECTION_ATTRIBUTES = %i[
+    id
+    map_photo
+    name
+    city
+    state
+    address
+    latitude
+    longitude
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
-  SHOW_PAGE_ATTRIBUTES = [
-    :skatepark_images,
-    :city,
-    :state,
-    :address,
-    :latitude,
-    :longitude,
-    :id,
-    :name,
-    :rating,
-    :material,
-    :designer,
-    :builder,
-    :opened,
-    :hours,
-    :size,
-    :notes,
-    :info,
-    :helmet,
-    :lights,
-    :photo_cred,
-    :photo_url,
-    :video_url,
-    :obstacles,
-    :ratings,
-    :reviews,
-    :favoriters,
-    :visitors,
-    :created_at,
-    :updated_at,
-
+  SHOW_PAGE_ATTRIBUTES = %i[
+    skatepark_images
+    city
+    state
+    address
+    latitude
+    longitude
+    id
+    name
+    rating
+    material
+    designer
+    builder
+    opened
+    hours
+    size
+    notes
+    info
+    helmet
+    lights
+    photo_cred
+    photo_url
+    video_url
+    obstacles
+    ratings
+    reviews
+    favoriters
+    visitors
+    created_at
+    updated_at
   ].freeze
 
   # FORM_ATTRIBUTES
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
-  FORM_ATTRIBUTES = [
-    :city,
-    :state,
-    :address,
-    :latitude,
-    :longitude,
-    :hero,
-    :map_photo,
-    :skatepark_images,
-    :name,
-    :rating,
-    :material,
-    :designer,
-    :builder,
-    :opened,
-    :hours,
-    :size,
-    :notes,
-    :info,
-    :helmet,
-    :lights,
-    :photo_cred,
-    :photo_url,
-    :video_url,
-    :obstacles,
+  FORM_ATTRIBUTES = %i[
+    city
+    state
+    address
+    latitude
+    longitude
+    hero
+    map_photo
+    skatepark_images
+    name
+    rating
+    material
+    designer
+    builder
+    opened
+    hours
+    size
+    notes
+    info
+    helmet
+    lights
+    photo_cred
+    photo_url
+    video_url
+    obstacles
   ].freeze
 
   # Overwrite this method to customize how skateparks are displayed

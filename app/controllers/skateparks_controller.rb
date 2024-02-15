@@ -7,10 +7,8 @@ class SkateparksController < ApplicationController
       each_serializer: RatingSerializer
     ).as_json
 
-    if current_user
-      @has_favorited = current_user.has_favorited?(@skatepark.id)
-      @has_visited = current_user.has_visited?(@skatepark.id)
-    end
+    @has_favorited = !!current_user&.favorited?(@skatepark.id)
+    @has_visited = !!current_user&.visited?(@skatepark.id)
   end
 
   def index; end
@@ -22,7 +20,32 @@ class SkateparksController < ApplicationController
     @query = params[:query]
   end
 
+  # DEPRECATED: to be removed in favor of /api/skateparks routes when user page converts to react
+  def favorite
+    skatepark.favoriters << current_user
+    head :ok
+  end
+
+  def unfavorite
+    skatepark.favoriters.destroy(current_user)
+    head :ok
+  end
+
+  def visit
+    skatepark.visitors << current_user
+    head :ok
+  end
+
+  def unvisit
+    skatepark.visitors.destroy(current_user)
+    head :ok
+  end
+
   private
+
+  def skatepark
+    @skatepark ||= Skatepark.find(params[:slug])
+  end
 
   def skateparks_json(skateparks)
     ActiveModelSerializers::SerializableResource.new(

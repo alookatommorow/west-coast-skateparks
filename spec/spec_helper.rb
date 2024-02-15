@@ -16,13 +16,13 @@
 # users commonly want.
 require 'simplecov'
 SimpleCov.start do
-  add_filter "app/helpers/analytics_helper.rb"
-  add_filter "app/fields/paperclip_field.rb"
+  add_filter 'app/helpers/analytics_helper.rb'
+  add_filter 'app/fields/paperclip_field.rb'
 end
 
 ENV['RAILS_ENV'] ||= 'test'
 
-ENV['BUNDLE_GEMFILE'] = File.expand_path('../../Gemfile', __FILE__)
+ENV['BUNDLE_GEMFILE'] = File.expand_path('../Gemfile', __dir__)
 require 'bundler/setup'
 Bundler.require
 require 'capybara/rspec'
@@ -75,8 +75,8 @@ RSpec.configure do |config|
     mocks.verify_partial_doubles = true
   end
 
-# The settings below are suggested to provide a good initial experience
-# with RSpec, but feel free to customize to your heart's content.
+  # The settings below are suggested to provide a good initial experience
+  # with RSpec, but feel free to customize to your heart's content.
 
   # These two settings work together to allow you to limit a spec run
   # to individual examples or groups you care about by tagging them with
@@ -123,7 +123,4 @@ RSpec.configure do |config|
   # test failures related to randomization by passing the same `--seed` value
   # as the one that triggered the failure.
   Kernel.srand config.seed
-
-
-
 end

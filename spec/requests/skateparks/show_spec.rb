@@ -1,8 +1,8 @@
-require "rails_helper"
+require 'rails_helper'
 
-RSpec.describe "/skateparks" do
-  describe "GET #show" do
-    it "sets instance vars" do
+RSpec.describe '/skateparks' do
+  describe 'GET #show' do
+    it 'sets instance vars' do
       skatepark = create(:skatepark)
       ratings = []
 
@@ -12,10 +12,10 @@ RSpec.describe "/skateparks" do
       expect(assigns(:ratings)).to eq ratings
     end
 
-    context "with ratings" do
-      it "sets ratings instance var" do
+    context 'with ratings' do
+      it 'sets ratings instance var' do
         skatepark = create(:skatepark)
-        rating = create_list(:rating, 2, skatepark: skatepark)
+        rating = create_list(:rating, 2, skatepark:)
         ratings = ActiveModelSerializers::SerializableResource.new(
           skatepark.ratings.order(created_at: :desc),
           adapter: :attributes,
@@ -28,8 +28,8 @@ RSpec.describe "/skateparks" do
       end
     end
 
-    context "with logged in user" do
-      it "sets has_favorited and has_visited instance vars" do
+    context 'with logged in user' do
+      it 'sets has_favorited and has_visited instance vars' do
         user = create(:user)
         skatepark = create(:skatepark)
         skatepark.visitors << user

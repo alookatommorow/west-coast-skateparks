@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :verify_user, except: [:new, :create]
+  before_action :verify_user, except: %i[new create]
 
   def new
     @user = User.new
@@ -8,9 +8,9 @@ class UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
     if @user.update(user_params)
-      redirect_to @user, notice: "Righteous."
+      redirect_to @user, notice: 'Righteous.'
     else
-      flash.now[:error] = @user.errors.full_messages.join(", ")
+      flash.now[:error] = @user.errors.full_messages.join(', ')
       render :edit
     end
   end
@@ -38,15 +38,15 @@ class UsersController < ApplicationController
 
   private
 
-    def verify_user
-      if !logged_in?
-        redirect_to new_session_path, flash: { error: "Sign in to see your profile" }
-      elsif logged_in? && params[:id].to_i != current_user.id
-        redirect_to root_path, flash: { error: "That's not your profile" }
-      end
+  def verify_user
+    if !logged_in?
+      redirect_to new_session_path, flash: { error: 'Sign in to see your profile' }
+    elsif logged_in? && params[:id].to_i != current_user.id
+      redirect_to root_path, flash: { error: "That's not your profile" }
     end
+  end
 
-    def user_params
-      params.require(:user).permit(:username, :password, :name, :email, :avatar)
-    end
+  def user_params
+    params.require(:user).permit(:username, :password, :name, :email, :avatar)
+  end
 end

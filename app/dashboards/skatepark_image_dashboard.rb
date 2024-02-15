@@ -1,4 +1,4 @@
-require "administrate/base_dashboard"
+require 'administrate/base_dashboard'
 
 class SkateparkImageDashboard < Administrate::BaseDashboard
   # ATTRIBUTE_TYPES
@@ -13,18 +13,18 @@ class SkateparkImageDashboard < Administrate::BaseDashboard
     id: Field::Number,
     caption: Field::String,
     created_at: Field::DateTime,
-    updated_at: Field::DateTime,
-  }
+    updated_at: Field::DateTime
+  }.freeze
 
   # COLLECTION_ATTRIBUTES
   # an array of attributes that will be displayed on the model's index page.
   #
   # By default, it's limited to four items to reduce clutter on index pages.
   # Feel free to add, remove, or rearrange items.
-  COLLECTION_ATTRIBUTES = [
-    :skatepark,
-    :photo,
-  ]
+  COLLECTION_ATTRIBUTES = %i[
+    skatepark
+    photo
+  ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
@@ -33,11 +33,11 @@ class SkateparkImageDashboard < Administrate::BaseDashboard
   # FORM_ATTRIBUTES
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
-  FORM_ATTRIBUTES = [
-    :photo,
-    :skatepark,
-    :caption,
-  ]
+  FORM_ATTRIBUTES = %i[
+    photo
+    skatepark
+    caption
+  ].freeze
 
   # Overwrite this method to customize how skateparks are displayed
   # across all pages of the admin dashboard.

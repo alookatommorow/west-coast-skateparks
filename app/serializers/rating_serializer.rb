@@ -5,7 +5,7 @@ class RatingSerializer < ActiveModel::Serializer
              :author,
              :author_id,
              :created_at,
-             :new_average,
+             :new_average
 
   def avatar
     object.user&.avatar&.url(:thumb)
@@ -20,7 +20,7 @@ class RatingSerializer < ActiveModel::Serializer
   end
 
   def created_at
-    object.created_at.strftime("%m/%d/%y")
+    object.created_at.strftime('%m/%d/%y')
   end
 
   def new_average
