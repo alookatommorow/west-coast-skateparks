@@ -44,6 +44,10 @@ group :development do
   gem "pgsync"
   gem "spring-commands-rspec"
   gem "web-console", "~> 3.1.1"
+  gem "rubocop"
+  gem "rubocop-performance", require: false
+  gem "rubocop-rails", require: false
+  gem "rubocop-rspec", require: false
 end
 
 group :development, :test do
