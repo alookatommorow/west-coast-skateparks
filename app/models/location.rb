@@ -20,8 +20,6 @@
 #  fk_rails_...  (skatepark_id => skateparks.id)
 #
 class Location < ActiveRecord::Base
-
-
   belongs_to :skatepark
   validates :city, :state, presence: true
 end

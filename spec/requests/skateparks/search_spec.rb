@@ -1,13 +1,13 @@
-require "rails_helper"
+require 'rails_helper'
 
-RSpec.describe "/skateparks" do
-  describe "GET #search" do
-    it "sets instance vars" do
+RSpec.describe '/skateparks' do
+  describe 'GET #search' do
+    it 'sets instance vars' do
       query = 'butts'
       ca_parks = create_list(:skatepark, 2, state: 'california').sort_by(&:city)
       or_parks = [create(:skatepark, state: 'oregon')]
 
-      get "/skateparks/search", params: { query: query }
+      get '/skateparks/search', params: { query: }
 
       expect(assigns(:ca_parks)).to eq json(ca_parks)
       expect(assigns(:or_parks)).to eq json(or_parks)

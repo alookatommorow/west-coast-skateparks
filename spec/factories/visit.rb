@@ -4,4 +4,3 @@ FactoryBot.define do
     skatepark
   end
 end
-

@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.feature 'Visitor creates an account' do
   scenario "they are redirected to 'my parks'" do
     visit root_path
-    click_link("Sign In")
+    click_link('Sign In')
     click_link("Don't have a WCS")
     fill_in 'user_username', with: 'buttclown95'
     fill_in 'user_email', with: 'juggalo@icplovers.org'
@@ -18,13 +18,15 @@ RSpec.feature 'Visitor creates an account' do
   context 'with email already in use' do
     scenario 'they are bitch slapped by a flash error' do
       user = create(:user)
-      invalid_user = build(:user,
+      invalid_user = build(
+        :user,
         username: 'jakovasaur',
         email: user.email,
-        password: 'suckmyjaggon')
+        password: 'suckmyjaggon'
+      )
 
       visit root_path
-      click_link("Sign In")
+      click_link('Sign In')
       click_link("Don't have a WCS")
       fill_in 'user_username', with: invalid_user.username
       fill_in 'user_email', with: user.email

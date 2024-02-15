@@ -1,8 +1,8 @@
-require "rails_helper"
+require 'rails_helper'
 
-RSpec.describe "/api/skateparks" do
-  describe "PATCH #unvisit" do
-    it "removes user from skatepark visitors" do
+RSpec.describe '/api/skateparks' do
+  describe 'PATCH #unvisit' do
+    it 'removes user from skatepark visitors' do
       skatepark = create(:skatepark)
       user = create(:user)
       skatepark.visitors << user

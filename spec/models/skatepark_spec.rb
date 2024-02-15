@@ -7,7 +7,7 @@ RSpec.describe Skatepark, type: :model do
 
       expect(skatepark.valid?).to be false
       expect(skatepark.errors.messages[:whitelist_obstacles]).to eq(
-        ["The obstacles are fucked"]
+        ['The obstacles are fucked']
       )
     end
   end
@@ -20,24 +20,24 @@ RSpec.describe Skatepark, type: :model do
     end
   end
 
-  describe "#more_than_one_picture?" do
-    it "returns true if skatepark has more than one picture" do
+  describe '#more_than_one_picture?' do
+    it 'returns true if skatepark has more than one picture' do
       skatepark = create(:skatepark)
-      create_list(:skatepark_image, 2, skatepark: skatepark)
+      create_list(:skatepark_image, 2, skatepark:)
 
       expect(skatepark.more_than_one_picture?).to eq(true)
     end
 
-    it "returns false if skatepark has one or fewer pictures" do
+    it 'returns false if skatepark has one or fewer pictures' do
       skatepark = create(:skatepark)
-      create(:skatepark_image, skatepark: skatepark)
+      create(:skatepark_image, skatepark:)
 
       expect(skatepark.more_than_one_picture?).to eq(false)
     end
   end
 
-  describe "#to_param" do
-    it "returns properly formatted param" do
+  describe '#to_param' do
+    it 'returns properly formatted param' do
       skatepark = create(:skatepark)
 
       expect(skatepark.to_param).to eq("#{skatepark.name.parameterize}-#{skatepark.city.parameterize}-#{skatepark.state}")
@@ -51,7 +51,7 @@ RSpec.describe Skatepark, type: :model do
 
       users.each_with_index do |user, stars|
         create(
-          :rating, user: user, skatepark: skatepark, stars: stars + 2
+          :rating, user:, skatepark:, stars: stars + 2
         )
       end
 

@@ -4,7 +4,7 @@ module Api
 
     def index
       render json: Skatepark.all.as_json(
-        only: [:slug, :name, :city, :state]
+        only: %i[slug name city state]
       )
     end
 

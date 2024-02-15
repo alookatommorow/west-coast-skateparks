@@ -9,6 +9,6 @@ RSpec.feature 'User gets weather for a skatepark' do
 
     click_button 'Local Weather'
 
-    expect(page).to have_text("Overcast")
+    expect(page).to have_text('Overcast')
   end
 end
