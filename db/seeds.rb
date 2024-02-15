@@ -21,6 +21,7 @@ with_err_handling do
       address: Faker::Address.street_address,
       latitude: Faker::Address.latitude,
       longitude: Faker::Address.longitude,
+      rating: Array(1..5).sample,
     }
   end
 
