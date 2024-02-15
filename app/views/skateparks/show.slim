@@ -48,6 +48,7 @@
     = react_component "GMap", props: {\
         resourceName: 'skateparks',
         resourceId: @skatepark.id,
+        mapKey: ENV.fetch('GOOGLE_KEY'),
       }
 
 = content_for :og_metadata

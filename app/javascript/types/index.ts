@@ -7,6 +7,6 @@ export type Skatepark = {
   longitude?: number;
   map_photo?: string;
   neighbor_parks?: Skatepark[];
-  rating?: number;
+  rating?: string;
   id?: number;
 };
