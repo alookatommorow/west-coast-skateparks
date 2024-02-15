@@ -6,8 +6,8 @@ RSpec.feature 'Visitor searches skatepark' do
 
     visit root_path
 
-    fill_in 'query', with: "Turd nugget"
-    expect(page).to have_text("0 Matches")
+    fill_in 'query', with: 'Turd nugget'
+    expect(page).to have_text('0 Matches')
     fill_in 'query', with: skatepark.name
     expect(page).to have_text(skatepark.name.titleize)
 

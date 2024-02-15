@@ -8,11 +8,10 @@ RSpec.describe '/ratings' do
       stars = 5
 
       post '/ratings', params: {
-        skatepark_id: skatepark.id, user_id: user.id, stars: stars
+        skatepark_id: skatepark.id, user_id: user.id, stars:
       }
 
       rating = Rating.last
-      json_response = JSON.parse(response.body)
 
       expect(rating.skatepark).to eq(skatepark)
       expect(rating.user).to eq(user)

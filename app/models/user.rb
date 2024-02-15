@@ -29,23 +29,27 @@ class User < ActiveRecord::Base
   has_many :ratings, dependent: :destroy
   has_many :reviews, dependent: :destroy
   has_and_belongs_to_many :favorites,
-    join_table: "favorites", class_name: "Skatepark", dependent: :destroy
+                          join_table: 'favorites',
+                          class_name: 'Skatepark',
+                          dependent: :destroy
   has_and_belongs_to_many :visits,
-    join_table: "visits", class_name: "Skatepark", dependent: :destroy
+                          join_table: 'visits',
+                          class_name: 'Skatepark',
+                          dependent: :destroy
 
   has_attached_file(:avatar, styles: { thumb: '100x100>' },
-    default_url: 'https://33.media.tumblr.com/avatar_ee7f0ba1cb58_128.png')
+                             default_url: 'https://33.media.tumblr.com/avatar_ee7f0ba1cb58_128.png')
   validates_attachment_content_type :avatar, content_type: /\Aimage/
 
-  def has_favorited?(skatepark_id)
+  def favorited?(skatepark_id)
     favorites.exists?(skatepark_id)
   end
 
-  def has_visited?(skatepark_id)
+  def visited?(skatepark_id)
     visits.exists?(skatepark_id)
   end
 
   def to_s
-    name ? name : username
+    name || username
   end
 end

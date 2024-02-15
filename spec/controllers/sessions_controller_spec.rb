@@ -8,7 +8,7 @@ RSpec.describe SessionsController, type: :controller do
       post :create, params: {
         session: {
           username: user.username,
-          password: user.password,
+          password: user.password
         }
       }
 
@@ -22,7 +22,7 @@ RSpec.describe SessionsController, type: :controller do
       post :create, params: {
         session: {
           username: user.username,
-          password: user.password,
+          password: user.password
         }
       }
 
@@ -32,12 +32,12 @@ RSpec.describe SessionsController, type: :controller do
   end
 
   describe '#destroy' do
-    it "clears the session and redirects with a flash message" do
+    it 'clears the session and redirects with a flash message' do
       id = 25
       session[:id] = id
 
       delete :destroy, params: {
-        id: id
+        id:
       }
 
       expect(session[:id]).to be(nil)

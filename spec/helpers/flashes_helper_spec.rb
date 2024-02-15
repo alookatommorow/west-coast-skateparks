@@ -13,7 +13,8 @@ RSpec.describe FlashesHelper, type: :helper do
         'error' => 'swag',
         'alert' => 'swag',
         'notice' => 'swag',
-        'success' => 'swag')
+        'success' => 'swag'
+      )
     end
   end
 end

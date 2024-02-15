@@ -5,17 +5,18 @@ class CreateNeighbors < ActiveRecord::Migration[5.0]
       t.integer :neighbor_park_id
     end
 
-    add_index(:neighbors, [:skatepark_id, :neighbor_park_id], unique: true)
-    add_index(:neighbors, [:neighbor_park_id, :skatepark_id], unique: true)
+    add_index(:neighbors, %i[skatepark_id neighbor_park_id], unique: true)
+    add_index(:neighbors, %i[neighbor_park_id skatepark_id], unique: true)
 
     Skatepark.transaction do
-      print "Associating neighbor parks..."
+      print 'Associating neighbor parks...'
       Skatepark.all.each do |skatepark|
-        next unless skatepark.has_coordinates?
+        next unless skatepark.coordinates?
+
         skatepark.send(:associate_neighbor_parks)
-        print "."
+        print '.'
       end
-      puts "DONEZO"
+      puts 'DONEZO'
     end
   end
 

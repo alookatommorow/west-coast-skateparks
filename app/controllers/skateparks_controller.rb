@@ -7,10 +7,8 @@ class SkateparksController < ApplicationController
       each_serializer: RatingSerializer
     ).as_json
 
-    if current_user
-      @has_favorited = current_user.has_favorited?(@skatepark.id)
-      @has_visited = current_user.has_visited?(@skatepark.id)
-    end
+    @has_favorited = !!current_user&.favorited?(@skatepark.id)
+    @has_visited = !!current_user&.visited?(@skatepark.id)
   end
 
   def index; end

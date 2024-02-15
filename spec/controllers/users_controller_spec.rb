@@ -1,12 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe UsersController, type: :controller do
-  describe "#create" do
-    it "creates user and signs them in" do
+  describe '#create' do
+    it 'creates user and signs them in' do
       user_params = {
-        username: "buttstuff",
-        email: "sacklick@69.gmail.com",
-        password: "FUCKUBRO",
+        username: 'buttstuff',
+        email: 'sacklick@69.gmail.com',
+        password: 'FUCKUBRO'
       }
 
       post :create, params: { user: user_params }

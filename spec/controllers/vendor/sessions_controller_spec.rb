@@ -6,7 +6,7 @@ RSpec.describe Vendor::SessionsController do
       vendor_auth_params = {
         name: 'DudeBroMan',
         email: 'cheeselover@swag.net',
-        username: 'cheeselover@swag.net',
+        username: 'cheeselover@swag.net'
       }
 
       post :create, params: vendor_auth_params
@@ -36,7 +36,7 @@ RSpec.describe Vendor::SessionsController do
           email: nil
         }
 
-        expect(post :create, params: vendor_auth_params).to render_template('_flashes')
+        expect(post(:create, params: vendor_auth_params)).to render_template('_flashes')
         expect(flash[:error]).to eq('No email detected, please create an account or add email to your Facebook')
       end
     end

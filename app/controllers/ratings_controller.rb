@@ -12,10 +12,10 @@ class RatingsController < ApplicationController
 
   def rating_params
     {
-      user_id:      params[:user_id],
+      user_id: params[:user_id],
       skatepark_id: params[:skatepark_id],
-      stars:        params[:stars],
-      review:       params[:review],
+      stars: params[:stars],
+      review: params[:review]
     }
   end
 
