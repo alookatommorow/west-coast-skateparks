@@ -48,6 +48,13 @@ Rails.application.routes.draw do
 
   resources :skateparks, only: %i[index show], param: :slug do
     resource :weather, only: :show, controller: 'skateparks/weather'
+    member do
+      patch :favorite
+      patch :unfavorite
+
+      patch :visit
+      patch :unvisit
+    end
   end
 
   resources :maps, only: :show

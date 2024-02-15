@@ -19,7 +19,7 @@ function generateMap(response) {
   }
 
   // initialize map
-  // MAPBUILDER.initialize();
+  MAPBUILDER.initialize();
 
   // add attributes and methods to MAPBUILDER for SKATEPARK PAGE
   function configureMapBuilderForSkateparkPage(skatepark) {
