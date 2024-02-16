@@ -1,8 +1,8 @@
-import React, { useEffect, useState, useMemo } from 'react';
-import { GoogleMap, LoadScript, useJsApiLoader } from '@react-google-maps/api';
+import React, { useEffect, useState } from 'react';
+import { GoogleMap, useJsApiLoader } from '@react-google-maps/api';
 import { Skatepark } from '../../types';
 import { MapContent } from './MapContent';
-import { useToggle } from '../../hooks/useToggle';
+import { Options } from './Options';
 
 type GMapProps = {
   resourceName: 'users' | 'skateparks';
@@ -10,35 +10,78 @@ type GMapProps = {
   mapKey: string;
 };
 
+export type CollectionCategory = 'nearby' | 'favorite' | 'visited' | 'both';
+
+export type Collection = {
+  type: CollectionCategory;
+  items: Skatepark[];
+};
+
+type Resource = {
+  main?: Skatepark;
+  collections: Collection[];
+};
+
+type LatLng = {
+  lat: number;
+  lng: number;
+};
+
+const DEFAULT_CENTER = {
+  lat: -3.745,
+  lng: -38.523,
+};
+
 const GMap = React.memo(function GMap({
   resourceName,
   resourceId,
   mapKey,
 }: GMapProps) {
-  const [resource, setResource] = useState<Skatepark | undefined>();
+  const [resource, setResource] = useState<Resource | undefined>();
   const [resourceIsLoading, setResourceIsLoading] = useState(true);
-  const { toggleIsOn: showNearby, toggle: toggleShowNearby } = useToggle(false);
+  const [mapCenter, setMapCenter] = useState<LatLng | undefined>(
+    DEFAULT_CENTER,
+  );
+  const [collectionVisibility, setCollectionVisibility] = useState<
+    Record<CollectionCategory, boolean>
+  >({
+    nearby: false,
+    favorite: true,
+    visited: true,
+    both: true,
+  });
 
-  let center = {
-    lat: -3.745,
-    lng: -38.523,
-  };
-
-  if (resource?.latitude && resource?.longitude) {
-    center = { lat: resource.latitude, lng: resource.longitude };
-  }
-
-  const { isLoaded: mapIsLoaded, loadError } = useJsApiLoader({
+  const { isLoaded: mapIsLoaded } = useJsApiLoader({
     googleMapsApiKey: mapKey,
   });
+
+  const findMapCenter = (fetchedResource: Resource) => {
+    const centerSource =
+      fetchedResource.main || fetchedResource.collections[0].items[0];
+
+    if (centerSource.latitude && centerSource.longitude) {
+      return { lat: centerSource.latitude, lng: centerSource.longitude };
+    }
+    return DEFAULT_CENTER;
+  };
+
+  const toggleCollection = (category: CollectionCategory) => {
+    setCollectionVisibility({
+      ...collectionVisibility,
+      [category]: !collectionVisibility[category],
+    });
+  };
 
   useEffect(() => {
     const fetchResource = async () => {
       const resourceUrl =
-        '/maps/' + resourceId + '?resource_name=' + resourceName;
+        '/api/maps/' + resourceId + '?resource_name=' + resourceName;
       const response = await fetch(resourceUrl);
       const resourceJson = await response.json();
+      const center = findMapCenter(resourceJson);
+
       setResource(resourceJson);
+      setMapCenter(center);
       setResourceIsLoading(false);
     };
 
@@ -48,7 +91,6 @@ const GMap = React.memo(function GMap({
   const isLoading = !mapIsLoaded || resourceIsLoading;
 
   return (
-    // <div id="skatepark-map">
     <div id="map-container">
       {isLoading ? (
         <div className="loading-container">
@@ -56,28 +98,27 @@ const GMap = React.memo(function GMap({
         </div>
       ) : (
         <>
-          <GoogleMap center={center} zoom={10} id="map">
+          <GoogleMap
+            center={mapCenter}
+            zoom={resourceName === 'skateparks' ? 9 : 6}
+            id="map"
+          >
             {resource !== undefined && (
               <MapContent
-                resource={resource}
-                center={center}
-                showNearby={showNearby}
+                main={resource.main}
+                collections={resource.collections}
+                collectionVisibility={collectionVisibility}
               />
             )}
           </GoogleMap>
-          <div id="map-toggle-buttons">
-            <button
-              id="toggle-nearby"
-              className="basic-button"
-              onClick={toggleShowNearby}
-            >
-              {showNearby ? 'Hide' : 'Show'} Nearby Parks
-            </button>
-          </div>
+          <Options
+            collections={resource?.collections}
+            toggleCollection={toggleCollection}
+            collectionVisibility={collectionVisibility}
+          />
         </>
       )}
     </div>
-    // </div>
   );
 });
 

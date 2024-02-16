@@ -6,49 +6,6 @@
     float: right;
     width: 78%;
     margin-bottom: 30px;
-
-    #map {
-      height: 500px;
-      width: 100%;
-
-      #content {
-        height: 50%;
-        text-align: center;
-
-        img {
-          height: 50px;
-        }
-
-        i.star {
-          color: $orange;
-
-          &.shaded {
-            color: $dark-blue;
-          }
-        }
-      }
-    }
-
-    #map-toggle-buttons {
-      display: flex;
-      justify-content: space-around;
-      margin-top: 15px;
-
-      /* this captures #toggle-visited-container, #toggle-favorite-container etc */
-      > div {
-        display: none;
-      }
-
-      .basic-button {
-        border-radius: 0;
-        background-color: $blue;
-        color: white;
-
-        &:hover {
-          color: $orange;
-        }
-      }
-    }
   }
 
   .favorites-visits {

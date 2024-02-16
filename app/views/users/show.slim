@@ -2,14 +2,11 @@
   .user-dashboard
     = render "profile_card", user: @user
   .user-map-container
-    #map.user-map
-    #map-toggle-buttons
-      #toggle-favorite-container
-        #toggle-favorite.basic-button Hide Favorites
-      #toggle-visited-container
-        #toggle-visited.basic-button Hide Visited
-      #toggle-both-container
-        #toggle-both.basic-button Hide THRASHED
+    = react_component "GMap", props: {\
+        resourceName: 'users',
+        resourceId: @user.id,
+        mapKey: ENV.fetch('GOOGLE_KEY'),
+      }
   .favorites-visits
     .favorites
       h4 Favorites

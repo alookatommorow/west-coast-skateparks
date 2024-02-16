@@ -1,39 +1,58 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Skatepark } from '../../types';
 import { SkateparkMarker } from './SkateparkMarker';
-
-type LatLng = {
-  lat: number;
-  lng: number;
-};
-
-type Resource = Skatepark;
+import { Collection, CollectionCategory } from '.';
 
 type MapContentProps = {
-  resource: Resource;
-  center: LatLng;
-  showNearby: boolean;
+  main?: Skatepark;
+  collections: Collection[];
+  collectionVisibility: Record<CollectionCategory, boolean>;
 };
 
-// const mapContent =
+export const MapContent = ({
+  main,
+  collections,
+  collectionVisibility,
+}: MapContentProps) => {
+  const [currentParkId, setCurrentParkId] = useState<string | undefined>();
 
-export const MapContent = ({ resource, showNearby }: MapContentProps) => {
+  const handleClick = (slug: string) => {
+    setCurrentParkId(slug);
+  };
+
+  const handleCloseClick = () => setCurrentParkId(undefined);
+
   return (
     <>
-      <SkateparkMarker skatepark={resource} type="main" isVisible />
-      {showNearby &&
-        resource?.neighbor_parks?.map((park: Skatepark) => {
-          if (park.latitude && park.longitude) {
-            return (
-              <SkateparkMarker
-                key={park.slug}
-                skatepark={park}
-                isVisible={showNearby}
-                type="nearby"
-              />
-            );
-          }
-        })}
+      {main && (
+        <SkateparkMarker
+          skatepark={main}
+          type="main"
+          isVisible
+          handleClick={() => handleClick(main.slug)}
+          handleCloseClick={handleCloseClick}
+          isInfoWindowVisible={currentParkId === main.slug}
+        />
+      )}
+      {collections.map((collection: Collection) => {
+        if (collectionVisibility[collection.type]) {
+          return collection.items.map((park: Skatepark) => {
+            if (park.latitude && park.longitude) {
+              return (
+                <SkateparkMarker
+                  key={park.slug}
+                  skatepark={park}
+                  isVisible={true}
+                  handleCloseClick={handleCloseClick}
+                  handleClick={() => handleClick(park.slug)}
+                  type={collection.type}
+                  isInfoWindowVisible={currentParkId === park.slug}
+                />
+              );
+            }
+          });
+        }
+      })}
     </>
   );
 };
