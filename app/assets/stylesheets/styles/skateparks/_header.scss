@@ -221,6 +221,10 @@ i.star {
     width: 65%;
     padding: 40px;
 
+    .photos {
+      margin-bottom: 30px;
+    }
+
     @media #{$mobile} {
       width: 100%;
       background: white;

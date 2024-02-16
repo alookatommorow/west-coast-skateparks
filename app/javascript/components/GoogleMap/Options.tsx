@@ -21,7 +21,7 @@ export const Options = ({
 }: OptionsProps) => {
   return (
     <div id="map-toggle-buttons">
-      <p>View Options</p>
+      <p>Display Options</p>
       {collections &&
         collections.map((collection: Collection) => {
           return (
