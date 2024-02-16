@@ -3,6 +3,7 @@ import { useToggle } from 'hooks/useToggle';
 import { StarInput } from 'components/StarInput';
 import { Stars } from 'components/Stars';
 import { SKATEPARK_ATTRS } from './constants';
+import { titleize } from '../../utils';
 
 function AdvancedSearch(props) {
   const { caParks, orParks, waParks, initialQuery } = props;
@@ -274,7 +275,7 @@ function AdvancedSearch(props) {
     ) {
       return titleize(park[attr]);
     } else if (park[attr] && attr === 'rating') {
-      return <Stars stars={park[attr]} prefix={`${park.slug}-stars`} tiny />;
+      return <Stars stars={Number(park[attr])} tiny />;
     } else if (park[attr] && attr === 'map_photo') {
       return <img src={park[attr]} />;
     }
