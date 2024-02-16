@@ -11,14 +11,20 @@ end
 
 with_err_handling do
   puts bold 'Creating Skateparks...'
-  skateparks = (1..40).map do
+  lat = 37.747680
+  long = -122.434059
+
+  skateparks = (1..40).map do |num|
+    lat += 0.12 if num > 1
+    long += 0.2 if num > 1 && num.odd?
+
     {
       name: "#{Faker::Creature::Animal.unique.name} skatepark",
       city: Faker::Tea.unique.variety,
       state: %w[california oregon washington].sample,
       address: Faker::Address.street_address,
-      latitude: Faker::Address.latitude,
-      longitude: Faker::Address.longitude,
+      latitude: lat,
+      longitude: long,
       rating: Array(1..5).sample
     }
   end
