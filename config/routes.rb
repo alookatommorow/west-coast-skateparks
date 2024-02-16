@@ -24,6 +24,7 @@ Rails.application.routes.draw do
   resources :sessions, only: %i[create destroy new]
 
   namespace :api do
+    resources :maps, only: :show
     resources :skateparks, only: :index, param: :slug do
       member do
         patch :favorite

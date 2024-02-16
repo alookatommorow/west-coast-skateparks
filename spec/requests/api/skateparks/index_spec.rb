@@ -2,8 +2,9 @@ require 'rails_helper'
 
 RSpec.describe '/api/skateparks' do
   describe 'GET #index' do
-    it 'returns JSON with skatepark and neighbor_parks' do
+    it 'returns skatepark JSON' do
       create_list(:skatepark, 3)
+
       expected = Skatepark.all.as_json(
         only: %i[slug name city state]
       )

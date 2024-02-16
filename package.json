@@ -11,6 +11,7 @@
     "@babel/preset-react": "^7.23.3",
     "@babel/preset-typescript": "^7.23.3",
     "@babel/runtime": "7",
+    "@react-google-maps/api": "^2.19.3",
     "@types/babel__core": "7",
     "@types/webpack": "5",
     "babel-loader": "8",
@@ -46,11 +47,12 @@
     "defaults"
   ],
   "devDependencies": {
+    "@types/google-map-react": "^2.1.10",
     "@types/react": "^18.2.48",
-    "@typescript-eslint/eslint-plugin": "^6.20.0",
-    "@typescript-eslint/parser": "^6.20.0",
     "@types/react-image-gallery": "^1.2.4",
     "@types/react-transition-group": "^4.4.10",
+    "@typescript-eslint/eslint-plugin": "^6.20.0",
+    "@typescript-eslint/parser": "^6.20.0",
     "eslint": "^8.0.1",
     "eslint-config-prettier": "^9.1.0",
     "eslint-config-standard-with-typescript": "^43.0.1",

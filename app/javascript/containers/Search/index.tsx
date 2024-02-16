@@ -2,18 +2,12 @@ import React, { useState, useEffect, useRef } from 'react';
 
 import { SearchForm } from './SearchForm';
 import { SearchResults } from './SearchResults';
+import { Skatepark } from '../../types';
 
 const STATE_DISPLAY = {
   california: 'CA',
   oregon: 'OR',
   washington: 'WA',
-};
-
-export type Skatepark = {
-  slug: string;
-  name: string;
-  city: string;
-  state: 'california' | 'oregon' | 'washington';
 };
 
 export type SearchResult = Skatepark & {
