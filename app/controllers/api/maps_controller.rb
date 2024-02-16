@@ -6,14 +6,12 @@ module Api
     }.freeze
 
     def show
-      render json: map_data_for_resource
-    rescue StandardError => e
-      binding.pry
+      render json: map_data
     end
 
     private
 
-    def map_data_for_resource
+    def map_data
       return if resource_class.nil?
 
       resource = resource_class.find(params[:id])
