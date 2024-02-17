@@ -15,7 +15,7 @@ export type SearchResult = Skatepark & {
   matchIndex: number;
 };
 
-function Search() {
+export const Search = () => {
   const [query, setQuery] = useState('');
   const [results, setResults] = useState<SearchResult[]>([]);
   const [skateparks, setSkateparks] = useState<Skatepark[]>([]);
@@ -110,6 +110,4 @@ function Search() {
       </div>
     </div>
   );
-}
-
-export default Search;
+};

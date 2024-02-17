@@ -9,4 +9,5 @@ export type Skatepark = {
   neighbor_parks?: Skatepark[];
   rating?: string;
   id?: number;
+  obstacles?: string;
 };

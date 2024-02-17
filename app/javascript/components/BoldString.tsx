@@ -8,6 +8,9 @@ type BoldStringPops = {
 };
 
 export const BoldString = ({ string, matchIndex, length }: BoldStringPops) => {
+  if (string === 'Garucha 67') {
+    console.log('fuckingggggg');
+  }
   const output = titleize(string);
   const first = output.slice(0, matchIndex);
   const bold = output.slice(matchIndex, matchIndex + length);
