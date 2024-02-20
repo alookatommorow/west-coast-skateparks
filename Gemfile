@@ -11,7 +11,7 @@ gem 'bcrypt'
 gem 'bourbon' # added to prevent high voltage bourbon unreadable error
 gem 'buttercms-rails'
 gem 'faker'
-gem 'font-awesome-sass', '~> 5.12.0'
+gem 'font-awesome-sass', '~> 6.5.1'
 gem 'friendly_id'
 gem 'geokit'
 gem 'gmaps4rails'
