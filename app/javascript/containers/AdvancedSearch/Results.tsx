@@ -1,17 +1,14 @@
 import React from 'react';
 import { Stars } from '../../components/Stars';
 import { SKATEPARK_ATTRS } from './constants';
-import { titleize } from '../../utils';
 import { useMediaQueries } from '../../hooks/useMediaQueries';
 import { Attr, SearchResult } from '.';
-import { BoldString } from '../../components/BoldString';
 
 type ResultsProps = {
   skateparks?: SearchResult[];
-  queryLength: number;
 };
 
-export const Results = ({ skateparks, queryLength }: ResultsProps) => {
+export const Results = ({ skateparks }: ResultsProps) => {
   const { isMobile } = useMediaQueries();
 
   const displayAttr = (park: SearchResult, attr: Attr) => {
@@ -23,25 +20,14 @@ export const Results = ({ skateparks, queryLength }: ResultsProps) => {
       return <Stars stars={Number(parkAttr)} tiny />;
     } else if (attr === 'map_photo') {
       return <img src={parkAttr} />;
-    } else if (attr === 'city' && park.queryMatch.city !== undefined) {
-      return (
-        <BoldString
-          string={park.city}
-          matchIndex={park.queryMatch.city}
-          length={queryLength}
-        />
-      );
-    } else if (attr === 'name' && park.queryMatch.name !== undefined) {
-      return (
-        <BoldString
-          string={park.name}
-          matchIndex={park.queryMatch.name}
-          length={queryLength}
-        />
-      );
+    } else if (
+      (attr === 'city' || attr === 'name') &&
+      park.queryMatch !== undefined &&
+      park.queryMatch[attr] !== undefined
+    ) {
+      return park.queryMatch[attr];
     }
-
-    return titleize(parkAttr);
+    return parkAttr;
   };
 
   return (

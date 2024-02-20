@@ -14,7 +14,8 @@
     "noImplicitAny": true,
     "strict": true,
     "allowJs": true,
-    "plugins": [{ "name": "typescript-plugin-css-modules" }]
+    "plugins": [{ "name": "typescript-plugin-css-modules" }],
+    "downlevelIteration": true,
   },
   "exclude": ["node_modules", "vendor", "public"],
   "compileOnSave": false,

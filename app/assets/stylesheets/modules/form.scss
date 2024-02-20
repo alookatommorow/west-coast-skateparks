@@ -60,6 +60,10 @@ form {
     box-shadow: 0em 0em 0em 0em transparent inset;
     transition: color 0.1s ease, border-color 0.1s ease;
 
+    &:focus {
+      border: 1px solid $blue;
+    }
+
     &.error {
       background: #fff6f6;
       border-color: #e0b4b4;
