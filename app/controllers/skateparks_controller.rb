@@ -15,7 +15,6 @@ class SkateparksController < ApplicationController
 
   def search
     @skateparks = skateparks_json(Skatepark.all.order(:state, :city, :name))
-    @query = params[:query]
   end
 
   # DEPRECATED: to be removed in favor of /api/skateparks routes when user page converts to react
