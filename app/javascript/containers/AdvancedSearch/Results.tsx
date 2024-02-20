@@ -32,29 +32,22 @@ export const Results = ({ skateparks }: ResultsProps) => {
     return <p>{parkAttr}</p>;
   };
 
-  const renderResults = (park: SearchResult) => (
-    <>
-      {SKATEPARK_ATTRS.map(attrMap => (
-        <div key={`${park.slug}-${attrMap.name}`}>
-          {displayAttr(park, attrMap.name)}
-        </div>
-      ))}
-    </>
-  );
+  const renderResults = (park: SearchResult) =>
+    SKATEPARK_ATTRS.map(attrMap => (
+      <div key={`${park.slug}-${attrMap.name}`}>
+        {displayAttr(park, attrMap.name)}
+      </div>
+    ));
 
-  return (
-    <>
-      {skateparks?.map(park => (
-        <a
-          href={`/skateparks/${park.slug}`}
-          key={park.slug}
-          className="column-layout"
-        >
-          {displayAttr(park, 'map_photo')}
+  return skateparks?.map(park => (
+    <a
+      href={`/skateparks/${park.slug}`}
+      key={park.slug}
+      className="column-layout"
+    >
+      {displayAttr(park, 'map_photo')}
 
-          {isTablet ? <div>{renderResults(park)}</div> : renderResults(park)}
-        </a>
-      ))}
-    </>
-  );
+      {isTablet ? <div>{renderResults(park)}</div> : renderResults(park)}
+    </a>
+  ));
 };
