@@ -59,7 +59,9 @@ export const SkateparkMarker = ({
               options={{ pixelOffset: new window.google.maps.Size(0, -32) }}
             >
               <a href={`/skateparks/${skatepark.slug}`}>
-                <img loading="lazy" src={skatepark.map_photo} />
+                {skatepark.map_photo && (
+                  <img loading="lazy" src={skatepark.map_photo} />
+                )}
                 <strong>{titleize(skatepark.name)}</strong>
                 <p>{titleize(skatepark.city)}</p>
                 {skatepark.rating && (

@@ -22,13 +22,13 @@ export const Stars = ({ stars, tiny }: StarsProps) => {
         {[...Array(wholeStars)].map((_e, i) => (
           <i
             key={`star-${i}`}
-            className={`star fas fa-star${tiny ? ' tiny' : ''}`}
+            className={`star fa-solid fa-star${tiny ? ' tiny' : ''}`}
           />
         ))}
         {!isInteger && (
           <i
             key={`star-half`}
-            className={`star fas fa-star-half-alt${tiny ? ' tiny' : ''}`}
+            className={`star fa-solid fa-star-half-alt${tiny ? ' tiny' : ''}`}
           />
         )}
         {[...Array(emptyStars)].map((_e, i) => (

@@ -13,6 +13,15 @@ with_err_handling do
   puts bold 'Creating Skateparks...'
   lat = 33.891955
   long = -117.517648
+  obstacles = ['rails',
+               'ledges',
+               'banks',
+               'bowl',
+               'quarterpipes',
+               'bank to ledge',
+               'bank to curb',
+               'double set',
+               'pyramid/funbox']
 
   skateparks = (1..200).map do |num|
     # create parks in clusters of 6
@@ -30,6 +39,8 @@ with_err_handling do
       end
     end
 
+    random_obstacle = Array(0..obstacles.length - 2).sample
+
     {
       name: "#{Faker::Creature::Animal.name} #{num} skatepark",
       city: "#{Faker::Tea.variety} #{num}",
@@ -37,7 +48,8 @@ with_err_handling do
       address: Faker::Address.street_address,
       latitude: lat,
       longitude: long,
-      rating: Array(1..5).sample
+      rating: Array(1..5).sample,
+      obstacles: obstacles.slice(random_obstacle, (obstacles.length - 1))
     }
   end
 

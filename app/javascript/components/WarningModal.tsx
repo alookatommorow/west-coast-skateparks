@@ -21,9 +21,9 @@ export const WarningModal = ({
   return (
     <Modal isVisible={isVisible} onClose={onClose}>
       <Modal.Body className="modal-warning">
-        <i className="fas fa-radiation"></i>
+        <i className="fa-solid fa-radiation"></i>
         <p>{mainText}</p>
-        <i className="fas fa-radiation"></i>
+        <i className="fa-solid fa-radiation"></i>
       </Modal.Body>
       <Modal.Footer>
         {href ? (

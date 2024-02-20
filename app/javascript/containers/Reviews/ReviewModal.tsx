@@ -44,9 +44,9 @@ export const ReviewModal = ({
     <Modal isVisible={isVisible} onClose={onClose}>
       {numUserRatings === 2 ? (
         <Modal.Body className="modal-warning">
-          <i className="fas fa-radiation"></i>
+          <i className="fa-solid fa-radiation"></i>
           <p>You only get two reviews per park. Now go skate!</p>
-          <i className="fas fa-radiation"></i>
+          <i className="fa-solid fa-radiation"></i>
         </Modal.Body>
       ) : (
         <form onSubmit={handleSubmit} className="review-form">

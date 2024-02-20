@@ -1,4 +1,11 @@
-export const SKATEPARK_ATTRS = [
+import { Attr } from '.';
+
+type AttrMap = {
+  name: Attr;
+  text: string;
+};
+
+export const SKATEPARK_ATTRS: Array<AttrMap> = [
   {
     name: 'name',
     text: 'Name',

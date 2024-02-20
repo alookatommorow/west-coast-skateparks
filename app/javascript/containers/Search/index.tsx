@@ -1,8 +1,10 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, ReactNode } from 'react';
 
 import { SearchForm } from './SearchForm';
 import { SearchResults } from './SearchResults';
 import { Skatepark } from '../../types';
+import { findMatchIndices } from '../../utils';
+import { BoldString } from '../../components/BoldString';
 
 const STATE_DISPLAY = {
   california: 'CA',
@@ -11,11 +13,10 @@ const STATE_DISPLAY = {
 };
 
 export type SearchResult = Skatepark & {
-  displayString: string;
-  matchIndex: number;
+  displayString: ReactNode;
 };
 
-function Search() {
+export const Search = () => {
   const [query, setQuery] = useState('');
   const [results, setResults] = useState<SearchResult[]>([]);
   const [skateparks, setSkateparks] = useState<Skatepark[]>([]);
@@ -45,27 +46,32 @@ function Search() {
     return () => document.removeEventListener('click', handleClickOutside);
   }, [query, skateparks, isLoading]);
 
-  const filterAndAddIndexOfMatch = (searchResult: SearchResult) => {
+  const filterQuery = (searchResult: SearchResult) => {
     let displayString = (
       searchResult.name +
       ', ' +
       searchResult.city
     ).toLowerCase();
-    const matchIndex = displayString.indexOf(query.toLowerCase());
+    const matchIndices = findMatchIndices(displayString, query);
 
-    if (matchIndex < 0) {
-      return false;
+    if (matchIndices.length > 0) {
+      displayString = displayString + ', ' + STATE_DISPLAY[searchResult.state];
+      searchResult.displayString = (
+        <BoldString
+          string={displayString}
+          matchIndices={matchIndices}
+          length={query.length}
+        />
+      );
+      return true;
     }
 
-    displayString = displayString + ', ' + STATE_DISPLAY[searchResult.state];
-    searchResult.displayString = displayString;
-    searchResult.matchIndex = matchIndex;
-    return true;
+    return false;
   };
 
   const searchSkateparks = () => {
     const castResults = skateparks as SearchResult[];
-    setResults(castResults.filter(filterAndAddIndexOfMatch));
+    setResults(castResults.filter(filterQuery));
   };
 
   const storeSkateparks = (response: Skatepark[]) => {
@@ -100,16 +106,8 @@ function Search() {
           handleFocus={getSkateparks}
           exitResults={exitResults}
         />
-        {query && (
-          <SearchResults
-            results={results}
-            queryLength={query.length}
-            isLoading={isLoading}
-          />
-        )}
+        {query && <SearchResults results={results} isLoading={isLoading} />}
       </div>
     </div>
   );
-}
-
-export default Search;
+};

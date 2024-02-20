@@ -38,7 +38,7 @@ export const StarInput = ({
           checked={stars === i + 1}
         />
         <i
-          className={`star fas fa-star ${showError && 'error'} ${isTiny && 'tiny'}`}
+          className={`star fa-solid fa-star ${showError && 'error'} ${isTiny && 'tiny'}`}
         />
       </label>
     ));
