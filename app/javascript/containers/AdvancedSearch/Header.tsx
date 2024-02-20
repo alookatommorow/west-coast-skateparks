@@ -9,7 +9,7 @@ type HeaderProps = {
 };
 
 export const Header = ({ filters, setFilters }: HeaderProps) => {
-  const { isMobile } = useMediaQueries();
+  const { isTablet } = useMediaQueries();
 
   const handleSort = (event: MouseEvent<HTMLButtonElement>) => {
     const name = event.currentTarget.getAttribute('name') as keyof Filter;
@@ -29,30 +29,23 @@ export const Header = ({ filters, setFilters }: HeaderProps) => {
   };
 
   return (
-    <>
-      {isMobile && (
-        <div className="field">
-          <label className="label">Sort by</label>
-        </div>
-      )}
-      <div className="table-header">
-        {!isMobile && <div className="column photo" />}
-        {SKATEPARK_ATTRS.map(attrObj => (
-          <button
-            key={attrObj.name}
-            className={`column sort-button ${attrObj.name}`}
-            name={attrObj.name}
-            onClick={handleSort}
-          >
+    <div className="table-header column-layout">
+      {SKATEPARK_ATTRS.map(attrObj => {
+        if (attrObj.name === 'obstacles') {
+          if (isTablet) return;
+          return <p key={attrObj.name}>{attrObj.text}</p>;
+        }
+        return (
+          <button key={attrObj.name} name={attrObj.name} onClick={handleSort}>
             {attrObj.text}
             {filters.sortAttr == attrObj.name && (
               <i
-                className={`fas fa-arrow-down sort-arrow${filters.sortOrder === 'asc' ? ' asc' : ''}`}
+                className={`fa-solid fa-arrow-down ${filters.sortOrder === 'asc' ? ' asc' : ''}`}
               ></i>
             )}
           </button>
-        ))}
-      </div>
-    </>
+        );
+      })}
+    </div>
   );
 };

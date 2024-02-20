@@ -6,6 +6,8 @@ import { BoldString } from '../../components/BoldString';
 import { Header } from './Header';
 import { Filters } from './Filters';
 import { Query } from './Query';
+import { Modal } from '../../components/Modal';
+import { useMediaQueries } from '../../hooks/useMediaQueries';
 
 export type Attr = keyof Pick<
   Skatepark,
@@ -40,6 +42,8 @@ export type SearchResult = Skatepark & {
 
 export const AdvancedSearch = ({ skateparks }: AdvancedSearchProps) => {
   const params = new URLSearchParams(window.location.search);
+  const { isTablet } = useMediaQueries();
+  const [modalIsOpen, setModalIsOpen] = useState(false);
   const [filters, setFilters] = useState<Filter>({
     query: params.get('query') || '',
     starsEquality: 'atLeast',
@@ -102,7 +106,7 @@ export const AdvancedSearch = ({ skateparks }: AdvancedSearchProps) => {
     if (!filters.california || !filters.oregon || !filters.washington) {
       filtersToRun.push(filterStates);
     }
-    if (filters.stars > 1) {
+    if (filters.stars > 1 || filters.starsEquality == 'equal') {
       filtersToRun.push(filterStars);
     }
 
@@ -150,18 +154,30 @@ export const AdvancedSearch = ({ skateparks }: AdvancedSearchProps) => {
   return (
     <div className="advanced-search-container">
       <Query filters={filters} setFilters={setFilters} />
-      <div className="columns">
-        <Filters filters={filters} setFilters={setFilters} />
+      <div className="results-container">
+        {!isTablet && <Filters filters={filters} setFilters={setFilters} />}
         <div>
-          <p className="header-text">
-            {filteredSkateparks?.length}{' '}
-            {`Result${filteredSkateparks?.length === 1 ? '' : 's'}`}
-          </p>
+          <div className="results-filters">
+            <p className="header-text">
+              {filteredSkateparks?.length}{' '}
+              {`Result${filteredSkateparks?.length === 1 ? '' : 's'}`}
+            </p>
 
+            {isTablet && (
+              <button onClick={() => setModalIsOpen(true)}>
+                <i className="fa-solid fa-sliders"></i>
+              </button>
+            )}
+          </div>
           <Header filters={filters} setFilters={setFilters} />
           <Results skateparks={filteredSkateparks} />
         </div>
       </div>
+      <Modal isVisible={modalIsOpen} onClose={() => setModalIsOpen(false)}>
+        <Modal.Body>
+          <Filters filters={filters} setFilters={setFilters} />
+        </Modal.Body>
+      </Modal>
     </div>
   );
 };

@@ -117,7 +117,7 @@ export const Reviews = ({
       <div className="review-header-container">
         <h4>Reviews</h4>
         <button className="write-review-button" onClick={toggleModalIsShowing}>
-          <i className="fas fa-comments"></i>
+          <i className="fa-solid fa-comments"></i>
           <p>Write a review</p>
         </button>
       </div>

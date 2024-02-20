@@ -4,7 +4,7 @@
   flex-direction: column;
   align-items: center;
 
-  .columns {
+  .results-container {
     display: grid;
     grid-template-columns: 1fr 4fr;
     width: 100%
@@ -13,7 +13,7 @@
   .query-form {
     margin-bottom: 48px;
     position: relative;
-    width: 30%;
+    width: 300px;
 
     i {
       color: $blue;
@@ -28,10 +28,11 @@
     display: flex;
     flex-direction: column;
     padding-right: 16px;
-    flex-basis: 30%;
 
     .field {
-      p, label {
+
+      p,
+      label {
         font-size: 16px;
       }
 
@@ -47,8 +48,9 @@
       .star-input {
         margin-bottom: 8px;
 
-        label, i {
-         margin: 0;
+        label,
+        i {
+          margin: 0;
         }
       }
     }
@@ -59,126 +61,108 @@
     font-weight: bold;
   }
 
-    a.row, .table-header {
+  .column-layout {
+    display: grid;
+    grid-template-columns: 120px 2fr 1fr 1fr 1fr 1fr;
+    text-transform: capitalize;
+  }
+
+  a.column-layout {
+    padding: 16px 0;
+    border-top: 1px solid #c4cacf;
+    color: $black;
+
+    >div {
+      align-self: center;
+    }
+
+    &:hover {
+      background: $dark-gray
+    }
+
+    &:last-child {
+      border-bottom: 1px solid #c4cacf;
+    }
+  }
+
+  .table-header {
+    >button, p {
+      font-size: 16px;
+      padding: 8px 0;
+    }
+
+    > button{
+      border: none;
+      background: transparent;
+      font-size: 16px;
+      transition: color 0.3s ease;
+      text-align: left;
+
+      &:hover {
+        cursor: pointer;
+        color: $orange;
+      }
+
+      &:first-child {
+        grid-column-start: 2;
+      }
+
+      i {
+        transition: transform 0.3s ease;
+        margin-left: 8px;
+        font-size: 12px;
+
+        &.asc {
+          transform: rotate(180deg);
+        }
+      }
+    }
+  }
+
+  @media #{$tablet} {
+    padding: 20px 64px;
+
+    .results-container {
+      grid-template-columns: 1fr;
+    }
+
+    .results-filters {
       display: flex;
-      align-items: center;
-      color: $black;
-      padding: 16px 20px;
-      transition: background 0.3s ease;
+      justify-content: space-between;
+      margin-bottom: 24px;
 
-      &:not(.table-header) {
-        border-top: 1px solid #c4cacf;
-
-        &:last-child {
-          border-bottom: 1px solid #c4cacf;
-        }
-
-        &:hover {
-          background: $dark-gray
-        }
+      .header-text {
+        margin: 0;
       }
+    }
 
-      img {
-        width: 100px;
-      }
+    .column-layout.table-header {
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+      margin-bottom: 16px;
 
-      .column {
-        margin-right: 10px;
-        flex: 1;
-        display: flex;
-        text-transform: capitalize;
-
-        &.sort-button {
-          border: none;
-          background: transparent;
+      > button:first-child {
+          grid-column-start: 1;
         }
+    }
 
-        &.name, &.city, &.obstacles {
-          flex: 2;
-        }
+    a.column-layout {
+      grid-template-columns: 120px 1fr;
+    }
 
-        &.dark-text {
-          color: #131e40;
-        }
+    .table-header {
+      >button {
+        border: 1px solid $dark-gray;
+        margin-right: 20px;
+        text-align: center;
 
         &:last-child {
           margin-right: 0;
         }
       }
     }
-
-    .table-header {
-      .column {
-        align-items: center;
-        font-size: 16px;
-        transition: color 0.3s ease;
-
-        &:hover {
-          cursor: pointer;
-          color: $orange;
-        }
-      }
-
-      .sort-arrow.asc {
-        transform: rotate(180deg);
-      }
-
-      i {
-        margin-left: 8px;
-        font-size: 12px;
-      }
-    }
+  }
 
   @media #{$mobile} {
     padding: 20px 14px;
-
-    .sort-button {
-      outline: none;
-      display: flex;
-      align-items: center;
-      font-size: 16px;
-      transition: color 0.3s ease;
-      padding: 10px;
-      margin-right: 20px;
-      border: 1px solid $dark-gray;
-      border-radius: 3px;
-
-      &.obstacles {
-        display: none;
-      }
-    }
-
-    .table-header {
-      padding: 16px 0;
-    }
-
-    a.row {
-      padding: 16px 0;
-
-      .column {
-        flex: none;
-      }
-    }
-
-    form {
-      .num-results {
-        margin-top: 12px;
-      }
-
-      > .row {
-        flex-wrap: wrap;
-        justify-content: space-between;
-
-        .field {
-          flex-basis: 48%;
-          padding: 0;
-          margin-bottom: 36px;
-
-          .row {
-            align-items: center;
-          }
-        }
-      }
-    }
   }
 }

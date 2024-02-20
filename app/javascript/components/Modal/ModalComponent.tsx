@@ -103,7 +103,7 @@ const ModalComponent = ({ children }: ModalComponentProps) => {
               ></i>
             </>
           ) : (
-            <i className="fas fa-times"></i>
+            <i className="fa-solid fa-times"></i>
           )}
         </button>
         {children}
