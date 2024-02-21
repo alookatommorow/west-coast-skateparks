@@ -34,7 +34,7 @@ module Admin
         :latitude,
         :longitude,
         :name,
-        :rating,
+        :stars,
         :material,
         :designer,
         :builder,
