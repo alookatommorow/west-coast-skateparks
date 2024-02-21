@@ -70,6 +70,7 @@
     display: grid;
     grid-template-columns: 120px 2fr 1fr 1fr 1fr 1fr;
     text-transform: capitalize;
+    align-items: center;
   }
 
   a.column-layout {
