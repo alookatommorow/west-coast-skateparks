@@ -1,7 +1,24 @@
 require 'rails_helper'
 
 RSpec.describe Skatepark, type: :model do
+  describe 'associations' do
+    it { is_expected.to have_many(:ratings).dependent(:destroy) }
+    it { is_expected.to have_many(:skatepark_images).dependent(:destroy) }
+    it { is_expected.to have_and_belong_to_many(:visitors).join_table(:visits).class_name('User').dependent(:destroy) }
+    it {
+      is_expected.to have_and_belong_to_many(:favoriters).join_table(:favorites).class_name('User').dependent(:destroy)
+    }
+  end
+
   describe 'validations' do
+    subject { build_stubbed(:skatepark) }
+    it { is_expected.to validate_numericality_of(:stars).is_in(1..5) }
+    it { is_expected.to validate_presence_of(:name) }
+    it { is_expected.to validate_presence_of(:city) }
+    it { is_expected.to validate_presence_of(:state) }
+    it { is_expected.to validate_presence_of(:state) }
+    it { is_expected.to validate_inclusion_of(:state).in_array(Skatepark::STATES) }
+
     it 'validates obstacles' do
       skatepark = build_stubbed(:skatepark, obstacles: ['fuck all'])
 

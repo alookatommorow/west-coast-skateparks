@@ -92,11 +92,14 @@ class Skatepark < ActiveRecord::Base
     'hips'
   ].freeze
 
+  STARS = [1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5].freeze
+
   friendly_id :to_param, use: %i[slugged finders]
 
   validates :name, :city, presence: true
   validates :state, presence: true, inclusion: { in: STATES }
   validate :whitelist_obstacles
+  validates :stars, numericality: { in: (1..5), step: 0.5 }, allow_blank: true
 
   has_many :ratings, dependent: :destroy
   has_many :reviews, dependent: :destroy
