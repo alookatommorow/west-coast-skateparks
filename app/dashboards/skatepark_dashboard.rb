@@ -22,7 +22,7 @@ class SkateparkDashboard < Administrate::BaseDashboard
     id: Field::Number,
     name: Field::String,
     identifier: Field::String,
-    rating: Field::Select.with_options(collection: ['1', '1.5', '2', '2.5', '3', '3.5', '4', '4.5', '5']),
+    stars: Field::Select.with_options(collection: [1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5]),
     material: Field::String,
     designer: Field::String,
     builder: Field::String,
@@ -72,7 +72,7 @@ class SkateparkDashboard < Administrate::BaseDashboard
     longitude
     id
     name
-    rating
+    stars
     material
     designer
     builder
@@ -99,6 +99,7 @@ class SkateparkDashboard < Administrate::BaseDashboard
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = %i[
+    name
     city
     state
     address
@@ -107,8 +108,7 @@ class SkateparkDashboard < Administrate::BaseDashboard
     hero
     map_photo
     skatepark_images
-    name
-    rating
+    stars
     material
     designer
     builder
