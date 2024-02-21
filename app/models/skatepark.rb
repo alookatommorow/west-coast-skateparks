@@ -32,6 +32,7 @@
 #  rating                 :string
 #  size                   :string
 #  slug                   :string
+#  stars                  :float
 #  state                  :string           not null
 #  video_url              :string
 #  zip_code               :string
