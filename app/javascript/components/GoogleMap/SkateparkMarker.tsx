@@ -64,8 +64,8 @@ export const SkateparkMarker = ({
                 )}
                 <strong>{titleize(skatepark.name)}</strong>
                 <p>{titleize(skatepark.city)}</p>
-                {skatepark.rating && (
-                  <Stars stars={Number(skatepark.rating)} tiny></Stars>
+                {skatepark.stars && (
+                  <Stars stars={skatepark.stars} tiny></Stars>
                 )}
               </a>
             </InfoWindow>

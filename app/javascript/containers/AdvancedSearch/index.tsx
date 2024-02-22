@@ -11,7 +11,7 @@ import { useMediaQueries } from '../../hooks/useMediaQueries';
 
 export type Attr = keyof Pick<
   Skatepark,
-  'city' | 'name' | 'state' | 'rating' | 'obstacles' | 'map_photo'
+  'city' | 'name' | 'state' | 'stars' | 'obstacles' | 'map_photo'
 >;
 
 export type QueryAttr = keyof Pick<Skatepark, 'city' | 'name'>;
@@ -58,13 +58,13 @@ export const AdvancedSearch = ({ skateparks }: AdvancedSearchProps) => {
     useState<SearchResult[]>();
 
   const filterStars = (skatepark: SearchResult) => {
-    const { rating } = skatepark;
-    if (!rating || isNaN(Number(rating))) return false;
+    const { stars } = skatepark;
+    if (!stars || isNaN(stars)) return false;
 
     if (filters.starsEquality === 'atLeast') {
-      return Number(rating) >= filters.stars;
+      return stars >= filters.stars;
     }
-    return Number(rating) === filters.stars;
+    return stars === filters.stars;
   };
 
   const filterStates = (skatepark: SearchResult) => {
@@ -117,14 +117,16 @@ export const AdvancedSearch = ({ skateparks }: AdvancedSearchProps) => {
   };
 
   const compareAttrs = (a: Skatepark, b: Skatepark) => {
-    const attrA =
-      typeof a[filters.sortAttr] === 'string'
-        ? a[filters.sortAttr]?.toUpperCase()
-        : a[filters.sortAttr];
-    const attrB =
-      typeof b[filters.sortAttr] === 'string'
-        ? b[filters.sortAttr]?.toUpperCase()
-        : b[filters.sortAttr];
+    let attrA = a[filters.sortAttr];
+    let attrB = b[filters.sortAttr];
+
+    if (typeof attrA === 'string') {
+      attrA = attrA.toUpperCase();
+    }
+
+    if (typeof attrB === 'string') {
+      attrB = attrB.toUpperCase();
+    }
 
     let comparison = 0;
     if (attrA === undefined && attrB === undefined) {

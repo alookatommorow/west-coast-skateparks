@@ -9,7 +9,7 @@ module Search
       :latitude,
       :longitude,
       :map_photo,
-      :rating,
+      :stars,
       :obstacles
     )
 

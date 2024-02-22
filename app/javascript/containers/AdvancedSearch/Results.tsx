@@ -18,10 +18,10 @@ export const Results = ({ skateparks }: ResultsProps) => {
 
     if (attr === 'obstacles' && isTablet) {
       return;
-    } else if (attr === 'rating') {
+    } else if (attr === 'stars') {
       return <Stars stars={Number(parkAttr)} tiny />;
     } else if (attr === 'map_photo') {
-      return <img src={parkAttr} />;
+      return <img src={parkAttr as string} />;
     } else if (
       (attr === 'city' || attr === 'name') &&
       park.queryMatch !== undefined &&

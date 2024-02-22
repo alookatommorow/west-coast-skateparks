@@ -7,7 +7,7 @@ export type Skatepark = {
   longitude?: number;
   map_photo?: string;
   neighbor_parks?: Skatepark[];
-  rating?: string;
+  stars?: number;
   id?: number;
   obstacles?: string;
 };

@@ -15,6 +15,7 @@
 // const imagePath = (name) => images(name, true)
 
 import ReactOnRails from 'react-on-rails';
+import { Stars } from '../components/Stars';
 import { Search } from '../containers/Search';
 import { Photos } from '../components/Photos';
 import { UserActions } from '../components/UserActions';
@@ -33,4 +34,5 @@ ReactOnRails.register({
   WarningModal,
   AdvancedSearch,
   GMap,
+  Stars,
 });

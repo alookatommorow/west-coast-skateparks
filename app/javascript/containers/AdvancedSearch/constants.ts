@@ -19,7 +19,7 @@ export const SKATEPARK_ATTRS: Array<AttrMap> = [
     text: 'State',
   },
   {
-    name: 'rating',
+    name: 'stars',
     text: 'Rating',
   },
   {
