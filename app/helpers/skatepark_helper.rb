@@ -23,18 +23,6 @@ module SkateparkHelper
     "#{skatepark} in #{skatepark.city.titleize}, #{STATE_ABBREVS[skatepark.state]} - photos, map, and info"
   end
 
-  def num_empty_stars(rating)
-    5 - rating.to_f.ceil
-  end
-
-  def num_half_stars(rating)
-    rating.to_f % 1 == 0 ? 0 : 1
-  end
-
-  def num_stars(rating)
-    rating.to_f.floor
-  end
-
   def info_icons
     {
       'material' => 'fa-layer-group',

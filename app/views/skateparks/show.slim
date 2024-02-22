@@ -4,12 +4,7 @@
       h1= @skatepark.name.titleize
       h2 #{@skatepark.city.titleize}, #{@skatepark.state.capitalize}
       .stars-container
-        - num_stars(@skatepark.rating).times do
-          i.star.fas.fa-star
-        - num_half_stars(@skatepark.rating).times do
-          i.star.fas.fa-star-half-alt
-        - num_empty_stars(@skatepark.rating).times do
-          i.star.far.fa-star
+         = react_component "Stars", props: { stars: @skatepark.stars }
       p.location
         | #{skatepark_location(@skatepark)}
         i.fa.fa-copy

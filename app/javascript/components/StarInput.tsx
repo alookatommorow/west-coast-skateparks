@@ -16,10 +16,10 @@ export const StarInput = ({
   const maxStars = 5;
 
   const handleStarsChange = (event: React.FormEvent<HTMLInputElement>) => {
-    const currentStars = Number(stars);
     let newStars = Number(event.currentTarget.value);
 
-    if (newStars === currentStars && currentStars > 1) {
+    // toggle input if already selected
+    if (newStars === stars && stars > 1) {
       newStars -= 1;
     }
 
