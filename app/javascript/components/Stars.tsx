@@ -17,7 +17,7 @@ export const Stars = ({ stars, tiny }: StarsProps) => {
   }
 
   return (
-    <>
+    <div>
       {[...Array(wholeStars)].map((_e, i) => (
         <i
           key={`star-${i}`}
@@ -36,6 +36,6 @@ export const Stars = ({ stars, tiny }: StarsProps) => {
           className={`star far fa-star${tiny ? ' tiny' : ''}`}
         />
       ))}
-    </>
+    </div>
   );
 };
