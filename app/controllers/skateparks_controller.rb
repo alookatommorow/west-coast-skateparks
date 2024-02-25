@@ -45,9 +45,6 @@ class SkateparksController < ApplicationController
   end
 
   def skateparks_json(skateparks)
-    ActiveModelSerializers::SerializableResource.new(
-      skateparks,
-      each_serializer: Search::SkateparkSerializer
-    ).as_json
+    skateparks.map { |park| Skateparks::SearchSerializer.json(park) }
   end
 end

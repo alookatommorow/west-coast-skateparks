@@ -3,7 +3,7 @@
     = render "profile_card", user: @user
   .user-map-container
     = react_component "GMap", props: {\
-        resourceName: 'users',
+        resourceName: 'user',
         resourceId: @user.id,
         mapKey: ENV.fetch('GOOGLE_KEY'),
       }

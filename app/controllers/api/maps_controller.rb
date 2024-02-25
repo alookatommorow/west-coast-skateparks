@@ -12,18 +12,12 @@ module Api
     private
 
     def map_data
-      return if resource_class.nil?
-
       resource = resource_class.find(params[:id])
-      resource_serializer.serialize(resource)
+      Skateparks::MapSerializer.send("for_#{params[:resource_name]}", resource)
     end
 
     def resource_class
-      WHITELISTED_CLASSNAMES[params[:resource_name]]
-    end
-
-    def resource_serializer
-      "Api::Maps::#{resource_class}Serializer".constantize
+      RESOURCES[params[:resource_name]] || raise(InvalidRequest)
     end
   end
 end
