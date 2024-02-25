@@ -1,8 +1,8 @@
 module Api
-  class MapsController < ApplicationController
-    WHITELISTED_CLASSNAMES = {
-      'skateparks' => Skatepark,
-      'users' => User
+  class MapsController < BaseController
+    RESOURCES = {
+      'skatepark' => Skatepark,
+      'user' => User
     }.freeze
 
     def show
