@@ -91,6 +91,8 @@ class Skatepark < ActiveRecord::Base
     'lumps',
     'hips'
   ].freeze
+  HERO_DEFAULT_URL = 'https://storage.googleapis.com/west-coast-skateparks/default-header.jpg'.freeze
+  MAP_PHOTO_DEFAULT_URL = 'https://storage.googleapis.com/west-coast-skateparks/logo-small.png'.freeze
 
   STARS = [1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5].freeze
 
@@ -114,10 +116,10 @@ class Skatepark < ActiveRecord::Base
 
   has_many :skatepark_images, dependent: :destroy
 
-  has_attached_file :hero, default_url: 'https://storage.googleapis.com/west-coast-skateparks/default-header.jpg'
+  has_attached_file :hero, default_url: HERO_DEFAULT_URL
   validates_attachment_content_type :hero, content_type: /\Aimage/
 
-  has_attached_file :map_photo, default_url: 'https://storage.googleapis.com/west-coast-skateparks/logo-small.png', styles: { thumb: '300x200>' }
+  has_attached_file :map_photo, default_url: MAP_PHOTO_DEFAULT_URL, styles: { thumb: '300x200>' }
   validates_attachment_content_type :map_photo, content_type: /\Aimage/
 
   scope :in_state, ->(state) { where(state:) }
