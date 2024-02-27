@@ -11,7 +11,7 @@ RSpec.feature 'Admin can create skateparks' do
     fill_in 'City', with: 'Modesto'
     select 'washington', from: 'State'
     fill_in 'Name', with: 'Fekken Perk'
-    select '5', from: 'Rating'
+    select '5', from: 'Stars'
     fill_in 'Material', with: 'plexi-glass'
     fill_in 'Designer', with: 'Barny Inc.'
     fill_in 'Builder', with: 'Bob'
@@ -42,7 +42,7 @@ RSpec.feature 'Admin can create skateparks' do
 
   scenario 'with incomplete location' do
     fill_in 'Name', with: 'Nowhere park'
-    select '5', from: 'Rating'
+    select '5', from: 'Stars'
     select 'california', from: 'State'
     click_button 'Create Skatepark'
 

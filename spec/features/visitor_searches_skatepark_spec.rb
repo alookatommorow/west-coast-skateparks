@@ -11,7 +11,7 @@ RSpec.feature 'Visitor searches skatepark' do
     fill_in 'query', with: skatepark.name
     expect(page).to have_text(skatepark.name.titleize)
 
-    click_link skatepark.name.titleize
+    click_link skatepark.name
 
     expect(page).to have_text(skatepark.address)
   end
