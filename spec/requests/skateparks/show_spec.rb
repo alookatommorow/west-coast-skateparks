@@ -15,16 +15,14 @@ RSpec.describe '/skateparks' do
     context 'with ratings' do
       it 'sets ratings instance var' do
         skatepark = create(:skatepark)
-        rating = create_list(:rating, 2, skatepark:)
-        ratings = ActiveModelSerializers::SerializableResource.new(
-          skatepark.ratings.order(created_at: :desc),
-          adapter: :attributes,
-          each_serializer: RatingSerializer
-        ).as_json
+        create_list(:rating, 2, skatepark:)
+        mock_json = [{ hey: 'youre looking great' }]
+
+        allow(RatingSerializer).to receive(:json).and_return(mock_json)
 
         get "/skateparks/#{skatepark.slug}"
 
-        expect(assigns(:ratings)).to eq ratings
+        expect(assigns(:ratings)).to eq mock_json
       end
     end
 
