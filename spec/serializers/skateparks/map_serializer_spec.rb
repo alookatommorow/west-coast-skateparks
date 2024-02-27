@@ -1,22 +1,34 @@
 require 'rails_helper'
 
 RSpec.describe Skateparks::MapSerializer do
+  it 'declares map attributes' do
+    attributes = %i[slug name city state latitude longitude stars map_photo]
+
+    expect(Skateparks::MapSerializer.attributes).to eq attributes
+  end
+
   describe '.for_skatepark' do
     it 'returns skatepark map JSON' do
       skatepark = build_stubbed(:skatepark)
       neighbor_parks = build_stubbed_pair(:skatepark)
 
       mock_json = { hey: 'what upple' }
+      mock_json_array = [mock_json]
 
       allow(skatepark).to receive(:neighbor_parks).and_return(neighbor_parks)
-      allow(Skateparks::BaseSerializer).to receive(:json).and_return(mock_json)
+      allow(Skateparks::BaseSerializer).to receive(:json)
+        .with(skatepark)
+        .and_return(mock_json)
+      allow(Skateparks::BaseSerializer).to receive(:json)
+        .with(neighbor_parks)
+        .and_return(mock_json_array)
 
       expected = {
         main: mock_json,
         collections: [
           {
             type: 'nearby',
-            items: [mock_json, mock_json]
+            items: mock_json_array
           }
         ]
       }
@@ -38,7 +50,7 @@ RSpec.describe Skateparks::MapSerializer do
       user.favorites << skateparks.third
       user.visits << skateparks.third
 
-      mock_json = { hey: 'sup' }
+      mock_json = [{ hey: 'sup' }]
 
       allow(Skateparks::BaseSerializer).to receive(:json).and_return(mock_json)
 
@@ -46,15 +58,15 @@ RSpec.describe Skateparks::MapSerializer do
         collections: [
           {
             type: 'favorite',
-            items: [mock_json]
+            items: mock_json
           },
           {
             type: 'visited',
-            items: [mock_json]
+            items: mock_json
           },
           {
             type: 'both',
-            items: [mock_json]
+            items: mock_json
           }
         ]
       }

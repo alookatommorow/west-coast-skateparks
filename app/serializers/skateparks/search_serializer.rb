@@ -1,14 +1,7 @@
 module Skateparks
   class SearchSerializer < Skateparks::BaseSerializer
-    ATTRIBUTES = %i[
-      id
-      slug
-      name
-      city
-      state
-      map_photo
-      stars
-      obstacles
-    ].freeze
+    class << self
+      attributes :slug, :name, :city, :state, :map_photo, :stars, :obstacles
+    end
   end
 end
