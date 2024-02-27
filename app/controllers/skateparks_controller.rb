@@ -14,7 +14,9 @@ class SkateparksController < ApplicationController
   def index; end
 
   def search
-    @skateparks = skateparks_json(Skatepark.all.order(:state, :city, :name))
+    @skateparks = Skateparks::SearchSerializer.json(
+      Skatepark.all.order(:state, :city, :name)
+    )
   end
 
   # DEPRECATED: to be removed in favor of /api/skateparks routes when user page converts to react
@@ -42,9 +44,5 @@ class SkateparksController < ApplicationController
 
   def skatepark
     @skatepark ||= Skatepark.find(params[:slug])
-  end
-
-  def skateparks_json(skateparks)
-    skateparks.map { |park| Skateparks::SearchSerializer.json(park) }
   end
 end
