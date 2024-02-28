@@ -1,29 +1,19 @@
 module Api
-  class MapsController < ApplicationController
-    WHITELISTED_CLASSNAMES = {
-      'skateparks' => Skatepark,
-      'users' => User
+  class MapsController < BaseController
+    RESOURCES = {
+      'skatepark' => Skatepark,
+      'user' => User
     }.freeze
 
     def show
-      render json: map_data
+      resource = resource_class.find(params[:id])
+      render json: Skateparks::MapSerializer.new(resource).serialize
     end
 
     private
 
-    def map_data
-      return if resource_class.nil?
-
-      resource = resource_class.find(params[:id])
-      resource_serializer.serialize(resource)
-    end
-
     def resource_class
-      WHITELISTED_CLASSNAMES[params[:resource_name]]
-    end
-
-    def resource_serializer
-      "Api::Maps::#{resource_class}Serializer".constantize
+      RESOURCES[params[:resource_name]] || raise(InvalidRequest)
     end
   end
 end

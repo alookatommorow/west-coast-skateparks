@@ -42,7 +42,7 @@
     .photos
       = render 'photos', skatepark: @skatepark
     = react_component "GMap", props: {\
-        resourceName: 'skateparks',
+        resourceName: 'skatepark',
         resourceId: @skatepark.id,
         mapKey: ENV.fetch('GOOGLE_KEY'),
       }

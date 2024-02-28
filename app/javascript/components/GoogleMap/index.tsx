@@ -5,7 +5,7 @@ import { MapContent } from './MapContent';
 import { Options } from './Options';
 
 type GMapProps = {
-  resourceName: 'users' | 'skateparks';
+  resourceName: 'user' | 'skatepark';
   resourceId: number;
   mapKey: string;
 };
@@ -100,7 +100,7 @@ const GMap = React.memo(function GMap({
         <>
           <GoogleMap
             center={mapCenter}
-            zoom={resourceName === 'skateparks' ? 9 : 6}
+            zoom={resourceName === 'skatepark' ? 9 : 6}
             id="map"
           >
             {resource !== undefined && (

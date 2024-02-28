@@ -3,8 +3,9 @@ class RatingsController < ApplicationController
 
   def create
     rating = Rating.create!(rating_params)
-    render json: rating,
-           new_average: rating.skatepark.average_rating,
+    additional_attributes = { new_average: rating.skatepark.average_rating }
+
+    render json: RatingSerializer.new(rating, additional_attributes:).serialize,
            status: :created
   end
 

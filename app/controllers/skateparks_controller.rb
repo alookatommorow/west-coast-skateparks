@@ -1,20 +1,19 @@
 class SkateparksController < ApplicationController
   def show
     @skatepark = Skatepark.includes(:skatepark_images).find(params[:slug])
-    @ratings = ActiveModelSerializers::SerializableResource.new(
-      @skatepark.ratings.includes(:user).order(created_at: :desc),
-      adapter: :attributes,
-      each_serializer: RatingSerializer
-    ).as_json
-
     @has_favorited = !!current_user&.favorited?(@skatepark.id)
     @has_visited = !!current_user&.visited?(@skatepark.id)
+    @ratings = RatingSerializer.new(
+      @skatepark.ratings.includes(:user).order(created_at: :desc)
+    ).serialize
   end
 
   def index; end
 
   def search
-    @skateparks = skateparks_json(Skatepark.all.order(:state, :city, :name))
+    @skateparks = Skateparks::SearchSerializer.new(
+      Skatepark.all.order(:state, :city, :name)
+    ).serialize
   end
 
   # DEPRECATED: to be removed in favor of /api/skateparks routes when user page converts to react
@@ -42,12 +41,5 @@ class SkateparksController < ApplicationController
 
   def skatepark
     @skatepark ||= Skatepark.find(params[:slug])
-  end
-
-  def skateparks_json(skateparks)
-    ActiveModelSerializers::SerializableResource.new(
-      skateparks,
-      each_serializer: Search::SkateparkSerializer
-    ).as_json
   end
 end

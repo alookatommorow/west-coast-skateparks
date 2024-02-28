@@ -20,6 +20,8 @@
 #  index_users_on_email  (email)
 #
 class User < ActiveRecord::Base
+  AVATAR_DEFAULT_URL = 'https://33.media.tumblr.com/avatar_ee7f0ba1cb58_128.png'.freeze
+
   has_secure_password
   validates :username, :email, presence: true
   validates :password, presence: true, on: :create
@@ -37,8 +39,7 @@ class User < ActiveRecord::Base
                           class_name: 'Skatepark',
                           dependent: :destroy
 
-  has_attached_file(:avatar, styles: { thumb: '100x100>' },
-                             default_url: 'https://33.media.tumblr.com/avatar_ee7f0ba1cb58_128.png')
+  has_attached_file :avatar, styles: { thumb: '100x100>' }, default_url: AVATAR_DEFAULT_URL
   validates_attachment_content_type :avatar, content_type: /\Aimage/
 
   def favorited?(skatepark_id)

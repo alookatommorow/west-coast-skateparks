@@ -10,6 +10,11 @@ rescue StandardError => e
 end
 
 with_err_handling do
+  image_files = [
+    File.open(Rails.root.join('public/newberg-01.jpg')),
+    File.open(Rails.root.join('public/newberg-06.jpg'))
+  ]
+
   puts bold 'Creating Skateparks...'
   lat = 33.891955
   long = -117.517648
@@ -34,7 +39,7 @@ with_err_handling do
         if num.odd?
           long += 0.1
         else
-          long -= 0.25
+          long -= 0.17
         end
       end
     end
@@ -48,25 +53,20 @@ with_err_handling do
       address: Faker::Address.street_address,
       latitude: lat,
       longitude: long,
-      rating: Array(1..5).sample,
-      obstacles: obstacles.slice(random_obstacle, (obstacles.length - 1))
+      stars: Array(1..5).sample,
+      obstacles: obstacles.slice(random_obstacle, (obstacles.length - 1)),
+      map_photo: image_files.first
     }
   end
 
-  Skatepark.create(skateparks)
-  skateparks = Skatepark.all
+  skateparks = Skatepark.create(skateparks)
 
   puts bold('Creating park images...')
   images = []
-  urls = [
-    'https://s3-us-west-1.amazonaws.com/west-coast-skateparks/skatepark_images/photos/000/001/808/original/newberg-01.jpg?1459399047',
-    'https://s3-us-west-1.amazonaws.com/west-coast-skateparks/skatepark_images/photos/000/001/813/original/newberg-06.jpg?1459399056'
-  ]
-
-  urls.each do |url|
+  image_files.each do |url|
     images.push(
       SkateparkImage.create(
-        photo: URI.parse(url),
+        photo: url,
         skatepark: skateparks.first
       )
     )
@@ -106,8 +106,7 @@ with_err_handling do
       }
     end
 
-    User.create(users)
-    users = User.all
+    users = User.create(users)
 
     print '  Creating buttery Reviews & Ratings for some Skateparks...'
     skateparks.pluck(:id).map do |park_id|

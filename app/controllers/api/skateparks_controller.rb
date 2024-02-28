@@ -1,7 +1,5 @@
 module Api
-  class SkateparksController < ApplicationController
-    include ApiErrorHandler
-
+  class SkateparksController < BaseController
     def index
       render json: Skatepark.all.as_json(
         only: %i[slug name city state]

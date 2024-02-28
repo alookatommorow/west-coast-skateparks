@@ -1,29 +1,19 @@
-class RatingSerializer < ActiveModel::Serializer
-  attributes :stars,
-             :review,
-             :avatar,
-             :author,
-             :author_id,
-             :created_at,
-             :new_average
+class RatingSerializer < BaseSerializer
+  attributes :stars, :review, :avatar, :author, :author_id, :created_at
 
-  def avatar
-    object.user&.avatar&.url(:thumb)
+  def avatar(rating = serializeable)
+    rating.user&.avatar&.url(:thumb)
   end
 
-  def author
-    object.user.to_s
+  def author(rating = serializeable)
+    rating.user&.to_s
   end
 
-  def author_id
-    object.user_id
+  def author_id(rating = serializeable)
+    rating.user_id
   end
 
-  def created_at
-    object.created_at.strftime('%m/%d/%y')
-  end
-
-  def new_average
-    @instance_options[:new_average]
+  def created_at(rating = serializeable)
+    rating.created_at.strftime('%m/%d/%y')
   end
 end
