@@ -1,20 +1,18 @@
 require 'rails_helper'
 
 RSpec.describe BaseSerializer do
-  describe '.json' do
+  describe '#serialize' do
     it 'raises error' do
       skatepark = build_stubbed(:skatepark)
 
-      expect { BaseSerializer.json(skatepark) }
+      expect { BaseSerializer.new(skatepark).serialize }
         .to raise_error BaseSerializer::UndefinedAttributesError
     end
 
     context 'with inheritance' do
       let(:child_class) do
         Class.new(BaseSerializer) do
-          class << self
-            attributes :name, :city, :designer
-          end
+          attributes :name, :city, :designer
         end
       end
 
@@ -24,7 +22,7 @@ RSpec.describe BaseSerializer do
 
         expected = skatepark.as_json(only: attributes)
 
-        json = child_class.json(skatepark)
+        json = child_class.new(skatepark).serialize
 
         expect(json).to eq expected
       end
@@ -37,7 +35,7 @@ RSpec.describe BaseSerializer do
 
           expected = skatepark.as_json(only: attributes).merge(additional_attributes)
 
-          json = child_class.json(skatepark, additional_attributes:)
+          json = child_class.new(skatepark, additional_attributes:).serialize
 
           expect(json).to eq expected
         end
@@ -50,7 +48,7 @@ RSpec.describe BaseSerializer do
 
           expected = skateparks.map { |park| park.as_json(only: attributes) }
 
-          json = child_class.json(skateparks)
+          json = child_class.new(skateparks).serialize
 
           expect(json).to eq expected
         end
@@ -66,7 +64,7 @@ RSpec.describe BaseSerializer do
 
           expected = skateparks.map { |park| park.as_json(only: attributes) }
 
-          json = child_class.json(skateparks)
+          json = child_class.new(skateparks).serialize
 
           expect(json).to eq expected
         end
@@ -75,12 +73,10 @@ RSpec.describe BaseSerializer do
       context 'with dynamic attribute' do
         let(:child_class) do
           Class.new(BaseSerializer) do
-            class << self
-              attributes :name, :obstacles
+            attributes :name, :obstacles
 
-              def obstacles(skatepark)
-                skatepark.obstacles.join(', ')
-              end
+            def obstacles(skatepark)
+              skatepark.obstacles&.join(', ')
             end
           end
         end
@@ -90,11 +86,23 @@ RSpec.describe BaseSerializer do
 
           expected = skatepark
                      .as_json(only: [:name])
-                     .merge(obstacles: child_class.obstacles(skatepark))
+                     .merge(obstacles: child_class.new(skatepark).obstacles(skatepark))
 
-          json = child_class.json(skatepark)
+          json = child_class.new(skatepark).serialize
 
           expect(json).to eq expected
+        end
+
+        context 'when dynamic attribute is nil' do
+          it 'returns does not include attribute' do
+            skatepark = build_stubbed(:skatepark)
+
+            expected = skatepark.as_json(only: [:name])
+
+            json = child_class.new(skatepark).serialize
+
+            expect(json).to eq expected
+          end
         end
       end
     end

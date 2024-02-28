@@ -5,6 +5,7 @@ RSpec.describe '/skateparks' do
     it 'sets instance vars' do
       skatepark = create(:skatepark)
       ratings = []
+      allow(skatepark).to receive(:ratings).and_return ratings
 
       get "/skateparks/#{skatepark.slug}"
 
@@ -17,8 +18,10 @@ RSpec.describe '/skateparks' do
         skatepark = create(:skatepark)
         create_list(:rating, 2, skatepark:)
         mock_json = [{ hey: 'youre looking great' }]
+        serializer = instance_double(RatingSerializer)
 
-        allow(RatingSerializer).to receive(:json).and_return(mock_json)
+        allow(RatingSerializer).to receive(:new).and_return(serializer)
+        allow(serializer).to receive(:serialize).and_return(mock_json)
 
         get "/skateparks/#{skatepark.slug}"
 
@@ -28,10 +31,11 @@ RSpec.describe '/skateparks' do
 
     context 'with logged in user' do
       it 'sets has_favorited and has_visited instance vars' do
-        user = create(:user)
+        user = build_stubbed(:user)
         skatepark = create(:skatepark)
-        skatepark.visitors << user
-        skatepark.favoriters << user
+
+        allow(user).to receive(:visited?).and_return true
+        allow(user).to receive(:favorited?).and_return true
 
         sign_in user
 

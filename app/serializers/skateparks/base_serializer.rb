@@ -1,13 +1,11 @@
 module Skateparks
   class BaseSerializer < ::BaseSerializer
-    class << self
-      def map_photo(skatepark)
-        skatepark.map_photo(:thumb)
-      end
+    def map_photo(skatepark = serializeable)
+      skatepark.map_photo(:thumb)
+    end
 
-      def obstacles(skatepark)
-        skatepark.obstacles&.join(', ')
-      end
+    def obstacles(skatepark = serializeable)
+      skatepark.obstacles&.join(', ')
     end
   end
 end

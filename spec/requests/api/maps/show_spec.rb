@@ -6,8 +6,10 @@ RSpec.describe '/api/maps' do
       it 'returns skatepark map JSON' do
         skatepark = create(:skatepark)
         json = { main: 'y u suckin', collections: ['brown stuff'] }.to_json
-        allow(Skateparks::MapSerializer).to receive(:for_skatepark)
-          .with(skatepark).and_return json
+        serializer = instance_double(Skateparks::MapSerializer)
+
+        allow(Skateparks::MapSerializer).to receive(:new).with(skatepark).and_return serializer
+        allow(serializer).to receive(:serialize).and_return json
 
         get "/api/maps/#{skatepark.id}", params: { resource_name: 'skatepark' }
 
@@ -19,8 +21,10 @@ RSpec.describe '/api/maps' do
       it 'returns user map JSON' do
         user = create(:user)
         json = { collections: ['tripe tacos'] }.to_json
-        allow(Skateparks::MapSerializer).to receive(:for_user)
-          .with(user).and_return json
+        serializer = instance_double(Skateparks::MapSerializer)
+
+        allow(Skateparks::MapSerializer).to receive(:new).with(user).and_return serializer
+        allow(serializer).to receive(:serialize).and_return json
 
         get "/api/maps/#{user.id}", params: { resource_name: 'user' }
 
@@ -32,8 +36,6 @@ RSpec.describe '/api/maps' do
       it 'returns user map JSON' do
         user = create(:user)
         json = { message: 'One or more parameters or parameter values invalid' }.to_json
-        allow(Skateparks::MapSerializer).to receive(:for_user)
-          .with(user).and_return json
 
         get "/api/maps/#{user.id}", params: { resource_name: 'unsupported' }
 

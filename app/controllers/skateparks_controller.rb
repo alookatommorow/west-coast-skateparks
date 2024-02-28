@@ -3,17 +3,17 @@ class SkateparksController < ApplicationController
     @skatepark = Skatepark.includes(:skatepark_images).find(params[:slug])
     @has_favorited = !!current_user&.favorited?(@skatepark.id)
     @has_visited = !!current_user&.visited?(@skatepark.id)
-    @ratings = RatingSerializer.json(
+    @ratings = RatingSerializer.new(
       @skatepark.ratings.includes(:user).order(created_at: :desc)
-    )
+    ).serialize
   end
 
   def index; end
 
   def search
-    @skateparks = Skateparks::SearchSerializer.json(
+    @skateparks = Skateparks::SearchSerializer.new(
       Skatepark.all.order(:state, :city, :name)
-    )
+    ).serialize
   end
 
   # DEPRECATED: to be removed in favor of /api/skateparks routes when user page converts to react
