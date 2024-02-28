@@ -21,8 +21,8 @@ RSpec.describe Skateparks::SearchSerializer do
     def serialize(skatepark)
       skatepark.as_json(only: %i[slug name city state stars])
                .merge(
-                 obstacles: skatepark.obstacles&.join(', '),
-                 map_photo: Skatepark::MAP_PHOTO_DEFAULT_URL
+                 'obstacles' => skatepark.obstacles&.join(', '),
+                 'map_photo' => Skatepark::MAP_PHOTO_DEFAULT_URL
                )
                .compact
     end

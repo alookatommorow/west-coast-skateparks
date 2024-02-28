@@ -31,7 +31,7 @@ RSpec.describe BaseSerializer do
         it 'returns resource JSON with non-null attributes defined in child' do
           skatepark = build_stubbed(:skatepark)
           attributes = %i[name city]
-          additional_attributes = { job: 'janitor' }
+          additional_attributes = { 'job' => 'janitor' }
 
           expected = skatepark.as_json(only: attributes).merge(additional_attributes)
 
@@ -83,10 +83,11 @@ RSpec.describe BaseSerializer do
 
         it 'returns JSON containing result of calling dynamic attribute' do
           skatepark = build_stubbed(:skatepark, obstacles: ['rails, ledges, bowl'])
+          obstacles = { 'obstacles' => child_class.new(skatepark).obstacles(skatepark) }
 
           expected = skatepark
-                     .as_json(only: [:name])
-                     .merge(obstacles: child_class.new(skatepark).obstacles(skatepark))
+                     .as_json(only: :name)
+                     .merge(obstacles)
 
           json = child_class.new(skatepark).serialize
 

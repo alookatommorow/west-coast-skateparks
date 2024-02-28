@@ -74,7 +74,7 @@ RSpec.describe Skateparks::MapSerializer do
 
     def serialize(skatepark)
       skatepark.as_json(only: %i[slug name city state latitude longitude stars])
-               .merge(map_photo: Skatepark::MAP_PHOTO_DEFAULT_URL)
+               .merge('map_photo' => Skatepark::MAP_PHOTO_DEFAULT_URL)
                .compact
     end
   end
