@@ -16,3 +16,35 @@ export const findMatchIndices = (str: string, searchStr: string) => {
 
   return indices;
 };
+
+type RequestOptions = {
+  fetchOptions?: Record<string, string>;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  onSuccess?: (arg: any) => void;
+  onError?: (error: string) => void;
+};
+
+export const request = async (url: string, options?: RequestOptions) => {
+  try {
+    const response = await fetch(url, options?.fetchOptions);
+    let responseJson;
+
+    if (response.ok) {
+      responseJson = await response.json();
+      options?.onSuccess?.(responseJson);
+
+      return responseJson;
+    } else {
+      const contentType = response.headers.get('content-type');
+
+      if (contentType?.includes('application/json')) {
+        responseJson = await response.json();
+        throw responseJson.message;
+      } else {
+        throw response.statusText;
+      }
+    }
+  } catch (error) {
+    options?.onError?.(error as string);
+  }
+};
