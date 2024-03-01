@@ -1,3 +1,3 @@
-- if user_facing_flashes.any?
-  .flashes class="#{flash_class_name(user_facing_flashes.first.first)} message"
-    .header= user_facing_flashes.first.second
+- if flash.present?
+  = react_component "Flash", props: { type: flash.to_hash.keys.first, message: flash.to_hash.values.first }
+

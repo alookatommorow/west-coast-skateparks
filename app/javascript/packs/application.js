@@ -24,6 +24,7 @@ import { Reviews } from '../containers/Reviews';
 import { Modal } from '../components/Modal';
 import { WarningModal } from '../components/WarningModal';
 import { AdvancedSearch } from '../containers/AdvancedSearch';
+import { Flash } from '../components/Flash';
 
 ReactOnRails.register({
   Search,
@@ -35,4 +36,5 @@ ReactOnRails.register({
   AdvancedSearch,
   GMap,
   Stars,
+  Flash,
 });
