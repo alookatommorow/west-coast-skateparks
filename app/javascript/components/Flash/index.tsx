@@ -1,7 +1,7 @@
 import React, { useEffect, useState, AnimationEvent } from 'react';
 import { classNames } from '../../utils/styles';
 
-type FlashCategory = 'alert' | 'error' | 'notice' | 'success';
+export type FlashCategory = 'alert' | 'error' | 'notice' | 'success';
 
 type FlashProps = {
   type?: FlashCategory | null;

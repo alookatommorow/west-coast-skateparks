@@ -1,6 +1,8 @@
 import React, { useState, MouseEvent } from 'react';
 import { WarningModal } from './WarningModal';
 import { useToggle } from '../hooks/useToggle';
+import { request } from '../utils';
+import { Flash, FlashCategory } from './Flash';
 
 type UserActionsProps = {
   hasFavorited: boolean;
@@ -22,11 +24,28 @@ export const UserActions = ({
   const [hasFavorited, setHasFavorited] = useState(initialHasFavorited);
   const [hasVisited, setHasVisited] = useState(initialHasVisited);
   const [visitIsLoading, setVisitIsLoading] = useState(false);
+  const [flashType, setFlashType] = useState<FlashCategory | undefined>();
+  const [flashMessage, setFlashMessage] = useState('');
   const [favoriteIsLoading, setFavoriteIsLoading] = useState(false);
   const {
     toggleIsOn: warningModalIsShowing,
     toggle: toggleWarningModalIsShowing,
   } = useToggle(false);
+
+  const handleError = () => {
+    setFlashType('error');
+    setFlashMessage('Something went wrong');
+  };
+
+  const handleSuccess = (name: string) => {
+    toggleHasAction(name);
+    setIsLoading(name, false);
+  };
+
+  const handleFlashClose = () => {
+    setFlashType(undefined);
+    setFlashMessage('');
+  };
 
   const handleClick = async (event: MouseEvent<HTMLButtonElement>) => {
     if (!userId) return toggleWarningModalIsShowing();
@@ -37,8 +56,8 @@ export const UserActions = ({
 
     setIsLoading(name, true);
 
-    try {
-      await fetch(`/api/skateparks/${slug}/${value}`, {
+    await request(`/api/skateparks/${slug}/${value}`, {
+      fetchOptions: {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
@@ -46,12 +65,10 @@ export const UserActions = ({
         body: JSON.stringify({
           user_id: userId,
         }),
-      });
-      toggleHasAction(name);
-      setIsLoading(name, false);
-    } catch (error) {
-      console.log('***********', error);
-    }
+      },
+      onError: handleError,
+      onSuccess: () => handleSuccess(name),
+    });
   };
 
   const setIsLoading = (name: string, isLoading: boolean) =>
@@ -68,6 +85,11 @@ export const UserActions = ({
 
   return (
     <>
+      <Flash
+        type={flashType}
+        message={flashMessage}
+        onClose={handleFlashClose}
+      />
       {(hasFavorited || hasVisited) && (
         <div className="user-indicators">
           {hasVisited && <i className="fa fa-check green"></i>}
@@ -92,12 +114,6 @@ export const UserActions = ({
         >
           {hasVisited && <i className="fa fa-slash red"></i>}
           <i className="fa fa-check green"></i>
-          {/* {hasVisited ? (
-            <i className="fa fa-times red"></i>
-          ) : (
-            <i className = "fa fa-check green"></i>
-
-          )} */}
         </button>
         <button
           className="btn"
@@ -108,11 +124,6 @@ export const UserActions = ({
         >
           {hasFavorited && <i className="fa fa-slash red"></i>}
           <i className="fa fa-heart red"></i>
-          {/* {hasFavorited ? (
-            <i className="fa fa-heart-broken red"></i>
-          ): (
-            <i className="fa fa-heart red"></i>
-          )} */}
         </button>
         {isAdmin && (
           <a

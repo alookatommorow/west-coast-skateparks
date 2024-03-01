@@ -17,8 +17,15 @@ export const findMatchIndices = (str: string, searchStr: string) => {
   return indices;
 };
 
+const json = async (response: Response) => {
+  const contentType = response.headers.get('content-type');
+  if (contentType?.includes('application/json')) {
+    return await response.json();
+  }
+};
+
 type RequestOptions = {
-  fetchOptions?: Record<string, string>;
+  fetchOptions?: Record<string, unknown>;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   onSuccess?: (arg: any) => void;
   onError?: (error: string) => void;
@@ -27,18 +34,13 @@ type RequestOptions = {
 export const request = async (url: string, options?: RequestOptions) => {
   try {
     const response = await fetch(url, options?.fetchOptions);
-    let responseJson;
+    const responseJson = await json(response);
 
     if (response.ok) {
-      responseJson = await response.json();
       options?.onSuccess?.(responseJson);
-
       return responseJson;
     } else {
-      const contentType = response.headers.get('content-type');
-
-      if (contentType?.includes('application/json')) {
-        responseJson = await response.json();
+      if (responseJson) {
         throw responseJson.message;
       } else {
         throw response.statusText;
