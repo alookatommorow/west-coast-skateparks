@@ -3,6 +3,8 @@ import { GoogleMap, useJsApiLoader } from '@react-google-maps/api';
 import { Skatepark } from '../../types';
 import { MapContent } from './MapContent';
 import { Options } from './Options';
+import { request } from '../../utils';
+import { Flash } from '../Flash';
 
 type GMapProps = {
   resourceName: 'user' | 'skatepark';
@@ -39,6 +41,7 @@ const GMap = React.memo(function GMap({
 }: GMapProps) {
   const [resource, setResource] = useState<Resource | undefined>();
   const [resourceIsLoading, setResourceIsLoading] = useState(true);
+  const [error, setError] = useState('');
   const [mapCenter, setMapCenter] = useState<LatLng | undefined>(
     DEFAULT_CENTER,
   );
@@ -72,17 +75,26 @@ const GMap = React.memo(function GMap({
     });
   };
 
+  const handleError = () => {
+    setError('Error. Could not load map data');
+    setResourceIsLoading(false);
+  };
+
+  const handleFlashClose = () => setError('');
+
+  const handleSuccess = (json: Resource) => {
+    const center = findMapCenter(json);
+    setResource(json);
+    setResourceIsLoading(false);
+    setMapCenter(center);
+  };
+
   useEffect(() => {
     const fetchResource = async () => {
-      const resourceUrl =
-        '/api/maps/' + resourceId + '?resource_name=' + resourceName;
-      const response = await fetch(resourceUrl);
-      const resourceJson = await response.json();
-      const center = findMapCenter(resourceJson);
-
-      setResource(resourceJson);
-      setMapCenter(center);
-      setResourceIsLoading(false);
+      await request(
+        '/api/maps/' + resourceId + '?resource_name=' + resourceName,
+        { onSuccess: handleSuccess, onError: handleError },
+      );
     };
 
     fetchResource();
@@ -91,34 +103,37 @@ const GMap = React.memo(function GMap({
   const isLoading = !mapIsLoaded || resourceIsLoading;
 
   return (
-    <div id="map-container">
-      {isLoading ? (
-        <div className="loading-container">
-          <div className="loading-icon"></div>
-        </div>
-      ) : (
-        <>
-          <GoogleMap
-            center={mapCenter}
-            zoom={resourceName === 'skatepark' ? 9 : 6}
-            id="map"
-          >
-            {resource !== undefined && (
-              <MapContent
-                main={resource.main}
-                collections={resource.collections}
-                collectionVisibility={collectionVisibility}
-              />
-            )}
-          </GoogleMap>
-          <Options
-            collections={resource?.collections}
-            toggleCollection={toggleCollection}
-            collectionVisibility={collectionVisibility}
-          />
-        </>
-      )}
-    </div>
+    <>
+      <Flash type="error" message={error} onClose={handleFlashClose} />
+      <div id="map-container">
+        {isLoading ? (
+          <div className="loading-container">
+            <div className="loading-icon"></div>
+          </div>
+        ) : (
+          <>
+            <GoogleMap
+              center={mapCenter}
+              zoom={resourceName === 'skatepark' ? 9 : 6}
+              id="map"
+            >
+              {resource !== undefined && (
+                <MapContent
+                  main={resource.main}
+                  collections={resource.collections}
+                  collectionVisibility={collectionVisibility}
+                />
+              )}
+            </GoogleMap>
+            <Options
+              collections={resource?.collections}
+              toggleCollection={toggleCollection}
+              collectionVisibility={collectionVisibility}
+            />
+          </>
+        )}
+      </div>
+    </>
   );
 });
 

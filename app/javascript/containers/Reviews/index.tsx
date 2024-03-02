@@ -2,16 +2,9 @@ import React, { useState, useEffect, FormEvent, ChangeEvent } from 'react';
 import { useToggle } from '../../hooks/useToggle';
 import { ReviewModal } from './ReviewModal';
 import { Stars } from '../../components/Stars';
-
-type Rating = {
-  author: string;
-  author_id: number;
-  avatar?: string;
-  created_at: string;
-  new_average: 3;
-  review: string;
-  stars: number;
-};
+import { request } from '../../utils';
+import { Flash } from '../../components/Flash';
+import { Rating } from '../../types';
 
 type ReviewFormProps = {
   skateparkId: number;
@@ -27,21 +20,32 @@ export const Reviews = ({
   initialAverageRating,
 }: ReviewFormProps) => {
   const [stars, setStars] = useState(0);
-  const [ratingError, setRatingError] = useState('');
+  const [formError, setFormError] = useState('');
+  const [requestError, setRequestError] = useState('');
   const [review, setReview] = useState('');
   const [averageRating, setAverageRating] = useState(initialAverageRating);
   const { toggleIsOn: modalIsShowing, toggle: toggleModalIsShowing } =
     useToggle(false);
 
   useEffect(() => {
-    if (stars > 0 && ratingError !== '') {
-      setRatingError('');
+    if (stars > 0 && formError !== '') {
+      setFormError('');
     }
   }, [stars]);
 
   useEffect(() => {
     if (!modalIsShowing) clearForm();
   }, [modalIsShowing]);
+
+  const handleSuccess = (json: Rating) => {
+    ratings.unshift(json);
+    setAverageRating(json.new_average);
+    toggleModalIsShowing();
+  };
+
+  const handleError = () => {
+    setRequestError('Something went wrong');
+  };
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -53,34 +57,36 @@ export const Reviews = ({
     };
 
     if (isValid()) {
-      const response = await fetch('/ratings', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
+      await request('/ratings', {
+        fetchOptions: {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data),
         },
-        body: JSON.stringify(data),
+        onSuccess: handleSuccess,
+        onError: handleError,
       });
-      const reviewJson = await response.json();
-      ratings.unshift(reviewJson);
-      setAverageRating(reviewJson.new_average);
-      toggleModalIsShowing();
     }
   };
 
   const clearForm = () => {
     setStars(0);
     setReview('');
-    setRatingError('');
+    setFormError('');
   };
 
   const handleChange = (event: ChangeEvent<HTMLTextAreaElement>) =>
     setReview(event.currentTarget.value);
 
+  const handleFlashClose = () => setRequestError('');
+
   const isValid = () => {
     let valid = true;
 
     if (stars < 1) {
-      setRatingError('Please add a rating');
+      setFormError('Please add a rating');
       valid = false;
     }
 
@@ -114,6 +120,7 @@ export const Reviews = ({
 
   return (
     <>
+      <Flash type="error" message={requestError} onClose={handleFlashClose} />
       <div className="review-header-container">
         <h4>Reviews</h4>
         <button className="write-review-button" onClick={toggleModalIsShowing}>
@@ -147,7 +154,7 @@ export const Reviews = ({
       <ReviewModal
         isVisible={modalIsShowing}
         onClose={toggleModalIsShowing}
-        ratingError={ratingError}
+        error={formError}
         stars={stars}
         handleSubmit={handleSubmit}
         handleChange={handleChange}

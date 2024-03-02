@@ -2,7 +2,7 @@ import React, { useState, MouseEvent } from 'react';
 import { WarningModal } from './WarningModal';
 import { useToggle } from '../hooks/useToggle';
 import { request } from '../utils';
-import { Flash, FlashCategory } from './Flash';
+import { Flash } from './Flash';
 
 type UserActionsProps = {
   hasFavorited: boolean;
@@ -24,28 +24,21 @@ export const UserActions = ({
   const [hasFavorited, setHasFavorited] = useState(initialHasFavorited);
   const [hasVisited, setHasVisited] = useState(initialHasVisited);
   const [visitIsLoading, setVisitIsLoading] = useState(false);
-  const [flashType, setFlashType] = useState<FlashCategory | undefined>();
-  const [flashMessage, setFlashMessage] = useState('');
+  const [error, setError] = useState('');
   const [favoriteIsLoading, setFavoriteIsLoading] = useState(false);
   const {
     toggleIsOn: warningModalIsShowing,
     toggle: toggleWarningModalIsShowing,
   } = useToggle(false);
 
-  const handleError = () => {
-    setFlashType('error');
-    setFlashMessage('Something went wrong');
-  };
+  const handleError = () => setError('Something went wrong');
 
   const handleSuccess = (name: string) => {
     toggleHasAction(name);
     setIsLoading(name, false);
   };
 
-  const handleFlashClose = () => {
-    setFlashType(undefined);
-    setFlashMessage('');
-  };
+  const handleFlashClose = () => setError('');
 
   const handleClick = async (event: MouseEvent<HTMLButtonElement>) => {
     if (!userId) return toggleWarningModalIsShowing();
@@ -85,11 +78,7 @@ export const UserActions = ({
 
   return (
     <>
-      <Flash
-        type={flashType}
-        message={flashMessage}
-        onClose={handleFlashClose}
-      />
+      <Flash type="error" message={error} onClose={handleFlashClose} />
       {(hasFavorited || hasVisited) && (
         <div className="user-indicators">
           {hasVisited && <i className="fa fa-check green"></i>}

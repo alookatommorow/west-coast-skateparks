@@ -25,6 +25,7 @@ import { Modal } from '../components/Modal';
 import { WarningModal } from '../components/WarningModal';
 import { AdvancedSearch } from '../containers/AdvancedSearch';
 import { Flash } from '../components/Flash';
+import { SkateparksShow } from '../pages/skateparks/show/index';
 
 ReactOnRails.register({
   Search,
@@ -37,4 +38,5 @@ ReactOnRails.register({
   GMap,
   Stars,
   Flash,
+  SkateparksShow,
 });

@@ -10,4 +10,25 @@ export type Skatepark = {
   stars?: number;
   id?: number;
   obstacles?: string;
+  address?: string;
+  hours?: string;
+  material?: string;
+  designer?: string;
+  builder?: string;
+  opened?: string;
+  size?: string;
+  lights?: string;
+  info?: string;
+};
+
+export type SkateparkAttr = keyof Skatepark;
+
+export type Rating = {
+  author: string;
+  author_id: number;
+  avatar?: string;
+  created_at: string;
+  new_average: number;
+  review: string;
+  stars: number;
 };

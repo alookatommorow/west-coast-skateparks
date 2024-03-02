@@ -1,51 +1,13 @@
-.skatepark-show-container
-  .sidebar
-    .sidebar-content
-      h1= @skatepark.name.titleize
-      h2 #{@skatepark.city.titleize}, #{@skatepark.state.capitalize}
-      - if @skatepark.stars.present?
-        .stars-container
-          = react_component "Stars", props: { stars: @skatepark.stars }
-      p.location
-        | #{skatepark_location(@skatepark)}
-        i.fa.fa-copy
-      = react_component "UserActions", props: {\
-        hasFavorited: !!@has_favorited,
-        hasVisited: !!@has_visited,
-        slug: @skatepark.slug,
-        address: skatepark_location(@skatepark),
-        isAdmin: !!current_user&.admin?,
-        userId: current_user&.id\
-      }
-      .info-container
-        - @skatepark.present_attributes.each do |attribute, value|
-          .col
-            - if attribute == 'size'
-              - value << ' sq ft'
-            - if attribute == 'hours'
-              - value = value.capitalize
-            - if attribute == 'obstacles'
-              - value = display_obstacles(value)
-            - value = value.try(:titleize) unless %w(info hours size).include?(attribute)
-            i class= "fa #{info_icons[attribute]}"
-            p= value
-        - if @skatepark.info.present?
-          p.info= @skatepark.info
-      .comments.reviews
-        = react_component "Reviews", props: {\
-          skateparkId: @skatepark.id,
-          userId: current_user&.id,
-          ratings: @ratings,
-          initialAverageRating: @skatepark.average_rating\
-        }
-  .map-photos
-    .photos
-      = render 'photos', skatepark: @skatepark
-    = react_component "GMap", props: {\
-        resourceName: 'skatepark',
-        resourceId: @skatepark.id,
-        mapKey: ENV.fetch('GOOGLE_KEY'),
-      }
+= react_component "SkateparksShow", props: {\
+    skatepark: @skatepark_json,
+    ratings: @ratings,
+    hasFavorited: @has_favorited,
+    hasVisited: @has_visited,
+    isAdmin: !!current_user&.admin?,
+    mapKey: ENV.fetch('GOOGLE_KEY'),
+    photos: @photos,
+    userId: current_user&.id\
+  }
 
 = content_for :og_metadata
   meta name="twitter:card" content="summary_large_image"
