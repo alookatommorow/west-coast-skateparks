@@ -18,6 +18,10 @@ with_err_handling do
   puts bold 'Creating Skateparks...'
   lat = 33.891955
   long = -117.517648
+  sizes = ['5,000', '8,000', '10,000', '13,000']
+  hours = ['dawn - dusk', '9am - 5pm', '7am - 10pm']
+  material = %w[concrete wood prefab]
+  builder = ['grindline', 'dreamland', 'yo mamma']
   obstacles = ['rails',
                'ledges',
                'banks',
@@ -55,7 +59,13 @@ with_err_handling do
       longitude: long,
       stars: Array(1..5).sample,
       obstacles: obstacles.slice(random_obstacle, (obstacles.length - 1)),
-      map_photo: image_files.first
+      map_photo: image_files.first,
+      size: sizes.sample,
+      hours: hours.sample,
+      material: material.sample,
+      builder: builder.sample,
+      designer: Faker::BossaNova.song,
+      info: Faker::Hipster.sentence
     }
   end
 
