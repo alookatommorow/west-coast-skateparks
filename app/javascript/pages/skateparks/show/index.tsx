@@ -65,19 +65,22 @@ export const SkateparksShow = ({
   return (
     <div className="skatepark-show-container">
       <div className="sidebar">
-        <h1>{titleize(skatepark.name)}</h1>
-        {hasVisited && <i className="fa fa-slash red"></i>}
-        {hasFavorited && <i className="fa fa-slash red"></i>}
+        <div className="fav-visit-indicators">
+          <h1>{titleize(skatepark.name)}</h1>
+          {(hasFavorited || hasVisited) && (
+            <div className="user-indicators">
+              {hasVisited && <i className="fa fa-check green"></i>}
+              {hasFavorited && <i className="fa fa-heart red"></i>}
+            </div>
+          )}
+        </div>
         <h2>
           {titleize(skatepark.city)}, {skatepark.state}
         </h2>
-        {skatepark.stars !== undefined && (
-          <div className="stars-container">
-            <Stars stars={skatepark.stars} />
-          </div>
-        )}
+        {skatepark.stars !== undefined && <Stars stars={skatepark.stars} />}
         <p className="location">
-          {skatepark.address} <i className="fa fa-copy" />
+          {skatepark.address}
+          {/* <i className="fa fa-copy" /> */}
         </p>
         <UserActions
           hasFavorited={hasFavorited}
@@ -111,9 +114,7 @@ export const SkateparksShow = ({
         </div>
       </div>
       <div className="map-photos">
-        <div className="photos">
-          <Photos photos={photos} />
-        </div>
+        <Photos photos={photos} />
         <GMap
           resourceName="skatepark"
           resourceId={Number(skatepark.id)}

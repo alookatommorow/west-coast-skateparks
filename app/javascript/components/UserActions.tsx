@@ -79,15 +79,8 @@ export const UserActions = ({
   return (
     <>
       <Flash type="error" message={error} onClose={handleFlashClose} />
-      {(hasFavorited || hasVisited) && (
-        <div className="user-indicators">
-          {hasVisited && <i className="fa fa-check green"></i>}
-          {hasFavorited && <i className="fa fa-heart red"></i>}
-        </div>
-      )}
       <div className="actions">
         <a
-          className="btn"
           rel="nofollow noopener noreferrer"
           target="_blank"
           href={`https://www.google.com/maps/dir/?api=1&destination=${modifiedAddress}`}
@@ -95,7 +88,6 @@ export const UserActions = ({
           <i className="fa fa-map-marked-alt"></i>
         </a>
         <button
-          className="btn"
           name={'visit'}
           value={hasVisited ? 'unvisit' : 'visit'}
           disabled={visitIsLoading}
@@ -105,7 +97,6 @@ export const UserActions = ({
           <i className="fa fa-check green"></i>
         </button>
         <button
-          className="btn"
           name={'favorite'}
           value={hasFavorited ? 'unfavorite' : 'favorite'}
           disabled={favoriteIsLoading}
@@ -116,7 +107,6 @@ export const UserActions = ({
         </button>
         {isAdmin && (
           <a
-            className="btn"
             rel="nofollow noopener noreferrer"
             target="_blank"
             href={`/admin/skateparks/${slug}/edit`}

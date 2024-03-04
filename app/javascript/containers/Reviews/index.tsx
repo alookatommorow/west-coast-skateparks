@@ -132,9 +132,9 @@ export const Reviews = ({
         <>
           {allRatings.map((rating, i) => (
             <div className="comment" key={`rating-${i}`}>
-              <div className="avatar">
-                <img src={`${rating.avatar}`} />
-              </div>
+              {/* <div className="avatar"> */}
+              <img src={`${rating.avatar}`} />
+              {/* </div> */}
               <div className="content">
                 <div className="headers">
                   <p className="author">{rating.author}</p>
