@@ -86,7 +86,8 @@ export const Search = () => {
   };
 
   const handleError = () => {
-    setError('Something went wrong');
+    setError('Search unavailable, try again later');
+    setIsLoading(false);
   };
 
   const onFlashClose = () => setError('');
