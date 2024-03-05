@@ -38,7 +38,7 @@ WebMock.disable_net_connect!(allow_localhost: true, allow: 'codeclimate.com')
 # Capybara.default_driver = ENV['CI'] ? :headless_chrome : :rack_test
 # Capybara.default_driver = :rack_test
 Capybara.enable_aria_label = true
-
+is_ci = ENV.fetch('CI', false)
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 RSpec.configure do |config|
@@ -46,13 +46,19 @@ RSpec.configure do |config|
     FileUtils.rm_rf(Dir["#{Rails.root}/spec/test_files/"])
   end
 
-  # tests use regular (faster) driver if they don't require js
-  config.before(:each, type: :system) do
-    driven_by :rack_test
-  end
+  if is_ci
+    config.before(:each, type: :system) do
+      driven_by :headless_chrome
+    end
+  else
+    # tests use regular (faster) driver if they don't require js
+    config.before(:each, type: :system) do
+      driven_by :rack_test
+    end
 
-  config.before(:each, type: :system, js: true) do
-    driven_by :headless_chrome # selenium when we need javascript
+    config.before(:each, type: :system, js: true) do
+      driven_by :headless_chrome
+    end
   end
 
   Capybara.register_driver :chrome do |app|
