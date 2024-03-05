@@ -19,6 +19,7 @@ export type Skatepark = {
   size?: string;
   lights?: string;
   info?: string;
+  average_rating?: number;
 };
 
 export type SkateparkAttr = keyof Skatepark;

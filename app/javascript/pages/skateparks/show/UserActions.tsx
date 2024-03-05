@@ -1,30 +1,33 @@
-import React, { useState, MouseEvent } from 'react';
-import { WarningModal } from './WarningModal';
-import { useToggle } from '../hooks/useToggle';
-import { request } from '../utils';
-import { Flash } from './Flash';
+import React, { useState, MouseEvent, Dispatch, SetStateAction } from 'react';
+import { WarningModal } from '../../../components/WarningModal';
+import { useToggle } from '../../../hooks/useToggle';
+import { request } from '../../../utils';
+import { Skatepark } from '../../../types';
 
 type UserActionsProps = {
   hasFavorited: boolean;
   hasVisited: boolean;
-  slug: string;
-  address: string;
+  skatepark: Skatepark;
   isAdmin: boolean;
   userId?: number;
+  error: string;
+  setError: Dispatch<SetStateAction<string>>;
+  setHasVisited: Dispatch<SetStateAction<boolean>>;
+  setHasFavorited: Dispatch<SetStateAction<boolean>>;
 };
 
 export const UserActions = ({
-  hasFavorited: initialHasFavorited,
-  hasVisited: initialHasVisited,
-  slug,
-  address,
+  hasFavorited,
+  hasVisited,
+  skatepark,
   isAdmin,
   userId,
+  setError,
+  setHasFavorited,
+  setHasVisited,
 }: UserActionsProps) => {
-  const [hasFavorited, setHasFavorited] = useState(initialHasFavorited);
-  const [hasVisited, setHasVisited] = useState(initialHasVisited);
+  const { slug, address } = skatepark;
   const [visitIsLoading, setVisitIsLoading] = useState(false);
-  const [error, setError] = useState('');
   const [favoriteIsLoading, setFavoriteIsLoading] = useState(false);
   const {
     toggleIsOn: warningModalIsShowing,
@@ -37,8 +40,6 @@ export const UserActions = ({
     toggleHasAction(name);
     setIsLoading(name, false);
   };
-
-  const handleFlashClose = () => setError('');
 
   const handleClick = async (event: MouseEvent<HTMLButtonElement>) => {
     if (!userId) return toggleWarningModalIsShowing();
@@ -74,19 +75,20 @@ export const UserActions = ({
       ? setHasVisited(!hasVisited)
       : setHasFavorited(!hasFavorited);
 
-  const modifiedAddress = address.replace(/ &/g, ',');
+  const modifiedAddress = address?.replace(/ &/g, ',');
 
   return (
     <>
-      <Flash type="error" message={error} onClose={handleFlashClose} />
       <div className="actions">
-        <a
-          rel="nofollow noopener noreferrer"
-          target="_blank"
-          href={`https://www.google.com/maps/dir/?api=1&destination=${modifiedAddress}`}
-        >
-          <i className="fa fa-map-marked-alt"></i>
-        </a>
+        {modifiedAddress && (
+          <a
+            rel="nofollow noopener noreferrer"
+            target="_blank"
+            href={`https://www.google.com/maps/dir/?api=1&destination=${modifiedAddress}`}
+          >
+            <i className="fa fa-map-marked-alt"></i>
+          </a>
+        )}
         <button
           name={'visit'}
           value={hasVisited ? 'unvisit' : 'visit'}

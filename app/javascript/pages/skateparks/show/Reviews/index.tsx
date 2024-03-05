@@ -1,27 +1,33 @@
-import React, { useState, useEffect, FormEvent, ChangeEvent } from 'react';
-import { useToggle } from '../../hooks/useToggle';
+import React, {
+  useState,
+  useEffect,
+  FormEvent,
+  ChangeEvent,
+  Dispatch,
+  SetStateAction,
+} from 'react';
+import { useToggle } from '../../../../hooks/useToggle';
 import { ReviewModal } from './ReviewModal';
-import { Stars } from '../../components/Stars';
-import { request } from '../../utils';
-import { Flash } from '../../components/Flash';
-import { Rating } from '../../types';
+import { Stars } from '../../../../components/Stars';
+import { request } from '../../../../utils';
+import { Rating, Skatepark } from '../../../../types';
 
 type ReviewFormProps = {
-  skateparkId: number;
+  skatepark: Skatepark;
   userId?: number;
   ratings: Rating[];
-  initialAverageRating: number;
+  setError: Dispatch<SetStateAction<string>>;
 };
 
 export const Reviews = ({
-  skateparkId,
+  skatepark,
   userId,
   ratings,
-  initialAverageRating,
+  setError: setRequestError,
 }: ReviewFormProps) => {
+  const { id: skateparkId, average_rating: initialAverageRating } = skatepark;
   const [stars, setStars] = useState(0);
   const [formError, setFormError] = useState('');
-  const [requestError, setRequestError] = useState('');
   const [review, setReview] = useState('');
   const [averageRating, setAverageRating] = useState(initialAverageRating);
   const { toggleIsOn: modalIsShowing, toggle: toggleModalIsShowing } =
@@ -45,6 +51,7 @@ export const Reviews = ({
 
   const handleError = () => {
     setRequestError('Something went wrong');
+    toggleModalIsShowing();
   };
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
@@ -79,8 +86,6 @@ export const Reviews = ({
 
   const handleChange = (event: ChangeEvent<HTMLTextAreaElement>) =>
     setReview(event.currentTarget.value);
-
-  const handleFlashClose = () => setRequestError('');
 
   const isValid = () => {
     let valid = true;
@@ -120,7 +125,6 @@ export const Reviews = ({
 
   return (
     <>
-      <Flash type="error" message={requestError} onClose={handleFlashClose} />
       <div className="review-header-container">
         <h4>Reviews</h4>
         <button className="write-review-button" onClick={toggleModalIsShowing}>
@@ -132,9 +136,7 @@ export const Reviews = ({
         <>
           {allRatings.map((rating, i) => (
             <div className="comment" key={`rating-${i}`}>
-              {/* <div className="avatar"> */}
               <img src={`${rating.avatar}`} />
-              {/* </div> */}
               <div className="content">
                 <div className="headers">
                   <p className="author">{rating.author}</p>
@@ -146,7 +148,7 @@ export const Reviews = ({
             </div>
           ))}
           <h4>User Rating</h4>
-          <Stars stars={averageRating} />
+          {averageRating && <Stars stars={averageRating} />}
         </>
       ) : (
         <p>No reviews yet</p>

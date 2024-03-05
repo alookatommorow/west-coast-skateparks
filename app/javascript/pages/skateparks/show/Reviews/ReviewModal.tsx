@@ -1,7 +1,7 @@
 import React, { FormEvent, ChangeEvent } from 'react';
-import { Modal } from '../../components/Modal';
-import { WarningModal } from '../../components/WarningModal';
-import { StarInput } from '../../components/StarInput';
+import { Modal } from '../../../../components/Modal';
+import { WarningModal } from '../../../../components/WarningModal';
+import { StarInput } from '../../../../components/StarInput';
 
 type ReviewModalProps = {
   isVisible: boolean;

@@ -17,10 +17,7 @@
 import ReactOnRails from 'react-on-rails';
 import { Stars } from '../components/Stars';
 import { Search } from '../containers/Search';
-import { Photos } from '../components/Photos';
-import { UserActions } from '../components/UserActions';
 import { GMap } from '../components/GoogleMap';
-import { Reviews } from '../containers/Reviews';
 import { Modal } from '../components/Modal';
 import { WarningModal } from '../components/WarningModal';
 import { AdvancedSearch } from '../containers/AdvancedSearch';
@@ -29,9 +26,6 @@ import { SkateparksShow } from '../pages/skateparks/show/index';
 
 ReactOnRails.register({
   Search,
-  Photos,
-  UserActions,
-  Reviews,
   Modal,
   WarningModal,
   AdvancedSearch,

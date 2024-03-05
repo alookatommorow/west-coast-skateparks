@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { titleize } from '../../../utils';
 import { Rating, Skatepark } from '../../../types';
 import { Stars } from '../../../components/Stars';
-import { UserActions } from '../../../components/UserActions';
-import { Reviews } from '../../../containers/Reviews';
+import { UserActions } from './UserActions';
+import { Reviews } from './Reviews';
 import { GMap } from '../../../components/GoogleMap';
-import { Photos } from '../../../components/Photos';
+import { Photos } from './Photos';
+import { Flash } from '../../../components/Flash';
 
 const INFO_ATTRS = [
   'material',
@@ -54,16 +55,23 @@ type SkateparksShowProps = {
 
 export const SkateparksShow = ({
   skatepark,
-  hasFavorited,
-  hasVisited,
+  hasFavorited: initialHasFavorited,
+  hasVisited: initialHasVisited,
   isAdmin,
   userId,
   ratings,
   mapKey,
   photos,
 }: SkateparksShowProps) => {
+  const [hasFavorited, setHasFavorited] = useState(initialHasFavorited);
+  const [hasVisited, setHasVisited] = useState(initialHasVisited);
+  const [error, setError] = useState('');
+
+  const handleFlashClose = () => setError('');
+
   return (
     <div className="skatepark-show-container">
+      <Flash type="error" message={error} onClose={handleFlashClose} />
       <div className="sidebar">
         <div className="fav-visit-indicators">
           <h1>{titleize(skatepark.name)}</h1>
@@ -85,10 +93,13 @@ export const SkateparksShow = ({
         <UserActions
           hasFavorited={hasFavorited}
           hasVisited={hasVisited}
-          slug={skatepark.slug}
-          address={skatepark.address || ''}
+          skatepark={skatepark}
           isAdmin={isAdmin}
           userId={userId}
+          setError={setError}
+          setHasVisited={setHasVisited}
+          setHasFavorited={setHasFavorited}
+          error={error}
         />
         <div className="info-container">
           {(INFO_ATTRS as InfoAttr[]).map(attr => {
@@ -108,8 +119,8 @@ export const SkateparksShow = ({
           <Reviews
             ratings={ratings}
             userId={userId}
-            skateparkId={Number(skatepark.id)}
-            initialAverageRating={2}
+            skatepark={skatepark}
+            setError={setError}
           />
         </div>
       </div>
