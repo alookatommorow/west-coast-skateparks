@@ -35,6 +35,7 @@ WebMock.disable_net_connect!(allow_localhost: true, allow: 'codeclimate.com')
 # Capybara.javascript_driver = :webkit
 
 # tests use regular (faster) driver if they don't require js
+# Capybara.default_driver = ENV['CI'] ? :headless_chrome : :rack_test
 Capybara.default_driver = :rack_test
 Capybara.enable_aria_label = true
 
@@ -49,7 +50,15 @@ RSpec.configure do |config|
     Capybara::Selenium::Driver.new(app, browser: :chrome)
   end
 
-  Capybara.javascript_driver = :chrome
+  Capybara.register_driver :headless_chrome do |app|
+    Capybara::Selenium::Driver.new(
+      app,
+      browser: :chrome,
+      options: Selenium::WebDriver::Chrome::Options.new(args: %w[headless disable-gpu no-sandbox])
+    )
+  end
+
+  Capybara.javascript_driver = :headless_chrome
 
   # rspec-expectations config goes here. You can use an alternate
   # assertion/expectation library such as wrong or the stdlib/minitest
