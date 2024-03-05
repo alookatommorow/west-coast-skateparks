@@ -16,7 +16,7 @@ RSpec.feature 'Visitor creates an account' do
   end
 
   context 'with email already in use' do
-    scenario 'they are bitch slapped by a flash error' do
+    scenario 'they are bitch slapped by a flash error', js: true do
       user = create(:user)
       invalid_user = build(
         :user,
