@@ -1,32 +1,45 @@
-import React, { useState, MouseEvent } from 'react';
-import { WarningModal } from './WarningModal';
-import { useToggle } from '../hooks/useToggle';
+import React, { useState, MouseEvent, Dispatch, SetStateAction } from 'react';
+import { WarningModal } from '../../../components/WarningModal';
+import { useToggle } from '../../../hooks/useToggle';
+import { request } from '../../../utils';
+import { Skatepark } from '../../../types';
 
 type UserActionsProps = {
   hasFavorited: boolean;
   hasVisited: boolean;
-  slug: string;
-  address: string;
+  skatepark: Skatepark;
   isAdmin: boolean;
   userId?: number;
+  error: string;
+  setError: Dispatch<SetStateAction<string>>;
+  setHasVisited: Dispatch<SetStateAction<boolean>>;
+  setHasFavorited: Dispatch<SetStateAction<boolean>>;
 };
 
 export const UserActions = ({
-  hasFavorited: initialHasFavorited,
-  hasVisited: initialHasVisited,
-  slug,
-  address,
+  hasFavorited,
+  hasVisited,
+  skatepark,
   isAdmin,
   userId,
+  setError,
+  setHasFavorited,
+  setHasVisited,
 }: UserActionsProps) => {
-  const [hasFavorited, setHasFavorited] = useState(initialHasFavorited);
-  const [hasVisited, setHasVisited] = useState(initialHasVisited);
+  const { slug, address } = skatepark;
   const [visitIsLoading, setVisitIsLoading] = useState(false);
   const [favoriteIsLoading, setFavoriteIsLoading] = useState(false);
   const {
     toggleIsOn: warningModalIsShowing,
     toggle: toggleWarningModalIsShowing,
   } = useToggle(false);
+
+  const handleError = () => setError('Something went wrong');
+
+  const handleSuccess = (name: string) => {
+    toggleHasAction(name);
+    setIsLoading(name, false);
+  };
 
   const handleClick = async (event: MouseEvent<HTMLButtonElement>) => {
     if (!userId) return toggleWarningModalIsShowing();
@@ -37,8 +50,8 @@ export const UserActions = ({
 
     setIsLoading(name, true);
 
-    try {
-      await fetch(`/api/skateparks/${slug}/${value}`, {
+    await request(`/api/skateparks/${slug}/${value}`, {
+      fetchOptions: {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
@@ -46,12 +59,10 @@ export const UserActions = ({
         body: JSON.stringify({
           user_id: userId,
         }),
-      });
-      toggleHasAction(name);
-      setIsLoading(name, false);
-    } catch (error) {
-      console.log('***********', error);
-    }
+      },
+      onError: handleError,
+      onSuccess: () => handleSuccess(name),
+    });
   };
 
   const setIsLoading = (name: string, isLoading: boolean) =>
@@ -64,27 +75,21 @@ export const UserActions = ({
       ? setHasVisited(!hasVisited)
       : setHasFavorited(!hasFavorited);
 
-  const modifiedAddress = address.replace(/ &/g, ',');
+  const modifiedAddress = address?.replace(/ &/g, ',');
 
   return (
     <>
-      {(hasFavorited || hasVisited) && (
-        <div className="user-indicators">
-          {hasVisited && <i className="fa fa-check green"></i>}
-          {hasFavorited && <i className="fa fa-heart red"></i>}
-        </div>
-      )}
       <div className="actions">
-        <a
-          className="btn"
-          rel="nofollow noopener noreferrer"
-          target="_blank"
-          href={`https://www.google.com/maps/dir/?api=1&destination=${modifiedAddress}`}
-        >
-          <i className="fa fa-map-marked-alt"></i>
-        </a>
+        {modifiedAddress && (
+          <a
+            rel="nofollow noopener noreferrer"
+            target="_blank"
+            href={`https://www.google.com/maps/dir/?api=1&destination=${modifiedAddress}`}
+          >
+            <i className="fa fa-map-marked-alt"></i>
+          </a>
+        )}
         <button
-          className="btn"
           name={'visit'}
           value={hasVisited ? 'unvisit' : 'visit'}
           disabled={visitIsLoading}
@@ -92,15 +97,8 @@ export const UserActions = ({
         >
           {hasVisited && <i className="fa fa-slash red"></i>}
           <i className="fa fa-check green"></i>
-          {/* {hasVisited ? (
-            <i className="fa fa-times red"></i>
-          ) : (
-            <i className = "fa fa-check green"></i>
-
-          )} */}
         </button>
         <button
-          className="btn"
           name={'favorite'}
           value={hasFavorited ? 'unfavorite' : 'favorite'}
           disabled={favoriteIsLoading}
@@ -108,15 +106,9 @@ export const UserActions = ({
         >
           {hasFavorited && <i className="fa fa-slash red"></i>}
           <i className="fa fa-heart red"></i>
-          {/* {hasFavorited ? (
-            <i className="fa fa-heart-broken red"></i>
-          ): (
-            <i className="fa fa-heart red"></i>
-          )} */}
         </button>
         {isAdmin && (
           <a
-            className="btn"
             rel="nofollow noopener noreferrer"
             target="_blank"
             href={`/admin/skateparks/${slug}/edit`}

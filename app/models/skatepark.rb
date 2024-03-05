@@ -93,6 +93,11 @@ class Skatepark < ActiveRecord::Base
   ].freeze
   HERO_DEFAULT_URL = 'https://storage.googleapis.com/west-coast-skateparks/default-header.jpg'.freeze
   MAP_PHOTO_DEFAULT_URL = 'https://storage.googleapis.com/west-coast-skateparks/logo-small.png'.freeze
+  STATE_ABBREVS = {
+    'california' => 'CA',
+    'oregon' => 'OR',
+    'washington' => 'WA'
+  }.freeze
 
   STARS = [1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5].freeze
 

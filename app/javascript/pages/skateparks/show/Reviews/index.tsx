@@ -1,47 +1,58 @@
-import React, { useState, useEffect, FormEvent, ChangeEvent } from 'react';
-import { useToggle } from '../../hooks/useToggle';
+import React, {
+  useState,
+  useEffect,
+  FormEvent,
+  ChangeEvent,
+  Dispatch,
+  SetStateAction,
+} from 'react';
+import { useToggle } from '../../../../hooks/useToggle';
 import { ReviewModal } from './ReviewModal';
-import { Stars } from '../../components/Stars';
-
-type Rating = {
-  author: string;
-  author_id: number;
-  avatar?: string;
-  created_at: string;
-  new_average: 3;
-  review: string;
-  stars: number;
-};
+import { Stars } from '../../../../components/Stars';
+import { request } from '../../../../utils';
+import { Rating, Skatepark } from '../../../../types';
 
 type ReviewFormProps = {
-  skateparkId: number;
+  skatepark: Skatepark;
   userId?: number;
   ratings: Rating[];
-  initialAverageRating: number;
+  setError: Dispatch<SetStateAction<string>>;
 };
 
 export const Reviews = ({
-  skateparkId,
+  skatepark,
   userId,
   ratings,
-  initialAverageRating,
+  setError: setRequestError,
 }: ReviewFormProps) => {
+  const { id: skateparkId, average_rating: initialAverageRating } = skatepark;
   const [stars, setStars] = useState(0);
-  const [ratingError, setRatingError] = useState('');
+  const [formError, setFormError] = useState('');
   const [review, setReview] = useState('');
   const [averageRating, setAverageRating] = useState(initialAverageRating);
   const { toggleIsOn: modalIsShowing, toggle: toggleModalIsShowing } =
     useToggle(false);
 
   useEffect(() => {
-    if (stars > 0 && ratingError !== '') {
-      setRatingError('');
+    if (stars > 0 && formError !== '') {
+      setFormError('');
     }
   }, [stars]);
 
   useEffect(() => {
     if (!modalIsShowing) clearForm();
   }, [modalIsShowing]);
+
+  const handleSuccess = (json: Rating) => {
+    ratings.unshift(json);
+    setAverageRating(json.new_average);
+    toggleModalIsShowing();
+  };
+
+  const handleError = () => {
+    setRequestError('Something went wrong');
+    toggleModalIsShowing();
+  };
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -53,24 +64,24 @@ export const Reviews = ({
     };
 
     if (isValid()) {
-      const response = await fetch('/ratings', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
+      await request('/ratings', {
+        fetchOptions: {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data),
         },
-        body: JSON.stringify(data),
+        onSuccess: handleSuccess,
+        onError: handleError,
       });
-      const reviewJson = await response.json();
-      ratings.unshift(reviewJson);
-      setAverageRating(reviewJson.new_average);
-      toggleModalIsShowing();
     }
   };
 
   const clearForm = () => {
     setStars(0);
     setReview('');
-    setRatingError('');
+    setFormError('');
   };
 
   const handleChange = (event: ChangeEvent<HTMLTextAreaElement>) =>
@@ -80,7 +91,7 @@ export const Reviews = ({
     let valid = true;
 
     if (stars < 1) {
-      setRatingError('Please add a rating');
+      setFormError('Please add a rating');
       valid = false;
     }
 
@@ -125,9 +136,7 @@ export const Reviews = ({
         <>
           {allRatings.map((rating, i) => (
             <div className="comment" key={`rating-${i}`}>
-              <div className="avatar">
-                <img src={`${rating.avatar}`} />
-              </div>
+              <img src={`${rating.avatar}`} />
               <div className="content">
                 <div className="headers">
                   <p className="author">{rating.author}</p>
@@ -139,7 +148,7 @@ export const Reviews = ({
             </div>
           ))}
           <h4>User Rating</h4>
-          <Stars stars={averageRating} />
+          {averageRating && <Stars stars={averageRating} />}
         </>
       ) : (
         <p>No reviews yet</p>
@@ -147,7 +156,7 @@ export const Reviews = ({
       <ReviewModal
         isVisible={modalIsShowing}
         onClose={toggleModalIsShowing}
-        ratingError={ratingError}
+        error={formError}
         stars={stars}
         handleSubmit={handleSubmit}
         handleChange={handleChange}

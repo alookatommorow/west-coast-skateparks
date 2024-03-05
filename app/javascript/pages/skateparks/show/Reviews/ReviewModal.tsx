@@ -1,12 +1,12 @@
 import React, { FormEvent, ChangeEvent } from 'react';
-import { Modal } from '../../components/Modal';
-import { WarningModal } from '../../components/WarningModal';
-import { StarInput } from '../../components/StarInput';
+import { Modal } from '../../../../components/Modal';
+import { WarningModal } from '../../../../components/WarningModal';
+import { StarInput } from '../../../../components/StarInput';
 
 type ReviewModalProps = {
   isVisible: boolean;
   onClose: () => void;
-  ratingError: string;
+  error: string;
   handleSubmit: (event: FormEvent<HTMLFormElement>) => void;
   userId?: number;
   stars: number;
@@ -18,7 +18,7 @@ type ReviewModalProps = {
 export const ReviewModal = ({
   isVisible,
   onClose,
-  ratingError,
+  error,
   handleSubmit,
   handleChange,
   setStars,
@@ -26,7 +26,7 @@ export const ReviewModal = ({
   stars,
   numUserRatings,
 }: ReviewModalProps) => {
-  const showError = ratingError.length > 0;
+  const showError = error.length > 0;
 
   if (!userId) {
     return (
@@ -57,7 +57,7 @@ export const ReviewModal = ({
               showError={showError}
             />
             <p className={`error-message-v2 ${showError && 'visible'}`}>
-              {ratingError}
+              {error}
             </p>
             <textarea name="review" onChange={handleChange} />
           </Modal.Body>

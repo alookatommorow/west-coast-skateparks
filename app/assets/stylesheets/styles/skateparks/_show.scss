@@ -1,81 +1,51 @@
-i.star {
-  color: $orange;
-  margin: 10px 0 0 10px;
-  font-size: 18px;
-  transition: color 0.3s ease;
-
-  &:first-of-type {
-    margin-left: 0;
-  }
-
-  &.error {
-    color: #f0130e;
-  }
-
-  &.tiny {
-    margin: 3px 0 0 3px;
-    font-size: 12px;
-
-    &:first-of-type {
-      margin-left: 0;
-    }
-  }
-}
-
 .skatepark-show-container {
-  position: relative;
-  display: flex;
-  margin-top: 49px;
-  padding-bottom: 30px;
-  min-height: 100%;
-  align-items: flex-end;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 2fr 5fr;
+  padding-top: 49px;
+  min-height: 100vh;
 
   @media #{$mobile} {
     background: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
   .sidebar {
-    position: absolute;
-    top: 0;
-    left: 0;
-    min-height: 100%;
     background: white;
-    width: 35%;
-    box-shadow: 0px 2px 1px -1px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.14), 0px 1px 3px 0px rgba(0,0,0,0.12);
+    padding: 30px;
+    box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
 
     @media #{$mobile} {
-      width: 100%;
-      min-height: initial;
-      position: relative;
+      padding-bottom: 0px;
       box-shadow: none;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
 
-    .sidebar-content {
-      padding: 30px;
-      position: relative;
-
-      @media #{$mobile} {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-      }
+    .fav-visit-indicators {
+      display: flex;
+      justify-content: space-between
     }
-
 
     .user-indicators {
-      position: absolute;
-      right: 30px;
-      top: 30px;
-      padding-top: 5px;
+      display: flex;
 
       i:nth-child(2) {
         margin-left: 10px;
       }
+
+      @media #{$mobile} {
+        position: absolute;
+        right: 30px;
+      }
     }
 
     @media #{$mobile} {
-      h1, h2 {
+
+      h1,
+      h2 {
         text-align: center;
       }
     }
@@ -128,7 +98,7 @@ i.star {
     .actions {
       display: flex;
 
-      .btn {
+      a, button {
         position: relative;
         background: $blue;
         color: white;
@@ -145,11 +115,6 @@ i.star {
         cursor: pointer;
         outline: 0;
 
-        i.fa-ban {
-          position: absolute;
-          font-size: 30px;
-        }
-
         i.fa-slash {
           position: absolute;
           font-size: 15px;
@@ -163,7 +128,7 @@ i.star {
           color: $orange;
           background-color: $dark-blue;
 
-          .fa-ban, .fa-map-marked-alt {
+          .fa-map-marked-alt {
             color: $orange;
           }
         }
@@ -178,10 +143,6 @@ i.star {
 
   .info-container {
     margin-top: 24px;
-
-    @media #{$mobile} {
-      width: 100%;
-    }
 
     p.info {
       margin-top: 24px;
@@ -200,6 +161,7 @@ i.star {
 
       p {
         flex: 1;
+        text-transform: capitalize;
       }
     }
   }
@@ -217,68 +179,45 @@ i.star {
   }
 
   .map-photos {
-    position: relative;
-    width: 65%;
     padding: 40px;
+
+    @media #{$mobile} {
+      padding: 20px 30px;
+    }
+
+    #map-container {
+      margin-top: 30px;
+    }
 
     .photos {
       margin-bottom: 30px;
     }
 
-    @media #{$mobile} {
-      width: 100%;
-      background: white;
-      padding: 0 30px 30px 30px;
-    }
-
     .image-gallery-content {
-      width: 100%;
-
-      .image-gallery-slide {
-        background: $blue;
-        display: flex !important;
-        align-items: center;
-        justify-content: center;
-        width: 100%;
-      }
-
-      .image-gallery-image {
-        max-width: 100%;
-      }
-
-      &:not(.fullscreen) .image-gallery-slide {
+      &:not(.fullscreen) .image-stuff {
         height: 500px;
 
-        .image-gallery-image {
-          max-height: 500px;
+        img {
+          max-width: 100%;
+          max-height: 100%;
         }
 
         @media #{$mobile} {
           height: 300px;
-
-          .image-gallery-image {
-            max-height: 300px;
-          }
         }
       }
 
-      &.fullscreen {
-        height: 100vh;
+      .image-stuff {
         display: flex;
+        align-items: center;
         justify-content: center;
-        flex-direction: column;
-        padding: 0 20px;
+        background: $blue;
+        height: 90vh;
 
-        .image-gallery-slide {
+        @media #{$mobile} and (orientation: landscape) {
           height: 80vh;
-
-          .image-gallery-image {
-            max-height: 80vh;
-          }
         }
       }
-
-
     }
   }
 

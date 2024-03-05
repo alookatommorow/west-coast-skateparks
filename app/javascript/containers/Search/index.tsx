@@ -3,8 +3,9 @@ import React, { useState, useEffect, useRef, ReactNode } from 'react';
 import { SearchForm } from './SearchForm';
 import { SearchResults } from './SearchResults';
 import { Skatepark } from '../../types';
-import { findMatchIndices } from '../../utils';
+import { request, findMatchIndices } from '../../utils';
 import { BoldString } from '../../components/BoldString';
+import { Flash } from '../../components/Flash';
 
 const STATE_DISPLAY = {
   california: 'CA',
@@ -21,6 +22,7 @@ export const Search = () => {
   const [results, setResults] = useState<SearchResult[]>([]);
   const [skateparks, setSkateparks] = useState<Skatepark[]>([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState('');
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -83,12 +85,20 @@ export const Search = () => {
     setQuery(event.currentTarget.value);
   };
 
+  const handleError = () => {
+    setError('Search unavailable, try again later');
+    setIsLoading(false);
+  };
+
+  const onFlashClose = () => setError('');
+
   const getSkateparks = async () => {
     if (!skateparks.length) {
       setIsLoading(true);
-      const response = await fetch('/api/skateparks');
-      const skateparksJson = await response.json();
-      storeSkateparks(skateparksJson);
+      await request('/api/skateparks', {
+        onSuccess: storeSkateparks,
+        onError: handleError,
+      });
     }
   };
 
@@ -98,16 +108,19 @@ export const Search = () => {
   };
 
   return (
-    <div id="react-search">
-      <div className="react-search-container" ref={containerRef}>
-        <SearchForm
-          handleChange={handleChange}
-          query={query}
-          handleFocus={getSkateparks}
-          exitResults={exitResults}
-        />
-        {query && <SearchResults results={results} isLoading={isLoading} />}
+    <>
+      <Flash type="error" message={error} onClose={onFlashClose} />
+      <div id="react-search">
+        <div className="react-search-container" ref={containerRef}>
+          <SearchForm
+            handleChange={handleChange}
+            query={query}
+            handleFocus={getSkateparks}
+            exitResults={exitResults}
+          />
+          {query && <SearchResults results={results} isLoading={isLoading} />}
+        </div>
       </div>
-    </div>
+    </>
   );
 };

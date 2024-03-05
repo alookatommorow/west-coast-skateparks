@@ -1,11 +1,23 @@
-.stars-container {
+i.star {
+  color: $orange;
+  margin: 10px 0 0 10px;
+  font-size: 18px;
+  transition: color 0.3s ease;
 
-  i {
-    color: $orange;
-    margin-left: 10px;
+  &:first-of-type {
+    margin-left: 0;
+  }
 
-    &:first-child {
-      margin: 0;
+  &.error {
+    color: #f0130e;
+  }
+
+  &.tiny {
+    margin: 3px 0 0 3px;
+    font-size: 12px;
+
+    &:first-of-type {
+      margin-left: 0;
     }
   }
 }

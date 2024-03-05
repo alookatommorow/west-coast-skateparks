@@ -1,14 +1,13 @@
 .user-edit-container
   h1 Edit Your Profile
-  form.form
-    = simple_form_for @user do |f|
-      .field
-        label.label for="user_username" Username
-        = f.input_field :username
-      .field
-        label.label for="user_name" Name
-        = f.input_field :name
-      .field
-        label.label for="user_avatar" Picture
-        = f.input_field :avatar
-      = f.submit 'Update', class: "basic-button"
+  = form_with model: @user, html: { class: 'form' } do |f|
+    .field
+      label.label for="user_username" Username
+      = f.text_field :username
+    .field
+      label.label for="user_name" Name
+      = f.text_field :name
+    .field
+      label.label for="user_avatar" Picture
+      = f.file_field :avatar
+    = f.submit 'Update', class: "basic-button"
