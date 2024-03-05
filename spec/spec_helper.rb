@@ -36,7 +36,7 @@ WebMock.disable_net_connect!(allow_localhost: true, allow: 'codeclimate.com')
 
 # tests use regular (faster) driver if they don't require js
 # Capybara.default_driver = ENV['CI'] ? :headless_chrome : :rack_test
-Capybara.default_driver = :rack_test
+# Capybara.default_driver = :rack_test
 Capybara.enable_aria_label = true
 
 #
@@ -44,6 +44,15 @@ Capybara.enable_aria_label = true
 RSpec.configure do |config|
   config.after(:suite) do
     FileUtils.rm_rf(Dir["#{Rails.root}/spec/test_files/"])
+  end
+
+  # tests use regular (faster) driver if they don't require js
+  config.before(:each, type: :system) do
+    driven_by :rack_test
+  end
+
+  config.before(:each, type: :system, js: true) do
+    driven_by :headless_chrome # selenium when we need javascript
   end
 
   Capybara.register_driver :chrome do |app|
@@ -54,7 +63,10 @@ RSpec.configure do |config|
     Capybara::Selenium::Driver.new(
       app,
       browser: :chrome,
-      options: Selenium::WebDriver::Chrome::Options.new(args: %w[headless disable-gpu no-sandbox])
+      options: Selenium::WebDriver::Chrome::Options.new(
+        args: %w[headless no-sandbox disable-gpu disable-dev-shm-usage],
+        binary: '/usr/bin/google-chrome'
+      )
     )
   end
 
