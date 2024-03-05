@@ -30,8 +30,8 @@ type LatLng = {
 };
 
 const DEFAULT_CENTER = {
-  lat: -3.745,
-  lng: -38.523,
+  lat: 37.78,
+  lng: -122.2432604,
 };
 
 const GMap = React.memo(function GMap({
@@ -62,7 +62,11 @@ const GMap = React.memo(function GMap({
     const centerSource =
       fetchedResource.main || fetchedResource.collections[0].items[0];
 
-    if (centerSource.latitude && centerSource.longitude) {
+    if (
+      centerSource !== undefined &&
+      centerSource.latitude &&
+      centerSource.longitude
+    ) {
       return { lat: centerSource.latitude, lng: centerSource.longitude };
     }
     return DEFAULT_CENTER;
