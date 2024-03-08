@@ -41,7 +41,7 @@ jobs:
           bundler-cache: true
 
       - name: Setup the postgres database
-        run: bundle exec rails db:setup
+        run: bundle exec rails db:create && bundle exec rails db:schema:load
 
       - name: Set Node.js 16.x
         uses: actions/setup-node@v3
