@@ -25,37 +25,17 @@ ENV['RAILS_ENV'] ||= 'test'
 ENV['BUNDLE_GEMFILE'] = File.expand_path('../Gemfile', __dir__)
 require 'bundler/setup'
 Bundler.require
-require 'capybara/rspec'
+
 require 'database_cleaner'
 require 'webmock/rspec'
+require 'config/capybara'
 
 WebMock.disable_net_connect!(allow_localhost: true, allow: 'codeclimate.com')
 
-Capybara.enable_aria_label = true
-#
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 RSpec.configure do |config|
   config.after(:suite) do
     FileUtils.rm_rf(Dir["#{Rails.root}/spec/test_files/"])
-  end
-
-  # tests use regular (faster) driver if they don't require js
-  config.before(:each, type: :system) do
-    driven_by :rack_test
-  end
-
-  config.before(:each, type: :system, js: true) do
-    driven_by :headless_chrome
-  end
-
-  Capybara.register_driver :headless_chrome do |app|
-    Capybara::Selenium::Driver.new(
-      app,
-      browser: :chrome,
-      options: Selenium::WebDriver::Chrome::Options.new(
-        args: %w[--headless --no-sandbox --disable-gpu --disable-dev-shm-usage]
-      )
-    )
   end
 
   # rspec-expectations config goes here. You can use an alternate
