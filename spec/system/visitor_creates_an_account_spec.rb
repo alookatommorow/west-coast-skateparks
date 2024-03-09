@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.feature 'Visitor creates an account' do
+RSpec.describe 'Visitor creates an account' do
   scenario "they are redirected to 'my parks'" do
     visit root_path
     click_link('Sign In')

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.feature 'User visits skatepark' do
+RSpec.describe 'User visits skatepark' do
   scenario 'it is added to their visited parks', js: true do
     user = create(:user)
     skatepark = create(:skatepark, name: 'fruit boot city')

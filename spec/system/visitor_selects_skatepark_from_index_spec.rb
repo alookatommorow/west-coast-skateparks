@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.feature 'Visitor selects skatepark from index' do
+RSpec.describe 'Visitor selects skatepark from index' do
   scenario 'Sees working links for skateparks from each state', js: true do
     or_skatepark = create(:skatepark, state: 'oregon', city: 'Bend')
     wa_skatepark = create(:skatepark, state: 'washington', city: 'Seattle')

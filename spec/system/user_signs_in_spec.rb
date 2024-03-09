@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.feature 'User signs in' do
+RSpec.describe 'User signs in' do
   scenario 'tries to access admin dashboard and is redirected with error message', js: true do
     user = create(:user)
 

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.feature 'Admin can create skateparks' do
+RSpec.describe 'Admin can create skateparks' do
   before do
     sign_in_user(create(:user, :admin))
     visit new_admin_skatepark_path

@@ -31,14 +31,7 @@ require 'webmock/rspec'
 
 WebMock.disable_net_connect!(allow_localhost: true, allow: 'codeclimate.com')
 
-# use `describe 'Feature', type: :feature, js: true` to use this driver
-# Capybara.javascript_driver = :webkit
-
-# tests use regular (faster) driver if they don't require js
-# Capybara.default_driver = ENV['CI'] ? :headless_chrome : :rack_test
-# Capybara.default_driver = :rack_test
 Capybara.enable_aria_label = true
-is_ci = ENV.fetch('CI', false)
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 RSpec.configure do |config|
@@ -46,23 +39,13 @@ RSpec.configure do |config|
     FileUtils.rm_rf(Dir["#{Rails.root}/spec/test_files/"])
   end
 
-  if is_ci
-    config.before(:each, type: :system) do
-      driven_by :headless_chrome
-    end
-  else
-    # tests use regular (faster) driver if they don't require js
-    config.before(:each, type: :system) do
-      driven_by :rack_test
-    end
-
-    config.before(:each, type: :system, js: true) do
-      driven_by :headless_chrome
-    end
+  # tests use regular (faster) driver if they don't require js
+  config.before(:each, type: :system) do
+    driven_by :rack_test
   end
 
-  Capybara.register_driver :chrome do |app|
-    Capybara::Selenium::Driver.new(app, browser: :chrome)
+  config.before(:each, type: :system, js: true) do
+    driven_by :headless_chrome
   end
 
   Capybara.register_driver :headless_chrome do |app|
@@ -70,13 +53,10 @@ RSpec.configure do |config|
       app,
       browser: :chrome,
       options: Selenium::WebDriver::Chrome::Options.new(
-        args: %w[headless no-sandbox disable-gpu disable-dev-shm-usage --window-size=1280,1024],
-        binary: '/usr/bin/google-chrome'
+        args: %w[--headless --no-sandbox --disable-gpu --disable-dev-shm-usage]
       )
     )
   end
-
-  # Capybara.javascript_driver = :headless_chrome
 
   # rspec-expectations config goes here. You can use an alternate
   # assertion/expectation library such as wrong or the stdlib/minitest
