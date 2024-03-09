@@ -16,12 +16,13 @@ RSpec.configure do |config|
 
   config.before(:each, type: :system, js: true) do
     if is_ci
-      driven_by :selenium,
-                using: :chrome,
-                screen_size: [1400, 1400],
-                options: { browser: :remote,
-                           url: 'http://chrome-server:4444' } do |driver_option|
-        driver_option.add_argument 'disable-dev-shm-usage'
+      driven_by(
+        :selenium,
+        using: :remote,
+        options: { url: 'http://localhost:4444/wd/hub', capabilities: :chrome }
+      ) do |options|
+        options.add_argument('no-sandbox')
+        options.add_argument('--headless')
       end
     else
       driven_by :selenium, using: :headless_chrome
