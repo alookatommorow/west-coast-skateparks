@@ -22,17 +22,18 @@ RSpec.configure do |config|
     FileUtils.rm_rf(Dir["#{Rails.root}/spec/test_files/"])
   end
 
-  if is_ci
-    config.before(:each, type: :system) do
-      driven_by :selenium, using: :headless_chrome
-    end
-  else
-    # tests use regular (faster) driver if they don't require js
-    config.before(:each, type: :system) do
-      driven_by :rack_test
-    end
-    config.before(:each, type: :system, js: true) do
-      driven_by :selenium, using: :headless_chrome
-    end
+  # if is_ci
+  #   config.before(:each, type: :system) do
+  #     driven_by :selenium, using: :headless_chrome
+  #   end
+  # else
+  # tests use regular (faster) driver if they don't require js
+  config.before(:each, type: :system) do
+    driven_by :rack_test
   end
+
+  config.before(:each, type: :system, js: true) do
+    driven_by :selenium, using: :headless_chrome
+  end
+  # end
 end
