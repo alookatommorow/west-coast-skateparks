@@ -56,8 +56,5 @@ jobs:
       - name: Yarn install
         run: yarn --frozen-lockfile
 
-      - name: Setup chrome driver (for Selenium)
-        uses: nanasess/setup-chromedriver@master
-
       - name: Run the test suite
         run: bundle exec rspec
