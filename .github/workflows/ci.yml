@@ -56,12 +56,15 @@ jobs:
       - name: Yarn install
         run: yarn --frozen-lockfile
 
+      - name: assets precompile
+        run: bundle exec rake assets:precompile --trace
+
       - name: Run the test suite
         run: bundle exec rspec
 
-      - name: Archive test screenshots
+      - name: Upload Capybara screenshots
         uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: code-coverage-report
+          name: capybara-screenshots
           path: tmp/capybara/
