@@ -58,3 +58,10 @@ jobs:
 
       - name: Run the test suite
         run: bundle exec rspec
+
+      - name: Archive test screenshots
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: code-coverage-report
+          path: tmp/capybara/
