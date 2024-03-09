@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.feature 'User signs out' do
+RSpec.describe 'User signs out' do
   scenario 'is redirected to root path' do
     user = create(:user)
 

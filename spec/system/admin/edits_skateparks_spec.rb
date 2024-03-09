@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.feature 'Admin can edit skateparks' do
+RSpec.describe 'Admin can edit skateparks' do
   let(:skatepark) { create(:skatepark) }
 
   before do

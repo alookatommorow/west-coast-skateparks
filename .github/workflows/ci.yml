@@ -14,7 +14,12 @@ jobs:
       POSTGRES_DB: west-coast-skateparks_test
       POSTGRES_HOST: localhost
       RAILS_ENV: test
-      WEATHER_KEY: test-key
+      GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
+      GOOGLE_KEY: ${{ secrets.GOOGLE_KEY }}
+      S3_BUCKET: ${{ secrets.S3_BUCKET }}
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      AWS_REGION: ${{ secrets.AWS_REGION }}
 
     services:
       postgres:
@@ -41,23 +46,30 @@ jobs:
           bundler-cache: true
 
       - name: Setup the postgres database
-        run: bundle exec rails db:setup
+        run: bundle exec rails db:create db:schema:load
 
-      # - name: Set Node.js 16.x
-      #   uses: actions/setup-node@v3
-      #   with:
-      #     node-version: 16.x
+      - name: Set Node.js 16.x
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16.x
 
-      # - uses: actions/cache@v2
-      #   with:
-      #     path: '**/node_modules'
-      #     key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
+      - uses: actions/cache@v2
+        with:
+          path: '**/node_modules'
+          key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
 
-      # - name: Yarn install
-      #   run: yarn --frozen-lockfile
+      - name: Yarn install
+        run: yarn --frozen-lockfile
 
-      # - name: Setup chrome driver (for Selenium)
-      #   uses: nanasess/setup-chromedriver@master
+      - name: assets precompile
+        run: bundle exec rake assets:precompile --trace
 
       - name: Run the test suite
-        run: bundle exec rspec --exclude-pattern "spec/features/**/*_spec.rb"
+        run: bundle exec rspec
+
+      - name: Upload Capybara screenshots
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: capybara-screenshots
+          path: tmp/capybara/

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.feature 'Admin signs in' do
+RSpec.describe 'Admin signs in' do
   scenario 'they are redirected to admin dashboard' do
     admin = create(:user, admin: true)
 

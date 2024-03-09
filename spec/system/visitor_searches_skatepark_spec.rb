@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.feature 'Visitor searches skatepark' do
+RSpec.describe 'Visitor searches skatepark' do
   scenario 'they see a working link to the skatepark', js: true do
     skatepark = create(:skatepark)
 

@@ -25,31 +25,18 @@ ENV['RAILS_ENV'] ||= 'test'
 ENV['BUNDLE_GEMFILE'] = File.expand_path('../Gemfile', __dir__)
 require 'bundler/setup'
 Bundler.require
-require 'capybara/rspec'
+
 require 'database_cleaner'
 require 'webmock/rspec'
+require 'config/capybara'
 
 WebMock.disable_net_connect!(allow_localhost: true, allow: 'codeclimate.com')
 
-# use `describe 'Feature', type: :feature, js: true` to use this driver
-# Capybara.javascript_driver = :webkit
-
-# tests use regular (faster) driver if they don't require js
-Capybara.default_driver = :rack_test
-Capybara.enable_aria_label = true
-
-#
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 RSpec.configure do |config|
   config.after(:suite) do
     FileUtils.rm_rf(Dir["#{Rails.root}/spec/test_files/"])
   end
-
-  Capybara.register_driver :chrome do |app|
-    Capybara::Selenium::Driver.new(app, browser: :chrome)
-  end
-
-  Capybara.javascript_driver = :chrome
 
   # rspec-expectations config goes here. You can use an alternate
   # assertion/expectation library such as wrong or the stdlib/minitest

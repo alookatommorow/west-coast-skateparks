@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.feature 'User favorites skatepark' do
+RSpec.describe 'User favorites skatepark' do
   scenario 'it is added to their favorite parks', js: true do
     user = create(:user)
     skatepark = create(:skatepark)

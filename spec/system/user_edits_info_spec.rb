@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.feature 'user edits info' do
+RSpec.describe 'user edits info' do
   scenario 'their info is updated', js: true do
     user = create(:user, name: 'Not Steve')
 
