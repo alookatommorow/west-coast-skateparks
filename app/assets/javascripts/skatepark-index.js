@@ -38,7 +38,7 @@ $(document).on('turbolinks:load', function () {
         pageCount = 1;
         currentStateLink = this.href;
 
-        const eventParameters = $(event.currentTarget).data('ga-event');
+        var eventParameters = $(event.currentTarget).data('ga-event');
         window.gtag('event', 'custom_click', eventParameters);
 
         showLoader();
