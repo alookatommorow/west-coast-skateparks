@@ -27,4 +27,5 @@ module.exports = {
     'import/imports-first': 0,
     'import/newline-after-import': 0,
   },
+  ignorePatterns: ['temp.js', '**/*.js'],
 };
