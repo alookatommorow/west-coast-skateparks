@@ -1,21 +1,21 @@
 #top
   .state-menu
     = link_to skateparks_state_path(state: 'california', page: 1),
-      data: { state_link: "california" },
+      data: { state_link: "california", ga_event: { type: 'state button', value: 'california' }  },
       class: 'state-button' do
         .state-image
           img src="https://storage.googleapis.com/west-coast-skateparks/states/ca-largeseal.png"
         .state-label CA
         .state-label-mobile California
     = link_to skateparks_state_path(state: 'oregon', page: 1),
-      data: { state_link: "oregon" },
+      data: { state_link: "oregon", ga_event: { type: 'state button', value: 'oregon' }  },
       class: 'state-button' do
         .state-image
           img src="https://storage.googleapis.com/west-coast-skateparks/states/or-largeseal.png"
         .state-label OR
         .state-label-mobile Oregon
     = link_to skateparks_state_path(state: 'washington', page: 1),
-      data: { state_link: "washington" },
+      data: { state_link: "washington", ga_event: { type: 'state button', value: 'washington' } },
       class: 'state-button' do
         .state-image
           img src="https://storage.googleapis.com/west-coast-skateparks/states/wa-largeseal.png"
@@ -34,6 +34,3 @@ a#back-to-top href="#top"
 = content_for :metadata
   meta name="description" content="Browse all skateparks by state and city"
 
-= content_for :analytics_event
-  javascript:
-    analytics.page("Skateparks Index");
