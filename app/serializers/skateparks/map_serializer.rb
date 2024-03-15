@@ -17,36 +17,27 @@ module Skateparks
     private
 
     def for_user
-      both = serializeable.favorites & serializeable.visits
+      favorite = serializeable.favorites
+      visited = serializeable.visits
 
       {
-        collections: [
-          {
-            type: 'favorite',
-            items: json(serializeable.favorites - both)
-          },
-          {
-            type: 'visited',
-            items: json(serializeable.visits - both)
-          },
-          {
-            type: 'both',
-            items: json(both)
-          }
-        ]
+        favorite: json(favorite),
+        visited: json(visited),
+        both: both_json(visited & favorite)
       }
     end
 
     def for_skatepark
       {
-        main: json(serializeable),
-        collections: [
-          {
-            type: 'nearby',
-            items: json(serializeable.neighbor_parks)
-          }
-        ]
+        main: [json(serializeable)],
+        nearby: json(serializeable.neighbor_parks)
       }
+    end
+
+    def both_json(items)
+      items.each_with_object({}) do |item, obj|
+        obj[item.slug] = json(item)
+      end
     end
   end
 end

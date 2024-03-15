@@ -23,6 +23,7 @@ import { WarningModal } from '../components/WarningModal';
 import { AdvancedSearch } from '../containers/AdvancedSearch';
 import { Flash } from '../components/Flash';
 import { SkateparksShow } from '../pages/skateparks/show/index';
+import { UsersShow } from '../pages/users/show/index';
 
 ReactOnRails.register({
   Search,
@@ -33,4 +34,5 @@ ReactOnRails.register({
   Stars,
   Flash,
   SkateparksShow,
+  UsersShow,
 });

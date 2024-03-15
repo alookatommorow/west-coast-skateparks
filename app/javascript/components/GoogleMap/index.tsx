@@ -1,140 +1,73 @@
 import React, { useEffect, useState } from 'react';
+import { CollectionVisibility, Map } from './Map';
+import { findMapCenter, resourceToCollection } from './utils';
 import { GoogleMap, useJsApiLoader } from '@react-google-maps/api';
-import { Skatepark } from '../../types';
-import { MapContent } from './MapContent';
-import { Options } from './Options';
-import { request } from '../../utils';
+import { useFetch } from './useFetch';
 import { Flash } from '../Flash';
+import { Resource } from './types';
 
 type GMapProps = {
   resourceName: 'user' | 'skatepark';
   resourceId: number;
   mapKey: string;
-};
-
-export type CollectionCategory = 'nearby' | 'favorite' | 'visited' | 'both';
-
-export type Collection = {
-  type: CollectionCategory;
-  items: Skatepark[];
-};
-
-type Resource = {
-  main?: Skatepark;
-  collections: Collection[];
-};
-
-type LatLng = {
-  lat: number;
-  lng: number;
-};
-
-const DEFAULT_CENTER = {
-  lat: 37.78,
-  lng: -122.2432604,
+  resource?: Resource;
 };
 
 const GMap = React.memo(function GMap({
   resourceName,
   resourceId,
   mapKey,
+  resource: initialResource,
 }: GMapProps) {
-  const [resource, setResource] = useState<Resource | undefined>();
-  const [resourceIsLoading, setResourceIsLoading] = useState(true);
   const [error, setError] = useState('');
-  const [mapCenter, setMapCenter] = useState<LatLng | undefined>(
-    DEFAULT_CENTER,
-  );
-  const [collectionVisibility, setCollectionVisibility] = useState<
-    Record<CollectionCategory, boolean>
-  >({
-    nearby: false,
-    favorite: true,
-    visited: true,
-    both: true,
-  });
+  const [mapResource, setMapResource] = useState<
+    CollectionVisibility | undefined
+  >();
+
+  const [center, setCenter] = useState(findMapCenter(mapResource));
+  const zoom = resourceName === 'skatepark' ? 9 : 6;
 
   const { isLoaded: mapIsLoaded } = useJsApiLoader({
     googleMapsApiKey: mapKey,
   });
 
-  const findMapCenter = (fetchedResource: Resource) => {
-    const centerSource =
-      fetchedResource.main || fetchedResource.collections[0].items[0];
-
-    if (
-      centerSource !== undefined &&
-      centerSource.latitude &&
-      centerSource.longitude
-    ) {
-      return { lat: centerSource.latitude, lng: centerSource.longitude };
-    }
-    return DEFAULT_CENTER;
-  };
-
-  const toggleCollection = (category: CollectionCategory) => {
-    setCollectionVisibility({
-      ...collectionVisibility,
-      [category]: !collectionVisibility[category],
-    });
-  };
-
-  const handleError = () => {
-    setError('Error. Could not load map data');
-    setResourceIsLoading(false);
-  };
-
-  const handleFlashClose = () => setError('');
-
-  const handleSuccess = (json: Resource) => {
-    const center = findMapCenter(json);
-    setResource(json);
-    setResourceIsLoading(false);
-    setMapCenter(center);
-  };
+  const { isLoading: resourceIsLoading } = useFetch({
+    resourceName,
+    resourceId,
+    shouldFetch: initialResource === undefined,
+    onSuccess: (json: Resource) => {
+      const fetchedCollection = resourceToCollection(json);
+      setMapResource(fetchedCollection);
+      setCenter(findMapCenter(fetchedCollection));
+    },
+    onError: setError,
+  });
 
   useEffect(() => {
-    const fetchResource = async () => {
-      await request(
-        '/api/maps/' + resourceId + '?resource_name=' + resourceName,
-        { onSuccess: handleSuccess, onError: handleError },
-      );
-    };
-
-    fetchResource();
-  }, [resourceName, resourceId]);
+    if (initialResource) {
+      setMapResource(resourceToCollection(initialResource));
+    }
+  }, [initialResource]);
 
   const isLoading = !mapIsLoaded || resourceIsLoading;
 
   return (
     <>
-      <Flash type="error" message={error} onClose={handleFlashClose} />
+      <Flash type="error" message={error} onClose={() => setError('')} />
       <div id="map-container">
         {isLoading ? (
           <div className="loading-container">
             <div className="loading-icon"></div>
           </div>
         ) : (
-          <>
-            <GoogleMap
-              center={mapCenter}
-              zoom={resourceName === 'skatepark' ? 9 : 6}
-              id="map"
-            >
-              {resource !== undefined && (
-                <MapContent
-                  main={resource.main}
-                  collections={resource.collections}
-                  collectionVisibility={collectionVisibility}
-                />
-              )}
-            </GoogleMap>
-            <Options
-              collections={resource?.collections}
-              toggleCollection={toggleCollection}
-              collectionVisibility={collectionVisibility}
-            />
-          </>
+          <GoogleMap center={center} zoom={zoom} id="map">
+            {mapResource !== undefined && (
+              <Map
+                collectionVisibility={mapResource}
+                setMapResource={setMapResource}
+              />
+            )}
+          </GoogleMap>
         )}
       </div>
     </>

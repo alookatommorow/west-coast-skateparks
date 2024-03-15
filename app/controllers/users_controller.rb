@@ -31,9 +31,15 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.includes(:favorites, :visits).find(params[:id])
+    @user = UserSerializer.new(current_user).serialize
+    # @favorites = Skateparks::SearchSerializer.new(current_user.favorites).serialize
+    # @visits = Skateparks::SearchSerializer.new(current_user.visits).serialize
+    @skateparks = Skateparks::MapSerializer.new(current_user).serialize
+    @num_ratings = current_user.ratings.count
 
     flash.now[:notice] = "Welcome, #{@user}" if params[:from_vendor]
+  rescue StandardError => e
+    binding.pry
   end
 
   private

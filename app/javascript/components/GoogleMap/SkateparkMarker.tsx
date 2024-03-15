@@ -3,18 +3,7 @@ import { Marker, InfoWindow } from '@react-google-maps/api';
 import { Skatepark } from '../../types';
 import { titleize } from '../../utils';
 import { Stars } from '../Stars';
-import { CollectionCategory } from '.';
-
-type Main = 'main';
-type ColorOption = CollectionCategory | Main;
-
-const COLOR_OPTIONS = {
-  main: 'red-dot',
-  nearby: 'green-dot',
-  favorite: 'purple-dot',
-  visited: 'yellow-dot',
-  both: 'blue-dot',
-};
+import { ColorOption, getIcon } from './utils';
 
 type SkateparkMarkerProps = {
   skatepark: Skatepark;
@@ -33,14 +22,6 @@ export const SkateparkMarker = ({
   handleClick,
   handleCloseClick,
 }: SkateparkMarkerProps) => {
-  const getIcon = (type: ColorOption) => {
-    return (
-      'https://maps.google.com/mapfiles/ms/icons/' +
-      COLOR_OPTIONS[type] +
-      '.png'
-    );
-  };
-
   if (!isVisible) return;
 
   return (
