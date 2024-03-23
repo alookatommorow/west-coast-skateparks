@@ -17,31 +17,4 @@ class SkateparksController < ApplicationController
       Skatepark.all.order(:state, :city, :name)
     ).serialize
   end
-
-  # DEPRECATED: to be removed in favor of /api/skateparks routes when user page converts to react
-  def favorite
-    skatepark.favoriters << current_user
-    head :ok
-  end
-
-  def unfavorite
-    skatepark.favoriters.destroy(current_user)
-    head :ok
-  end
-
-  def visit
-    skatepark.visitors << current_user
-    head :ok
-  end
-
-  def unvisit
-    skatepark.visitors.destroy(current_user)
-    head :ok
-  end
-
-  private
-
-  def skatepark
-    @skatepark ||= Skatepark.find(params[:slug])
-  end
 end

@@ -27,21 +27,21 @@ export const UsersShow = ({
   numRatings,
 }: UsersShowProps) => {
   const [error, setError] = useState('');
-  const [collections, setSkateparks] = useState(initialSkateparks);
+  const [skateparks, setSkateparks] = useState(initialSkateparks);
 
-  const { favorite, visited, both } = collections;
+  const { favorite, visited, both } = skateparks;
 
   const removeFromCollection = (collection: Skatepark[], slug: string) => {
     return collection.filter((skatepark: Skatepark) => skatepark.slug !== slug);
   };
 
-  const removeFromCollections = (slug: string, type: UserSkateparkKey) => {
+  const removePark = (slug: string, type: UserSkateparkKey) => {
     const freshBoth = both;
     delete freshBoth[slug];
 
     setSkateparks({
-      ...collections,
-      [type]: removeFromCollection(collections[type], slug),
+      ...skateparks,
+      [type]: removeFromCollection(skateparks[type], slug),
       both: freshBoth,
     });
   };
@@ -59,7 +59,7 @@ export const UsersShow = ({
           resourceName="user"
           resourceId={user.id}
           mapKey={mapKey}
-          resource={collections}
+          resource={skateparks}
         />
       </div>
       <div className="favorites-visits">
@@ -71,7 +71,7 @@ export const UsersShow = ({
               type="favorite"
               userId={user.id}
               setError={setError}
-              removePark={removeFromCollections}
+              removePark={removePark}
             />
           )}
         </div>
@@ -83,7 +83,7 @@ export const UsersShow = ({
               type="visited"
               userId={user.id}
               setError={setError}
-              removePark={removeFromCollections}
+              removePark={removePark}
             />
           )}
         </div>

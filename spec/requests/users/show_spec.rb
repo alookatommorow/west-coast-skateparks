@@ -12,13 +12,20 @@ RSpec.describe '/users' do
     end
 
     context 'with authenticated user' do
-      it 'sets user instance var' do
+      it 'sets instance vars' do
         user = create(:user)
+        skateparks = create_list(:skatepark, 2)
+        create(:rating, skatepark: skateparks.first, user:)
+        user.favorites << skateparks.first
+        user.visits << skateparks.second
+
         sign_in user
 
         get "/users/#{user.id}"
 
-        expect(assigns(:user)).to eq user
+        expect(assigns(:user)).to eq UserSerializer.new(user).serialize
+        expect(assigns(:skateparks)).to eq Skateparks::MapSerializer.new(user).serialize
+        expect(assigns(:num_ratings)).to eq user.ratings.count
       end
 
       context 'when trying to access other profile' do

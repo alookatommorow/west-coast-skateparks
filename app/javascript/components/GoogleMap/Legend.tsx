@@ -1,14 +1,15 @@
 import React from 'react';
-// import { Collection } from '.';
 import { getIcon } from './utils';
-import { CollectionVisibility, VisibilityOption } from './Map';
+import { ResourceName, SkateparkType } from './types';
 
 type LegendProps = {
-  collections: CollectionVisibility;
   main?: string;
+  resourceName: ResourceName;
 };
 
-export const Legend = ({ collections, main }: LegendProps) => {
+export const Legend = ({ main, resourceName }: LegendProps) => {
+  const icons: SkateparkType[] =
+    resourceName === 'user' ? ['favorite', 'visited', 'both'] : ['nearby'];
   return (
     <div id="map-legend">
       <p className="legend-title">Legend</p>
@@ -19,15 +20,13 @@ export const Legend = ({ collections, main }: LegendProps) => {
             <p className="capitalize">{main}</p>
           </div>
         )}
-        {Object.values(collections).map((collection: VisibilityOption) => {
-          if (collection.isVisible) {
-            return (
-              <div className="icon-container" key={collection.type}>
-                <img src={getIcon(collection.type)} />
-                <p className="capitalize">{collection.type}</p>
-              </div>
-            );
-          }
+        {icons.map((type: SkateparkType) => {
+          return (
+            <div className="icon-container" key={type}>
+              <img src={getIcon(type)} />
+              <p className="capitalize">{type}</p>
+            </div>
+          );
         })}
       </div>
     </div>

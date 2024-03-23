@@ -1,5 +1,4 @@
-import { CollectionCategory, Resource } from './types';
-import { CollectionVisibility } from './Map';
+import { SkateparkType, Resource, MapData, ResourceName } from './types';
 import { Skatepark } from '../../types';
 
 const DEFAULT_CENTER = {
@@ -15,10 +14,7 @@ const COLOR_OPTIONS = {
   both: 'blue-dot',
 };
 
-type Main = 'main';
-export type ColorOption = CollectionCategory | Main;
-
-export const findMapCenter = (resource?: CollectionVisibility) => {
+export const findMapCenter = (resource?: MapData) => {
   if (!resource) return DEFAULT_CENTER;
 
   let centerSource: Skatepark | undefined = resource.main?.items[0];
@@ -45,55 +41,58 @@ export const findMapCenter = (resource?: CollectionVisibility) => {
   return DEFAULT_CENTER;
 };
 
-export const getIcon = (type: ColorOption) => {
+export const getIcon = (type: SkateparkType) => {
   return (
     'https://maps.google.com/mapfiles/ms/icons/' + COLOR_OPTIONS[type] + '.png'
   );
 };
 
-export const resourceToCollection = (resource: Resource | undefined) => {
+// format raw data for consumption by map components
+export const resourceToMapData = (
+  resource: Resource | undefined,
+  resourceName: ResourceName,
+) => {
   if (resource === undefined) return;
 
   return {
     nearby: {
       isVisible: false,
-      toggleEnabled:
-        resource.nearby !== undefined && resource.nearby.length > 0,
+      toggleEnabled: resourceName === 'skatepark',
       items: resource.nearby || [],
-      type: 'nearby' as CollectionCategory,
+      type: 'nearby' as SkateparkType,
     },
     favorite: {
       isVisible: true,
-      toggleEnabled:
-        resource.favorite !== undefined && resource.favorite.length > 0,
+      toggleEnabled: resourceName === 'user',
       items:
+        // remove favorites that appear in 'both'
         resource.favorite?.filter(
           skatepark => resource.both?.[skatepark.slug] === undefined,
         ) || [],
-      type: 'favorite' as CollectionCategory,
+      type: 'favorite' as SkateparkType,
     },
     visited: {
       isVisible: true,
-      toggleEnabled:
-        resource.visited !== undefined && resource.visited.length > 0,
+      toggleEnabled: resourceName === 'user',
       items:
+        // remove visited that appear in 'both'
         resource.visited?.filter(
           skatepark => resource.both?.[skatepark.slug] === undefined,
         ) || [],
-      type: 'visited' as CollectionCategory,
+      type: 'visited' as SkateparkType,
     },
     both: {
       isVisible: true,
       toggleEnabled: false,
-      renderAsType: 'both' as CollectionCategory,
+      renderAsType: 'both' as SkateparkType,
       items: resource.both !== undefined ? Object.values(resource.both) : [],
-      type: 'both' as CollectionCategory,
+      type: 'both' as SkateparkType,
     },
     main: {
       isVisible: true,
       toggleEnabled: false,
       items: resource.main || [],
-      type: 'main' as CollectionCategory,
+      type: 'main' as SkateparkType,
     },
   };
 };

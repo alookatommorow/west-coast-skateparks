@@ -1,35 +1,27 @@
 import React, { useState } from 'react';
 import { Skatepark } from '../../types';
 import { SkateparkMarker } from './SkateparkMarker';
-import { CollectionCategory } from './types';
-import { CollectionVisibility, VisibilityOption } from './Map';
+import { MapData, SkateparkData, SkateparkType } from './types';
 
 type MapContentProps = {
-  // main?: Skatepark;
-  // collections: CollectionVisibility;
-  collectionVisibility: CollectionVisibility;
+  mapData: MapData;
 };
 
-export const MapContent = ({ collectionVisibility }: MapContentProps) => {
+export const MapContent = ({ mapData }: MapContentProps) => {
   const [currentParkId, setCurrentParkId] = useState<string | undefined>();
 
-  const handleClick = (slug: string) => {
-    setCurrentParkId(slug);
-  };
+  const handleClick = (slug: string) => setCurrentParkId(slug);
 
-  const renderCollection = (collection: VisibilityOption) => {
-    if (!collection.isVisible) return;
+  const renderSkateparks = (skateparks: SkateparkData) => {
+    if (!skateparks.isVisible) return;
 
     return skateparkMarkers(
-      collection.items,
-      collection.renderAsType || collection.type,
+      skateparks.items,
+      skateparks.renderAsType || skateparks.type,
     );
   };
 
-  const skateparkMarkers = (
-    skateparks: Skatepark[],
-    type: CollectionCategory,
-  ) => {
+  const skateparkMarkers = (skateparks: Skatepark[], type: SkateparkType) => {
     return skateparks.map((park: Skatepark) => {
       if (park.latitude && park.longitude) {
         return (
@@ -49,7 +41,7 @@ export const MapContent = ({ collectionVisibility }: MapContentProps) => {
 
   const handleCloseClick = () => setCurrentParkId(undefined);
 
-  return Object.values(collectionVisibility).map(
-    (collection: VisibilityOption) => renderCollection(collection),
+  return Object.values(mapData).map((skateparks: SkateparkData) =>
+    renderSkateparks(skateparks),
   );
 };

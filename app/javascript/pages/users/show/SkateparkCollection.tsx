@@ -3,9 +3,6 @@ import { Skatepark } from '../../../types';
 import { skateparkLocation } from '../../../utils';
 import { favoriteVisitSkatepark } from '../../../utils/favoriteVisitSkatepark';
 import { UserSkateparkKey } from '.';
-// import { UserMapResource } from '../../../components/GoogleMap';
-
-// export type CollectionType = Exclude<keyof UserMapResource, 'both'>;
 
 type SkateparkCollectionProps = {
   skateparks: Skatepark[];

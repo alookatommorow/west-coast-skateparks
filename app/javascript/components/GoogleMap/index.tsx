@@ -1,13 +1,15 @@
-import React, { useEffect, useState } from 'react';
-import { CollectionVisibility, Map } from './Map';
-import { findMapCenter, resourceToCollection } from './utils';
-import { GoogleMap, useJsApiLoader } from '@react-google-maps/api';
-import { useFetch } from './useFetch';
+import React, { useMemo } from 'react';
+import { GoogleMap } from '@react-google-maps/api';
+import { useMapSetup } from './useMapSetup';
 import { Flash } from '../Flash';
-import { Resource } from './types';
+import { Resource, ResourceName } from './types';
+import { resourceToMapData } from './utils';
+import { MapContent } from './MapContent';
+import { Options } from './Options';
+import { Legend } from './Legend';
 
 type GMapProps = {
-  resourceName: 'user' | 'skatepark';
+  resourceName: ResourceName;
   resourceId: number;
   mapKey: string;
   resource?: Resource;
@@ -19,37 +21,19 @@ const GMap = React.memo(function GMap({
   mapKey,
   resource: initialResource,
 }: GMapProps) {
-  const [error, setError] = useState('');
-  const [mapResource, setMapResource] = useState<
-    CollectionVisibility | undefined
-  >();
-
-  const [center, setCenter] = useState(findMapCenter(mapResource));
   const zoom = resourceName === 'skatepark' ? 9 : 6;
+  const initialMapData = useMemo(
+    () => resourceToMapData(initialResource, resourceName),
+    [initialResource],
+  );
 
-  const { isLoaded: mapIsLoaded } = useJsApiLoader({
-    googleMapsApiKey: mapKey,
-  });
-
-  const { isLoading: resourceIsLoading } = useFetch({
-    resourceName,
-    resourceId,
-    shouldFetch: initialResource === undefined,
-    onSuccess: (json: Resource) => {
-      const fetchedCollection = resourceToCollection(json);
-      setMapResource(fetchedCollection);
-      setCenter(findMapCenter(fetchedCollection));
-    },
-    onError: setError,
-  });
-
-  useEffect(() => {
-    if (initialResource) {
-      setMapResource(resourceToCollection(initialResource));
-    }
-  }, [initialResource]);
-
-  const isLoading = !mapIsLoaded || resourceIsLoading;
+  const { isLoading, mapData, error, center, setMapData, setError } =
+    useMapSetup({
+      resourceName,
+      resourceId,
+      initialMapData,
+      mapKey,
+    });
 
   return (
     <>
@@ -61,11 +45,15 @@ const GMap = React.memo(function GMap({
           </div>
         ) : (
           <GoogleMap center={center} zoom={zoom} id="map">
-            {mapResource !== undefined && (
-              <Map
-                collectionVisibility={mapResource}
-                setMapResource={setMapResource}
-              />
+            {mapData !== undefined && (
+              <>
+                <MapContent mapData={mapData} />
+                <Options setMapData={setMapData} mapData={mapData} />
+                <Legend
+                  resourceName={resourceName}
+                  main={mapData.main.items[0]?.name}
+                />
+              </>
             )}
           </GoogleMap>
         )}

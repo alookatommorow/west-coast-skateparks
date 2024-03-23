@@ -8,13 +8,13 @@ RSpec.describe RatingSerializer do
   end
 
   describe '#avatar' do
-    it 'returns user avater thumb attribute' do
+    it 'returns user avatar thumb attribute' do
       user = build_stubbed(:user)
       rating = build_stubbed(:rating, user:)
 
       avatar = RatingSerializer.new(rating).avatar
 
-      expect(avatar).to eq User::AVATAR_DEFAULT_URL
+      expect(avatar).to eq user.avatar.url(:thumb)
     end
   end
 
