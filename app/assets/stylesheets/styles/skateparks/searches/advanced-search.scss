@@ -92,12 +92,14 @@
   }
 
   .table-header {
-    >button, p {
+
+    >button,
+    p {
       font-size: 16px;
       padding: 8px 0;
     }
 
-    > button{
+    >button {
       border: none;
       background: transparent;
       font-size: 16px;
@@ -146,9 +148,9 @@
       grid-template-columns: 1fr 1fr 1fr 1fr;
       margin-bottom: 16px;
 
-      > button:first-child {
-          grid-column-start: 1;
-        }
+      >button:first-child {
+        grid-column-start: 1;
+      }
     }
 
     a.column-layout {

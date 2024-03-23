@@ -1,101 +1,139 @@
 .user-show-container {
   padding: 0 30px 30px 30px;
 
-  .user-map-container {
-    position: relative;
-    float: right;
-    width: 78%;
-    margin-bottom: 30px;
+  p {
+    margin: 0;
+  }
+
+  .map-card-container {
+    display: flex;
+    gap: 30px;
+
+    #map-container {
+      flex-grow: 1;
+    }
+  }
+
+  .header {
+    font-weight: bold;
+    font-size: 32px;
+    display: block;
+    color: rgba(0, 0, 0, 0.85);
+    margin-bottom: 12px;
+  }
+
+  .card {
+    display: flex;
+    flex-direction: column;
+    align-self: start;
+    align-items: center;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+    padding: 20px;
+    background: #fff;
+    border-radius: 0.375rem;
+
+    img {
+      max-width: 225px;
+      max-height: 225px;
+      border-radius: 0.5rem;
+    }
+
+    p:not(.header) {
+      color: rgba(0, 0, 0, 0.4);
+    }
+
+    i {
+      margin-bottom: 4px;
+    }
+
+    .extra {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 16px;
+      margin: 16px 0;
+    }
+
+    .user-stat {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+
+  .basic-button {
+    background-color: $blue;
+    color: white;
+    margin: 8px auto 0 auto;
+
+    &:hover {
+      color: $orange;
+    }
   }
 
   .favorites-visits {
-    clear: right;
-    display: flex;
-    justify-content: space-around;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    margin-top: 30px;
 
-    h4 {
-      font-family: 'Dirty-Bakers-Dozen', sans-serif;
-      color: $blue;
-      font-size: 25px;
-      margin-bottom: 10px;
-    }
-
-    .favorites, .visits {
+    .header {
       text-align: center;
-      width: 48%;
     }
 
-    .user-park-display {
+    .park-item-container,
+    .park-item {
       display: flex;
-      padding: 0;
+      align-items: center;
+    }
 
-      .remove {
-        flex: 1;
-        display: flex;
-        align-items: stretch;
-        justify-content: center;
+    .park-item-container {
+      gap: 20px;
+      justify-content: center;
 
-        .remove-button {
-          border-radius: 0;
-          background: white;
-          cursor: pointer;
-          width: 100%;
+      button {
+        border: none;
+        padding: 0;
+        color: $orange;
+        cursor: pointer;
 
-          i {
-            font-size: 24px;
-            color: $blue;
-          }
-
-          &:hover {
-            background-color: $gray;
-
-            i {
-              color: $orange;
-            }
-          }
+        i {
+          font-size: 24px;
         }
       }
+    }
 
-      .park-link {
-        padding: 10px 0;
-        flex: 8;
-        padding-left: 15px;
-        border-radius: 0;
-        display: flex;
-        align-items: center;
-        background: white;
-        color: black;
+    .park-item {
+      flex-grow: 1;
+      background-color: #fff;
+      box-shadow:
+        0px 1px 3px 0px #d4d4d5,
+        0px 0px 0px 1px #d4d4d5;
+      padding: 16px;
+      border-radius: 12px;
+      margin-bottom: 16px;
+      color: $black;
+      max-width: 450px;
 
-        &:hover {
-          background-color: $gray
-        }
+      &:hover {
+        background-color: $gray;
+      }
 
-        .link-section {
-          text-align: left;
-          position: relative;
-          flex: 1;
+      img {
+        max-width: 200px;
+        max-height: 200px;
+        margin-right: 18px;
+      }
 
-          .city {
-            font-weight: bold;
-            margin-bottom: 10px;
-          }
-
-          .remove-button {
-            text-align: center;
-          }
-
-          img {
-            margin: auto 0;
-            width: 100%;
-          }
-        }
+      p:last-child {
+        margin: 0;
       }
     }
 
     @media #{$tablet} {
       display: block;
 
-      .favorites, .visits {
+      .favorites,
+      .visits {
         width: 100%;
         margin: 0 auto;
       }
@@ -109,65 +147,8 @@
   @media #{$mobile} {
     padding: 0 15px 15px 15px;
 
-    .user-dashboard {
-      float: none;
+    .card {
       margin: 0 auto;
-      width: 65%;
-
-      .card {
-        border-radius: 0;
-        margin: 0 auto;
-      }
-    }
-
-    .user-map-container {
-      float: none;
-      width: 90%;
-      margin: 15px auto;
-
-      #map {
-        height: 400px;
-      }
-    }
-  }
-}
-
-.user-dashboard {
-  float: left;
-  width: 20%;
-
-  .card, .card img {
-    border-radius: 0;
-  }
-
-  .card {
-    .user-stat {
-      display: flex;
-      align-items: center;
-    }
-
-    .content p {
-      margin: 0 0 0 10px;
-    }
-  }
-
-  .user-stat p.inline-block {
-    margin-left: 10px;
-  }
-
-  .edit-button {
-    margin: 10px 0;
-    text-align: center;
-
-    .basic-button {
-      background-color: $blue;
-      color: white;
-      margin: 0 auto;
-      border-radius: 0;
-
-      &:hover {
-        color: $orange;
-      }
     }
   }
 }

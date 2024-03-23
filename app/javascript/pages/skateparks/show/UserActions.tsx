@@ -1,8 +1,11 @@
 import React, { useState, MouseEvent, Dispatch, SetStateAction } from 'react';
 import { WarningModal } from '../../../components/WarningModal';
 import { useToggle } from '../../../hooks/useToggle';
-import { request } from '../../../utils';
 import { Skatepark } from '../../../types';
+import {
+  FavoriteVisitOptions,
+  favoriteVisitSkatepark,
+} from '../../../utils/favoriteVisitSkatepark';
 
 type UserActionsProps = {
   hasFavorited: boolean;
@@ -50,16 +53,10 @@ export const UserActions = ({
 
     setIsLoading(name, true);
 
-    await request(`/api/skateparks/${slug}/${value}`, {
-      fetchOptions: {
-        method: 'PATCH',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          user_id: userId,
-        }),
-      },
+    await favoriteVisitSkatepark({
+      slug,
+      type: value as FavoriteVisitOptions['type'],
+      userId,
       onError: handleError,
       onSuccess: () => handleSuccess(name),
     });

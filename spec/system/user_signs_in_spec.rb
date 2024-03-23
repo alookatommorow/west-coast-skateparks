@@ -12,7 +12,7 @@ RSpec.describe 'User signs in' do
     expect(page).to have_text('You need admin authentication to access that.')
   end
 
-  scenario 'is redirected to their homepage, and can sign out if they choose' do
+  scenario 'is redirected to their homepage, and can sign out if they choose', js: true do
     user = create(:user)
     sign_in_user(user)
 

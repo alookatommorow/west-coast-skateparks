@@ -1,47 +1,10 @@
-.user-show-container data-signed-in=true
-  .user-dashboard
-    = render "profile_card", user: @user
-  .user-map-container
-    = react_component "GMap", props: {\
-        resourceName: 'user',
-        resourceId: @user.id,
-        mapKey: ENV.fetch('GOOGLE_KEY'),
-      }
-  .favorites-visits
-    .favorites
-      h4 Favorites
-      .list
-        - @user.favorites.each do |park|
-          .user-park-display.item data-ajax-container=true
-            = link_to park, class: "park-link" do
-              .link-section.city-name
-                .city= park.city.titleize + ", " + SkateparkHelper::STATE_ABBREVS[park.state]
-                .name= park.name.titleize
-              .link-section.image
-                = image_tag("#{park.hero}")
-            = form_tag unfavorite_skatepark_path(park),
-              method: :patch,
-              data: { skatepark_id: park.id, ajax_button: true, remove_container: true },
-              class: "remove" do
-                button.remove-button.basic-button
-                  i.fa.fa-times
-    .visits
-      h4 Visits
-      .list
-        - @user.visits.each do |park|
-          .user-park-display.item data-ajax-container=true
-            = link_to park, class: "park-link" do
-              .link-section.city-name
-                .city= park.city.titleize + ", " + SkateparkHelper::STATE_ABBREVS[park.state]
-                .name= park.name.titleize
-              .link-section.image
-                = image_tag("#{park.hero}")
-            = form_tag unvisit_skatepark_path(park),
-              method: :patch,
-              data: { skatepark_id: park.id, ajax_button: true, remove_container: true },
-              class: "remove" do
-                button.remove-button.basic-button
-                  i.fa.fa-times
+= react_component "UsersShow", props: {\
+    user: @user,
+    skateparks: @skateparks,
+    numRatings: @num_ratings,
+    mapKey: ENV.fetch('GOOGLE_KEY'),
+  }
+
 
 - if flash[:signed_up]
   = content_for :analytics_event

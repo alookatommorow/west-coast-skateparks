@@ -98,7 +98,8 @@
     .actions {
       display: flex;
 
-      a, button {
+      a,
+      button {
         position: relative;
         background: $blue;
         color: white;

@@ -4,10 +4,14 @@
 
 // disable image highlighting bc of annoyance w photo carousel
 img {
-   -ms-user-select: none;      /* IE 10+ */
-   -moz-user-select: none;     /* Firefox all */
-   -webkit-user-select: none;  /* Chrome all / Safari all */
-   user-select: none;          /* Likely future */
+  -ms-user-select: none;
+  /* IE 10+ */
+  -moz-user-select: none;
+  /* Firefox all */
+  -webkit-user-select: none;
+  /* Chrome all / Safari all */
+  user-select: none;
+  /* Likely future */
 }
 
 html,
@@ -43,26 +47,32 @@ h4,
 h5 {
   font-family: 'Lato', 'Helvetica Neue', Arial, Helvetica, sans-serif;
   line-height: 1.2857em;
-  margin: calc(2rem -  0.14285em ) 0em 1rem;
+  margin: calc(2rem - 0.14285em) 0em 1rem;
   font-weight: bold;
   padding: 0em;
 }
+
 h1 {
   min-height: 1rem;
   font-size: 2rem;
 }
+
 h2 {
   font-size: 1.714rem;
 }
+
 h3 {
   font-size: 1.28rem;
 }
+
 h4 {
   font-size: 1.071rem;
 }
+
 h5 {
   font-size: 1rem;
 }
+
 h1:first-child,
 h2:first-child,
 h3:first-child,
@@ -70,6 +80,7 @@ h4:first-child,
 h5:first-child {
   margin-top: 0em;
 }
+
 h1:last-child,
 h2:last-child,
 h3:last-child,
@@ -95,6 +106,10 @@ p {
   }
 }
 
+.capitalize {
+  text-transform: capitalize;
+}
+
 /*-------------------
         Links
 --------------------*/
@@ -116,10 +131,12 @@ a {
   background-color: #CCE2FF;
   color: rgba(0, 0, 0, 0.87);
 }
+
 ::-moz-selection {
   background-color: #CCE2FF;
   color: rgba(0, 0, 0, 0.87);
 }
+
 ::selection {
   background-color: #CCE2FF;
   color: rgba(0, 0, 0, 0.87);
@@ -131,18 +148,21 @@ input::-webkit-selection {
   background-color: rgba(100, 100, 100, 0.4);
   color: rgba(0, 0, 0, 0.87);
 }
+
 textarea::-moz-selection,
 input::-moz-selection {
   background-color: rgba(100, 100, 100, 0.4);
   color: rgba(0, 0, 0, 0.87);
 }
+
 textarea::selection,
 input::selection {
   background-color: rgba(100, 100, 100, 0.4);
   color: rgba(0, 0, 0, 0.87);
 }
 
-input, textarea {
+input,
+textarea {
   box-sizing: border-box;
 }
 

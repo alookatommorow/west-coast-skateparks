@@ -6,18 +6,15 @@ class UsersController < ApplicationController
   end
 
   def update
-    @user = User.find(params[:id])
-    if @user.update(user_params)
-      redirect_to @user, notice: 'Righteous.'
+    if current_user.update(user_params)
+      redirect_to current_user, notice: 'Righteous.'
     else
-      flash.now[:error] = @user.errors.full_messages.join(', ')
+      flash.now[:error] = current_user.errors.full_messages.join(', ')
       render :edit
     end
   end
 
-  def edit
-    @user = User.find(params[:id])
-  end
+  def edit; end
 
   def create
     @user = User.new(user_params)
@@ -31,9 +28,11 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.includes(:favorites, :visits).find(params[:id])
+    @user = UserSerializer.new(current_user).serialize
+    @skateparks = Skateparks::MapSerializer.new(current_user).serialize
+    @num_ratings = current_user.ratings.count
 
-    flash.now[:notice] = "Welcome, #{@user}" if params[:from_vendor]
+    flash.now[:notice] = "Welcome, #{current_user}" if params[:from_vendor]
   end
 
   private

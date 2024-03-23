@@ -3,24 +3,14 @@ import { Marker, InfoWindow } from '@react-google-maps/api';
 import { Skatepark } from '../../types';
 import { titleize } from '../../utils';
 import { Stars } from '../Stars';
-import { CollectionCategory } from '.';
-
-type Main = 'main';
-type ColorOption = CollectionCategory | Main;
-
-const COLOR_OPTIONS = {
-  main: 'red-dot',
-  nearby: 'green-dot',
-  favorite: 'purple-dot',
-  visited: 'yellow-dot',
-  both: 'blue-dot',
-};
+import { getIcon } from './utils';
+import { SkateparkType } from './types';
 
 type SkateparkMarkerProps = {
   skatepark: Skatepark;
   isVisible: boolean;
   isInfoWindowVisible: boolean;
-  type: ColorOption;
+  type: SkateparkType;
   handleClick: () => void;
   handleCloseClick: () => void;
 };
@@ -33,45 +23,34 @@ export const SkateparkMarker = ({
   handleClick,
   handleCloseClick,
 }: SkateparkMarkerProps) => {
-  const getIcon = (type: ColorOption) => {
-    return (
-      'https://maps.google.com/mapfiles/ms/icons/' +
-      COLOR_OPTIONS[type] +
-      '.png'
-    );
-  };
-
   if (!isVisible) return;
 
   return (
-    <>
-      {skatepark.latitude && skatepark.longitude && (
-        <>
-          <Marker
+    skatepark.latitude &&
+    skatepark.longitude && (
+      <>
+        <Marker
+          position={{ lat: skatepark.latitude, lng: skatepark.longitude }}
+          icon={getIcon(type)}
+          onClick={handleClick}
+        />
+        {isInfoWindowVisible && (
+          <InfoWindow
             position={{ lat: skatepark.latitude, lng: skatepark.longitude }}
-            icon={getIcon(type)}
-            onClick={handleClick}
-          />
-          {isInfoWindowVisible && (
-            <InfoWindow
-              position={{ lat: skatepark.latitude, lng: skatepark.longitude }}
-              onCloseClick={handleCloseClick}
-              options={{ pixelOffset: new window.google.maps.Size(0, -32) }}
-            >
-              <a href={`/skateparks/${skatepark.slug}`}>
-                {skatepark.map_photo && (
-                  <img loading="lazy" src={skatepark.map_photo} />
-                )}
-                <strong>{titleize(skatepark.name)}</strong>
-                <p>{titleize(skatepark.city)}</p>
-                {skatepark.stars && (
-                  <Stars stars={skatepark.stars} tiny></Stars>
-                )}
-              </a>
-            </InfoWindow>
-          )}
-        </>
-      )}
-    </>
+            onCloseClick={handleCloseClick}
+            options={{ pixelOffset: new window.google.maps.Size(0, -32) }}
+          >
+            <a href={`/skateparks/${skatepark.slug}`}>
+              {skatepark.map_photo && (
+                <img loading="lazy" src={skatepark.map_photo} />
+              )}
+              <strong>{titleize(skatepark.name)}</strong>
+              <p>{titleize(skatepark.city)}</p>
+              {skatepark.stars && <Stars stars={skatepark.stars} tiny></Stars>}
+            </a>
+          </InfoWindow>
+        )}
+      </>
+    )
   );
 };

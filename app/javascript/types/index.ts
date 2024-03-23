@@ -3,6 +3,7 @@ export type Skatepark = {
   name: string;
   city: string;
   state: 'california' | 'oregon' | 'washington';
+  location?: string;
   latitude?: number;
   longitude?: number;
   map_photo?: string;
@@ -32,4 +33,13 @@ export type Rating = {
   new_average: number;
   review: string;
   stars: number;
+};
+
+export type User = {
+  username: string;
+  email: string;
+  avatar?: string;
+  created_at: string;
+  name?: string;
+  id: number;
 };

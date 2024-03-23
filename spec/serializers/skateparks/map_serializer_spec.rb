@@ -19,13 +19,8 @@ RSpec.describe Skateparks::MapSerializer do
         allow(skatepark).to receive(:neighbor_parks).and_return(neighbor_parks)
 
         expected = {
-          main: skatepark_json,
-          collections: [
-            {
-              type: 'nearby',
-              items: neighbor_json
-            }
-          ]
+          main: [skatepark_json],
+          nearby: neighbor_json
         }
 
         json = Skateparks::MapSerializer.new(skatepark).serialize
@@ -45,25 +40,16 @@ RSpec.describe Skateparks::MapSerializer do
         allow(user).to receive(:favorites).and_return(favorites)
         allow(user).to receive(:visits).and_return(visits)
 
-        both_json = both.map { |n| serialize(n) }
-        visits_json = (visits - both).map { |n| serialize(n) }
-        favorites_json = (favorites - both).map { |n| serialize(n) }
+        visits_json = visits.map { |n| serialize(n) }
+        favorites_json = favorites.map { |n| serialize(n) }
+        both_json = both.each_with_object({}) do |n, obj|
+          obj[n.slug] = serialize n
+        end
 
         expected = {
-          collections: [
-            {
-              type: 'favorite',
-              items: favorites_json
-            },
-            {
-              type: 'visited',
-              items: visits_json
-            },
-            {
-              type: 'both',
-              items: both_json
-            }
-          ]
+          favorite: favorites_json,
+          visited: visits_json,
+          both: both_json
         }
 
         json = Skateparks::MapSerializer.new(user).serialize

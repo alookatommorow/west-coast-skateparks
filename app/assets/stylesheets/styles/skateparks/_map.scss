@@ -37,15 +37,19 @@
   }
 }
 
-#map-toggle-buttons {
-  position: absolute;
-  top: 10px;
-  right: 70px;
+#map-toggle-buttons,
+#map-legend {
   background: white;
   padding: 10px;
   text-align: center;
   border-radius: 2px;
   box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 4px -1px;
+  position: absolute;
+}
+
+#map-toggle-buttons {
+  top: 10px;
+  right: 70px;
 
   p {
     font-weight: bold;
@@ -76,5 +80,25 @@
   @media #{$mobile} {
     right: 10px;
     top: 60px;
+  }
+}
+
+#map-legend {
+  bottom: 10px;
+  left: 10px;
+  max-width: 100px;
+
+  .icons {
+    display: grid;
+    gap: 12px;
+
+    img {
+      margin-bottom: 4px;
+    }
+  }
+
+  .legend-title {
+    font-weight: bold;
+    margin-bottom: 12px;
   }
 }

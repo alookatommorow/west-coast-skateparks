@@ -1,3 +1,10 @@
+import { Skatepark } from '../types';
+const STATE_ABBREVS = {
+  california: 'CA',
+  oregon: 'OR',
+  washington: 'WA',
+};
+
 export const titleize = (str: string) => {
   return str.replace(new RegExp('(?:\\b|_)([a-z])', 'g'), function (char) {
     return char.toUpperCase();
@@ -49,4 +56,8 @@ export const request = async (url: string, options?: RequestOptions) => {
   } catch (error) {
     options?.onError?.(error as string);
   }
+};
+
+export const skateparkLocation = (skatepark: Skatepark) => {
+  return `${skatepark.city}, ${STATE_ABBREVS[skatepark.state]} `;
 };

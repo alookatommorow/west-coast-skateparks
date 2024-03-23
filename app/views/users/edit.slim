@@ -1,6 +1,6 @@
 .user-edit-container
   h1 Edit Your Profile
-  = form_with model: @user, html: { class: 'form' } do |f|
+  = form_with model: current_user, html: { class: 'form' } do |f|
     .field
       label.label for="user_username" Username
       = f.text_field :username
