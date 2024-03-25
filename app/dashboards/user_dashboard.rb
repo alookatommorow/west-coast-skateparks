@@ -16,7 +16,6 @@ class UserDashboard < Administrate::BaseDashboard
     favorites: Field::HasMany.with_options,
     visits: Field::HasMany.with_options,
     ratings: Field::HasMany,
-    reviews: Field::HasMany,
     created_at: Field::DateTime
   }.freeze
 

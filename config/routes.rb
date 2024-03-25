@@ -60,7 +60,6 @@ Rails.application.routes.draw do
 
   resources :maps, only: :show
   resources :ratings, only: :create
-  resources :reviews, only: :create
 
   get '/sitemap.xml.gz', to: redirect("https://#{ENV['S3_BUCKET']}.s3.amazonaws.com/sitemaps/sitemap.xml.gz"),
                          as: :sitemap

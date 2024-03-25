@@ -13,7 +13,6 @@ class DashboardManifest
     skateparks
     users
     ratings
-    reviews
     skatepark_images
   ].freeze
 
