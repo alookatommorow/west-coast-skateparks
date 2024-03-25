@@ -87,7 +87,6 @@ class SkateparkDashboard < Administrate::BaseDashboard
     video_url
     obstacles
     ratings
-    reviews
     favoriters
     visitors
     created_at
