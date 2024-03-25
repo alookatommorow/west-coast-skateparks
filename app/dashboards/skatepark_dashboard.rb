@@ -11,7 +11,6 @@ class SkateparkDashboard < Administrate::BaseDashboard
     hero: PaperclipField,
     map_photo: PaperclipField,
     ratings: Field::HasMany,
-    reviews: Field::HasMany,
     skatepark_images: Field::HasMany,
     city: Field::String,
     state: Field::Select.with_options(collection: %w[california oregon washington]),
@@ -88,7 +87,6 @@ class SkateparkDashboard < Administrate::BaseDashboard
     video_url
     obstacles
     ratings
-    reviews
     favoriters
     visitors
     created_at

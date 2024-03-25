@@ -109,7 +109,6 @@ class Skatepark < ActiveRecord::Base
   validates :stars, numericality: { in: (1..5), step: 0.5 }, allow_blank: true
 
   has_many :ratings, dependent: :destroy
-  has_many :reviews, dependent: :destroy
   has_and_belongs_to_many :favoriters,
                           join_table: 'favorites',
                           class_name: 'User',

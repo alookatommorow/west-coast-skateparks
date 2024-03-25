@@ -29,7 +29,6 @@ class User < ActiveRecord::Base
   validates_format_of :email, with: /\A.+@.+\..{2,}\z/
 
   has_many :ratings, dependent: :destroy
-  has_many :reviews, dependent: :destroy
   has_and_belongs_to_many :favorites,
                           join_table: 'favorites',
                           class_name: 'Skatepark',
