@@ -4,18 +4,19 @@ require 'aws-sdk'
 namespace :sitemap do
   desc 'Upload the sitemap files to S3'
   task upload_to_s3: :environment do
-    puts "Starting sitemap upload to S3..."
+    puts 'Starting sitemap upload to S3...'
 
     s3 = Aws::S3::Client.new(access_key_id: ENV['AWS_ACCESS_KEY_ID'],
-                     secret_access_key: ENV['AWS_SECRET_ACCESS_KEY'])
+                             secret_access_key: ENV['AWS_SECRET_ACCESS_KEY'])
     resource = Aws::S3::Resource.new(client: s3)
 
     bucket = resource.bucket(ENV['S3_BUCKET'])
 
-    Dir.entries(File.join(Rails.root, "tmp", "sitemaps")).each do |file_name|
+    Dir.entries(File.join(Rails.root, 'tmp', 'sitemaps')).each do |file_name|
       next if ['.', '..', '.DS_Store'].include? file_name
+
       path = "sitemaps/#{file_name}"
-      file = File.join(Rails.root, "tmp", "sitemaps", file_name)
+      file = File.join(Rails.root, 'tmp', 'sitemaps', file_name)
 
       begin
         object = bucket.object(path)
@@ -27,12 +28,10 @@ namespace :sitemap do
     end
   end
 
-  desc 'Create the sitemap, then upload it to S3 and ping the search engines'
-  task create_upload_and_ping: :environment do
-    Rake::Task["sitemap:create"].invoke
+  desc 'Create the sitemap and upload it to S3'
+  task create_and_upload: :environment do
+    Rake::Task['sitemap:create'].invoke
 
-    Rake::Task["sitemap:upload_to_s3"].invoke
-
-    SitemapGenerator::Sitemap.ping_search_engines('http://www.cookieshq.co.uk/sitemap.xml.gz')
+    Rake::Task['sitemap:upload_to_s3'].invoke
   end
 end
