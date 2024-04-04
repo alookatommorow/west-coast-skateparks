@@ -16,6 +16,7 @@ const INFO_ATTRS = [
   'size',
   'lights',
   'obstacles',
+  'hours',
 ];
 
 type InfoAttr = keyof Pick<
@@ -27,6 +28,7 @@ type InfoAttr = keyof Pick<
   | 'size'
   | 'lights'
   | 'obstacles'
+  | 'hours'
 >;
 
 const INFO_ICONS = {
@@ -82,8 +84,8 @@ export const SkateparksShow = ({
             </div>
           )}
         </div>
-        <h2>
-          {titleize(skatepark.city)}, {skatepark.state}
+        <h2 className="capitalize">
+          {skatepark.city}, {skatepark.state}
         </h2>
         {skatepark.stars !== undefined && <Stars stars={skatepark.stars} />}
         <p className="location">
