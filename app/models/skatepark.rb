@@ -47,16 +47,6 @@ class Skatepark < ActiveRecord::Base
   extend FriendlyId
 
   STATES = %w[california oregon washington].freeze
-  VISIBLE_ATTRIBUTES = %w[
-    hours
-    material
-    designer
-    builder
-    opened
-    size
-    lights
-    obstacles
-  ].freeze
   OBSTACLES = [
     'rails',
     'ledges',
@@ -150,20 +140,8 @@ class Skatepark < ActiveRecord::Base
     (raw_avg * 2).ceil.to_f / 2
   end
 
-  def present_attributes
-    attributes.slice(*VISIBLE_ATTRIBUTES).select { |_k, v| v.present? }
-  end
-
   def ratings?
     ratings.exists?
-  end
-
-  def pictures?
-    skatepark_images.exists?
-  end
-
-  def more_than_one_picture?
-    skatepark_images.count > 1
   end
 
   def coordinates?
