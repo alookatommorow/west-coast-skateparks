@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_03_25_154642) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_07_073617) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -96,6 +96,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_25_154642) do
     t.string "zip_code"
     t.string "obstacles", array: true
     t.float "stars"
+    t.integer "status", default: 0, null: false
     t.index ["slug"], name: "index_skateparks_on_slug", unique: true
   end
 

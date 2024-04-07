@@ -34,6 +34,7 @@
 #  slug                   :string
 #  stars                  :float
 #  state                  :string           not null
+#  status                 :integer          default("open"), not null
 #  video_url              :string
 #  zip_code               :string
 #  created_at             :datetime
@@ -88,6 +89,8 @@ class Skatepark < ActiveRecord::Base
     'oregon' => 'OR',
     'washington' => 'WA'
   }.freeze
+
+  enum status: { open: 0, closed: 1 }
 
   STARS = [1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5].freeze
 
