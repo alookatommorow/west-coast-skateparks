@@ -17,11 +17,9 @@ module SkateparkHelper
 
   def skatepark_og_meta_title(skatepark)
     title = "#{skatepark} - #{skatepark.city.titleize}, #{STATE_ABBREVS[skatepark.state]}"
-    if skatepark.open?
-      title
-    else
-      "[CLOSED] - #{title}"
-    end
+    return title if skatepark.open?
+
+    "[CLOSED] - #{title}"
   end
 
   def skatepark_description(skatepark)
