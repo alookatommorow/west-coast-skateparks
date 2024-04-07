@@ -18,6 +18,7 @@ RSpec.describe Skatepark, type: :model do
     it { is_expected.to validate_presence_of(:state) }
     it { is_expected.to validate_presence_of(:state) }
     it { is_expected.to validate_inclusion_of(:state).in_array(Skatepark::STATES) }
+    it { is_expected.to define_enum_for(:status).with_values(open: 0, closed: 1) }
 
     it 'validates obstacles' do
       skatepark = build_stubbed(:skatepark, obstacles: ['fuck all'])

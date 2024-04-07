@@ -21,6 +21,7 @@ export type Skatepark = {
   lights?: string;
   info?: string;
   average_rating?: number;
+  status?: 'open' | 'closed';
 };
 
 export type SkateparkAttr = keyof Skatepark;

@@ -7,6 +7,7 @@ import { Reviews } from './Reviews';
 import { GMap } from '../../../components/GoogleMap';
 import { Photos } from './Photos';
 import { Flash } from '../../../components/Flash';
+import { classNames } from '../../../utils/styles';
 
 const INFO_ATTRS = [
   'material',
@@ -44,6 +45,9 @@ const INFO_ICONS = {
   lights: 'fa-lightbulb',
 };
 
+const STAMP_URL =
+  'https://west-coast-skateparks.s3.us-west-1.amazonaws.com/closed-stamp.png';
+
 type SkateparksShowProps = {
   skatepark: Skatepark;
   hasFavorited: boolean;
@@ -72,8 +76,19 @@ export const SkateparksShow = ({
   const handleFlashClose = () => setError('');
 
   return (
-    <div className="skatepark-show-container">
+    <div
+      className={classNames('skatepark-show-container', {
+        closed: skatepark.status === 'closed',
+      })}
+    >
       <Flash type="error" message={error} onClose={handleFlashClose} />
+      {skatepark.status === 'closed' && (
+        <>
+          <div className="closed-overlay" />
+          <img className="closed-stamp" src={STAMP_URL} />
+        </>
+      )}
+
       <div className="sidebar">
         <div className="fav-visit-indicators">
           <h1>{titleize(skatepark.name)}</h1>
@@ -128,11 +143,13 @@ export const SkateparksShow = ({
       </div>
       <div className="map-photos">
         <Photos photos={photos} />
-        <GMap
-          resourceName="skatepark"
-          resourceId={Number(skatepark.id)}
-          mapKey={mapKey}
-        />
+        {skatepark.status === 'open' && (
+          <GMap
+            resourceName="skatepark"
+            resourceId={Number(skatepark.id)}
+            mapKey={mapKey}
+          />
+        )}
       </div>
     </div>
   );
