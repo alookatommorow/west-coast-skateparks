@@ -21,7 +21,7 @@ class SkateparkDashboard < Administrate::BaseDashboard
     id: Field::Number,
     name: Field::String,
     identifier: Field::String,
-    stars: Field::Select.with_options(collection: [1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5]),
+    stars: Field::Select.with_options(collection: [1.0, 1.5, 2.0, 2.5, 3.0, 3.5, 4.0, 4.5, 5.0]),
     material: Field::String,
     designer: Field::String,
     builder: Field::String,
