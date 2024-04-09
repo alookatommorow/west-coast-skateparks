@@ -94,7 +94,7 @@ class Skatepark < ActiveRecord::Base
 
   STARS = [1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5].freeze
 
-  friendly_id :to_param, use: %i[slugged finders]
+  friendly_id :to_param, use: %i[slugged history finders]
 
   validates :name, :city, presence: true
   validates :state, presence: true, inclusion: { in: STATES }
@@ -157,6 +157,10 @@ class Skatepark < ActiveRecord::Base
 
   def to_s
     (name.downcase.include?('skatepark') ? name : "#{name} skatepark").titleize
+  end
+
+  def should_generate_new_friendly_id?
+    will_save_change_to_name? || super
   end
 
   private
