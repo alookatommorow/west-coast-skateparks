@@ -137,14 +137,10 @@ class Skatepark < ActiveRecord::Base
   end
 
   def average_rating
-    return unless ratings?
-
     raw_avg = ratings.average(:stars)
-    (raw_avg * 2).ceil.to_f / 2
-  end
+    return if raw_avg.blank?
 
-  def ratings?
-    ratings.exists?
+    (raw_avg * 2).ceil.to_f / 2
   end
 
   def coordinates?

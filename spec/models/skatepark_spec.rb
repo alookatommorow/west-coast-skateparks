@@ -37,17 +37,9 @@ RSpec.describe Skatepark, type: :model do
     end
   end
 
-  describe '#ratings?' do
-    it 'returns true when a skatepark has ratings' do
-      rating = create(:rating)
-
-      expect(rating.skatepark.ratings?).to be true
-    end
-  end
-
   describe '#to_param' do
     it 'returns properly formatted param' do
-      skatepark = create(:skatepark)
+      skatepark = build_stubbed(:skatepark)
 
       expect(skatepark.to_param).to eq("#{skatepark.name.parameterize}-#{skatepark.city.parameterize}-#{skatepark.state}")
     end
@@ -67,7 +59,7 @@ RSpec.describe Skatepark, type: :model do
       expect(skatepark.average_rating).to eq(2.5)
     end
 
-    it 'returns a nil if skatepark has not been rated' do
+    it 'returns nil if skatepark has not been rated' do
       skatepark = create(:skatepark)
 
       expect(skatepark.average_rating).to be nil
