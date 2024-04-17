@@ -1,4 +1,4 @@
-class UserSerializer < BaseSerializer
+class UserSerializer < Serialization::BaseSerializer
   attributes :id, :username, :name, :email, :created_at, :avatar
 
   def avatar(user = serializeable)

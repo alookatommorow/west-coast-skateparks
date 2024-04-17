@@ -1,5 +1,5 @@
 module Skateparks
-  class SearchSerializer < Skateparks::BaseSerializer
+  class SearchSerializer < BaseSerializer
     attributes :slug, :name, :city, :state, :map_photo, :stars, :obstacles
   end
 end

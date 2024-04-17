@@ -1,13 +1,10 @@
 class SkateparksController < ApplicationController
   def show
-    @skatepark = Skatepark.find(params[:slug])
+    @skatepark = Skatepark.includes(ratings: :user).find(params[:slug])
     @skatepark_json = Skateparks::ShowSerializer.new(@skatepark).serialize
     @has_favorited = !!current_user&.favorited?(@skatepark.id)
     @has_visited = !!current_user&.visited?(@skatepark.id)
-    @ratings = RatingSerializer.new(
-      @skatepark.ratings.includes(:user).order(created_at: :desc)
-    ).serialize
-    @photos = @skatepark.skatepark_images.map(&:photo)
+    @map_data = Skateparks::MapData.for(@skatepark)
   end
 
   def index; end

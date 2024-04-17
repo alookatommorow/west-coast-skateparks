@@ -1,5 +1,5 @@
 module Skateparks
-  class BaseSerializer < ::BaseSerializer
+  class BaseSerializer < ::Serialization::BaseSerializer
     def map_photo(skatepark = serializeable)
       skatepark.map_photo(:thumb)
     end

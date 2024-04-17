@@ -24,7 +24,7 @@ RSpec.describe '/users' do
         get "/users/#{user.id}"
 
         expect(assigns(:user)).to eq UserSerializer.new(user).serialize
-        expect(assigns(:skateparks)).to eq Skateparks::MapSerializer.new(user).serialize
+        expect(assigns(:skateparks)).to eq Skateparks::MapData.for(user)
         expect(assigns(:num_ratings)).to eq user.ratings.count
       end
 

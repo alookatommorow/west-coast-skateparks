@@ -1,4 +1,4 @@
-class RatingSerializer < BaseSerializer
+class RatingSerializer < Serialization::BaseSerializer
   attributes :stars, :review, :avatar, :author, :author_id, :created_at
 
   def avatar(rating = serializeable)

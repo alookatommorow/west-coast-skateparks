@@ -1,11 +1,10 @@
 = react_component "SkateparksShow", props: {\
     skatepark: @skatepark_json,
-    ratings: @ratings,
     hasFavorited: @has_favorited,
     hasVisited: @has_visited,
     isAdmin: !!current_user&.admin?,
     mapKey: ENV.fetch('GOOGLE_KEY'),
-    photos: @photos,
+    mapData: @map_data,
     userId: current_user&.id\
   }
 
