@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { titleize } from '../../../utils';
-import { Rating, Skatepark } from '../../../types';
+import { Skatepark } from '../../../types';
 import { Stars } from '../../../components/Stars';
 import { UserActions } from './UserActions';
 import { Reviews } from './Reviews';
@@ -8,6 +8,7 @@ import { GMap } from '../../../components/GoogleMap';
 import { Photos } from './Photos';
 import { Flash } from '../../../components/Flash';
 import { classNames } from '../../../utils/styles';
+import { Resource } from '../../../components/GoogleMap/types';
 
 const INFO_ATTRS = [
   'material',
@@ -54,9 +55,8 @@ type SkateparksShowProps = {
   hasVisited: boolean;
   isAdmin: boolean;
   userId?: number;
-  ratings: Rating[];
   mapKey: string;
-  photos: string[];
+  mapData: Resource;
 };
 
 export const SkateparksShow = ({
@@ -65,9 +65,8 @@ export const SkateparksShow = ({
   hasVisited: initialHasVisited,
   isAdmin,
   userId,
-  ratings,
   mapKey,
-  photos,
+  mapData,
 }: SkateparksShowProps) => {
   const [hasFavorited, setHasFavorited] = useState(initialHasFavorited);
   const [hasVisited, setHasVisited] = useState(initialHasVisited);
@@ -134,7 +133,7 @@ export const SkateparksShow = ({
         </div>
         <div className="reviews comments">
           <Reviews
-            ratings={ratings}
+            ratings={skatepark.ratings || []}
             userId={userId}
             skatepark={skatepark}
             setError={setError}
@@ -142,11 +141,14 @@ export const SkateparksShow = ({
         </div>
       </div>
       <div className="map-photos">
-        <Photos photos={photos} />
+        {skatepark.photos && skatepark.photos.length > 1 && (
+          <Photos photos={skatepark.photos} />
+        )}
         {skatepark.status === 'open' && (
           <GMap
             resourceName="skatepark"
             resourceId={Number(skatepark.id)}
+            resource={mapData}
             mapKey={mapKey}
           />
         )}

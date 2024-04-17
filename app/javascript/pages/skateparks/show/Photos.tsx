@@ -1,9 +1,10 @@
 import React from 'react';
 import 'react-image-gallery/styles/scss/image-gallery.scss';
 import ImageGallery, { ReactImageGalleryItem } from 'react-image-gallery';
+import { Photo } from '../../../types';
 
 type PhotosProps = {
-  photos: string[];
+  photos: Photo[];
 };
 export const Photos = ({ photos }: PhotosProps) => {
   const renderItem = (item: ReactImageGalleryItem) => (
@@ -13,8 +14,8 @@ export const Photos = ({ photos }: PhotosProps) => {
   );
 
   const formattedPhotos = photos.map(photo => ({
-    original: photo,
-    thumbnail: photo,
+    original: photo.url,
+    thumbnail: photo.url,
   }));
 
   return (

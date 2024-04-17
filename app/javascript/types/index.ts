@@ -1,3 +1,7 @@
+export type Photo = {
+  url: string;
+};
+
 export type Skatepark = {
   slug: string;
   name: string;
@@ -22,6 +26,8 @@ export type Skatepark = {
   info?: string;
   average_rating?: number;
   status?: 'open' | 'closed';
+  photos?: Photo[];
+  ratings?: Rating[];
 };
 
 export type SkateparkAttr = keyof Skatepark;
