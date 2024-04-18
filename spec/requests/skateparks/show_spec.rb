@@ -18,6 +18,19 @@ RSpec.describe '/skateparks' do
       expect(assigns(:map_data)).to eq map_json
     end
 
+    context 'when slug has changed' do
+      it 'sets has_favorited and has_visited instance vars' do
+        skatepark = create(:skatepark)
+        old_slug = skatepark.slug
+
+        skatepark.update(name: 'new skatepark name')
+
+        get "/skateparks/#{old_slug}"
+
+        expect(response).to redirect_to skatepark_path(skatepark)
+      end
+    end
+
     context 'with logged in user' do
       it 'sets has_favorited and has_visited instance vars' do
         user = build_stubbed(:user)
