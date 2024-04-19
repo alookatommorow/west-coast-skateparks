@@ -71,5 +71,3 @@ group :test do
   gem 'shoulda-matchers', '~> 6.0'
   gem 'webmock'
 end
-
-# gem 'mini_racer', platforms: :ruby
