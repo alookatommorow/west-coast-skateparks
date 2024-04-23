@@ -65,7 +65,8 @@ with_err_handling do
       material: material.sample,
       builder: builder.sample,
       designer: Faker::BossaNova.song,
-      info: Faker::Hipster.sentence
+      info: Faker::Hipster.sentence,
+      zip_code: Faker::Address.zip_code
     }
   end
 
