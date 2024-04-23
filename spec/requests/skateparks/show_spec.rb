@@ -13,6 +13,19 @@ RSpec.describe '/skateparks' do
       expect(assigns(:ratings)).to eq ratings
     end
 
+    context 'when slug has changed' do
+      it 'sets has_favorited and has_visited instance vars' do
+        skatepark = create(:skatepark)
+        old_slug = skatepark.slug
+
+        skatepark.update(name: 'new skatepark name')
+
+        get "/skateparks/#{old_slug}"
+
+        expect(response).to redirect_to skatepark_path(skatepark)
+      end
+    end
+
     context 'with ratings' do
       it 'sets ratings instance var' do
         skatepark = create(:skatepark)
