@@ -9,6 +9,7 @@ RSpec.describe 'Admin can create skateparks' do
   scenario 'successfully' do
     fill_in 'Address', with: '56 56th st.'
     fill_in 'City', with: 'Modesto'
+    fill_in 'Zip code', with: '94619'
     select 'washington', from: 'State'
     fill_in 'Name', with: 'Fekken Perk'
     select '5.0', from: 'Stars'
@@ -33,6 +34,7 @@ RSpec.describe 'Admin can create skateparks' do
     expect(page).to have_content 'Skatepark was successfully created.'
     expect(page).to have_content 'Fekken Perk'
     expect(page).to have_content '56 56th st.'
+    expect(page).to have_content '94619'
     expect(page).to have_content 'Modesto'
     expect(page).to have_content 'washington'
     expect(page).to have_content 'plexi-glass'

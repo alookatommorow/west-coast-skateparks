@@ -50,6 +50,7 @@ module Admin
         :photo_cred,
         :photo_url,
         :video_url,
+        :zip_code,
         obstacles: []
       )
     end
