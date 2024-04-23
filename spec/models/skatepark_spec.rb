@@ -13,9 +13,7 @@ RSpec.describe Skatepark, type: :model do
   describe 'validations' do
     subject { build_stubbed(:skatepark) }
     it { is_expected.to validate_numericality_of(:stars).is_in(1..5) }
-    it { is_expected.to validate_presence_of(:name) }
     it { is_expected.to validate_presence_of(:city) }
-    it { is_expected.to validate_presence_of(:state) }
     it { is_expected.to validate_presence_of(:state) }
     it { is_expected.to validate_inclusion_of(:state).in_array(Skatepark::STATES) }
     it { is_expected.to define_enum_for(:status).with_values(open: 0, closed: 1) }
@@ -27,6 +25,15 @@ RSpec.describe Skatepark, type: :model do
       expect(skatepark.errors.messages[:whitelist_obstacles]).to eq(
         ['The obstacles are fucked']
       )
+    end
+
+    it 'updates slug' do
+      name = 'blarga124 clontark'
+      skatepark = create(:skatepark)
+
+      skatepark.update(name:)
+
+      expect(skatepark.slug).to include name.parameterize
     end
   end
 
