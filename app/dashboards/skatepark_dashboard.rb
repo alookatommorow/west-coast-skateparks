@@ -67,6 +67,7 @@ class SkateparkDashboard < Administrate::BaseDashboard
     city
     state
     address
+    zip_code
     latitude
     longitude
     id

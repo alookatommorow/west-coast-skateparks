@@ -19,7 +19,7 @@ RSpec.describe '/skateparks' do
     end
 
     context 'when slug has changed' do
-      it 'sets has_favorited and has_visited instance vars' do
+      it 'redirects to new path' do
         skatepark = create(:skatepark)
         old_slug = skatepark.slug
 
