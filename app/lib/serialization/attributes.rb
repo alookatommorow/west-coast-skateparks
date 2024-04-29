@@ -12,15 +12,15 @@ module Serialization
 
     private
 
-    def attributes_hash(record)
+    def attributes_hash
       attributes.each_with_object({}) do |attr, obj|
-        val = attribute_value(attr, record)
+        val = attribute_value(attr)
         obj[attr] = val if val.present?
       end
     end
 
-    def attribute_value(attr, record)
-      return public_send(attr, record) if respond_to?(attr)
+    def attribute_value(attr)
+      return public_send(attr) if respond_to?(attr)
 
       record.public_send(attr)
     end

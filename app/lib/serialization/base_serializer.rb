@@ -5,36 +5,33 @@ module Serialization
     include Attributes
     include HasMany
 
-    attr_accessor :serializeable
-
-    def initialize(serializeable, options = {})
+    def initialize(serializeable = nil, options = {})
       @serializeable = serializeable
+      @record = serializeable
       @options = options
     end
 
-    def serialize
-      return serialize_collection if collection?
+    def serialize(to_serialize = serializeable)
+      return serialize_collection(to_serialize) if to_serialize.respond_to? :length
 
+      @record = to_serialize
       json
     end
 
     private
 
-    attr_reader :options
+    attr_reader :options, :serializeable
+    attr_accessor :record
 
-    def json(record = serializeable)
-      attributes_hash(record).tap do |result|
+    def json
+      attributes_hash.tap do |result|
         result.merge!(options[:additional_attributes]) if options[:additional_attributes].present?
-        result.merge!(has_many_hash(record))
+        result.merge!(has_many_hash)
       end.as_json
     end
 
-    def collection?
-      serializeable.is_a?(Array) || serializeable.is_a?(ActiveRecord::Relation)
-    end
-
-    def serialize_collection
-      serializeable.map { |record| json(record) }
+    def serialize_collection(to_serialize)
+      to_serialize.map { |s| serialize(s) }
     end
 
     def attributes

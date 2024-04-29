@@ -76,27 +76,22 @@ RSpec.describe Serialization::BaseSerializer do
           Class.new(Serialization::BaseSerializer) do
             attributes :name, :obstacles
 
-            def obstacles(skatepark)
-              skatepark.obstacles&.join(', ')
+            def obstacles
+              record.obstacles&.join(', ')
             end
           end
         end
 
         it 'returns JSON containing result of calling dynamic attribute' do
           skatepark = build_stubbed(:skatepark, obstacles: ['rails, ledges, bowl'])
-          obstacles = { 'obstacles' => child_class.new(skatepark).obstacles(skatepark) }
-
-          expected = skatepark
-                     .as_json(only: :name)
-                     .merge(obstacles)
 
           json = child_class.new(skatepark).serialize
 
-          expect(json).to eq expected
+          expect(json['obstacles']).to eq skatepark.obstacles&.join(', ')
         end
 
         context 'when dynamic attribute is nil' do
-          it 'returns does not include attribute' do
+          it 'does not include attribute' do
             skatepark = build_stubbed(:skatepark)
 
             expected = skatepark.as_json(only: [:name])
