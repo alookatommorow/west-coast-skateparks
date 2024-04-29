@@ -19,12 +19,15 @@ RSpec.describe '/users' do
         user.favorites << skateparks.first
         user.visits << skateparks.second
 
+        map_json = { maps: 'here n there' }
+        allow_any_instance_of(User).to receive(:map_data).and_return(map_json)
+
         sign_in user
 
         get "/users/#{user.id}"
 
         expect(assigns(:user)).to eq UserSerializer.new(user).serialize
-        expect(assigns(:skateparks)).to eq Skateparks::MapData.for(user)
+        expect(assigns(:skateparks)).to eq map_json
         expect(assigns(:num_ratings)).to eq user.ratings.count
       end
 
