@@ -29,7 +29,7 @@ class UsersController < ApplicationController
 
   def show
     @user = UserSerializer.new(current_user).serialize
-    @skateparks = Skateparks::MapSerializer.new(current_user).serialize
+    @skateparks = current_user.map_data
     @num_ratings = current_user.ratings.count
 
     flash.now[:notice] = "Welcome, #{current_user}" if params[:from_vendor]

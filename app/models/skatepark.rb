@@ -90,6 +90,8 @@ class Skatepark < ActiveRecord::Base
     'washington' => 'WA'
   }.freeze
 
+  include Skateparks::Mappable
+
   enum status: { open: 0, closed: 1 }
 
   STARS = [1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5].freeze
@@ -137,14 +139,10 @@ class Skatepark < ActiveRecord::Base
   end
 
   def average_rating
-    return unless ratings?
-
     raw_avg = ratings.average(:stars)
-    (raw_avg * 2).ceil.to_f / 2
-  end
+    return if raw_avg.blank?
 
-  def ratings?
-    ratings.exists?
+    (raw_avg * 2).ceil.to_f / 2
   end
 
   def coordinates?
@@ -161,6 +159,13 @@ class Skatepark < ActiveRecord::Base
 
   def should_generate_new_friendly_id?
     will_save_change_to_name? || super
+  end
+
+  def map_data
+    {
+      main: [map_json(self)],
+      nearby: map_json(neighbor_parks)
+    }
   end
 
   private

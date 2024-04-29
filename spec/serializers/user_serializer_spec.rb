@@ -4,7 +4,7 @@ RSpec.describe UserSerializer do
   it 'declares rating attributes' do
     attributes = %i[id username name email created_at avatar]
 
-    expect(UserSerializer.new(nil).attributes).to eq attributes
+    expect(UserSerializer.new.attributes).to eq attributes
   end
 
   describe '#avatar' do

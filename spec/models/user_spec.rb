@@ -56,4 +56,39 @@ RSpec.describe User do
       end
     end
   end
+
+  describe '#map_data' do
+    it "returns user's skateparks map JSON" do
+      user = create(:user)
+      skateparks = create_list(:skatepark, 3)
+      favorites = [skateparks.first, skateparks.third]
+      visits = [skateparks.second, skateparks.third]
+      both = favorites & visits
+
+      allow(user).to receive(:favorites).and_return(favorites)
+      allow(user).to receive(:visits).and_return(visits)
+
+      visits_json = visits.map { |n| serialize(n) }
+      favorites_json = favorites.map { |n| serialize(n) }
+      both_json = both.each_with_object({}) do |n, obj|
+        obj[n.slug] = serialize n
+      end
+
+      expected = {
+        favorite: favorites_json,
+        visited: visits_json,
+        both: both_json
+      }
+
+      json = user.map_data
+
+      expect(json).to eq expected
+    end
+  end
+
+  def serialize(skatepark)
+    skatepark.as_json(only: %i[slug name city state latitude longitude stars])
+             .merge('map_photo' => Skatepark::MAP_PHOTO_DEFAULT_URL)
+             .compact
+  end
 end

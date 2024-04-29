@@ -1,22 +1,22 @@
 module Skateparks
-  class BaseSerializer < ::BaseSerializer
-    def map_photo(skatepark = serializeable)
-      skatepark.map_photo(:thumb)
+  class BaseSerializer < ::Serialization::BaseSerializer
+    def map_photo
+      record.map_photo(:thumb)
     end
 
-    def obstacles(skatepark = serializeable)
-      skatepark.obstacles&.join(', ')
+    def obstacles
+      record.obstacles&.join(', ')
     end
 
-    def address(skatepark = serializeable)
-      "#{skatepark.address}, #{skatepark.city.titleize}, #{Skatepark::STATE_ABBREVS[skatepark.state]} #{skatepark.zip_code || ''}"
+    def address
+      "#{record.address}, #{record.city.titleize}, #{Skatepark::STATE_ABBREVS[record.state]} #{record.zip_code || ''}"
         .strip
     end
 
-    def size(skatepark = serializeable)
-      return if skatepark.size.blank?
+    def size
+      return if record.size.blank?
 
-      "#{skatepark.size} sq ft"
+      "#{record.size} sq ft"
     end
   end
 end

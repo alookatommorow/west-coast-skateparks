@@ -4,17 +4,22 @@ RSpec.describe '/skateparks' do
   describe 'GET #show' do
     it 'sets instance vars' do
       skatepark = create(:skatepark)
-      ratings = []
-      allow(skatepark).to receive(:ratings).and_return ratings
+      serializer = instance_double(Skateparks::ShowSerializer)
+      skatepark_json = { hey: 'sup' }
+      map_json = { maps: 'here n there' }
+      allow_any_instance_of(Skatepark).to receive(:map_data).and_return(map_json)
+      allow(Skateparks::ShowSerializer).to receive(:new).with(skatepark).and_return(serializer)
+      allow(serializer).to receive(:serialize).and_return(skatepark_json)
 
       get "/skateparks/#{skatepark.slug}"
 
       expect(assigns(:skatepark)).to eq skatepark
-      expect(assigns(:ratings)).to eq ratings
+      expect(assigns(:skatepark_json)).to eq skatepark_json
+      expect(assigns(:map_data)).to eq map_json
     end
 
     context 'when slug has changed' do
-      it 'sets has_favorited and has_visited instance vars' do
+      it 'redirects to new path' do
         skatepark = create(:skatepark)
         old_slug = skatepark.slug
 
@@ -23,22 +28,6 @@ RSpec.describe '/skateparks' do
         get "/skateparks/#{old_slug}"
 
         expect(response).to redirect_to skatepark_path(skatepark)
-      end
-    end
-
-    context 'with ratings' do
-      it 'sets ratings instance var' do
-        skatepark = create(:skatepark)
-        create_list(:rating, 2, skatepark:)
-        mock_json = [{ hey: 'youre looking great' }]
-        serializer = instance_double(RatingSerializer)
-
-        allow(RatingSerializer).to receive(:new).and_return(serializer)
-        allow(serializer).to receive(:serialize).and_return(mock_json)
-
-        get "/skateparks/#{skatepark.slug}"
-
-        expect(assigns(:ratings)).to eq mock_json
       end
     end
 

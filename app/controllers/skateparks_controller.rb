@@ -5,10 +5,7 @@ class SkateparksController < ApplicationController
     @skatepark_json = Skateparks::ShowSerializer.new(@skatepark).serialize
     @has_favorited = !!current_user&.favorited?(@skatepark.id)
     @has_visited = !!current_user&.visited?(@skatepark.id)
-    @ratings = RatingSerializer.new(
-      @skatepark.ratings.includes(:user).order(created_at: :desc)
-    ).serialize
-    @photos = @skatepark.skatepark_images.map(&:photo)
+    @map_data = @skatepark.map_data
   end
 
   def index; end
@@ -22,7 +19,7 @@ class SkateparksController < ApplicationController
   private
 
   def find_skatepark
-    @skatepark = Skatepark.find(params[:slug])
+    @skatepark = Skatepark.includes(ratings: :user).find(params[:slug])
 
     # If an old id or a numeric id was used to find the record, then
     # the request path will not match the skatepark_path, and we should do

@@ -22,6 +22,8 @@
 class User < ActiveRecord::Base
   AVATAR_DEFAULT_URL = 'https://33.media.tumblr.com/avatar_ee7f0ba1cb58_128.png'.freeze
 
+  include Skateparks::Mappable
+
   has_secure_password
   validates :username, :email, presence: true
   validates :password, presence: true, on: :create
@@ -51,5 +53,13 @@ class User < ActiveRecord::Base
 
   def to_s
     name || username
+  end
+
+  def map_data
+    {
+      favorite: map_json(favorites),
+      visited: map_json(visits),
+      both: map_json_by_slug(favorites & visits)
+    }
   end
 end
