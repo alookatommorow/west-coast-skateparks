@@ -5,7 +5,7 @@ class SkateparksController < ApplicationController
     @skatepark_json = Skateparks::ShowSerializer.new(@skatepark).serialize
     @has_favorited = !!current_user&.favorited?(@skatepark.id)
     @has_visited = !!current_user&.visited?(@skatepark.id)
-    @map_data = Skateparks::MapData.for(@skatepark)
+    @map_data = @skatepark.map_data
   end
 
   def index; end

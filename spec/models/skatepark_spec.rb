@@ -65,4 +65,30 @@ RSpec.describe Skatepark, type: :model do
       expect(skatepark.average_rating).to be nil
     end
   end
+
+  describe '#map_data' do
+    it 'returns skatepark map JSON' do
+      skatepark = build_stubbed(:skatepark)
+      neighbor_parks = build_stubbed_pair(:skatepark)
+      skatepark_json = serialize(skatepark)
+      neighbor_json = neighbor_parks.map { |n| serialize(n) }
+
+      allow(skatepark).to receive(:neighbor_parks).and_return(neighbor_parks)
+
+      expected = {
+        main: [skatepark_json],
+        nearby: neighbor_json
+      }
+
+      json = skatepark.map_data
+
+      expect(json).to eq expected
+    end
+  end
+
+  def serialize(skatepark)
+    skatepark.as_json(only: %i[slug name city state latitude longitude stars])
+             .merge('map_photo' => Skatepark::MAP_PHOTO_DEFAULT_URL)
+             .compact
+  end
 end

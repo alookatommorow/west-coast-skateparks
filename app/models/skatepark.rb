@@ -90,6 +90,8 @@ class Skatepark < ActiveRecord::Base
     'washington' => 'WA'
   }.freeze
 
+  include Skateparks::Mappable
+
   enum status: { open: 0, closed: 1 }
 
   STARS = [1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5].freeze
@@ -157,6 +159,13 @@ class Skatepark < ActiveRecord::Base
 
   def should_generate_new_friendly_id?
     will_save_change_to_name? || super
+  end
+
+  def map_data
+    {
+      main: [map_json(self)],
+      nearby: map_json(neighbor_parks)
+    }
   end
 
   private
