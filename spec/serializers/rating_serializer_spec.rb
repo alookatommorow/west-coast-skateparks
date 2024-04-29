@@ -4,7 +4,7 @@ RSpec.describe RatingSerializer do
   it 'declares rating attributes' do
     attributes = %i[stars review avatar author author_id created_at]
 
-    expect(RatingSerializer.new(nil).attributes).to eq attributes
+    expect(RatingSerializer.new.attributes).to eq attributes
   end
 
   describe '#avatar' do

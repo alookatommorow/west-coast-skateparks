@@ -4,7 +4,7 @@ RSpec.describe Skateparks::SearchSerializer do
   it 'declares map attributes' do
     attributes = %i[slug name city state map_photo stars obstacles]
 
-    expect(Skateparks::SearchSerializer.new(nil).attributes).to eq attributes
+    expect(Skateparks::SearchSerializer.new.attributes).to eq attributes
   end
 
   describe '#serialize' do
