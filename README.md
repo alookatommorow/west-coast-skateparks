@@ -38,22 +38,14 @@ West Coast Skateparks is deployed using Heroku. Visit the app [here](https://www
 1. Install Ruby 3.2.2 with your preferred Ruby version manager
 ##### Install Bundler
 1. `gem install bundler`
+##### Install ImageMagick
+1. `brew install imagemagick`
 ##### Setup Rails App
 1. [Install Postgres](https://postgresapp.com/)
 1. `bundle install`
 1. `bundle exec rails db:setup`
 1. `bundle exec rails s`
 1. Open `http://localhost:3000` and get to it
-
-#### Troubleshooting Mac M1 chips
-Mac M1 chip is known to cause issues with Ruby and PG gem installations
-##### Ruby
-The following command might help install Ruby when using asdf: `optflags=-Wno-error=implicit-function-declaration ASDF_RUBY_BUILD_VERSION=v20220630 asdf install ruby 3.2.2`
-##### PG Gem
-The following command might help install PG gem: 
-`gem install pg -v ‘0.21.0’ -- --with-cflags="-Wno-error=implicit-function-declaration"`
-See other troubleshooting tips [here](https://gist.github.com/tomholford/f38b85e2f06b3ddb9b4593e841c77c9e)
-
 
 ## Contribute
 If you would like to clone the repo and make a contribution, please feel free!
