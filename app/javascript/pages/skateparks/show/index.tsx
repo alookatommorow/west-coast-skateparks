@@ -74,6 +74,11 @@ export const SkateparksShow = ({
 
   const handleFlashClose = () => setError('');
 
+  const showMap =
+    skatepark.status === 'open' &&
+    skatepark.latitude !== undefined &&
+    skatepark.longitude !== undefined;
+
   return (
     <div
       className={classNames('skatepark-show-container', {
@@ -144,7 +149,7 @@ export const SkateparksShow = ({
         {skatepark.photos && skatepark.photos.length > 1 && (
           <Photos photos={skatepark.photos} />
         )}
-        {skatepark.status === 'open' && (
+        {showMap && (
           <GMap
             resourceName="skatepark"
             resourceId={Number(skatepark.id)}
