@@ -89,6 +89,7 @@ class Skatepark < ActiveRecord::Base
     'oregon' => 'OR',
     'washington' => 'WA'
   }.freeze
+  NEIGHBOR_RADIUS = 0.4
 
   include Skateparks::Mappable
 
@@ -124,17 +125,18 @@ class Skatepark < ActiveRecord::Base
   scope :in_state, ->(state) { where(state:) }
 
   def neighbor_parks
-    radius = 0.4
+    return [] unless coordinates?
+
     self.class
         .where.not(id:)
         .where(
           'latitude BETWEEN ? AND ?',
-          latitude - radius,
-          latitude + radius
+          latitude - NEIGHBOR_RADIUS,
+          latitude + NEIGHBOR_RADIUS
         ).where(
           'longitude BETWEEN ? AND ?',
-          longitude - radius,
-          longitude + radius
+          longitude - NEIGHBOR_RADIUS,
+          longitude + NEIGHBOR_RADIUS
         )
   end
 
