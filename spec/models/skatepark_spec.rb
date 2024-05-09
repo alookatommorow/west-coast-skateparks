@@ -59,10 +59,12 @@ RSpec.describe Skatepark, type: :model do
       expect(skatepark.average_rating).to eq(2.5)
     end
 
-    it 'returns nil if skatepark has not been rated' do
-      skatepark = create(:skatepark)
+    context 'with no ratings' do
+      it 'returns nil' do
+        skatepark = create(:skatepark)
 
-      expect(skatepark.average_rating).to be nil
+        expect(skatepark.average_rating).to be nil
+      end
     end
   end
 
@@ -83,6 +85,28 @@ RSpec.describe Skatepark, type: :model do
       json = skatepark.map_data
 
       expect(json).to eq expected
+    end
+  end
+
+  describe '#neighbor_parks' do
+    it 'returns skateparks with lat/lng within radius' do
+      range = 0..Skatepark::NEIGHBOR_RADIUS
+      outside_range = Skatepark::NEIGHBOR_RADIUS + 0.01
+      skatepark = create(:skatepark)
+      create(:skatepark, latitude: skatepark.latitude + outside_range,
+                         longitude: skatepark.longitude + Skatepark::NEIGHBOR_RADIUS)
+      neighbor_parks = create_list(:skatepark, 2, latitude: skatepark.latitude + rand(range),
+                                                  longitude: skatepark.longitude + rand(range))
+
+      expect(skatepark.neighbor_parks).to match_array neighbor_parks
+    end
+
+    context 'when lat or lng is nil' do
+      it 'returns empty array' do
+        skatepark = create(:skatepark, latitude: nil)
+
+        expect(skatepark.neighbor_parks).to be_empty
+      end
     end
   end
 
